@@ -1,0 +1,159 @@
+* {
+  .font-smoothing;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-text-size-adjust: none;
+  box-sizing: border-box;
+}
+
+html {
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+html, body, .page, #root {
+  height: 100%;
+  //height: auto;
+}
+
+body {
+  font-family: @ff-base;
+  font-weight: 400;
+  color: @color-base;
+  background: @color-invert;
+  text-rendering: optimizeLegibility;
+  margin: 0;
+  padding: 0;
+}
+
+img {
+  border: none;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+}
+
+a {
+  background-color: transparent;
+  -webkit-text-decoration-skip: objects;
+}
+
+a:hover, a:active, a:focus, input:focus, button:focus {
+  outline: none;
+}
+
+svg:not(:root) {
+  overflow: hidden;
+}
+
+input, button {
+  font-family: inherit;
+  overflow: visible;
+}
+
+button,
+select {
+  text-transform: none;
+}
+
+/**
+ * Prevent a WebKit bug where destroys native `audio` and `video`
+ *    controls in Android 4.
+ * Correct the inability to style clickable types in iOS and Safari.
+ */
+
+button,
+html [type="button"],
+[type="reset"],
+[type="submit"] {
+  -webkit-appearance: button;
+}
+
+/**
+ * Remove the inner border and padding in Firefox.
+ */
+
+button::-moz-focus-inner,
+[type="button"]::-moz-focus-inner,
+[type="reset"]::-moz-focus-inner,
+[type="submit"]::-moz-focus-inner {
+  border-style: none;
+  padding: 0;
+}
+
+/**
+ * Restore the focus styles unset by the previous rule.
+ */
+
+button:-moz-focusring,
+[type="button"]:-moz-focusring,
+[type="reset"]:-moz-focusring,
+[type="submit"]:-moz-focusring {
+  outline: 1px dotted ButtonText;
+}
+
+/**
+ * Add the correct box sizing in IE 10-.
+ * Remove the padding in IE 10-.
+ */
+
+[type="checkbox"],
+[type="radio"] {
+  box-sizing: border-box;
+  padding: 0;
+}
+
+/**
+ * Correct the text style of placeholders in Chrome, Edge, and Safari.
+ */
+
+::-webkit-input-placeholder {
+  color: inherit;
+  opacity: 0.54;
+}
+
+input {
+  -webkit-appearance: none;
+  border-radius: 0;
+}
+
+small {
+  font-size: 71%;
+}
+
+.page {
+  overflow: hidden;
+
+  @media @phone {
+    height: auto;
+    min-height: 100%;
+    //overflow: auto;
+
+    &_full-block {
+      overflow: hidden;
+    }
+  }
+}
+
+.row-padding-bigger {
+  padding-left: 20px;
+  padding-right: 20px;
+
+  @media @phone {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+.content {
+  padding-bottom: 69px;
+
+  &__wrapper {
+    min-height: 100%;
+    position: relative;
+  }
+
+  @media @phone {
+    padding-bottom: 116px;
+  }
+}

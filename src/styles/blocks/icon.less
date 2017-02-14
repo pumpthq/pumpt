@@ -1,0 +1,324 @@
+.icon {
+
+  &_inline {
+    display: inline-block !important;
+    margin-right: 5px;
+    margin-top: 2px;
+    vertical-align: top;
+
+    & + .icon__text {
+      display: inline-block;
+      margin-top: -1px;
+      vertical-align: top;
+    }
+
+    @media @phone {
+      margin-right: 6px;
+
+      &.invisible-tablet {
+        display: none !important;
+      }
+    }
+  }
+
+  .button & {
+    margin-left: -1px;
+    margin-top: -1px;
+  }
+
+  .button_type_slider & {
+    margin: 0;
+  }
+
+  .navigation_inline & {
+    margin-top: 4px;
+  }
+}
+
+.icon-bookmark,
+.icon-bookmark-fill {
+  .size(18px, 22px);
+
+  &_size {
+    &_small {
+      .size(13px, 14px);
+    }
+  }
+}
+
+.icon-card-menu {
+  .size(18px, 4px);
+}
+
+.icon-logo {
+  .size(136px, 31px);
+
+  @media @phone {
+    .logo_full & {
+
+      .size(105px, 23px);
+    }
+  }
+}
+
+.icon-arrow {
+  .size(17px, 16px);
+
+  &_right {
+    transform: rotate(180deg);
+  }
+
+  @media @phone {
+    .size(13px, 12px);
+  }
+}
+
+.icon-matches {
+  .size(14px, 15px);
+}
+
+.icon-decline {
+  .size(14px);
+
+  &_size {
+    &_m {
+      .size(16px);
+    }
+  }
+}
+
+.icon-ok {
+  .size(15px, 14px);
+
+  &-fill {
+    .size(15px);
+  }
+
+  &_size {
+    &_big {
+      .size(22px, 15px);
+    }
+    &_small {
+      .size(10px, 7px);
+    }
+  }
+
+  &_blue {
+    use {
+      stroke: @color-additional;
+    }
+  }
+}
+
+.icon-question {
+  .size(24px);
+  border: 2px solid @grey;
+  border-radius: @br-circle;
+  color: @grey;
+  font-family: @ff-base;
+  font-size: @fz-general;
+  font-weight: 700;
+  line-height: 1.4;
+  text-align: center;
+  text-decoration: none;
+}
+
+.icon-warning {
+  .size(18px);
+}
+
+.icon-onboarding-1 {
+  .size(84px, 77px);
+  position: relative;
+  top: 6px;
+
+  @media @phone {
+    .size(58px, 52px);
+    top: 3px;
+  }
+}
+
+.icon-onboarding-2 {
+  .size(83px, 84px);
+  position: relative;
+  top: 3px;
+
+  @media @phone {
+    .size(57px, 58px);
+    top: 0;
+  }
+}
+
+.icon-onboarding-3 {
+  .size(84px, 81px);
+  position: relative;
+  top: 3px;
+
+  @media @phone {
+    .size(58px, 56px);
+    top: 1px;
+  }
+}
+
+.icon-onboarding-4 {
+  .size(80px, 84px);
+  left: 2px;
+  position: relative;
+  top: 3px;
+
+  @media @phone {
+    .size(55px, 58px);
+    top: 0;
+  }
+}
+
+.icon-onboarding-5 {
+  .size(75px, 84px);
+  left: 4px;
+  position: relative;
+  top: 3px;
+
+  @media @phone {
+    .size(51px, 58px);
+    top: -1px;
+  }
+}
+
+.icon-wall {
+  .size(1465px, 1430px);
+  margin-top: -25%;
+  opacity: 0.6;
+  position: relative;
+  right: -20%;
+}
+
+.icon-chain {
+  .size(18px);
+
+  @media @phone {
+    .size(14px);
+  }
+}
+
+.icon-facebook {
+  .size(18px);
+}
+
+.icon-twitter {
+  .size(18px, 21px);
+}
+
+.icon-linkedIn {
+  .size(18px);
+}
+
+.icon-big-arrow {
+  .size(172px, 14px);
+}
+
+.icon-small-arrow {
+  .size(30px, 13px);
+}
+
+.icon-person {
+  .size(28px, 32px);
+
+  @media @phone {
+    .size(25px, 28px);
+  }
+}
+
+.icon-pencil {
+  .size(12px);
+}
+
+.icon-case {
+  .size(38px, 30px);
+
+  &-empty {
+    .size(17px, 15px);
+  }
+
+  &-fill {
+    .size(15px, 14px);
+  }
+}
+
+.icon-education {
+  .size(42px, 34px);
+}
+
+.icon-pin {
+  .size(26px, 36px);
+}
+
+.icon-social {
+  .size(38px, 37px);
+}
+
+.icon-skills {
+  .size(35px);
+}
+
+.icon-heart {
+  .size(38px, 32px);
+}
+
+.icon-building {
+  .size(37px, 33px);
+}
+
+.icon-description {
+  .size(27px, 34px);
+}
+
+.icon-quote {
+  .size(35px, 31px);
+}
+
+.icon-photos {
+  .size(37px, 29px);
+}
+
+.icon-star {
+  .size(16px, 15px);
+
+  &_size {
+    &_l {
+      height: 20px;
+      width: 21px;
+    }
+  }
+
+  &_color {
+    &_invert {
+      fill: transparent;
+      stroke: @color-invert;
+    }
+  }
+
+  &_filled {
+    &.icon-star_color_invert {
+      fill: @color-invert;
+      stroke: transparent;
+    }
+  }
+}
+
+.icon-search {
+  .size(11px);
+}
+
+.icon-trash {
+  .size(13px, 17px);
+}
+
+.colored {
+  fill: inherit !important;
+  stroke: none !important;
+}
+
+.colored-stroke {
+  stroke: inherit !important;
+  fill: none !important;
+}

@@ -1,0 +1,32 @@
+.scroll-container {
+  overflow: hidden;
+  height: 100%;
+
+  &__inner {
+    overflow: auto;
+    height: 100%;
+    width: calc(~'100% + 15px');
+    -webkit-overflow-scrolling: touch;
+  }
+
+  &_content {
+    &_all {
+      height: calc(~'100% - 72px');
+    }
+  }
+
+  @media @phone {
+
+    &__inner {
+      box-sizing: border-box;
+      margin-right: 0;
+      padding-right: 0;
+    }
+
+    &, &_content_all, &__inner {
+      height: auto;
+      overflow: hidden;
+      width: 100%;
+    }
+  }
+}

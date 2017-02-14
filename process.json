@@ -1,0 +1,32 @@
+{
+  "apps": [{
+    "name": "pumpt-spa",
+    "script": "server",
+    "watch": true,
+    "exec_mode": "cluster",
+    "instances": 1,
+    "merge_logs": true,
+    "cwd": "./",
+    "env": {
+      "NODE_ENV": "development",
+      "BABEL_ENV": "development",
+      "PORT": "3010",
+      "REMOTE_API_HOST": "http://pumpt-dev-api.softfacade.com",
+      "REMOTE_API_PORT": "80"
+    },
+    "env_staging": {
+      "NODE_ENV": "staging",
+      "BABEL_ENV": "staging",
+      "PORT": "3011",
+      "REMOTE_API_HOST": "http://pumpt-dev-api.softfacade.com",
+      "REMOTE_API_PORT": "80"
+    },
+    "env_production": {
+      "NODE_ENV": "production",
+      "BABEL_ENV": "production",
+      "PORT": "3012",
+      "REMOTE_API_HOST": "http://pumpt-dev-api.softfacade.com",
+      "REMOTE_API_PORT": "80"
+    }
+  }]
+}

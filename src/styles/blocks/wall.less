@@ -1,0 +1,82 @@
+.wall {
+
+  &_type {
+
+    &_revert {
+      background-color: @background-invert;
+    }
+
+    &_base {
+      background-color: @background-base;
+    }
+  }
+
+  &_image {
+
+    &_first {
+      background-image: url('@{img-url}/wall/b-image_1.png');
+      background-repeat: no-repeat;
+      background-position: 0 100%;
+    }
+
+    &_second {
+      background-image: url('@{img-url}/wall/b-image_2.png');
+      background-repeat: no-repeat;
+      background-position: 0 0;
+    }
+
+    &_third {
+      background-image: url('@{img-url}/wall/b-image_3.png');
+      background-repeat: no-repeat;
+      background-position: 100% 100%;
+    }
+  }
+
+  &_onboarding {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+
+    .on-styled {
+      opacity: 0;
+    }
+
+    &_second {
+      #_1 {
+        opacity: 1;
+      }
+    }
+
+    &_third {
+      #_1, #_2 {
+        opacity: 1;
+      }
+    }
+
+    &_fourth {
+      #_1, #_2, #_3 {
+        opacity: 1;
+      }
+    }
+
+    &_fifth {
+      #_1, #_2, #_3, #_4 {
+        opacity: 1;
+      }
+    }
+
+    &_sixth {
+      #_1, #_2, #_3, #_4, #_5 {
+        opacity: 1;
+      }
+    }
+
+    &_final {
+      .on-styled {
+        opacity: 1;
+      }
+    }
+  }
+}

@@ -1,0 +1,210 @@
+.image {
+
+  &__wrapper {
+    .size(84px);
+    position: relative;
+    left: 25px;
+    display: block;
+  }
+
+  &__hor-list {
+    padding-right: 6px;
+    white-space: nowrap;
+
+    .image {
+      margin: 9px 0 0 -10px;
+      position: relative;
+
+      &:nth-last-child(2) {
+        opacity: 0.8;
+      }
+
+      &:nth-last-child(3) {
+        opacity: 0.6;
+      }
+
+      &:nth-last-child(4) {
+        opacity: 0.4;
+      }
+
+      &:nth-last-child(5) {
+        opacity: 0.2;
+      }
+
+      .card__actions & {
+        margin-top: 0;
+      }
+    }
+
+    .card__actions & {
+      margin-left: 28px;
+    }
+  }
+
+  &_inline {
+    .size(auto);
+    display: inline-block;
+  }
+
+  &_round {
+    border-radius: @br-circle;
+  }
+
+  &_top-rad {
+    border-radius: @br-standard @br-standard 0 0;
+  }
+
+  &_rad {
+    border-radius: @br-standard;
+  }
+
+  &_shadow {
+    box-shadow: @bsh-1;
+  }
+
+  &_empty {
+    border: 2px solid fade(@color-base, 10);
+    text-align: center;
+    padding: 15px 0;
+    position: relative;
+
+    .icon-person {
+      fill: @orange;
+
+      .profile-progress_size_s & {
+        .size(11px, 13px);
+
+        use {
+          fill: @orange;
+        }
+      }
+    }
+
+    .icon-building {
+      fill: @blue;
+    }
+
+  }
+
+  &_photo {
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 30px;
+    margin-top: 8px;
+    position: relative;
+
+    .link {
+      position: absolute;
+      bottom: calc(~'12px - 100%');
+      left: 0;
+      text-align: center;
+    }
+  }
+
+  &_width {
+    &_full {
+      .size(100%);
+      display: block;
+      object-fit: cover;
+    }
+  }
+
+  &_size {
+
+    &_xs {
+      .size(23px);
+    }
+
+    &_s {
+      .size(30px);
+    }
+
+    &_m {
+      .size(36px);
+    }
+
+    &_l {
+      .size(46px);
+    }
+
+    &_xl {
+      .size(48px);
+    }
+
+    &_xxl {
+      .size(66px);
+    }
+  }
+
+  &_type {
+    &_rating {
+      margin: 0 1px;
+
+    }
+
+    &_rating-name {
+      margin: 0 0 0 5px;
+    }
+
+    &_company-logo {
+
+      .card & {
+        display: inline-block;
+        vertical-align: top;
+        margin-right: 28px;
+        margin-top: 4px;
+      }
+
+      .card_state_open & {
+        margin-right: 29px;
+      }
+
+    }
+
+    &_summary-candidate {
+      margin-right: 14px;
+    }
+  }
+
+  @media @phone {
+    &_type {
+      &_rating {
+        margin: 0;
+      }
+
+      &_rating-name {
+        margin: 0;
+      }
+
+      &_summary-candidate {
+        margin-right: 13px;
+      }
+    }
+
+    &__wrapper {
+      .size(60px);
+      left: 8px;
+    }
+
+    &_photo {
+      margin-top: 1px;
+      margin-right: 10px;
+
+      .link {
+        bottom: calc(~'14px - 100%');
+        font-size: extract(@fzs-main, 1);
+        line-height: 1.2;
+      }
+    }
+
+    &_empty {
+      padding: 11px 0;
+    }
+
+    &_size {
+      &_xxl {
+        .size(56px);
+      }
+    }
+  }
+}

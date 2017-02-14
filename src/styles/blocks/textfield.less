@@ -1,0 +1,477 @@
+.textfield {
+  border: none;
+  display: block;
+  font-size: extract(@fzs-main, 2);
+  padding: 0;
+  width: 100%;
+
+  .icon-ok {
+    display: none;
+    position: absolute;
+    right: -1px;
+    bottom: 17px;
+  }
+
+  &__input {
+    border-bottom: 1px solid fade(@grey, 30);
+    color: @color-base;
+    font-family: @ff-base;
+    font-size: extract(@fzs-main, 2);
+    padding: 9px 0 8px;
+  }
+
+  &__label {
+    color: @grey;
+    font-family: @ff-base;
+    font-size: extract(@fzs-main, 2);
+    font-weight: 400;
+    line-height: 1;
+    top: 10px;
+
+    &::after {
+      background-color: @blue;
+      bottom: 0;
+      height: 1px;
+    }
+
+    &-text {
+      margin-top: 10px;
+      display: block;
+    }
+  }
+
+  &__error {
+    color: @red;
+    font-family: @ff-base;
+    font-size: extract(@fzs-main, 1);
+    margin-top: 9px;
+  }
+
+  &__separator {
+    position: absolute;
+    top: 11px;
+
+    &:first-of-type {
+      left: 30%;
+    }
+
+    &:nth-of-type(2) {
+      left: 60%;
+    }
+  }
+
+  &__expandable-holder {
+    background-color: @background-invert;
+    position: absolute;
+    right: 0;
+    width: 100%;
+  }
+
+  & + .checkbox {
+    margin-bottom: 0;
+    margin-top: 15px;
+  }
+
+  &.is-disabled {
+    .textfield__input {
+      border-bottom: 1px solid fade(@grey, 30);
+      color: @light-grey;
+    }
+
+    .textfield__label {
+      color: @light-grey;
+    }
+  }
+
+  &.is-valid {
+    .icon-ok {
+      display: block;
+    }
+    use {
+      stroke: @green;
+    }
+  }
+
+  &.is-invalid {
+    margin-bottom: 24px;
+
+    .textfield__input {
+      color: @red;
+    }
+  }
+
+  &_type {
+
+    &_textarea {
+
+      .textfield__input {
+        resize: none;
+        height: 41px;
+        overflow: hidden;
+      }
+
+    }
+
+    &_full-size {
+      border-top: 1px solid fade(@palette-black, 10);
+      display: flex;
+      flex-direction: column;
+      height: calc(~'100% - 50px');
+      width: 100%;
+
+      .textfield__input {
+        .size(100%);
+        font-size: @fz-general;
+        padding: 16px 35px;
+        resize: none;
+        border: none;
+        display: flex;
+        flex-grow: 1;
+      }
+
+      .textfield__label {
+        display: none;
+      }
+
+      &:focus {
+        outline: none;
+      }
+
+      .card__actions-summary & {
+        flex-grow: 1;
+      }
+    }
+
+    &_social {
+      padding-left: 38px;
+
+      .textfield__label {
+        left: 38px;
+        width: calc(~'100% - 38px');
+        font-size: extract(@fzs-main, 3);
+        top: 11px;
+      }
+
+      .textfield__input {
+        font-size: extract(@fzs-main, 3);
+        padding: 8px 0 7px;
+      }
+
+      use {
+        stroke: @light-grey;
+        fill: @light-grey;
+      }
+
+      .icon {
+        position: absolute;
+        left: 0;
+        top: 12px;
+      }
+
+      &.is-dirty:not(.is-focused) {
+
+        .icon-facebook use {
+          fill: #39579a;
+        }
+
+        .icon-twitter use {
+          fill: #009ef8;
+        }
+
+        .icon-linkedIn use {
+          fill: #0076b7;
+        }
+
+        .icon-chain use {
+          fill: @black;
+        }
+      }
+    }
+
+    &_date {
+      display: flex;
+
+      .textfield__input {
+        width: 33.3%;
+        padding-left: 20px;
+        padding-right: 0;
+
+        &:nth-of-type(2) {
+          width: 30.6%;
+        }
+
+        &:last-of-type {
+          width: 100% - 33.3% - 30.6%;
+        }
+      }
+
+      .textfield__label {
+        display: flex;
+      }
+
+      .textfield__label-item {
+        display: inline-block;
+        width: 33.3%;
+        padding-left: 20px;
+        padding-right: 20px;
+
+        &:nth-of-type(2) {
+          width: 30.6%;
+        }
+
+        &:last-of-type {
+          width: 100% - 33.3% - 30.6%;
+        }
+      }
+    }
+
+    &_chat {
+
+      height: 100%;
+
+      .textfield__input {
+        border: none;
+        display: block;
+        height: 100%;
+        font-size: @fz-general;
+        padding: 16px 35px 16px 0;
+      }
+      .textfield__label {
+        display: none;
+      }
+
+    }
+  }
+
+  &_size {
+
+    &_s {
+
+      .icon-ok {
+        display: none;
+        position: absolute;
+        right: -1px;
+        bottom: 17px;
+      }
+
+      .textfield {
+
+        &__input {
+          font-size: @fz-general;
+          padding: 9px 0 8px;
+          border-bottom: 1px solid fade(@grey, 30);
+        }
+
+        &__label {
+          top: 12px;
+          color: @grey;
+          font-size: @fz-general;
+
+          &::after {
+            bottom: 0;
+            height: 1px;
+          }
+        }
+
+        &__error {
+          font-size: extract(@fzs-main, 1);
+          margin-top: 9px;
+        }
+      }
+
+      &.is-invalid {
+        margin-bottom: 24px;
+      }
+    }
+
+    &_m {
+
+    }
+
+    &_l {
+
+      .textfield {
+
+        &__input {
+          padding-bottom: 6px;
+          font-size: @fz-l;
+        }
+
+        &__label {
+          top: 12px;
+          font-size: @fz-l;
+        }
+
+        &__error {
+          font-size: @fz-general;
+          margin-top: 3px;
+        }
+      }
+
+      &.is-invalid {
+        margin-bottom: 13px;
+      }
+    }
+  }
+
+  &_filled {
+    .icon-ok {
+      display: block;
+      right: 2px;
+      top: 11px;
+    }
+  }
+
+  &_expandable {
+    width: auto;
+
+    .icon-search {
+      margin: 7px 0;
+    }
+
+    .icon-search use {
+      fill: fade(@color-invert, 50);
+    }
+
+    .button_type_close {
+      display: none;
+      padding: 0;
+      margin: 0;
+      width: 30px;
+      height: 30px;
+      line-height: 0;
+      border: none;
+      bottom: -4px;
+      right: -3px;
+      top: auto;
+    }
+
+    .mdl-button {
+      position: absolute;
+      bottom: 1px;
+      height: 25px;
+      width: 25px;
+      line-height: 0;
+      min-width: 0;
+      right: -5px;
+    }
+
+    .textfield__input {
+      border: none;
+      font-size: @fz-general;
+
+      &::-moz-placeholder {
+        color: fade(@color-invert, 30);
+      }
+      &::-webkit-input-placeholder {
+        color: fade(@color-invert, 30);
+      }
+      &:-ms-input-placeholder {
+        color: fade(@color-invert, 30);
+      }
+    }
+
+    &.is-focused {
+      .icon-search {
+        display: none;
+      }
+
+      .button_type_close {
+        display: block;
+      }
+    }
+  }
+
+  &_color {
+    &_invert {
+      .textfield__input {
+        color: @color-invert;
+        border-color: fade(@color-invert, 30);
+      }
+
+      .textfield__label {
+        color: fade(@color-invert, 30);
+
+        &::after {
+          background-color: @color-invert;
+        }
+      }
+    }
+  }
+
+  & + .textfield {
+    margin-top: 8px;
+  }
+
+  @media @phone {
+
+    font-size: @fz-general;
+
+    &__input {
+      font-size: @fz-general;
+      padding: 10px 0 7px;
+    }
+
+    &__label {
+      font-size: @fz-general;
+      top: 12px;
+    }
+
+    &_size {
+
+      &_l {
+
+        .textfield {
+
+          &__input {
+            padding: 7px 0 8px;
+            font-size: @fz-general + 3px;
+          }
+
+          &__label {
+            top: 9px;
+            font-size: @fz-general + 3px;
+          }
+
+          &__error {
+            font-size: @fz-general;
+            margin-top: 3px;
+          }
+        }
+
+        &.is-invalid {
+          margin-bottom: 13px;
+        }
+      }
+    }
+
+    &_type {
+      &_social {
+
+        padding-left: 28px;
+
+        .textfield__input {
+          font-size: @fz-general;
+        }
+
+        .textfield__label {
+          font-size: @fz-general;
+          left: 28px;
+          width: calc(~'100% - 28px');
+        }
+
+        .icon {
+          top: 9px;
+        }
+      }
+    }
+
+    & + .checkbox {
+      margin-top: 27px;
+    }
+
+    &_filled .icon-ok {
+      display: none;
+    }
+  }
+}

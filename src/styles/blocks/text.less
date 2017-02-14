@@ -1,0 +1,151 @@
+.text {
+  color: @color-base;
+  font-family: @ff-base;
+  font-size: @fz-general;
+  font-weight: 400;
+  line-height: 1.33;
+  text-decoration: none;
+
+  &_size {
+    &_xxs {
+      font-size: extract(@fzs-main, 1);
+    }
+
+    &_xs {
+      font-size: extract(@fzs-main, 2);
+    }
+
+    &_s {
+      font-size: extract(@fzs-main, 3);
+    }
+
+    &_m {
+      font-size: extract(@fzs-main, 4);
+    }
+
+    &_l {
+      font-size: extract(@fzs-main, 5);
+    }
+
+    &_xl {
+      font-size: @fz-l;
+    }
+
+    &_xxl {
+      font-size: @fz-xl;
+    }
+
+    &_huge {
+      font-size: extract(@fzs-main, 5) * 3;
+    }
+  }
+
+  &_color {
+    &_invert {
+      color: @color-invert;
+    }
+
+    &_grey {
+      color: @grey;
+    }
+
+    &_l-grey {
+      color: @light-grey;
+    }
+  }
+
+  &_opacity {
+    &_half {
+      opacity: 0.5;
+    }
+
+    &_30 {
+      opacity: 0.3;
+    }
+  }
+
+  &_weight {
+    &_semibold {
+      font-weight: 600;
+    }
+  }
+
+  &_type {
+    &_content {
+      display: block;
+      margin: 10px 0;
+    }
+
+    &_heading {
+      line-height: 0.99;
+    }
+
+    &_heading-margin {
+      margin-bottom: 14px;
+    }
+
+    &_helper {
+      display: block;
+      margin-top: 24px;
+
+      &-upper {
+        display: block;
+        margin-top: 9px;
+      }
+    }
+  }
+
+  &_helper {
+    display: block;
+    margin-top: 24px;
+    &_s {
+      margin-top: 9px;
+    }
+  }
+
+  &_after {
+    &_big-head {
+      line-height: 1.6;
+      margin-bottom: 9px;
+      margin-top: -9px;
+    }
+  }
+
+  &_leading {
+    &_normal {
+      line-height: @lh-base;
+    }
+  }
+
+  &__mark {
+    background-color: fade(@background-base, 20);
+  }
+
+  @media @phone {
+
+    font-size: extract(@fzs-main, 1);
+
+    &_size {
+
+      &_xs {
+        font-size: @fz-general;
+      }
+
+      &_s {
+        font-size: @fz-general;
+
+        //font-size: extract(@fzs-main, 2);
+      }
+
+      &_xl {
+        font-size: @fz-general + 3px;
+      }
+    }
+
+    &_after_big-head {
+      line-height: 1.2;
+      margin-bottom: 14px;
+      margin-top: -14px;
+    }
+  }
+}

@@ -1,0 +1,49 @@
+.font-smoothing() {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+}
+
+.font-size-rems(@px-size) {
+  @rem-size: @px-size / @fz-general;
+  font-size: ~"@{rem-size}rem";
+}
+
+.selection(@background-color, @font-color) {
+  ::-moz-selection {
+    background: @background-color;
+    color: @font-color;
+  }
+
+  ::selection {
+    background: @background-color;
+    color: @font-color;
+  }
+}
+
+.placeholder(@color: fade(@color-invert, 30)) {
+  ::-moz-placeholder {
+    color: @color;
+  }
+  ::-webkit-input-placeholder {
+    color: @color;
+  }
+  :-ms-input-placeholder {
+    color: @color;
+  }
+}
+
+// Sizes
+.full-height() {
+  min-height: 580px;
+  height: 100vh;
+}
+
+.size(@thesize) {
+  width: @thesize;
+  height: @thesize;
+}
+
+.size(@width, @height) {
+  width: @width;
+  height: @height;
+}

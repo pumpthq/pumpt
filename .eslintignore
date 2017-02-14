@@ -1,0 +1,15 @@
+build/*
+reports/*
+
+platforms/*
+plugins/*
+
+node_modules/*
+**/node_modules/*
+
+*.config.js
+server.js
+server-proxy.js
+
+app/lib/*
+**/__tests__/*

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 31.5">
+  <path fill="white" d="M20 12v16c0 1.15-1.14 2-2 2H6c-.92 0-2-.98-2-2V12h16z"/>
+  <path fill="none" stroke="white" stroke-width="3" stroke-miterlimit="50" d="M20 12v16c0 1.15-1.14 2-2 2H6c-.92 0-2-.98-2-2V12h16z" stroke-dasharray="0"/>
+  <path fill="white" d="M0 8V4h25v4z"/>
+  <path fill="white" d="M10 0h5c1.1 0 2 .9 2 2v2c0 1.1-.9 2-2 2h-5c-1.1 0-2-.9-2-2V2c0-1.1.9-2 2-2z"/>
+</svg>

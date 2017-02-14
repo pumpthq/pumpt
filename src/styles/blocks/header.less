@@ -1,0 +1,40 @@
+.header {
+  display: flex;
+  margin-bottom: 5px;
+  padding: 21px 0;
+  justify-content: space-between;
+
+  &__item {
+    display: flex;
+    align-items: center;
+  }
+
+  &_mini {
+    margin-bottom: 1px;
+    padding: 20px 0;
+  }
+
+  &_small {
+    margin-bottom: 0;
+  }
+
+  @media @phone {
+    padding: 23px 0;
+
+    &_mini {
+      margin-bottom: 2px;
+      padding: 17px 0;
+    }
+
+    &_small {
+      padding: 16px 0 15px;
+    }
+
+    .page_full-block &__wrapper {
+      position: fixed;
+      background: @black;
+      width: 100%;
+      z-index: 2;
+    }
+  }
+}

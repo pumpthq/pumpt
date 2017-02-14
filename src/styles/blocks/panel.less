@@ -1,0 +1,124 @@
+.panel {
+  background-color: @background-base;
+  border-radius: @br-standard;
+  box-shadow: @bsh-4;
+  margin-bottom: 24px;
+  padding: 20px 35px 23px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  @media @phone {
+    box-shadow: @bsh-5;
+    margin-bottom: 12px;
+    padding: 2px 15px 24px;
+  }
+
+  &_mobile-full-width {
+    @media @phone {
+      margin-left: -15px;
+      width: calc(~'100% + 30px');
+    }
+  }
+
+  &_type {
+    &_on-nav {
+      margin-bottom: 0;
+      min-height: 448px;
+      position: fixed;
+      width: 365px;
+
+      @media screen and (max-width: 1120px) {
+        width: 298px;
+      }
+
+      @media @tablet {
+        .size(100%, auto);
+        border-radius: 0;
+        bottom: -30px;
+        box-shadow: @bsh-6;
+        left: 0;
+        min-height: 0;
+        overflow-x: scroll;
+        overflow-y: hidden;
+        padding-bottom: 30px;
+        right: auto;
+        top: auto;
+      }
+
+      @media @phone {
+        padding-bottom: 30px !important;
+      }
+    }
+
+    &_card {
+      .heading {
+        margin: 13px 0;
+      }
+
+      .text {
+        line-height: 1.35;
+        margin-top: -4px;
+
+        @media @phone {
+          font-size: extract(@fzs-main, 1);
+          line-height: 1.2;
+          margin-top: -7px;
+        }
+      }
+    }
+
+    &_content {
+      .heading_type_four {
+        margin: 13px 0;
+      }
+
+      .heading_type_two {
+        margin: 23px 0 10px;
+      }
+
+      &.panel_padding_big {
+        padding-bottom: 51px;
+      }
+    }
+  }
+
+  &_padding {
+    &_big {
+      padding: 29px 65px 65px;
+
+      @media @phone {
+        padding: 10px 38px 41px;
+      }
+    }
+
+    &_false {
+      padding: 0;
+
+      @media @phone {
+        padding: 0;
+      }
+    }
+  }
+
+  &_size {
+    &_fixed {
+      background-color: @background-base;
+      border-radius: @br-standard;
+      box-shadow: @bsh-1;
+      width: 830px;
+
+      @media @tablet {
+        width: 100%;
+      }
+    }
+  }
+
+  &_pos {
+    &_center {
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+}

@@ -1,0 +1,43 @@
+@media @tablet {
+  .swipe-container {
+    display: block;
+    overflow: hidden;
+    width: 100%;
+
+    &__inner {
+      margin-bottom: -30px;
+      overflow-x: auto;
+      padding-bottom: 30px;
+      white-space: nowrap;
+      width: 100%;
+    }
+
+    &_location {
+      &_app {
+        margin-left: -135px;
+        width: calc(~'100% + 170px');
+
+        .swipe-container__inner {
+          padding-left: 135px;
+          padding-right: 24px
+        }
+      }
+    }
+  }
+}
+
+@media @phone {
+  .swipe-container {
+
+    &_location {
+      &_app {
+        margin-left: -24px;
+        width: calc(~'100% + 39px');
+
+        .swipe-container__inner {
+          padding-left: 24px;
+        }
+      }
+    }
+  }
+}

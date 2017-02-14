@@ -1,0 +1,532 @@
+@close-btn-color: #262626;
+@btn-padding: 30px;
+
+.button {
+
+  &_type {
+
+    &_icon {
+      margin-left: 22px;
+      width: 18px;
+
+      &:first-of-type {
+        margin-left: 0;
+      }
+    }
+
+    &_colored {
+      background-color: @color-additional;
+      border-radius: @br-standard - 2px;
+      color: @color-invert;
+      font-family: @ff-base;
+      font-size: @fz-general;
+      font-weight: 600;
+      height: auto;
+      line-height: 1;
+      margin-right: 30px;
+      min-height: 42px;
+      padding: 0 @btn-padding;
+      text-transform: none;
+
+      &:hover {
+        background-color: @color-additional;
+      }
+
+      &[disabled][disabled] {
+        background-color: @light-grey;
+        color: @color-invert;
+      }
+    }
+
+    &_slider {
+      .size(36px);
+      background: transparent;
+      border: 2px solid @color-invert;
+      border-radius: @br-circle;
+      cursor: pointer;
+      opacity: 0.5;
+      padding: 5px 8px;
+      position: absolute;
+
+      use {
+        fill: @color-invert;
+      }
+
+      &.button_pos_right {
+        padding: 5px 7px;
+      }
+
+      &.button_color_grey {
+        border-color: @grey;
+        opacity: 1;
+
+        use {
+          fill: @grey;
+        }
+      }
+      &[disabled] {
+        opacity: 0.1;
+      }
+    }
+
+    &_close {
+      .size(24px);
+      background-color: @color-invert;
+      border: 1px solid fade(@background-invert, 20);
+      border-radius: @br-circle;
+      color: @close-btn-color;
+      font-family: @ff-base;
+      font-size: extract(@fzs-main, 5);
+      font-weight: 600;
+      line-height: 0.88;
+      padding: 2px 0;
+      position: absolute;
+      right: -12px;
+      text-align: center;
+      text-decoration: none;
+      top: -12px;
+      z-index: 2;
+
+      &.button_close_simple {
+        background: transparent;
+        width: 12px;
+        height: 12px;
+        color: @color-invert;
+        font-family: @ff-base;
+        font-size: 30px;
+        font-weight: 400;
+        line-height: 0.8;
+      }
+    }
+
+    &_delete {
+      .size(12px);
+      background: transparent;
+      border: none;
+      color: @color-base;
+      cursor: pointer;
+      display: inline-block;
+      font-family: @ff-base;
+      font-size: @fz-general * 2;
+      font-weight: 400;
+      line-height: 0.13;
+      margin-top: 17px;
+      padding: 0;
+      text-decoration: none;
+    }
+
+    &_trash {
+      .size(30px);
+      background: fade(@palette-black, 30);
+      border: none;
+      border-radius: @br-standard / 2;
+      cursor: pointer;
+      line-height: 0;
+      margin: 0;
+      padding: 0;
+      position: absolute;
+      right: 6px;
+      top: 7px;
+      z-index: 1;
+
+      .icon {
+        fill: @white;
+      }
+    }
+
+    &_transparent {
+      background: transparent;
+      border: none;
+      color: @blue;
+      font-family: @ff-base;
+      font-size: @fz-general;
+      font-weight: 400;
+      height: auto;
+      line-height: 1.5;
+      margin: 0;
+      min-width: 0 !important;
+      padding: 0;
+      text-transform: none;
+      width: auto;
+
+      &:hover {
+        background: transparent;
+      }
+    }
+
+    &_linkedin {
+
+      background-color: #0077b5;
+      padding-left: 13px;
+      padding-right: 17px;
+      text-align: left;
+      white-space: nowrap;
+
+      use {
+        fill: @color-invert !important;
+      }
+
+      .icon {
+        margin-right: 7px;
+      }
+    }
+
+    &_file {
+      .size(216px, auto);
+      display: inline-block;
+      margin: 13px 10px 8px 0;
+      position: relative;
+      vertical-align: top;
+
+      .button__inner {
+        .size(100%, 126px);
+        display: block;
+        border: 1px dashed fade(@grey, 50);
+        border-radius: @br-standard / 2;
+        margin-bottom: 3px;
+      }
+
+      .button__inputfile {
+        .size(1px);
+        opacity: 0;
+        overflow: hidden;
+        position: absolute;
+        z-index: -1;
+      }
+
+      .button__inputfile-label {
+        .size(100%);
+        color: @color-additional;
+        cursor: pointer;
+        display: flex;
+        font-family: @ff-base;
+        font-size: @fz-general;
+        font-weight: 400;
+        line-height: @lh-base;
+        justify-content: center;
+        align-items: center;
+        flex-flow: column wrap;
+      }
+
+      &:nth-child(3n) {
+        margin-right: 0;
+      }
+    }
+
+    &_group-upload {
+      height: 126px;
+      width: 100%;
+    }
+
+    &_text-icon {
+      color: white;
+      font-size: @fz-xxl + 2px;
+      letter-spacing: -2.2px;
+      line-height: 0;
+      text-decoration: none;
+    }
+  }
+
+  &_pos {
+
+    &_left {
+      left: 0;
+    }
+
+    &_right {
+      right: 0;
+      top: 1px;
+    }
+
+    &_center {
+      margin: 0 auto;
+    }
+  }
+
+  &_include_icon {
+    text-align: left;
+    padding-right: @btn-padding + 6px;
+
+    .icon-pencil {
+      .size(14px);
+      margin-top: -5px;
+      margin-right: 7px;
+      use {
+        fill: @background-base;
+      }
+    }
+  }
+
+  &_size {
+
+    &_s {
+      padding-left: @btn-padding - 16px;
+      padding-right: @btn-padding - 11px;
+    }
+
+    &_m {
+      padding: 0 (@btn-padding - 10px);
+    }
+
+    &_l {
+      min-width: 170px;
+      padding: 0 (@btn-padding - 3px);
+
+      &.button_type_transparent {
+        font-size: extract(@fzs-main, 4);
+        font-weight: 600;
+        padding: 0;
+      }
+    }
+
+    &_xl {
+      padding: 0 (@btn-padding * 2 + 8px);
+    }
+
+    &_50p {
+      width: 50%;
+    }
+  }
+
+  &_height {
+    &_small {
+      height: 36px;
+    }
+  }
+
+  &_margin-right_m {
+    margin-right: 35px;
+  }
+
+  &_state {
+
+    &_uploading {
+
+      .button__inner {
+        border-color: fade(@light-grey, 50);
+        overflow: hidden;
+      }
+
+      .button__inputfile-label {
+        justify-content: flex-end;
+        padding-bottom: 17px;
+      }
+
+      .logo_spinner {
+        margin-bottom: 11px;
+      }
+    }
+
+    &_filled {
+
+      .button__inner {
+        border-color: transparent;
+      }
+
+      .image {
+        border-radius: @br-standard / 2;
+      }
+    }
+
+    &_error {
+
+      .button__inner {
+        border-color: fade(@red, 30);
+      }
+
+      .button__inputfile-label {
+        cursor: default;
+      }
+
+      .button__error-links {
+        margin-top: 2px;
+
+        .link:not(:first-child) {
+          margin-left: 9px;
+        }
+      }
+    }
+  }
+
+  &_color {
+    &_l-grey {
+      color: @light-grey;
+    }
+    &_grey {
+      color: @grey;
+    }
+    &_white {
+      background-color: @background-base;
+      color: @blue;
+
+      &[disabled] {
+        opacity: 0.2;
+      }
+
+      &:hover {
+        background-color: @background-base;
+        color: @blue;
+      }
+    }
+  }
+
+  &__wrapper {
+    margin: 12px 0;
+  }
+
+  @media @tablet-landscape {
+    &_type {
+
+      &_file {
+        &:nth-child(2) {
+          margin-right: 0;
+        }
+
+        &:nth-child(3) {
+          margin-right: 10px;
+        }
+      }
+    }
+  }
+
+  @media @tablet {
+    &_type {
+      &_file {
+
+        margin: 6px 5px 0 0;
+
+        &:nth-child(2), &:nth-child(3) {
+          margin-right: 10px;
+        }
+
+        &:last-child {
+          margin-right: 0;
+        }
+
+        .button__inner {
+          border-color: @color-additional;
+        }
+      }
+    }
+
+    &_state {
+      &_uploading {
+        .button__inputfile-label {
+          padding-bottom: 31px;
+        }
+
+        .button__inner {
+          border-color: @light-grey;
+          margin-bottom: 6px;
+        }
+
+        .text {
+          font-size: @fz-general;
+        }
+      }
+
+      &_filled {
+        .button__inner {
+          border-color: transparent;
+        }
+      }
+
+      &_error {
+        .button__inner {
+          border-color: fade(@red, 30);
+        }
+      }
+    }
+  }
+
+  @media @phone {
+
+    &_type {
+      &_colored {
+        margin-right: 36px;
+        padding: 0 23px;
+
+        .panel_type_card & {
+          margin: 4px 0;
+          width: 100%;
+        }
+      }
+
+      &_linkedin {
+        padding-left: 36px;
+        padding-right: 36px;
+        text-align: center;
+
+        .icon {
+          position: absolute;
+          left: 13px;
+          top: 13px;
+        }
+      }
+
+      &_slider {
+        .size(30px);
+        padding: 5px;
+      }
+
+      &_close {
+        .size(18px);
+        font-size: @fz-general + 3px;
+        right: 6px;
+        top: 6px;
+      }
+    }
+
+    &_include_icon {
+      padding-left: 36px;
+      padding-right: 36px;
+      text-align: center;
+
+      .icon {
+        position: absolute;
+        top: 20px;
+        left: 15px;
+      }
+
+      .card__actions & {
+        padding-left: 25px;
+        padding-right: 26px;
+      }
+    }
+
+    &_size {
+      &_l {
+        min-width: 130px;
+        padding: 0 @btn-padding - 6px;
+
+        &.button_type_transparent {
+          font-size: @fz-general + 3px;
+          font-weight: 400;
+        }
+      }
+    }
+
+    &__wrapper {
+
+      margin-top: 20px;
+      margin-bottom: 15px;
+
+      .button {
+        margin-bottom: 12px;
+        margin-right: 0;
+        width: 100%;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+
+        .card_onb-info & {
+          height: 42px;
+          padding-left: 36px;
+          padding-right: 36px;
+        }
+      }
+
+    }
+  }
+}
