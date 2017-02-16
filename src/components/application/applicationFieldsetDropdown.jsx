@@ -29,6 +29,7 @@ class ApplicationFieldsetDropdown extends Component {
         this.inputOnFocus = this.inputOnFocus.bind(this)
         this.inputOnBlur = this.inputOnBlur.bind(this)
         this.inputOnChange = this.inputOnChange.bind(this)
+        this.inputOnClick = this.inputOnClick.bind(this)
     }
 
     componentWillMount() {
@@ -115,6 +116,15 @@ class ApplicationFieldsetDropdown extends Component {
         })
     }
 
+    toggle() {
+        let currentFocusing = this.state.isFocused
+        this.setState({
+            isDirty: !currentFocusing,
+            isFocused: !currentFocusing,
+            visibleList: !currentFocusing
+        })
+    }
+
     showList(bool) {
         this.setState({
             visibleList : bool
@@ -155,6 +165,10 @@ class ApplicationFieldsetDropdown extends Component {
                             onChange={this.inputOnChange}
                             onFocus={this.inputOnFocus}
                             onBlur={this.inputOnBlur}
+                        />
+                        <span
+                            class="triangle"
+                            onClick={this.inputOnClick}
                         />
                         <span class='mdl-textfield__error textfield__error'>{error}</span>
                         <span className="mdl-textfield__label textfield__label"/>
@@ -202,6 +216,10 @@ class ApplicationFieldsetDropdown extends Component {
         this.showList(false)
 
         this.props.onBlur.apply(this, [event])
+    }
+
+    inputOnClick(event) {
+        this.toggle()
     }
 }
 

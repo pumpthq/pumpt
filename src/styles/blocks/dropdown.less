@@ -72,7 +72,20 @@
         margin-bottom: 0;
         padding-bottom: 0;
 
-        &::after {
+        //&::after {
+        //  .size(6px);
+        //  border: 1px solid @color-base;
+        //  border-right: none;
+        //  border-top: none;
+        //  content: '';
+        //  margin-top: -3px;
+        //  position: absolute;
+        //  right: 1px;
+        //  top: 50%;
+        //  transform: rotate(-45deg);
+        //}
+
+        .triangle {
           .size(6px);
           border: 1px solid @color-base;
           border-right: none;
@@ -96,7 +109,12 @@
         }
 
         &.dropdown__wrapper_active {
-          &::after {
+          //&::after {
+          //  transform: rotate(135deg);
+          //  margin-top: 1px;
+          //}
+
+          .triangle {
             transform: rotate(135deg);
             margin-top: 1px;
           }

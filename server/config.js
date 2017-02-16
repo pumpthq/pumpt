@@ -1,4 +1,5 @@
 const config = {};
+
 const DEFAULT_HOST = '37.139.29.63';
 
 config.env = process.env.NODE_ENV || 'development';

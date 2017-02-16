@@ -73,7 +73,7 @@ const apiLogin = ({ email, password }) =>
      }).then((response) => (response.data))
 ;
 
-const cleanMessageOnSession = () =>
+ const cleanMessageOnSession = () =>
      axios
         .get(`${API_URL}/users/clean`)
         .then(response => (response.data))

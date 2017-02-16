@@ -1,3 +1,4 @@
+import axios from 'axios';
 import ShortID from 'shortid';
 import saveStep from './saveOnboardingStep';
 import {
@@ -32,6 +33,11 @@ import {
     SET_DEFAULT_STATE,
     SET_DEFAULT_NEW_JOB_STATE,
 } from './../constants/companyJobs';
+
+import {
+    API_URL,
+    API_CANDIDATE_ROOT
+} from './../constants/api';
 
 const defaultState = {
     open: [{
@@ -102,11 +108,10 @@ export default (state = defaultState, action) => {
         case OPEN_FETCH_SUCCEEDED :
             return {
                 ...state,
-                open: payload.jobs
-                    .map((job) => ({
+                open: payload.jobs.map((job) => ({
                         id: job._id,
                         ...getOnlyRequired(job),
-                    })),
+                })),
                 drafts: [],
                 closed: [],
                 activeTab: OPEN_TAB,
@@ -294,58 +299,123 @@ export default (state = defaultState, action) => {
                     active: [],
                 },
             };
-        default : {
-            let xhr = new XMLHttpRequest();
-            xhr.open('GET', 'http://37.139.29.63:4000/api/candidates', false);
-            xhr.send(null);
-            let candidates = eval("(" + xhr.responseText + ")");
-            let finalCandidates = [];
-            candidates.map((candidate) => {
+        default:
+        {
+            //let candidatesUrl = API_URL + API_CANDIDATE_ROOT;
+            //axios.get(candidatesUrl).then((response) => {
+            //    let resultCandidates = response.data;
+            //    let finalCandidates = [];
+            //
+            //    resultCandidates.map((candidate) => {
+            //        let finalCandidate = {
+            //            id: candidate._id,
+            //            jobTitle: candidate.recentJobParent,
+            //            location: candidate.location.abilityToRelocate ? 'ready for relocation' : 'not ready for relocation',
+            //            salary: candidate.recentAnnualIncome,
+            //            experience: candidate.recentAreaExperience,
+            //            employment: candidate.employments[0],
+            //            degree: candidate.education.degree,
+            //            matches: '0'
+            //        };
+            //
+            //        finalCandidates.push(finalCandidate);
+            //    });
+            //
+            //    let returnedObject = {
+            //        open: finalCandidates,
+            //        drafts: [
+            //            {
+            //                id: ShortID.generate(),
+            //                jobTitle: 'Frontend',
+            //                location: 'Uzhhorod',
+            //                salary: '10000$',
+            //                experience: '2 Years',
+            //                employment: 'Any',
+            //                degree: 'Any'
+            //            }
+            //        ],
+            //        closed: [
+            //            {
+            //                id: ShortID.generate(),
+            //                jobTitle: 'Sales',
+            //                location: 'Uzhhorod',
+            //                salary: '5000$',
+            //                experience: '1 year',
+            //                employment: 'Full-time',
+            //                degree: 'Bachelors',
+            //                matches: '4'
+            //            }
+            //        ],
+            //        activeTab: OPEN_TAB,
+            //        newJob: {
+            //            head: SHOW_SUMMARY_HEAD_EDIT,
+            //            step: null,
+            //            progress: [],
+            //            active: [],
+            //            summary: {}
+            //        }
+            //    };
+            //
+            //    console.log(returnedObject);
+            //
+            //    return returnedObject;
+            //});
 
-                let finalCandidate = {
-                    id: candidate._id,
-                    jobTitle: candidate.recentJobParent,
-                    location: candidate.location.abilityToRelocate ? 'ready for relocation' : 'not ready for relocation',
-                    salary: candidate.recentAnnualIncome,
-                    experience: candidate.recentAreaExperience,
-                    employment: candidate.employments[0],
-                    degree: candidate.education.degree,
-                    matches: '0'
-                };
-                finalCandidates.push(finalCandidate);
-            });
-            return {
-                open: finalCandidates,
-                drafts: [{
-                    id: ShortID.generate(),
-                    jobTitle: 'Frontend',
-                    location: 'Uzhhorod',
-                    salary: '10000$',
-                    experience: '2 Years',
-                    employment: 'Any',
-                    degree: 'Any',
-                }],
-                closed: [{
-                    id: ShortID.generate(),
-                    jobTitle: 'Sales',
-                    location: 'Uzhhorod',
-                    salary: '5000$',
-                    experience: '1 year',
-                    employment: 'Full-time',
-                    degree: 'Bachelors',
-                    matches: '4',
-                }],
-                activeTab: OPEN_TAB,
-                newJob: {
-                    head: SHOW_SUMMARY_HEAD_EDIT,
-                    step: null,
-                    progress: [],
-                    active: [],
-                    summary: {},
-                },
-            };
+            //let xhr = new XMLHttpRequest();
+            //xhr.open('GET', 'http://37.139.29.63:4000/api/candidates', false);
+            //xhr.send(null);
+            //let candidates = eval("(" + xhr.responseText + ")");
+            //let finalCandidates = [];
+            //candidates.map((candidate) => {
+            //
+            //    let finalCandidate = {
+            //        id: candidate._id,
+            //        jobTitle: candidate.recentJobParent,
+            //        location: candidate.location.abilityToRelocate ? 'ready for relocation' : 'not ready for relocation',
+            //        salary: candidate.recentAnnualIncome,
+            //        experience: candidate.recentAreaExperience,
+            //        employment: candidate.employments[0],
+            //        degree: candidate.education.degree,
+            //        matches: '0'
+            //    };
+            //    finalCandidates.push(finalCandidate);
+            //});
+            //return {
+            //    open: finalCandidates,
+            //    drafts: [{
+            //        id: ShortID.generate(),
+            //        jobTitle: 'Frontend',
+            //        location: 'Uzhhorod',
+            //        salary: '10000$',
+            //        experience: '2 Years',
+            //        employment: 'Any',
+            //        degree: 'Any'
+            //    }],
+            //    closed: [{
+            //        id: ShortID.generate(),
+            //        jobTitle: 'Sales',
+            //        location: 'Uzhhorod',
+            //        salary: '5000$',
+            //        experience: '1 year',
+            //        employment: 'Full-time',
+            //        degree: 'Bachelors',
+            //        matches: '4'
+            //    }],
+            //    activeTab: OPEN_TAB,
+            //    newJob: {
+            //        head: SHOW_SUMMARY_HEAD_EDIT,
+            //        step: null,
+            //        progress: [],
+            //        active: [],
+            //        summary: {},
+            //    },
+            //};
+            //console.log('qwe');
+             return {
+                ...state
+             };
         }
-            // return state;
+
     }
 };
 
