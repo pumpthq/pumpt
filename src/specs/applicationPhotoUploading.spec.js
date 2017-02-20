@@ -9,7 +9,7 @@ import {
 } from './../reducers/applicationPhotoUploading'
 import store from './../store'
 import faker from 'faker'
-import helpers from './../helpers'
+//import helpers from './../helpers'
 import MockAdapter from 'axios-mock-adapter'
 import axios from 'axios'
 import ObjectID from 'bson-objectid'

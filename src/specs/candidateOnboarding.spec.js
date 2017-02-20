@@ -7,7 +7,7 @@ import {
 } from './../reducers/candidateOnboarding'
 import store from './../store'
 import faker from 'faker'
-import helpers from './../helpers'
+// import helpers from './../helpers'
 
 const {
     dispatch,

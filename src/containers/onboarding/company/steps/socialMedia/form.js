@@ -59,7 +59,9 @@ import {
 
         /*if (!linkedInProfileUrl) {
             errors.linkedInProfileUrl = 'Can\'t be blank'
-        } else */if (linkedInProfileUrl && validateJs.single(`http://${linkedInProfileUrl.replace('http://').replace('https://')}`, urlSchema)) {
+        } else */
+
+        if (linkedInProfileUrl && validateJs.single(`http://${linkedInProfileUrl.replace('http://').replace('https://')}`, urlSchema)) {
             errors.linkedInProfileUrl = 'Invalid URL'
         }
 
@@ -69,7 +71,9 @@ import {
 
         /*if (!facebookProfileUrl) {
             errors.facebookProfileUrl = 'Can\'t be blank'
-        } else */if (facebookProfileUrl && validateJs.single(`http://${facebookProfileUrl.replace('http://').replace('https://')}`, urlSchema)) {
+        } else */
+
+        if (facebookProfileUrl && validateJs.single(`http://${facebookProfileUrl.replace('http://').replace('https://')}`, urlSchema)) {
             errors.facebookProfileUrl = 'Invalid URL'
         }
 

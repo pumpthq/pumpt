@@ -5,3 +5,6 @@ export {
     validateLogin,
     validateChangePassword
 } from './validator';
+export {
+    formatUrl
+} from './formatter'

@@ -70,22 +70,18 @@ export default function () {
         takeLatest(APPLY_FOR_MEMBERSHIP_REQUESTED, function* () {
             const onboardingState = yield select(getCompanyOnboarding);
 
-            if (onboardingState.linkedInProfileUrl) {
-                onboardingState.linkedInProfileUrl = 'http://' + onboardingState.linkedInProfileUrl;
-            } else {
+            if (!onboardingState.linkedInProfileUrl) {
                 onboardingState.linkedInProfileUrl = '';
             }
             if (!onboardingState.twitterUsername) {
                 onboardingState.twitterUsername = '';
             }
-            if (onboardingState.facebookProfileUrl) {
-                onboardingState.facebookProfileUrl = 'http://' + onboardingState.facebookProfileUrl;
-            } else {
+            if (!onboardingState.facebookProfileUrl) {
                 onboardingState.facebookProfileUrl = '';
             }
 
-            if(onboardingState.websiteUrl.indexOf('http://') === -1) {
-                onboardingState.websiteUrl = 'http://' + onboardingState.websiteUrl;
+            if(!onboardingState.websiteUrl) {
+                onboardingState.websiteUrl = '';
             }
 
             const payload = {
