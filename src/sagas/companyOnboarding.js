@@ -84,6 +84,10 @@ export default function () {
                 onboardingState.facebookProfileUrl = '';
             }
 
+            if(onboardingState.websiteUrl.indexOf('http://') === -1) {
+                onboardingState.websiteUrl = 'http://' + onboardingState.websiteUrl;
+            }
+
             const payload = {
                 fullName: onboardingState.fullName,
                 position: onboardingState.jobTitle,
@@ -101,7 +105,7 @@ export default function () {
                         state: states[onboardingState.headquatersState],
                     },
                     socialMedia: {
-                        websiteUrl: `http://${onboardingState.websiteUrl}`, /*http://*/
+                        websiteUrl: `${onboardingState.websiteUrl}`,
                         linkedInUrl: `${onboardingState.linkedInProfileUrl}`,
                         twitterAcc: `${onboardingState.twitterUsername}`,
                         facebookUrl: `${onboardingState.facebookProfileUrl}`,

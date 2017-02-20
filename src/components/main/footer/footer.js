@@ -34,7 +34,7 @@ class Footer extends Component {
                         </div>
                         <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12 text-right footer__item">
                             <address class="text text_color_invert text_opacity_half">
-                                &copy; 2016 Pumpt Platform, LLC.
+                                &copy; 2017 Pumpt Platform, LLC.
                             </address>
                         </div>
                     </div>

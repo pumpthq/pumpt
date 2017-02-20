@@ -88,7 +88,7 @@ class ValuesForm extends Component {
                         )
                     })}
                 </List>
-                <button class="onboarding__next mdl-button button button_type_colored button_size_l" disabled={!activeItems || activeItems.length < 3} onClick={nextStep}>Nexttt</button>
+                <button class="onboarding__next mdl-button button button_type_colored button_size_l" disabled={!activeItems || activeItems.length < 3} onClick={nextStep}>Next</button>
                 <div className="classsssName"></div>
             </div>
         )
