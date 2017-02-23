@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { SHOW_FIELD_OF_EXPERTISE_STEP, FIELD_OF_EXPERTISE_DROPDOWN_DATA } from './../../../../../../constants/candidateOnboarding'
 import { showFieldOfExpertiseStep } from './../../../../../../actions/candidateOnboarding'
-import { NavigationLink } from './../../../../../../components/main/navigation'
+import { NavigationLink, NavigationLink2 } from './../../../../../../components/main/navigation'
 import CallStep from './../../../../callStep'
 import { NavLinkLabel } from '../../../../renderHelpers'
 import { findById } from '../../../../../../constants/dropdownData'
@@ -38,7 +38,7 @@ export class To extends Component {
             id : stateItem.id,
             data : FIELD_OF_EXPERTISE_DROPDOWN_DATA
         }) : null
-        
+
         return (
             <NavigationLink
                 style={{
@@ -83,4 +83,3 @@ LinkToFieldOfExpertiseStep.propTypes = {
 }
 
 export default LinkToFieldOfExpertiseStep
-

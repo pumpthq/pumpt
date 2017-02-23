@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { SHOW_EXPERIENCE_STEP, EXPERIENCE_DROPDOWN_DATA } from './../../../../../../constants/candidateOnboarding'
 import { showExperienceStep } from './../../../../../../actions/candidateOnboarding'
-import { NavigationLink } from './../../../../../../components/main/navigation'
+import { NavigationLink, NavigationLink2 } from './../../../../../../components/main/navigation'
 import CallStep from './../../../../callStep'
 import { findById } from '../../../../../../constants/dropdownData'
 
@@ -38,8 +38,8 @@ export class To extends Component {
             data : EXPERIENCE_DROPDOWN_DATA
         }) : null
 
-        return (
-            <NavigationLink
+        return(
+            <NavigationLink2
                 style={{
                     cursor : isFilled || isActive ? 'pointer' : 'default'
                 }}
@@ -48,7 +48,9 @@ export class To extends Component {
                 onClick={() => {
                     if (isEnabled) dispatch(showExperienceStep())
                 }}
-            >{item ? stateItem.value || item.title : 'Experience'}</NavigationLink>
+                textLabel='Experience'
+                textFilledWith={item ? stateItem.value || item.title : ''}
+            />
         )
     }
 }

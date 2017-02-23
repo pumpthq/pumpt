@@ -5,6 +5,7 @@ import { ListItemUserEntered } from './listItemUserEntered'
 
 const LIST_ITEM_TYPE_TEXT = 'list.item.type.text'
 const LIST_ITEM_TYPE_USER_ENTERED = 'list.item.type.userEntered'
+const LIST_ITEM_TYPE_GROUP = 'list.item.type.group'
 
 class List2Item extends Component {
     render() {

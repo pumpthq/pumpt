@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { SHOW_INDUSTRY_STEP, INDUSTRY_DROPDOWN_DATA } from './../../../../../../constants/candidateOnboarding'
 import { showIndustryStep } from './../../../../../../actions/candidateOnboarding'
-import { NavigationLink } from './../../../../../../components/main/navigation'
+import { NavigationLink, NavigationLink2 } from './../../../../../../components/main/navigation'
 import CallStep from './../../../../callStep'
 import { findById } from '../../../../../../constants/dropdownData'
 
@@ -38,8 +38,8 @@ export class To extends Component {
             data : INDUSTRY_DROPDOWN_DATA
         }) : null
 
-        return (
-            <NavigationLink
+        return(
+            <NavigationLink2
                 style={{
                     cursor : isFilled || isActive ? 'pointer' : 'default'
                 }}
@@ -48,7 +48,9 @@ export class To extends Component {
                 onClick={() => {
                     if (isEnabled) dispatch(showIndustryStep())
                 }}
-            >{item ? stateItem.value || item.title : 'Industry'}</NavigationLink>
+                textLabel='Industry'
+                textFilledWith={item ? stateItem.value || item.title : ''}
+            />
         )
     }
 }

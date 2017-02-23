@@ -1,16 +1,20 @@
 import React, { Component, PropTypes } from 'react'
-import { ListItem } from './index'
+import { ListItemGroup } from './index'
 
-class List2 extends Component {
+class List2Component extends Component {
     constructor(props) {
         super(props)
         const { preselectedItem, preselectedValue } = props
         this.state = {
             selectedItemId: preselectedItem,
-            selectedValue: preselectedValue
+            selectedValue: preselectedValue,
+            openGroupsId: []
         }
         this.handleItemClick = this.handleItemClick.bind(this)
         this.handleValueChange = this.handleValueChange.bind(this)
+        this.handleGroupClick = this.handleGroupClick.bind(this)
+        this.toggleGroup = this.toggleGroup.bind(this)
+        this.isGroupOpened = this.isGroupOpened.bind(this)
     }
 
     makeClassName() {
@@ -25,10 +29,32 @@ class List2 extends Component {
     }
 
     render() {
-        const { items, preselectedValue } = this.props
+        const { items, preselectedValue, handleGroups } = this.props
         const { selectedItemId, selectedValue } = this.state
         const noOneSelected = selectedItemId === ''
-        return (
+
+        return(
+            <ul class={this.makeClassName()}>
+            {
+                items.map(group => {
+                    return(
+                        <ListItemGroup
+                            {...group}
+                            onClick={this.handleItemClick}
+                            onValueChange={this.handleValueChange}
+                            onGroupClick={this.handleGroupClick}
+                            selectedItemId={selectedItemId}
+                            selectedValue={selectedValue}
+                            handleGroups={handleGroups}
+                            isOpened={this.isGroupOpened(group.id)}
+                        />
+                    )
+                })
+            }
+            </ul>
+        );
+
+        /* return (
             <ul className={this.makeClassName()}>
             {
                 items.map(item => {
@@ -45,12 +71,18 @@ class List2 extends Component {
                 })
             }
             </ul>
-        )
+        ) */
     }
 
     handleItemClick({ id }) {
         this.setState({
             selectedItemId: id
+        })
+    }
+
+    handleGroupClick(groupId) {
+        this.setState({
+            openGroupsId: this.toggleGroup(groupId)
         })
     }
 
@@ -64,9 +96,39 @@ class List2 extends Component {
             value: value
         })
     }
+
+    toggleGroup(groupIdClicked) {
+        const { openGroupsId } = this.state
+        console.log(`Toggled ${groupIdClicked}`)
+        console.log(openGroupsId)
+        let wasItemInLIst = false
+        let newOpenGroupsId = []
+        openGroupsId.map((groupId) => {
+            if(groupId !== groupIdClicked) {
+                newOpenGroupsId.push(groupId)
+            } else {
+                wasItemInLIst = true
+            }
+        })
+        if(!wasItemInLIst) {
+            newOpenGroupsId.push(groupIdClicked)
+        }
+        return newOpenGroupsId
+    }
+
+    isGroupOpened(groupId) {
+        const { openGroupsId } = this.state
+        let wasGroupFind = false
+        openGroupsId.map((listGroupId) => {
+            if(listGroupId === groupId) {
+                wasGroupFind = true
+            }
+        })
+        return wasGroupFind
+    }
 }
 
-List2.propTypes = {
+List2Component.propTypes = {
     items: PropTypes.arrayOf(PropTypes.object),
     classesToAdd: PropTypes.arrayOf(PropTypes.string),
     allowNoSelection: PropTypes.bool,
@@ -75,16 +137,18 @@ List2.propTypes = {
     preselectedValue: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.object
-    ])
+    ]),
+    handleGroups: PropTypes.bool
 }
 
-List2.defaultProps = {
+List2Component.defaultProps = {
     items: [],
     classesToAdd: [],
     allowNoSelection: true,
     listValueSelected: () => {},
     preselectedItem: '',
-    preselectedValue: ''
+    preselectedValue: '',
+    handleGroups: false
 }
 
-export default List2
+export default List2Component

@@ -1,13 +1,15 @@
-import React, { Component, PropTypes } from 'react';
-import Panel from '../../../../../components/main/panel';
-import { H1 } from '../../../../../components/main/heading';
-import on3Image from '../../../../../img/sprites-svg/on3.svg';
-import FieldOfExpertiseForm from './form';
-import OnboardingCandidateLinker from './../linker';
+import React, { Component, PropTypes } from 'react'
+import Panel from '../../../../../components/main/panel'
+import { H1 } from '../../../../../components/main/heading'
+import on3Image from '../../../../../img/sprites-svg/on3.svg'
+import FieldOfExpertiseForm from './form'
+import FieldOfExpertiseContent from './content'
+
+import OnboardingCandidateLinker from './../linker'
 
 class FieldOfExpertiseStep extends Component {
     componentDidMount() {
-        this.props.scrollTop();
+        this.props.scrollTop()
     }
     render() {
         return (
@@ -24,7 +26,8 @@ class FieldOfExpertiseStep extends Component {
                                     </span>
                                 </span>
                                 </H1>
-                                <FieldOfExpertiseForm />
+                                <FieldOfExpertiseContent />
+                                { /*<FieldOfExpertiseForm /> */}
                             </Panel>
                         </section>
                         <aside class="column column_size_s">
@@ -39,6 +42,6 @@ class FieldOfExpertiseStep extends Component {
 
 FieldOfExpertiseStep.propTypes = {
     scrollTop: PropTypes.func,
-};
+}
 
-export default FieldOfExpertiseStep;
+export default FieldOfExpertiseStep

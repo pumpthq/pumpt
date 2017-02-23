@@ -2,6 +2,8 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import List from './../../../../../components/main/list'
 import { findById } from '../../../../../constants/dropdownData'
+import { INDUSTRY_DROPDOWN_DATA } from './../../../../../constants/candidateOnboarding'
+import uuid from 'uuid'
 
 import {
     saveIndustryData,
@@ -9,8 +11,6 @@ import {
 } from './../../../../../actions/candidateOnboarding'
 
 import { AlternativeListItem, StepListLink } from '../../../renderHelpers'
-import { INDUSTRY_DROPDOWN_DATA } from './../../../../../constants/candidateOnboarding'
-import uuid from 'uuid'
 
 @connect(
     function mapStateToProps(state, ownProps) {
@@ -19,7 +19,7 @@ import uuid from 'uuid'
             id : industry ? industry.id : null,
             data : INDUSTRY_DROPDOWN_DATA
         })
-        
+
         return {
             activeItem
         }
@@ -44,7 +44,6 @@ import uuid from 'uuid'
 class IndustryForm extends Component {
     render() {
         const { listItems, nextStep, activeItem } = this.props
-        
         return (
             <List type='onboarding'>
                 {listItems.map(item => {
@@ -58,7 +57,6 @@ class IndustryForm extends Component {
                             }} />
                         )
                     }
-
                     return (
                         <StepListLink {...{
                             key : uuid.v4(),
