@@ -16,7 +16,6 @@ describe('Utils methods', () => {
                 };
 
                 let returned = formatUrl(source);
-                console.log(returned);
                 expect(returned).to.be.an('object');
                 expect(returned).to.deep.equal(expected);
             });

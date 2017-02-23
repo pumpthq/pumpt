@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { SHOW_WEBSITE_AND_SOCIAL_MEDIA_STEP } from './../../../../../../constants/companyOnboarding'
 import { showWebsiteAndSocialMediaStep } from './../../../../../../actions/companyOnboarding'
-import { NavigationLink } from './../../../../../../components/main/navigation'
+import { NavigationLink, NavigationLink2 } from './../../../../../../components/main/navigation'
 import CallStep from './../../../../callStep'
 
 @connect(
@@ -32,8 +32,8 @@ export class To extends Component {
         } = this.props
         const { websiteUrl } = onboardingState
 
-        return (
-            <NavigationLink
+        return(
+            <NavigationLink2
                 style={{
                     cursor : isFilled || isActive ? 'pointer' : 'default'
                 }}
@@ -42,8 +42,11 @@ export class To extends Component {
                 onClick={() => {
                     if (isEnabled) dispatch(showWebsiteAndSocialMediaStep())
                 }}
-            >{websiteUrl && websiteUrl.length < label.length ? websiteUrl : label}</NavigationLink>
+                textLabel={label}
+                textFilledWith={websiteUrl}
+            />
         )
+    
     }
 }
 

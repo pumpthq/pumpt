@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { SHOW_NUMBER_OF_EMPLOYEES_STEP, COMPANY_EMPLOYEES_DATA } from './../../../../../../constants/companyOnboarding'
 import { showNumberOfEmployeesStep } from './../../../../../../actions/companyOnboarding'
-import { NavigationLink } from './../../../../../../components/main/navigation'
+import { NavigationLink, NavigationLink2 } from './../../../../../../components/main/navigation'
 import CallStep from './../../../../callStep'
 import { findById } from '../../../../../../constants/dropdownData'
 
@@ -39,7 +39,7 @@ export class To extends Component {
         }) : null
 
         return (
-            <NavigationLink
+            <NavigationLink2
                 style={{
                     cursor : isFilled || isActive ? 'pointer' : 'default'
                 }}
@@ -48,7 +48,9 @@ export class To extends Component {
                 onClick={() => {
                     if (isEnabled) dispatch(showNumberOfEmployeesStep())
                 }}
-            >{item ? stateItem.value || item.value : 'Company Size' }</NavigationLink>
+                textLabel='Company Size'
+                textFilledWith={stateItem ? stateItem.value || item.value : ''}
+            />
         )
     }
 }

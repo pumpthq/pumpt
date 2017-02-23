@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { SHOW_VALUES_STEP } from './../../../../../../constants/companyOnboarding'
 import { VALUE_ASSESSMENTS_DROPDOWN_DATA } from './../../../../../../constants/candidateOnboarding'
 import { showValuesStep } from './../../../../../../actions/companyOnboarding'
-import { NavigationLink } from './../../../../../../components/main/navigation'
+import { NavigationLink, NavigationLink2 } from './../../../../../../components/main/navigation'
 import CallStep from './../../../../callStep'
 import { findById } from '../../../../../../constants/dropdownData'
 
@@ -52,9 +52,8 @@ export class To extends Component {
             caption = titles.join(" / ");
 
         }
-
-        return (
-            <NavigationLink
+        return(
+            <NavigationLink2
                 style={{
                     cursor : isFilled || isActive ? 'pointer' : 'default'
                 }}
@@ -63,8 +62,11 @@ export class To extends Component {
                 onClick={() => {
                     if (isEnabled) dispatch(showValuesStep())
                 }}
-            >{caption ? caption : 'Values Assessment'}</NavigationLink>
+                textLabel='Values Assessment'
+                textFilledWith={caption}
+            />
         )
+    
     }
 }
 

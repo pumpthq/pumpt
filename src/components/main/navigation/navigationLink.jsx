@@ -12,7 +12,7 @@ class NavigationLink extends Component {
     }
 
     render() {
-        const { children, onClick, style } = this.props
+        const { children, onClick, style, filled } = this.props
         
         return (
             <span class={this.makeClasses('navigation__link')}>
@@ -22,7 +22,7 @@ class NavigationLink extends Component {
                     href=''
                     onClick={(event) => {
                         event.preventDefault()
-                        
+
                         onClick()
                     }}
                 >

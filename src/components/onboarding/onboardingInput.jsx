@@ -69,9 +69,15 @@ class OnboardingInput extends Component {
             afterImg,
             textFieldSize,
             additionalClass,
+            value
         } = props;
         const { isFocused } = this.state;
         const textFieldSizeClass = textFieldSize ? `textfield_size_${textFieldSize}` : '';
+
+        let labelValue = '';
+        if(value == '') {
+            labelValue = label;
+        }
 
         return (
             <div class={this.makeClasses(`mdl-textfield mdl-js-textfield textfield is-upgraded ${textFieldSizeClass} ${additionalClass}`)}>
@@ -99,7 +105,7 @@ class OnboardingInput extends Component {
                         }
                     `}
                 </style>
-                <label class="mdl-textfield__label textfield__label" htmlFor={inputId}>{label}</label>
+                <label class="mdl-textfield__label textfield__label" htmlFor={inputId}>{labelValue}</label>
                 {isFocused ? null : afterImg}
                 <span class="mdl-textfield__error textfield__error">{error}</span>
             </div>

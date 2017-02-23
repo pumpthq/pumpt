@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { SHOW_HEADQUATERS_LOCATION_STEP } from './../../../../../../constants/companyOnboarding'
 import { showHeadquatersLocationStep } from './../../../../../../actions/companyOnboarding'
-import { NavigationLink } from './../../../../../../components/main/navigation'
+import { NavigationLink, NavigationLink2 } from './../../../../../../components/main/navigation'
 import CallStep from './../../../../callStep'
 
 @connect(
@@ -34,7 +34,7 @@ export class To extends Component {
         const text = (headquatersCity && headquatersState ? location : 'Headquarters')
 
         return (
-            <NavigationLink
+            <NavigationLink2
                 style={{
                     cursor : isFilled || isActive ? 'pointer' : 'default'
                 }}
@@ -43,7 +43,9 @@ export class To extends Component {
                 onClick={() => {
                     if (isEnabled) dispatch(showHeadquatersLocationStep())
                 }}
-            >{text}</NavigationLink>
+                textLabel='Headquarters'
+                textFilledWith={text}
+            />
         )
     }
 }
@@ -71,4 +73,3 @@ LinkToHeadquatersLocationStep.propTypes = {
 }
 
 export default LinkToHeadquatersLocationStep
-

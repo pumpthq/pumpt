@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { SHOW_FOUNDATION_YEAR_STEP } from './../../../../../../constants/companyOnboarding'
 import { showFoundationYearStep } from './../../../../../../actions/companyOnboarding'
-import { NavigationLink } from './../../../../../../components/main/navigation'
+import { NavigationLink, NavigationLink2 } from './../../../../../../components/main/navigation'
 import CallStep from './../../../../callStep'
 import moment from 'moment';
 
@@ -34,8 +34,8 @@ export class To extends Component {
         const yearsInBusiness = moment().year() - foundationYear;
         const text = (foundationYear ? `${yearsInBusiness} years in Business` : 'Years in Business');
 
-        return (
-            <NavigationLink
+        return(
+            <NavigationLink2
                 style={{
                     cursor : isFilled || isActive ? 'pointer' : 'default'
                 }}
@@ -44,7 +44,9 @@ export class To extends Component {
                 onClick={() => {
                     if (isEnabled) dispatch(showFoundationYearStep())
                 }}
-            >{text}</NavigationLink>
+                textLabel='Years in Business'
+                textFilledWith={text}
+            />
         )
     }
 }

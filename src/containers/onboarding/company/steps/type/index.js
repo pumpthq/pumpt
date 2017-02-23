@@ -5,6 +5,7 @@ import { OnboardingInput } from './../../../../../components/onboarding'
 import on2Image from './../../../../../img/sprites-svg/on2.svg'
 
 import TypeForm from './form'
+import TypeContent from './content'
 import OnboardingCompanyLinker from './../linker'
 
 class TypeStep extends Component{
@@ -23,7 +24,8 @@ class TypeStep extends Component{
                                         </span>
                                     </span>
                                 </H1>
-                                <TypeForm/>
+                                {/* <TypeForm/> */}
+                                <TypeContent/>
                             </Panel>
                         </section>
                         <aside class='column column_size_s'>

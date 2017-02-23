@@ -20,7 +20,6 @@ import { AlternativeListItem, StepListLink } from '../../../renderHelpers'
             id : companyType ? companyType.id : null,
             data : COMPANY_TYPE_DATA
         })
-
         return {
             activeItem
         }
@@ -35,7 +34,6 @@ import { AlternativeListItem, StepListLink } from '../../../renderHelpers'
             }))
             dispatch(showHeadquatersLocationStep())
         }
-        
         return {
             dispatch,
             nextStep
