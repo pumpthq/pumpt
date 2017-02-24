@@ -47,7 +47,8 @@ class List2ItemGroup extends Component {
             onValueChange,
             handleGroups,
             selectedItemId,
-            selectedValue
+            selectedValue,
+            otherPlaceholder
         } = this.props
         if(handleGroups) {
             return(
@@ -66,6 +67,7 @@ class List2ItemGroup extends Component {
                                         isSelected={selectedItemId === item.id}
                                         noOneSelected={selectedItemId === ''}
                                         preselectedValue={selectedValue}
+                                        otherPlaceholder={otherPlaceholder}
                                     />
                                 )
                             })
@@ -86,6 +88,7 @@ class List2ItemGroup extends Component {
                                 isSelected={selectedItemId === item.id}
                                 noOneSelected={selectedItemId === ''}
                                 preselectedValue={selectedValue}
+                                otherPlaceholder={otherPlaceholder}
                             />
                         )
                     })
@@ -115,7 +118,8 @@ List2ItemGroup.PropTypes = {
     id: PropTypes.string,
     key: PropTypes.string,
     isOpened: PropTypes.bool,
-    classesToAdd: PropTypes.string
+    classesToAdd: PropTypes.string,
+    otherPlaceholder: PropTypes.string
 }
 
 List2ItemGroup.defaultProps = {

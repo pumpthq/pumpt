@@ -31,12 +31,11 @@ export class To extends Component {
             dispatch
         } = this.props
         const stateItem = onboardingState.income
-        let item = null
 
-        stateItem ? item = findById({
-            id : stateItem.id,
-            data : ANNUAL_INCOME_DROPDOWN_DATA
-        }) : null
+        let value = ''
+        if(stateItem) {
+            value += stateItem.value
+        }
 
         return (
             <NavigationLink2
@@ -49,7 +48,7 @@ export class To extends Component {
                     if (isEnabled) dispatch(showIncomeStep())
                 }}
                 textLabel='Income'
-                textFilledWith={item ? stateItem.value || item.title : ''}
+                textFilledWith={value}
             />
         )
 

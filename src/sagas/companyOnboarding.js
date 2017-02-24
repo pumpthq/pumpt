@@ -31,6 +31,8 @@ import { signIn } from './../actions/authorization';
 import states from './../constants/states.json';
 import { ROUTE_APPLICATION_COMPANY } from './../constants/routes';
 
+import { formatUrl } from './../utils'
+
 export const fetchByEmail = (email) =>
      axios.get(`${API_URL}${EMAIL_AVAILABILITY}/${email}`)
         .then(response => response.data)
@@ -73,16 +75,18 @@ export default function () {
             if (!onboardingState.linkedInProfileUrl) {
                 onboardingState.linkedInProfileUrl = '';
             }
+            const linkedInProfileUrl = formatUrl(onboardingState.linkedInProfileUrl).url
             if (!onboardingState.twitterUsername) {
                 onboardingState.twitterUsername = '';
             }
             if (!onboardingState.facebookProfileUrl) {
                 onboardingState.facebookProfileUrl = '';
             }
-
+            const facebookProfileUrl = formatUrl(onboardingState.facebookProfileUrl).url
             if(!onboardingState.websiteUrl) {
                 onboardingState.websiteUrl = '';
             }
+            const websiteUrl = formatUrl(onboardingState.websiteUrl).url
 
             const payload = {
                 fullName: onboardingState.fullName,
@@ -101,10 +105,10 @@ export default function () {
                         state: states[onboardingState.headquatersState],
                     },
                     socialMedia: {
-                        websiteUrl: `${onboardingState.websiteUrl}`,
-                        linkedInUrl: `${onboardingState.linkedInProfileUrl}`,
+                        websiteUrl: websiteUrl,
+                        linkedInUrl: linkedInProfileUrl,
                         twitterAcc: `${onboardingState.twitterUsername}`,
-                        facebookUrl: `${onboardingState.facebookProfileUrl}`,
+                        facebookUrl: facebookProfileUrl,
                     },
                 },
             };

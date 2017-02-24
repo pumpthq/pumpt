@@ -49,7 +49,7 @@ export class To extends Component {
                 }
             }
 
-            caption = titles.join(" / ");
+            caption = titles.join(" | ");
 
         }
         return(
@@ -66,7 +66,7 @@ export class To extends Component {
                 textFilledWith={caption}
             />
         )
-    
+
     }
 }
 

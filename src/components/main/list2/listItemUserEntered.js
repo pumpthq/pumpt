@@ -53,7 +53,7 @@ class List2ItemUserEntered extends Component {
     }
 
     render() {
-        let { text, id, isSelected, preselectedValue } = this.props
+        let { text, id, isSelected, preselectedValue, otherPlaceholder } = this.props
         if(isSelected) {
             return (
                 <div>
@@ -65,6 +65,7 @@ class List2ItemUserEntered extends Component {
                     <SimpleInput
                         value={preselectedValue}
                         onValueChange={this.handleValueChange}
+                        placeholder={otherPlaceholder}
                     />
                 </div>
             )
@@ -91,7 +92,8 @@ List2ItemUserEntered.PropTypes = {
     preselectedValue: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.object
-    ])
+    ]),
+    otherPlaceholder: PropTypes.string
 }
 
 List2ItemUserEntered.defaultProps = {
@@ -102,7 +104,8 @@ List2ItemUserEntered.defaultProps = {
     onClick: () => {},
     onValueChange: () => {},
     noOneSelected: true,
-    preselectedValue: ''
+    preselectedValue: '',
+    otherPlaceholder: PropTypes.string
 }
 
 export {

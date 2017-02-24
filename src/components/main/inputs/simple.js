@@ -50,12 +50,13 @@ class SimpleInput extends Component {
     }
 
     render() {
-        const { value } = this.props
+        const { value, placeholder } = this.props
         return(
             <div
                 className={this.makeContainerCalssName()}
             >
                 <input
+                    placeholder={placeholder}
                     className={this.makeInputClassName()}
                     onChange={this.handleValueChange}
                     onFocus={this.handleFocus}
@@ -69,12 +70,14 @@ class SimpleInput extends Component {
 
 SimpleInput.propTypes = {
     onValueChange: PropTypes.func,
-    value: PropTypes.string
+    value: PropTypes.string,
+    placeholder: PropTypes.string
 }
 
 SimpleInput.defaultProps = {
     onValueChange: () => {},
-    value: ''
+    value: '',
+    placeholder: ''
 }
 
 export {

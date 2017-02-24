@@ -88,8 +88,8 @@ class ApplicationCompanyAccordion extends ApplicationAccordionPrototype {
 
                 <AccordionItem
                     iconElement={<PinIcon />}
-                    title="Locations"
-                    defaultTitle="Locations"
+                    title="Location"
+                    defaultTitle="Location"
                     status={location}
                     childrenActive={<AddLocationsActive />}
                     childrenFilled={<AddLocationsFilled />}

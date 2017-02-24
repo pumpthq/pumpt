@@ -40,7 +40,7 @@ class List2Component extends Component {
     }
 
     render() {
-        const { items, preselectedValue, handleGroups, classesToAdd } = this.props
+        const { items, preselectedValue, handleGroups, classesToAdd, otherPlaceholder } = this.props
         const { selectedItemId, selectedValue } = this.state
         const noOneSelected = selectedItemId === ''
 
@@ -59,6 +59,7 @@ class List2Component extends Component {
                             handleGroups={handleGroups}
                             isOpened={this.isGroupOpened(group.id)}
                             classesToAdd={classesToAdd}
+                            otherPlaceholder={otherPlaceholder}
                         />
                     )
                 })
@@ -151,7 +152,8 @@ List2Component.propTypes = {
         PropTypes.string,
         PropTypes.object
     ]),
-    handleGroups: PropTypes.bool
+    handleGroups: PropTypes.bool,
+    otherPlaceholder: PropTypes.string
 }
 
 List2Component.defaultProps = {
@@ -161,7 +163,8 @@ List2Component.defaultProps = {
     listValueSelected: () => {},
     preselectedItem: '',
     preselectedValue: '',
-    handleGroups: false
+    handleGroups: false,
+    otherPlaceholder: ''
 }
 
 export default List2Component

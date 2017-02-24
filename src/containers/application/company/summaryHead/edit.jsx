@@ -49,7 +49,7 @@ const InputProps = {
             numberOfEmployees : numberOfEmployees ? numberOfEmployees.value : '< 10 employees',
             foundationYear : foundationYear || '1911'
         }
-        
+
         return {
             state,
             onboardingState : state.applicationCompany,
@@ -76,13 +76,13 @@ const InputProps = {
     ],
     validate : (values, context) => {
         const errors = {}
-        
+
         if (!values.companyName){
             errors.firstName = ' '
         }
-        
+
         return errors
-        
+
     }
 })
 class SummaryHeadEdit extends Component {
@@ -222,7 +222,7 @@ class SummaryHeadEdit extends Component {
                                     <ApplicationFieldset
                                         {...foundationYear}
                                         {...InputProps}
-                                        label="Foundation Year"
+                                        label="Year founded"
                                     />
                                     <div class="form__actions">
                                         <Button type='submit' typeColored disabled={submitting || invalid}>Save</Button>

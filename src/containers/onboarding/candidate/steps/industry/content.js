@@ -93,6 +93,7 @@ class IndustryContent extends Component {
                     preselectedItem={id}
                     preselectedValue={value}
                     handleGroups={false}
+                    otherPlaceholder={'enter industry here'}
                 />
                 <div class='form__actions'>
                     <Button

@@ -48,7 +48,7 @@ export class To extends Component {
                 }
             }
 
-            caption = titles.join(" / ");
+            caption = titles.join(" | ");
 
         }
 
