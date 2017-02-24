@@ -4,13 +4,14 @@ import { H1 } from '../../../../../components/main/heading'
 import on4Image from '../../../../../img/sprites-svg/on4.svg'
 
 import JobTitleForm from './form'
+import JobTitleContent from './content'
 import OnboardingCandidateLinker from './../linker'
 
 class JobTitleStep extends Component {
     componentDidMount() {
         this.props.scrollTop()
     }
-    
+
     render() {
         return (
             <div class='container'>
@@ -26,7 +27,8 @@ class JobTitleStep extends Component {
                                     </span>
                                 </span>
                                 </H1>
-                                <JobTitleForm/>
+                                <JobTitleContent />
+                                {/*<JobTitleForm/>*/}
                             </Panel>
                         </section>
                         <aside class='column column_size_s'>

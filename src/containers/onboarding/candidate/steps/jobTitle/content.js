@@ -7,35 +7,34 @@ import {
     LIST_ITEM_TYPE_GROUP
 } from './../../../../../components/main/list2'
 import Button from './../../../../../components/main/button'
-import { FIELD_OF_EXPERTISE_DROPDOWN_DATA } from './../../../../../constants/candidateOnboarding';
+import { JOB_TITLE_DROPDOWN_DATA } from './../../../../../constants/candidateOnboarding'
 import { apiEnumToListData } from './../../../../../utils'
 
 import {
-    saveFieldOfExpertiseStep,
-    showJobTitleStep,
+    saveJobTitleStep,
+    showIncomeStep
 } from './../../../../../actions/candidateOnboarding'
-
 
 @connect(
     function mapStateToProps(state) {
-        const { fieldOfExpertise, fieldOfExpertiseHead } = state.candidateOnboarding
+        const { jobTitle, jobTitleHead } = state.candidateOnboarding
         return {
-            prefilledFieldOfExpertise: {
-                fieldOfExpertise,
-                fieldOfExpertiseHead
+            prefilledJobTitle: {
+                jobTitle,
+                jobTitleHead
             }
         }
     },
     function mapDispatchToProps(dispatch) {
         const nextStep = ({id, value, parent }) => {
-            dispatch(saveFieldOfExpertiseStep({
-                fieldOfExpertise: {
-                    id: id,
-                    value: value
+            dispatch(saveJobTitleStep({
+                jobTitle : {
+                    id,
+                    value
                 },
-                fieldOfExpertiseHead: parent
+                jobTitleHead: parent
             }))
-            dispatch(showJobTitleStep())
+            dispatch(showIncomeStep())
         };
 
         return {
@@ -44,11 +43,11 @@ import {
         }
     }
 )
-class FieldOfExpertiseContent extends Component {
+class JobTitleContent extends Component {
     constructor(props) {
         super(props)
 
-        const { prefilledFieldOfExpertise } = this.props
+        const { prefilledJobTitle } = this.props
 
         this.state = {
             stepValid: false,
@@ -56,13 +55,13 @@ class FieldOfExpertiseContent extends Component {
             vaule: '',
             parent: ''
         }
-        if(prefilledFieldOfExpertise) {
-            if(prefilledFieldOfExpertise.fieldOfExpertise && prefilledFieldOfExpertise.fieldOfExpertiseHead) {
+        if(prefilledJobTitle) {
+            if(prefilledJobTitle.jobTitle && prefilledJobTitle.jobTitleHead) {
                 this.state = {
                     stepValid: true,
-                    id: prefilledFieldOfExpertise.fieldOfExpertise.id,
-                    value: prefilledFieldOfExpertise.fieldOfExpertise.value,
-                    parent: prefilledFieldOfExpertise.fieldOfExpertiseHead.value
+                    id: prefilledJobTitle.jobTitle.id,
+                    value: prefilledJobTitle.jobTitle.value,
+                    parent: prefilledJobTitle.jobTitleHead.value
                 }
             }
         }
@@ -87,7 +86,7 @@ class FieldOfExpertiseContent extends Component {
     }
 
     render() {
-        const convertedItems = apiEnumToListData(FIELD_OF_EXPERTISE_DROPDOWN_DATA)
+        const convertedItems = apiEnumToListData(JOB_TITLE_DROPDOWN_DATA)
         const classesToAdd = [
             'list_type_onboarding',
             'list_sublayer_true'
@@ -117,15 +116,15 @@ class FieldOfExpertiseContent extends Component {
     }
 }
 
-FieldOfExpertiseContent.propTypes = {
+JobTitleContent.propTypes = {
     dispatch: PropTypes.func,
     nextStep: PropTypes.func,
-    prefilledFieldOfExpertise: PropTypes.object
+    prefilledJobTitle: PropTypes.object
 }
 
-FieldOfExpertiseContent.defaultProps = {
+JobTitleContent.defaultProps = {
     dispatch: () => {},
     nextStep: () => {}
 }
 
-export default FieldOfExpertiseContent
+export default JobTitleContent

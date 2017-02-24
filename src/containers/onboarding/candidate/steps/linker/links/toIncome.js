@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { SHOW_INCOME_STEP, ANNUAL_INCOME_DROPDOWN_DATA } from './../../../../../../constants/candidateOnboarding'
 import { showIncomeStep } from './../../../../../../actions/candidateOnboarding'
-import { NavigationLink } from './../../../../../../components/main/navigation'
+import { NavigationLink, NavigationLink2 } from './../../../../../../components/main/navigation'
 import CallStep from './../../../../callStep'
 import { findById } from '../../../../../../constants/dropdownData'
 
@@ -39,6 +39,21 @@ export class To extends Component {
         }) : null
 
         return (
+            <NavigationLink2
+                style={{
+                    cursor : isFilled || isActive ? 'pointer' : 'default'
+                }}
+                active={isActive}
+                filled={isFilled}
+                onClick={() => {
+                    if (isEnabled) dispatch(showIncomeStep())
+                }}
+                textLabel='Income'
+                textFilledWith={item ? stateItem.value || item.title : ''}
+            />
+        )
+
+        /*return (
             <NavigationLink
                 style={{
                     cursor : isFilled || isActive ? 'pointer' : 'default'
@@ -49,7 +64,7 @@ export class To extends Component {
                     if (isEnabled) dispatch(showIncomeStep())
                 }}
             >{item ? stateItem.value || item.title : 'Income'}</NavigationLink>
-        )
+        )*/
     }
 }
 

@@ -6,6 +6,8 @@ class List2ItemGroup extends Component {
         super(props)
 
         this.handleGroupClick = this.handleGroupClick.bind(this)
+        this.makeUnGrouppedClassName = this.makeUnGrouppedClassName.bind(this)
+        this.makeGroupClassName = this.makeGroupClassName.bind(this)
     }
 
     handleGroupClick(e) {
@@ -112,7 +114,8 @@ List2ItemGroup.PropTypes = {
     text: PropTypes.string,
     id: PropTypes.string,
     key: PropTypes.string,
-    isOpened: PropTypes.bool
+    isOpened: PropTypes.bool,
+    classesToAdd: PropTypes.string
 }
 
 List2ItemGroup.defaultProps = {

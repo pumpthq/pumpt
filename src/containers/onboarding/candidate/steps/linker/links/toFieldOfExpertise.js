@@ -32,14 +32,37 @@ export class To extends Component {
             dispatch
         } = this.props
         const stateItem = onboardingState.fieldOfExpertise
-        let item = null
+        const stateParent = onboardingState.fieldOfExpertiseHead
+        // let item = null
+        // stateItem ? item = findById({
+        //     id : stateItem.id,
+        //     data : FIELD_OF_EXPERTISE_DROPDOWN_DATA
+        // }) : null
 
-        stateItem ? item = findById({
-            id : stateItem.id,
-            data : FIELD_OF_EXPERTISE_DROPDOWN_DATA
-        }) : null
+        let value = ''
+        if(stateParent) {
+            value += stateParent.value + ' | '
+        }
+        if(stateItem) {
+            value += stateItem.value
+        }
 
-        return (
+        return(
+            <NavigationLink2
+                style={{
+                    cursor : isFilled || isActive ? 'pointer' : 'default'
+                }}
+                active={isActive}
+                filled={isFilled}
+                onClick={() => {
+                    if (isEnabled) dispatch(showFieldOfExpertiseStep())
+                }}
+                textLabel='Field of Expertise'
+                textFilledWith={value}
+            />
+        )
+
+        /*return(
             <NavigationLink
                 style={{
                     cursor : isFilled || isActive ? 'pointer' : 'default'
@@ -56,7 +79,7 @@ export class To extends Component {
                     item
                 }} />
             </NavigationLink>
-        )
+        )*/
     }
 }
 

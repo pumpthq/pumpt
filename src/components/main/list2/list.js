@@ -5,16 +5,27 @@ class List2Component extends Component {
     constructor(props) {
         super(props)
         const { preselectedItem, preselectedValue } = props
-        this.state = {
-            selectedItemId: preselectedItem,
-            selectedValue: preselectedValue,
-            openGroupsId: []
-        }
+
         this.handleItemClick = this.handleItemClick.bind(this)
         this.handleValueChange = this.handleValueChange.bind(this)
         this.handleGroupClick = this.handleGroupClick.bind(this)
         this.toggleGroup = this.toggleGroup.bind(this)
         this.isGroupOpened = this.isGroupOpened.bind(this)
+        this.getParent = this.getParent.bind(this)
+
+        this.state = {
+            selectedItemId: preselectedItem,
+            selectedValue: preselectedValue,
+            openGroupsId: []
+        }
+    }
+
+    componentDidMount() {
+        const { preselectedItem } = this.props
+        let parent = this.getParent(preselectedItem)
+        this.setState({
+            openGroupsId: this.toggleGroup(parent.id)
+        })
     }
 
     makeClassName() {
@@ -29,7 +40,7 @@ class List2Component extends Component {
     }
 
     render() {
-        const { items, preselectedValue, handleGroups } = this.props
+        const { items, preselectedValue, handleGroups, classesToAdd } = this.props
         const { selectedItemId, selectedValue } = this.state
         const noOneSelected = selectedItemId === ''
 
@@ -47,31 +58,13 @@ class List2Component extends Component {
                             selectedValue={selectedValue}
                             handleGroups={handleGroups}
                             isOpened={this.isGroupOpened(group.id)}
+                            classesToAdd={classesToAdd}
                         />
                     )
                 })
             }
             </ul>
         );
-
-        /* return (
-            <ul className={this.makeClassName()}>
-            {
-                items.map(item => {
-                    return(
-                        <ListItem
-                            {...item}
-                            onClick={this.handleItemClick}
-                            onValueChange={this.handleValueChange}
-                            isSelected={selectedItemId === item.id}
-                            noOneSelected={noOneSelected}
-                            preselectedValue={selectedValue}
-                        />
-                    )
-                })
-            }
-            </ul>
-        ) */
     }
 
     handleItemClick({ id }) {
@@ -93,7 +86,8 @@ class List2Component extends Component {
         })
         this.props.listValueSelected({
             id: id,
-            value: value
+            value: value,
+            parent: this.getParent(id)
         })
     }
 
@@ -125,6 +119,25 @@ class List2Component extends Component {
             }
         })
         return wasGroupFind
+    }
+
+    getParent(itemId) {
+        const { items } = this.props
+        let parent = {
+            id: '',
+            value: ''
+        }
+        items.map((group) => {
+            const groupItems = group.items
+            groupItems.map((item) => {
+                if(item.id === itemId) {
+                    parent.id = group.id
+                    parent.value = group.text
+                    return
+                }
+            })
+        })
+        return parent
     }
 }
 

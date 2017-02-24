@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { SHOW_JOB_TITLE_STEP, JOB_TITLE_DROPDOWN_DATA } from './../../../../../../constants/candidateOnboarding'
 import { showJobTitleStep } from './../../../../../../actions/candidateOnboarding'
-import { NavigationLink } from './../../../../../../components/main/navigation'
+import { NavigationLink, NavigationLink2 } from './../../../../../../components/main/navigation'
 import CallStep from './../../../../callStep'
 import { NavLinkLabel } from '../../../../renderHelpers'
 import { findById } from '../../../../../../constants/dropdownData'
@@ -32,14 +32,32 @@ export class To extends Component {
             dispatch
         } = this.props
         const stateItem = onboardingState.jobTitle
-        let item = null
+        const stateParent = onboardingState.jobTitleHead
 
-        stateItem ? item = findById({
-            id : stateItem.id,
-            data : JOB_TITLE_DROPDOWN_DATA
-        }) : null
+        let value = ''
+        if(stateParent) {
+            value += stateParent.value + ' | '
+        }
+        if(stateItem) {
+            value += stateItem.value
+        }
 
-        return (
+        return(
+            <NavigationLink2
+                style={{
+                    cursor : isFilled || isActive ? 'pointer' : 'default'
+                }}
+                active={isActive}
+                filled={isFilled}
+                onClick={() => {
+                    if (isEnabled) dispatch(showJobTitleStep())
+                }}
+                textLabel='Job Title'
+                textFilledWith={value}
+            />
+        )
+
+        /*return (
             <NavigationLink
                 style={{
                     cursor : isFilled || isActive ? 'pointer' : 'default'
@@ -56,7 +74,7 @@ export class To extends Component {
                     item
                 }} />
             </NavigationLink>
-        )
+        )*/
     }
 }
 

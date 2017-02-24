@@ -7,6 +7,8 @@ import {
 } from './../../../../../components/main/List2'
 import Button from './../../../../../components/main/button'
 import { COMPANY_TYPE_DATA } from './../../../../../constants/companyOnboarding'
+import { apiEnumToListData } from './../../../../../utils'
+
 import {
     saveCompanyTypeData,
     showHeadquatersLocationStep
@@ -74,23 +76,8 @@ class TypeContent extends Component {
         nextStep({ id, value })
     }
 
-    convertCompanyTypesToListData(initialData) {
-        let listData = [];
-        let key = 0
-        initialData.map((item) => {
-            listData.push({
-                key: key++,
-                id: item.id,
-                value: item.title,
-                text: item.title,
-                type: item.alternative ? LIST_ITEM_TYPE_USER_ENTERED : LIST_ITEM_TYPE_TEXT
-            });
-        });
-        return listData
-    }
-
     render() {
-        const convertedItems = this.convertCompanyTypesToListData(COMPANY_TYPE_DATA)
+        const convertedItems = apiEnumToListData(COMPANY_TYPE_DATA)
         const classesToAdd = [
             'list_type_onboarding'
         ]
@@ -104,6 +91,7 @@ class TypeContent extends Component {
                     listValueSelected={this.handleListChange}
                     preselectedItem={id}
                     preselectedValue={value}
+                    handleGroups={false}
                 />
                 <div class='form__actions'>
                     <Button
