@@ -32,10 +32,13 @@ import { mapDropdown } from './../../../../components/parts/mapDropdown';
             income,
             experience
         } = state.applicationCandidate.summary
+
+        let industryDataFlatten = INDUSTRY_DROPDOWN_DATA[0].items
         const ddCheckedIndustry = findById({
             id : industry ? industry.id : null,
-            data : INDUSTRY_DROPDOWN_DATA
+            data : industryDataFlatten
         }) || {}
+
         const ddCheckedFieldOfExpertise = findById({
             id : fieldOfExpertise ? fieldOfExpertise.id : null,
             data : FIELD_OF_EXPERTISE_DROPDOWN_DATA
@@ -67,7 +70,16 @@ import { mapDropdown } from './../../../../components/parts/mapDropdown';
             income : income ? income.value : '$50–100K',
             experience : experience ? experience.value : '5–10 years'
         }
-        
+
+        if(ddCheckedIndustry) {
+            if(ddCheckedIndustry.parent && ddCheckedIndustry.alternative) {
+                initialValues.industry = ddCheckedIndustry.parent.title
+                initialValues.alternativeIndustry = industry.value
+            } else {
+                initialValues.industry = industry ? industry.valie : 'Ad tech'
+            }
+        }
+
         if (ddCheckedExperience) {
             if (ddCheckedFieldOfExpertise.parent &&
                 ddCheckedFieldOfExpertise.alternative) {
@@ -181,10 +193,12 @@ class SummaryHeadEdit extends Component {
         super(props)
         const { ddData, checkedElements, onCheckItem } = props
 
+        const industryDataFlatten = ddData.industry[0].items
+
         this.state = {
             ...checkedElements,
             ddIndustry : mapDropdown({
-                arr : ddData.industry,
+                arr : industryDataFlatten,
                 onClick : ({ dispatch, element, value }) => {
                     onCheckItem({
                         dispatch,
@@ -270,7 +284,7 @@ class SummaryHeadEdit extends Component {
                 firstName,
                 lastName,
                 email,
-                industry,
+                industry, alternativeIndustry,
                 fieldOfExpertise, alternativeFieldOfExpertise,
                 jobTitle, alternativeJobTitle,
                 income,
@@ -288,6 +302,10 @@ class SummaryHeadEdit extends Component {
             ddCheckedIncome,
             ddCheckedExperience
         } = this.state
+
+        console.log('Industry drop down data')
+        console.log(ddCheckedIndustry)
+        console.log('HeyHey')
 
         return (
             <div class="summary-head">
@@ -308,7 +326,8 @@ class SummaryHeadEdit extends Component {
                         email : fields.email,
                         industry : {
                             id : ddCheckedIndustry.id,
-                            value : fields.industry
+                            value : !fields.alternativeIndustry ?
+                                fields.industry : fields.alternativeIndustry
                         },
                         fieldOfExpertise : {
                             id : ddCheckedFieldOfExpertise.id,
@@ -359,7 +378,13 @@ class SummaryHeadEdit extends Component {
                             })
                         },
                         list : this.state.ddIndustry,
-                        checkedElementId : ddCheckedIndustry.id
+                        checkedElementId : ddCheckedIndustry.id,
+                        otherChild : ddCheckedIndustry.alternative && ddCheckedIndustry.parent ?
+                            <OtherActiveInput {...alternativeIndustry}
+                                label="Other"
+                                error={alternativeIndustry.touched && alternativeIndustry.error}
+                            /> :
+                            null
                     }}
                 />
                 <ApplicationFieldsetDropdown {...fieldOfExpertise}

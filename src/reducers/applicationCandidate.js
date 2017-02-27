@@ -71,7 +71,7 @@ const defaultState = {
     skills: [
         ...[
             'MS Office (Word, Excel, PPt)',
-            'ComsCore',
+            'comScore',
             'Google Analytics',
             'IAB Certification',
             'SalesForce',
