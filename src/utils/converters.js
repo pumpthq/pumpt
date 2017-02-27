@@ -2,7 +2,7 @@ import {
     LIST_ITEM_TYPE_TEXT,
     LIST_ITEM_TYPE_USER_ENTERED,
     LIST_ITEM_TYPE_GROUP
-} from './../components/main/List2'
+} from './../components/main/list2'
 
 const apiEnumToListData = (initialData) => {
     let listData = []
