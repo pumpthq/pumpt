@@ -11,7 +11,7 @@ config.port = process.env.PORT || 4000;
 /* remote api configurations */
 
 const remoteApi = {
-    host: process.env.REMOTE_API_HOST || 'pumpt-dev-api.softfacade.com',
+    host: process.env.REMOTE_API_HOST || '37.139.29.63:3000',
     port: process.env.REMOTE_API_PORT || '80',
 };
 
