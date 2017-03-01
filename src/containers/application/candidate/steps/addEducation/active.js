@@ -11,6 +11,12 @@ import SchoolFilter from './../../../../../components/parts/schoolFilter'
 import moment from 'moment'
 
 import {
+    DEGREES_DROPDOWN_DATA
+} from './../../../../../constants/companyJobs'
+
+import { mapDropdown } from './../../../../../components/parts/mapDropdown'
+import ApplicationFieldsetDropdown from './../../../../../components/application/applicationFieldsetDropdown'
+import {
     saveEducationData,
     cancelEducationStep
 } from './../../../../../actions/applicationCandidate'
@@ -28,7 +34,7 @@ import {
         const endDate = moment(toDate, 'MM-DD-YYYY')
         const isStartDateAvailable = fromDate && startDate
         const isEndDateAvailable = toDate && endDate
-        
+
         return {
             initialValues : {
                 schoolName,
@@ -43,9 +49,9 @@ import {
             }
         }
     },
-    
+
     function mapDispatchToProps(dispatch, ownProps) {
-        return{ 
+        return{
             dispatch
         }
     }
@@ -65,7 +71,7 @@ import {
     ],
     validate : (values) => {
         const errors = {}
-        
+
         if (!values.schoolName) {
             errors.schoolName = 'Can\'t be blank'
         }
@@ -110,21 +116,29 @@ import {
     }
 })
 class AddEducationForm extends Component {
-    
+
     constructor(props) {
         super(props)
-        
+
+        const { dropDownData } = props
+
         this.state = {
             school : {
                 name : null,
                 city : null,
                 state : null
-            }
+            },
+            degreeDropDownData: mapDropdown({
+                arr: dropDownData.degrees,
+                onClick: () => {
+                    console.log('Clicked')
+                }
+            })
         }
     }
-    
+
     render() {
-        
+
         const {
             fields : {
                 schoolName,
@@ -155,7 +169,7 @@ class AddEducationForm extends Component {
                             ...fields,
                             fromDate,
                             toDate
-                            
+
                         }))
                     })
                 }>
@@ -195,7 +209,7 @@ class AddEducationForm extends Component {
                             />
                         </div>
                     </fieldset>
-    
+
                     <fieldset class="row form__row">
                         <div class="col-lg-6 col-xs-12">
                             <div class="mdl-textfield mdl-js-textfield textfield">
@@ -209,15 +223,24 @@ class AddEducationForm extends Component {
                         <div class="col-lg-6 col-xs-12">
                             <div
                                 class="mdl-textfield mdl-js-textfield textfield">
-                                <OnboardingInput {...degree}
+                                { /* <OnboardingInput {...degree}
                                     textFieldSize={false}
                                     label='Degree'
                                     error={degree.touched && degree.error}
+                                /> */ }
+                                <ApplicationFieldsetDropdown
+                                    id={degree.id}
+                                    value={degree.value}
+                                    label='Degree'
+                                    error={degree.touched && degree.error}
+                                    list={this.state.degreeDropDownData}
+                                    checkedElementId={'0'}
+                                    onChange={(event) => {}}
                                 />
                             </div>
                         </div>
                     </fieldset>
-    
+
                     <fieldset class="row form__row">
                         <div class="col-lg-6 col-xs-12">
                             <div class='row'>
@@ -255,7 +278,7 @@ class AddEducationForm extends Component {
                             </div>
                         </div>
                     </fieldset>
-    
+
                     <div class="form__actions">
                         <Button
                             type='submit'
@@ -283,7 +306,14 @@ AddEducationForm.propTypes = {
     submitting : PropTypes.bool,
     invalid : PropTypes.bool,
     handleSubmit : PropTypes.func,
-    dispatch : PropTypes.func
+    dispatch : PropTypes.func,
+    dropDownData: PropTypes.object
+}
+
+AddEducationForm.defaultProps = {
+    dropDownData: {
+        degrees: DEGREES_DROPDOWN_DATA
+    }
 }
 
 export default AddEducationForm

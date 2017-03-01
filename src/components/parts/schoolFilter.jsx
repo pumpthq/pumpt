@@ -8,7 +8,12 @@ export default function({ value }) {
     return co(function * () {
         const schools = yield fetchUniversity(value)
         const list = schools.sort().slice(0, 5).map((school) => {
-            const item = `${school.city}, ${school.state}`
+            let item = ''
+            if(school.state) {
+                item = `${school.city}, ${school.state}`
+            } else {
+                item = `${school.city}`
+            }
 
             return {
                 title : `${school.name}<br/>${item}`,
