@@ -33,7 +33,8 @@ export const mapDropdown = ({ arr, parent = null, onClick }) => {
                     element: child,
                     // If checked element is root and looks like alternative
                     // then show nothing otherwise prepared value
-                    value: !parent && child.alternative ? '' : value,
+                    //value: !parent && child.alternative ? '' : value,
+                    value: value
                 }]);
             },
         };

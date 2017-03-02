@@ -144,12 +144,13 @@ export const showEducationStep = () => ({
     type : SHOW_EDUCATION_STEP
 })
 
-export const saveEducationData = ({ schoolName, fieldOfStudy, degree, fromDate, toDate }) => ({
+export const saveEducationData = ({ schoolName, fieldOfStudy, degree, otherDegree, fromDate, toDate }) => ({
     type : SAVE_EDUCATION_DATA,
     payload : {
         schoolName,
         fieldOfStudy,
         degree,
+        otherDegree,
         fromDate,
         toDate
     }

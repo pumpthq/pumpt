@@ -16,6 +16,7 @@ import {
 
 import { mapDropdown } from './../../../../../components/parts/mapDropdown'
 import ApplicationFieldsetDropdown from './../../../../../components/application/applicationFieldsetDropdown'
+import OtherActiveInput from './../../../../../components/application/otherActiveInput'
 import {
     saveEducationData,
     cancelEducationStep
@@ -27,6 +28,8 @@ import {
             schoolName,
             fieldOfStudy,
             degree,
+            otherDegree,
+            isSelectedDegreeOther,
             fromDate,
             toDate
         } = state.applicationCandidate.education
@@ -40,6 +43,8 @@ import {
                 schoolName,
                 fieldOfStudy,
                 degree,
+                otherDegree,
+                isSelectedDegreeOther,
                 fromMonth : isStartDateAvailable ? startDate.format('MM') : '',
                 fromDay : isStartDateAvailable ? startDate.format('DD') : '1',
                 fromYear : isStartDateAvailable ? startDate.format('YYYY') : '',
@@ -62,6 +67,7 @@ import {
         'schoolName',
         'fieldOfStudy',
         'degree',
+        'otherDegree',
         'fromMonth',
         'fromDay',
         'fromYear',
@@ -82,6 +88,10 @@ import {
 
         if (!values.degree) {
             errors.degree = 'Can\'t be blank'
+        }
+
+        if(values.otherDegree !== 'undefined' && !values.otherDegree) {
+            errors.otherDegree = ' '
         }
 
         if (!values.workHere) {
@@ -123,18 +133,50 @@ class AddEducationForm extends Component {
         const { dropDownData } = props
 
         this.state = {
-            school : {
-                name : null,
-                city : null,
-                state : null
+            school: {
+                name: null,
+                city: null,
+                state: null
             },
+            selectedDegreeId: '',
+            isSelectedDegreeOther: false,
+            otherDegree: '',
             degreeDropDownData: mapDropdown({
                 arr: dropDownData.degrees,
-                onClick: () => {
-                    console.log('Clicked')
+                onClick: ({ dispatch, element, value }) => {
+                    this.onItemChagne({
+                        dispatch,
+                        field: 'degree',
+                        value
+                    })
+
+                    if(element.alternative) {
+                        this.setState({
+                            isSelectedDegreeOther: true,
+                            selectedDegreeId: element.id,
+                            otherDegree: value
+                        })
+                    } else {
+                        this.setState({
+                            isSelectedDegreeOther: false,
+                            selectedDegreeId: element.id
+                        })
+                    }
+
                 }
             })
         }
+        this.onItemChagne = this.onItemChagne.bind(this)
+    }
+
+    onItemChagne({ dispatch, field, value }) {
+        dispatch({
+            type: 'redux-form/CHANGE',
+            field,
+            value,
+            touch: true,
+            form: 'applicationCandidateAddEducation'
+        })
     }
 
     render() {
@@ -143,7 +185,7 @@ class AddEducationForm extends Component {
             fields : {
                 schoolName,
                 fieldOfStudy,
-                degree,
+                degree, otherDegree,
                 fromMonth,
                 fromDay,
                 fromYear,
@@ -229,13 +271,21 @@ class AddEducationForm extends Component {
                                     error={degree.touched && degree.error}
                                 /> */ }
                                 <ApplicationFieldsetDropdown
-                                    id={degree.id}
-                                    value={degree.value}
+                                    {...degree}
                                     label='Degree'
                                     error={degree.touched && degree.error}
-                                    list={this.state.degreeDropDownData}
-                                    checkedElementId={'0'}
+                                    checkedElementId={this.state.selectedDegreeId}
                                     onChange={(event) => {}}
+                                    {...{
+                                        list: this.state.degreeDropDownData,
+                                        otherChild: this.state.isSelectedDegreeOther ?
+                                            <OtherActiveInput
+                                                {...otherDegree}
+                                                label="Other"
+                                                error={otherDegree.touched && otherDegree.error}
+                                            /> :
+                                            null
+                                    }}
                                 />
                             </div>
                         </div>
