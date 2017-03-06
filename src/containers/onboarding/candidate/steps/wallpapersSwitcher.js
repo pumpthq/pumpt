@@ -26,9 +26,12 @@ import {
 
 export default class WallpapersSwitcher extends Component {
     render() {
-        const { step } = this.props
+        let { step, isRichWallpaperNeeded } = this.props
         let type = false
 
+        if(isRichWallpaperNeeded) {
+            step = SHOW_EXPERIENCE_STEP
+        }
         switch (step) {
             case SHOW_CONTACT_INFO_STEP :
                 type = false
@@ -73,5 +76,10 @@ WallpapersSwitcher.propTypes = {
         'sixth',
         'final',
         false
-    ])
+    ]),
+    isRichWallpaperNeeded: PropTypes.boolean
+}
+
+WallpapersSwitcher.defaultProps = {
+    isRichWallpaperNeeded: false
 }

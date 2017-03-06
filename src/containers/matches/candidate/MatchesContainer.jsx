@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import Wrapper from './../../../components/main/wrapper';
+import WallpapersSwitcher from './../../onboarding/candidate/steps/wallpapersSwitcher';
 import TabBar from './parts/TabBar';
 import CompanyHeader from './parts/HeaderMenu';
 
@@ -21,6 +22,10 @@ export default class MatchesContainer extends Component {
 
         return (
             <Wrapper>
+                <WallpapersSwitcher
+                    step={'sixth'}
+                    isRichWallpaperNeeded={true}
+                />
                 <div className="container">
                     <div className="row row-padding-bigger">
                         <div className="col-lg-12">

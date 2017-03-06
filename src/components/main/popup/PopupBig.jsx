@@ -6,10 +6,12 @@ import PopupError from './../../../components/PopupError'
 const propTypes = {
     children : PropTypes.node,
     heading : PropTypes.string,
-    loginPageError : PropTypes.string
+    loginPageError : PropTypes.string,
+    backgroundTransparency: PropTypes.boolean
 }
 const defaultProps = {
-    loginPageError: false
+    loginPageError: false,
+    backgroundTransparency: false
 }
 
 @connect(
@@ -23,6 +25,15 @@ const defaultProps = {
 )
 class PopUpBig extends Component {
 
+    makeContainerClassName() {
+        let finalinzedClassName = 'popup-overlay'
+        const { backgroundTransparency } = this.props
+        if(backgroundTransparency) {
+            finalinzedClassName += ' popup-transparent'
+        }
+        return finalinzedClassName
+    }
+
     render() {
         const {
             children,
@@ -31,7 +42,7 @@ class PopUpBig extends Component {
         } = this.props
 
         return (
-            <div class="popup-overlay">
+            <div class={this.makeContainerClassName()}>
                 <div class="popup popup_big">
                     {/*<a href="" class="button button_type_close">×</a>*/}
                     <div className="popup__top">
