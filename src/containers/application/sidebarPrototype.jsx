@@ -10,7 +10,7 @@ class ProgressChartSidebarPrototype extends Component {
         this.makeClasses = this.makeClasses.bind(this)
         this.renderOkIcon = this.renderOkIcon.bind(this)
     }
-    
+
     setLevel(completed) {
         const { filled } = this.props
         const progress = completed + filled.length
@@ -21,16 +21,22 @@ class ProgressChartSidebarPrototype extends Component {
             progress
         }
     }
-    
+
     evaluateStates({ constant }) {
         const { active, filled } = this.props
 
         const isActive = active.indexOf(constant) > -1
         const isFilled = filled.indexOf(constant) > -1
 
+        // return {
+        //     isActive : isActive && !isFilled,
+        //     isFilled : !isActive && isFilled,
+        //     isActiveAndFilled : isActive && isFilled
+        // }
+
         return {
-            isActive : isActive && !isFilled,
-            isFilled : !isActive && isFilled,
+            isActive : isActive,
+            isFilled : isFilled,
             isActiveAndFilled : isActive && isFilled
         }
     }
@@ -52,12 +58,12 @@ class ProgressChartSidebarPrototype extends Component {
 
         return classes.join(' ')
     }
-    
+
     renderOkIcon({ constant }) {
         const {
             isFilled
         } = this.evaluateStates({ constant })
-        
+
         return isFilled ? <OkIcon/> : null
     }
 }

@@ -85,6 +85,34 @@ class PhotosDesktop extends Component {
         this.files = []
     }
 
+    getAddPhotoForm() {
+        const { images } = this.props
+        const newMediaKey = uuid.v4()
+        if(images.length < 3) {
+            return(
+                <div key={newMediaKey} class='button button_type_file'>
+                    <div class="button__inner">
+                        <input
+                            class="button__inputfile"
+                            type="file" multiple
+                            id={newMediaKey}
+                            onChange={this.handleImageChange}
+                        />
+                        <label
+                            class="button__inputfile-label text-center"
+                            htmlFor={newMediaKey}
+                        >Upload <br/> company photos</label>
+                    </div>
+                </div>
+            )
+        } else {
+            return(
+                <div></div>
+            )
+        }
+
+    }
+
     render() {
         const { images } = this.props
         const { componentKey } = this
@@ -177,20 +205,24 @@ class PhotosDesktop extends Component {
                                 )
                             }
                         })}
-                        <div key={newMediaKey} class='button button_type_file'>
-                            <div class="button__inner">
-                                <input
-                                    class="button__inputfile"
-                                    type="file" multiple
-                                    id={newMediaKey}
-                                    onChange={this.handleImageChange}
-                                />
-                                <label
-                                    class="button__inputfile-label text-center"
-                                    htmlFor={newMediaKey}
-                                >Upload <br/> company photos</label>
+
+                        { this.getAddPhotoForm()
+                            /* if(images.length < 3) {
+                            <div key={newMediaKey} class='button button_type_file'>
+                                <div class="button__inner">
+                                    <input
+                                        class="button__inputfile"
+                                        type="file" multiple
+                                        id={newMediaKey}
+                                        onChange={this.handleImageChange}
+                                    />
+                                    <label
+                                        class="button__inputfile-label text-center"
+                                        htmlFor={newMediaKey}
+                                    >Upload <br/> company photos</label>
+                                </div>
                             </div>
-                        </div>
+                        } */ }
                     </div>
                 </div>
             </div>

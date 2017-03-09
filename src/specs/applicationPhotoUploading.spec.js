@@ -41,7 +41,7 @@ describe('application media', function() {
             file : aBlob,
             controller : 'test'
         }))
-    
+
         const state = getApplicationMedia(getState())
 
         expect(state).to.be.an('Object')

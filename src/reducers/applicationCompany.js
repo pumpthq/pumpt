@@ -89,6 +89,10 @@ const aggregatePhotos = ({ progress, photos }) => {
     const quantityOfPlaceholdersOnStartup = defaultState.photos.length;
     const photosWithoutPlaceholders = photos.filter((item) => (item.isUploaded));
 
+    const isUploadedLimitPhotos = photos.length >= 3
+    console.log(`Photos array`)
+    console.log(photos)
+    // console.log(progress)
     return {
         photos: photosWithoutPlaceholders.length >= quantityOfPlaceholdersOnStartup ? [
             ...photosWithoutPlaceholders,
@@ -100,7 +104,7 @@ const aggregatePhotos = ({ progress, photos }) => {
                     mediaId: ShortID.generate(),
                 })),
         ],
-        progress: photosWithoutPlaceholders.length ?
+        progress: isUploadedLimitPhotos ?
             pushUnique(PHOTO_STEP, [...progress]) :
             progress.filter((step) => (step !== PHOTO_STEP)),
     };
