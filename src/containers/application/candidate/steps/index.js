@@ -14,6 +14,10 @@ import AddSkillsFilled from './addSkills/filled'
 import AddInterestsActive from './addInterests/active'
 import AddInterestsFilled from './addInterests/filled'
 
+import EducationBlockDisplay from './education/display'
+import EducationBlockEdit from './education/edit'
+import EducationContainer from './education/container'
+
 import CaseIcon from '../../../../components/icons/case'
 import EducationIcon from '../../../../components/icons/education'
 import PinIcon from '../../../../components/icons/pin'
@@ -104,6 +108,10 @@ class ApplicationCandidateAccordion extends ApplicationAccordionPrototype {
                     onWhenFilledClick={dispatch.bind(null, showExperienceStep())}
                     onEdit={dispatch.bind(null, showExperienceStep())}
                 />
+
+                <EducationContainer
+                    id={123}
+                    />
 
                 <AccordionItem
                     iconElement={<EducationIcon/>}

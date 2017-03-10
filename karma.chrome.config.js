@@ -13,7 +13,17 @@ module.exports = function (config) {
             './node_modules/phantomjs-polyfill/bind-polyfill.js',
             'src/**/*.spec.js'
         ],
-        plugins : [webpack, 'karma-jasmine', 'karma-phantomjs-launcher', 'karma-coverage', 'karma-spec-reporter', 'karma-jasmine-html-reporter', 'karma-sinon', 'karma-es6-shim'],
+        plugins : [
+            webpack,
+            'karma-jasmine',
+            'karma-phantomjs-launcher',
+            'karma-chrome-launcher',
+            'karma-coverage',
+            'karma-spec-reporter',
+            'karma-jasmine-html-reporter',
+            'karma-sinon',
+            'karma-es6-shim',
+        ],
         browsers : ['Chrome'],
         preprocessors : {
             'src/**/*.spec.js' : ['webpack']

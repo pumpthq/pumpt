@@ -28,6 +28,10 @@ import {
     SAVE_EDUCATION_DATA,
     CLOSE_EDUCATION_STEP,
 
+    EDUCATIONS_SHOW,
+    EDUCATIONS_CLOSE,
+    EDUCATIONS_ADD,
+
     LOCATION_STEP,
     SHOW_LOCATION_STEP,
     SAVE_LOCATION_DATA,
@@ -56,6 +60,12 @@ import {
 import saveStep from './saveOnboardingStep';
 import pushUnique from './../pushUnique';
 
+import {
+    addObjectToArray,
+    addStringToArrayUnique,
+    removeStringFromArray
+} from './stateProcessing'
+
 const defaultState = {
     summaryHead: SHOW_SUMMARY_HEAD_STANDARD,
     importFromLinkedIn: null,
@@ -66,6 +76,14 @@ const defaultState = {
     summary: {},
     experience: {},
     education: {},
+
+    educations: [
+        {
+            schoolName: 'This is from reducer',
+            degree: 'and yes'
+        }
+    ],
+
     location: {},
     socialMedia: {},
     skills: [
@@ -194,13 +212,15 @@ export default (state = defaultState, action) => {
                 payload,
             });
 
+
         case SHOW_EXPERIENCE_STEP :
             return {
                 ...state,
                 step: type,
                 active: [EXPERIENCE_STEP],
             };
-        case SAVE_EXPERIENCE_DATA :
+
+        case SAVE_EXPERIENCE_DATA:
             return {
                 ...saveStep({
                     state,
@@ -211,6 +231,21 @@ export default (state = defaultState, action) => {
                 }),
                 active: [],
             };
+
+        case EDUCATIONS_SHOW:
+            return {
+                ...state,
+                step: type,
+                active: [EDUCATION_STEP]
+            }
+            break;
+
+        case EDUCATIONS_ADD:
+            return {
+                ...addObjectToArray(state, 'educations', payload)
+            }
+            break;
+
 
         case SHOW_EDUCATION_STEP :
             return {

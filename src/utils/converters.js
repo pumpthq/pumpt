@@ -13,6 +13,7 @@ const apiEnumToListData = (initialData) => {
             groupData.push({
                 key: item.id,
                 id: item.id,
+                name: item.title,
                 value: item.title,
                 text: item.title,
                 type: item.alternative ? LIST_ITEM_TYPE_USER_ENTERED : LIST_ITEM_TYPE_TEXT

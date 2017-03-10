@@ -15,13 +15,13 @@ import DescriptionListItem from '../../../../../components/application/descripti
 )
 class AddDescriptionFilled extends Component {
     render() {
-        
+
         const { description } = this.props
 
         return (
             <DescriptionListItem>
                 <div class="list__item-general" style={{
-                    whiteSpace : 'pre'
+                    whiteSpace : 'pre-line'
                 }}>
                     { description }
                 </div>

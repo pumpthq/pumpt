@@ -56,9 +56,9 @@ describe('candidate onboarding', function() {
         dispatch(actions.saveIndustryData({
             industry: faker.company.companyName()
         }))
-        
+
         const state = getCandidateOnboarding(getState())
-        
+
         expect(state).to.be.an('Object')
             .and.have.property('step')
             .and.be.equals(constants.SHOW_INDUSTRY_STEP)
