@@ -1,0 +1,45 @@
+.logo {
+  .size(31px);
+  display: block;
+  overflow: hidden;
+  margin-right: 13px;
+
+  &_full {
+    width: 136px;
+  }
+
+  &_spinner {
+    margin: 0;
+
+    .icon {
+      width: 128px;
+      margin-left: 0;
+      margin-top: 0;
+    }
+  }
+
+  &_size {
+    &_s {
+      .size(28px);
+    }
+  }
+
+  @media @phone {
+    .size(29px);
+
+    &_full {
+      .size(105px, 23px);
+    }
+
+    &_spinner {
+      .size(42px, 35px);
+      background: url('@{img-url}/spinner.png') 0 0 no-repeat;
+      margin-bottom: 5px;
+
+      .icon {
+        display: none;
+      }
+    }
+  }
+}
+

@@ -1,0 +1,101 @@
+.link {
+  color: @color-additional;
+  text-decoration: none;
+  font-family: @ff-base;
+  font-size: @fz-general;
+  font-weight: 400;
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+
+  use {
+    fill: @color-additional;
+  }
+
+  &_type {
+
+    &_additional {
+      color: @grey;
+
+      use {
+        fill: @grey;
+        stroke: @grey;
+      }
+    }
+
+    &_revert {
+      opacity: 0.6;
+    }
+
+    &_white {
+      color: @white;
+    }
+  }
+
+  &_color {
+
+    &_l-grey {
+      color: @light-grey;
+    }
+  }
+
+  &_size {
+
+    &_xxs {
+      font-size: extract(@fzs-main, 1);
+    }
+
+    &_xs {
+      font-size: extract(@fzs-main, 2);
+    }
+
+    &_s {
+      font-size: extract(@fzs-main, 3);
+    }
+
+    &_s-weight {
+      font-size: extract(@fzs-main, 3);
+      font-weight: 600;
+    }
+
+    &_m {
+      font-size: extract(@fzs-main, 4);
+    }
+
+    &_l {
+      font-size: extract(@fzs-main, 5);
+    }
+
+    &_xl {
+      font-family: @ff-base;
+      font-size: @fz-l;
+    }
+
+    &_xxl {
+      font-size: @fz-xl;
+    }
+  }
+
+  .heading & {
+    margin-left: 4px;
+
+    .icon {
+      vertical-align: baseline;
+    }
+  }
+
+  @media @phone {
+    font-size: extract(@fzs-main, 1);
+
+    .form__actions & {
+      font-size: @fz-general;
+    }
+
+    &_size {
+      &_xl {
+        font-size: @fz-general + 3px;
+      }
+    }
+  }
+}

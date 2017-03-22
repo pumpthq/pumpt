@@ -1,0 +1,41 @@
+.footer {
+
+  padding-left: 30px;
+  padding-right: 30px;
+
+  &__wrapper {
+    width: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+  }
+
+  &__item {
+    border-top: 1px solid fade(@color-invert, 10);
+    padding-top: 20px;
+    padding-bottom: 18px;
+  }
+
+  .navigation {
+    margin: 0;
+  }
+
+  @media @phone {
+
+    border-top: 1px solid fade(@color-invert, 10);
+
+    &__item {
+      border: none;
+      padding-top: 15px;
+      padding-bottom: 15px;
+
+      &.text-right {
+        text-align: left;
+      }
+
+      &:first-child {
+        padding-bottom: 0;
+      }
+    }
+  }
+}

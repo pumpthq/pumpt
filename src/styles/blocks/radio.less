@@ -1,0 +1,31 @@
+.radio {
+
+  &.is-upgraded {
+    padding-left: 27px;
+  }
+
+  .mdl-radio__outer-circle {
+    .size(18px);
+    top: 2px;
+  }
+
+  .mdl-radio__outer-circle, &.is-checked .mdl-radio__outer-circle  {
+    border: 1px solid fade(@color-base, 50);
+  }
+
+  .mdl-radio__inner-circle {
+    .size(10px);
+    background-color: @color-base;
+    top: 6px;
+  }
+
+  .mdl-radio__ripple-container {
+    top: -11px;
+  }
+
+  & + .textfield {
+    margin-left: 27px;
+    margin-top: 4px;
+    width: calc(~'100% - 27px');
+  }
+}

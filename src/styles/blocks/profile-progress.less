@@ -1,0 +1,213 @@
+.profile-progress {
+
+  &__wrapper {
+    display: flex;
+    align-items: center;
+  }
+
+  &_filled {
+    &_one, &_two, &_three, &_four, &_five, &_six, &_seven, &_eight, &_nine, &_ten, &_eleven, &_twelve {
+      background-color: #7f7f7f;
+    }
+
+    &_one {
+      background-image: linear-gradient(270deg, transparent 50%, #000 50%), linear-gradient(-60deg, #000 50%, transparent 50%);
+    }
+
+    &_two {
+      background-image: linear-gradient(270deg, transparent 50%, #000 50%), linear-gradient(-30deg, #000 50%, transparent 50%);
+    }
+
+    &_three {
+      background-image: linear-gradient(270deg, transparent 50%, #000 50%), linear-gradient(0deg, #000 50%, transparent 50%);
+    }
+
+    &_four {
+      background-image: linear-gradient(270deg, transparent 50%, #000 50%), linear-gradient(30deg, #000 50%, transparent 50%);
+    }
+
+    &_five {
+      background-image: linear-gradient(270deg, transparent 50%, #000 50%), linear-gradient(60deg, #000 50%, transparent 50%);
+    }
+
+    &_six {
+      background-image: linear-gradient(270deg, transparent 50%, #000 50%), linear-gradient(90deg, #000 50%, transparent 50%);
+    }
+
+    &_seven {
+      background-image: linear-gradient(120deg, transparent 50%, #7f7f7f 50%), linear-gradient(90deg, #000 50%, transparent 50%);
+    }
+
+    &_eight {
+      background-image: linear-gradient(150deg, transparent 50%, #7f7f7f 50%), linear-gradient(90deg, #000 50%, transparent 50%);
+    }
+
+    &_nine {
+      background-image: linear-gradient(180deg, transparent 50%, #7f7f7f 50%), linear-gradient(90deg, #000 50%, transparent 50%);
+    }
+
+    &_ten {
+      background-image: linear-gradient(210deg, transparent 50%, #7f7f7f 50%), linear-gradient(90deg, #000 50%, transparent 50%);
+    }
+
+    &_eleven {
+      background-image: linear-gradient(240deg, transparent 50%, #7f7f7f 50%), linear-gradient(90deg, #000 50%, transparent 50%);
+    }
+
+    &_twelve {
+      background-image: linear-gradient(270deg, transparent 50%, #7f7f7f 50%), linear-gradient(90deg, #000 50%, transparent 50%);
+    }
+  }
+
+  &_size {
+
+    &_s {
+      .size(29px);
+      border-radius: 50%;
+      position: relative;
+      margin-left: 12px;
+
+      .image {
+        position: absolute;
+        top: 3px;
+        left: 3px;
+
+        &_photo {
+          .size(25px, 25px);
+          top: 2px;
+          left: 2px;
+          margin: 0;
+          padding: 0;
+        }
+
+        &_empty {
+          background: @background-base;
+        }
+      }
+    }
+
+    &_l {
+      .size(204px);
+      position: relative;
+
+      .column & {
+        margin: 36px 0 31px;
+      }
+
+      .progress__image {
+        fill: #2F2F2F;
+      }
+
+      .progress__filled {
+
+        &_one, &_two, &_three, &_four, &_five, &_six, &_seven, &_eight, &_nine, &_ten, &_eleven, &_twelve {
+          .progress__image_first {
+            fill: extract(@progress-colors, 1);
+          }
+        }
+
+        &_two, &_three, &_four, &_five, &_six, &_seven, &_eight, &_nine, &_ten, &_eleven, &_twelve {
+
+          .progress__image_second {
+            fill: extract(@progress-colors, 2);
+          }
+        }
+
+        &_three, &_four, &_five, &_six, &_seven, &_eight, &_nine, &_ten, &_eleven, &_twelve {
+          .progress__image_third {
+            fill: extract(@progress-colors, 3);
+          }
+        }
+
+        &_four, &_five, &_six, &_seven, &_eight, &_nine, &_ten, &_eleven, &_twelve {
+          .progress__image_fourth {
+            fill: extract(@progress-colors, 4);
+          }
+        }
+
+        &_five, &_six, &_seven, &_eight, &_nine, &_ten, &_eleven, &_twelve {
+
+          .progress__image_fifth {
+            fill: extract(@progress-colors, 5);
+          }
+
+        }
+
+        &_six, &_seven, &_eight, &_nine, &_ten, &_eleven, &_twelve {
+
+          .progress__image_sixth {
+            fill: extract(@progress-colors, 6);
+          }
+        }
+
+        &_seven, &_eight, &_nine, &_ten, &_eleven, &_twelve {
+
+          .progress__image_seventh {
+            fill: extract(@progress-colors, 7);
+          }
+        }
+
+        &_eight, &_nine, &_ten, &_eleven, &_twelve {
+          .progress__image_eighth {
+            fill: extract(@progress-colors, 8);
+          }
+        }
+
+        &_nine, &_ten, &_eleven, &_twelve {
+          .progress__image_ninth {
+            fill: extract(@progress-colors, 9);
+          }
+        }
+
+        &_ten, &_eleven, &_twelve {
+
+          .progress__image_tenth {
+            fill: extract(@progress-colors, 10);
+          }
+
+        }
+
+        &_eleven, &_twelve {
+          .progress__image_eleventh {
+            fill: extract(@progress-colors, 11);
+          }
+        }
+
+        &_twelve {
+
+          .progress__image_twelfth {
+            fill: extract(@progress-colors, 12);
+          }
+
+        }
+      }
+
+      .profile-progress__text-wrapper {
+        position: absolute;
+        top: 50px;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        text-align: center;
+
+        & > * {
+          line-height: 1.09;
+        }
+      }
+
+      .profile-progress__text {
+        font-size: extract(@fzs-main, 3) * 3;
+        font-weight: 300;
+        display: block;
+      }
+    }
+  }
+
+  @media @tablet {
+    &__wrapper {
+      .text {
+        font-size: @fz-general;
+      }
+    }
+  }
+}

@@ -1,0 +1,85 @@
+.popup-overlay {
+  background-color: fade(@color-base, 90);
+  height: 100%;
+  display: flex;
+  left: 0;
+  overflow: auto;
+  padding: 20px 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+}
+
+.popup-transparent {
+    background-color: transparent;
+}
+
+.popup {
+  .size(470px, auto);
+  background-color: @color-invert;
+  border-radius: @br-standard;
+  box-shadow: @bsh-4;
+  margin: auto;
+  position: relative;
+  z-index: 101;
+
+  &_big {
+    width: 571px;
+  }
+
+  @media @phone {
+    max-width: 345px;
+    width: 90%;
+  }
+
+
+  &__top {
+    padding: 25px 35px 0;
+
+    .text {
+      line-height: @lh-base;
+      margin-top: -6px;
+    }
+
+    .list_type_inline {
+      margin-top: -6px;
+    }
+  }
+
+  &_big &__top {
+    padding-left: 55px;
+    padding-right: 55px;
+
+    @media @phone {
+      padding-left: 35px;
+      padding-right: 35px;
+    }
+  }
+
+
+  &__middle {
+    display: block;
+    padding: 0 35px 48px;
+
+    &_indent_none {
+        padding: 18px 0 0;
+    }
+  }
+
+  &_big &__middle {
+    padding-left: 55px;
+    padding-right: 55px;
+
+    @media @phone {
+      padding-left: 35px;
+      padding-right: 35px;
+    }
+  }
+
+
+  &__bottom {
+    border-radius: 0 0 @br-standard @br-standard;
+    overflow: hidden;
+  }
+}

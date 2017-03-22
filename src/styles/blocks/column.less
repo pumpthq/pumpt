@@ -1,0 +1,58 @@
+.column {
+
+  &__wrapper {
+    display: flex;
+    margin-bottom: 60px;
+    justify-content: space-between;
+
+    &_height {
+      &_full {
+        min-height: calc(~'100vh - 132px');
+      }
+    }
+  }
+
+  &_size {
+
+    &_xs {
+      width: 18.4%;
+    }
+
+    &_s {
+      width: 33.2%;
+    }
+
+    &_l {
+      width: 63.8%;
+    }
+
+    &_xl {
+      width: 77.2%
+    }
+  }
+
+  @media @tablet {
+
+    &__wrapper {
+      flex-direction: column;
+      margin-bottom: 90px;
+
+      .content & {
+        margin-bottom: 0;
+      }
+    }
+
+    &_size {
+      &_l, &_s, &_xl, &_xs {
+        width: 100%;
+      }
+    }
+  }
+
+  @media @phone {
+
+
+
+
+  }
+}

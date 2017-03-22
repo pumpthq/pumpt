@@ -1,0 +1,237 @@
+.form {
+  padding-top: 18px;
+
+  &_padding-size_xs {
+    padding-top: 4px;
+  }
+
+
+  &__row {
+    margin-bottom: 20px;
+
+    &_nowrap {
+      white-space: nowrap;
+    }
+
+    &_indent-size {
+      &_xs {
+        margin-bottom: 10px;
+      }
+
+      &_s {
+        margin-bottom: 14px;
+      }
+
+      &_m {
+        margin-bottom: 22px;
+      }
+    }
+  }
+
+  &__actions {
+    margin-top: 42px;
+    display: flex;
+    align-items: center;
+
+    .button {
+      flex-shrink: 0;
+    }
+
+    & > .text {
+      flex-grow: 0;
+      flex-shrink: 1;
+      line-height: 1.25;
+    }
+
+    &_v-align {
+      &_center {
+        align-items: center;
+      }
+    }
+
+    &_indent-size {
+      &_s {
+        margin-top: 25px;
+      }
+
+      &_m {
+        margin-top: 35px;
+      }
+    }
+  }
+
+  &__bottom {
+    border-top: 1px solid fade(@palette-black, 10);
+    margin-top: 30px;
+    padding-top: 30px;
+    margin-bottom: 0;
+  }
+
+
+  &__subinfo {
+    display: block;
+    font-size: @fz-general;
+    text-align: center;
+    margin-top: 60px;
+  }
+
+
+  &_type {
+    &_link {
+
+      .button_type_transparent {
+        opacity: 0;
+      }
+
+      .textfield {
+
+        &__input {
+          opacity: 0;
+        }
+
+        &__input,
+        &__label {
+          cursor: pointer;
+        }
+
+        &__label {
+          color: @color-additional;
+        }
+
+        &.is-focused, &.is-dirty {
+          .textfield {
+
+            &__input,
+            &__label {
+              cursor: text;
+            }
+
+            &__input {
+              opacity: 1;
+            }
+
+            &__label {
+              color: @grey;
+            }
+          }
+
+          & + .button_type_transparent {
+            opacity: 1;
+          }
+        }
+      }
+
+    }
+  }
+
+  &_inline {
+    margin: 0;
+
+    .textfield {
+
+      &_size {
+
+        &_l {
+          .textfield__input {
+            padding: 2px 0 5px;
+          }
+
+          .textfield__label {
+            top: 0;
+          }
+        }
+      }
+    }
+
+    .button_type_transparent {
+      position: absolute;
+      right: 0;
+      top: 5px;
+    }
+  }
+
+  &_indent-size {
+    &_none {
+      padding-top: 0;
+    }
+
+    &_s {
+      padding-top: 8px;
+    }
+
+    &_m {
+      padding-top: 16px;
+    }
+  }
+
+  @media @phone {
+
+    padding-top: 11px;
+
+    &__actions {
+      margin-top: 28px;
+
+      &_v-align {
+        &_center {
+          align-items: stretch;
+          flex-direction: column;
+
+          .button {
+            width: 100%;
+          }
+        }
+      }
+
+      .text {
+        font-weight: 400;
+        color: @light-grey;
+        margin-top: 22px;
+        position: relative;
+        top: 14px;
+
+        .link {
+          font-size: extract(@fzs-main, 1);
+        }
+      }
+
+      .card_onb-info_edit & {
+        margin-top: 16px;
+      }
+    }
+
+    &_inline {
+
+      .textfield_size_l {
+        .textfield__input {
+          padding: 7px 0 8px;
+        }
+
+        .textfield__label {
+          top: 9px;
+        }
+      }
+    }
+
+    &_indent-size {
+      &_none {
+        padding-top: 0;
+      }
+
+      &_s {
+        padding-top: 3px;
+      }
+    }
+
+    &__row > [class*='col-xs-']:not(:last-child) {
+      margin-bottom: 20px;
+    }
+
+    .row + .row > [class*='col-xs-']:only-child {
+      margin-top: 22px;
+    }
+  }
+
+  .row [class*='col-']:last-child .form__row {
+    margin-bottom: 0;
+  }
+}
