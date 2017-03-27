@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+//import { reduxReactRouter } from 'redux-router'
 import { connect } from 'react-redux'
 
 import EducationBlockDisplay from './display'
