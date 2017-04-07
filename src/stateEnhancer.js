@@ -2,7 +2,8 @@ import { compose } from 'redux'
 import persistState from 'redux-localstorage'
 import middleware from './middlewares'
 
-const stateEnhancer = compose(
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const stateEnhancer = composeEnhancers(
     middleware,
     persistState(null, {
         slicer : (paths) => {
