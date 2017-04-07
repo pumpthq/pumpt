@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 
 class EducationsItemDisplay extends Component {
     render() {
-        const { schoolName, degeree } = this.props
+        const { schoolName, degree } = this.props
 
         return(
             <div>
