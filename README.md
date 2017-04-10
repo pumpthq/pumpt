@@ -12,6 +12,12 @@ To do a commit, use `npm run commit` in order to follow conventional commit syst
 Before any push action project will run `npm run lint` to check code style.
 If you want to skip it go with `git push --no-verify`
 
+## DevTools
+
+Since this client-side app is running **Redux** on top of **React**, a proper debugging tool is required navigate through state changes when tracking down the source of any bugs or issues.
+
+Currently, the app is configured for [Redux DevTools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en), which can be installed and used on [Google Chrome](https://www.google.com/chrome/browser/desktop/index.html).
+
 ## Production deployment
 
 1. `npm install`
