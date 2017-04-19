@@ -8,8 +8,8 @@
     "merge_logs": true,
     "cwd": "./",
     "env": {
-      "NODE_ENV": "development",
-      "BABEL_ENV": "development",
+      "NODE_ENV": "production",
+      "BABEL_ENV": "production",
       "PORT": "4000",
       "REMOTE_API_HOST": "http://37.139.29.63",
       "REMOTE_API_PORT": "3000"
