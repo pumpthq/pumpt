@@ -24,6 +24,10 @@ import {
     SAVE_EDUCATION_DATA,
     CLOSE_EDUCATION_STEP,
 
+    EDUCATIONS_SHOW,
+    EDUCATIONS_CLOSE,
+    EDUCATIONS_ADD,
+
     SHOW_LOCATION_STEP,
     SAVE_LOCATION_DATA,
     CLOSE_LOCATION_STEP,
@@ -53,6 +57,16 @@ export const showAccordion = () => ({
 
 export const migrateOnboardingToApplication = (payload) => ({
     type : ONBOARDING_TO_APPLICATION_MIGRATION,
+    payload
+})
+
+export const educatuonsShow = (payload) => ({
+    type: EDUCATIONS_SHOW,
+    payload
+})
+
+export const educationsAdd = (payload) => ({
+    type: EDUCATIONS_ADD,
     payload
 })
 

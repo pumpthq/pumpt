@@ -20,13 +20,14 @@ import {
 @connect(
     (state) => {
         const { candidateOnboarding } = state;
-        const { firstName, lastName, email } = candidateOnboarding;
+        const { firstName, lastName, email, location } = candidateOnboarding;
 
         return {
             initialValues: {
                 firstName,
                 lastName,
                 email,
+                location,
             },
         };
     }
@@ -37,6 +38,7 @@ import {
         'firstName',
         'lastName',
         'email',
+        'location'
     ],
     alwaysAsyncValidate: true,
     asyncBlurFields: ['email'],
@@ -55,6 +57,11 @@ import {
             errors.email = 'Can\'t be blank';
         } else if (!emailValidator.validate(values.email)) {
             errors.email = 'Invalid Email';
+        }
+
+
+        if (!values.location) {
+          errors.location = 'Can\'t be blank';
         }
 
         return errors;
@@ -101,6 +108,7 @@ class ContactInfoForm extends Component {
                 firstName,
                 lastName,
                 email,
+                location,
             },
             handleSubmit,
             submitting,
@@ -130,6 +138,13 @@ class ContactInfoForm extends Component {
                         label="Email"
                         {...email}
                         error={email.touched && email.error}
+                    />
+                </fieldset>
+                <fieldset className="form__row">
+                    <OnboardingInput
+                        label="Location"
+                        {...location}
+                        error={location.touched && location.error}
                     />
                 </fieldset>
                 <div className="form__actions">

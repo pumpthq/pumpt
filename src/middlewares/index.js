@@ -9,8 +9,9 @@ const middleware = compose(
         thunkMiddleware,
         routerMiddleware,
         sagaMiddleware
-    ),
-    window.devToolsExtension ? window.devToolsExtension() : devTools => devTools
+    )
+    //Deprecated: https://github.com/zalmoxisus/redux-devtools-extension/issues/220
+    //window.devToolsExtension ? window.devToolsExtension() : devTools => devTools
 )
 
 export default middleware

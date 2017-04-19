@@ -6,7 +6,7 @@ import {
     LIST_ITEM_TYPE_TEXT,
     LIST_ITEM_TYPE_USER_ENTERED,
     LIST_ITEM_TYPE_GROUP
-} from './../../components/main/List2'
+} from './../../components/main/list2'
 
 const expect = chai.expect
 
@@ -22,7 +22,7 @@ describe('Converters', () => {
                     items: [
                         {
                             id: '234234',
-                            name: 'ThisIsName',
+                            name: 'ThisIsTitle',
                             title: 'ThisIsTitle',
                             alternative: true
                         }
@@ -40,7 +40,7 @@ describe('Converters', () => {
                         {
                             key: '234234',
                             id: '234234',
-                            name: 'ThisIsName',
+                            name: 'ThisIsTitle',
                             value: 'ThisIsTitle',
                             text: 'ThisIsTitle',
                             type: LIST_ITEM_TYPE_USER_ENTERED
