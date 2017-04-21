@@ -5,12 +5,7 @@ const express = require('express');
 const winston = require('winston');
 const expressWinston = require('express-winston');
 
-const config = require('./config');
-const HOST = config.host;
-const PORT = config.port;
-const NODE_ENV = config.env;
-const remoteApiUrl = config.remoteApi.url;
-
+const { NODE_ENV, HOST, PORT, REMOTE_API_HOST, REMOTE_API_PORT } = require('./config');
 const app = express();
 
 app.use(cors());
@@ -31,7 +26,7 @@ app.use(expressWinston.logger({
 switch (NODE_ENV) {
     case 'development' :
         const webpack = require('webpack');
-        const webpackConfig = require('./../webpack.config.js');
+        const webpackConfig = require('./webpack.config');
         const compiler = webpack(webpackConfig);
 
         app.use(require('webpack-dev-middleware')(compiler, {
@@ -51,16 +46,15 @@ switch (NODE_ENV) {
 
         break;
     default :
-        const buildAppPath = path.join(__dirname, './../build').normalize();
+        const buildAppPath = path.join(__dirname, './build').normalize();
 
         app.use('/', express.static(buildAppPath));
         break;
 }
 
-console.log(remoteApiUrl);
 
 app.use('/api', proxy({
-    target : remoteApiUrl,
+    target : `${REMOTE_API_HOST}:${REMOTE_API_PORT}`,
     changeOrigin : true,
     ws : true,
     pathRewrite : {
