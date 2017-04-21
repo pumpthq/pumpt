@@ -17,9 +17,14 @@ import {
 
     SET_DEFAULT_STATE,
 } from './../constants/candidateMatches';
-
+import { API } from '../constants/actionTypes'
 export const fetchAll = () => ({
-    type : ALL_FETCH_REQUESTED
+    type : API,
+    payload : {
+        url : '/matches',
+        success: fetchAllSucceeded,
+        error: fetchAllFailed
+    }
 })
 
 export const fetchAllSucceeded = ({ matches }) => ({
@@ -37,7 +42,12 @@ export const fetchAllFailed = ({ statusCode }) => ({
 })
 
 export const fetchBookmarked = () => ({
-    type : BOOKMARKED_FETCH_REQUESTED
+    type : API,
+    payload: {
+        url: '/matches'
+        success: fetchBookmarkedSucceeded,
+        error: fetchBookmarkedFailed
+    }
 })
 
 export const fetchBookmarkedSucceeded = ({ matches }) => ({
@@ -89,5 +99,10 @@ export const clearCandidateMatchesState = () => ({
 });
 
 export const fetchVacancies = () => ({
-    type: 'FETCH_VACANCIES_FOR_CANDIDATE'
+    type: API,
+    payload : {
+        url : '/matches',
+        success: fetchAllSucceeded,
+        error: fetchAllFailed
+    }
 });
