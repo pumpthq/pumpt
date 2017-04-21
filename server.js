@@ -24,7 +24,7 @@ app.use(expressWinston.logger({
 }));
 
 switch (NODE_ENV) {
-    case 'development' :
+    case 'local' :
         const webpack = require('webpack');
         const webpackConfig = require('./webpack.config');
         const compiler = webpack(webpackConfig);
