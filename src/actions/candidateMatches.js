@@ -1,11 +1,6 @@
 import {
-    ALL_FETCH_REQUESTED,
-    ALL_FETCH_SUCCEEDED,
-    ALL_FETCH_FAILED,
-
-    BOOKMARKED_FETCH_REQUESTED,
+    MATCHES_FETCH_SUCCEEDED,
     BOOKMARKED_FETCH_SUCCEEDED,
-    BOOKMARKED_FETCH_FAILED,
 
     NOT_INTERESTED_FETCH_REQUESTED,
     NOT_INTERESTED_FETCH_SUCCEEDED,
@@ -18,49 +13,37 @@ import {
     SET_DEFAULT_STATE,
 } from './../constants/candidateMatches';
 import { API } from '../constants/actionTypes'
-export const fetchAll = () => ({
+import { fetchFailed } from './apiError'
+
+export const fetchMatches = () => ({
     type : API,
     payload : {
-        url : '/matches',
-        success: fetchAllSucceeded,
-        error: fetchAllFailed
+        url : '/matches/candidate',
+        success: fetchMatchesSucceeded,
+        error: fetchFailed
     }
 })
 
-export const fetchAllSucceeded = ({ matches }) => ({
-    type : ALL_FETCH_SUCCEEDED,
+export const fetchMatchesSucceeded = data => ({
+    type : MATCHES_FETCH_SUCCEEDED,
     payload : {
-        matches
-    }
-})
-
-export const fetchAllFailed = ({ statusCode }) => ({
-    type : ALL_FETCH_FAILED,
-    payload : {
-        statusCode
+        matches: data
     }
 })
 
 export const fetchBookmarked = () => ({
     type : API,
     payload: {
-        url: '/matches'
+        url: '/matches',
         success: fetchBookmarkedSucceeded,
-        error: fetchBookmarkedFailed
+        error: fetchFailed
     }
 })
 
-export const fetchBookmarkedSucceeded = ({ matches }) => ({
+export const fetchBookmarkedSucceeded = data => ({
     type : BOOKMARKED_FETCH_SUCCEEDED,
     payload : {
-        matches
-    }
-})
-
-export const fetchBookmarkedFailed = ({ statusCode }) => ({
-    type : BOOKMARKED_FETCH_FAILED,
-    payload : {
-        statusCode
+        matches: data
     }
 })
 
@@ -96,13 +79,4 @@ export const routeToNotInterested = () => ({
 
 export const clearCandidateMatchesState = () => ({
     type: SET_DEFAULT_STATE,
-});
-
-export const fetchVacancies = () => ({
-    type: API,
-    payload : {
-        url : '/matches',
-        success: fetchAllSucceeded,
-        error: fetchAllFailed
-    }
 });
