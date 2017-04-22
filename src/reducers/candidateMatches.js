@@ -31,9 +31,9 @@ const demoCard = () => ({
 });
 
 const defaultState = {
-    all: [demoCard(), demoCard(), demoCard(), demoCard(), demoCard()],
-    bookmarked: [demoCard()],
-    notInterested: [demoCard()],
+    all: [],
+    bookmarked: [],
+    notInterested: [],
     activeTab: ALL_TAB,
     newJob: {
         step: null,
@@ -90,8 +90,8 @@ export default (state = defaultState, action) => {
             })
             return {
                 all: vacancies,
-                bookmarked: [demoCard()],
-                notInterested: [demoCard()],
+                bookmarked: [],
+                notInterested: [],
                 activeTab: ALL_TAB,
                 newJob: {
                     step: null,
