@@ -18,14 +18,24 @@ Since this client-side app is running **Redux** on top of **React**, a proper de
 
 Currently, the app is configured for [Redux DevTools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en), which can be installed and used on [Google Chrome](https://www.google.com/chrome/browser/desktop/index.html).
 
-## Production deployment
+## Staging deployment
 
 1. `npm install`
-2. Check `process.json` which is a PM2 configuration file and choose environment.
-3. `npm run build` in order to make a build.
-4. `pm2 start process.json --env staging`
+2. `npm run build` in order to make a build.
+3. `npm run start:dev`
+
+## Production deployment
+
+In production, we are using `pm2` to auto-scale and load-balance our instances to meet demand:
+
+1. `npm install`
+2. `npm run build` in order to make a build.
+4. `npm run start:prod`
+
+Because `pm2` will run our instances as separate child processes, errors and other logs will not be produced in the console.  
+
+To print production logs into the console, run `pm2 logs`
 
 ## Requirements
 
-Node version `4.2.4`
-NPM version `2.4.12`
+Node `^6.8`, NPM `^3.8`
