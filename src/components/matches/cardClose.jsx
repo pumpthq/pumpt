@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 import { connect } from 'react-redux'
 
-import { fetchVacancies } from '../../actions/candidateMatches'
+import { postBookmark, fetchVacancies } from '../../actions/candidateMatches'
 
 import Bookmark from '../icons/bookmark'
 import BookmarkFill from '../icons/BookmarkFill'
@@ -45,7 +45,15 @@ const defaultProps = {
     removeOfBookmark: PropTypes.func
 };
 
-@connect(undefined, { })
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    addToBookmark: () => {
+      dispatch(postBookmark(ownProps.id))
+    }
+  }
+}
+
+@connect(undefined, mapDispatchToProps)
 export default class cardClose extends Component {
 
     componentWillMount() {}

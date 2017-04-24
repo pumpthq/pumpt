@@ -10,6 +10,8 @@ import {
     ROUTE_TO_BOOKMARKED,
     ROUTE_TO_NOT_INTERESTED,
 
+    BOOKMARK_POST_SUCCEEDED,
+
     SET_DEFAULT_STATE,
 } from './../constants/candidateMatches';
 import { API } from '../constants/actionTypes'
@@ -63,6 +65,20 @@ export const fetchNotInterestedFailed = ({ statusCode }) => ({
     payload : {
         statusCode
     }
+})
+
+export const postBookmark = (matchingId) => ({
+    type : API,
+    payload : {
+        url : `/matches/bookmark/${matchingId}`,
+        success: postBookmarkSucceeded,
+        error: fetchFailed
+    }
+})
+
+export const postBookmarkSucceeded = (data) => ({
+    type: BOOKMARK_POST_SUCCEEDED,
+    payload: { data }
 })
 
 export const routeToAll = () => ({

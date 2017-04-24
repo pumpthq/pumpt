@@ -1,9 +1,12 @@
+import _ from 'lodash';
 import ShortID from 'shortid';
 import axios from 'axios';
 import {
     MATCHES_FETCH_SUCCEEDED,
     BOOKMARKED_FETCH_SUCCEEDED,
     NOT_INTERESTED_FETCH_SUCCEEDED,
+
+    BOOKMARK_POST_SUCCEEDED,
 
     ALL_TAB,
     BOOKMARKED_TAB,
@@ -75,7 +78,7 @@ export default (state = defaultState, action) => {
             const vacancies = payload.matches.map(matching => {
                 let vacancy = matching._vacancy
                 return {
-                    id: vacancy._id,
+                    id: matching._id,
                     name: vacancy.company.name,
                     logo: vacancy.company.logo,
                     title: vacancy.title,
@@ -86,6 +89,7 @@ export default (state = defaultState, action) => {
                     employment: vacancy.employment,
                     text: vacancy.description,
                     background: '',
+                    status: matching.vacancy.status
                 }
             })
             return {
@@ -137,6 +141,14 @@ export default (state = defaultState, action) => {
             };
         case SET_DEFAULT_STATE :
             return defaultState;
+
+        case BOOKMARK_POST_SUCCEEDED: // then move newly bookmarked matching to bookmark collection in state
+            const all = _.clone(state.all)
+
+            const matchings = _.remove(all, matching => matching.id == payload.data._id)
+            const bookmarked = state.bookmarked.concat(matchings)
+
+            return { ...state, all, bookmarked }
 
         default :
             return state;
