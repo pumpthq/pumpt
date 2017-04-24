@@ -26,7 +26,7 @@ Currently, the app is configured for [Redux DevTools](https://chrome.google.com/
 
 ## Production deployment
 
-In production, we are using `pm2` to auto-scale and load-balance our instances to meet demand:
+In production, `pm2` is used to auto-scale and load-balance instances of our application to meet demand. To deploy:
 
 1. `npm install`
 2. `npm run build` in order to make a build.
