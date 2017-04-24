@@ -1,0 +1,17 @@
+{
+  "apps": [{
+    "name": "pumpt-spa2",
+    "script": "server",
+    "watch": true,
+    "exec_mode": "cluster",
+    "instances": 1,
+    "merge_logs": true,
+    "cwd": "./",
+    "env": {
+u      "BABEL_ENV": "development",
+      "PORT": "4000",
+      "REMOTE_API_HOST": "http://37.139.29.63",
+      "REMOTE_API_PORT": "3000"
+    }
+  }]
+}

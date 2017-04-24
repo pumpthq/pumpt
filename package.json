@@ -4,9 +4,9 @@
   "description": "",
   "author": "Pavel Malyshev",
   "scripts": {
-    "start:local": "NODE_ENV=development BABEL_ENV=local REMOTE_API_HOST=http://localhost REMOTE_API_PORT=3000 HOST=localhost node server",
-    "start:prod": "NODE_ENV=production BABEL_ENV=production REMOTE_API_HOST=pumpt-dev-api.softfacade.com REMOTE_API_PORT=80 HOST=pumpt-dev-api.softfacade.com PORT=3000 node server",
-    "start:dev": "pm2 start process.json",
+    "start:local": "node server",
+    "start:dev": "NODE_ENV=development pm2 start process.js",
+    "start:prod": "NODE_ENV=production pm2 start process.js",
     "build": "NODE_ENV=production BABEL_ENV=production webpack --colors --config webpack.production.config.js",
     "test": "BABEL_ENV=test ./node_modules/karma/bin/karma start --single-run --no-auto-watch karma.config.js",
     "test:chrome": "BABEL_ENV=test ./node_modules/karma/bin/karma start --auto-watch --no-single-run karma.chrome.config.js",

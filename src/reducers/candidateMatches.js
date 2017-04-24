@@ -1,6 +1,7 @@
 import ShortID from 'shortid';
+import axios from 'axios';
 import {
-    ALL_FETCH_SUCCEEDED,
+    MATCHES_FETCH_SUCCEEDED,
     BOOKMARKED_FETCH_SUCCEEDED,
     NOT_INTERESTED_FETCH_SUCCEEDED,
 
@@ -30,9 +31,9 @@ const demoCard = () => ({
 });
 
 const defaultState = {
-    all: [demoCard(), demoCard(), demoCard(), demoCard(), demoCard()],
-    bookmarked: [demoCard()],
-    notInterested: [demoCard()],
+    all: [],
+    bookmarked: [],
+    notInterested: [],
     activeTab: ALL_TAB,
     newJob: {
         step: null,
@@ -70,33 +71,27 @@ export default (state = defaultState, action) => {
     const { type, payload } = action;
 
     switch (type) {
-        case ALL_FETCH_SUCCEEDED :
-            let xhr = new XMLHttpRequest();
-            xhr.open('GET', 'http://37.139.29.63:4000/api/matches', false);
-            xhr.send(null);
-            let vacancies = eval("(" + xhr.responseText + ")");
-            let finalVacancies = [];
-            vacancies.map((vacancy) => {
-
-                let finalVacancy = {
+        case MATCHES_FETCH_SUCCEEDED :
+            const vacancies = payload.matches.map(matching => {
+                let vacancy = matching._vacancy
+                return {
                     id: vacancy._id,
                     name: vacancy.company.name,
                     logo: vacancy.company.logo,
                     title: vacancy.title,
                     location: vacancy.company.locationHeadquarters.state,
-                    match: 80, // Math.floor(Math.random() * 21) + 70,
+                    match: matching.score,
                     salary: vacancy.salary,
                     experience: vacancy.experience,
                     employment: vacancy.employment,
-                    text: defaultText,
+                    text: vacancy.description,
                     background: '',
-                };
-                finalVacancies.push(finalVacancy);
-            });
+                }
+            })
             return {
-                all: finalVacancies,
-                bookmarked: [demoCard()],
-                notInterested: [demoCard()],
+                all: vacancies,
+                bookmarked: [],
+                notInterested: [],
                 activeTab: ALL_TAB,
                 newJob: {
                     step: null,
@@ -142,43 +137,6 @@ export default (state = defaultState, action) => {
             };
         case SET_DEFAULT_STATE :
             return defaultState;
-
-        case 'FETCH_VACANCIES_FOR_CANDIDATE' : {
-            let xhr = new XMLHttpRequest();
-            xhr.open('GET', 'http://37.139.29.63:4000/api/matches', false);
-            xhr.send(null);
-            let vacancies = eval("(" + xhr.responseText + ")");
-            let finalVacancies = [];
-            vacancies.map((vacancy) => {
-
-                let finalVacancy = {
-                    id: vacancy._id,
-                    name: vacancy.company.name,
-                    logo: 'https://myspace.com/common/images/user.png',
-                    title: vacancy.title,
-                    location: vacancy.company.locationHeadquarters.state,
-                    match: 80, // Math.floor(Math.random() * 21) + 70,
-                    salary: vacancy.salary,
-                    experience: vacancy.experience,
-                    employment: vacancy.employment,
-                    text: defaultText,
-                    background: '',
-                };
-                finalVacancies.push(finalVacancy);
-            });
-            return {
-                all: finalVacancies,
-                bookmarked: [demoCard()],
-                notInterested: [demoCard()],
-                activeTab: ALL_TAB,
-                newJob: {
-                    step: null,
-                    progress: [],
-                    active: [],
-                    summary: {},
-                },
-            };
-        }
 
         default :
             return state;

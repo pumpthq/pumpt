@@ -1,11 +1,14 @@
 import { applyMiddleware, compose } from 'redux'
-import logger from './logger'
+import loggerMiddleware from './logger'
 import thunkMiddleware from 'redux-thunk'
 import sagaMiddleware from './saga'
 import routerMiddleware from './router'
+import apiMiddleware from './api'
 
 const middleware = compose(
     applyMiddleware(
+        loggerMiddleware,
+        apiMiddleware,
         thunkMiddleware,
         routerMiddleware,
         sagaMiddleware

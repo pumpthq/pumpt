@@ -27,7 +27,7 @@ import {
     getCandidateMatches
 } from './../reducers/candidateMatches';
 import {
-    fetchAll,
+    fetchMatches,
     fetchAllSucceeded,
     fetchAllFailed,
 
@@ -50,112 +50,18 @@ import {
     getAccessToken,
 } from './../reducers/authorization';
 
-const getAllMatches = ({ accessToken }) => {
-    return axios({
-        method: 'GET',
-        baseURL: API_URL,
-        url: API_ALL_MATCHES,
-        headers: {
-            'access-token': accessToken,
-        },
-        responseType: 'json',
-    }).then(response => response.data);
-};
-
-const getBookmarkedMatches = ({ accessToken }) => {
-    return axios({
-        method: 'GET',
-        baseURL: API_URL,
-        url: API_BOOKMARKED_MATCHES,
-        headers: {
-            'access-token': accessToken,
-        },
-        responseType: 'json',
-    }).then(response => response.data);
-};
-
-const getNotInterestedMatches = ({ accessToken }) => {
-    return axios({
-        method: 'GET',
-        baseURL: API_URL,
-        url: API_NOT_INTERESTED_MATCHES,
-        headers: {
-            'access-token': accessToken,
-        },
-        responseType: 'json',
-    }).then(response => response.data);
-};
-
 export default function () {
     return [
         takeLatest(ROUTE_TO_ALL, function * () {
-            const { accessToken } = yield select(getAccessToken);
-
-            yield put(fetchAll())
-
-            let allMatches
-
-            try {
-                allMatches = yield call(getAllMatches, { accessToken })
-            } catch (ex) {
-                const statusCode = ex.status
-
-                console.log('Retrieving all matches fails', ex)
-                return yield put(fetchAllFailed({ statusCode }))
-            }
-
-            yield put(fetchAllSucceeded({ matches : allMatches }))
-            yield put(routeToAll())
-        }),
+            // const { accessToken } = yield select(getAccessToken);
+            yield put(fetchMatches())
+        })
+        ,
         takeLatest(ROUTE_TO_BOOKMARKED, function * () {
-            const { accessToken } = yield select(getAccessToken);
-
-            yield put(fetchBookmarked())
-
-            let bookmarkedMatches
-
-            try {
-                bookmarkedMatches = yield call(getBookmarkedMatches, { accessToken })
-            } catch (ex) {
-                const statusCode = ex.status
-
-                console.log('Retrieving bookmarked matches fails', ex)
-                return yield put(fetchBookmarkedFailed({ statusCode }))
-            }
-
-            yield put(fetchBookmarkedSucceeded({ matches : bookmarkedMatches }))
-            yield put(routeToBookmarked())
+        //     yield put(fetchBookmarked())
         }),
         takeLatest(ROUTE_TO_NOT_INTERESTED, function * () {
-            const { accessToken } = yield select(getAccessToken);
-
-            yield put(fetchNotInterested())
-
-            let notInterestedMatches
-
-            try {
-                notInterestedMatches = yield call(getNotInterestedMatches, { accessToken })
-            } catch (ex) {
-                const statusCode = ex.status
-
-                console.log('Retrieving not interested matches fails', ex)
-                return yield put(fetchNotInterestedFailed({ statusCode }))
-            }
-
-            yield put(fetchNotInterestedSucceeded({ matches : notInterestedMatches }))
-            yield put(routeToNotInterested())
-        }),
-        takeLatest([
-            ALL_FETCH_FAILED,
-            BOOKMARKED_FETCH_FAILED,
-            NOT_INTERESTED_FETCH_FAILED
-        ], function * (action) {
-            const { statusCode } = action.payload
-
-            if (statusCode === 401) {
-                yield put(logOut());
-            }
+        //     yield put(fetchNotInterested())
         })
     ];
 }
-

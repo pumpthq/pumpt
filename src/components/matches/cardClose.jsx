@@ -45,12 +45,10 @@ const defaultProps = {
     removeOfBookmark: PropTypes.func
 };
 
-@connect(undefined, { fetchVacancies })
+@connect(undefined, { })
 export default class cardClose extends Component {
 
-    componentWillMount() {
-        this.props.fetchVacancies()
-    }
+    componentWillMount() {}
 
     renderMatchInformation() {
         const { name, logo, title, location, match, salary, experience, employment, background } = this.props;
