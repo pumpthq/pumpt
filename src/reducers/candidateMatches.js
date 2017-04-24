@@ -1,7 +1,7 @@
 import ShortID from 'shortid';
 import axios from 'axios';
 import {
-    ALL_FETCH_SUCCEEDED,
+    MATCHES_FETCH_SUCCEEDED,
     BOOKMARKED_FETCH_SUCCEEDED,
     NOT_INTERESTED_FETCH_SUCCEEDED,
 
@@ -71,7 +71,7 @@ export default (state = defaultState, action) => {
     const { type, payload } = action;
 
     switch (type) {
-        case ALL_FETCH_SUCCEEDED :
+        case MATCHES_FETCH_SUCCEEDED :
             const vacancies = payload.matches.map(matching => {
                 let vacancy = matching._vacancy
                 return {
@@ -84,7 +84,7 @@ export default (state = defaultState, action) => {
                     salary: vacancy.salary,
                     experience: vacancy.experience,
                     employment: vacancy.employment,
-                    text: defaultText,
+                    text: vacancy.description,
                     background: '',
                 }
             })
