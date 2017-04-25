@@ -6,10 +6,11 @@ import DescriptiveParagraph from './descriptiveParagraph'
 import DescriptiveList from './descriptiveList'
 import DescriptiveListItem from './descriptiveListItem'
 import Carousel from './carouselMathes'
-
+import CardCarousel from './cardCarousel'
 export {
     CardClose,
     CardOpen,
+    CardCarousel,
     CardGlassdoor,
     TabBar,
     DescriptiveParagraph,

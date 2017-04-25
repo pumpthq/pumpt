@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import './matches.less';
+import { CardCarousel } from './../../../components/matches';
+
 
 const propTypes = {
     matches: PropTypes.arrayOf(PropTypes.shape({
@@ -37,6 +39,10 @@ export default class MatchesSliderPrototype extends Component {
         super(props);
 
         this.state = {};
+    }
+
+    render() {
+        return <CardCarousel {...this.props} />
     }
 
 }
