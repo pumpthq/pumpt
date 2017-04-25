@@ -13,7 +13,7 @@ import Card from './../../../components/jobs/card';
         }
     }
 )
-export default class JobsExampleSlides extends JobsSliderPrototype {
+class JobsExampleSlides extends JobsSliderPrototype {
 
     render() {
         const { jobs } = this.props;
@@ -28,3 +28,5 @@ export default class JobsExampleSlides extends JobsSliderPrototype {
     }
 
 };
+
+module.exports = JobsExampleSlides

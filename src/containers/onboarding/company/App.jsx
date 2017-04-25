@@ -41,4 +41,4 @@ OnboardingCompany.propTypes = {
     state : PropTypes.object
 }
 
-export default OnboardingCompany
+module.exports = OnboardingCompany

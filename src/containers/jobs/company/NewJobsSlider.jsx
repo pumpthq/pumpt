@@ -15,7 +15,8 @@ import ShortID from 'shortid';
         };
     }
 )
-export default class NewJobSlider extends JobsSliderPrototype {
+
+class NewJobSlider extends JobsSliderPrototype {
 
     componentWillMount() {
         this.jobCardId = ShortID.generate();
@@ -35,3 +36,5 @@ export default class NewJobSlider extends JobsSliderPrototype {
     }
 
 };
+
+module.exports = NewJobSlider

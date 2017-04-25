@@ -8,7 +8,7 @@ const propTypes = {
 };
 const defaultProps = {};
 
-export default class JobsContainer extends Component {
+class JobsContainer extends Component {
 
     constructor(props) {
         super(props);
@@ -44,3 +44,5 @@ export default class JobsContainer extends Component {
 
 JobsContainer.propTypes = propTypes;
 JobsContainer.defaultProps = defaultProps;
+
+module.exports = JobsContainer

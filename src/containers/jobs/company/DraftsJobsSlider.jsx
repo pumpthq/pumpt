@@ -42,4 +42,4 @@ class DraftsJobsSlider extends JobsSliderPrototype {
 DraftsJobsSlider.propTypes = propTypes;
 DraftsJobsSlider.defaultProps = defaultProps;
 
-export default DraftsJobsSlider;
+module.exports = DraftsJobsSlider;

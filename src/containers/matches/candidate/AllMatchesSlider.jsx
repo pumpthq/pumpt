@@ -13,7 +13,7 @@ import CardClose from './../../../components/matches/cardClose';
         }
     }
 )
-export default class AllMatchesSlider extends MatchesSliderPrototype {
+class AllMatchesSlider extends MatchesSliderPrototype {
 
     render() {
         const { matches } = this.props;
@@ -28,3 +28,5 @@ export default class AllMatchesSlider extends MatchesSliderPrototype {
     }
 
 };
+
+module.exports = AllMatchesSlider

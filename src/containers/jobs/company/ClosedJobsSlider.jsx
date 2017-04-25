@@ -29,4 +29,4 @@ class ClosedJobsSlider extends JobsSliderPrototype {
 
 }
 
-export default ClosedJobsSlider;
+module.exports = ClosedJobsSlider;

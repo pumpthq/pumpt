@@ -9,7 +9,7 @@ const propTypes = {
 };
 const defaultProps = {};
 
-export default class MatchesContainer extends Component {
+class MatchesContainer extends Component {
 
     constructor(props) {
         super(props);
@@ -49,3 +49,5 @@ export default class MatchesContainer extends Component {
 
 MatchesContainer.propTypes = propTypes;
 MatchesContainer.defaultProps = defaultProps;
+
+module.exports = MatchesContainer

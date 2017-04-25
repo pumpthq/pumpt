@@ -46,4 +46,4 @@ OnboardingCandidate.propTypes = {
     state: PropTypes.object,
 };
 
-export default OnboardingCandidate;
+module.exports = OnboardingCandidate;
