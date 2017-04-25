@@ -6,7 +6,6 @@ import history from './history'
 import App from './containers/App';
 
 const rootRoute = {
-    childRoutes: [{
         path: '/',
         component: App,
         indexRoute: { onEnter: (nextState, replace) => replace('/story/login') },
@@ -17,7 +16,6 @@ const rootRoute = {
             require('./containers/jobs'),
             require('./containers/matches')
         ]
-    }]
 };
 
 const routes = (

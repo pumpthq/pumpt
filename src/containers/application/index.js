@@ -1,9 +1,7 @@
 module.exports = {
     path: 'application',
-    getChildRoutes(location, cb) {
-        cb(null, [
-            require('./candidate'),
-            require('./company')
-        ])
-    }
+    childRoutes: [
+        { path: 'company', component: require('./company/App') },
+        { path: 'candidate', component: require('./candidate/App') },
+    ]
 };
