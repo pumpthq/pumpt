@@ -77,7 +77,7 @@ WallpapersSwitcher.propTypes = {
         'final',
         false
     ]),
-    isRichWallpaperNeeded: PropTypes.boolean
+    isRichWallpaperNeeded: PropTypes.bool
 }
 
 WallpapersSwitcher.defaultProps = {
