@@ -144,7 +144,7 @@ export default class cardClose extends Component {
     renderRejects() {
         const { status, postReject } = this.props;
 
-        if (status === undefined || status.bookmarked) {
+        if (status === undefined || (status.approved === undefined && status.bookmarked)) {
             return (
                 <a onClick={postReject} className="mdl_button button">
                     REJECT
