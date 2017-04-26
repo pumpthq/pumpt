@@ -2,6 +2,7 @@ import _ from 'lodash';
 import {
     MATCHES_FETCH_SUCCEEDED,
     BOOKMARK_POST_SUCCEEDED,
+    REJECT_POST_SUCCEEDED,
 
     ALL_TAB,
     BOOKMARKED_TAB,
@@ -25,10 +26,10 @@ const defaultState = {
 
 export default (state = defaultState, action) => {
     const { type, payload } = action;
-
+    let all, bookmarked, notInterested, matchings
     switch (type) {
         case MATCHES_FETCH_SUCCEEDED :
-            const all = []
+            all = []
               , bookmarked = []
               , notInterested = []
 
@@ -51,8 +52,8 @@ export default (state = defaultState, action) => {
 
                 // ⚠️ TODO: review specs how cards are filtered into matches-tabs
                 if(card.status === undefined) all.push(card)
-                else if(card.status.bookmarked) bookmarked.push(card)
-                else if(!card.status.approved) notInterested.push(card)
+                else if(card.status.approved !== undefined && !card.status.approved) notInterested.push(card)
+                else if(card.status.bookmarked !== undefined && card.status.bookmarked) bookmarked.push(card)
                 else all.push(card)
             })
 
@@ -64,12 +65,26 @@ export default (state = defaultState, action) => {
             }
 
         case BOOKMARK_POST_SUCCEEDED: // then move newly bookmarked matching to bookmark collection in state
-            const all = _.clone(state.all)
+            all = _.clone(state.all)
 
-            const matchings = _.remove(all, matching => matching.id == payload.data._id)
-            const bookmarked = state.bookmarked.concat(matchings)
+            matchings = _.remove(all, matching => matching.id == payload.id)
+            bookmarked = state.bookmarked.concat(matchings)
 
             return { ...state, all, bookmarked }
+
+        case REJECT_POST_SUCCEEDED: // then move newly rejected matching to notInterested collection in state
+            all = _.clone(state.all)
+            bookmarked = _.clone(state.bookmarked)
+
+            matchings = _.remove(all, matching => matching.id == payload.id)
+
+            if(matchings.length === 0) { //could not find matching in 'all', so it should be in 'bookmarked'
+                matchings = _.remove(bookmarked, matching => matching.id == payload.id)
+            }
+
+            notInterested = state.notInterested.concat(matchings)
+
+            return { ...state, all, bookmarked, notInterested }
 
         case SET_DEFAULT_STATE :
             return defaultState;

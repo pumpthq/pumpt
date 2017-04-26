@@ -1,16 +1,12 @@
 import {
     MATCHES_FETCH_SUCCEEDED,
-    BOOKMARKED_FETCH_SUCCEEDED,
-
-    NOT_INTERESTED_FETCH_REQUESTED,
-    NOT_INTERESTED_FETCH_SUCCEEDED,
-    NOT_INTERESTED_FETCH_FAILED,
 
     ROUTE_TO_ALL,
     ROUTE_TO_BOOKMARKED,
     ROUTE_TO_NOT_INTERESTED,
 
     BOOKMARK_POST_SUCCEEDED,
+    REJECT_POST_SUCCEEDED,
 
     SET_DEFAULT_STATE,
 } from './../constants/candidateMatches';
@@ -33,52 +29,32 @@ export const fetchMatchesSucceeded = data => ({
     }
 })
 
-export const fetchBookmarked = () => ({
-    type : API,
-    payload: {
-        url: '/matches',
-        success: fetchBookmarkedSucceeded,
-        error: fetchFailed
-    }
-})
-
-export const fetchBookmarkedSucceeded = data => ({
-    type : BOOKMARKED_FETCH_SUCCEEDED,
-    payload : {
-        matches: data
-    }
-})
-
-export const fetchNotInterested = () => ({
-    type : NOT_INTERESTED_FETCH_REQUESTED
-})
-
-export const fetchNotInterestedSucceeded = ({ matches }) => ({
-    type : NOT_INTERESTED_FETCH_SUCCEEDED,
-    payload : {
-        matches
-    }
-})
-
-export const fetchNotInterestedFailed = ({ statusCode }) => ({
-    type : NOT_INTERESTED_FETCH_FAILED,
-    payload : {
-        statusCode
-    }
-})
-
 export const postBookmark = (matchingId) => ({
     type : API,
     payload : {
         url : `/matches/bookmark/${matchingId}`,
-        success: postBookmarkSucceeded,
+        success: postBookmarkSucceeded(matchingId),
         error: fetchFailed
     }
 })
 
-export const postBookmarkSucceeded = (data) => ({
+export const postBookmarkSucceeded = id => data => ({
     type: BOOKMARK_POST_SUCCEEDED,
-    payload: { data }
+    payload: { id }
+})
+
+export const postReject = (matchingId) => ({
+    type : API,
+    payload : {
+        url : `/matches/reject/${matchingId}`,
+        success: postRejectSucceeded(matchingId),
+        error: fetchFailed
+    }
+})
+
+export const postRejectSucceeded = id => data => ({
+    type: REJECT_POST_SUCCEEDED,
+    payload: { id }
 })
 
 export const routeToAll = () => ({
