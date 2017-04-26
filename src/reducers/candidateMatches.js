@@ -1,11 +1,6 @@
 import _ from 'lodash';
-import ShortID from 'shortid';
-import axios from 'axios';
 import {
     MATCHES_FETCH_SUCCEEDED,
-    BOOKMARKED_FETCH_SUCCEEDED,
-    NOT_INTERESTED_FETCH_SUCCEEDED,
-
     BOOKMARK_POST_SUCCEEDED,
 
     ALL_TAB,
@@ -14,24 +9,6 @@ import {
 
     SET_DEFAULT_STATE,
 } from './../constants/candidateMatches';
-
-const defaultText = [
-    'Our Account Management team is comprised of highly motivated, experienced marketing professionals dedicated to providing our clients with the highest quality of service.',
-    ' We are seeking a candidate who is career-minded, professional and responsible to manage digital and print media campaigns and partnerships with established clients.'
-];
-const demoCard = () => ({
-    id: ShortID.generate(),
-    name: "New York Times",
-    logo: "",
-    title: "Media Manager",
-    location: "New York, NY",
-    match: '97',
-    salary: "$50–100K",
-    experience: "5–10 years",
-    employment: "Full-time",
-    text :defaultText,
-    background: ""
-});
 
 const defaultState = {
     all: [],
@@ -46,38 +23,18 @@ const defaultState = {
     },
 };
 
-const getOnlyRequired = ({
-    name,
-    logo,
-    title,
-    location,
-    match,
-    salary,
-    experience,
-    employment,
-    text,
-    background
-}) => ({
-    name,
-    logo,
-    title,
-    location,
-    match,
-    salary,
-    experience,
-    employment,
-    text,
-    background
-});
-
 export default (state = defaultState, action) => {
     const { type, payload } = action;
 
     switch (type) {
         case MATCHES_FETCH_SUCCEEDED :
-            const vacancies = payload.matches.map(matching => {
+            const all = []
+              , bookmarked = []
+              , notInterested = []
+
+            payload.matches.forEach(matching => {
                 let vacancy = matching._vacancy
-                return {
+                let card = {
                     id: matching._id,
                     name: vacancy.company.name,
                     logo: vacancy.company.logo,
@@ -91,56 +48,20 @@ export default (state = defaultState, action) => {
                     background: '',
                     status: matching.vacancy.status
                 }
+
+                // ⚠️ TODO: review specs how cards are filtered into matches-tabs
+                if(card.status === undefined) all.push(card)
+                else if(card.status.bookmarked) bookmarked.push(card)
+                else if(!card.status.approved) notInterested.push(card)
+                else all.push(card)
             })
-            return {
-                all: vacancies,
-                bookmarked: [],
-                notInterested: [],
-                activeTab: ALL_TAB,
-                newJob: {
-                    step: null,
-                    progress: [],
-                    active: [],
-                    summary: {},
-                },
-            };
-            /*return {
-                ...state,
-                all: payload.matches
-                    .map((job) => ({
-                        id: job._id,
-                        ...getOnlyRequired(job),
-                    })),
-                bookmarked: [],
-                notInterested: [],
-                activeTab: ALL_TAB,
-            };*/
-        case BOOKMARKED_FETCH_SUCCEEDED :
+
             return {
                 ...state,
-                all: [],
-                bookmarked: payload.matches
-                    .map((job) => ({
-                        id: job._id,
-                        ...getOnlyRequired(job),
-                    })),
-                notInterested: [],
-                activeTab: BOOKMARKED_TAB,
-            };
-        case NOT_INTERESTED_FETCH_SUCCEEDED :
-            return {
-                ...state,
-                all: [],
-                bookmarked: [],
-                notInterested: payload.matches
-                    .map((job) => ({
-                        id: job._id,
-                        ...getOnlyRequired(job),
-                    })),
-                activeTab: NOT_INTERESTED_TAB,
-            };
-        case SET_DEFAULT_STATE :
-            return defaultState;
+                all,
+                bookmarked,
+                notInterested
+            }
 
         case BOOKMARK_POST_SUCCEEDED: // then move newly bookmarked matching to bookmark collection in state
             const all = _.clone(state.all)
@@ -150,11 +71,10 @@ export default (state = defaultState, action) => {
 
             return { ...state, all, bookmarked }
 
+        case SET_DEFAULT_STATE :
+            return defaultState;
+
         default :
             return state;
     }
-};
-
-export const getCandidateMatches = (state) => {
-    return state.candidateMatches;
-};
+}
