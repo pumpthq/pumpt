@@ -7,3 +7,6 @@ export class AllMatchesSlider extends MatchesSliderPrototype {}
 
 @connect( state => ({ matches: state.candidateMatches.bookmarked }) )
 export class BookmarkedMatchesSlider extends MatchesSliderPrototype {}
+
+@connect( state => ({ matches: state.candidateMatches.notInterested }) )
+export class NotInterestedMatchesSlider extends MatchesSliderPrototype {}

@@ -5,5 +5,6 @@ module.exports = {
     childRoutes: [
         { path: 'all', component: AllMatchesSlider },
         { path: 'bookmarked', component: BookmarkedMatchesSlider }
+        { path: 'notInterested', component: NotInterestedMatchesSlider }
     ]
 };
