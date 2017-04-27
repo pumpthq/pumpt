@@ -8,20 +8,7 @@ const expressWinston = require('express-winston');
 const { NODE_ENV, HOST, PORT, REMOTE_API_HOST, REMOTE_API_PORT } = require('./config');
 const app = express();
 
-app.use(cors());
-app.use(expressWinston.logger({
-    transports : [
-        new winston.transports.Console({
-            json : true,
-            colorize : true
-        })
-    ],
-    meta : true,
-    msg : 'HTTP {{req.method}} {{req.url}}',
-    expressFormat : true,
-    colorStatus : true,
-    ignoreRoute : function (req, res) { return false; }
-}));
+// app.use(cors());
 
 switch (NODE_ENV) {
     case 'local' :
@@ -40,7 +27,8 @@ switch (NODE_ENV) {
             },
             stats : {
                 colors : true
-            }
+            },
+            publicPath: webpackConfig.output.publicPath
         }));
         app.use(require('webpack-hot-middleware')(compiler));
 
