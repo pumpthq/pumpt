@@ -7,6 +7,7 @@ import {
 
     BOOKMARK_POST_SUCCEEDED,
     REJECT_POST_SUCCEEDED,
+    APPROVE_POST_SUCCEEDED,
 
     SET_DEFAULT_STATE,
 } from './../constants/candidateMatches';
@@ -54,6 +55,20 @@ export const postReject = (matchingId) => ({
 
 export const postRejectSucceeded = id => data => ({
     type: REJECT_POST_SUCCEEDED,
+    payload: { id }
+})
+
+export const postApprove = (matchingId) => ({
+    type : API,
+    payload : {
+        url : `/matches/approve/${matchingId}`,
+        success: postApproveSucceeded(matchingId),
+        error: fetchFailed
+    }
+})
+
+export const postApproveSucceeded = id => data => ({
+    type: APPROVE_POST_SUCCEEDED,
     payload: { id }
 })
 

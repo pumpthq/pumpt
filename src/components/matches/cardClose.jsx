@@ -1,10 +1,13 @@
 import React, {Component, PropTypes} from 'react'
 import { connect } from 'react-redux'
 
-import { postBookmark, postReject } from '../../actions/candidateMatches'
+import { postBookmark, postReject, postApprove } from '../../actions/candidateMatches'
 
 import Bookmark from '../icons/bookmark'
 import BookmarkFill from '../icons/BookmarkFill'
+
+import './card.less'
+
 
 const propTypes = {
     name: PropTypes.string,
@@ -52,6 +55,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     },
     postReject: () => {
       dispatch(postReject(ownProps.id))
+  },
+    postApprove: () => {
+      dispatch(postApprove(ownProps.id))
     }
   }
 }
@@ -133,7 +139,7 @@ export default class cardClose extends Component {
     renderBookmarks() {
         const { status, addToBookmark } = this.props;
 
-        if (status === undefined) {
+        if (status.bookmarked === undefined && status.approved === undefined) {
             return (
                 <a onClick={addToBookmark} className="button button_type_icons">
                     <Bookmark />
@@ -141,14 +147,15 @@ export default class cardClose extends Component {
             )
         }
     }
-    renderRejects() {
-        const { status, postReject } = this.props;
+    renderApproveReject() {
+        const { status, postReject, postApprove } = this.props;
 
-        if (status === undefined || (status.approved === undefined && status.bookmarked)) {
+        if (status.approved === undefined) {
             return (
-                <a onClick={postReject} className="mdl_button button">
-                    REJECT
-                </a>
+                <div>
+                    <a onClick={postApprove} className="mdl_button button">APPROVE</a>
+                    <a onClick={postReject} className="mdl_button button">REJECT</a>
+                </div>
             );
         }
     }
@@ -163,7 +170,7 @@ export default class cardClose extends Component {
                         <div className="mdl-card__actions card__actions">
                             <a className="link" onClick={onClickForLink}>View Full Description</a>
                             <div className="mdl-layout-spacer" />
-                            {this.renderRejects()}
+                            {this.renderApproveReject()}
                             {this.renderBookmarks()}
                         </div>
                     </form>
