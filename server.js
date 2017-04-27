@@ -2,13 +2,12 @@ const path = require('path');
 const proxy = require('http-proxy-middleware');
 const cors = require('cors');
 const express = require('express');
-const winston = require('winston');
-const expressWinston = require('express-winston');
-
+const morgan = require('morgan')
 const { NODE_ENV, HOST, PORT, REMOTE_API_HOST, REMOTE_API_PORT } = require('./config');
 const app = express();
 
 // app.use(cors());
+app.use(morgan('dev'))
 
 switch (NODE_ENV) {
     case 'local' :
