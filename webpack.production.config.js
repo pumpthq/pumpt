@@ -8,7 +8,6 @@ module.exports = {
 
     entry : {
         app: './src/app',
-        shared: webpackConfig.entry.shared
     },
 
     output : {
@@ -59,7 +58,6 @@ module.exports = {
     plugins : [
         new webpack.NoErrorsPlugin(),
         new ExtractTextPlugin('styles.css'),
-        new webpack.optimize.CommonsChunkPlugin('shared.js'),
         new webpack.optimize.UglifyJsPlugin({
             compress : {
                 warnings : false,
