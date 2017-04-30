@@ -32,7 +32,7 @@ const propTypes = {
 
 const defaultProps = {
     name: 'New York Times',
-    logo: '',
+    logo: '//superrepo.org/static/images/icons/original/xplugin.video.nytimes.png.pagespeed.ic.XOPQITkLio.png',
     ratingImage: '',
     ratingCount: 2,
     rakuten: '',

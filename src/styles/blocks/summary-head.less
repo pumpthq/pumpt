@@ -2,6 +2,11 @@
   flex-shrink: 0;
   position: relative;
 
+  // TODO: refactor to overlay with tint
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding: 10px 10px 20px;
+
   &__title {
     display: block;
     padding: 32px 35px 34px;
@@ -364,7 +369,7 @@
   }
 
   .card_state_open &__title {
-    padding-bottom: 38px;
+    // padding-bottom: 38px;
   }
 
   .card_state_open .card__actions-summary &__title {

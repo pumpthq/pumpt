@@ -14,6 +14,8 @@ import DeclineIcon from '../icons/Decline'
 
 import CompanyLinkCard from './cardGlassdor'
 
+import { tintedBackground } from './helper'
+
 const propTypes = {
     name: PropTypes.string,
     logo: PropTypes.string,
@@ -49,7 +51,7 @@ const propTypes = {
 
 const defaultProps = {
     name: 'Name',
-    logo: '',
+    logo: '//superrepo.org/static/images/icons/original/xplugin.video.nytimes.png.pagespeed.ic.XOPQITkLio.png',
     title: 'Title',
     location: 'location',
     match: 20,
@@ -57,7 +59,8 @@ const defaultProps = {
     experience: 'Experience',
     employment: 'Employment',
     degree: '',
-    background: '',
+    background: '//wallpaper.sc/en/ipad/wp-content/uploads/2014/10/ipad-2048x2048-thumbnail_01022-256x256.jpg',
+    backgroundTint: [50,50,50,.75],
     text: '',
     children: '',
     additionElements: '',
@@ -91,19 +94,19 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 export default class CardOpen extends Component {
 
     renderMatchInformation() {
-        const { name, logo, title, location, match, salary, experience, employment, background, degree } = this.props
+        const { name, logo, title, location, match, salary, experience, employment, background, backgroundTint, degree } = this.props
         return (
-            <div className="summary-head">
+            <div className="summary-head" style={ tintedBackground(background,...backgroundTint) }>
                 <div className="summary-head__title mdl-card__title">
                     <div className="summary-head__title-item">
                         <div className="summary-head__title-column">
                             <img className="image image_round image_size_xxl image_type_company-logo" src={logo}/>
                             <div className="summary-head__title-block">
-                                <h2 className="mdl-card__title-text heading heading_color heading_type_two">
+                                <h2 className="mdl-card__title-text heading heading_color_invert heading_type_two">
                                     {name}
                                 </h2>
                                 <span
-                                    className="mdl-card__subtitle-text summary-head__subtitle-text text ">
+                                    className="mdl-card__subtitle-text summary-head__subtitle-text text text_color_invert">
                                     {title}<br/>
                                     {location}
                                 </span>
@@ -111,33 +114,33 @@ export default class CardOpen extends Component {
                         </div>
                         <div className="summary-head__title-column text-right">
                             <div
-                                className="mdl-card__subtitle-text summary-head__subtitle-text text ">
+                                className="mdl-card__subtitle-text summary-head__subtitle-text text text_color_invert">
                                 <span className="summary-head__subtitle-head">{match}%</span>
                                 <span>match</span></div>
                         </div>
                     </div>
                     <div className="summary-head__title-item">
                         <div className="summary-head__title-column">
-                            <span className="text  summary-head__label">Salary </span>
-                            <span className="text  text_size_s summary-head__summary">{salary}</span>
+                            <span className="text text_color_invert summary-head__label">Salary </span>
+                            <span className="text text_color_invert text_size_s summary-head__summary">{salary}</span>
                         </div>
                         <div className="summary-head__title-column">
-                            <span className="text  summary-head__label">Industry Experience </span>
-                            <span className="text  text_size_s summary-head__summary">{experience}</span>
+                            <span className="text text_color_invert summary-head__label">Industry Experience </span>
+                            <span className="text text_color_invert text_size_s summary-head__summary">{experience}</span>
                         </div>
                         <div className="summary-head__title-column">
-                            <span className="text  summary-head__label">Employment </span>
-                            <span className="text  text_size_s summary-head__summary">{employment}</span>
+                            <span className="text text_color_invert summary-head__label">Employment </span>
+                            <span className="text text_color_invert text_size_s summary-head__summary">{employment}</span>
                         </div>
                         <div className="summary-head__title-column">
-                            <span className="text  summary-head__label">Degree </span>
-                            <span className="text  text_size_s summary-head__summary">{degree}</span>
+                            <span className="text text_color_invert summary-head__label">Degree </span>
+                            <span className="text text_color_invert text_size_s summary-head__summary">{degree}</span>
                         </div>
                     </div>
                 </div>
-                <div className="mdl-card__media summary-head__media">
+                {/* <div className="mdl-card__media summary-head__media">
                     <img className="summary-head__media-inner" src={background}/>
-                </div>
+                </div> */}
             </div>
         )
     }

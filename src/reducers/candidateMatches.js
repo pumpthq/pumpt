@@ -45,7 +45,7 @@ export default (state = defaultState, action) => {
                 let card = {
                     id: matching._id,
                     name: vacancy.company.name,
-                    logo: vacancy.company.logo,
+                    // logo: vacancy.company.logo,
                     title: vacancy.title,
                     location: vacancy.company.locationHeadquarters.state,
                     match: matching.score,
@@ -55,7 +55,8 @@ export default (state = defaultState, action) => {
                     text: vacancy.description,
                     responsibilities: vacancy.responsibilities || [],
                     requirements: vacancy.requirements || [],
-                    background: '',
+                    // background: '',
+                    quoteOrMotto: vacancy.company.quoteOrMotto,
                     status: matching.vacancy.status || {}
                 }
 

@@ -6,6 +6,8 @@ import { postBookmark, postReject, postApprove, showFullDescription } from '../.
 import Bookmark from '../icons/bookmark'
 import BookmarkFill from '../icons/BookmarkFill'
 
+import { tintedBackground } from './helper'
+
 import './card.less'
 
 
@@ -32,15 +34,16 @@ const propTypes = {
 
 const defaultProps = {
     name: 'Name',
-    logo: '',
+    logo: '//superrepo.org/static/images/icons/original/xplugin.video.nytimes.png.pagespeed.ic.XOPQITkLio.png',
     title: 'Title',
     location: 'location',
     match: 20,
     salary: 'Salary',
     experience: 'Experience',
     employment: 'Employment',
-    background: '',
-    text: '',
+    background: '//wallpaper.sc/en/ipad/wp-content/uploads/2014/10/ipad-2048x2048-thumbnail_01022-256x256.jpg',
+    backgroundTint: [50,50,50,.75],
+    text: 'This will contain the job description',
     onClick: e=> {},
     onClickForLink: e=> {},
     bookmark: false,
@@ -72,51 +75,49 @@ export default class cardClose extends Component {
     componentWillMount() {}
 
     renderMatchInformation() {
-        const { name, logo, title, location, match, salary, experience, employment, background } = this.props;
+        const { name, logo, title, location, match, salary, experience, employment, background, backgroundTint } = this.props;
         return (
-            <div className="summary-head">
+            <div className="summary-head" style={ tintedBackground(background,...backgroundTint) } >
                 <div className="summary-head__title mdl-card__title">
                     <div className="summary-head__title-item">
                         <div className="summary-head__title-column">
                             <img className="image image_round image_size_xxl image_type_company-logo" src={logo}/>
                             <div className="summary-head__title-block">
-                                <h2 style={{color: '#000'}} className="mdl-card__title-text heading heading_color_invert heading_type_two">
+                                <h2 className="mdl-card__title-text heading heading_color_invert heading_type_two">
                                     {name}
                                 </h2>
-                                <span
-                                    style={{color: '#000'}}
-                                    className="mdl-card__subtitle-text summary-head__subtitle-text text text_color_invert">
+                                <span className="mdl-card__subtitle-text summary-head__subtitle-text text text_color_invert">
                                     {title}<br/>
                                     {location}
                                 </span>
                             </div>
                         </div>
-                        <div className="summary-head__title-column text-right">
+                        {/* <div className="summary-head__title-column text-right">
                             <div
-                                style={{color: '#000'}}
+
                                 className="mdl-card__subtitle-text summary-head__subtitle-text text text_color_invert">
-                                <span style={{color: '#000'}} className="summary-head__subtitle-head">{match}%</span>
-                                <span style={{color: '#000'}}>match</span></div>
-                        </div>
+                                <span  className="summary-head__subtitle-head">{match}%</span>
+                                <span >match</span></div>
+                        </div> */}
                     </div>
                     <div className="summary-head__title-item">
+                        {/* <div className="summary-head__title-column">
+                            <span  className="text text_color_invert summary-head__label">Salary </span>
+                            <span  className="text text_color_invert text_size_s summary-head__summary">{salary}</span>
+                        </div> */}
                         <div className="summary-head__title-column">
-                            <span style={{color: '#000'}} className="text text_color_invert summary-head__label">Salary </span>
-                            <span style={{color: '#000'}} className="text text_color_invert text_size_s summary-head__summary">{salary}</span>
+                            <span  className="text text_color_invert summary-head__label">Industry Experience </span>
+                            <span  className="text text_color_invert text_size_s summary-head__summary">{experience}</span>
                         </div>
                         <div className="summary-head__title-column">
-                            <span style={{color: '#000'}} className="text text_color_invert summary-head__label">Industry Experience </span>
-                            <span style={{color: '#000'}} className="text text_color_invert text_size_s summary-head__summary">{experience}</span>
-                        </div>
-                        <div className="summary-head__title-column">
-                            <span style={{color: '#000'}} className="text text_color_invert summary-head__label">Employment </span>
-                            <span style={{color: '#000'}} className="text text_color_invert text_size_s summary-head__summary">{employment}</span>
+                            <span  className="text text_color_invert summary-head__label">Employment </span>
+                            <span  className="text text_color_invert text_size_s summary-head__summary">{employment}</span>
                         </div>
                     </div>
                 </div>
-                <div className="mdl-card__media summary-head__media">
+                {/* <div className="mdl-card__media summary-head__media">
                     <img className="summary-head__media-inner" src={background}/>
-                </div>
+                </div> */}
             </div>
         )
     }
@@ -169,7 +170,7 @@ export default class cardClose extends Component {
             <div className="slider__item">
                 <div className="mdl-card card">
                     {this.renderMatchInformation()}
-                    {this.renderShortContent()}
+                    {/* {this.renderShortContent()} */}
                     <form className="card__actions-wrapper">
                         <div className="mdl-card__actions card__actions">
                             <a className="link" onClick={showFullDescription}>View Full Description</a>
