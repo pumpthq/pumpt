@@ -9,6 +9,9 @@ import {
     REJECT_POST_SUCCEEDED,
     APPROVE_POST_SUCCEEDED,
 
+    SHOW_FULL_DESCRIPTION,
+    HIDE_FULL_DESCRIPTION,
+
     SET_DEFAULT_STATE,
 } from './../constants/candidateMatches';
 import { API } from '../constants/actionTypes'
@@ -70,6 +73,20 @@ export const postApprove = (matchingId) => ({
 export const postApproveSucceeded = id => data => ({
     type: APPROVE_POST_SUCCEEDED,
     payload: { id }
+})
+
+export const showFullDescription = (matchingId) => ({
+    type : SHOW_FULL_DESCRIPTION,
+    payload : {
+        id : matchingId,
+    }
+})
+
+export const hideFullDescription = (matchingId) => ({
+    type : HIDE_FULL_DESCRIPTION,
+    payload : {
+        id : matchingId,
+    }
 })
 
 export const routeToAll = () => ({

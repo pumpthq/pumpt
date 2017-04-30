@@ -9,6 +9,9 @@ import {
     BOOKMARKED_TAB,
     NOT_INTERESTED_TAB,
 
+    SHOW_FULL_DESCRIPTION,
+    HIDE_FULL_DESCRIPTION,
+
     SET_DEFAULT_STATE,
 } from './../constants/candidateMatches';
 
@@ -31,7 +34,7 @@ export default (state = defaultState, action) => {
     let all, bookmarked, notInterested, matchings, approved
     switch (type) {
         case MATCHES_FETCH_SUCCEEDED :
-            all = []
+              all = []
               , bookmarked = []
               , notInterested = []
               , approved = []
@@ -50,9 +53,12 @@ export default (state = defaultState, action) => {
                     experience: vacancy.experience,
                     employment: vacancy.employment,
                     text: vacancy.description,
+                    responsibilities: vacancy.responsibilities || [],
+                    requirements: vacancy.requirements || [],
                     background: '',
                     status: matching.vacancy.status || {}
                 }
+
 
                 // ⚠️ TODO: review specs how cards are filtered into matches-tabs
                 if(card.status.approved !== undefined) {
@@ -112,6 +118,36 @@ export default (state = defaultState, action) => {
 
             return { ...state, all, bookmarked, approved }
 
+
+        case SHOW_FULL_DESCRIPTION:
+            all = _.clone(state.all)
+            bookmarked = _.clone(state.bookmarked)
+            notInterested = _.clone(state.notInterested)
+            all.forEach( (job) => {
+                job.viewDetails = job.id === payload.id
+            })
+            bookmarked.forEach( (job) => {
+                job.viewDetails = job.id === payload.id
+            })
+            notInterested.forEach( (job) => {
+                job.viewDetails = job.id === payload.id
+            })
+
+
+            return {...state, all, bookmarked, notInterested };
+
+        case HIDE_FULL_DESCRIPTION:
+            const hide = job => job.viewDetails = false;
+                all = _.clone(state.all)
+                bookmarked = _.clone(state.bookmarked)
+                notInterested = _.clone(state.notInterested)
+
+                all.forEach(hide)
+                bookmarked.forEach(hide)
+                notInterested.forEach(hide)
+
+
+                return {...state, all, bookmarked, notInterested };
 
 
         case SET_DEFAULT_STATE :

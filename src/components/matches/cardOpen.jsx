@@ -1,5 +1,9 @@
 import React, {Component, PropTypes} from 'react'
 
+import { connect } from 'react-redux'
+
+import { postBookmark, postReject, postApprove, hideFullDescription } from '../../actions/candidateMatches'
+
 import ButtonApply from './buttonApply'
 import ButtonLink from './buttonLink'
 
@@ -7,6 +11,8 @@ import Bookmark from '../icons/bookmark'
 import BookmarkFill from '../icons/BookmarkFill'
 import OkIcon from '../icons/ok'
 import DeclineIcon from '../icons/Decline'
+
+import CompanyLinkCard from './cardGlassdor'
 
 const propTypes = {
     name: PropTypes.string,
@@ -63,6 +69,25 @@ const defaultProps = {
     removeOfBookmark: PropTypes.func
 };
 
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    addToBookmark: () => {
+      dispatch(postBookmark(ownProps.id))
+    },
+    postReject: () => {
+      dispatch(postReject(ownProps.id))
+  },
+    postApprove: () => {
+      dispatch(postApprove(ownProps.id))
+  },
+    hideFullDescription: () => {
+      dispatch(hideFullDescription(ownProps.id))
+    }
+
+  }
+}
+
+@connect(undefined, mapDispatchToProps)
 export default class CardOpen extends Component {
 
     renderMatchInformation() {
@@ -74,11 +99,11 @@ export default class CardOpen extends Component {
                         <div className="summary-head__title-column">
                             <img className="image image_round image_size_xxl image_type_company-logo" src={logo}/>
                             <div className="summary-head__title-block">
-                                <h2 className="mdl-card__title-text heading heading_color_invert heading_type_two">
+                                <h2 className="mdl-card__title-text heading heading_color heading_type_two">
                                     {name}
                                 </h2>
                                 <span
-                                    className="mdl-card__subtitle-text summary-head__subtitle-text text text_color_invert">
+                                    className="mdl-card__subtitle-text summary-head__subtitle-text text ">
                                     {title}<br/>
                                     {location}
                                 </span>
@@ -86,27 +111,27 @@ export default class CardOpen extends Component {
                         </div>
                         <div className="summary-head__title-column text-right">
                             <div
-                                className="mdl-card__subtitle-text summary-head__subtitle-text text text_color_invert">
+                                className="mdl-card__subtitle-text summary-head__subtitle-text text ">
                                 <span className="summary-head__subtitle-head">{match}%</span>
                                 <span>match</span></div>
                         </div>
                     </div>
                     <div className="summary-head__title-item">
                         <div className="summary-head__title-column">
-                            <span className="text text_color_invert summary-head__label">Salary </span>
-                            <span className="text text_color_invert text_size_s summary-head__summary">{salary}</span>
+                            <span className="text  summary-head__label">Salary </span>
+                            <span className="text  text_size_s summary-head__summary">{salary}</span>
                         </div>
                         <div className="summary-head__title-column">
-                            <span className="text text_color_invert summary-head__label">Industry Experience </span>
-                            <span className="text text_color_invert text_size_s summary-head__summary">{experience}</span>
+                            <span className="text  summary-head__label">Industry Experience </span>
+                            <span className="text  text_size_s summary-head__summary">{experience}</span>
                         </div>
                         <div className="summary-head__title-column">
-                            <span className="text text_color_invert summary-head__label">Employment </span>
-                            <span className="text text_color_invert text_size_s summary-head__summary">{employment}</span>
+                            <span className="text  summary-head__label">Employment </span>
+                            <span className="text  text_size_s summary-head__summary">{employment}</span>
                         </div>
                         <div className="summary-head__title-column">
-                            <span className="text text_color_invert summary-head__label">Degree </span>
-                            <span className="text text_color_invert text_size_s summary-head__summary">{degree}</span>
+                            <span className="text  summary-head__label">Degree </span>
+                            <span className="text  text_size_s summary-head__summary">{degree}</span>
                         </div>
                     </div>
                 </div>
@@ -116,6 +141,53 @@ export default class CardOpen extends Component {
             </div>
         )
     }
+
+    renderLongContent() {
+        const { text } = this.props
+        return (
+            <div className="card__middle-block">
+                <span className="text  summary-head__label">Description</span>
+
+                {text}
+            </div>
+        );
+    }
+
+    renderResponsibilities() {
+        const { responsibilities } = this.props
+        return (
+            <div className="card__middle-block">
+                <span className="text  summary-head__label">Responsibilities</span>
+
+                { responsibilities && responsibilities.map( (item, key) => {
+                    return (
+                        <p key={key} className="mdl-card__supporting-text card__supporting-text">{item}</p>
+                    );
+
+                    })
+                }
+            </div>
+        );
+    }
+
+    renderRequirements() {
+        const { requirements } = this.props
+        return (
+            <div className="card__middle-block">
+                <span className="text  summary-head__label">Requirements</span>
+
+                { requirements && requirements.map( (item, key) => {
+                    return (
+                        <p key={key} className="mdl-card__supporting-text card__supporting-text">{item}</p>
+                    );
+
+                    })
+                }
+            </div>
+        );
+    }
+
+
 
     renderBookmarks() {
         const { bookmark, addToBookmark, removeOfBookmark } = this.props
@@ -136,14 +208,19 @@ export default class CardOpen extends Component {
     }
 
     render() {
-        const { children, additionElements, onClickClose } = this.props
+        const { children, additionElements, onClickClose, hideFullDescription } = this.props
         return (
+
             <div className="slider__item slider__item_active">
-                <a class="button button_type_close" onClick={onClickClose}>×</a>
+                <a class="button button_type_close" onClick={hideFullDescription}>×</a>
                 <div className="scroll-container">
                     <div className="scroll-container__inner">
                         <div className="mdl-card card card_state_open card_state_scroll">
                             {this.renderMatchInformation()}
+                            {this.renderLongContent()}
+                            {this.renderResponsibilities()}
+
+                            {this.renderRequirements()}
                             <div className="card__middle-block">
                                 <div className="row">
                                     <div className="col-lg-9">
@@ -166,6 +243,10 @@ export default class CardOpen extends Component {
                             </form>
                         </div>
                         {additionElements}
+
+
+                        <CompanyLinkCard />
+
                     </div>
                 </div>
 

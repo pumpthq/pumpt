@@ -31,18 +31,18 @@ const propTypes = {
 };
 
 const defaultProps = {
-    name: '',
+    name: 'New York Times',
     logo: '',
     ratingImage: '',
-    ratingCount: '',
+    ratingCount: 2,
     rakuten: '',
     facebook: '',
     linkedin: '',
     twitter: '',
-    headquarters: '',
-    companyType: '',
-    ofEmployees: '',
-    founded: '',
+    headquarters: 'New York, NY',
+    companyType: 'Publishing',
+    ofEmployees: '500-1000',
+    founded: '1982',
     onClickGoToCompanyPage: e => {},
     onClickGoToBlacklistCompany: e => {}
 };
@@ -141,11 +141,6 @@ export default class cardGlassdor extends Component {
                             <div className="summary-head__title-column">
                                 <a className="link" onClick={onClickGoToCompanyPage}>
                                     Go to Company Page
-                                </a>
-                            </div>
-                            <div className="summary-head__title-column text-right">
-                                <a className="link link_type_additional" onClick={onClickGoToBlacklistCompany}>
-                                    Blacklist Company
                                 </a>
                             </div>
                         </div>

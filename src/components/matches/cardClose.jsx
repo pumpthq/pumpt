@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 import { connect } from 'react-redux'
 
-import { postBookmark, postReject, postApprove } from '../../actions/candidateMatches'
+import { postBookmark, postReject, postApprove, showFullDescription } from '../../actions/candidateMatches'
 
 import Bookmark from '../icons/bookmark'
 import BookmarkFill from '../icons/BookmarkFill'
@@ -58,7 +58,11 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   },
     postApprove: () => {
       dispatch(postApprove(ownProps.id))
+  },
+    showFullDescription: () => {
+      dispatch(showFullDescription(ownProps.id))
     }
+
   }
 }
 
@@ -160,7 +164,7 @@ export default class cardClose extends Component {
         }
     }
     render() {
-        const { onClickForLink } = this.props;
+        const { showFullDescription } = this.props;
         return (
             <div className="slider__item">
                 <div className="mdl-card card">
@@ -168,7 +172,7 @@ export default class cardClose extends Component {
                     {this.renderShortContent()}
                     <form className="card__actions-wrapper">
                         <div className="mdl-card__actions card__actions">
-                            <a className="link" onClick={onClickForLink}>View Full Description</a>
+                            <a className="link" onClick={showFullDescription}>View Full Description</a>
                             <div className="mdl-layout-spacer" />
                             {this.renderApproveReject()}
                             {this.renderBookmarks()}
