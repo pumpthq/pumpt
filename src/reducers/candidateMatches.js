@@ -52,6 +52,7 @@ export default (state = defaultState, action) => {
                     salary: vacancy.salary,
                     experience: vacancy.experience,
                     employment: vacancy.employment,
+                    degree: vacancy.degree,
                     text: vacancy.description,
                     responsibilities: vacancy.responsibilities || [],
                     requirements: vacancy.requirements || [],

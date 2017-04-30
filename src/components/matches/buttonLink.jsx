@@ -20,9 +20,9 @@ const defaultProps = {
 
 export default class ButtonLink extends Component {
     render() {
-        const { icon, children } = this.props
+        const { icon, children, onClick } = this.props
         return (
-            <a className="link">
+            <a onClick={onClick} className="link">
                 {icon}
                 <span className="icon__text">{children}</span>
             </a>

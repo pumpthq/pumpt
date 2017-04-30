@@ -4,6 +4,9 @@ import { connect } from 'react-redux'
 import { postBookmark, postReject, postApprove, showFullDescription } from '../../actions/candidateMatches'
 
 import Bookmark from '../icons/bookmark'
+import Decline from '../icons/Decline'
+import Approve from '../icons/heart'
+
 import BookmarkFill from '../icons/BookmarkFill'
 
 import { tintedBackground } from './helper'
@@ -146,8 +149,8 @@ export default class cardClose extends Component {
 
         if (status.bookmarked === undefined && status.approved === undefined) {
             return (
-                <a onClick={addToBookmark} className="button button_type_icons">
-                    <Bookmark />
+                <a onClick={addToBookmark} className="button button_type_icons col-xs-12">
+                    <Bookmark /> BOOKMARK
                 </a>
             )
         }
@@ -158,8 +161,10 @@ export default class cardClose extends Component {
         if (status.approved === undefined) {
             return (
                 <div>
-                    <a onClick={postApprove} className="mdl_button button">APPROVE</a>
-                    <a onClick={postReject} className="mdl_button button">REJECT</a>
+                    <a onClick={postApprove} className="mdl_button button col-xs-12">
+                        <Approve /> APPROVE</a>
+                    <a onClick={postReject} className="mdl_button button col-xs-12">
+                        <Decline /> REJECT</a>
                 </div>
             );
         }
@@ -173,10 +178,15 @@ export default class cardClose extends Component {
                     {/* {this.renderShortContent()} */}
                     <form className="card__actions-wrapper">
                         <div className="mdl-card__actions card__actions">
-                            <a className="link" onClick={showFullDescription}>View Full Description</a>
-                            <div className="mdl-layout-spacer" />
-                            {this.renderApproveReject()}
-                            {this.renderBookmarks()}
+                            {/* <div className="mdl-layout-spacer" /> */}
+                            <div className="col-xs-6">
+                                {this.renderApproveReject()}
+                                {this.renderBookmarks()}
+                            </div>
+                            <div className="col-xs-6">
+                                <a className="link" onClick={showFullDescription}>View Full Description</a>
+                            </div>
+
                         </div>
                     </form>
                 </div>

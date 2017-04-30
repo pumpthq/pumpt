@@ -193,15 +193,10 @@ export default class CardOpen extends Component {
 
 
     renderBookmarks() {
-        const { bookmark, addToBookmark, removeOfBookmark } = this.props
+        const { status, addToBookmark } = this.props
 
-        if(bookmark) {
-            return (
-                <a onClick={removeOfBookmark} className="button button_type_icons">
-                    <BookmarkFill/>
-                </a>
-            )
-        } else {
+
+        if (status.bookmarked === undefined && status.approved === undefined) {
             return (
                 <a onClick={addToBookmark} className="button button_type_icons">
                     <Bookmark/>
@@ -211,7 +206,7 @@ export default class CardOpen extends Component {
     }
 
     render() {
-        const { children, additionElements, onClickClose, hideFullDescription } = this.props
+        const { children, additionElements, postReject, postApprove, hideFullDescription } = this.props
         return (
 
             <div className="slider__item slider__item_active">
@@ -234,10 +229,10 @@ export default class CardOpen extends Component {
                             <form className="card__actions-wrapper">
 
                                 <div className="mdl-card__actions card__actions">
-                                    <ButtonApply icon={<OkIcon className="icon_inline invisible-tablet"/>}>
+                                    <ButtonApply onClick={postApprove} icon={<OkIcon className="icon_inline invisible-tablet"/>}>
                                         Apply
                                     </ButtonApply>
-                                    <ButtonLink icon={<DeclineIcon className="icon_inline invisible-tablet"/>}>
+                                    <ButtonLink onClick={postReject} icon={<DeclineIcon className="icon_inline invisible-tablet"/>}>
                                         Not interested
                                     </ButtonLink>
                                     <div className="mdl-layout-spacer"/>
