@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react'
-import { connect } from 'react-redux'
-
+import { connect} from 'react-redux'
+import { Link } from 'react-router'
 import { postBookmark, postReject, postApprove, showFullDescription } from '../../actions/candidateMatches'
 
 import Bookmark from '../icons/bookmark'
@@ -170,7 +170,7 @@ export default class cardClose extends Component {
         }
     }
     render() {
-        const { showFullDescription } = this.props;
+        const { showFullDescription, id } = this.props;
         return (
             <div className="slider__item">
                 <div className="mdl-card card">
@@ -184,7 +184,8 @@ export default class cardClose extends Component {
                                 {this.renderBookmarks()}
                             </div>
                             <div className="col-xs-6">
-                                <a className="link" onClick={showFullDescription}>View Full Description</a>
+                                {/* <a className="link" onClick={showFullDescription}>View Full Description</a> */}
+                                <Link to={`candidate/matches/vacancy/${id}`} className="link" action={showFullDescription}>View Full Description</Link>
                             </div>
 
                         </div>

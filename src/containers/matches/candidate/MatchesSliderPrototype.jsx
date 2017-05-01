@@ -11,7 +11,7 @@ const propTypes = {
         logo: PropTypes.string,
         title: PropTypes.string,
         location: PropTypes.string,
-        match: PropTypes.string,
+        match: PropTypes.numberss,
         salary: PropTypes.string,
         experience: PropTypes.string,
         employment: PropTypes.string,

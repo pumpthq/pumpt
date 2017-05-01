@@ -90,6 +90,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   }
 }
 
+import { browserHistory } from 'react-router'
+
 @connect(undefined, mapDispatchToProps)
 export default class CardOpen extends Component {
 
@@ -210,7 +212,7 @@ export default class CardOpen extends Component {
         return (
 
             <div className="slider__item slider__item_active">
-                <a class="button button_type_close" onClick={hideFullDescription}>×</a>
+                <a class="button button_type_close" onClick={browserHistory.goBack}>×</a>
                 <div className="scroll-container">
                     <div className="scroll-container__inner">
                         <div className="mdl-card card card_state_open card_state_scroll">
@@ -243,7 +245,7 @@ export default class CardOpen extends Component {
                         {additionElements}
 
 
-                        <CompanyLinkCard />
+                        <CompanyLinkCard {...this.props}/>
 
                     </div>
                 </div>
