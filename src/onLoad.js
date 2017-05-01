@@ -40,8 +40,8 @@ export const getAppData = () =>
              data.EMPLOYEMENTS_DROPDOWN_DATA.forEach((element) => EMPLOYEMENTS_DROPDOWN_DATA.push(element));
              data.DEGREES_DROPDOWN_DATA.forEach((element) => DEGREES_DROPDOWN_DATA.push(element));
 
-             const session = yield axios.get(`${API_URL}/users/current`);
-             SESSION.push(session.data);
+            //  const session = yield axios.get(`${API_URL}/users/current`);
+            //  SESSION.push(session.data);
 
             console.log('ON START: ', SESSION);
 

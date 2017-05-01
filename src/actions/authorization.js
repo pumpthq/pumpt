@@ -110,6 +110,12 @@ export const saveAccessToken = ({
     },
 });
 
+export const loginSucceeded = (data) => ({
+    type: AUTHENTICATION_SUCCEEDED,
+    payload: data
+});
+
+
 export const signInFailed = ({ }) => ({
     type: AUTHENTICATION_FAILED,
     payload: {},

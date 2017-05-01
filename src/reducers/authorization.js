@@ -13,11 +13,11 @@ import {
 } from './../constants/authorization';
 
 const defaultState = {
-    email: null,
-    password: null,
-    userId: null,
-    entityId: null,
-    accessToken: null,
+    // email: null,
+    // password: null,
+    // userId: null,
+    // entityId: null,
+    // accessToken: null,
 };
 
 export default (state = defaultState, action) => {
@@ -28,8 +28,8 @@ export default (state = defaultState, action) => {
         case AUTHENTICATION_COMPANY_REQUESTED :
         case AUTHENTICATION_REQUESTED :
             return {
-                ...defaultState,
-                ...payload,
+                ...state
+                // ...defaultState,
             };
 
         case AUTHENTICATION_CANDIDATE_SUCCEEDED :
@@ -49,7 +49,6 @@ export default (state = defaultState, action) => {
         case AUTHENTICATION_SUCCEEDED :
             return {
                 ...state,
-                password: null,
                 ...payload,
             };
 

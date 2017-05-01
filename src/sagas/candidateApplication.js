@@ -70,7 +70,7 @@ const updateCandidate = ({ id, accessToken, body }) => {
 }
 
 const fetchProfile = ({ id }) => {
-    return axios.get(`${API_URL}${API_CANDIDATE_ROOT}/${id}`)
+    return axios.get(`${API_URL}${API_CANDIDATE_ROOT}/current`)
         .then(response => response.data)
 }
 

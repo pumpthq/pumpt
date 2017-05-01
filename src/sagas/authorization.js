@@ -35,7 +35,9 @@ import {
     signInCompanyFailed,
     loginAtBegin,
     saveAccessToken,
+    saveProfile,
     signInFailed,
+    signIn,
     logOutFailed,
     logOutSucceeded,
 } from './../actions/authorization';
@@ -105,24 +107,7 @@ export function uiLogin({ email, password }) {
     const credentials = { email, password };
     const { dispatch } = this;
 
-    return apiLogin(credentials)
-        .then((response) => {
-            const profile = composeProfile({ response });
-
-            setTimeout(() => {
-                dispatch(saveAccessToken(profile));
-                dispatch(loginAtBegin(credentials));
-            });
-            return profile;
-        })
-        .catch(() => {
-            setTimeout(() => {
-                dispatch(signInFailed());
-            });
-            return Promise.reject({
-                password: 'That email and password combination is not valid.',
-            });
-        });
+    return dispatch(signIn(credentials))
 }
 
 const composeProfile = ({ response }) => {
@@ -211,34 +196,29 @@ export default function () {
 
             try {
                 const response = yield call(apiLogin, payload);
-                const profile = composeProfile({ response });
+                // const profile = composeProfile({ response });
+                //
+                const {isCandidate, isNotApproved, isRecruiter} = response
+                yield put(loginSucceeded(response));
 
-                yield put(saveAccessToken(profile));
+                if (isCandidate && isNotApproved) {
+                    yield put(getLatestCandidateProfile());
+                    yield put(push(ROUTE_APPLICATION_CANDIDATE));
+                } else if (isRecruiter && isNotApproved) {
+                    yield put(getLatestCompanyProfile());
+                    yield put(push(ROUTE_APPLICATION_COMPANY));
+                } else if (isCandidate && !isNotApproved) {
+                    yield put(getLatestCandidateProfile());
+                    yield put(push(ROUTE_CANDIDATE_MATCHES_ALL));
+                    yield put(navigateToAllMatches());
+                } else if (isRecruiter && !isNotApproved) {
+                    yield put(getLatestCompanyProfile());
+                    yield put(push(ROUTE_COMPANY_JOBS_OPEN));
+                    yield put(navigateToOpenJobs());
+                }
+
             } catch (ex) {
                 yield put(signInFailed({}));
-            }
-        }),
-        takeLatest(LOGIN_AT_BEGIN, function* () {
-            const {
-                isCandidate,
-                isRecruiter,
-                isNotApproved,
-            } = yield select(getAccessToken);
-
-            if (isCandidate && isNotApproved) {
-                yield put(getLatestCandidateProfile());
-                yield put(push(ROUTE_APPLICATION_CANDIDATE));
-            } else if (isRecruiter && isNotApproved) {
-                yield put(getLatestCompanyProfile());
-                yield put(push(ROUTE_APPLICATION_COMPANY));
-            } else if (isCandidate && !isNotApproved) {
-                yield put(getLatestCandidateProfile());
-                yield put(push(ROUTE_CANDIDATE_MATCHES_ALL));
-                yield put(navigateToAllMatches());
-            } else if (isRecruiter && !isNotApproved) {
-                yield put(getLatestCompanyProfile());
-                yield put(push(ROUTE_COMPANY_JOBS_OPEN));
-                yield put(navigateToOpenJobs());
             }
         }),
         takeLatest(USER_LOGOUT_REQUESTED, function* () {
