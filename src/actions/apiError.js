@@ -1,6 +1,7 @@
 export const RESET_API_ERROR = 'RESET_API_ERROR';
 export const ADD_API_ERROR = 'ADD_API_ERROR';
 export const API_ERROR = 'API_ERROR'
+export const API_SUCCESS = 'API_SUCCESS'
 
 export const addApiError = message => ({
     type: ADD_API_ERROR,
@@ -14,4 +15,9 @@ export const resetApiError = () => ({
 export const fetchFailed = err => ({
     type : API_ERROR,
     payload : { err }
+})
+
+export const fetchSucceeded = data => ({
+    type : API_SUCCESS,
+    payload : { data }
 })
