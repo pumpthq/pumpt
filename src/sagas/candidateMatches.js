@@ -52,16 +52,16 @@ import {
 
 export default function () {
     return [
-        takeLatest(ROUTE_TO_ALL, function * () {
-            // const { accessToken } = yield select(getAccessToken);
-            yield put(fetchMatches())
-        })
-        ,
-        takeLatest(ROUTE_TO_BOOKMARKED, function * () {
-        //     yield put(fetchBookmarked())
-        }),
-        takeLatest(ROUTE_TO_NOT_INTERESTED, function * () {
-        //     yield put(fetchNotInterested())
-        })
+        // takeLatest(ROUTE_TO_ALL, function * () {
+        //     // const { accessToken } = yield select(getAccessToken);
+        //     yield put(fetchMatches())
+        // })
+        // ,
+        // takeLatest(ROUTE_TO_BOOKMARKED, function * () {
+        // //     yield put(fetchBookmarked())
+        // }),
+        // takeLatest(ROUTE_TO_NOT_INTERESTED, function * () {
+        // //     yield put(fetchNotInterested())
+        // })
     ];
 }

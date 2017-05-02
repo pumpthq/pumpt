@@ -41,7 +41,7 @@ export default class ChangePassPopup extends Component {
         e.preventDefault();
 
         const { values: { currentPass, newPass } } = this.props;
-        this.props.changePasswordRequest(currentPass, newPass);
+        this.props.changePassword(currentPass, newPass);
 
         this.handleToggle();
     };
