@@ -38,6 +38,7 @@ import {
     saveProfile,
     signInFailed,
     signIn,
+    loginSucceeded,
     logOutFailed,
     logOutSucceeded,
 } from './../actions/authorization';
