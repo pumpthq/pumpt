@@ -69,7 +69,7 @@ const updateCompany = ({ id, accessToken, body }) =>
 ;
 
 const fetchProfile = ({ id }) =>
-     axios.get(`${API_URL}${API_RECRUITER_ROOT}/${id}`)
+     axios.get(`${API_URL}${API_RECRUITER_ROOT}/current`)
         .then(response => response.data)
 ;
 
