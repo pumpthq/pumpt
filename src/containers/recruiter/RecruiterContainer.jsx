@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import Wrapper from './../../../components/main/wrapper';
-import TabBar from './parts/TabBar';
+import Wrapper from './../../components/main/wrapper';
 import CompanyHeader from './parts/HeaderMenu';
 
 const propTypes = {
@@ -8,7 +7,7 @@ const propTypes = {
 };
 const defaultProps = {};
 
-class JobsContainer extends Component {
+class RecruiterContainer extends Component {
 
     constructor(props) {
         super(props);
@@ -28,21 +27,14 @@ class JobsContainer extends Component {
                         </div>
                     </div>
                 </div>
-                <div className="container slider-container">
-                    <div className="row row-padding-bigger">
-                        <div className="col-lg-12">
-                            {children}
-                        </div>
-                    </div>
-                </div>
-                <TabBar />
+                {children}
             </Wrapper>
         );
     }
 
 }
 
-JobsContainer.propTypes = propTypes;
-JobsContainer.defaultProps = defaultProps;
+RecruiterContainer.propTypes = propTypes;
+RecruiterContainer.defaultProps = defaultProps;
 
-module.exports = JobsContainer
+module.exports = RecruiterContainer

@@ -13,7 +13,7 @@ const rootRoute = {
             require('./containers/login'),
             require('./containers/onboarding'),
             require('./containers/application'),
-            require('./containers/jobs'),
+            require('./containers/recruiter'),
             require('./containers/matches')
         ]
 };

@@ -5,14 +5,14 @@ import {
     HeaderFull,
     HeaderDropDownMenu,
     HeaderDropDownItem,
-} from './../../../../components/main/header';
+} from './../../../components/main/header';
 import {
     ROUTE_COMPANY_MATCHES_ALL,
     ROUTE_COMPANY_JOBS_OPEN,
     ROUTE_COMPANY_JOBS_NEW,
     ROUTE_APPLICATION_COMPANY,
-} from './../../../../constants/routes';
-import { logOut } from './../../../../actions/authorization';
+} from './../../../constants/routes';
+import { logOut } from './../../../actions/authorization';
 
 const propTypes = {
     dispatch: PropTypes.func,
@@ -79,7 +79,7 @@ class JobsHeaderMenu extends Component {
                 ]}
                 addition={
                     <HeaderDropDownMenu
-                        userName={companyName}
+                        userName={`${companyName}`}
                         userAvatar={profilePhoto}
                         progress={progress}
                         linkTo={ROUTE_APPLICATION_COMPANY}
@@ -87,7 +87,6 @@ class JobsHeaderMenu extends Component {
                         <HeaderDropDownItem to={ROUTE_APPLICATION_COMPANY}>Profile</HeaderDropDownItem>
                         <HeaderDropDownItem>Change Password</HeaderDropDownItem>
                         <HeaderDropDownItem>Notification Settings</HeaderDropDownItem>
-                        <HeaderDropDownItem>Blacklisted Companies</HeaderDropDownItem>
                         <HeaderDropDownItem>Help &amp; Support</HeaderDropDownItem>
                         <HeaderDropDownItem
                             onClick={() => {
