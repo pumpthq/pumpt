@@ -18,7 +18,7 @@ import {
     // AUTHENTICATION_COMPANY_REQUESTED,
     // AUTHENTICATION_REQUESTED,
     AUTHENTICATION_SUCCEEDED,
-    // AUTHENTICATION_FAILED,
+    AUTHENTICATION_FAILED,
     CHANGE_PASSWORD_REQUEST,
     LOGIN_AT_BEGIN,
     // USER_LOGOUT_REQUESTED,
@@ -201,12 +201,16 @@ export default function () {
             // try {
                 // const response = yield call(apiLogin, payload);
                 // const profile = composeProfile({ response });
-                console.log(payload)
                 const {isCandidate, isNotApproved, isRecruiter} = payload
+
                 // yield put(loginSucceeded(response));
 
+                // redirect to previously requested route
+
+
+                // or load default dashboard
+
                 if (isCandidate && isNotApproved) {
-                    yield put(getLatestCandidateProfile());
                     yield put(push(ROUTE_APPLICATION_CANDIDATE));
                 } else if (isRecruiter && isNotApproved) {
                     yield put(getLatestCompanyProfile());
@@ -218,12 +222,15 @@ export default function () {
                 } else if (isRecruiter && !isNotApproved) {
                     yield put(getLatestCompanyProfile());
                     yield put(push(ROUTE_COMPANY_JOBS_OPEN));
-                    yield put(navigateToOpenJobs());
+                    // yield put(navigateToOpenJobs());
                 }
 
             // } catch (ex) {
             //     yield put(signInFailed({}));
             // }
+        }),
+        takeLatest(AUTHENTICATION_FAILED, function* (action) {
+            yield put(push(ROUTE_LOGIN))
         }),
         takeLatest(USER_LOGOUT_SUCCEEDED, function* () {
             // try {
@@ -234,7 +241,7 @@ export default function () {
                 yield put(clearMediaState());
                 yield put(clearCompanyJobsState());
                 yield put(clearCandidateMatchesState());
-                yield put(push(ROUTE_DEFAULT));
+                yield put(push(ROUTE_LOGIN));
             // } catch (ex) {
                 // yield put(logOutFailed({}));
             // }

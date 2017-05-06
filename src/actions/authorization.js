@@ -9,7 +9,7 @@ import {
 
     // AUTHENTICATION_REQUESTED,
     AUTHENTICATION_SUCCEEDED,
-    // AUTHENTICATION_FAILED,
+    AUTHENTICATION_FAILED,
 
     // CHANGE_PASSWORD_REQUEST,
     CHANGE_PASSWORD_SUCCEEDED,
@@ -29,6 +29,24 @@ import {
 
 import { API } from '../constants/actionTypes'
 import { fetchFailed } from '../actions/apiError';
+
+export const resolveUser = () => ({
+    type: API,
+    payload : {
+        url : '/users/current',
+        method: 'GET',
+        success: loginSucceeded,
+        error: loginFailed
+    }
+});
+
+export const resolveUserSucceeded = () => ({
+    type: RESOLVE_USER_SUCCEEDED,
+});
+
+export const resolveUserFailed = () => ({
+    type: RESOLVE_USER_FAILED,
+});
 
 export const changePassword = (oldPassword, newPassword) => ({
     type: API,
@@ -65,11 +83,9 @@ export const loginSucceeded = (data) => ({
     payload: data
 });
 
-//
-// export const signInFailed = ({ }) => ({
-//     type: AUTHENTICATION_FAILED,
-//     payload: {},
-// });
+export const loginFailed = () => ({
+    type: AUTHENTICATION_FAILED,
+});
 
 // export const loginAtBegin = ({ email, password }) => ({
 //     type: LOGIN_AT_BEGIN,
