@@ -5,8 +5,8 @@
 To launch spa please do following steps:
 
 1. `npm install`
-2. `npm run start:development` in order to work with latest deployed API
-or `npm run start:local` to continue working with local API.
+2. `npm run start:dev` in order to work with latest deployed API
+or `npm run start` to continue working with local API.
 
 To do a commit, use `npm run commit` in order to follow conventional commit system.
 Before any push action project will run `npm run lint` to check code style.
