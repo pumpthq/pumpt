@@ -25,6 +25,8 @@ import {
     USER_LOGOUT_SUCCEEDED,
     // USER_LOGOUT_FAILED,
     FORGOT_PASSWORD_SUCCEEDED,
+
+    RESOLVE_USER_SUCCEEDED,
 } from './../constants/authorization';
 
 import {
@@ -195,6 +197,17 @@ export default function () {
         //         yield put(signInCompanyFailed({}));
         //     }
         // }),
+        //
+        takeLatest(RESOLVE_USER_SUCCEEDED, function* (action) {
+            const { payload } = action;
+            const { isCandidate, isNotApproved, isRecruiter } = payload
+
+            if (isCandidate) {
+                yield put(getLatestCandidateProfile());
+            } else if (isRecruiter) {
+                yield put(getLatestCompanyProfile());
+            }
+        }),
         takeLatest(AUTHENTICATION_SUCCEEDED, function* (action) {
             const { payload } = action;
 

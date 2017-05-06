@@ -21,6 +21,8 @@ import {
 
     LOGIN_AT_BEGIN,
 
+    RESOLVE_USER_SUCCEEDED,
+
     // FORGOT_PASSWORD,
 } from './../constants/authorization';
 import {
@@ -35,13 +37,14 @@ export const resolveUser = () => ({
     payload : {
         url : '/users/current',
         method: 'GET',
-        success: loginSucceeded,
+        success: resolveUserSucceeded,
         error: loginFailed
     }
 });
 
-export const resolveUserSucceeded = () => ({
+export const resolveUserSucceeded = (data) => ({
     type: RESOLVE_USER_SUCCEEDED,
+    payload: data
 });
 
 export const resolveUserFailed = () => ({
