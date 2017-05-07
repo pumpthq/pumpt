@@ -18,9 +18,7 @@ import {
     DEGREES_DROPDOWN_DATA,
     EMPLOYEMENTS_DROPDOWN_DATA,
 } from './../../../../../constants/companyJobs';
-import {
-    saveSummaryData,
-} from './../../../../../actions/companyJobs';
+import { createJob } from './../../../../../actions/companyJobs';
 import { mapDropdown } from './../../../../../components/parts/mapDropdown';
 
 const propTypes = {
@@ -255,7 +253,7 @@ class SummaryHeadActive extends Component {
                                 },
                             };
 
-                            dispatch(saveSummaryData(data));
+                            dispatch(createJob(data));
                         })
                     }
                 >

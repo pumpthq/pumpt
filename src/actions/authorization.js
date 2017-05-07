@@ -30,7 +30,7 @@ import {
 } from './../constants/api'
 
 import { API } from '../constants/actionTypes'
-import { fetchFailed } from '../actions/apiError';
+import { fetchFailed } from '../actions/api';
 
 export const resolveUser = () => ({
     type: API,

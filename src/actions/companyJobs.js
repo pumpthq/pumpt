@@ -1,3 +1,4 @@
+import { deprecated } from 'core-decorators'
 import {
     ALL_FETCH_REQUESTED,
     ALL_FETCH_SUCCEEDED,
@@ -44,83 +45,115 @@ import {
     CLOSE_OPENED_NEW_JOB_CARD
 } from './../constants/companyJobs';
 
-export const fetchAll = () => ({
-    type : ALL_FETCH_REQUESTED
-})
-
-export const fetchAllSucceeded = () => ({
-    type : ALL_FETCH_SUCCEEDED
-})
-
-export const fetchAllFailed = () => ({
-    type : ALL_FETCH_FAILED
-})
-
-export const fetchOpen = () => ({
-    type : OPEN_FETCH_REQUESTED
-})
-
-export const fetchOpenSucceeded = ({ jobs }) => ({
-    type : OPEN_FETCH_SUCCEEDED,
-    payload : {
-        jobs
+const updateJob = (id, data)  => {
+    type: API,
+    payload:{
+        method: 'PUT',
+        url: `${API_VACANCY_ROOT}/${id}`,
+        data,
     }
-})
+};
 
-export const fetchOpenFailed = ({ statusCode }) => ({
-    type : OPEN_FETCH_FAILED,
-    payload : {
-        statusCode
+const deleteJob = (id) => {
+    type:API, payload:{
+        method: 'DELETE',
+        url: `${API_VACANCY_ROOT}/${id}`,
     }
-})
+};
 
-export const fetchDrafts = () => ({
-    type : DRAFTS_FETCH_REQUESTED
-})
-
-export const fetchDraftsSucceeded = ({ jobs }) => ({
-    type : DRAFTS_FETCH_SUCCEEDED,
-    payload : {
-        jobs
+const getAllJobs = () => {
+    type:API, payload:{
+        method: 'GET',
+        url: API_ALL_JOBS,
     }
-})
+};
 
-export const fetchDraftsFailed = ({ statusCode }) => ({
-    type : DRAFTS_FETCH_FAILED,
-    payload : {
-        statusCode
+const createJob = (data) => {
+    type:API, payload:{
+        method: 'POST',
+        url: API_VACANCY_ROOT,
+        data
     }
-})
+};
 
-export const fetchClosed = () => ({
-    type : CLOSED_FETCH_REQUESTED
-})
 
-export const fetchClosedSucceeded = ({ jobs }) => ({
-    type : CLOSED_FETCH_SUCCEEDED,
-    payload : {
-        jobs
-    }
-})
+// export const fetchAll = () => ({
+//     type : ALL_FETCH_REQUESTED
+// })
+//
+// export const fetchAllSucceeded = () => ({
+//     type : ALL_FETCH_SUCCEEDED
+// })
+//
+// export const fetchAllFailed = () => ({
+//     type : ALL_FETCH_FAILED
+// })
+//
+// export const fetchOpen = () => ({
+//     type : OPEN_FETCH_REQUESTED
+// })
+//
+// export const fetchOpenSucceeded = ({ jobs }) => ({
+//     type : OPEN_FETCH_SUCCEEDED,
+//     payload : {
+//         jobs
+//     }
+// })
+//
+// export const fetchOpenFailed = ({ statusCode }) => ({
+//     type : OPEN_FETCH_FAILED,
+//     payload : {
+//         statusCode
+//     }
+// })
+//
+// export const fetchDrafts = () => ({
+//     type : DRAFTS_FETCH_REQUESTED
+// })
+//
+// export const fetchDraftsSucceeded = ({ jobs }) => ({
+//     type : DRAFTS_FETCH_SUCCEEDED,
+//     payload : {
+//         jobs
+//     }
+// })
+//
+// export const fetchDraftsFailed = ({ statusCode }) => ({
+//     type : DRAFTS_FETCH_FAILED,
+//     payload : {
+//         statusCode
+//     }
+// })
+//
+// export const fetchClosed = () => ({
+//     type : CLOSED_FETCH_REQUESTED
+// })
+//
+// export const fetchClosedSucceeded = ({ jobs }) => ({
+//     type : CLOSED_FETCH_SUCCEEDED,
+//     payload : {
+//         jobs
+//     }
+// })
+//
+// export const fetchClosedFailed = ({ statusCode }) => ({
+//     type : CLOSED_FETCH_FAILED,
+//     payload : {
+//         statusCode
+//     }
+// })
 
-export const fetchClosedFailed = ({ statusCode }) => ({
-    type : CLOSED_FETCH_FAILED,
-    payload : {
-        statusCode
-    }
-})
-
-export const routeToOpen = () => ({
-    type : ROUTE_TO_OPEN
-})
-
-export const routeToDrafts = () => ({
-    type : ROUTE_TO_DRAFTS
-})
-
-export const routeToClosed = () => ({
-    type : ROUTE_TO_CLOSED
-})
+// export const routeToOpen = () => ({
+//     type : ROUTE_TO_OPEN
+// })
+//
+// export const routeToDrafts = () => ({
+//     type : ROUTE_TO_DRAFTS
+// })
+//
+// export const routeToClosed = () => ({
+//     type : ROUTE_TO_CLOSED
+// })
 
 export const showDescriptionStep = () => ({
     type : SHOW_DESCRIPTION_STEP
@@ -170,6 +203,7 @@ export const cancelSkillsAndRequirementsStep = (payload = {}) => ({
     payload : {}
 })
 
+@deprecated
 export const saveSummaryData = ({
     jobTitle,
     location,
@@ -191,25 +225,28 @@ export const saveSummaryData = ({
     },
 });
 
+@deprecated
 export const saveSummaryDataSucceeded = ({}) => ({
     type : SAVE_SUMMARY_DATA_SUCCEEDED,
     payload : {}
 })
 
+@deprecated
 export const saveSummaryDataFailed = ({}) => ({
     type : SAVE_SUMMARY_DATA_FAILED,
     payload : {}
 })
 
-export const closeJob = ({ id }) => ({
-    type: CLOSE_JOB,
-    payload: { id },
-});
+// export const closeJob = ({ id }) => ({
+//     type: CLOSE_JOB,
+//     payload: { id },
+// });
+//
+// export const deleteJob = ({ id }) => ({
+//     type: DELETE_JOB,
+//     payload: { id },
+// });
 
-export const deleteJob = ({ id }) => ({
-    type: DELETE_JOB,
-    payload: { id },
-});
 
 export const startMatching = ({ id }) => ({
     type: START_MATCHING,

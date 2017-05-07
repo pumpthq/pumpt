@@ -6,7 +6,7 @@ import UploadImage from './../parts/uploadImage';
 import ApplicationFieldset from'./../../../../components/application/applicationFieldset';
 import ApplicationFieldsetDropdown from './../../../../components/application/applicationFieldsetDropdown';
 import Button from './../../../../components/main/button';
-import { saveSummaryData } from './../../../../actions/applicationCompany';
+import { updateJob } from './../../../../actions/applicationCompany';
 import {
     COMPANY_EMPLOYEES_DATA,
     COMPANY_TYPE_DATA,
@@ -180,7 +180,7 @@ class SummaryHeadEdit extends Component {
                                         foundationYear : fields.foundationYear
                                     }
 
-                                    dispatch(saveSummaryData(data))
+                                    dispatch(updateJob(this.props.id,data))
                                     onCancel()
                                     })
                                 }>

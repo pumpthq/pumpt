@@ -2,7 +2,7 @@
 import axios from 'axios'
 import { API_URL } from '../constants/api'
 import { API } from '../constants/actionTypes'
-import { fetchRequested, fetchSucceeded, fetchFailed } from '../actions/apiError'
+import { fetchRequested, fetchSucceeded, fetchFailed } from '../actions/api'
 
 export default store => next => action => {
 

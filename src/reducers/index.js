@@ -9,7 +9,7 @@ import applicationMedia from './applicationPhotoUploading';
 import authorization from './authorization';
 import companyJobs from './companyJobs';
 import candidateMatches from './candidateMatches';
-import apiError from './apiError';
+import apiError from './api';
 
 import '../constants/dropdownData';
 

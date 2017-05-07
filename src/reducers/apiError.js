@@ -2,7 +2,7 @@ import {
     ADD_API_ERROR,
     RESET_API_ERROR,
     API_ERROR
-} from '../actions/apiError';
+} from '../actions/api';
 
 const DEFAULT_STATE = {};
 

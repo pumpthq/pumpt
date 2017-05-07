@@ -112,7 +112,7 @@ class DraftsCard extends Component {
                                 className="link link_type_additional"
                                 onClick={(event) => {
                                     event.preventDefault();
-                                    dispatch(deleteJob({ id }));
+                                    dispatch(deleteJob(id));
                                 }}
                             >
                                 Delete Draft

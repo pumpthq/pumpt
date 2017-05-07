@@ -15,7 +15,7 @@ import {
     SET_DEFAULT_STATE,
 } from './../constants/candidateMatches';
 import { API } from '../constants/actionTypes'
-import { fetchFailed } from './apiError'
+import { fetchFailed } from './api'
 
 export const fetchMatches = () => ({
     type : API,
