@@ -73,6 +73,7 @@
     "chai": "3.5.0",
     "chai-as-promised": "5.3.0",
     "commitizen": "2.8.2",
+    "core-decorators": "^0.18.0",
     "css-loader": "0.23.1",
     "cz-conventional-changelog": "1.1.6",
     "eslint": "3.4.0",
