@@ -17,7 +17,8 @@ export default (state = DEFAULT_STATE, action) => {
             return DEFAULT_STATE;
 
         case API_ERROR:
-            throw payload.err
+            console.log(API_ERROR,payload)
+            // throw payload.err
             return state
 
         default :

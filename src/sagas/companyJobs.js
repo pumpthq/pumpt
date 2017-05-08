@@ -3,7 +3,7 @@ import { deprecated } from 'core-decorators'
 import { takeLatest } from 'redux-saga';
 import { call, put, select } from 'redux-saga/effects';
 import { push } from 'react-router-redux';
-import states from './../constants/states.json';
+// import states from './../constants/states.json';
 import {
     START_MATCHING,
     CLOSE_JOB,
@@ -88,8 +88,7 @@ import {
 export default function () {
     return [
         takeLatest(SAVE_SUMMARY_DATA, function * () {
-            @deprecated
-            function handleSummaryData() {
+
                 const { entityId, companyId, accessToken } = yield select(getAccessToken)
                 const { newJob } = yield select(getCompanyJobs)
                 const {
@@ -133,7 +132,8 @@ export default function () {
                     console.log('Create new job fails', ex)
                     yield put(saveSummaryDataFailed({}))
                 }
-            }()
+
+
         }),
         // takeLatest(ROUTE_TO_OPEN, function * () {
         //     const { accessToken } = yield select(getAccessToken);

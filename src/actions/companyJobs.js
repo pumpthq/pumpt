@@ -44,36 +44,52 @@ import {
 
     CLOSE_OPENED_NEW_JOB_CARD
 } from './../constants/companyJobs';
-
-const updateJob = (id, data)  => {
-    type: API,
-    payload:{
-        method: 'PUT',
-        url: `${API_VACANCY_ROOT}/${id}`,
-        data,
+import { API } from '../constants/actionTypes'
+import {
+    API_URL,
+    API_ALL_JOBS,
+    API_OPEN_JOBS,
+    API_DRAFT_JOBS,
+    API_CLOSED_JOBS,
+    API_VACANCY_ROOT,
+} from './../constants/api';
+export const updateJob = (id, data)  => {
+    return {
+      type: API,
+      payload:{
+          method: 'PUT',
+          url: `${API_VACANCY_ROOT}/${id}`,
+          data,
+      }
     }
 };
 
-const deleteJob = (id) => {
+export const deleteJob = (id) => {
+    return {
     type:API, payload:{
         method: 'DELETE',
         url: `${API_VACANCY_ROOT}/${id}`,
     }
+  }
 };
 
-const getAllJobs = () => {
+export const getAllJobs = () => {
+    return {
     type:API, payload:{
         method: 'GET',
         url: API_ALL_JOBS,
     }
+  }
 };
 
-const createJob = (data) => {
+export const createJob = (data) => {
+    return {
     type:API, payload:{
         method: 'POST',
         url: API_VACANCY_ROOT,
         data
     }
+  }
 };
 
 
@@ -203,7 +219,6 @@ export const cancelSkillsAndRequirementsStep = (payload = {}) => ({
     payload : {}
 })
 
-@deprecated
 export const saveSummaryData = ({
     jobTitle,
     location,
@@ -225,14 +240,13 @@ export const saveSummaryData = ({
     },
 });
 
-@deprecated
-export const saveSummaryDataSucceeded = ({}) => ({
+
+export const saveSummaryDataSucceeded = ({}) => deprecated({
     type : SAVE_SUMMARY_DATA_SUCCEEDED,
     payload : {}
 })
 
-@deprecated
-export const saveSummaryDataFailed = ({}) => ({
+export const saveSummaryDataFailed = ({}) => deprecated({
     type : SAVE_SUMMARY_DATA_FAILED,
     payload : {}
 })

@@ -21,6 +21,8 @@ import {
 import { createJob } from './../../../../../actions/companyJobs';
 import { mapDropdown } from './../../../../../components/parts/mapDropdown';
 
+import states from 'constants/states.json';
+
 const propTypes = {
     fields: PropTypes.object,
     ddData: PropTypes.object,
@@ -253,7 +255,27 @@ class SummaryHeadActive extends Component {
                                 },
                             };
 
-                            dispatch(createJob(data));
+                            const selectedItemIndustry = findById({
+                                id: data.industry.id,
+                                data: FIELD_OF_EXPERTISE_DROPDOWN_DATA,
+                            });
+                            const locationState = data.location && data.location.split(', ').pop();
+                            const patchedData = {
+                                    // TODO complete mapping
+                                    title: data.jobTitle,
+                                    industry: data.industry.value,
+                                    industryParent: selectedItemIndustry.parent ?
+                                        selectedItemIndustry.parent.title : null,
+                                    salary: data.salary.value,
+                                    // company: data.companyId,
+                                    // recruiter: data.entityId,
+                                    experience: data.experience.value,
+                                    employment: data.employment.value,
+                                    degree: data.degree.value,
+                                    state: states[locationState],
+                            };
+
+                            dispatch(createJob(patchedData));
                         })
                     }
                 >
