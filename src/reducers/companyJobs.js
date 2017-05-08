@@ -10,6 +10,9 @@ import {
     DRAFTS_TAB,
     CLOSED_TAB,
 
+    CREATE_JOB_SUCCEEDED,
+    CREATE_JOB_FAILED,
+
     DESCRIPTION_STEP,
     SHOW_DESCRIPTION_STEP,
     SAVE_DESCRIPTION_DATA,
@@ -141,6 +144,20 @@ export default (state = defaultState, action) => {
                 activeTab: CLOSED_TAB,
             };
 
+        case CREATE_JOB_SUCCEEDED :
+            let drafts = _.clone(state.drafts)
+            drafts.push(getOnlyRequired(payload.job))
+            return {
+                ...state,
+                drafts,
+            };
+
+        case CREATE_JOB_FAILED :
+            //TODO send errors back for newjob form state for display
+            return {
+                ...state,
+            };
+
             // TODO what is this???? O_o
         case SHOW_SUMMARY_HEAD_STANDARD :
         case SHOW_SUMMARY_HEAD_EDIT :
@@ -151,22 +168,22 @@ export default (state = defaultState, action) => {
                     head: type,
                 },
             };
-        case SAVE_SUMMARY_DATA :
-            return {
-                ...state,
-                newJob: {
-                    ...state.newJob,
-                    ...payload,
-                },
-            };
-        case SAVE_SUMMARY_DATA_SUCCEEDED :
-            return {
-                ...state,
-                newJob: {
-                    ...state.newJob,
-                    head: SHOW_SUMMARY_HEAD_STANDARD,
-                },
-            };
+        // case SAVE_SUMMARY_DATA :
+        //     return {
+        //         ...state,
+        //         newJob: {
+        //             ...state.newJob,
+        //             ...payload,
+        //         },
+        //     };
+        // case SAVE_SUMMARY_DATA_SUCCEEDED :
+        //     return {
+        //         ...state,
+        //         newJob: {
+        //             ...state.newJob,
+        //             head: SHOW_SUMMARY_HEAD_STANDARD,
+        //         },
+        //     };
 
         case SHOW_DESCRIPTION_STEP :
             return {

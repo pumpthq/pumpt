@@ -42,7 +42,12 @@ import {
     SET_DEFAULT_STATE,
     SET_DEFAULT_NEW_JOB_STATE,
 
-    CLOSE_OPENED_NEW_JOB_CARD
+    CLOSE_OPENED_NEW_JOB_CARD,
+
+    CREATE_JOB_SUCCEEDED,
+    CREATE_JOB_FAILED,
+
+
 } from './../constants/companyJobs';
 import { API } from '../constants/actionTypes'
 import {
@@ -87,9 +92,30 @@ export const createJob = (data) => {
     type:API, payload:{
         method: 'POST',
         url: API_VACANCY_ROOT,
-        data
+        data,
+        success: createJobSucceeded,
+        failed: createJobFailed
     }
   }
+};
+
+
+export const createJobSucceeded = (data) => {
+    return {
+      type: CREATE_JOB_SUCCEEDED,
+      payload: {
+          job: data
+      }
+    }
+};
+
+export const createJobFailed = (data) => {
+    return {
+      type: CREATE_JOB_FAILED,
+      payload: {
+          err: data
+      }
+    }
 };
 
 

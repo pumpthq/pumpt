@@ -41,11 +41,15 @@ import {
     DRAFTS_FETCH_FAILED,
     CLOSED_FETCH_FAILED,
 
+    CREATE_JOB_SUCCEEDED,
+    CREATE_JOB_FAILED,
+
     SAVE_SUMMARY_DATA,
     SAVE_DESCRIPTION_DATA,
     SAVE_RESPONSIBILITIES_DATA,
     SAVE_SKILLS_AND_REQUIREMENTS_DATA,
-    CLOSE_OPENED_NEW_JOB_CARD
+    CLOSE_OPENED_NEW_JOB_CARD,
+
 } from './../constants/companyJobs';
 import {
     getCompanyJobs
@@ -87,54 +91,57 @@ import {
 
 export default function () {
     return [
-        takeLatest(SAVE_SUMMARY_DATA, function * () {
-
-                const { entityId, companyId, accessToken } = yield select(getAccessToken)
-                const { newJob } = yield select(getCompanyJobs)
-                const {
-                    jobTitle,
-                    location,
-                    salary,
-                    experience,
-                    employment,
-                    degree,
-                    industry,
-                } = newJob;
-                const selectedItemIndustry = findDropdownItemById({
-                    id: industry.id,
-                    data: FIELD_OF_EXPERTISE_DROPDOWN_DATA,
-                });
-                const locationState = location.split(', ').pop();
-                const patch = {
-                    id: entityId,
-                    accessToken,
-                    body: {
-                        // TODO complete mapping
-                        title: jobTitle,
-                        industry: industry.value,
-                        industryParent: selectedItemIndustry.parent ?
-                            selectedItemIndustry.parent.title : null,
-                        salary: salary.value,
-                        company: companyId,
-                        recruiter: entityId,
-                        experience: experience.value,
-                        employment: employment.value,
-                        degree: degree.value,
-                        state: states[locationState],
-                    },
-                };
-
-                try {
-                    yield call(createJob, patch);
-
-                    yield put(saveSummaryDataSucceeded({}));
-                } catch (ex) {
-                    console.log('Create new job fails', ex)
-                    yield put(saveSummaryDataFailed({}))
-                }
-
-
+        takeLatest(CREATE_JOB_SUCCEEDED, function * (action) {
+          yield put(push(ROUTE_TO_DRAFTS)); //or route to view job
         }),
+        // takeLatest(SAVE_SUMMARY_DATA, function * () {
+        //
+        //         const { entityId, companyId, accessToken } = yield select(getAccessToken)
+        //         const { newJob } = yield select(getCompanyJobs)
+        //         const {
+        //             jobTitle,
+        //             location,
+        //             salary,
+        //             experience,
+        //             employment,
+        //             degree,
+        //             industry,
+        //         } = newJob;
+        //         const selectedItemIndustry = findDropdownItemById({
+        //             id: industry.id,
+        //             data: FIELD_OF_EXPERTISE_DROPDOWN_DATA,
+        //         });
+        //         const locationState = location.split(', ').pop();
+        //         const patch = {
+        //             id: entityId,
+        //             accessToken,
+        //             body: {
+        //                 // TODO complete mapping
+        //                 title: jobTitle,
+        //                 industry: industry.value,
+        //                 industryParent: selectedItemIndustry.parent ?
+        //                     selectedItemIndustry.parent.title : null,
+        //                 salary: salary.value,
+        //                 company: companyId,
+        //                 recruiter: entityId,
+        //                 experience: experience.value,
+        //                 employment: employment.value,
+        //                 degree: degree.value,
+        //                 state: states[locationState],
+        //             },
+        //         };
+        //
+        //         try {
+        //             yield call(createJob, patch);
+        //
+        //             yield put(saveSummaryDataSucceeded({}));
+        //         } catch (ex) {
+        //             console.log('Create new job fails', ex)
+        //             yield put(saveSummaryDataFailed({}))
+        //         }
+        //
+        //
+        // }),
         // takeLatest(ROUTE_TO_OPEN, function * () {
         //     const { accessToken } = yield select(getAccessToken);
         //
