@@ -1,6 +1,7 @@
 import axios from 'axios';
 import ShortID from 'shortid';
 import saveStep from './saveOnboardingStep';
+import _ from 'lodash';
 import {
     OPEN_FETCH_SUCCEEDED,
     DRAFTS_FETCH_SUCCEEDED,
@@ -12,6 +13,9 @@ import {
 
     CREATE_JOB_SUCCEEDED,
     CREATE_JOB_FAILED,
+
+    UPDATE_JOB_SUCCEEDED,
+    UPDATE_JOB_FAILED,
 
     DESCRIPTION_STEP,
     SHOW_DESCRIPTION_STEP,
@@ -146,7 +150,7 @@ export default (state = defaultState, action) => {
 
         case CREATE_JOB_SUCCEEDED :
             let drafts = _.clone(state.drafts)
-            drafts.push(getOnlyRequired(payload.job))
+            drafts.push(payload.job)
             return {
                 ...state,
                 drafts,

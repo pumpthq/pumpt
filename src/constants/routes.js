@@ -11,5 +11,6 @@ export const ROUTE_APPLICATION_COMPANY = '/application/company';
 export const ROUTE_COMPANY_MATCHES_ALL = '/recruiter/matches/all';
 export const ROUTE_COMPANY_JOBS_OPEN = '/recruiter/jobs/show/open';
 export const ROUTE_COMPANY_JOBS_DRAFTS = '/recruiter/jobs/show/drafts';
-export const ROUTE_COMPANY_JOBS_NEW = '/recruiter/jobs/new';
 export const ROUTE_COMPANY_JOBS_CLOSED = '/recruiter/jobs/show/closed';
+export const ROUTE_COMPANY_JOBS_NEW = '/recruiter/jobs/new';
+export const ROUTE_COMPANY_JOBS_EDIT = '/recruiter/jobs/edit';

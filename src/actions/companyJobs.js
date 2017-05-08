@@ -47,6 +47,8 @@ import {
     CREATE_JOB_SUCCEEDED,
     CREATE_JOB_FAILED,
 
+    UPDATE_JOB_SUCCEEDED,
+    UPDATE_JOB_FAILED,
 
 } from './../constants/companyJobs';
 import { API } from '../constants/actionTypes'
@@ -58,6 +60,17 @@ import {
     API_CLOSED_JOBS,
     API_VACANCY_ROOT,
 } from './../constants/api';
+
+
+export const getAllJobs = () => {
+    return {
+    type:API, payload:{
+        method: 'GET',
+        url: API_ALL_JOBS,
+    }
+  }
+};
+
 export const updateJob = (id, data)  => {
     return {
       type: API,
@@ -69,6 +82,25 @@ export const updateJob = (id, data)  => {
     }
 };
 
+export const updateJobSucceeded = (data) => {
+    return {
+      type: UPDATE_JOB_SUCCEEDED,
+      payload: {
+          job: data
+      }
+    }
+};
+
+export const updateJobFailed = (data) => {
+    return {
+      type: UPDATE_JOB_FAILED,
+      payload: {
+          err: data
+      }
+    }
+};
+
+
 export const deleteJob = (id) => {
     return {
     type:API, payload:{
@@ -78,14 +110,6 @@ export const deleteJob = (id) => {
   }
 };
 
-export const getAllJobs = () => {
-    return {
-    type:API, payload:{
-        method: 'GET',
-        url: API_ALL_JOBS,
-    }
-  }
-};
 
 export const createJob = (data) => {
     return {

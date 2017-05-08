@@ -13,21 +13,19 @@ const propTypes = {
 
 const defaultProps = {};
 
-@connect(
-    (state) => {
-        const { head } = state.companyJobs.newJob;
-        return { head };
-    }
-)
+// @connect(
+//     (state) => {
+//         const { head } = state.companyJobs.newJob;
+//         return { head };
+//     }
+// )
 export default class SummaryHead extends Component {
     render() {
-        const {
-            head,
-        } = this.props;
-        const active = head === SHOW_SUMMARY_HEAD_STANDARD;
+        const { filled } = this.props;
+        //const active = head === SHOW_SUMMARY_HEAD_STANDARD;
         return (
-            <div className={`summary-head summary-head_rad-top ${active ? '' : 'summary-head_form_true'}`} style={{ backgroundColor: '#4f68ac' }}>
-                {active ? <SummaryHeadFilled /> : <SummaryHeadActive /> }
+            <div className={`summary-head summary-head_rad-top ${filled ? '' : 'summary-head_form_true'}`} style={{ backgroundColor: '#4f68ac' }}>
+                {filled ? <SummaryHeadFilled /> : <SummaryHeadActive /> }
             </div>
         );
     }

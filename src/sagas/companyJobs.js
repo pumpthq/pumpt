@@ -92,7 +92,9 @@ import {
 export default function () {
     return [
         takeLatest(CREATE_JOB_SUCCEEDED, function * (action) {
-          yield put(push(ROUTE_TO_DRAFTS)); //or route to view job
+          // yield put(push(ROUTE_TO_DRAFTS)); //or route to view job
+          const { job } = action.payload
+          yield put(push(`recruiter/jobs/edit/${job.id}`))
         }),
         // takeLatest(SAVE_SUMMARY_DATA, function * () {
         //
