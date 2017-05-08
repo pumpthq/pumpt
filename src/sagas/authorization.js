@@ -46,6 +46,7 @@ import {
 } from './../actions/authorization';
 
 import { fetchMatches } from './../actions/candidateMatches';
+import { fetchJobs } from './../actions/companyJobs';
 // import {
 //     getAccessToken,
 // } from './../reducers/authorization';
@@ -235,7 +236,7 @@ export default function () {
                 } else if (isRecruiter && !isNotApproved) {
                     yield put(getLatestCompanyProfile());
                     yield put(push(ROUTE_COMPANY_JOBS_OPEN));
-                    // yield put(navigateToOpenJobs());
+                    yield put(fetchJobs());
                 }
 
             // } catch (ex) {

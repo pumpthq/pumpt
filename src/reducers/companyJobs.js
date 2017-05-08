@@ -11,6 +11,9 @@ import {
     DRAFTS_TAB,
     CLOSED_TAB,
 
+    FETCH_JOBS_SUCCEEDED,
+    FETCH_JOBS_FAILED,
+
     CREATE_JOB_SUCCEEDED,
     CREATE_JOB_FAILED,
 
@@ -47,44 +50,46 @@ import {
 } from './../constants/api';
 
 const defaultState = {
-    open: [{
-        id: ShortID.generate(),
-        jobTitle: 'Sales',
-        location: 'Uzhhorod',
-        salary: '5000$',
-        experience: '1 year',
-        employment: 'Full-time',
-        degree: 'Bachelors',
-        matches: '4',
-    }],
-    drafts: [{
-        id: ShortID.generate(),
-        jobTitle: 'Frontend',
-        location: 'Uzhhorod',
-        salary: '10000$',
-        experience: '2 Years',
-        employment: 'Any',
-        degree: 'Any',
-    }],
-    closed: [{
-        id: ShortID.generate(),
-        jobTitle: 'Sales',
-        location: 'Uzhhorod',
-        salary: '5000$',
-        experience: '1 year',
-        employment: 'Full-time',
-        degree: 'Bachelors',
-        matches: '4',
-    }],
-    activeTab: OPEN_TAB,
-    newJob: {
-        head: SHOW_SUMMARY_HEAD_EDIT,
-        step: null,
-        progress: [],
-        active: [],
-        summary: {},
-    },
-};
+    jobs: []
+}
+//     open: [{
+//         id: ShortID.generate(),
+//         jobTitle: 'Sales',
+//         location: 'Uzhhorod',
+//         salary: '5000$',
+//         experience: '1 year',
+//         employment: 'Full-time',
+//         degree: 'Bachelors',
+//         matches: '4',
+//     }],
+//     drafts: [{
+//         id: ShortID.generate(),
+//         jobTitle: 'Frontend',
+//         location: 'Uzhhorod',
+//         salary: '10000$',
+//         experience: '2 Years',
+//         employment: 'Any',
+//         degree: 'Any',
+//     }],
+//     closed: [{
+//         id: ShortID.generate(),
+//         jobTitle: 'Sales',
+//         location: 'Uzhhorod',
+//         salary: '5000$',
+//         experience: '1 year',
+//         employment: 'Full-time',
+//         degree: 'Bachelors',
+//         matches: '4',
+//     }],
+//     activeTab: OPEN_TAB,
+//     newJob: {
+//         head: SHOW_SUMMARY_HEAD_EDIT,
+//         step: null,
+//         progress: [],
+//         active: [],
+//         summary: {},
+//     },
+// };
 
 const getOnlyRequired = ({
     title,
@@ -110,43 +115,46 @@ const getOnlyRequired = ({
 
 export default (state = defaultState, action) => {
     const { type, payload } = action;
-
     switch (type) {
-        case OPEN_FETCH_SUCCEEDED :
-            return {
-                ...state,
-                open: payload.jobs.map((job) => ({
-                        id: job._id,
-                        ...getOnlyRequired(job),
-                })),
-                drafts: [],
-                closed: [],
-                activeTab: OPEN_TAB,
-            };
-        case DRAFTS_FETCH_SUCCEEDED :
-            return {
-                ...state,
-                open: [],
-                drafts: payload.jobs
-                    .map((job) => ({
-                        id: job._id,
-                        ...getOnlyRequired(job),
-                    })),
-                closed: [],
-                activeTab: DRAFTS_TAB,
-            };
-        case CLOSED_FETCH_SUCCEEDED :
-            return {
-                ...state,
-                open: [],
-                drafts: [],
-                closed: payload.jobs
-                    .map((job) => ({
-                        id: job._id,
-                        ...getOnlyRequired(job),
-                    })),
-                activeTab: CLOSED_TAB,
-            };
+        case FETCH_JOBS_SUCCEEDED :
+            const { jobs } = payload;
+            return { jobs };
+
+        // case OPEN_FETCH_SUCCEEDED :
+        //     return {
+        //         ...state,
+        //         open: payload.jobs.map((job) => ({
+        //                 id: job._id,
+        //                 ...getOnlyRequired(job),
+        //         })),
+        //         drafts: [],
+        //         closed: [],
+        //         activeTab: OPEN_TAB,
+        //     };
+        // case DRAFTS_FETCH_SUCCEEDED :
+        //     return {
+        //         ...state,
+        //         open: [],
+        //         drafts: payload.jobs
+        //             .map((job) => ({
+        //                 id: job._id,
+        //                 ...getOnlyRequired(job),
+        //             })),
+        //         closed: [],
+        //         activeTab: DRAFTS_TAB,
+        //     };
+        // case CLOSED_FETCH_SUCCEEDED :
+        //     return {
+        //         ...state,
+        //         open: [],
+        //         drafts: [],
+        //         closed: payload.jobs
+        //             .map((job) => ({
+        //                 id: job._id,
+        //                 ...getOnlyRequired(job),
+        //             })),
+        //         activeTab: CLOSED_TAB,
+        //     };
 
         case CREATE_JOB_SUCCEEDED :
             let drafts = _.clone(state.drafts)

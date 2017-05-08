@@ -13,9 +13,9 @@ import {
 import {
     API_URL,
     API_ALL_JOBS,
-    API_OPEN_JOBS,
-    API_DRAFT_JOBS,
-    API_CLOSED_JOBS,
+    // API_OPEN_JOBS,
+    // API_DRAFT_JOBS,
+    // API_CLOSED_JOBS,
     API_VACANCY_ROOT,
 } from './../constants/api';
 import {
@@ -37,9 +37,9 @@ import {
     ROUTE_TO_DRAFTS,
     ROUTE_TO_CLOSED,
 
-    OPEN_FETCH_FAILED,
-    DRAFTS_FETCH_FAILED,
-    CLOSED_FETCH_FAILED,
+    // OPEN_FETCH_FAILED,
+    // DRAFTS_FETCH_FAILED,
+    // CLOSED_FETCH_FAILED,
 
     CREATE_JOB_SUCCEEDED,
     CREATE_JOB_FAILED,
@@ -55,21 +55,21 @@ import {
     getCompanyJobs
 } from './../reducers/companyJobs';
 import {
-    fetchAll,
-    fetchAllSucceeded,
-    fetchAllFailed,
+    // fetchAll,
+    // fetchAllSucceeded,
+    // fetchAllFailed,
 
-    fetchOpen,
-    fetchOpenSucceeded,
-    fetchOpenFailed,
+    // fetchOpen,
+    // fetchOpenSucceeded,
+    // fetchOpenFailed,
+    //
+    // fetchDrafts,
+    // fetchDraftsSucceeded,
+    // fetchDraftsFailed,
 
-    fetchDrafts,
-    fetchDraftsSucceeded,
-    fetchDraftsFailed,
-
-    fetchClosed,
-    fetchClosedSucceeded,
-    fetchClosedFailed,
+    // fetchClosed,
+    // fetchClosedSucceeded,
+    // fetchClosedFailed,
 
     saveSummaryDataSucceeded,
     saveSummaryDataFailed,
@@ -79,15 +79,15 @@ import {
     routeToClosed,
     clearNewJobState
 } from './../actions/companyJobs';
-import {
-    logOut,
-} from './../actions/authorization';
-import {
-    getAccessToken,
-} from './../reducers/authorization';
-import {
-    findById as findDropdownItemById,
-} from '../constants/dropdownData';
+// import {
+//     logOut,
+// } from './../actions/authorization';
+// import {
+//     getAccessToken,
+// } from './../reducers/authorization';
+// import {
+//     findById as findDropdownItemById,
+// } from '../constants/dropdownData';
 
 export default function () {
     return [

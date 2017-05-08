@@ -21,18 +21,18 @@ const propTypes = {
 };
 const defaultProps = {};
 
-@connect(
-    function mapStateToProps(state) {
-        return {
-            state
-        }
-    },
-    function dispatchStateToProps(dispatch) {
-        return {
-            dispatch
-        }
-    }
-)
+// @connect(
+//     function mapStateToProps(state) {
+//         return {
+//             state
+//         }
+//     },
+//     function dispatchStateToProps(dispatch) {
+//         return {
+//             dispatch
+//         }
+//     }
+// )
 export default class MatchesSliderPrototype extends Component {
 
     constructor(props) {

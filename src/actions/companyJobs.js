@@ -1,20 +1,20 @@
 import { deprecated } from 'core-decorators'
 import {
-    ALL_FETCH_REQUESTED,
-    ALL_FETCH_SUCCEEDED,
-    ALL_FETCH_FAILED,
+    FETCH_JOBS_REQUESTED,
+    FETCH_JOBS_SUCCEEDED,
+    FETCH_JOBS_FAILED,
 
-    OPEN_FETCH_REQUESTED,
-    OPEN_FETCH_SUCCEEDED,
-    OPEN_FETCH_FAILED,
-
-    DRAFTS_FETCH_REQUESTED,
-    DRAFTS_FETCH_SUCCEEDED,
-    DRAFTS_FETCH_FAILED,
-
-    CLOSED_FETCH_REQUESTED,
-    CLOSED_FETCH_SUCCEEDED,
-    CLOSED_FETCH_FAILED,
+    // OPEN_FETCH_REQUESTED,
+    // OPEN_FETCH_SUCCEEDED,
+    // OPEN_FETCH_FAILED,
+    //
+    // DRAFTS_FETCH_REQUESTED,
+    // DRAFTS_FETCH_SUCCEEDED,
+    // DRAFTS_FETCH_FAILED,
+    //
+    // CLOSED_FETCH_REQUESTED,
+    // CLOSED_FETCH_SUCCEEDED,
+    // CLOSED_FETCH_FAILED,
 
     ROUTE_TO_OPEN,
     ROUTE_TO_DRAFTS,
@@ -143,17 +143,17 @@ export const createJobFailed = (data) => {
 };
 
 
-// export const fetchAll = () => ({
-//     type : ALL_FETCH_REQUESTED
-// })
-//
-// export const fetchAllSucceeded = () => ({
-//     type : ALL_FETCH_SUCCEEDED
-// })
-//
-// export const fetchAllFailed = () => ({
-//     type : ALL_FETCH_FAILED
-// })
+export const fetchJobs = () => ({
+    type : FETCH_JOBS_REQUESTED
+})
+
+export const fetchJobsSucceeded = () => ({
+    type : FETCH_JOBS_SUCCEEDED
+})
+
+export const fetchJobsFailed = () => ({
+    type : FETCH_JOBS_FAILED
+})
 //
 // export const fetchOpen = () => ({
 //     type : OPEN_FETCH_REQUESTED

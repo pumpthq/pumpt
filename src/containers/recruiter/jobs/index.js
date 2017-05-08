@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import EditContainer from './EditContainer'
+import { OpenJobsSlider, DraftJobsSlider, ClosedJobsSlider } from './sliders'
 
 module.exports = {
     path: 'jobs',
@@ -11,9 +12,9 @@ module.exports = {
           path: 'show',
           component: require('./ShowContainer'),
           childRoutes: [
-              { path: 'closed', component: require('./ClosedJobsSlider') },
-              { path: 'open', component: require('./OpenJobsSlider') },
-              { path: 'drafts', component: require('./DraftsJobsSlider') },
+              { path: 'closed', component: ClosedJobsSlider },
+              { path: 'open', component: OpenJobsSlider },
+              { path: 'drafts', component: DraftsJobsSlider },
           ]
       },
     ]
