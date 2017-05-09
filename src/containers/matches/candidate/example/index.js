@@ -9,7 +9,8 @@ import '../matches.less'
 
 import Wrapper from '../../../../components/main/wrapper'
 import { HeaderFull, HeaderDropDownMenu, HeaderDropDownItem } from '../../../../components/main/header'
-import { CardClose, TabBar, Carousel, CardOpen, CardGlassdoor, DescriptiveParagraph, DescriptiveList, DescriptiveListItem} from '../../../../components/matches'
+import { CardClose, TabBar, CardOpen, CardGlassdoor, DescriptiveParagraph, DescriptiveList, DescriptiveListItem} from '../../../../components/matches'
+import Carousel from 'component/Carousel'
 
 import logoImage from '../../../../img/sprites-svg/logo.svg'
 

@@ -1,6 +1,6 @@
 import { deprecated } from 'core-decorators'
 import {
-    FETCH_JOBS_REQUESTED,
+    // FETCH_JOBS_REQUESTED,
     FETCH_JOBS_SUCCEEDED,
     FETCH_JOBS_FAILED,
 
@@ -64,7 +64,8 @@ import {
 
 export const getAllJobs = () => {
     return {
-    type:API, payload:{
+    type:API,
+    payload:{
         method: 'GET',
         url: API_ALL_JOBS,
     }
@@ -82,20 +83,20 @@ export const updateJob = (id, data)  => {
     }
 };
 
-export const updateJobSucceeded = (data) => {
+export const updateJobSucceeded = job => {
     return {
       type: UPDATE_JOB_SUCCEEDED,
       payload: {
-          job: data
+          job
       }
     }
 };
 
-export const updateJobFailed = (data) => {
+export const updateJobFailed = err => {
     return {
       type: UPDATE_JOB_FAILED,
       payload: {
-          err: data
+          err
       }
     }
 };
@@ -103,11 +104,12 @@ export const updateJobFailed = (data) => {
 
 export const deleteJob = (id) => {
     return {
-    type:API, payload:{
-        method: 'DELETE',
-        url: `${API_VACANCY_ROOT}/${id}`,
-    }
-  }
+        type:API,
+        payload:{
+            method: 'DELETE',
+            url: `${API_VACANCY_ROOT}/${id}`,
+        }
+      }
 };
 
 
@@ -124,31 +126,42 @@ export const createJob = (data) => {
 };
 
 
-export const createJobSucceeded = (data) => {
+export const createJobSucceeded = job => {
     return {
       type: CREATE_JOB_SUCCEEDED,
       payload: {
-          job: data
+          job
       }
     }
 };
 
-export const createJobFailed = (data) => {
+export const createJobFailed = err => {
     return {
       type: CREATE_JOB_FAILED,
       payload: {
-          err: data
+          err
       }
     }
 };
 
 
-export const fetchJobs = () => ({
-    type : FETCH_JOBS_REQUESTED
-})
+export const fetchJobs = () => {
+    return {
+        type : API,
+        payload:{
+            method: 'GET',
+            url:'/vacancies',
+            success: fetchJobsSucceeded,
+            error: fetchJobsFailed,
+        }
+    }
+};
 
-export const fetchJobsSucceeded = () => ({
-    type : FETCH_JOBS_SUCCEEDED
+export const fetchJobsSucceeded = jobs => ({
+    type : FETCH_JOBS_SUCCEEDED,
+    payload: {
+        jobs
+    }
 })
 
 export const fetchJobsFailed = () => ({

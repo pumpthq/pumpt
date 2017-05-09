@@ -3,9 +3,9 @@ import ShortID from 'shortid';
 import saveStep from './saveOnboardingStep';
 import _ from 'lodash';
 import {
-    OPEN_FETCH_SUCCEEDED,
-    DRAFTS_FETCH_SUCCEEDED,
-    CLOSED_FETCH_SUCCEEDED,
+    // OPEN_FETCH_SUCCEEDED,
+    // DRAFTS_FETCH_SUCCEEDED,
+    // CLOSED_FETCH_SUCCEEDED,
 
     OPEN_TAB,
     DRAFTS_TAB,
@@ -116,9 +116,10 @@ const getOnlyRequired = ({
 export default (state = defaultState, action) => {
     const { type, payload } = action;
     switch (type) {
-        case FETCH_JOBS_SUCCEEDED :
+        case FETCH_JOBS_SUCCEEDED : {
             const { jobs } = payload;
             return { jobs };
+        }
 
         // case OPEN_FETCH_SUCCEEDED :
         //     return {
@@ -156,13 +157,14 @@ export default (state = defaultState, action) => {
         //         activeTab: CLOSED_TAB,
         //     };
 
-        case CREATE_JOB_SUCCEEDED :
-            let drafts = _.clone(state.drafts)
-            drafts.push(payload.job)
+        case CREATE_JOB_SUCCEEDED : {
+            let jobs = _.clone(state.jobs)
+            jobs.push(payload.job)
             return {
                 ...state,
-                drafts,
-            };
+                jobs,
+            }
+        }
 
         case CREATE_JOB_FAILED :
             //TODO send errors back for newjob form state for display

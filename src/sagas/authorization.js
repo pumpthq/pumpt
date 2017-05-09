@@ -207,6 +207,7 @@ export default function () {
                 yield put(getLatestCandidateProfile());
             } else if (isRecruiter) {
                 yield put(getLatestCompanyProfile());
+                yield put(fetchJobs());
             }
         }),
         takeLatest(AUTHENTICATION_SUCCEEDED, function* (action) {

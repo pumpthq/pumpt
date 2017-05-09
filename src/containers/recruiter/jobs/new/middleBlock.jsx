@@ -30,11 +30,12 @@ const defaultProps = {};
 
 @connect(
     (state) => {
-        const { progress, active } = state.companyJobs.newJob;
+        //
+        //  const { progress, active } = state.companyJobs.newJob;
 
         return {
-            filled: progress.slice(),
-            active: active.slice().pop(),
+            filled: [],
+            active: [],
         };
     },
     (dispatch) => ({ dispatch })

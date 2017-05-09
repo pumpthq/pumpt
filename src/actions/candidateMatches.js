@@ -15,14 +15,12 @@ import {
     SET_DEFAULT_STATE,
 } from './../constants/candidateMatches';
 import { API } from '../constants/actionTypes'
-import { fetchFailed } from './api'
 
 export const fetchMatches = () => ({
     type : API,
     payload : {
         url : '/matches/candidate',
         success: fetchMatchesSucceeded,
-        error: fetchFailed
     }
 })
 
@@ -38,7 +36,6 @@ export const postBookmark = (matchingId) => ({
     payload : {
         url : `/matches/bookmark/${matchingId}`,
         success: postBookmarkSucceeded(matchingId),
-        error: fetchFailed
     }
 })
 
@@ -52,7 +49,6 @@ export const postReject = (matchingId) => ({
     payload : {
         url : `/matches/reject/${matchingId}`,
         success: postRejectSucceeded(matchingId),
-        error: fetchFailed
     }
 })
 
@@ -66,7 +62,6 @@ export const postApprove = (matchingId) => ({
     payload : {
         url : `/matches/approve/${matchingId}`,
         success: postApproveSucceeded(matchingId),
-        error: fetchFailed
     }
 })
 

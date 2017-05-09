@@ -1,31 +1,30 @@
-import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
-import { CardCarousel } from 'components/CardCarousel';
+import React, {Component, PropTypes} from 'react'
+import Carousel from 'component/Carousel'
 
+const CardSlider = props => {
+    const Item = props.component;
+    return (
+        <Carousel>
+            {props.items.map((item) => {
+                return <Item key={item.id} {...item} />
+            })}
+            {props.append}
+        </Carousel>
+    )
+}
 
-const propTypes = {
-    cards: PropTypes.arrayOf(PropTypes.shape({
+CardSlider.propTypes = {
+    items: PropTypes.arrayOf(PropTypes.shape({
         id: PropTypes.string,
-        name: PropTypes.string,
         logo: PropTypes.string,
         background: PropTypes.string
     }))
+    component: PropTypes.element,
+    append: PropTypes.node,
 };
-const defaultProps = {};
 
-export default class CardSlider extends Component {
+CardSlider.defaultProps = {
+    items: []
+};
 
-    constructor(props) {
-        super(props);
-
-        this.state = {};
-    }
-
-    render() {
-        return <CardCarousel {...this.props} />
-    }
-
-}
-
-CardSlider.propTypes = propTypes;
-CardSlider.defaultProps = defaultProps;
+export default CardSlider

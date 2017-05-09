@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router'
 import { H2 } from './../main/heading';
 import Button from './../main/button';
 import {
@@ -8,20 +9,20 @@ import {
 } from './../../actions/companyJobs';
 
 const propTypes = {
-    jobTitle: PropTypes.string,
-    location: PropTypes.string,
+    title: PropTypes.string,
+    state: PropTypes.string,
     salary: PropTypes.string,
     experience: PropTypes.string,
     employment: PropTypes.string,
     degree: PropTypes.string,
     matches: PropTypes.string,
-    id: PropTypes.string,
+    _id: PropTypes.string,
     dispatch: PropTypes.func,
 };
 
 const defaultProps = {
-    jobTitle: '',
-    location: '',
+    title: '',
+    state: '',
     salary: '',
     experience: '',
     employment: '',
@@ -34,28 +35,28 @@ const defaultProps = {
 class DraftsCard extends Component {
     render() {
         const {
-            jobTitle,
-            location,
+            title,
+            state,
             salary,
             experience,
             employment,
             degree,
-            id,
+            _id,
             dispatch,
         } = this.props;
         return (
             <div className="slider__item slider__item_content_middle">
                 <div className="mdl-card card card_size_s">
                     <div className="summary-head summary-head_rad-top" style={{ backgroundColor: '#4f68ac' }}>
-                        <div className={`summary-head__title mdl-card__title ${jobTitle ? null : 'summary-head__title_transparency'}`}>
+                        <div className={`summary-head__title mdl-card__title ${title ? null : 'summary-head__title_transparency'}`}>
                             <div className="summary-head__title-item">
                                 <div className="summary-head__title-column">
                                     <div className="summary-head__title-block">
                                         <H2 className="mdl-card__title-text heading heading_color_invert heading_type_two">
-                                            {jobTitle || 'Untitled'}
+                                            {title || 'Untitled'}
                                         </H2>
                                         <span className="mdl-card__subtitle-text summary-head__subtitle-text text text_color_invert text_size_xs">
-                                            {location || 'Location is not specified'}
+                                            {state || 'Location is not specified'}
                                         </span>
                                     </div>
                                 </div>
@@ -94,11 +95,11 @@ class DraftsCard extends Component {
                     </div>
                     <div className="card__middle-block text-center">
                         <Button
-                            disabled={`${jobTitle ? '' : 'disabled'}`}
+                            disabled={ title === undefined }
                             className="button_type_colored button_pos_center"
                             onClick={(event) => {
                                 event.preventDefault();
-                                dispatch(startMatching({ id }));
+                                dispatch(startMatching({ _id }));
                             }}
                         >
                             Start Matching
@@ -106,13 +107,16 @@ class DraftsCard extends Component {
                     </div>
                     <form className="card__actions-wrapper">
                         <div className="mdl-card__actions mdl-card--border card__actions">
-                            <a className="link" href="">Edit Description</a>
+                            <Link to={`/recruiter/jobs/edit/${_id}`} className="link">
+                                Edit Description
+                            </Link>
+
                             <div className="mdl-layout-spacer" />
                             <button
                                 className="link link_type_additional"
                                 onClick={(event) => {
                                     event.preventDefault();
-                                    dispatch(deleteJob(id));
+                                    dispatch(deleteJob(_id));
                                 }}
                             >
                                 Delete Draft

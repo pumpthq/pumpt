@@ -2,8 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
 const propTypes = {
-    jobTitle: PropTypes.string,
-    location: PropTypes.string,
+    title: PropTypes.string,
+    state: PropTypes.string,
     salary: PropTypes.string,
     experience: PropTypes.string,
     employment: PropTypes.string,
@@ -12,41 +12,42 @@ const propTypes = {
 };
 
 const defaultProps = {
-    jobTitle: ' Media Manager Assistant ',
-    location: 'New York, NY',
+    title: ' Media Manager Assistant ',
+    state: 'New York, NY',
     salary: '$50-100K',
     experience: '2-5 years',
     employment: 'Full-time',
     degree: 'Bachelor\'s',
+    industry: 'AdTech/Platform'
 };
 
-@connect(
-    (state) => {
-        const {
-            jobTitle,
-            location,
-            salary,
-            experience,
-            employment,
-            degree,
-            industry,
-        } = state.companyJobs.newJob;
-        return {
-            jobTitle,
-            location,
-            salary,
-            experience,
-            employment,
-            degree,
-            industry,
-        };
-    }
-)
+// @connect(
+//     (state) => {
+//         const {
+//             title,
+//             state,
+//             salary,
+//             experience,
+//             employment,
+//             degree,
+//             industry,
+//         } = state.companyJobs.newJob;
+//         return {
+//             title,
+//             state,
+//             salary,
+//             experience,
+//             employment,
+//             degree,
+//             industry,
+//         };
+//     }
+// )
 class SummaryHeadFilled extends Component {
     render() {
         const {
-            jobTitle,
-            location,
+            title,
+            state,
             salary,
             experience,
             employment,
@@ -60,10 +61,10 @@ class SummaryHeadFilled extends Component {
                         <div className="summary-head__title-item">
                             <div className="summary-head__title-column">
                                 <h2 className="mdl-card__title-text heading heading_color_invert heading_type_two">
-                                    {jobTitle}
+                                    {title}
                                 </h2>
                                 <span className="mdl-card__subtitle-text summary-head__subtitle-text text text_color_invert">
-                                    {location}
+                                    {state}
                                 </span>
                             </div>
                         </div>
@@ -78,10 +79,10 @@ class SummaryHeadFilled extends Component {
 
                     <div className="summary-head__title-column">
                         <span className="text text_color_invert summary-head__label">
-                            Focus
+                            Area of Expertise
                         </span>
                         <span className="text text_color_invert text_size_s summary-head__summary">
-                            {industry.value}
+                            {industry}
                         </span>
                     </div>
 
@@ -90,7 +91,7 @@ class SummaryHeadFilled extends Component {
                             Salary
                         </span>
                         <span className="text text_color_invert text_size_s summary-head__summary">
-                            {salary.value}
+                            {salary}
                         </span>
                     </div>
 
@@ -99,7 +100,7 @@ class SummaryHeadFilled extends Component {
                             Experience
                         </span>
                         <span className="text text_color_invert text_size_s summary-head__summary">
-                            {experience.value}
+                            {experience}
                         </span>
                     </div>
 
@@ -108,7 +109,7 @@ class SummaryHeadFilled extends Component {
                             Employment
                         </span>
                         <span className="text text_color_invert text_size_s summary-head__summary">
-                            {employment.value}
+                            {employment}
                         </span>
                     </div>
 
@@ -117,7 +118,7 @@ class SummaryHeadFilled extends Component {
                             Degree
                         </span>
                         <span className="text text_color_invert text_size_s summary-head__summary">
-                            {degree.value}
+                            {degree}
                         </span>
                     </div>
                 </div>

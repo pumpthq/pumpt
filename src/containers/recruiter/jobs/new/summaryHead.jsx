@@ -25,7 +25,7 @@ export default class SummaryHead extends Component {
         //const active = head === SHOW_SUMMARY_HEAD_STANDARD;
         return (
             <div className={`summary-head summary-head_rad-top ${filled ? '' : 'summary-head_form_true'}`} style={{ backgroundColor: '#4f68ac' }}>
-                {filled ? <SummaryHeadFilled /> : <SummaryHeadActive /> }
+                {filled ? <SummaryHeadFilled {...this.props} /> : <SummaryHeadActive {...this.props} /> }
             </div>
         );
     }

@@ -14,7 +14,7 @@ module.exports = {
           childRoutes: [
               { path: 'closed', component: ClosedJobsSlider },
               { path: 'open', component: OpenJobsSlider },
-              { path: 'drafts', component: DraftsJobsSlider },
+              { path: 'drafts', component: DraftJobsSlider },
           ]
       },
     ]

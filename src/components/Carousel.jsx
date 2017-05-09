@@ -22,7 +22,7 @@ const defaultProps = {
     openCard: false
 };
 
-export default class carouselMathes extends Component {
+export default class Carousel extends Component {
     constructor(props) {
         super(props);
 
@@ -188,5 +188,5 @@ export default class carouselMathes extends Component {
     }
 }
 
-carouselMathes.propTypes = propTypes;
-carouselMathes.defaultProps = defaultProps;
+Carousel.propTypes = propTypes;
+Carousel.defaultProps = defaultProps;
