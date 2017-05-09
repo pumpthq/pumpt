@@ -16,6 +16,9 @@ export default store => next => action => {
 
       axios({ baseURL: API_URL, method, url, data })
       .then(res => store.dispatch(success(res.data)))
-      .catch(err => store.dispatch(error(err)))
+      .catch(err => {
+          if(err instanceof Error) throw err
+          else store.dispatch(error(err))
+      })
     }
 }
