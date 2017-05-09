@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
-import './carousel.less'
+import './matches/carousel.less'
 
-import ArrowIcon from '../../components/icons/arrow'
+import ArrowIcon from 'components/icons/arrow'
 
 const propTypes = {
     className: PropTypes.string,

@@ -12,7 +12,6 @@ const propTypes = {
     matches: PropTypes.string,
     industry: PropTypes.string,
     id: PropTypes.string,
-    dispatch: PropTypes.func,
 };
 
 const defaultProps = {
@@ -39,7 +38,7 @@ class Card extends Component {
             matches,
             industry,
             dispatch,
-            id,
+            _id,
         } = this.props;
         return (
             <div className="slider__item slider__item_content_middle">
@@ -112,7 +111,7 @@ class Card extends Component {
                                 className="link link_type_additional"
                                 onClick={(event) => {
                                     event.preventDefault();
-                                    dispatch(closeJob({ id }));
+                                    dispatch(closeJob(_id));
                                 }}
                             >
                             Close Job

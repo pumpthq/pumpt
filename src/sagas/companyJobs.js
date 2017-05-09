@@ -5,12 +5,6 @@ import { call, put, select } from 'redux-saga/effects';
 import { push } from 'react-router-redux';
 // import states from './../constants/states.json';
 import {
-    START_MATCHING,
-    CLOSE_JOB,
-    DELETE_JOB
-} from './../constants/companyJobs'
-
-import {
     API_URL,
     API_ALL_JOBS,
     // API_OPEN_JOBS,
@@ -18,20 +12,24 @@ import {
     // API_CLOSED_JOBS,
     API_VACANCY_ROOT,
 } from './../constants/api';
+
 import {
     ROUTE_COMPANY_JOBS_OPEN,
     ROUTE_COMPANY_JOBS_DRAFTS,
     ROUTE_COMPANY_JOBS_CLOSED,
 } from './../constants/routes';
+
 import {
     ANNUAL_INCOME_DROPDOWN_DATA,
     EXPERIENCE_DROPDOWN_DATA,
     FIELD_OF_EXPERTISE_DROPDOWN_DATA,
 } from './../constants/candidateOnboarding';
+
 import {
     DEGREES_DROPDOWN_DATA,
     EMPLOYEMENTS_DROPDOWN_DATA,
 } from './../constants/companyJobs';
+
 import {
     ROUTE_TO_OPEN,
     ROUTE_TO_DRAFTS,
@@ -44,16 +42,20 @@ import {
     CREATE_JOB_SUCCEEDED,
     CREATE_JOB_FAILED,
 
-    SAVE_SUMMARY_DATA,
-    SAVE_DESCRIPTION_DATA,
-    SAVE_RESPONSIBILITIES_DATA,
-    SAVE_SKILLS_AND_REQUIREMENTS_DATA,
-    CLOSE_OPENED_NEW_JOB_CARD,
+    OPEN_JOB_SUCCEEDED,
+    CLOSE_JOB_SUCCEEDED,
+    DELETE_JOB_SUCCEEDED,
+
+    // SAVE_SUMMARY_DATA,
+    // SAVE_DESCRIPTION_DATA,
+    // SAVE_RESPONSIBILITIES_DATA,
+    // SAVE_SKILLS_AND_REQUIREMENTS_DATA,
+    // CLOSE_OPENED_NEW_JOB_CARD,
 
 } from './../constants/companyJobs';
-import {
-    getCompanyJobs
-} from './../reducers/companyJobs';
+// import {
+//     getCompanyJobs
+// } from './../reducers/companyJobs';
 import {
     // fetchAll,
     // fetchAllSucceeded,
@@ -71,13 +73,13 @@ import {
     // fetchClosedSucceeded,
     // fetchClosedFailed,
 
-    saveSummaryDataSucceeded,
-    saveSummaryDataFailed,
+    // saveSummaryDataSucceeded,
+    // saveSummaryDataFailed,
 
     routeToOpen,
     routeToDrafts,
     routeToClosed,
-    clearNewJobState
+    // clearNewJobState
 } from './../actions/companyJobs';
 // import {
 //     logOut,
@@ -94,7 +96,7 @@ export default function () {
         takeLatest(CREATE_JOB_SUCCEEDED, function * (action) {
           // yield put(push(ROUTE_TO_DRAFTS)); //or route to view job
           const { job } = action.payload
-          yield put(push(`recruiter/jobs/edit/${job.id}`))
+          yield put(push(`recruiter/jobs/edit/${job._id}`))
         }),
         // takeLatest(SAVE_SUMMARY_DATA, function * () {
         //
@@ -259,26 +261,26 @@ export default function () {
         //         console.log(`Delete job fails with id ${id}`)
         //     }
         // }),
-        takeLatest(START_MATCHING, function * (action) {
-            const { accessToken } = yield select(getAccessToken);
-            const { id } = action.payload
-
-            try {
-                yield call(updateJob, {
-                    id,
-                    accessToken,
-                    body : {
-                        status: 'opened'
-                    }
-                })
-                yield put(routeToDrafts())
-            } catch (ex) {
-                console.log(`Start matching fails with id ${id}`)
-            }
-        }),
-        takeLatest(CLOSE_OPENED_NEW_JOB_CARD, function * (action) {
-            yield put(routeToDrafts());
-            yield put(clearNewJobState())
-        })
+        // takeLatest(START_MATCHING, function * (action) {
+        //     const { accessToken } = yield select(getAccessToken);
+        //     const { id } = action.payload
+        //
+        //     try {
+        //         yield call(updateJob, {
+        //             id,
+        //             accessToken,
+        //             body : {
+        //                 status: 'opened'
+        //             }
+        //         })
+        //         yield put(routeToDrafts())
+        //     } catch (ex) {
+        //         console.log(`Start matching fails with id ${id}`)
+        //     }
+        // }),
+        // takeLatest(CLOSE_OPENED_NEW_JOB_CARD, function * (action) {
+        //     yield put(routeToDrafts());
+        //     yield put(clearNewJobState())
+        // })
     ];
 }
