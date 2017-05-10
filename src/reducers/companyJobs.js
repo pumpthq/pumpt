@@ -14,6 +14,12 @@ import {
     FETCH_JOBS_SUCCEEDED,
     FETCH_JOBS_FAILED,
 
+    FETCH_COMPANY_SUCCEEDED,
+    FETCH_COMPANY_FAILED,
+
+    FETCH_RECRUITER_SUCCEEDED,
+    FETCH_RECRUITER_FAILED,
+
     CREATE_JOB_SUCCEEDED,
     CREATE_JOB_FAILED,
 
@@ -123,9 +129,18 @@ export default (state = defaultState, action) => {
     switch (type) {
         case FETCH_JOBS_SUCCEEDED : {
             const { jobs } = payload;
-            return { jobs };
+            return { ...state, jobs };
         }
 
+        case FETCH_COMPANY_SUCCEEDED : {
+            const { company } = payload;
+            return { ...state, company };
+        }
+
+        case FETCH_RECRUITER_SUCCEEDED : {
+            const { recruiter } = payload;
+            return { ...state, recruiter };
+        }
         // case OPEN_FETCH_SUCCEEDED :
         //     return {
         //         ...state,

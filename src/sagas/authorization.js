@@ -46,7 +46,7 @@ import {
 } from './../actions/authorization';
 
 import { fetchMatches } from './../actions/candidateMatches';
-import { fetchJobs } from './../actions/companyJobs';
+import { fetchJobs, fetchCompany, fetchRecruiter } from './../actions/companyJobs';
 // import {
 //     getAccessToken,
 // } from './../reducers/authorization';
@@ -66,6 +66,7 @@ import { getLatestProfile as getLatestCompanyProfile } from './../actions/applic
 import { clearMediaState } from './../actions/applicationPhotoUploading';
 import { clearCompanyJobsState } from './../actions/companyJobs';
 import { clearCandidateMatchesState } from './../actions/candidateMatches';
+
 // import {
 //     routeToOpen as navigateToOpenJobs,
 // } from './../actions/companyJobs';
@@ -206,7 +207,9 @@ export default function () {
             if (isCandidate) {
                 yield put(getLatestCandidateProfile());
             } else if (isRecruiter) {
-                yield put(getLatestCompanyProfile());
+                // yield put(getLatestCompanyProfile());
+                yield put(fetchRecruiter());
+                yield put(fetchCompany());
                 yield put(fetchJobs());
             }
         }),
@@ -235,8 +238,10 @@ export default function () {
                     yield put(push(ROUTE_CANDIDATE_MATCHES_ALL));
                     yield put(fetchMatches())
                 } else if (isRecruiter && !isNotApproved) {
-                    yield put(getLatestCompanyProfile());
+                    // yield put(getLatestCompanyProfile());
                     yield put(push(ROUTE_COMPANY_JOBS_OPEN));
+                    yield put(fetchRecruiter());
+                    yield put(fetchCompany());
                     yield put(fetchJobs());
                 }
 
