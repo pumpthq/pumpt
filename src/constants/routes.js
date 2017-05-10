@@ -14,3 +14,4 @@ export const ROUTE_COMPANY_JOBS_DRAFTS = '/recruiter/jobs/show/drafts';
 export const ROUTE_COMPANY_JOBS_CLOSED = '/recruiter/jobs/show/closed';
 export const ROUTE_COMPANY_JOBS_NEW = '/recruiter/jobs/new';
 export const ROUTE_COMPANY_JOBS_EDIT = '/recruiter/jobs/edit';
+export const ROUTE_EDIT_COMPANY = '/recruiter/company'

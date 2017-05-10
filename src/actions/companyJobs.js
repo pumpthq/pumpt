@@ -62,12 +62,14 @@ import {
 } from './../constants/companyJobs';
 import { API } from '../constants/actionTypes'
 import {
-    API_URL,
-    API_ALL_JOBS,
-    API_OPEN_JOBS,
-    API_DRAFT_JOBS,
-    API_CLOSED_JOBS,
+    // API_URL,
+    // API_ALL_JOBS,
+    // API_OPEN_JOBS,
+    // API_DRAFT_JOBS,
+    // API_CLOSED_JOBS,
     API_VACANCY_ROOT,
+    API_RECRUITER_ROOT,
+    API_COMPANY_ROOT,
 } from './../constants/api';
 
 
@@ -175,7 +177,7 @@ export const fetchCompany = () => {
         type : API,
         payload:{
             method: 'GET',
-            url: '/companies/current',
+            url: `${API_COMPANY_ROOT}/current`,
             success: fetchCompanySucceeded,
             error: fetchCompanyFailed,
         }
@@ -199,7 +201,7 @@ export const fetchRecruiter = () => {
         type : API,
         payload:{
             method: 'GET',
-            url: '/recruiter/current',
+            url: `${API_RECRUITER_ROOT}/current`,
             success: fetchRecruiterSucceeded,
             error: fetchRecruiterFailed,
         }
