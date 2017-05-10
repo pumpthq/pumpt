@@ -66,7 +66,7 @@ export default class DropdownMenu extends Component {
                             <img
                                 role="presentation"
                                 className="image image_round image_size_xs"
-                                src={`${API_URL}${API_IMAGES}/${userAvatar}`}
+                                src={userAvatar}
                             /> :
                             <span className="image image_round image_size_xxl image_empty image_photo">
                                 <IconPerson />
