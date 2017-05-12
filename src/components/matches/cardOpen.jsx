@@ -14,7 +14,7 @@ import DeclineIcon from '../icons/Decline'
 
 import CompanyLinkCard from './cardGlassdor'
 
-import { tintedBackground } from './helper'
+import { tintedBackground } from 'components/helpers'
 
 const propTypes = {
     name: PropTypes.string,

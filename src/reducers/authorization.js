@@ -10,6 +10,7 @@ import {
     // AUTHENTICATION_FAILED,
     CHANGE_PASSWORD_SUCCEEDED,
     FORGOT_PASSWORD_SUCCEEDED,
+    USER_LOGOUT_SUCCEEDED,
 } from './../constants/authorization';
 
 const defaultState = {
@@ -57,6 +58,9 @@ export default (state = defaultState, action) => {
                 ...state,
                 ...payload,
             };
+
+        case USER_LOGOUT_SUCCEEDED:
+            return { /* empty state */ }
 
         // case AUTHENTICATION_CANDIDATE_FAILED :
         // case AUTHENTICATION_COMPANY_FAILED :

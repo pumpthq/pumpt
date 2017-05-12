@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react';
-import GlassDoorImage from './glassdoor.jpg'
+import GlassDoorImage from 'img/glassdoor.jpg'
 
 const propTypes = {
     name: PropTypes.string,

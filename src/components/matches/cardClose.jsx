@@ -9,7 +9,7 @@ import Approve from '../icons/heart'
 
 import BookmarkFill from '../icons/BookmarkFill'
 
-import { tintedBackground } from './helper'
+import { tintedBackground } from 'components/helpers'
 
 import './card.less'
 
