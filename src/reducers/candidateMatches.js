@@ -13,6 +13,7 @@ import {
     HIDE_FULL_DESCRIPTION,
 
     SET_DEFAULT_STATE,
+    FETCH_COMPANY_SUCCEEDED,
 } from './../constants/candidateMatches';
 
 const defaultState = {
@@ -27,6 +28,7 @@ const defaultState = {
         active: [],
         summary: {},
     },
+    companies: [],
 };
 
 export default (state = defaultState, action) => {
@@ -120,6 +122,12 @@ export default (state = defaultState, action) => {
 
             return { ...state, all, bookmarked, approved }
 
+        case FETCH_COMPANY_SUCCEEDED: {
+            const { company } = payload;
+            const companies = _.filter(state.companies, company => company._id != company._id);
+            companies.push(company)
+            return { ...state, companies }
+        }
 
         case SET_DEFAULT_STATE :
             return defaultState;

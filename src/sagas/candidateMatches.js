@@ -41,7 +41,10 @@ import {
 
     routeToAll,
     routeToBookmarked,
-    routeToNotInterested
+    routeToNotInterested,
+
+    fetchCompany,
+
 } from './../actions/candidateMatches';
 import {
     logOut,
@@ -52,6 +55,12 @@ import {
 
 export default function () {
     return [
+        takeLatest(VIEW_COMPANY, function * (action) {
+            const { payload } = action
+            const { id } = payload
+            yield put(fetchCompany(id))
+            yield put(push(`/candidate/company/${id}`))
+        })
         // takeLatest(ROUTE_TO_ALL, function * () {
         //     // const { accessToken } = yield select(getAccessToken);
         //     yield put(fetchMatches())

@@ -13,6 +13,9 @@ import {
     HIDE_FULL_DESCRIPTION,
 
     SET_DEFAULT_STATE,
+
+    FETCH_COMPANY_SUCCEEDED,
+    VIEW_COMPANY,
 } from './../constants/candidateMatches';
 import { API } from '../constants/actionTypes'
 
@@ -99,3 +102,25 @@ export const routeToNotInterested = () => ({
 export const clearCandidateMatchesState = () => ({
     type: SET_DEFAULT_STATE,
 });
+
+export const fetchCompany = (id) => ({
+    type : API,
+    payload : {
+        url : `/companies/${id}`,
+        success: fetchCompanySucceeded(id),
+    }
+})
+
+export const fetchCompanySucceeded = id => company => ({
+    type : FETCH_COMPANY_SUCCEEDED,
+    payload : {
+        company
+    }
+})
+
+export const viewCompany = id => ({
+    type : VIEW_COMPANY,
+    payload : {
+        id
+    }
+})

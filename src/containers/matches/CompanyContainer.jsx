@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux'
 
 import CompanyProfile from 'components/CompanyProfile'
+import VerticalScroller from 'components/VerticalScroller'
 
 const mapStateToProps = (state, ownProps) => (
     //TODO: Handle the case where company had not been fetched yet.
@@ -13,7 +14,9 @@ class CompanyContainer extends Component {
 
     render() {
         return (
+            <VerticalScroller>
               <CompanyProfile {...this.props.company} />
+            </VerticalScroller>
         );
     }
 

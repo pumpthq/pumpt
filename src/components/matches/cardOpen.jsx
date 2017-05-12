@@ -16,6 +16,8 @@ import CompanyLinkCard from './cardGlassdor'
 
 import { tintedBackground } from 'components/helpers'
 
+import { browserHistory } from 'react-router'
+
 const propTypes = {
     name: PropTypes.string,
     logo: PropTypes.string,
@@ -90,7 +92,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   }
 }
 
-import { browserHistory } from 'react-router'
 
 @connect(undefined, mapDispatchToProps)
 export default class CardOpen extends Component {

@@ -9,7 +9,9 @@ class CompanyContainer extends Component {
 
     render() {
         return (
-              <CompanyProfile {...this.props.company}/>
+            <VerticalScroller>
+                <CompanyProfile {...this.props.company}/>
+            </VerticalScroller>
         );
     }
 

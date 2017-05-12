@@ -1,52 +1,57 @@
 import React, {Component, PropTypes} from 'react';
+import { connect } from 'react-redux'
 import GlassDoorImage from 'img/glassdoor.jpg'
 
 const propTypes = {
-    name: PropTypes.string,
-    logo: PropTypes.string,
-    ratingImage: PropTypes.string,
-    ratingCount: PropTypes.number,
-    rakuten: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.bool
-    ]),
-    facebook: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.bool
-    ]),
-    linkedin: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.bool
-    ]),
-    twitter: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.bool
-    ]),
-    headquarters: PropTypes.string,
-    companyType: PropTypes.string,
-    ofEmployees: PropTypes.string,
-    founded: PropTypes.string,
-    onClickGoToCompanyPage: PropTypes.func,
-    onClickGoToBlacklistCompany: PropTypes.func
+    // name: PropTypes.string,
+    // logo: PropTypes.string,
+    // ratingImage: PropTypes.string,
+    // ratingCount: PropTypes.number,
+    // rakuten: PropTypes.oneOfType([
+    //     PropTypes.string,
+    //     PropTypes.bool
+    // ]),
+    // facebook: PropTypes.oneOfType([
+    //     PropTypes.string,
+    //     PropTypes.bool
+    // ]),
+    // linkedin: PropTypes.oneOfType([
+    //     PropTypes.string,
+    //     PropTypes.bool
+    // ]),
+    // twitter: PropTypes.oneOfType([
+    //     PropTypes.string,
+    //     PropTypes.bool
+    // ]),
+    // locationHeadquarters: PropTypes.string,
+    // type: PropTypes.string,
+    // employeesAmount: PropTypes.string,
+    // foundDate: PropTypes.string,
+    // onClickGoToCompanyPage: PropTypes.func,
+    // onClickGoToBlacklistCompany: PropTypes.func
 };
 
 const defaultProps = {
-    name: 'New York Times',
-    logo: '//superrepo.org/static/images/icons/original/xplugin.video.nytimes.png.pagespeed.ic.XOPQITkLio.png',
-    ratingImage: '',
-    ratingCount: 2,
-    rakuten: '',
-    facebook: '',
-    linkedin: '',
-    twitter: '',
-    headquarters: 'New York, NY',
-    companyType: 'Publishing',
-    ofEmployees: '500-1000',
-    founded: '1982',
-    onClickGoToCompanyPage: e => {},
-    onClickGoToBlacklistCompany: e => {}
+    // name: 'New York Times',
+    // logo: '//superrepo.org/static/images/icons/original/xplugin.video.nytimes.png.pagespeed.ic.XOPQITkLio.png',
+    // ratingImage: '',
+    // ratingCount: 2,
+    // rakuten: '',
+    // facebook: '',
+    // linkedin: '',
+    // twitter: '',
+    // locationHeadquarters: 'New York, NY',
+    // type: 'Publishing',
+    // employeesAmount: '500-1000',
+    // foundDate: '1982',
+    // onClickGoToCompanyPage: e => {},
+    // onClickGoToBlacklistCompany: e => {}
+    locationHeadquarters: {city:'', state:''}
 };
 
+const matchDispatchToProps = dispatch => ({dispatch})
+
+@connect(undefined,mapDispatchToProps)
 export default class cardGlassdor extends Component {
     renderSocialNetworkList() {
         let socialNetworkItem = this.renderSocialNetworkItem
@@ -69,30 +74,30 @@ export default class cardGlassdor extends Component {
         )
     }
     renderCompanyInformation() {
-        const { headquarters, companyType, ofEmployees, founded } = this.props
+        const { locationHeadquarters, type, employeesAmount, foundDate } = this.props
 
         return (
             <div
                 className="summary-head__title-item summary-head__title-item_type_alignment summary-head__title-item_type_middle">
                 <div className="summary-head__title-column"><span
-                    className="text summary-head__label">Headquarters</span> <span
-                    className="text text_size_s summary-head__summary">{headquarters}</span>
+                    className="text summary-head__label">locationHeadquarters</span> <span
+                    className="text text_size_s summary-head__summary">{locationHeadquarters.city}, {locationHeadquarters.state.substring(0,2)}</span>
                 </div>
                 <div className="summary-head__title-column"><span
                     className="text summary-head__label">Company Type</span> <span
-                    className="text text_size_s summary-head__summary">{companyType}</span>
+                    className="text text_size_s summary-head__summary">{type}</span>
                 </div>
                 <div className="summary-head__title-column"><span
                     className="text summary-head__label"># of employees</span> <span
-                    className="text text_size_s summary-head__summary">{ofEmployees}</span></div>
+                    className="text text_size_s summary-head__summary">{employeesAmount}</span></div>
                 <div className="summary-head__title-column"><span
-                    className="text summary-head__label">Founded</span> <span
-                    className="text text_size_s summary-head__summary">{founded}</span></div>
+                    className="text summary-head__label">foundDate</span> <span
+                    className="text text_size_s summary-head__summary">{foundDate}</span></div>
             </div>
         )
     }
     render() {
-        const { name, logo, ratingImage, ratingCount, onClickGoToCompanyPage, onClickGoToBlacklistCompany } = this.props
+        const { name, logo, ratingImage, ratingCount, onClickGoToCompanyPage } = this.props
         return (
             <div className="mdl-card card card_type_mini card_state_open">
                 <div className="summary-head">
@@ -139,7 +144,7 @@ export default class cardGlassdor extends Component {
                         {this.renderCompanyInformation()}
                         <div className="summary-head__title-item summary-head__title-item_type_alignment summary-head__title-item_type_action-bar">
                             <div className="summary-head__title-column">
-                                <a className="link" onClick={onClickGoToCompanyPage}>
+                                <a className="link" onClick={dispatch(viewCompany(this.props._id))}>
                                     Go to Company Page
                                 </a>
                             </div>
