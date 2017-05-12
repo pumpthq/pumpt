@@ -14,6 +14,7 @@ import {
 
     SET_DEFAULT_STATE,
     FETCH_COMPANY_SUCCEEDED,
+    FETCH_VACANCY_SUCCEEDED,
 } from './../constants/candidateMatches';
 
 const defaultState = {
@@ -29,6 +30,7 @@ const defaultState = {
         summary: {},
     },
     companies: [],
+    vacancies: [],
 };
 
 export default (state = defaultState, action) => {
@@ -127,6 +129,13 @@ export default (state = defaultState, action) => {
             const companies = _.filter(state.companies, company => company._id != company._id);
             companies.push(company)
             return { ...state, companies }
+        }
+
+        case FETCH_VACANCY_SUCCEEDED: {
+            const { vacancy } = payload;
+            const vacancies = _.filter(state.vacancies, vacancy => vacancy._id != vacancy._id);
+            vacancies.push(vacancy)
+            return { ...state, vacancies }
         }
 
         case SET_DEFAULT_STATE :

@@ -16,6 +16,10 @@ import {
 
     FETCH_COMPANY_SUCCEEDED,
     VIEW_COMPANY,
+
+    FETCH_VACANCY_SUCCEEDED,
+    VIEW_VACANCY,
+
 } from './../constants/candidateMatches';
 import { API } from '../constants/actionTypes'
 
@@ -120,6 +124,28 @@ export const fetchCompanySucceeded = id => company => ({
 
 export const viewCompany = id => ({
     type : VIEW_COMPANY,
+    payload : {
+        id
+    }
+})
+
+export const fetchVacancy = (id) => ({
+    type : API,
+    payload : {
+        url : `/vacancies/${id}`,
+        success: fetchVacancySucceeded(id),
+    }
+})
+
+export const fetchVacancySucceeded = id => vacancy => ({
+    type : FETCH_VACANCY_SUCCEEDED,
+    payload : {
+        vacancy
+    }
+})
+
+export const viewVacancy = id => ({
+    type : VIEW_VACANCY,
     payload : {
         id
     }

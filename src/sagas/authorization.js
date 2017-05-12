@@ -205,6 +205,7 @@ export default function () {
             const { isCandidate, isNotApproved, isRecruiter } = payload
 
             if (isCandidate) {
+                yield put(fetchMatches())
                 yield put(getLatestCandidateProfile());
             } else if (isRecruiter) {
                 // yield put(getLatestCompanyProfile());
@@ -256,11 +257,11 @@ export default function () {
             // try {
             //     yield call(apiLogOut);
                 // yield put(logOutSucceeded({}));
-                yield put(clearApplicationCandidateState());
-                yield put(clearApplicationCompanyState());
-                yield put(clearMediaState());
-                yield put(clearCompanyJobsState());
-                yield put(clearCandidateMatchesState());
+                // yield put(clearApplicationCandidateState());
+                // yield put(clearApplicationCompanyState());
+                // yield put(clearMediaState());
+                // yield put(clearCompanyJobsState());
+                // yield put(clearCandidateMatchesState());
                 yield put(push(ROUTE_LOGIN));
             // } catch (ex) {
                 // yield put(logOutFailed({}));

@@ -2,6 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import { connect } from 'react-redux'
 import GlassDoorImage from 'img/glassdoor.jpg'
 
+import { viewCompany } from '../../actions/candidateMatches'
 const propTypes = {
     // name: PropTypes.string,
     // logo: PropTypes.string,
@@ -49,7 +50,7 @@ const defaultProps = {
     locationHeadquarters: {city:'', state:''}
 };
 
-const matchDispatchToProps = dispatch => ({dispatch})
+const mapDispatchToProps = dispatch => ({dispatch})
 
 @connect(undefined,mapDispatchToProps)
 export default class cardGlassdor extends Component {
@@ -97,7 +98,7 @@ export default class cardGlassdor extends Component {
         )
     }
     render() {
-        const { name, logo, ratingImage, ratingCount, onClickGoToCompanyPage } = this.props
+        const { dispatch, name, logo, ratingImage, ratingCount, onClickGoToCompanyPage } = this.props
         return (
             <div className="mdl-card card card_type_mini card_state_open">
                 <div className="summary-head">
@@ -144,7 +145,7 @@ export default class cardGlassdor extends Component {
                         {this.renderCompanyInformation()}
                         <div className="summary-head__title-item summary-head__title-item_type_alignment summary-head__title-item_type_action-bar">
                             <div className="summary-head__title-column">
-                                <a className="link" onClick={dispatch(viewCompany(this.props._id))}>
+                                <a className="link" onClick={()=>dispatch(viewCompany(this.props.company))}>
                                     Go to Company Page
                                 </a>
                             </div>
