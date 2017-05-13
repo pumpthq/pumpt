@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 import { connect} from 'react-redux'
 import { Link } from 'react-router'
-import { postBookmark, postReject, postApprove, showFullDescription } from '../../actions/candidateMatches'
+import { postBookmark, postReject, postApprove, viewVacancy } from '../../actions/candidateMatches'
 
 import Bookmark from '../icons/bookmark'
 import Decline from '../icons/Decline'
@@ -65,8 +65,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     postApprove: () => {
       dispatch(postApprove(ownProps.id))
   },
-    showFullDescription: () => {
-      dispatch(showFullDescription(ownProps.id))
+    viewVacancy: () => {
+      dispatch(viewVacancy(ownProps._vacancy))
     }
 
   }
@@ -185,7 +185,7 @@ export default class cardClose extends Component {
                             </div>
                             <div className="col-xs-6">
                                 {/* <a className="link" onClick={showFullDescription}>View Full Description</a> */}
-                                <Link to={`candidate/matches/vacancy/${id}`} className="link" action={showFullDescription}>View Full Description</Link>
+                                <a className="link" onClick={viewVacancy}>View Full Description</a>
                             </div>
 
                         </div>

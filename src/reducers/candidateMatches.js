@@ -48,6 +48,7 @@ export default (state = defaultState, action) => {
 
                 let card = {
                     id: matching._id,
+                    _vacancy: matching._vacancy,
                     name: vacancy.company.name,
                     logo: vacancy.company.logo,
                     title: vacancy.title,
