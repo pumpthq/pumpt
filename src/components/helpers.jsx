@@ -9,3 +9,5 @@ export const tintedBackground = (background,r,g,b,a) => {
             `
     }
 }
+
+export const dispatchProp = dispatch => ({dispatch})

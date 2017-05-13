@@ -170,7 +170,7 @@ export default class cardClose extends Component {
         }
     }
     render() {
-        const { showFullDescription, id } = this.props;
+        const { viewVacancy, id } = this.props;
         return (
             <div className="slider__item">
                 <div className="mdl-card card">

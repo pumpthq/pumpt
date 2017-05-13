@@ -62,13 +62,13 @@ export default function () {
         takeLatest(VIEW_COMPANY, function * (action) {
             const { payload } = action
             const { id } = payload
-            yield put(fetchCompany(id))
+            // yield put(fetchCompany(id))
             yield put(push(`/candidate/matches/company/${id}`))
         }),
         takeLatest(VIEW_VACANCY, function * (action) {
             const { payload } = action
             const { id } = payload
-            yield put(fetchVacancy(id))
+            // yield put(fetchVacancy(id))
             yield put(push(`/candidate/matches/vacancy/${id}`))
         })
         // takeLatest(ROUTE_TO_ALL, function * () {

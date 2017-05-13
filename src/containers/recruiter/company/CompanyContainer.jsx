@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux'
-import CompanyProfile from 'components/CompanyProfile'
+import CompanyProfile from 'components/company/Profile'
 import {tintedBackground} from 'components/helpers'
 const mapStateToProps = state => ({ company: state.companyJobs.company })
 
