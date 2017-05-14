@@ -7,12 +7,6 @@ import { postBookmark, postReject, postApprove, hideFullDescription } from '../.
 import ButtonApply from './buttonApply'
 import ButtonLink from './buttonLink'
 
-import Bookmark from '../icons/bookmark'
-import BookmarkFill from '../icons/BookmarkFill'
-import OkIcon from '../icons/ok'
-import DeclineIcon from '../icons/Decline'
-
-
 import { ApproveOpen, Decline } from 'components/icons'
 
 import { tintedBackground } from 'components/helpers'
@@ -97,7 +91,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 
 
 @connect(undefined, mapDispatchToProps)
-export default class VacancyCard extends Component {
+export default class Profile extends Component {
 
     renderMatchInformation() {
         const { name, logo, title, location, match, salary, experience, employment, background, backgroundTint, degree } = this.props
@@ -199,7 +193,7 @@ export default class VacancyCard extends Component {
         if (status.bookmarked === undefined && status.approved === undefined) {
             return (
                 <a onClick={addToBookmark} className="button button_type_icons">
-                    <Bookmark/>
+
                 </a>
             )
         }
@@ -244,5 +238,5 @@ export default class VacancyCard extends Component {
     }
 }
 
-VacancyCard.propTypes = propTypes;
-VacancyCard.defaultProps = defaultProps;
+Profile.propTypes = propTypes;
+Profile.defaultProps = defaultProps;

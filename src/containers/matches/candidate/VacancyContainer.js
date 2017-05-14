@@ -1,11 +1,11 @@
 import { connect } from 'react-redux'
 import React, { Component } from 'react'
-import VacancyCard from '../../../components/matches/vacancyCard'
+import VacancyProfile from '../../../components/matches/Profile'
 import { find } from 'lodash'
 import { dispatchProp } from 'components/helpers'
 import { fetchVacancy } from 'actions/candidateMatches'
 
-import CompanySummaryCard from 'components/company/SummaryCard'
+import CompanySummary from 'components/company/Summary'
 
 function mapStateToProps(state, ownProps) {
     return {
@@ -23,8 +23,8 @@ export default class VacancyContainer extends Component {
         return (
             <div className="slider matches-carousel ">
                 <div className="slider__items" style={ {transform: 'translateX(0px)'} }>
-                    <VacancyCard {...this.props.vacancy} />
-                    <CompanySummaryCard id={this.props.vacancy.company} />
+                    <VacancyProfile {...this.props.vacancy} />
+                    <CompanySummary id={this.props.vacancy.company} />
                 </div>
             </div>
         )

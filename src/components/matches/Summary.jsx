@@ -3,12 +3,7 @@ import { connect} from 'react-redux'
 import { Link } from 'react-router'
 import { postBookmark, postReject, postApprove, viewVacancy } from '../../actions/candidateMatches'
 
-import Bookmark from '../icons/bookmark'
-import Decline from '../icons/Decline'
-import Approve from '../icons/heart'
-
-import BookmarkFill from '../icons/BookmarkFill'
-
+import { BookmarkOpen, BookmarkFill, Decline, ApproveOpen, ApproveFill } from 'components/icons'
 import { tintedBackground } from 'components/helpers'
 
 import './card.less'
@@ -73,7 +68,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 }
 
 @connect(undefined, mapDispatchToProps)
-export default class cardClose extends Component {
+export default class Summary extends Component {
 
     componentWillMount() {}
 
@@ -162,7 +157,7 @@ export default class cardClose extends Component {
             return (
                 <div>
                     <a onClick={postApprove} className="mdl_button button col-xs-12">
-                        <Approve /> APPROVE</a>
+                        <ApproveOpen /> APPROVE</a>
                     <a onClick={postReject} className="mdl_button button col-xs-12">
                         <Decline /> REJECT</a>
                 </div>
@@ -196,5 +191,5 @@ export default class cardClose extends Component {
     }
 }
 
-cardClose.propTypes = propTypes;
-cardClose.defaultProps = defaultProps;
+Summary.propTypes = propTypes;
+Summary.defaultProps = defaultProps;
