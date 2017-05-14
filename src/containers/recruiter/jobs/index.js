@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import EditContainer from './EditContainer'
-import { OpenJobsSlider, DraftJobsSlider, ClosedJobsSlider } from './sliders'
+import { OpenJobsSlider, DraftJobsSlider, ClosedJobsSlider } from './Sliders'
 
 module.exports = {
     path: 'jobs',
