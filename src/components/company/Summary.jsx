@@ -53,20 +53,8 @@ const defaultProps = {
     locationHeadquarters: {city:'', state:''}
 };
 
-function mapStateToProps(state, ownProps) {
-    return {
-        company: find(state.candidateMatches.companies, card => card._id === ownProps.id)
-    }
-}
-@connect(mapStateToProps,dispatchProp)
-export default class SummaryCard extends Component {
+export default class CompanySummary extends Component {
 
-    componentWillMount() {
-        const { dispatch, id, company } = this.props;
-        if(!company) {
-            dispatch(fetchCompany(id))
-        }
-    }
     renderSocialNetworkList() {
         let socialNetworkItem = this.renderSocialNetworkItem
         const socialNetworkArray = ['rakutten', 'facebook', 'linkedin', 'twitter']
@@ -170,5 +158,5 @@ export default class SummaryCard extends Component {
     }
 }
 
-cardGlassdor.propTypes = propTypes;
-cardGlassdor.defaultProps = defaultProps;
+CompanySummary.propTypes = propTypes;
+CompanySummary.defaultProps = defaultProps;

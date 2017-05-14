@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import CardSlider from 'components/CardSlider';
-import MatchSummary from 'components/matches/MatchSummary'
+import MatchSummary from 'components/matches/Summary'
 
 @connect( state => ({
     items: state.candidateMatches.all,

@@ -4,8 +4,8 @@ import { connect } from 'react-redux'
 
 import { postBookmark, postReject, postApprove, hideFullDescription } from '../../actions/candidateMatches'
 
-import ButtonApply from './buttonApply'
-import ButtonLink from './buttonLink'
+import ButtonApply from 'components/parts/buttonApply'
+import ButtonLink from 'components/parts/buttonLink'
 
 import { ApproveOpen, Decline } from 'components/icons'
 
@@ -48,10 +48,13 @@ const propTypes = {
 
 const defaultProps = {
     // name: 'Name',
-    logo: 'https://placeholdit.imgix.net/~text?txtsize=9&txt=50x50&w=50&h=50',
-    background: 'https://placeholdit.imgix.net/~text?txtsize=33&txt=350%C3%97150&w=350&h=150',
+    company: {
+        name: '{companyName}',
+        logo: 'https://placeholdit.imgix.net/~text?txtsize=9&txt=50x50&w=50&h=50',
+        background: 'https://placeholdit.imgix.net/~text?txtsize=33&txt=350%C3%97150&w=350&h=150',
+    },
     title: '{title}',
-    location: '{location}',
+    state: '{location}',
     // match: 20,
     // salary: 'Salary',
     // experience: 'Experience',
@@ -94,7 +97,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 export default class Profile extends Component {
 
     renderMatchInformation() {
-        const { name, logo, title, location, match, salary, experience, employment, background, backgroundTint, degree } = this.props
+        const { company, title, state, match, salary, experience, employment, backgroundTint, degree } = this.props
+        const { name, logo, background } = company
         return (
             <div className="summary-head" style={ tintedBackground(background,...backgroundTint) }>
                 <div className="summary-head__title mdl-card__title">
@@ -108,7 +112,7 @@ export default class Profile extends Component {
                                 <span
                                     className="mdl-card__subtitle-text summary-head__subtitle-text text text_color_invert">
                                     {title}<br/>
-                                    {location}
+                                    {state}
                                 </span>
                             </div>
                         </div>

@@ -1,6 +1,6 @@
 import CardClose from './Summary'
 import TabBar from './tabBar'
-import CardOpen from './cardOpen'
+import CardOpen from 'components/jobs/Profile'
 import DescriptiveParagraph from './descriptiveParagraph'
 import DescriptiveList from './descriptiveList'
 import DescriptiveListItem from './descriptiveListItem'
