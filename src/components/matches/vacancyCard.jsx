@@ -13,6 +13,8 @@ import OkIcon from '../icons/ok'
 import DeclineIcon from '../icons/Decline'
 
 
+import { ApproveOpen, Decline } from 'components/icons'
+
 import { tintedBackground } from 'components/helpers'
 
 import { browserHistory } from 'react-router'
@@ -217,20 +219,14 @@ export default class VacancyCard extends Component {
                             {this.renderResponsibilities()}
 
                             {this.renderRequirements()}
-                            <div className="card__middle-block">
-                                <div className="row">
-                                    <div className="col-lg-9">
-                                        {children}
-                                    </div>
-                                </div>
-                            </div>
+
                             <form className="card__actions-wrapper">
 
                                 <div className="mdl-card__actions card__actions">
-                                    <ButtonApply onClick={postApprove} icon={<OkIcon className="icon_inline invisible-tablet"/>}>
+                                    <ButtonApply onClick={postApprove} icon={<ApproveOpen className="icon_inline invisible-tablet"/>}>
                                         Apply
                                     </ButtonApply>
-                                    <ButtonLink onClick={postReject} icon={<DeclineIcon className="icon_inline invisible-tablet"/>}>
+                                    <ButtonLink onClick={postReject} icon={<Decline className="icon_inline invisible-tablet"/>}>
                                         Not interested
                                     </ButtonLink>
                                     <div className="mdl-layout-spacer"/>
@@ -239,6 +235,7 @@ export default class VacancyCard extends Component {
                             </form>
                         </div>
                         {additionElements}
+                        {children}
                     </div>
                 </div>
 

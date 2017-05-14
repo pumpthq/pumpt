@@ -150,7 +150,7 @@ export default class cardClose extends Component {
         if (status.bookmarked === undefined && status.approved === undefined) {
             return (
                 <a onClick={addToBookmark} className="button button_type_icons col-xs-12">
-                    <Bookmark /> BOOKMARK
+                    <BookmarkOpen /> BOOKMARK
                 </a>
             )
         }
