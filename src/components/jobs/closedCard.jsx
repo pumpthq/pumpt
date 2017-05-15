@@ -1,8 +1,8 @@
 import React, {Component, PropTypes} from 'react';
 
 const propTypes = {
-    title: PropTypes.string,
-    state: PropTypes.string,
+    jobTitle: PropTypes.string,
+    location: PropTypes.string,
     salary: PropTypes.string,
     experience: PropTypes.string,
     employment: PropTypes.string,
@@ -21,8 +21,8 @@ const defaultProps = {
 class ClosedCard extends Component {
     render() {
         const {
-            title,
-            state,
+            jobTitle,
+            location,
             salary,
             experience,
             employment,
@@ -38,10 +38,10 @@ class ClosedCard extends Component {
                                 <div className="summary-head__title-column">
                                     <div className="summary-head__title-block">
                                         <h2 className="mdl-card__title-text heading heading_color_invert heading_type_two">
-                                            {title}
+                                            {jobTitle}
                                         </h2>
                                         <span className="mdl-card__subtitle-text summary-head__subtitle-text text text_color_invert text_size_xs">
-                                            {state}
+                                            {location}
                                         </span>
                                     </div>
                                 </div>

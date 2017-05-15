@@ -1,5 +1,5 @@
-// import axios from 'axios';
-// import ShortID from 'shortid';
+import axios from 'axios';
+import ShortID from 'shortid';
 import saveStep from './saveOnboardingStep';
 import _ from 'lodash';
 import {
@@ -20,33 +20,28 @@ import {
     UPDATE_JOB_SUCCEEDED,
     UPDATE_JOB_FAILED,
 
-    CLOSE_JOB_SUCCEEDED,
-    OPEN_JOB_SUCCEEDED,
-    DELETE_JOB_SUCCEEDED,
+    DESCRIPTION_STEP,
+    SHOW_DESCRIPTION_STEP,
+    SAVE_DESCRIPTION_DATA,
+    CLOSE_DESCRIPTION_STEP,
 
+    RESPONSIBILITIES_STEP,
+    SHOW_RESPONSIBILITIES_STEP,
+    SAVE_RESPONSIBILITIES_DATA,
+    CLOSE_RESPONSIBILITIES_STEP,
 
-    // DESCRIPTION_STEP,
-    // SHOW_DESCRIPTION_STEP,
-    // SAVE_DESCRIPTION_DATA,
-    // CLOSE_DESCRIPTION_STEP,
-    //
-    // RESPONSIBILITIES_STEP,
-    // SHOW_RESPONSIBILITIES_STEP,
-    // SAVE_RESPONSIBILITIES_DATA,
-    // CLOSE_RESPONSIBILITIES_STEP,
+    SKILLS_AND_REQUIREMENTS_STEP,
+    SHOW_SKILLS_AND_REQUIREMENTS_STEP,
+    SAVE_SKILLS_AND_REQUIREMENTS_DATA,
+    CLOSE_SKILLS_AND_REQUIREMENTS_STEP,
 
-    // SKILLS_AND_REQUIREMENTS_STEP,
-    // SHOW_SKILLS_AND_REQUIREMENTS_STEP,
-    // SAVE_SKILLS_AND_REQUIREMENTS_DATA,
-    // CLOSE_SKILLS_AND_REQUIREMENTS_STEP,
-    //
-    // SAVE_SUMMARY_DATA,
-    // SHOW_SUMMARY_HEAD_STANDARD,
-    // SHOW_SUMMARY_HEAD_EDIT,
-    // SAVE_SUMMARY_DATA_SUCCEEDED,
-    //
-    // SET_DEFAULT_STATE,
-    // SET_DEFAULT_NEW_JOB_STATE,
+    SAVE_SUMMARY_DATA,
+    SHOW_SUMMARY_HEAD_STANDARD,
+    SHOW_SUMMARY_HEAD_EDIT,
+    SAVE_SUMMARY_DATA_SUCCEEDED,
+
+    SET_DEFAULT_STATE,
+    SET_DEFAULT_NEW_JOB_STATE,
 } from './../constants/companyJobs';
 
 import {
@@ -96,27 +91,27 @@ const defaultState = {
 //     },
 // };
 
-// const getOnlyRequired = ({
-//     title,
-//     location,
-//     salary,
-//     experience,
-//     employment,
-//     degree,
-//     matches,
-//     industry,
-//     industryParent, // TODO
-// }) => ({
-//     jobTitle: title,
-//     location,
-//     salary,
-//     experience,
-//     employment,
-//     degree,
-//     matches,
-//     industry,
-//     industryParent, // TODO
-// });
+const getOnlyRequired = ({
+    title,
+    location,
+    salary,
+    experience,
+    employment,
+    degree,
+    matches,
+    industry,
+    industryParent, // TODO
+}) => ({
+    jobTitle: title,
+    location,
+    salary,
+    experience,
+    employment,
+    degree,
+    matches,
+    industry,
+    industryParent, // TODO
+});
 
 export default (state = defaultState, action) => {
     const { type, payload } = action;
@@ -171,60 +166,22 @@ export default (state = defaultState, action) => {
             }
         }
 
-        case UPDATE_JOB_SUCCEEDED : {
-            let jobs = _.clone(state.jobs)
-            let i = _.findIndex(jobs, {_id : payload.id})
-            jobs[i] = {...jobs[i], ...payload.data}
-            return {
-                ...state,
-                jobs,
-            }
-        }
-
-        case CREATE_JOB_FAILED : {
+        case CREATE_JOB_FAILED :
             //TODO send errors back for newjob form state for display
             return {
                 ...state,
-            }
-        }
-
-        case CLOSE_JOB_SUCCEEDED : {
-            let jobs = _.clone(state.jobs)
-            _.find(jobs, job => job._id == payload.id).status = 'closed'
-            return {
-                ...state,
-                jobs,
-            }
-        }
-
-        case OPEN_JOB_SUCCEEDED : {
-            let jobs = _.clone(state.jobs)
-            _.find(jobs, job => job._id == payload.id).status = 'opened'
-            return {
-                ...state,
-                jobs,
-            }
-        }
-
-        case DELETE_JOB_SUCCEEDED : {
-            let jobs = _.clone(state.jobs)
-            _.remove(jobs, {_id: payload.id})
-            return {
-                ...state,
-                jobs,
-            }
-        }
+            };
 
             // TODO what is this???? O_o
-        // case SHOW_SUMMARY_HEAD_STANDARD :
-        // case SHOW_SUMMARY_HEAD_EDIT :
-        //     return {
-        //         ...state,
-        //         newJob: {
-        //             ...state.newJob,
-        //             head: type,
-        //         },
-        //     };
+        case SHOW_SUMMARY_HEAD_STANDARD :
+        case SHOW_SUMMARY_HEAD_EDIT :
+            return {
+                ...state,
+                newJob: {
+                    ...state.newJob,
+                    head: type,
+                },
+            };
         // case SAVE_SUMMARY_DATA :
         //     return {
         //         ...state,
@@ -242,138 +199,249 @@ export default (state = defaultState, action) => {
         //         },
         //     };
 
-        // case SHOW_DESCRIPTION_STEP :
-        //     return {
-        //         ...state,
-        //         newJob: {
-        //             ...state.newJob,
-        //             step: type,
-        //             active: [DESCRIPTION_STEP],
-        //         },
-        //     };
-        //
-        // case SAVE_DESCRIPTION_DATA :
-        //     if (!payload.description) {
-        //         return {
-        //             ...state,
-        //             newJob: {
-        //                 ...state.newJob,
-        //                 description: null,
-        //                 progress: state.newJob.progress
-        //                     .filter((step) => step !== DESCRIPTION_STEP),
-        //                 active: [],
-        //             },
-        //         };
-        //     }
-        //
-        //     return {
-        //         ...state,
-        //         newJob: {
-        //             ...state.newJob,
-        //             ...saveStep({
-        //                 state: state.newJob,
-        //                 step: DESCRIPTION_STEP,
-        //                 payload,
-        //             }),
-        //             active: [],
-        //         },
-        //     };
-        //
-        // case SHOW_RESPONSIBILITIES_STEP :
-        //     return {
-        //         ...state,
-        //         newJob: {
-        //             ...state.newJob,
-        //             step: type,
-        //             active: [RESPONSIBILITIES_STEP],
-        //         },
-        //     };
-        //
-        // case SAVE_RESPONSIBILITIES_DATA :
-        //     if (!payload.responsibilities) {
-        //         return {
-        //             ...state,
-        //             newJob: {
-        //                 ...state.newJob,
-        //                 responsibilities: null,
-        //                 progress: state.newJob.progress
-        //                     .filter((step) => step !== RESPONSIBILITIES_STEP),
-        //                 active: [],
-        //             },
-        //         };
-        //     }
-        //
-        //     return {
-        //         ...state,
-        //         newJob: {
-        //             ...state.newJob,
-        //             ...saveStep({
-        //                 state: state.newJob,
-        //                 step: RESPONSIBILITIES_STEP,
-        //                 payload,
-        //             }),
-        //             active: [],
-        //         },
-        //     };
-        //
-        // case SHOW_SKILLS_AND_REQUIREMENTS_STEP :
-        //     return {
-        //         ...state,
-        //         newJob: {
-        //             ...state.newJob,
-        //             step: type,
-        //             active: [SKILLS_AND_REQUIREMENTS_STEP],
-        //         },
-        //     };
-        //
-        // case SAVE_SKILLS_AND_REQUIREMENTS_DATA :
-        //     if (!payload.skillsAndRequirements) {
-        //         return {
-        //             ...state,
-        //             newJob: {
-        //                 ...state.newJob,
-        //                 skillsAndRequirements: null,
-        //                 progress: state.newJob.progress
-        //                     .filter((step) => step !== SKILLS_AND_REQUIREMENTS_STEP),
-        //                 active: [],
-        //             },
-        //         };
-        //     }
-        //
-        //     return {
-        //         ...state,
-        //         newJob: {
-        //             ...state.newJob,
-        //             ...saveStep({
-        //                 state: state.newJob,
-        //                 step: SKILLS_AND_REQUIREMENTS_STEP,
-        //                 payload,
-        //             }),
-        //             active: []
-        //         },
-        //     };
-        //
-        // case SET_DEFAULT_NEW_JOB_STATE :
-        //     return {
-        //         ...state,
-        //         newJob: defaultState.newJob,
-        //     };
-        //
-        // case SET_DEFAULT_STATE :
-        //     return defaultState;
-        //
-        // case CLOSE_DESCRIPTION_STEP :
-        // case CLOSE_RESPONSIBILITIES_STEP :
-        // case CLOSE_SKILLS_AND_REQUIREMENTS_STEP :
-        //     return {
-        //         ...state,
-        //         newJob: {
-        //             ...state.newJob,
-        //             step: null,
-        //             active: [],
-        //         },
-        //     };
-        default: {
+        case SHOW_DESCRIPTION_STEP :
+            return {
+                ...state,
+                newJob: {
+                    ...state.newJob,
+                    step: type,
+                    active: [DESCRIPTION_STEP],
+                },
+            };
+
+        case SAVE_DESCRIPTION_DATA :
+            if (!payload.description) {
+                return {
+                    ...state,
+                    newJob: {
+                        ...state.newJob,
+                        description: null,
+                        progress: state.newJob.progress
+                            .filter((step) => step !== DESCRIPTION_STEP),
+                        active: [],
+                    },
+                };
+            }
+
+            return {
+                ...state,
+                newJob: {
+                    ...state.newJob,
+                    ...saveStep({
+                        state: state.newJob,
+                        step: DESCRIPTION_STEP,
+                        payload,
+                    }),
+                    active: [],
+                },
+            };
+
+        case SHOW_RESPONSIBILITIES_STEP :
+            return {
+                ...state,
+                newJob: {
+                    ...state.newJob,
+                    step: type,
+                    active: [RESPONSIBILITIES_STEP],
+                },
+            };
+
+        case SAVE_RESPONSIBILITIES_DATA :
+            if (!payload.responsibilities) {
+                return {
+                    ...state,
+                    newJob: {
+                        ...state.newJob,
+                        responsibilities: null,
+                        progress: state.newJob.progress
+                            .filter((step) => step !== RESPONSIBILITIES_STEP),
+                        active: [],
+                    },
+                };
+            }
+
+            return {
+                ...state,
+                newJob: {
+                    ...state.newJob,
+                    ...saveStep({
+                        state: state.newJob,
+                        step: RESPONSIBILITIES_STEP,
+                        payload,
+                    }),
+                    active: [],
+                },
+            };
+
+        case SHOW_SKILLS_AND_REQUIREMENTS_STEP :
+            return {
+                ...state,
+                newJob: {
+                    ...state.newJob,
+                    step: type,
+                    active: [SKILLS_AND_REQUIREMENTS_STEP],
+                },
+            };
+
+        case SAVE_SKILLS_AND_REQUIREMENTS_DATA :
+            if (!payload.skillsAndRequirements) {
+                return {
+                    ...state,
+                    newJob: {
+                        ...state.newJob,
+                        skillsAndRequirements: null,
+                        progress: state.newJob.progress
+                            .filter((step) => step !== SKILLS_AND_REQUIREMENTS_STEP),
+                        active: [],
+                    },
+                };
+            }
+
+            return {
+                ...state,
+                newJob: {
+                    ...state.newJob,
+                    ...saveStep({
+                        state: state.newJob,
+                        step: SKILLS_AND_REQUIREMENTS_STEP,
+                        payload,
+                    }),
+                    active: []
+                },
+            };
+
+        case SET_DEFAULT_NEW_JOB_STATE :
+            return {
+                ...state,
+                newJob: defaultState.newJob,
+            };
+
+        case SET_DEFAULT_STATE :
+            return defaultState;
+
+        case CLOSE_DESCRIPTION_STEP :
+        case CLOSE_RESPONSIBILITIES_STEP :
+        case CLOSE_SKILLS_AND_REQUIREMENTS_STEP :
+            return {
+                ...state,
+                newJob: {
+                    ...state.newJob,
+                    step: null,
+                    active: [],
+                },
+            };
+        default:
+        {
+            //let candidatesUrl = API_URL + API_CANDIDATE_ROOT;
+            //axios.get(candidatesUrl).then((response) => {
+            //    let resultCandidates = response.data;
+            //    let finalCandidates = [];
+            //
+            //    resultCandidates.map((candidate) => {
+            //        let finalCandidate = {
+            //            id: candidate._id,
+            //            jobTitle: candidate.recentJobParent,
+            //            location: candidate.location.abilityToRelocate ? 'ready for relocation' : 'not ready for relocation',
+            //            salary: candidate.recentAnnualIncome,
+            //            experience: candidate.recentAreaExperience,
+            //            employment: candidate.employments[0],
+            //            degree: candidate.education.degree,
+            //            matches: '0'
+            //        };
+            //
+            //        finalCandidates.push(finalCandidate);
+            //    });
+            //
+            //    let returnedObject = {
+            //        open: finalCandidates,
+            //        drafts: [
+            //            {
+            //                id: ShortID.generate(),
+            //                jobTitle: 'Frontend',
+            //                location: 'Uzhhorod',
+            //                salary: '10000$',
+            //                experience: '2 Years',
+            //                employment: 'Any',
+            //                degree: 'Any'
+            //            }
+            //        ],
+            //        closed: [
+            //            {
+            //                id: ShortID.generate(),
+            //                jobTitle: 'Sales',
+            //                location: 'Uzhhorod',
+            //                salary: '5000$',
+            //                experience: '1 year',
+            //                employment: 'Full-time',
+            //                degree: 'Bachelors',
+            //                matches: '4'
+            //            }
+            //        ],
+            //        activeTab: OPEN_TAB,
+            //        newJob: {
+            //            head: SHOW_SUMMARY_HEAD_EDIT,
+            //            step: null,
+            //            progress: [],
+            //            active: [],
+            //            summary: {}
+            //        }
+            //    };
+            //
+            //    console.log(returnedObject);
+            //
+            //    return returnedObject;
+            //});
+
+            //let xhr = new XMLHttpRequest();
+            //xhr.open('GET', 'http://37.139.29.63:4000/api/candidates', false);
+            //xhr.send(null);
+            //let candidates = eval("(" + xhr.responseText + ")");
+            //let finalCandidates = [];
+            //candidates.map((candidate) => {
+            //
+            //    let finalCandidate = {
+            //        id: candidate._id,
+            //        jobTitle: candidate.recentJobParent,
+            //        location: candidate.location.abilityToRelocate ? 'ready for relocation' : 'not ready for relocation',
+            //        salary: candidate.recentAnnualIncome,
+            //        experience: candidate.recentAreaExperience,
+            //        employment: candidate.employments[0],
+            //        degree: candidate.education.degree,
+            //        matches: '0'
+            //    };
+            //    finalCandidates.push(finalCandidate);
+            //});
+            //return {
+            //    open: finalCandidates,
+            //    drafts: [{
+            //        id: ShortID.generate(),
+            //        jobTitle: 'Frontend',
+            //        location: 'Uzhhorod',
+            //        salary: '10000$',
+            //        experience: '2 Years',
+            //        employment: 'Any',
+            //        degree: 'Any'
+            //    }],
+            //    closed: [{
+            //        id: ShortID.generate(),
+            //        jobTitle: 'Sales',
+            //        location: 'Uzhhorod',
+            //        salary: '5000$',
+            //        experience: '1 year',
+            //        employment: 'Full-time',
+            //        degree: 'Bachelors',
+            //        matches: '4'
+            //    }],
+            //    activeTab: OPEN_TAB,
+            //    newJob: {
+            //        head: SHOW_SUMMARY_HEAD_EDIT,
+            //        step: null,
+            //        progress: [],
+            //        active: [],
+            //        summary: {},
+            //    },
+            //};
+            //console.log('qwe');
              return {
                 ...state
              };
@@ -382,6 +450,6 @@ export default (state = defaultState, action) => {
     }
 };
 
-// export const getCompanyJobs = (state) => {
-//     return state.companyJobs;
-// };
+export const getCompanyJobs = (state) => {
+    return state.companyJobs;
+};

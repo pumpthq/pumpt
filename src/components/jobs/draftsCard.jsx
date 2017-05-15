@@ -3,7 +3,10 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router'
 import { H2 } from './../main/heading';
 import Button from './../main/button';
-import { deleteJob, openJob } from './../../actions/companyJobs';
+import {
+    deleteJob,
+    startMatching,
+} from './../../actions/companyJobs';
 
 const propTypes = {
     title: PropTypes.string,
@@ -96,7 +99,7 @@ class DraftsCard extends Component {
                             className="button_type_colored button_pos_center"
                             onClick={(event) => {
                                 event.preventDefault();
-                                dispatch(openJob(_id));
+                                dispatch(startMatching({ _id }));
                             }}
                         >
                             Start Matching
