@@ -4,6 +4,12 @@ import {
     FETCH_JOBS_SUCCEEDED,
     FETCH_JOBS_FAILED,
 
+    FETCH_COMPANY_SUCCEEDED,
+    FETCH_COMPANY_FAILED,
+
+    FETCH_RECRUITER_SUCCEEDED,
+    FETCH_RECRUITER_FAILED,
+
     // OPEN_FETCH_REQUESTED,
     // OPEN_FETCH_SUCCEEDED,
     // OPEN_FETCH_FAILED,
@@ -23,6 +29,14 @@ import {
     SHOW_DESCRIPTION_STEP,
     SAVE_DESCRIPTION_DATA,
     CLOSE_DESCRIPTION_STEP,
+    //
+    SHOW_RESPONSIBILITIES_STEP,
+    SAVE_RESPONSIBILITIES_DATA,
+    CLOSE_RESPONSIBILITIES_STEP,
+    //
+    SHOW_SKILLS_AND_REQUIREMENTS_STEP,
+    SAVE_SKILLS_AND_REQUIREMENTS_DATA,
+    CLOSE_SKILLS_AND_REQUIREMENTS_STEP,
 
     SHOW_RESPONSIBILITIES_STEP,
     SAVE_RESPONSIBILITIES_DATA,
@@ -53,12 +67,14 @@ import {
 } from './../constants/companyJobs';
 import { API } from '../constants/actionTypes'
 import {
-    API_URL,
-    API_ALL_JOBS,
-    API_OPEN_JOBS,
-    API_DRAFT_JOBS,
-    API_CLOSED_JOBS,
+    // API_URL,
+    // API_ALL_JOBS,
+    // API_OPEN_JOBS,
+    // API_DRAFT_JOBS,
+    // API_CLOSED_JOBS,
     API_VACANCY_ROOT,
+    API_RECRUITER_ROOT,
+    API_COMPANY_ROOT,
 } from './../constants/api';
 
 
@@ -167,6 +183,55 @@ export const fetchJobsSucceeded = jobs => ({
 export const fetchJobsFailed = () => ({
     type : FETCH_JOBS_FAILED
 })
+
+
+export const fetchCompany = () => {
+    return {
+        type : API,
+        payload:{
+            method: 'GET',
+            url: `${API_COMPANY_ROOT}/current`,
+            success: fetchCompanySucceeded,
+            error: fetchCompanyFailed,
+        }
+    }
+};
+
+export const fetchCompanySucceeded = company => ({
+    type : FETCH_COMPANY_SUCCEEDED,
+    payload: {
+        company
+    }
+})
+
+export const fetchCompanyFailed = () => ({
+    type : FETCH_COMPANY_FAILED
+})
+
+
+export const fetchRecruiter = () => {
+    return {
+        type : API,
+        payload:{
+            method: 'GET',
+            url: `${API_RECRUITER_ROOT}/current`,
+            success: fetchRecruiterSucceeded,
+            error: fetchRecruiterFailed,
+        }
+    }
+};
+
+export const fetchRecruiterSucceeded = recruiter => ({
+    type : FETCH_RECRUITER_SUCCEEDED,
+    payload: {
+        recruiter
+    }
+})
+
+export const fetchRecruiterFailed = () => ({
+    type : FETCH_RECRUITER_FAILED
+})
+
 //
 // export const fetchOpen = () => ({
 //     type : OPEN_FETCH_REQUESTED

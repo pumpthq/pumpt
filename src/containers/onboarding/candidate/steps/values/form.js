@@ -7,7 +7,7 @@ import { findById } from '../../../../../constants/dropdownData'
 
 import {
     saveValuesData,
-    showSetUpPasswordStep
+		showSetUpPasswordStep
 } from './../../../../../actions/candidateOnboarding'
 
 import { StepListCheckLink } from '../../../renderHelpers'

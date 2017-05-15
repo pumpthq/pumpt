@@ -13,6 +13,8 @@ import {
     HIDE_FULL_DESCRIPTION,
 
     SET_DEFAULT_STATE,
+    FETCH_COMPANY_SUCCEEDED,
+    FETCH_VACANCY_SUCCEEDED,
 } from './../constants/candidateMatches';
 
 const defaultState = {
@@ -27,6 +29,8 @@ const defaultState = {
         active: [],
         summary: {},
     },
+    companies: [],
+    vacancies: [],
 };
 
 export default (state = defaultState, action) => {
@@ -44,6 +48,9 @@ export default (state = defaultState, action) => {
 
                 let card = {
                     id: matching._id,
+                    _id: matching._id,
+                    _vacancy: vacancy._id,
+                    _company: vacancy.company._id,
                     name: vacancy.company.name,
                     logo: vacancy.company.logo,
                     title: vacancy.title,
@@ -120,6 +127,19 @@ export default (state = defaultState, action) => {
 
             return { ...state, all, bookmarked, approved }
 
+        case FETCH_COMPANY_SUCCEEDED: {
+            const { company } = payload;
+            const companies = _.filter(state.companies, c => c._id != company._id);
+            companies.push(company)
+            return { ...state, companies }
+        }
+
+        case FETCH_VACANCY_SUCCEEDED: {
+            const { vacancy } = payload;
+            const vacancies = _.filter(state.vacancies, v => v._id != vacancy._id);
+            vacancies.push(vacancy)
+            return { ...state, vacancies }
+        }
 
         case SHOW_FULL_DESCRIPTION:
             all = _.clone(state.all)

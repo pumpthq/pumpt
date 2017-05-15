@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { SHOW_VALUES_STEP, VALUE_ASSESSMENTS_DROPDOWN_DATA } from './../../../../../../constants/candidateOnboarding'
 import { showValuesStep } from './../../../../../../actions/candidateOnboarding'
-import { NavigationLink } from './../../../../../../components/main/navigation'
+import { NavigationLink, NavigationLink2 } from './../../../../../../components/main/navigation'
 import CallStep from './../../../../callStep'
 import { findById } from '../../../../../../constants/dropdownData'
 
@@ -31,11 +31,11 @@ export class To extends Component {
             dispatch
         } = this.props
         const stateItem = onboardingState.values
-        let caption = null
+        let value = null
 
         if(stateItem) {
 
-            caption = ""
+            value = ""
             let titles = [];
 
             for(let a of stateItem) {
@@ -44,16 +44,16 @@ export class To extends Component {
                     data : VALUE_ASSESSMENTS_DROPDOWN_DATA
                 })
                 if(i) {
-                    titles.push(i.title);
+                    titles.push("\n"+i.title);
                 }
             }
 
-            caption = titles.join(" | ");
+            value = titles.join("\n");
 
         }
 
         return (
-            <NavigationLink
+            <NavigationLink2
                 style={{
                     cursor : isFilled || isActive ? 'pointer' : 'default'
                 }}
@@ -62,7 +62,9 @@ export class To extends Component {
                 onClick={() => {
                     if (isEnabled) dispatch(showValuesStep())
                 }}
-            >{caption ? caption : 'Values Assessment'}</NavigationLink>
+                textLabel='Values Assessment'
+                textFilledWith={value}
+            />
         )
     }
 }

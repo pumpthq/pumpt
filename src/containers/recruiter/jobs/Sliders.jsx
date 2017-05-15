@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import CardSlider from 'components/CardSlider';
-import Card from 'components/jobs/card';
+import Card from 'components/jobs/openedCard';
 import ClosedCard from 'components/jobs/closedCard';
 import CreateJobCard from 'components/jobs/createJobCard';
 import DraftsCard from 'components/jobs/draftsCard';

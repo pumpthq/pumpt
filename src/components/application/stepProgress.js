@@ -26,7 +26,7 @@ const defaultProps = {
 export default class StepProgress extends Component {
 
     render() {
-        const isApproved = SESSION[0].user && SESSION[0].user.isApproved;
+        const isApproved = !isNotApproved
         const { isNotApproved, isFilled } = this.props
         const isWaitingForApproval = !isApproved ? 'active' : 'filled';
 

@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import CardOpen from '../../../components/jobs/cardOpen';
+import NewCard from 'components/jobs/newCard';
 import SummaryHead from './new/summaryHead';
 import MiddleBlock from './new/middleBlock';
 import { find } from 'lodash'
@@ -22,7 +22,7 @@ class EditContainer extends Component {
               <div className="row row-padding-bigger">
                   <div className="col-lg-12">
                     { this.props.job &&
-                        <CardOpen key={this.props.id} {...this.props.job}
+                        <NewCard key={this.props.id} {...this.props.job}
                             summaryHead={<SummaryHead filled={true} {...this.props.job} />}
                             middleBlock={<MiddleBlock {...this.props.job} />}
                             onClick={browserHistory.goBack}

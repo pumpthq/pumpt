@@ -1,16 +1,12 @@
-import CardClose from './cardClose'
+import CardClose from './Summary'
 import TabBar from './tabBar'
-import CardOpen from './cardOpen'
-import CardGlassdoor from './cardGlassdor'
+import CardOpen from 'components/jobs/Profile'
 import DescriptiveParagraph from './descriptiveParagraph'
 import DescriptiveList from './descriptiveList'
 import DescriptiveListItem from './descriptiveListItem'
-import CardCarousel from './cardCarousel'
 export {
     CardClose,
     CardOpen,
-    CardCarousel,
-    CardGlassdoor,
     TabBar,
     DescriptiveParagraph,
     DescriptiveList,
