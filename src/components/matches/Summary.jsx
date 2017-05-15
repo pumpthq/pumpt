@@ -61,7 +61,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
       dispatch(postApprove(ownProps.id))
   },
     viewVacancy: () => {
-      dispatch(viewVacancy(ownProps._vacancy))
+      dispatch(viewVacancy(ownProps._company, ownProps._vacancy))
     }
 
   }

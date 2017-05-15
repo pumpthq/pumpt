@@ -4,7 +4,7 @@ import GlassDoorImage from 'img/glassdoor.jpg'
 
 import { find } from 'lodash'
 import { dispatchProp } from 'components/helpers'
-import { viewCompany, fetchCompany } from 'actions/candidateMatches'
+import { viewCompany } from 'actions/candidateMatches'
 
 const propTypes = {
     // name: PropTypes.string,
@@ -52,7 +52,7 @@ const defaultProps = {
     // onClickGoToBlacklistCompany: e => {}
     locationHeadquarters: {city:'', state:''}
 };
-
+@connect(undefined,dispatchProp)
 export default class CompanySummary extends Component {
 
     renderSocialNetworkList() {
@@ -146,7 +146,7 @@ export default class CompanySummary extends Component {
                         {this.renderCompanyInformation()}
                         <div className="summary-head__title-item summary-head__title-item_type_alignment summary-head__title-item_type_action-bar">
                             <div className="summary-head__title-column">
-                                <a className="link" onClick={()=>dispatch(viewCompany(this.props.id))}>
+                                <a className="link" onClick={()=>dispatch(viewCompany(this.props._id))}>
                                     Go to Company Page
                                 </a>
                             </div>

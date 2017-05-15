@@ -146,9 +146,9 @@ export default class CompanyProfile extends Component {
     render() {
         const { name, background, logo, ratingImage, ratingCount, onClickGoToCompanyPage, onClickGoToBlacklistCompany } = this.props
         return (
-            
+
             <div className="mdl-card card card_type_mini card_state_open">
-                <a class="button button_type_close" onClick={browserHistory.goBack}>×</a>
+                {/* <a class="button button_type_close" onClick={browserHistory.goBack}>×</a> */}
                 <div className="summary-hero" style={ tintedBackground(background,255,255,255,0) }></div>
                 <div className="summary-head">
 

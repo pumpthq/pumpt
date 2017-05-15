@@ -144,9 +144,9 @@ export const fetchVacancySucceeded = id => vacancy => ({
     }
 })
 
-export const viewVacancy = id => ({
+export const viewVacancy = (cid, id) => ({
     type : VIEW_VACANCY,
     payload : {
-        id
+        cid, id
     }
 })
