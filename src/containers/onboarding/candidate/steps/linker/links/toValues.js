@@ -44,7 +44,7 @@ export class To extends Component {
                     data : VALUE_ASSESSMENTS_DROPDOWN_DATA
                 })
                 if(i) {
-                    titles.push(i.title);
+                    titles.push("\n"+i.title);
                 }
             }
 
