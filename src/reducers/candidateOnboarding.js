@@ -20,6 +20,9 @@ import {
     SHOW_VALUES_STEP,
     SAVE_VALUES_DATA,
 
+		SHOW_APPLICATION_STEP,
+		//SAVE...
+
     SHOW_SET_UP_PASSWORD_STEP,
     SAVE_SET_UP_PASSWORD_DATA,
 
@@ -123,6 +126,12 @@ export default (state = defaultState, action) => {
                 step: SHOW_VALUES_STEP,
                 payload,
             });
+
+        case SHOW_APPLICATION_STEP :
+            return {
+                ...state,
+                step,
+            };
 
         case SHOW_SET_UP_PASSWORD_STEP :
             return {

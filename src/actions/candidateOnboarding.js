@@ -134,6 +134,16 @@ export const saveValuesData = ({ values }) => ({
     }
 })
 
+export const showApplicationStep = () => ({
+    type : SHOW_APPLICATION_STEP
+})
+
+/*export const saveApplicationData = ({ values }) => ({
+    type : SAVE_VALUES_DATA,
+    payload : {
+        values
+    }
+})*/
 
 export const showSetUpPasswordStep = () => ({
     type : SHOW_SET_UP_PASSWORD_STEP

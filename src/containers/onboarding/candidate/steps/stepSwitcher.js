@@ -9,7 +9,7 @@ import {
     SHOW_INCOME_STEP,
     SHOW_EXPERIENCE_STEP,
     SHOW_SET_UP_PASSWORD_STEP,
-    SHOW_VALUES_STEP
+    SHOW_VALUES_STEP,
 } from './../../../../constants/candidateOnboarding'
 
 import ContactInfoStep from './contactInfo'
