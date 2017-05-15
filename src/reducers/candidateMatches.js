@@ -129,14 +129,14 @@ export default (state = defaultState, action) => {
 
         case FETCH_COMPANY_SUCCEEDED: {
             const { company } = payload;
-            const companies = _.filter(state.companies, company => company._id != company._id);
+            const companies = _.filter(state.companies, c => c._id != company._id);
             companies.push(company)
             return { ...state, companies }
         }
 
         case FETCH_VACANCY_SUCCEEDED: {
             const { vacancy } = payload;
-            const vacancies = _.filter(state.vacancies, vacancy => vacancy._id != vacancy._id);
+            const vacancies = _.filter(state.vacancies, v => v._id != vacancy._id);
             vacancies.push(vacancy)
             return { ...state, vacancies }
         }
