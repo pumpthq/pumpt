@@ -84,6 +84,8 @@ export default function() {
             }
 
             try {
+							debugger;
+							console.log("trying to register member!");
                 yield call(registerMembership, payload)
                 yield put(migrateOnboardingToApplication(onboardingState))
 

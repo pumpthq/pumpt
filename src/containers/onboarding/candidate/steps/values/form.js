@@ -7,7 +7,7 @@ import { findById } from '../../../../../constants/dropdownData'
 
 import {
     saveValuesData,
-    showSetUpPasswordStep
+		showSetUpPasswordStep
 } from './../../../../../actions/candidateOnboarding'
 
 import { StepListCheckLink } from '../../../renderHelpers'
@@ -59,7 +59,7 @@ import { VALUE_ASSESSMENTS_DROPDOWN_DATA } from './../../../../../constants/cand
         }
 
         const nextStep = ({ id, value }) => {
-            dispatch(showApplicationStep())
+            dispatch(showSetUpPasswordStep())
         }
 
         return {

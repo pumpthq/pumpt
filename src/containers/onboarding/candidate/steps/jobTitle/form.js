@@ -7,7 +7,8 @@ import {
     showIncomeStep
 } from './../../../../../actions/candidateOnboarding'
 
-import { StepTopAccordion } from '../../../renderHelpers'
+//import { StepTopAccordion } from '../../../renderHelpers'
+import { AlternativeListItem, StepListLink } from '../../../renderHelpers'
 import { JOB_TITLE_DROPDOWN_DATA } from './../../../../../constants/candidateOnboarding'
 
 @connect(
@@ -45,14 +46,30 @@ import { JOB_TITLE_DROPDOWN_DATA } from './../../../../../constants/candidateOnb
 )
 class JobTitleForm extends Component {
     render() {
-        const { nextStep, activeItem } = this.props
-
+        const { listItems, nextStep, activeItem } = this.props
         return (
-            <StepTopAccordion {...{
-                list : JOB_TITLE_DROPDOWN_DATA,
-                activeItem,
-                onClick : nextStep
-            }}/>
+            <List type='onboarding'>
+                {listItems.map(item => {
+                    if (item.alternative) {
+                        return (
+                            <AlternativeListItem {...{
+                                key : uuid.v4(),
+                                item,
+                                activeItem,
+                                onClick : nextStep
+                            }} />
+                        )
+                    }
+                    return (
+                        <StepListLink {...{
+                            key : uuid.v4(),
+                            item,
+                            activeItem,
+                            onClick : nextStep
+                        }} />
+                    )
+                })}
+            </List>
         )
     }
 }
