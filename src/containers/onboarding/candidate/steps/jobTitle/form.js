@@ -24,15 +24,12 @@ import { JOB_TITLE_DROPDOWN_DATA } from './../../../../../constants/candidateOnb
         }
     },
     function mapDispatchToProps(dispatch, ownProps) {
-        const nextStep = ({ id, value, parent }) => {
+        const nextStep = ({ id, value}) => {
             dispatch(saveJobTitleStep({
                 jobTitle : {
                     id,
                     value
                 },
-                jobTitleHead : {
-                    value : parent
-                }
             }))
             dispatch(showIncomeStep())
         }
