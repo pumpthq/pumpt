@@ -59,7 +59,7 @@ import { VALUE_ASSESSMENTS_DROPDOWN_DATA } from './../../../../../constants/cand
         }
 
         const nextStep = ({ id, value }) => {
-            dispatch(showSetUpPasswordStep())
+            dispatch(showApplicationStep())
         }
 
         return {

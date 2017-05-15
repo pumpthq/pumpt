@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { SHOW_APPLICATION_STEP, APPLICATION_DROPDOWN_DATA } from './../../../../../../constants/candidateOnboarding'
+import { SHOW_APPLICATION_STEP } from './../../../../../../constants/candidateOnboarding'
 import { showApplicationStep } from './../../../../../../actions/candidateOnboarding'
 import { NavigationLink, NavigationLink2 } from './../../../../../../components/main/navigation'
 import CallStep from './../../../../callStep'
