@@ -7,10 +7,10 @@ import IconPhoto from '../../../../components/icons/photo'
 
 @connect(
     function mapStateToProps(state, ownProps) {
+        const { email } = state.authorization
         const {
             firstName,
             lastName,
-            email,
             industry,
             fieldOfExpertise,
             jobTitle,
@@ -22,15 +22,15 @@ import IconPhoto from '../../../../components/icons/photo'
 
         return {
             onboardingState : {
-                firstName : firstName || 'Jane',
-                lastName : lastName || 'Sullivan',
+                firstName : firstName || '',
+                lastName : lastName || '',
                 fullName,
-                email : email || 'j.sullivan@sd-ventures.com',
-                industry : industry ? industry.value : 'Digital Media',
-                fieldOfExpertise : fieldOfExpertise ? fieldOfExpertise.value : 'Programmatic',
-                jobTitle : jobTitle ? jobTitle.value : 'Account Coordinator',
-                income : income ? income.value : '$50–100K',
-                experience : experience ? experience.value : '5–10 years'
+                email : email || '',
+                industry : industry ? industry.value : '',
+                fieldOfExpertise : fieldOfExpertise ? fieldOfExpertise.value : '',
+                jobTitle : jobTitle ? jobTitle.value : '',
+                income : income ? income.value : '',
+                experience : experience ? experience.value : ''
             }
         }
     },

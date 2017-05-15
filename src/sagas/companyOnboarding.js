@@ -27,7 +27,7 @@ import {
 import { getCompanyOnboarding } from './../reducers/companyOnboarding';
 import { migrateOnboardingToApplication } from './../actions/applicationCompany';
 import { getSummary } from './../reducers/applicationCompany';
-import { signIn } from './../actions/authorization';
+import { login } from './../actions/authorization';
 import states from './../constants/states.json';
 import { ROUTE_APPLICATION_COMPANY } from './../constants/routes';
 
@@ -116,7 +116,7 @@ export default function () {
                 yield call(registerMembership, payload);
                 yield put(migrateOnboardingToApplication(onboardingState));
                 const { email, password } = yield select(getSummary);
-                yield put(signIn({ email, password }));
+                yield put(login({ email, password }));
                 yield take(AUTHENTICATION_SUCCEEDED);
                 yield put(push(ROUTE_APPLICATION_COMPANY));
                 yield put(applyForMembershipSucceeded({}));

@@ -204,9 +204,15 @@ export default function () {
             const { payload } = action;
             const { isCandidate, isNotApproved, isRecruiter } = payload
 
-            if (isCandidate) {
-                yield put(fetchMatches())
+            if (isCandidate && isNotApproved) {
                 yield put(getLatestCandidateProfile());
+                yield put(push(ROUTE_APPLICATION_CANDIDATE));
+            } else if (isRecruiter && isNotApproved) {
+                yield put(getLatestCompanyProfile());
+                yield put(push(ROUTE_APPLICATION_COMPANY));
+            } else if (isCandidate) {
+                yield put(getLatestCandidateProfile());
+                yield put(fetchMatches())
             } else if (isRecruiter) {
                 // yield put(getLatestCompanyProfile());
                 yield put(fetchRecruiter());

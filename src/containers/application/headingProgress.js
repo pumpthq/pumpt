@@ -26,7 +26,7 @@ class HeadingProgress extends Component {
             onClickGetMatches
         } = this.props;
 
-        const isApproved = SESSION[0].user && SESSION[0].user.isApproved;
+        // const isApproved = SESSION[0].user && SESSION[0].user.isApproved;
         //if profile is approved & filled. Button "Get Matches" is visible & active
         if (!isNotApproved && isFilled) {
             return (
@@ -59,7 +59,7 @@ class HeadingProgress extends Component {
             )
         }
         //if profile is approved and NOT filled. Button "Get Matches" is visible and DISABLED
-        else if (isApproved && !isFilled) {
+        else if (!isNotApproved && !isFilled) {
             return (
                 <div>
                     <H1 class="heading heading_type_four  heading_button_true ">

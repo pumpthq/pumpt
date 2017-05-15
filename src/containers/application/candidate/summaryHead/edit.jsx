@@ -22,10 +22,10 @@ import { mapDropdown } from './../../../../components/parts/mapDropdown';
 
 @connect(
     function mapStateToProps(state, ownProps) {
+        const { email } = state.authorization
         const {
             firstName,
             lastName,
-            email,
             industry,
             fieldOfExpertise,
             jobTitle,

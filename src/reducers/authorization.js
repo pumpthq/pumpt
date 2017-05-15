@@ -7,6 +7,7 @@ import {
     // AUTHENTICATION_COMPANY_FAILED,
     // AUTHENTICATION_REQUESTED,
     AUTHENTICATION_SUCCEEDED,
+    RESOLVE_USER_SUCCEEDED,
     // AUTHENTICATION_FAILED,
     CHANGE_PASSWORD_SUCCEEDED,
     FORGOT_PASSWORD_SUCCEEDED,
@@ -47,17 +48,28 @@ export default (state = defaultState, action) => {
         //         isRecruiter: true,
         //         ...payload,
         //     };
-        case AUTHENTICATION_SUCCEEDED :
+        case AUTHENTICATION_SUCCEEDED : {
             return {
                 ...state,
                 ...payload,
             };
 
-        case FORGOT_PASSWORD_SUCCEEDED :
+        }
+
+        case RESOLVE_USER_SUCCEEDED : {
+            return {
+                ...state,
+                ...payload,
+            }
+        }
+        
+        case FORGOT_PASSWORD_SUCCEEDED : {
             return {
                 ...state,
                 ...payload,
             };
+        }
+
 
         case USER_LOGOUT_SUCCEEDED:
             return { /* empty state */ }

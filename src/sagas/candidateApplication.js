@@ -366,14 +366,16 @@ export default function() {
                     }
                 } = profile
                 const {
-                    education : {
-                        schoolName,
-                        speciality,
-                        startStudyAt,
-                        endStudyAt,
-                        degree
-                    }
+                    education
                 } = profile
+
+                const {
+                   schoolName,
+                   speciality,
+                   startStudyAt,
+                   endStudyAt,
+                   degree
+               } = education || {}
                 const {
                     skills
                 } = profile
@@ -391,7 +393,7 @@ export default function() {
                     summary : {
                         firstName : profile.firstName,
                         lastName : profile.lastName,
-                        email : profile.user.email,
+                        // email : profile.user.email,
                         industry : {
                             id : null,
                             value : profile.interestWorkingArea
