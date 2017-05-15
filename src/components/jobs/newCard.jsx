@@ -2,22 +2,14 @@ import React, { Component, PropTypes } from 'react';
 import { push } from 'react-router-redux'
 import { connect } from 'react-redux'
 import { browserHistory } from 'react-router'
-
+import SummaryHead from 'containers/recruiter/jobs/new/summaryHead'
+import MiddleBlock from 'containers/recruiter/jobs/new/middleBlock'
+import JobForm from 'components/jobs/JobForm'
 const propTypes = {};
 
 const defaultProps = {};
 
-@connect(
-    function mapStateToProps(state) {
-        return {}
-    },
-    function mapDispatchToProps(dispatch) {
-        return {
-            dispatch
-        }
-    }
-)
-class CardOpen extends Component {
+class NewCard extends Component {
 
     render() {
         return (
@@ -27,14 +19,13 @@ class CardOpen extends Component {
                     className="button button_type_close"
                     onClick={(event) => {
                         event.preventDefault()
-                        browserHistory.back();
+                        browserHistory.goBack();
                     }}
                 >×</a>
                 <div className="scroll-container">
                     <div className="scroll-container__inner">
                         <div className="mdl-card card card_state_open card_state_scroll card_state_open-mini">
-                            <SummaryHead />
-                            <MiddleBlock />
+                            <JobForm />
                         </div>
                     </div>
                 </div>
@@ -44,7 +35,7 @@ class CardOpen extends Component {
     }
 }
 
-CardOpen.propTypes = propTypes;
-CardOpen.defaultProps = defaultProps;
+NewCard.propTypes = propTypes;
+NewCard.defaultProps = defaultProps;
 
-export default CardOpen;
+export default NewCard;
