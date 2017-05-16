@@ -20,6 +20,9 @@ import {
     FETCH_RECRUITER_SUCCEEDED,
     FETCH_RECRUITER_FAILED,
 
+    FETCH_MATCHES_SUCCEEDED,
+    FETCH_MATCHES_FAILED,
+
     CREATE_JOB_SUCCEEDED,
     CREATE_JOB_FAILED,
 
@@ -61,7 +64,9 @@ import {
 } from './../constants/api';
 
 const defaultState = {
-    jobs: []
+    jobs: [],
+    matches: [],
+    candidates: [],
 }
 //     open: [{
 //         id: ShortID.generate(),
@@ -141,6 +146,12 @@ export default (state = defaultState, action) => {
             const { recruiter } = payload;
             return { ...state, recruiter };
         }
+
+        case FETCH_MATCHES_SUCCEEDED : {
+            const matches = _.uniqBy( payload.matches.concat(state.matches), '_id' )
+            return { ...state, matches }
+        }
+
         // case OPEN_FETCH_SUCCEEDED :
         //     return {
         //         ...state,

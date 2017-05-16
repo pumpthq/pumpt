@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import EditContainer from './EditContainer'
+import MatchesContainer from './MatchesContainer'
+import CandidateContainer from './CandidateContainer'
+
 import { OpenJobsSlider, DraftJobsSlider, ClosedJobsSlider } from './Sliders'
 
 module.exports = {

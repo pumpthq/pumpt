@@ -10,6 +10,9 @@ import {
     FETCH_RECRUITER_SUCCEEDED,
     FETCH_RECRUITER_FAILED,
 
+    FETCH_MATCHES_SUCCEEDED,
+    FETCH_MATCHES_FAILED,
+
     // OPEN_FETCH_REQUESTED,
     // OPEN_FETCH_SUCCEEDED,
     // OPEN_FETCH_FAILED,
@@ -241,6 +244,21 @@ export const fetchRecruiterSucceeded = recruiter => ({
 
 export const fetchRecruiterFailed = () => ({
     type : FETCH_RECRUITER_FAILED
+})
+
+export const fetchMatches = (id) => ({
+    type : API,
+    payload : {
+        url : `/matches/vacancy/${id}`,
+        success: fetchMatchesSucceeded,
+    }
+})
+
+export const fetchMatchesSucceeded = matches => ({
+    type : FETCH_MATCHES_SUCCEEDED,
+    payload : {
+        matches
+    }
 })
 
 //
