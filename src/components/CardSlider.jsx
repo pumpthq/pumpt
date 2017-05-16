@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react'
-import Carousel from 'component/Carousel'
+import Carousel from 'components/Carousel'
 
 const CardSlider = props => {
     const Item = props.component;
