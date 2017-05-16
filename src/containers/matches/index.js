@@ -9,6 +9,7 @@ module.exports = {
     path: 'candidate/matches',
     component: MatchesContainer,
     childRoutes: [
+        { path: 'edit', component: EditContainer },
         { path: 'company/:id', component: (props) => <CompanyContainer id={props.params.id} /> },
         { path: 'company/:cid/vacancy/:id', component: (props) => <VacancyContainer cid={props.params.cid} id={props.params.id} /> },
         { path: 'all', component: AllMatchesSlider },

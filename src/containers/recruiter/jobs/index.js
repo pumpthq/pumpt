@@ -7,7 +7,6 @@ module.exports = {
     component: require('./JobsContainer'),
     childRoutes:[
       { path: 'new', component: require('./NewContainer') },
-      { path: 'edit/:id', component: (props) => <EditContainer id={props.params.id}/> },
       {
           path: 'show',
           component: require('./ShowContainer'),
@@ -17,5 +16,10 @@ module.exports = {
               { path: 'drafts', component: DraftJobsSlider },
           ]
       },
+      { path: ':id/edit', component: (props) => <EditContainer id={props.params.id}/> },
+
+      { path: ':id/candidates', component: (props) => <MatchesContainer id={props.params.id}/> }
+      { path: ':id/candidates/:cid', component: (props) => <CandidateContainer {...props.params} /> }
+
     ]
 };
