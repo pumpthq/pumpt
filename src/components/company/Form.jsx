@@ -169,7 +169,7 @@ export default class CompanyForm extends Component {
         return (
 
             <div className="mdl-card card card_type_mini card_state_open">
-                {/* <a class="button button_type_close" onClick={browserHistory.goBack}>×</a> */}
+                <a class="button button_type_close" onClick={browserHistory.goBack}>×</a>
                 <div className="summary-hero" style={ tintedBackground(background.value,255,255,255,0) }></div>
                 <div className="summary-head">
 

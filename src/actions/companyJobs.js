@@ -13,6 +13,9 @@ import {
     FETCH_MATCHES_SUCCEEDED,
     FETCH_MATCHES_FAILED,
 
+    FETCH_CANDIDATE_SUCCEEDED,
+    FETCH_CANDIDATE_FAILED,
+
     // OPEN_FETCH_REQUESTED,
     // OPEN_FETCH_SUCCEEDED,
     // OPEN_FETCH_FAILED,
@@ -258,6 +261,21 @@ export const fetchMatchesSucceeded = matches => ({
     type : FETCH_MATCHES_SUCCEEDED,
     payload : {
         matches
+    }
+})
+
+export const fetchCandidate = (id) => ({
+    type : API,
+    payload : {
+        url : `/candidates/${id}`,
+        success: fetchCandidateSucceeded,
+    }
+})
+
+export const fetchCandidateSucceeded = candidate => ({
+    type : FETCH_CANDIDATE_SUCCEEDED,
+    payload : {
+        candidate
     }
 })
 

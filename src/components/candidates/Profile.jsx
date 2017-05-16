@@ -1,28 +1,29 @@
 import React, {Component, PropTypes} from 'react';
+
 import { browserHistory } from 'react-router'
 
 const propTypes = {};
 const defaultProps = {};
 
-
-export default class MatchesList extends Component {
+export default class CandidateProfile extends Component {
 
     render() {
-        const { matches, job } = this.props
+        const { candidate, job } = this.props
+        const { firstName, lastName, avatar } = candidate
+        const { title } = job
         return (
 
             <div className="mdl-card card card_type_mini card_state_open">
                 <a class="button button_type_close" onClick={browserHistory.goBack}>×</a>
 
-                { JSON.stringify(job) }
+                <h2>{ title }</h2>
+
                 <CardDivider />
 
-                { matches && matches.map( match =>
-                    <div>
-                        { match._candidate }
-                        <CardDivider />
-                    </div>
-                )}
+                <img src={avatar}></img>
+
+                { `${lastName}, ${firstName}` }
+
             </div>
         )
     }
@@ -30,5 +31,5 @@ export default class MatchesList extends Component {
 
 const CardDivider = () => (<div className="summary-head__title-item summary-head__title-item_type_alignment summary-head__title-item_type_middle"></div>)
 
-MatchesList.propTypes = propTypes;
-MatchesList.defaultProps = defaultProps;
+CandidateProfile.propTypes = propTypes;
+CandidateProfile.defaultProps = defaultProps;

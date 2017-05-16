@@ -23,6 +23,10 @@ import {
     FETCH_MATCHES_SUCCEEDED,
     FETCH_MATCHES_FAILED,
 
+    FETCH_CANDIDATE_SUCCEEDED,
+    FETCH_CANDIDATE_FAILED,
+
+
     CREATE_JOB_SUCCEEDED,
     CREATE_JOB_FAILED,
 
@@ -150,6 +154,11 @@ export default (state = defaultState, action) => {
         case FETCH_MATCHES_SUCCEEDED : {
             const matches = _.uniqBy( payload.matches.concat(state.matches), '_id' )
             return { ...state, matches }
+        }
+
+        case FETCH_CANDIDATE_SUCCEEDED : {
+            const candidates = _.uniqBy( payload.candidates.concat(state.candidates), '_id' )
+            return { ...state, candidates };
         }
 
         // case OPEN_FETCH_SUCCEEDED :
