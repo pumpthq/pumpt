@@ -190,3 +190,5 @@ export default class Carousel extends Component {
 
 Carousel.propTypes = propTypes;
 Carousel.defaultProps = defaultProps;
+
+export default Carousel

@@ -18,7 +18,7 @@ CardSlider.propTypes = {
         id: PropTypes.string,
         logo: PropTypes.string,
         background: PropTypes.string
-    }))
+    })),
     component: PropTypes.element,
     append: PropTypes.node
 };
