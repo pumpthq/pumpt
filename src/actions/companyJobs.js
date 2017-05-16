@@ -58,6 +58,8 @@ import {
     UPDATE_JOB_SUCCEEDED,
     UPDATE_JOB_FAILED,
 
+    UPDATE_COMPANY_SUCCEEDED,
+    UPDATE_COMPANY_FAILED,
 
 } from './../constants/companyJobs';
 import { API } from '../constants/actionTypes'
@@ -171,6 +173,28 @@ export const fetchJobsFailed = () => ({
     type : FETCH_JOBS_FAILED
 })
 
+
+export const updateCompany = (data)  => {
+    return {
+      type: API,
+      payload:{
+          method: 'PUT',
+          url: `${API_COMPANY_ROOT}/current`,
+          data,
+          success: updateJobSucceeded(data),
+      }
+    }
+};
+
+export const updateCompanySucceeded = (data) => company => {
+    return {
+      type: UPDATE_COMPANY_SUCCEEDED,
+      payload: {
+          data,
+          company,
+      }
+    }
+};
 
 export const fetchCompany = () => {
     return {
