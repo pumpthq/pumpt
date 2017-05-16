@@ -92,27 +92,14 @@ class HeadingProgress extends Component {
         // Default view. if profile is NOT approved & NOT filled. There is no button "Get Matches".
         return (
             <div>
-                <H1 noGutter typeFour class='row'>Thanks for your application!</H1>
+                <H1 noGutter typeFour class='row'>Just a couple more steps.</H1>
                 <p class="text text_after_big-head text_size_xs">
-                    We carefully consider the Candidates we bring on to our platform to
-                    ensure relevant job matches. We’ll review your background and email you as soon as
-                    possible to let you know
-                    whether you're an appropriate fit for Pumpt.
+								We'd like to get to know you better. Tell us a bit about your professional background and anything else you'd like to share. We'll only use this information
+								to improve the accuracy of your matches and whetherPumpt is the right fit for you.
                 </p>
             </div>
         )
     }
-}
-
-HeadingProgress.propTypes = {
-    isNotApproved : PropTypes.bool,
-    isFilled : PropTypes.bool,
-    onClickGetMatches : PropTypes.func
-}
-
-HeadingProgress.defaultProps = {
-    isNotApproved : false,
-    isFilled : false
 }
 
 export default HeadingProgress

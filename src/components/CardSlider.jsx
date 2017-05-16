@@ -20,7 +20,7 @@ CardSlider.propTypes = {
         background: PropTypes.string
     }))
     component: PropTypes.element,
-    append: PropTypes.node,
+    append: PropTypes.node
 };
 
 CardSlider.defaultProps = {
