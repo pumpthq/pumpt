@@ -1,26 +1,28 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import NewCard from 'components/jobs/newCard'
-const propTypes = {};
-const defaultProps = {};
+import { dispatchProp } from 'components/helpers'
 
-// @connect
+import JobForm from 'components/jobs/JobForm'
+import VerticalScroller from 'components/VerticalScroller'
+
+import { createJob } from 'actions/companyJobs'
+
+@connect(undefined,dispatchProp)
 class NewContainer extends Component {
 
     render() {
-
+        const { dispatch } = this.props
         return (
-          <div className="container slider-container">
-              <div className="row row-padding-bigger">
-                  <div className="col-lg-12">
-                    <NewCard {...this.props.job} />
-                  </div>
-              </div>
-          </div>
+            <VerticalScroller>
+                <JobForm onSubmit={values=> dispatch(createJob(values))}/>
+            </VerticalScroller>
         );
     }
 
 }
+
+const propTypes = {};
+const defaultProps = {};
 
 NewContainer.propTypes = propTypes;
 NewContainer.defaultProps = defaultProps;

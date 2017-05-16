@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { reduxForm } from 'redux-form'
+import { browserHistory } from 'react-router'
 import {
     ANNUAL_INCOME_DROPDOWN_DATA,
     EXPERIENCE_DROPDOWN_DATA,
@@ -10,21 +11,49 @@ import {
     EMPLOYEMENTS_DROPDOWN_DATA,
 } from 'constants/companyJobs';
 import STATES from 'constants/states.json';
-
+import { find } from 'lodash'
 
 @reduxForm({
     form: 'job',
-    fields: ['title', 'state', 'salary', 'experience', 'employment', 'degree', 'industry', 'description', 'responsibilities', 'requirements'],
+    fields: ['title', 'state', 'salary', 'experience', 'employment', 'degree', 'industry', 'industryParent', 'description', 'responsibilities', 'requirements'],
 })
-class SimpleForm extends Component {
+class JobForm extends Component {
+
+    constructor(props) {
+        super(props)
+        const industryParentObj = find(FIELD_OF_EXPERTISE_DROPDOWN_DATA, o => o.title == this.props.fields.industryParent.value)
+        this.state = {industries: industryParentObj ? industryParentObj.items : []}
+    }
+    
+    componentWillReceiveProps() {
+        const industryParentObj = find(FIELD_OF_EXPERTISE_DROPDOWN_DATA, o => o.title == this.props.fields.industryParent.value)
+        if(industryParentObj) {
+            this.setState({ industries: industryParentObj.items  })
+        }
+    }
+
+    updateIndustries = event => {
+        console.log('ok')
+        const industryParentObj = find(FIELD_OF_EXPERTISE_DROPDOWN_DATA, o => o.title == event.target.value)
+        if(industryParentObj) {
+            this.setState({ industries: industryParentObj.items  })
+        }
+        this.props.fields.industryParent.onBlur(event)
+    }
+
   render() {
     const {
-      fields: { title, state, salary, experience, employment, degree, industry, description, responsibilities, requirements },
+      fields: { title, state, salary, experience, employment, degree, industry, industryParent, description, responsibilities, requirements },
       handleSubmit,
       resetForm,
-      submitting
+      submitting,
       } = this.props
-    return (<form onSubmit={handleSubmit}>
+
+    return (
+        <div className="mdl-card card card_state_open card_state_scroll">
+            <a class="button_type_close" onClick={browserHistory.goBack}>×</a>
+
+        <form onSubmit={handleSubmit}>
         <div>
           <label>Title</label>
           <div>
@@ -34,15 +63,10 @@ class SimpleForm extends Component {
         <div>
           <label>Location</label>
           <div>
-            <select
-              {...state}
-              // required syntax for reset form to work
-              // undefined will not change value to first empty option
-              // when resetting
-              value={state.value || ''}>
-              <option></option>
+            <select {...state} value={state.value || ''}>
+              <option value='' disabled>Select One...</option>
               {Object.keys(STATES).map(state =>
-                  <option key={state} value={state}>{STATES[state]}</option>
+                  <option key={state} value={STATES[state]}>{STATES[state]}</option>
               )}
             </select>
           </div>
@@ -52,7 +76,9 @@ class SimpleForm extends Component {
         <EnumSelector field={experience} label="Experience" options={EXPERIENCE_DROPDOWN_DATA} />
         <EnumSelector field={employment} label="Employment" options={EMPLOYEMENTS_DROPDOWN_DATA} />
         <EnumSelector field={degree} label="Degree" options={DEGREES_DROPDOWN_DATA} />
-        <EnumSelector field={industry} label="Industry" options={FIELD_OF_EXPERTISE_DROPDOWN_DATA} />
+        <EnumSelector field={industryParent} label="Industry" options={FIELD_OF_EXPERTISE_DROPDOWN_DATA}
+            onBlur={this.updateIndustries} />
+        <EnumSelector field={industry} label="Field of Expertise" options={this.state.industries} />
 
         <TextArea field={description} label="Description" />
         <TextArea field={responsibilities} label="Responsibilities" />
@@ -62,17 +88,18 @@ class SimpleForm extends Component {
           <button type="submit" disabled={submitting}>
             {submitting ? <i/> : <i/>} Submit
           </button>
-          <button type="button" disabled={submitting} onClick={resetForm}>
+          {/* <button type="button" disabled={submitting} onClick={resetForm}>
             Clear Values
-          </button>
+          </button> */}
         </div>
       </form>
+  </div>
     )
   }
 }
 
 const EnumSelector = (props) => {
-    const {field, label, options} = props
+    const {field, label, options, onChange, onBlur} = props
     return (
         <div>
           <label>{label}</label>
@@ -82,7 +109,9 @@ const EnumSelector = (props) => {
               // required syntax for reset form to work
               // undefined will not change value to first empty option
               // when resetting
-              value={field.value || ''}>
+              value={field.value || ''}
+              disabled={options.length === 0}
+              onBlur={onBlur}>
               <option value="" disabled>Select One...</option>
               {options.map( ({id,title}) =>
                   <option key={id} value={title}>{title}</option>
@@ -109,4 +138,4 @@ const TextArea = (props) => {
     )
 }
 
-export default SimpleForm
+export default JobForm

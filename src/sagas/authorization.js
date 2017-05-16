@@ -242,14 +242,15 @@ export default function () {
                     yield put(push(ROUTE_APPLICATION_COMPANY));
                 } else if (isCandidate && !isNotApproved) {
                     yield put(getLatestCandidateProfile());
-                    yield put(push(ROUTE_CANDIDATE_MATCHES_ALL));
                     yield put(fetchMatches())
+                    yield put(push(ROUTE_CANDIDATE_MATCHES_ALL));
                 } else if (isRecruiter && !isNotApproved) {
                     // yield put(getLatestCompanyProfile());
-                    yield put(push(ROUTE_COMPANY_JOBS_OPEN));
                     yield put(fetchRecruiter());
                     yield put(fetchCompany());
                     yield put(fetchJobs());
+                    yield put(push(ROUTE_COMPANY_JOBS_OPEN));
+
                 }
 
             // } catch (ex) {

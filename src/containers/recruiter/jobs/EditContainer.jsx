@@ -1,10 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import NewCard from 'components/jobs/newCard';
-import SummaryHead from './new/summaryHead';
-import MiddleBlock from './new/middleBlock';
 import { find } from 'lodash'
-import { browserHistory } from 'react-router'
+import { updateJob } from 'actions/companyJobs'
+
+import JobForm from 'components/jobs/JobForm'
+import VerticalScroller from 'components/VerticalScroller'
 
 const propTypes = {};
 const defaultProps = {};
@@ -15,22 +15,12 @@ function mapStateToProps(state, ownProps) {
 
 @connect(mapStateToProps)
 class EditContainer extends Component {
-
     render() {
+        const { dispatch, job, id } = this.props
         return (
-          <div className="container slider-container">
-              <div className="row row-padding-bigger">
-                  <div className="col-lg-12">
-                    { this.props.job &&
-                        <NewCard key={this.props.id} {...this.props.job}
-                            summaryHead={<SummaryHead filled={true} {...this.props.job} />}
-                            middleBlock={<MiddleBlock {...this.props.job} />}
-                            onClick={browserHistory.goBack}
-                        />
-                    }
-                  </div>
-              </div>
-          </div>
+            <VerticalScroller>
+                <JobForm initialValues={job} onSubmit={values=> dispatch(updateJob(id,values))}/>
+            </VerticalScroller>
         );
     }
 
