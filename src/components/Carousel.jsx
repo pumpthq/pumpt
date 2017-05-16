@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
-import './carousel.less'
+import 'components/matches/carousel.less'
 
-import ArrowIcon from '../../components/icons/arrow'
+import ArrowIcon from 'components/icons/arrow'
 
 const propTypes = {
     className: PropTypes.string,
@@ -190,5 +190,3 @@ export default class Carousel extends Component {
 
 Carousel.propTypes = propTypes;
 Carousel.defaultProps = defaultProps;
-
-export default Carousel
