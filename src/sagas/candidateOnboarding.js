@@ -77,14 +77,12 @@ export default function() {
                 recentWorkingArea : onboardingState.fieldOfExpertise.value,
                 recentWorkingAreaParent : onboardingState.fieldOfExpertiseHead.value,
                 recentJob : onboardingState.jobTitle.value,
-                recentJobParent : onboardingState.jobTitleHead.value,
                 recentAnnualIncome : onboardingState.income.value,
                 recentAreaExperience : onboardingState.experience.value,
                 valueAssessments : onboardingState.valueAssessments
             }
 
             try {
-							debugger;
 							console.log("trying to register member!");
                 yield call(registerMembership, payload)
                 yield put(migrateOnboardingToApplication(onboardingState))

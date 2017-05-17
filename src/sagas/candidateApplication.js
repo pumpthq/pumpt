@@ -113,8 +113,6 @@ export default function() {
                     recentWorkingAreaParent : selectedItemFieldOfExpertise.parent ?
                         selectedItemFieldOfExpertise.parent.title : null,
                     recentJob : jobTitle.value,
-                    recentJobParent : selectedItemJobTitle.parent ?
-                        selectedItemJobTitle.parent.title : null,
                     recentAnnualIncome : summary.income.value,
                     recentAreaExperience : summary.experience.value
                 }
@@ -433,15 +431,10 @@ export default function() {
 
                 if (jobTitlePath) {
                     const selectedItem = jobTitlePath.pop()
-                    const parentItem = jobTitlePath.shift()
 
                     patch.summary.jobTitle = {
                         id : selectedItem.id,
                         value : profile.recentJob
-                    }
-                    patch.summary.jobTitleHead = {
-                        id : parentItem.id,
-                        value : parentItem.title
                     }
                 }
                 if(avatar) {
