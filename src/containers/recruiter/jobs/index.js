@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import EditContainer from './EditContainer'
+import ListContainer from './ListContainer'
 import MatchesContainer from './MatchesContainer'
 import CandidateContainer from './CandidateContainer'
 
@@ -11,14 +12,15 @@ module.exports = {
     childRoutes:[
       { path: 'new', component: require('./NewContainer') },
       {
-          path: 'show',
-          component: require('./ShowContainer'),
+          path: 'list',
+          component: ListContainer,
           childRoutes: [
               { path: 'closed', component: ClosedJobsSlider },
               { path: 'open', component: OpenJobsSlider },
               { path: 'drafts', component: DraftJobsSlider },
           ]
       },
+      { path: ':id/show', component: (props) => <ShowContainer id={props.params.id} /> }
       { path: ':id/edit', component: (props) => <EditContainer id={props.params.id}/> },
 
       { path: ':id/candidates', component: (props) => <MatchesContainer id={props.params.id}/> }

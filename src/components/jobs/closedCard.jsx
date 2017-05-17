@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react';
-
+import { Link } from 'react-router'
 const propTypes = {
     title: PropTypes.string,
     state: PropTypes.string,
@@ -89,7 +89,10 @@ class ClosedCard extends Component {
                     </div>
                     <form className="card__actions-wrapper">
                         <div className="mdl-card__actions mdl-card--border card__actions">
-                            <a className="link" href="">View Job Description</a>
+                            <Link className="link" to={`recruiter/jobs/${_id}/show`}>
+                                View Job Description
+                            </Link>
+
                             <div className="mdl-layout-spacer" />
                             <a href="" className="button button_type_text-icon button_color_grey"> ... </a>
                         </div>

@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import { connect } from 'react-redux';
 import { closeJob } from './../../actions/companyJobs';
+import { Link } from 'react-router'
 
 const propTypes = {
     title: PropTypes.string,
@@ -105,7 +106,10 @@ class Card extends Component {
                     </div>
                     <form className="card__actions-wrapper">
                         <div className="mdl-card__actions mdl-card--border card__actions">
-                            <a className="link" href="">View Job Description</a>
+                            <Link className="link" to={`recruiter/jobs/${_id}/show`}>
+                                View Job Description
+                            </Link>
+
                             <div className="mdl-layout-spacer" />
                             <button
                                 className="link link_type_additional"
