@@ -3,7 +3,10 @@ import React, {Component, PropTypes} from 'react';
 import { browserHistory } from 'react-router'
 
 const propTypes = {};
-const defaultProps = {};
+const defaultProps = {
+    candidate: false,
+    job: false,
+};
 
 export default class CandidateProfile extends Component {
 
@@ -11,6 +14,8 @@ export default class CandidateProfile extends Component {
         const { candidate, job } = this.props
         const { firstName, lastName, avatar } = candidate
         const { title } = job
+
+        console.log(candidate)
         return (
 
             <div className="mdl-card card card_type_mini card_state_open">

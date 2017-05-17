@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
 import VacancyProfile from '../../../components/jobs/Profile'
 import { find } from 'lodash'
 import VerticalScroller from 'components/VerticalScroller'
@@ -14,8 +15,7 @@ export default class ShowContainer extends Component {
     render() {
         return (
             <VerticalScroller>
-                    <VacancyProfile {...this.props.vacancy} >
-                    </VacancyProfile>
+                    <VacancyProfile {...this.props.vacancy} />
             </VerticalScroller>
         )
     }

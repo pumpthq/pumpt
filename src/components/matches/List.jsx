@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react';
-import { browserHistory } from 'react-router'
+import { Link, browserHistory } from 'react-router'
 
 const propTypes = {};
 const defaultProps = {};
@@ -19,7 +19,10 @@ export default class MatchesList extends Component {
 
                 { matches && matches.map( match =>
                     <div>
-                        { match._candidate }
+                        { JSON.stringify(match._candidate) }
+                        <Link className="link" to={`recruiter/jobs/${job._id}/candidates/${match._candidate._id}`}>
+                            View Candidate
+                        </Link>
                         <CardDivider />
                     </div>
                 )}

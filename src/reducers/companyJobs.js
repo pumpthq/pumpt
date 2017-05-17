@@ -160,7 +160,7 @@ export default (state = defaultState, action) => {
         }
 
         case FETCH_CANDIDATE_SUCCEEDED : {
-            const candidates = _.uniqBy( payload.candidates.concat(state.candidates), '_id' )
+            const candidates = _.uniqBy( [payload.candidate].concat(state.candidates), '_id' )
             return { ...state, candidates };
         }
 

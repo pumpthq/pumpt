@@ -3,7 +3,7 @@ import { AllMatchesSlider, BookmarkedMatchesSlider, NotInterestedMatchesSlider }
 import MatchesContainer from './candidate/MatchesContainer'
 import VacancyContainer from './candidate/VacancyContainer'
 import CompanyContainer from './CompanyContainer'
-
+import EditContainer from './candidate/EditContainer'
 
 module.exports = {
     path: 'candidate/matches',

@@ -90,7 +90,9 @@ class Card extends Component {
                     <div className="card__middle-block">
                         <div className="row">
                             <div className="col-lg-5 no-right-gutter">
-                                <a className="link link_size_s" href="">{matches} Matches</a>
+                                <Link className="link" to={`recruiter/jobs/${_id}/candidates`}>
+                                    Matches
+                                </Link>
                                 <p className="text text_color_l-grey">67–98% match</p>
                             </div>
                             <div className="col-lg-7">

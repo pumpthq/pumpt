@@ -8,9 +8,11 @@ import { fetchCandidate } from 'actions/companyJobs'
 import { find } from 'lodash'
 
 function mapStateToProps(state, ownProps) {
+
     return {
         job: find(state.companyJobs.jobs, o => o._id === ownProps.id),
-        candidate: find(state.companyJobs.candidate, o => o._id == ownProps.cid)}
+        candidate: find(state.companyJobs.candidates, o => o._id == ownProps.cid)
+    }
 }
 
 @connect(mapStateToProps)

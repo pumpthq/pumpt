@@ -208,12 +208,10 @@ export default class Profile extends Component {
     render() {
         const { children, additionElements, postReject, postApprove, hideFullDescription } = this.props
         return (
-
-            <div className="slider__item slider__item_active">
-                <a class="button button_type_close" onClick={browserHistory.goBack}>×</a>
-                <div className="scroll-container">
-                    <div className="scroll-container__inner">
+                    <div>
                         <div className="mdl-card card card_state_open card_state_scroll">
+                            <a class="button_type_close" onClick={browserHistory.goBack}>×</a>
+
                             {this.renderMatchInformation()}
                             {this.renderLongContent()}
                             {this.renderResponsibilities()}
@@ -237,9 +235,6 @@ export default class Profile extends Component {
                         {additionElements}
                         {children}
                     </div>
-                </div>
-
-            </div>
         )
     }
 }
