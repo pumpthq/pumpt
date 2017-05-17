@@ -5,6 +5,8 @@ import MatchesList from 'components/matches/List'
 import VerticalScroller from 'components/VerticalScroller'
 import { fetchMatches } from 'actions/companyJobs'
 
+import { find, filter } from 'lodash'
+
 function mapStateToProps(state, ownProps) {
     return {
         job: find(state.companyJobs.jobs, card => card._id === ownProps.id),
