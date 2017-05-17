@@ -23,12 +23,6 @@ const defaultState = {
     notInterested: [],
     approved: [],
     activeTab: ALL_TAB,
-    newJob: {
-        step: null,
-        progress: [],
-        active: [],
-        summary: {},
-    },
     companies: [],
     vacancies: [],
 };
@@ -43,31 +37,7 @@ export default (state = defaultState, action) => {
               , notInterested = []
               , approved = []
 
-            payload.matches.forEach(matching => {
-                let vacancy = matching._vacancy
-
-                let card = {
-                    id: matching._id,
-                    _id: matching._id,
-                    _vacancy: vacancy._id,
-                    _company: vacancy.company._id,
-                    name: vacancy.company.name,
-                    logo: vacancy.company.logo,
-                    title: vacancy.title,
-                    location: vacancy.company.locationHeadquarters.state,
-                    match: matching.score,
-                    salary: vacancy.salary,
-                    experience: vacancy.experience,
-                    employment: vacancy.employment,
-                    degree: vacancy.degree,
-                    text: vacancy.description,
-                    responsibilities: vacancy.responsibilities || [],
-                    requirements: vacancy.requirements || [],
-                    background: vacancy.company.background,
-                    quoteOrMotto: vacancy.company.quoteOrMotto,
-                    status: matching.vacancy.status || {}
-                }
-
+            payload.matches.forEach(card => {
 
                 // ⚠️ TODO: review specs how cards are filtered into matches-tabs
                 if(card.status.approved !== undefined) {
