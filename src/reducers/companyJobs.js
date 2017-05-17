@@ -37,6 +37,9 @@ import {
     OPEN_JOB_SUCCEEDED,
     DELETE_JOB_SUCCEEDED,
 
+    UPDATE_COMPANY_SUCCEEDED,
+    UPDATE_COMPANY_FAILED,
+
 
     // DESCRIPTION_STEP,
     // SHOW_DESCRIPTION_STEP,
@@ -247,6 +250,14 @@ export default (state = defaultState, action) => {
             return {
                 ...state,
                 jobs,
+            }
+        }
+
+        case UPDATE_COMPANY_SUCCEEDED : {
+            const { company } = payload
+            return {
+                ...state,
+                company
             }
         }
 

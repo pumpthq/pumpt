@@ -5,7 +5,7 @@ import { tintedBackground } from 'components/helpers'
 import { browserHistory } from 'react-router'
 
 import { Location, EnumSelector, TextArea } from 'components/form/inputs'
-
+import {COMPANY_EMPLOYEES_DATA} from 'constants/companyOnboarding'
 const propTypes = {
     // name: PropTypes.string,
     // logo: PropTypes.string,
@@ -55,7 +55,7 @@ const defaultProps = {
 
 @reduxForm({
     form: 'company',
-    fields: [ 'name', 'type', 'description', 'employeesAmount', 'foundDate', 'background', 'logo', 'locationHeadquarters.city', 'locationHeadquarters.state'  ]
+    fields: [ 'name', 'type', 'quoteOrMotto', 'description', 'employeesAmount', 'foundDate', 'background', 'logo', 'locationHeadquarters.city', 'locationHeadquarters.state'  ]
 })
 export default class CompanyForm extends Component {
 
@@ -103,7 +103,7 @@ export default class CompanyForm extends Component {
                     className="text summary-head__label"># of employees</span> <span
                     className="text text_size_s summary-head__summary">
 
-                    <input type="text" placeholder='' {...employeesAmount} />
+                    <EnumSelector field={employeesAmount} options={COMPANY_EMPLOYEES_DATA} />
 
                     </span></div>
                 <div className="summary-head__title-column">
@@ -165,11 +165,13 @@ export default class CompanyForm extends Component {
 
     render() {
         const { name, background, logo } = this.props.fields
-        const { ratingImage, ratingCount, submitting} = this.props
+        const { ratingImage, ratingCount, submitting, handleSubmit} = this.props
         return (
 
             <div className="mdl-card card card_type_mini card_state_open">
-                <a class="button button_type_close" onClick={browserHistory.goBack}>×</a>
+                <a class="button_type_close" onClick={browserHistory.goBack}>×</a>
+
+                <form onSubmit={handleSubmit}>
                 <div className="summary-hero" style={ tintedBackground(background.value,255,255,255,0) }></div>
                 <div className="summary-head">
 
@@ -243,7 +245,7 @@ export default class CompanyForm extends Component {
                     Clear Values
                   </button> */}
                 </div>
-
+                </form>
             </div>
         )
     }

@@ -48,6 +48,7 @@ import {
     CLOSE_JOB_SUCCEEDED,
     DELETE_JOB_SUCCEEDED,
 
+    UPDATE_COMPANY_SUCCEEDED,
     // SAVE_SUMMARY_DATA,
     // SAVE_DESCRIPTION_DATA,
     // SAVE_RESPONSIBILITIES_DATA,
@@ -105,6 +106,11 @@ export default function () {
         takeLatest(UPDATE_JOB_SUCCEEDED, function * (action) {
           // yield put(push(ROUTE_TO_DRAFTS)); //or route to view job
           const { job } = action.payload
+          yield put(push(ROUTE_COMPANY_JOBS_DRAFTS))
+        }),
+
+        takeLatest(UPDATE_COMPANY_SUCCEEDED, function * (action) {
+          // yield put(push(ROUTE_TO_DRAFTS)); //or route to view job
           yield put(push(ROUTE_COMPANY_JOBS_DRAFTS))
         }),
         // takeLatest(SAVE_SUMMARY_DATA, function * () {

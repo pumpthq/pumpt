@@ -56,7 +56,7 @@ import STATES from 'constants/states.json';
 export class Location extends Component {
   shouldComponentUpdate(nextProps) {
     return this.props.state !== nextProps.state ||
-      this.props.city !== nextProps.city ||
+      this.props.city !== nextProps.city
   }
 
   render() {

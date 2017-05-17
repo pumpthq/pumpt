@@ -187,7 +187,7 @@ export const updateCompany = (data)  => {
           method: 'PUT',
           url: `${API_COMPANY_ROOT}/current`,
           data,
-          success: updateJobSucceeded(data),
+          success: updateCompanySucceeded(data),
       }
     }
 };

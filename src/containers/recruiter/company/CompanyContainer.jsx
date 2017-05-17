@@ -13,6 +13,8 @@ const mapStateToProps = state => ({ company: state.companyJobs.company })
 class CompanyContainer extends Component {
 
     render() {
+        const { dispatch } = this.props
+        
         return (
             <VerticalScroller>
                 <CompanyForm initialValues={this.props.company} onSubmit={values=> dispatch(updateCompany(values)) }/>
