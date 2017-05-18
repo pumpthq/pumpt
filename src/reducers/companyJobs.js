@@ -217,7 +217,7 @@ export default (state = defaultState, action) => {
 
             // TODO what is this???? O_o
         case SHOW_SUMMARY_HEAD_STANDARD :
-        case SHOW_SUMMARY_HEAD_EDIT :
+        case SHOW_SUMMARY_HEAD_EDIT : {
             return {
                 ...state,
                 jobs,
