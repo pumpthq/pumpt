@@ -10,18 +10,22 @@ const propTypes = {
     experience: PropTypes.string,
     employment: PropTypes.string,
     degree: PropTypes.string,
-    matches: PropTypes.string,
     industry: PropTypes.string,
-    id: PropTypes.string,
+    _id: PropTypes.string,
 };
 
 const defaultProps = {
-    salary: '',
-    experience: '',
-    employment: '',
-    degree: '',
-    matches: '',
-    industry: '',
+    _id: '{_id}',
+    title: '{title}',
+    salary: '{salary}',
+    state: '{state}',
+    experience: '{experience}',
+    employment: '{employment}',
+    degree: '{degree}',
+    industry: '{industry}',
+    candidates: {
+        briefs: []
+    }
 };
 
 @connect(
@@ -36,8 +40,8 @@ class Card extends Component {
             experience,
             employment,
             degree,
-            matches,
             industry,
+            candidates,
             dispatch,
             _id,
         } = this.props;
@@ -89,19 +93,17 @@ class Card extends Component {
                     </div>
                     <div className="card__middle-block">
                         <div className="row">
-                            <div className="col-lg-5 no-right-gutter">
+                            <div className="col-xs-6 no-right-gutter">
                                 <Link className="link" to={`recruiter/jobs/${_id}/candidates`}>
-                                    Matches
+                                    {candidates.briefs.length} Matching
                                 </Link>
-                                <p className="text text_color_l-grey">67–98% match</p>
+                                {/* <p className="text text_color_l-grey">67–98% match</p> */}
                             </div>
-                            <div className="col-lg-7">
-                                <div className="image__hor-list text-right">
-                                    <img className="image image_size_m image_round" src="" />
-                                    <img className="image image_size_m image_round" src="" />
-                                    <img className="image image_size_m image_round" src="" />
-                                    <img className="image image_size_m image_round" src="" />
-                                    <img className="image image_size_m image_round" src="" />
+                            <div className="col-xs-6">
+                                <div className="text-right">
+                                    {candidates.briefs.map(candidate =>
+                                        <img className="image image_size_m image_round" src={candidate.avatar} />
+                                    )}
                                 </div>
                             </div>
                         </div>

@@ -2,6 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import { connect } from 'react-redux'
 import GlassDoorImage from 'img/glassdoor.jpg'
 
+import { Link } from 'react-router'
 import { find } from 'lodash'
 import { dispatchProp } from 'components/helpers'
 import { viewCompany } from 'actions/candidateMatches'
@@ -50,7 +51,13 @@ const defaultProps = {
     // foundDate: '1982',
     // onClickGoToCompanyPage: e => {},
     // onClickGoToBlacklistCompany: e => {}
-    locationHeadquarters: {city:'', state:''}
+    _id: '{_id}',
+    name: '{name}',
+    type: '{type}',
+    employeesAmount: '{employeesAmount}',
+    foundDate: '{foundDate}',
+    logo: 'https://placeholdit.imgix.net/~text?txtsize=9&txt=50x50&w=50&h=50',
+    locationHeadquarters: {city:'{city}', state:'{state}'}
 };
 @connect(undefined,dispatchProp)
 export default class CompanySummary extends Component {
@@ -99,7 +106,7 @@ export default class CompanySummary extends Component {
         )
     }
     render() {
-        const { dispatch, name, logo, ratingImage, ratingCount, onClickGoToCompanyPage } = this.props
+        const { dispatch, name, logo, ratingImage, ratingCount, _id } = this.props
         return (
             <div className="mdl-card card card_type_mini card_state_open">
                 <div className="summary-head">
@@ -146,9 +153,13 @@ export default class CompanySummary extends Component {
                         {this.renderCompanyInformation()}
                         <div className="summary-head__title-item summary-head__title-item_type_alignment summary-head__title-item_type_action-bar">
                             <div className="summary-head__title-column">
-                                <a className="link" onClick={()=>dispatch(viewCompany(this.props._id))}>
+                                {/* <a className="link" onClick={()=>dispatch(viewCompany(this.props_id))}>
                                     Go to Company Page
-                                </a>
+                                </a> */}
+                                <Link className="link" to={`/candidate/matches/company/${_id}`}>
+                                    Go to Company Page
+                                </Link>
+
                             </div>
                         </div>
                     </div>

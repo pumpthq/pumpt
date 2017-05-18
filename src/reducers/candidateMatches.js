@@ -37,15 +37,15 @@ export default (state = defaultState, action) => {
               , notInterested = []
               , approved = []
 
-            payload.matches.forEach(card => {
-
+            payload.matches.forEach(match => {
+                var card = match.vacancy
                 // ⚠️ TODO: review specs how cards are filtered into matches-tabs
-                if(card.status.approved !== undefined) {
-                    if (!card.status.approved) notInterested.push(card)
+                if(card.status.approved !== null) {
+                    if (!card.status.approved) notInterested.push(match)
                     else approved.push(card)
                 }
-                else if(card.status.bookmarked !== undefined && card.status.bookmarked) bookmarked.push(card)
-                else all.push(card)
+                else if(card.status.bookmarked !== null && card.status.bookmarked) bookmarked.push(match)
+                else all.push(match)
             })
 
             return {

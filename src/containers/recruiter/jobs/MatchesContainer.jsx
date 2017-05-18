@@ -10,24 +10,25 @@ import { find, filter } from 'lodash'
 function mapStateToProps(state, ownProps) {
     return {
         job: find(state.companyJobs.jobs, card => card._id === ownProps.id),
-        matches: filter(state.companyJobs.matches, match => match._vacancy == ownProps.id)}
+        // matches: filter(state.companyJobs.matches, match => match._vacancy == ownProps.id)
+    }
 }
 
 @connect(mapStateToProps)
 class MatchesContainer extends Component {
 
-    componentWillMount() {
-        const { dispatch, id, matches } = this.props;
-        if(matches.length==0) {
-            dispatch(fetchMatches(id))
-        }
-    }
+    // componentWillMount() {
+    //     const { dispatch, id, matches } = this.props;
+    //     if(matches.length==0) {
+    //         dispatch(fetchMatches(id))
+    //     }
+    // }
 
 
     render() {
         return (
             <VerticalScroller>
-                <MatchesList {...this.props} />
+                <MatchesList {...this.props.job} />
             </VerticalScroller>
         );
     }

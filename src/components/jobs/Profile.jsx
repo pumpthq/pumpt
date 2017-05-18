@@ -14,36 +14,36 @@ import { tintedBackground } from 'components/helpers'
 import { browserHistory } from 'react-router'
 
 const propTypes = {
-    name: PropTypes.string,
-    logo: PropTypes.string,
-    title: PropTypes.string,
-    location: PropTypes.string,
-    match: PropTypes.number,
-    salary: PropTypes.string,
-    experience: PropTypes.string,
-    employment: PropTypes.string,
-    degree: PropTypes.string,
-    background: PropTypes.string,
-    text: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.array
-    ]),
-    children: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.element,
-        PropTypes.array
-    ]),
-    additionElements: PropTypes.oneOfType([
-        PropTypes.element,
-        PropTypes.string,
-        PropTypes.array
-    ]),
-    onClick: PropTypes.func,
-    onClickForLink: PropTypes.func,
-    onClickClose: PropTypes.func,
-    bookmark: PropTypes.bool,
-    addToBookmark: PropTypes.func,
-    removeOfBookmark: PropTypes.func
+//     name: PropTypes.string,
+//     logo: PropTypes.string,
+//     title: PropTypes.string,
+//     location: PropTypes.string,
+//     match: PropTypes.number,
+//     salary: PropTypes.string,
+//     experience: PropTypes.string,
+//     employment: PropTypes.string,
+//     degree: PropTypes.string,
+//     background: PropTypes.string,
+//     text: PropTypes.oneOfType([
+//         PropTypes.string,
+//         PropTypes.array
+//     ]),
+//     children: PropTypes.oneOfType([
+//         PropTypes.string,
+//         PropTypes.element,
+//         PropTypes.array
+//     ]),
+//     additionElements: PropTypes.oneOfType([
+//         PropTypes.element,
+//         PropTypes.string,
+//         PropTypes.array
+//     ]),
+//     onClick: PropTypes.func,
+//     onClickForLink: PropTypes.func,
+//     onClickClose: PropTypes.func,
+//     bookmark: PropTypes.bool,
+//     addToBookmark: PropTypes.func,
+//     removeOfBookmark: PropTypes.func
 };
 
 const defaultProps = {

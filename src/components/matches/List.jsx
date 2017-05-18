@@ -2,26 +2,37 @@ import React, {Component, PropTypes} from 'react';
 import { Link, browserHistory } from 'react-router'
 
 const propTypes = {};
-const defaultProps = {};
+const defaultProps = {
+    _id: '{_id}',
+    title: '{title}',
+    candidates: {
+        briefs: [],
+    }
+};
 
 
 export default class MatchesList extends Component {
 
     render() {
-        const { matches, job } = this.props
+        const {title, candidates, _id} = this.props
         return (
 
             <div className="mdl-card card card_type_mini card_state_open">
-                <a class="button button_type_close" onClick={browserHistory.goBack}>×</a>
+                <a class="button_type_close" onClick={browserHistory.goBack}>×</a>
 
-                { JSON.stringify(job) }
+                <h2>{ title }</h2>
                 <CardDivider />
 
-                { matches && matches.map( match =>
+                <h4>{ candidates.briefs.length } MATCHES</h4>
+
+                { candidates.briefs && candidates.briefs.map( candidate =>
                     <div>
-                        { JSON.stringify(match._candidate) }
-                        <Link className="link" to={`recruiter/jobs/${job._id}/candidates/${match._candidate._id}`}>
-                            View Candidate
+                        {candidate.firstName}
+                        {candidate.lastName}
+                        <img src={candidate.avatar} />
+
+                        <Link className="link" to={`recruiter/jobs/${_id}/candidates/${candidate._id}`}>
+                            View Candidate Details
                         </Link>
                         <CardDivider />
                     </div>

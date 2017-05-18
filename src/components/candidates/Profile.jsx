@@ -19,7 +19,7 @@ export default class CandidateProfile extends Component {
         return (
 
             <div className="mdl-card card card_type_mini card_state_open">
-                <a class="button button_type_close" onClick={browserHistory.goBack}>×</a>
+                <a class="button_type_close" onClick={browserHistory.goBack}>×</a>
 
                 <h2>{ title }</h2>
 
