@@ -204,6 +204,7 @@ export default function () {
             const { payload } = action;
             const { isCandidate, isNotApproved, isRecruiter } = payload
 
+            console.log('resolving user')
             if (isCandidate && isNotApproved) {
                 yield put(getLatestCandidateProfile());
                 yield put(push(ROUTE_APPLICATION_CANDIDATE));
@@ -236,6 +237,7 @@ export default function () {
                 // or load default dashboard
 
                 if (isCandidate && isNotApproved) {
+                    yield put(getLatestCandidateProfile());
                     yield put(push(ROUTE_APPLICATION_CANDIDATE));
                 } else if (isRecruiter && isNotApproved) {
                     yield put(getLatestCompanyProfile());

@@ -60,10 +60,7 @@ const updateCandidate = ({ id, accessToken, body }) => {
     return axios({
         method : 'PUT',
         baseURL : API_URL,
-        url : `${API_CANDIDATE_ROOT}/${id}`,
-        headers : {
-            'access-token' : accessToken
-        },
+        url : `${API_CANDIDATE_ROOT}/current`,
         data : body,
         responseType : 'json'
     }).then(response => response.data)
