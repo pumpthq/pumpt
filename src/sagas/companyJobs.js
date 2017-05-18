@@ -55,7 +55,7 @@ import {
     // SAVE_DESCRIPTION_DATA,
     // SAVE_RESPONSIBILITIES_DATA,
     // SAVE_SKILLS_AND_REQUIREMENTS_DATA,
-    // CLOSE_OPENED_NEW_JOB_CARD,
+    CLOSE_OPENED_NEW_JOB_CARD,
 
 } from './../constants/companyJobs';
 
