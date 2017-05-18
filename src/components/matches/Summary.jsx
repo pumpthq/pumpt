@@ -9,44 +9,32 @@ import { tintedBackground } from 'components/helpers'
 import './card.less'
 
 
-const propTypes = {
-    name: PropTypes.string,
-    logo: PropTypes.string,
-    title: PropTypes.string,
-    location: PropTypes.string,
-    match: PropTypes.number,
-    salary: PropTypes.string,
-    experience: PropTypes.string,
-    employment: PropTypes.string,
-    background: PropTypes.string,
-    text: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.array
-    ]),
-    onClick: PropTypes.func,
-    onClickForLink: PropTypes.func,
-    bookmark: PropTypes.bool,
-    addToBookmark: PropTypes.func,
-    removeOfBookmark: PropTypes.func,
-};
+const propTypes = {};
 
 const defaultProps = {
-    name: 'Name',
-    logo: '//superrepo.org/static/images/icons/original/xplugin.video.nytimes.png.pagespeed.ic.XOPQITkLio.png',
-    title: 'Title',
-    location: 'location',
-    match: 20,
-    salary: 'Salary',
-    experience: 'Experience',
-    employment: 'Employment',
-    background: '//wallpaper.sc/en/ipad/wp-content/uploads/2014/10/ipad-2048x2048-thumbnail_01022-256x256.jpg',
+    company: {
+        brief: {
+            name: '{name}',
+            logo: 'https://placeholdit.imgix.net/~text?txtsize=9&txt=50x50&w=50&h=50',
+            background: 'https://placeholdit.imgix.net/~text?txtsize=33&txt=350%C3%97150&w=350&h=150',
+        }
+    },
+    vacancy: {
+        brief: {
+            title: '{title}',
+            state: '{state}',
+            salary: '{salary}',
+            experience: '{experience}',
+            employment: '{employment}',
+            description: '{description}',
+        }
+    },
+    status: {
+        bookmarked: false,
+        approved: false,
+    },
+    score: '{score}',
     backgroundTint: [50,50,50,.75],
-    text: 'This will contain the job description',
-    onClick: e=> {},
-    onClickForLink: e=> {},
-    bookmark: false,
-    addToBookmark: PropTypes.func,
-    removeOfBookmark: PropTypes.func
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
@@ -73,20 +61,20 @@ export default class Summary extends Component {
     componentWillMount() {}
 
     renderMatchInformation() {
-        const { name, logo, title, location, match, salary, experience, employment, background, backgroundTint } = this.props;
+        const { score, company, vacancy, backgroundTint } = this.props
         return (
-            <div className="summary-head" style={ tintedBackground(background,...backgroundTint) } >
+            <div className="summary-head" style={ tintedBackground(company.brief.background,...backgroundTint) } >
                 <div className="summary-head__title mdl-card__title">
                     <div className="summary-head__title-item">
                         <div className="summary-head__title-column">
-                            <img className="image image_round image_size_xxl image_type_company-logo" src={logo}/>
+                            <img className="image image_round image_size_xxl image_type_company-logo" src={company.brief.logo}/>
                             <div className="summary-head__title-block">
                                 <h2 className="mdl-card__title-text heading heading_color_invert heading_type_two">
-                                    {name}
+                                    {company.brief.name}
                                 </h2>
                                 <span className="mdl-card__subtitle-text summary-head__subtitle-text text text_color_invert">
-                                    {title}<br/>
-                                    {location}
+                                    {vacancy.brief.title}<br/>
+                                    {vacancy.brief.state}
                                 </span>
                             </div>
                         </div>
@@ -105,11 +93,11 @@ export default class Summary extends Component {
                         </div> */}
                         <div className="summary-head__title-column">
                             <span  className="text text_color_invert summary-head__label">Industry Experience </span>
-                            <span  className="text text_color_invert text_size_s summary-head__summary">{experience}</span>
+                            <span  className="text text_color_invert text_size_s summary-head__summary">{vacancy.brief.experience}</span>
                         </div>
                         <div className="summary-head__title-column">
                             <span  className="text text_color_invert summary-head__label">Employment </span>
-                            <span  className="text text_color_invert text_size_s summary-head__summary">{employment}</span>
+                            <span  className="text text_color_invert text_size_s summary-head__summary">{vacancy.brief.employment}</span>
                         </div>
                     </div>
                 </div>
@@ -121,28 +109,17 @@ export default class Summary extends Component {
     }
 
     renderShortContent() {
-        const { text } = this.props
-        let content;
-
-        if (typeof text === 'object') {
-            content = text.map( (paragraph, key) => {
-                return (
-                    <p key={key} className="mdl-card__supporting-text card__supporting-text">{paragraph}</p>
-                );
-            });
-        } else {
-            content = <p className="mdl-card__supporting-text card__supporting-text">{text}</p>;
-        }
+        const { vacancy } = this.props
         return (
             <div className="card__middle-block">
-                {content}
+                <p className="mdl-card__supporting-text card__supporting-text">{vacancy.brief.description}</p>
             </div>
         );
     }
     renderBookmarks() {
-        const { status, addToBookmark } = this.props;
+        const { candidate: { status }, addToBookmark } = this.props;
 
-        if (status.bookmarked === undefined && status.approved === undefined) {
+        if (status.bookmarked === null && status.approved === null) {
             return (
                 <a onClick={addToBookmark} className="button button_type_icons col-xs-12">
                     <BookmarkOpen /> BOOKMARK
@@ -151,9 +128,9 @@ export default class Summary extends Component {
         }
     }
     renderApproveReject() {
-        const { status, postReject, postApprove } = this.props;
+        const { candidate: { status }, postReject, postApprove } = this.props;
 
-        if (status.approved === undefined) {
+        if (status.approved === null) {
             return (
                 <div>
                     <a onClick={postApprove} className="mdl_button button col-xs-12">
@@ -165,12 +142,12 @@ export default class Summary extends Component {
         }
     }
     render() {
-        const { viewVacancy, id } = this.props;
+        const { viewVacancy, _vacancy, _company } = this.props;
         return (
             <div className="slider__item">
                 <div className="mdl-card card">
                     {this.renderMatchInformation()}
-                    {/* {this.renderShortContent()} */}
+                    {this.renderShortContent()}
                     <form className="card__actions-wrapper">
                         <div className="mdl-card__actions card__actions">
                             {/* <div className="mdl-layout-spacer" /> */}
@@ -179,8 +156,9 @@ export default class Summary extends Component {
                                 {this.renderBookmarks()}
                             </div>
                             <div className="col-xs-6">
-                                {/* <a className="link" onClick={showFullDescription}>View Full Description</a> */}
-                                <a className="link" onClick={viewVacancy}>View Full Description</a>
+                                <Link className="link" to={`candidate/matches/company/${_company}/vacancy/${_vacancy}`}>
+                                    View Full Description
+                                </Link>
                             </div>
 
                         </div>

@@ -23,12 +23,6 @@ const defaultState = {
     notInterested: [],
     approved: [],
     activeTab: ALL_TAB,
-    newJob: {
-        step: null,
-        progress: [],
-        active: [],
-        summary: {},
-    },
     companies: [],
     vacancies: [],
 };
@@ -43,39 +37,15 @@ export default (state = defaultState, action) => {
               , notInterested = []
               , approved = []
 
-            payload.matches.forEach(matching => {
-                let vacancy = matching._vacancy
-
-                let card = {
-                    id: matching._id,
-                    _id: matching._id,
-                    _vacancy: vacancy._id,
-                    _company: vacancy.company._id,
-                    name: vacancy.company.name,
-                    logo: vacancy.company.logo,
-                    title: vacancy.title,
-                    location: vacancy.company.locationHeadquarters.state,
-                    match: matching.score,
-                    salary: vacancy.salary,
-                    experience: vacancy.experience,
-                    employment: vacancy.employment,
-                    degree: vacancy.degree,
-                    text: vacancy.description,
-                    responsibilities: vacancy.responsibilities || [],
-                    requirements: vacancy.requirements || [],
-                    background: vacancy.company.background,
-                    quoteOrMotto: vacancy.company.quoteOrMotto,
-                    status: matching.vacancy.status || {}
-                }
-
-
+            payload.matches.forEach(match => {
+                var card = match.vacancy
                 // ⚠️ TODO: review specs how cards are filtered into matches-tabs
-                if(card.status.approved !== undefined) {
-                    if (!card.status.approved) notInterested.push(card)
+                if(card.status.approved !== null) {
+                    if (!card.status.approved) notInterested.push(match)
                     else approved.push(card)
                 }
-                else if(card.status.bookmarked !== undefined && card.status.bookmarked) bookmarked.push(card)
-                else all.push(card)
+                else if(card.status.bookmarked !== null && card.status.bookmarked) bookmarked.push(match)
+                else all.push(match)
             })
 
             return {
