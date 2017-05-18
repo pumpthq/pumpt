@@ -37,7 +37,7 @@ class ImportButton extends Component {
                     >
                         <PencilIcon />{`
                             `}
-                        <span class="icon__text">Set up profile manually</span>
+                        <span class="icon__text">Complete Profile Manually</span>
                     </button>
                 </div>
             </div>

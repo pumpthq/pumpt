@@ -62,14 +62,11 @@ class EntryBlock extends Component {
                     <div class="container">
                         <div class="row row-padding-bigger">
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 column__wrapper">
-                                <section class="column column_size_xl">
                                     <Panel>
                                         <HeadingProgress/>
                                         <SummaryHead />
                                         <ApplicationCandidate />
                                     </Panel>
-                                </section>
-                                <ProgressChartSidebar isFilled={progress} />
                             </div>
                         </div>
                     </div>
