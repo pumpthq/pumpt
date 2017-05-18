@@ -83,7 +83,6 @@ class ProgressChartSidebar extends ProgressChartSidebarPrototype {
                             dispatch(showAddPhotoStep())
                         }}>Photos {this.renderOkIcon({ constant : PHOTO_STEP })}</a>
                     </nav>,
-                    <ImportFromLinkedInButton isImporter={true}/>
                     ] :
                     null
                 }
