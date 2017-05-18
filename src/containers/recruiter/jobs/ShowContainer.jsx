@@ -1,40 +1,22 @@
 import React, { Component, PropTypes } from 'react';
-import Wrapper from './../../../components/main/wrapper';
-import TabBar from './parts/TabBar'
+import { connect } from 'react-redux';
+import VacancyProfile from '../../../components/jobs/Profile'
+import { find } from 'lodash'
+import VerticalScroller from 'components/VerticalScroller'
 
-const propTypes = {
-    children : PropTypes.node,
-};
-const defaultProps = {};
-
-class ShowContainer extends Component {
-
-    constructor(props) {
-        super(props);
-
-        this.state = {};
-    }
-
-    render() {
-        const { children } = this.props;
-
-        return (
-              <div>
-                <div className="container slider-container">
-                    <div className="row row-padding-bigger">
-                        <div className="col-lg-12">
-                            {children}
-                        </div>
-                    </div>
-                </div>
-                <TabBar />
-              </div>
-        );
-    }
-
+const mapStateToProps = (state, ownProps) => {
+    const vacancy = find(state.companyJobs.jobs, o => o._id === ownProps.id)
+    const company = state.companyJobs.company
+    if(vacancy) vacancy.company = company
+    return { vacancy }
 }
-
-ShowContainer.propTypes = propTypes;
-ShowContainer.defaultProps = defaultProps;
-
-module.exports = ShowContainer
+@connect(mapStateToProps)
+export default class ShowContainer extends Component {
+    render() {
+        return (
+            <VerticalScroller>
+                    <VacancyProfile {...this.props.vacancy} />
+            </VerticalScroller>
+        )
+    }
+}

@@ -10,16 +10,16 @@ const propTypes = {};
 const defaultProps = {};
 
 function mapStateToProps(state, ownProps) {
-    return { job: find(state.companyJobs.jobs, job => job._id == ownProps.id)}
+    return { candidate: state.candidateMatches.candidate }
 }
 
 @connect(mapStateToProps)
 class EditContainer extends Component {
     render() {
-        const { dispatch, job, id } = this.props
+        const { dispatch, candidate } = this.props
         return (
             <VerticalScroller>
-                <JobForm initialValues={job} onSubmit={values=> dispatch(updateJob(id,values))}/>
+                {/* <CandidateForm initialValues={candidate} onSubmit={values=> dispatch(updateCandidate(id,values))}/> */}
             </VerticalScroller>
         );
     }

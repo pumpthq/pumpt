@@ -3,12 +3,13 @@ import { AllMatchesSlider, BookmarkedMatchesSlider, NotInterestedMatchesSlider }
 import MatchesContainer from './candidate/MatchesContainer'
 import VacancyContainer from './candidate/VacancyContainer'
 import CompanyContainer from './CompanyContainer'
-
+import EditContainer from './candidate/EditContainer'
 
 module.exports = {
     path: 'candidate/matches',
     component: MatchesContainer,
     childRoutes: [
+        { path: 'edit', component: EditContainer },
         { path: 'company/:id', component: (props) => <CompanyContainer id={props.params.id} /> },
         { path: 'company/:cid/vacancy/:id', component: (props) => <VacancyContainer cid={props.params.cid} id={props.params.id} /> },
         { path: 'all', component: AllMatchesSlider },

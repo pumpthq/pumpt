@@ -10,6 +10,12 @@ import {
     FETCH_RECRUITER_SUCCEEDED,
     FETCH_RECRUITER_FAILED,
 
+    FETCH_MATCHES_SUCCEEDED,
+    FETCH_MATCHES_FAILED,
+
+    FETCH_CANDIDATE_SUCCEEDED,
+    FETCH_CANDIDATE_FAILED,
+
     // OPEN_FETCH_REQUESTED,
     // OPEN_FETCH_SUCCEEDED,
     // OPEN_FETCH_FAILED,
@@ -55,6 +61,9 @@ import {
 
     UPDATE_JOB_SUCCEEDED,
     UPDATE_JOB_FAILED,
+
+    UPDATE_COMPANY_SUCCEEDED,
+    UPDATE_COMPANY_FAILED,
 
 } from './../constants/companyJobs';
 import { API } from '../constants/actionTypes'
@@ -177,6 +186,28 @@ export const fetchJobsFailed = () => ({
 })
 
 
+export const updateCompany = (data)  => {
+    return {
+      type: API,
+      payload:{
+          method: 'PUT',
+          url: `${API_COMPANY_ROOT}/current`,
+          data,
+          success: updateCompanySucceeded(data),
+      }
+    }
+};
+
+export const updateCompanySucceeded = (data) => company => {
+    return {
+      type: UPDATE_COMPANY_SUCCEEDED,
+      payload: {
+          data,
+          company,
+      }
+    }
+};
+
 export const fetchCompany = () => {
     return {
         type : API,
@@ -222,6 +253,36 @@ export const fetchRecruiterSucceeded = recruiter => ({
 
 export const fetchRecruiterFailed = () => ({
     type : FETCH_RECRUITER_FAILED
+})
+
+export const fetchMatches = (id) => ({
+    type : API,
+    payload : {
+        url : `/matches/vacancy/${id}`,
+        success: fetchMatchesSucceeded,
+    }
+})
+
+export const fetchMatchesSucceeded = matches => ({
+    type : FETCH_MATCHES_SUCCEEDED,
+    payload : {
+        matches
+    }
+})
+
+export const fetchCandidate = (id) => ({
+    type : API,
+    payload : {
+        url : `/candidates/${id}`,
+        success: fetchCandidateSucceeded,
+    }
+})
+
+export const fetchCandidateSucceeded = candidate => ({
+    type : FETCH_CANDIDATE_SUCCEEDED,
+    payload : {
+        candidate
+    }
 })
 
 //

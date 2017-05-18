@@ -1,9 +1,11 @@
 import React, {Component, PropTypes} from 'react';
 import GlassDoorImage from 'img/glassdoor.jpg'
-
+import { reduxForm } from 'redux-form'
 import { tintedBackground } from 'components/helpers'
 import { browserHistory } from 'react-router'
 
+import { Location, EnumSelector, TextArea } from 'components/form/inputs'
+import {COMPANY_EMPLOYEES_DATA} from 'constants/companyOnboarding'
 const propTypes = {
     // name: PropTypes.string,
     // logo: PropTypes.string,
@@ -48,11 +50,14 @@ const defaultProps = {
     // foundDate: '1982',
     // onClickGoToCompanyPage: e => {},
     // onClickGoToBlacklistCompany: e => {}
-    locationHeadquarters: {city:'', state:''}
+    // locationHeadquarters: {city:'', state:''}
 };
 
-
-export default class CompanyProfile extends Component {
+@reduxForm({
+    form: 'company',
+    fields: [ 'name', 'type', 'quoteOrMotto', 'description', 'employeesAmount', 'foundDate', 'background', 'logo', 'locationHeadquarters.city', 'locationHeadquarters.state'  ]
+})
+export default class CompanyForm extends Component {
 
     renderSocialNetworkList() {
         let socialNetworkItem = this.renderSocialNetworkItem
@@ -75,40 +80,55 @@ export default class CompanyProfile extends Component {
         )
     }
     renderCompanyHeader() {
-        const { locationHeadquarters, type, employeesAmount, foundDate } = this.props
+        const { locationHeadquarters, type, employeesAmount, foundDate } = this.props.fields
 
         return (
             <div className="summary-head__title-item summary-head__title-item_type_alignment summary-head__title-item_type_middle">
-                <div className="summary-head__title-column"><span
-                    className="text summary-head__label">Headquarters</span> <span
-                    className="text text_size_s summary-head__summary">{locationHeadquarters.city}, {locationHeadquarters.state.substring(0,2)}</span>
+                <div className="summary-head__title-column">
+                    <span className="text summary-head__label">Headquarters</span>
+                    <span className="text text_size_s summary-head__summary">
+                        <Location {...locationHeadquarters} />
+                    </span>
                 </div>
+
                 <div className="summary-head__title-column"><span
                     className="text summary-head__label">Company Type</span> <span
-                    className="text text_size_s summary-head__summary">{type}</span>
+                    className="text text_size_s summary-head__summary">
+
+                    <input type="text" placeholder='' {...type} />
+
+                    </span>
                 </div>
                 <div className="summary-head__title-column"><span
                     className="text summary-head__label"># of employees</span> <span
-                    className="text text_size_s summary-head__summary">{employeesAmount}</span></div>
-                <div className="summary-head__title-column"><span
-                    className="text summary-head__label">Founded</span> <span
-                    className="text text_size_s summary-head__summary">{foundDate}</span></div>
+                    className="text text_size_s summary-head__summary">
+
+                    <EnumSelector field={employeesAmount} options={COMPANY_EMPLOYEES_DATA} />
+
+                    </span></div>
+                <div className="summary-head__title-column">
+                    <span className="text summary-head__label">Founded</span>
+                    <span className="text text_size_s summary-head__summary">
+
+                    <input type="text" placeholder='' {...foundDate} />
+
+                    </span></div>
             </div>
         )
     }
     renderDescriptionSection() {
-        const { description, quoteOrMotto } = this.props
+        const { description, quoteOrMotto } = this.props.fields
         return (
 
             <div className="card__middle-block">
                 <span className="text  summary-head__label">Description</span>
 
-                {description}
+                <TextArea field={description} />
 
                 <div className="aside">
 
                     <span className="text  summary-head__label">Quote</span>
-                    { quoteOrMotto }
+                    <input type="text" {...quoteOrMotto} />
                 </div>
             </div>
 
@@ -144,22 +164,25 @@ export default class CompanyProfile extends Component {
     }
 
     render() {
-        const { name, background, logo, ratingImage, ratingCount, onClickGoToCompanyPage, onClickGoToBlacklistCompany } = this.props
+        const { name, background, logo } = this.props.fields
+        const { ratingImage, ratingCount, submitting, handleSubmit} = this.props
         return (
 
             <div className="mdl-card card card_type_mini card_state_open">
-                <a class="button button_type_close" onClick={browserHistory.goBack}>×</a>
-                <div className="summary-hero" style={ tintedBackground(background,255,255,255,0) }></div>
+                <a class="button_type_close" onClick={browserHistory.goBack}>×</a>
+
+                <form onSubmit={handleSubmit}>
+                <div className="summary-hero" style={ tintedBackground(background.value,255,255,255,0) }></div>
                 <div className="summary-head">
 
                     <div className="summary-head__title mdl-card__title">
                         <div className="summary-head__title-item">
                             <div className="summary-head__title-column">
                                 <img className="image image_round image_size_xxl image_type_company-logo"
-                                src={logo}/>
+                                src={logo.value}/>
                                 <div className="summary-head__title-block">
                                     <h2 className="mdl-card__title-text heading heading_type_two">
-                                        {name}
+                                        <input type="text" placeholder='' {...name} />
                                         <img src={ratingImage}
                                              className="image image_inline image_type_rating invisible-tablet"/>
                                         <span className="text text_color_grey invisible-tablet">
@@ -212,6 +235,17 @@ export default class CompanyProfile extends Component {
 
                 <CardDivider />
                 {this.renderLocationSection()}
+
+                <CardDivider />
+                <div>
+                  <button type="submit" disabled={submitting}>
+                    {submitting ? <i/> : <i/>} Submit
+                  </button>
+                  {/* <button type="button" disabled={submitting} onClick={resetForm}>
+                    Clear Values
+                  </button> */}
+                </div>
+                </form>
             </div>
         )
     }
@@ -219,5 +253,5 @@ export default class CompanyProfile extends Component {
 
 const CardDivider = () => (<div className="summary-head__title-item summary-head__title-item_type_alignment summary-head__title-item_type_middle"></div>)
 
-CompanyProfile.propTypes = propTypes;
-CompanyProfile.defaultProps = defaultProps;
+CompanyForm.propTypes = propTypes;
+CompanyForm.defaultProps = defaultProps;

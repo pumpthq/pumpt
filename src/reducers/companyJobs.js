@@ -20,34 +20,49 @@ import {
     FETCH_RECRUITER_SUCCEEDED,
     FETCH_RECRUITER_FAILED,
 
+    FETCH_MATCHES_SUCCEEDED,
+    FETCH_MATCHES_FAILED,
+
+    FETCH_CANDIDATE_SUCCEEDED,
+    FETCH_CANDIDATE_FAILED,
+
+
     CREATE_JOB_SUCCEEDED,
     CREATE_JOB_FAILED,
 
     UPDATE_JOB_SUCCEEDED,
     UPDATE_JOB_FAILED,
 
-    DESCRIPTION_STEP,
-    SHOW_DESCRIPTION_STEP,
-    SAVE_DESCRIPTION_DATA,
-    CLOSE_DESCRIPTION_STEP,
+    CLOSE_JOB_SUCCEEDED,
+    OPEN_JOB_SUCCEEDED,
+    DELETE_JOB_SUCCEEDED,
 
-    RESPONSIBILITIES_STEP,
-    SHOW_RESPONSIBILITIES_STEP,
-    SAVE_RESPONSIBILITIES_DATA,
-    CLOSE_RESPONSIBILITIES_STEP,
+    UPDATE_COMPANY_SUCCEEDED,
+    UPDATE_COMPANY_FAILED,
 
-    SKILLS_AND_REQUIREMENTS_STEP,
-    SHOW_SKILLS_AND_REQUIREMENTS_STEP,
-    SAVE_SKILLS_AND_REQUIREMENTS_DATA,
-    CLOSE_SKILLS_AND_REQUIREMENTS_STEP,
 
-    SAVE_SUMMARY_DATA,
-    SHOW_SUMMARY_HEAD_STANDARD,
-    SHOW_SUMMARY_HEAD_EDIT,
-    SAVE_SUMMARY_DATA_SUCCEEDED,
+    // DESCRIPTION_STEP,
+    // SHOW_DESCRIPTION_STEP,
+    // SAVE_DESCRIPTION_DATA,
+    // CLOSE_DESCRIPTION_STEP,
+    //
+    // RESPONSIBILITIES_STEP,
+    // SHOW_RESPONSIBILITIES_STEP,
+    // SAVE_RESPONSIBILITIES_DATA,
+    // CLOSE_RESPONSIBILITIES_STEP,
 
-    SET_DEFAULT_STATE,
-    SET_DEFAULT_NEW_JOB_STATE,
+    // SKILLS_AND_REQUIREMENTS_STEP,
+    // SHOW_SKILLS_AND_REQUIREMENTS_STEP,
+    // SAVE_SKILLS_AND_REQUIREMENTS_DATA,
+    // CLOSE_SKILLS_AND_REQUIREMENTS_STEP,
+    //
+    // SAVE_SUMMARY_DATA,
+    // SHOW_SUMMARY_HEAD_STANDARD,
+    // SHOW_SUMMARY_HEAD_EDIT,
+    // SAVE_SUMMARY_DATA_SUCCEEDED,
+    //
+    // SET_DEFAULT_STATE,
+    // SET_DEFAULT_NEW_JOB_STATE,
 } from './../constants/companyJobs';
 
 import {
@@ -56,7 +71,9 @@ import {
 } from './../constants/api';
 
 const defaultState = {
-    jobs: []
+    jobs: [],
+    matches: [],
+    candidates: [],
 }
 //     open: [{
 //         id: ShortID.generate(),
@@ -136,6 +153,17 @@ export default (state = defaultState, action) => {
             const { recruiter } = payload;
             return { ...state, recruiter };
         }
+
+        case FETCH_MATCHES_SUCCEEDED : {
+            const matches = _.uniqBy( payload.matches.concat(state.matches), '_id' )
+            return { ...state, matches }
+        }
+
+        case FETCH_CANDIDATE_SUCCEEDED : {
+            const candidates = _.uniqBy( [payload.candidate].concat(state.candidates), '_id' )
+            return { ...state, candidates };
+        }
+
         // case OPEN_FETCH_SUCCEEDED :
         //     return {
         //         ...state,
@@ -192,11 +220,36 @@ export default (state = defaultState, action) => {
         case SHOW_SUMMARY_HEAD_EDIT :
             return {
                 ...state,
+<<<<<<< HEAD
                 newJob: {
                     ...state.newJob,
                     head: type,
                 },
             };
+=======
+                jobs,
+            }
+        }
+
+        case UPDATE_COMPANY_SUCCEEDED : {
+            const { company } = payload
+            return {
+                ...state,
+                company
+            }
+        }
+
+            // TODO what is this???? O_o
+        // case SHOW_SUMMARY_HEAD_STANDARD :
+        // case SHOW_SUMMARY_HEAD_EDIT :
+        //     return {
+        //         ...state,
+        //         newJob: {
+        //             ...state.newJob,
+        //             head: type,
+        //         },
+        //     };
+>>>>>>> recruiter-experience
         // case SAVE_SUMMARY_DATA :
         //     return {
         //         ...state,

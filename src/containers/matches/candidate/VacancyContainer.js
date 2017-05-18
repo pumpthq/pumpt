@@ -4,6 +4,7 @@ import VacancyProfile from '../../../components/jobs/Profile'
 import { find } from 'lodash'
 import { dispatchProp } from 'components/helpers'
 import { fetchVacancy, fetchCompany } from 'actions/candidateMatches'
+import VerticalScroller from 'components/VerticalScroller'
 
 import CompanySummary from 'components/company/Summary'
 
@@ -29,13 +30,11 @@ export default class VacancyContainer extends Component {
     }
     render() {
         return (
-            <div className="slider matches-carousel ">
-                <div className="slider__items" style={ {transform: 'translateX(0px)'} }>
+            <VerticalScroller>
                     <VacancyProfile {...this.props.vacancy} >
                         <CompanySummary {...this.props.company} />
                     </VacancyProfile>
-                </div>
-            </div>
+            </VerticalScroller>
         )
     }
 }

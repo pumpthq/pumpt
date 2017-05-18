@@ -107,7 +107,7 @@ class DraftsCard extends Component {
                     </div>
                     <form className="card__actions-wrapper">
                         <div className="mdl-card__actions mdl-card--border card__actions">
-                            <Link to={`/recruiter/jobs/edit/${_id}`} className="link">
+                            <Link to={`/recruiter/jobs/${_id}/edit`} className="link">
                                 Edit Description
                             </Link>
 

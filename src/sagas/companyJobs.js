@@ -33,9 +33,9 @@ import {
     EMPLOYEMENTS_DROPDOWN_DATA,
 } from './../constants/companyJobs';
 import {
-    ROUTE_TO_OPEN,
-    ROUTE_TO_DRAFTS,
-    ROUTE_TO_CLOSED,
+    // ROUTE_TO_OPEN,
+    // ROUTE_TO_DRAFTS,
+    // ROUTE_TO_CLOSED,
 
     // OPEN_FETCH_FAILED,
     // DRAFTS_FETCH_FAILED,
@@ -44,16 +44,24 @@ import {
     CREATE_JOB_SUCCEEDED,
     CREATE_JOB_FAILED,
 
-    SAVE_SUMMARY_DATA,
-    SAVE_DESCRIPTION_DATA,
-    SAVE_RESPONSIBILITIES_DATA,
-    SAVE_SKILLS_AND_REQUIREMENTS_DATA,
-    CLOSE_OPENED_NEW_JOB_CARD,
+    UPDATE_JOB_SUCCEEDED,
+
+    OPEN_JOB_SUCCEEDED,
+    CLOSE_JOB_SUCCEEDED,
+    DELETE_JOB_SUCCEEDED,
+
+    UPDATE_COMPANY_SUCCEEDED,
+    // SAVE_SUMMARY_DATA,
+    // SAVE_DESCRIPTION_DATA,
+    // SAVE_RESPONSIBILITIES_DATA,
+    // SAVE_SKILLS_AND_REQUIREMENTS_DATA,
+    // CLOSE_OPENED_NEW_JOB_CARD,
 
 } from './../constants/companyJobs';
-import {
-    getCompanyJobs
-} from './../reducers/companyJobs';
+
+// import {
+//     getCompanyJobs
+// } from './../reducers/companyJobs';
 import {
     // fetchAll,
     // fetchAllSucceeded,
@@ -74,10 +82,10 @@ import {
     saveSummaryDataSucceeded,
     saveSummaryDataFailed,
 
-    routeToOpen,
-    routeToDrafts,
-    routeToClosed,
-    clearNewJobState
+    // routeToOpen,
+    // routeToDrafts,
+    // routeToClosed,
+    // clearNewJobState
 } from './../actions/companyJobs';
 // import {
 //     logOut,
@@ -94,7 +102,18 @@ export default function () {
         takeLatest(CREATE_JOB_SUCCEEDED, function * (action) {
           // yield put(push(ROUTE_TO_DRAFTS)); //or route to view job
           const { job } = action.payload
-          yield put(push(`recruiter/jobs/edit/${job.id}`))
+          yield put(push(ROUTE_COMPANY_JOBS_DRAFTS))
+        }),
+
+        takeLatest(UPDATE_JOB_SUCCEEDED, function * (action) {
+          // yield put(push(ROUTE_TO_DRAFTS)); //or route to view job
+          const { job } = action.payload
+          yield put(push(ROUTE_COMPANY_JOBS_DRAFTS))
+        }),
+
+        takeLatest(UPDATE_COMPANY_SUCCEEDED, function * (action) {
+          // yield put(push(ROUTE_TO_DRAFTS)); //or route to view job
+          yield put(push(ROUTE_COMPANY_JOBS_DRAFTS))
         }),
         // takeLatest(SAVE_SUMMARY_DATA, function * () {
         //
