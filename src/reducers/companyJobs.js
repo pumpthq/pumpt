@@ -220,13 +220,6 @@ export default (state = defaultState, action) => {
         case SHOW_SUMMARY_HEAD_EDIT :
             return {
                 ...state,
-<<<<<<< HEAD
-                newJob: {
-                    ...state.newJob,
-                    head: type,
-                },
-            };
-=======
                 jobs,
             }
         }
@@ -249,7 +242,6 @@ export default (state = defaultState, action) => {
         //             head: type,
         //         },
         //     };
->>>>>>> recruiter-experience
         // case SAVE_SUMMARY_DATA :
         //     return {
         //         ...state,
