@@ -15,7 +15,7 @@ class SocialMediaStep extends Component {
                         <section class='column column_size_l'>
                             <Panel paddingBig>
                                 <H1 noGutter typeFour class='row'>
-                                    <span class='col-lg-10 col-md-10 col-sm-10 col-xs-12'>Please provide website and&nbsp;social media accounts.</span>
+                                    <span class='col-lg-10 col-md-10 col-sm-10 col-xs-12'>Please provide your company’s website page and/or any active social media accounts</span>
                                     <span class='col-lg-2 col-md-2 col-sm-2 hidden-xs'>
                                         <span class='image__wrapper'>
                                             

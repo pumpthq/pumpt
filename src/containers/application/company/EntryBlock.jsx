@@ -6,6 +6,7 @@ import SummaryHead from './summaryHead';
 import Footer from './../../../components/main/footer/footer';
 import ApplicationCompany from './steps';
 import ProgressChartSidebar from './sidebar';
+import ImportFromLinkedInButton from './parts/ImportFromLinkedInButton'
 import { fetchLinkedInData } from './../../../actions/applicationCompany';
 import {
     IMPORT_STARTED,
@@ -57,14 +58,11 @@ class EntryBlock extends Component {
                             <div className="col-lg-12 column__wrapper">
                                 <section className="column column_size_xl">
                                     <Panel className="panel_type_card">
-                                        <HeadingProgress
-                                            isFilled={progress}
-                                            onClickGetMatches={() => {
-                                                dispatch(push(ROUTE_COMPANY_JOBS_OPEN));
-                                            }}
-                                        />
-                                        <StepProgress isFilled={progress} />
-                                    </Panel>
+                                        <HeadingProgress/>
+																				<br />
+																				<br />
+																				<ImportFromLinkedInButton isImporter={true}/>
+																			</Panel>
                                     <Panel paddingFalse>
                                         <SummaryHead />
                                         <ApplicationCompany />
