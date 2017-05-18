@@ -9,22 +9,23 @@ import UploadImage from './../parts/uploadImage'
         const {
             companyName,
             companyType,
-            email,
             numberOfEmployees,
             foundationYear
         } = state.applicationCompany.summary
         const {
             place
         } = state.applicationCompany.location[0]
-
+        const {
+            email
+        } = state.authorization
         return {
             onboardingState : {
-                companyName : companyName || 'Rakuten Global',
-                email : email || 'nick.thornton@rakuten.global',
-                companyType : companyType ? companyType.value  : 'Digital Media',
-                numberOfEmployees : numberOfEmployees ? numberOfEmployees.value : '500-1000',
-                foundationYear : foundationYear || 1911,
-                headquatersLocation : place || 'Headquarters'
+                companyName : companyName || '{name}',
+                email : email || '{email}',
+                companyType : companyType ? companyType.value  : '{type}',
+                numberOfEmployees : numberOfEmployees ? numberOfEmployees.value : '{numberOfEmployees}',
+                foundationYear : foundationYear || '{founded}',
+                headquatersLocation : place || '{headquarters}'
             }
         }
     },
