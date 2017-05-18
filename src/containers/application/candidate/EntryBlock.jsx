@@ -19,6 +19,7 @@ import {
 } from './../../../constants/routes';
 
 import ResendEmailText from '../../../components/ResendEmailText.jsx';
+import ImportButton from './parts/importButton';
 
 @connect(
     (state) => {
@@ -62,18 +63,8 @@ class EntryBlock extends Component {
                         <div class="row row-padding-bigger">
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 column__wrapper">
                                 <section class="column column_size_xl">
-                                    <Panel className="panel_type_card">
-                                        <HeadingProgress
-                                            isFilled={progress}
-                                            onClickGetMatches={() => {
-                                                dispatch(push(ROUTE_CANDIDATE_MATCHES_ALL));
-                                            }}
-                                        />
-                                        <StepProgress isFilled={progress} />
-                                        <br />
-                                        <ResendEmailText />
-                                    </Panel>
-                                    <Panel paddingFalse>
+                                    <Panel>
+                                        <HeadingProgress/>
                                         <SummaryHead />
                                         <ApplicationCandidate />
                                     </Panel>

@@ -25,8 +25,8 @@ class ImportButton extends Component {
 
         return (
             <div class="mdl-card__actions card__actions">
-                <p class="text text_color_l-grey text_size_xs">Boost your profile score by telling us more about
-                    you.</p>
+                <p class="text text_color_l-grey text_size_xs">
+                   </p>
                 <div class="button__wrapper">
                     <ImportFromLinkedInButton/>{`
                             `}
