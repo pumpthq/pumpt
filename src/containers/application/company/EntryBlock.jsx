@@ -63,7 +63,6 @@ class EntryBlock extends Component {
                                                 dispatch(push(ROUTE_COMPANY_JOBS_OPEN));
                                             }}
                                         />
-                                        <StepProgress isFilled={progress} />
                                     </Panel>
                                     <Panel paddingFalse>
                                         <SummaryHead />

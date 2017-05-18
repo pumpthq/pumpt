@@ -62,7 +62,7 @@ export class To extends Component {
                 onClick={() => {
                     if (isEnabled) dispatch(showValuesStep())
                 }}
-                textLabel='Values Assessment'
+                textLabel='Company Values Assessment'
                 textFilledWith={caption}
             />
         )
