@@ -15,7 +15,7 @@ import { find } from 'lodash'
 
 @reduxForm({
     form: 'job',
-    fields: ['title', 'state', 'salary', 'experience', 'employment', 'degree', 'industry', 'industryParent', 'description', 'responsibilities', 'requirements'],
+    fields: ['title', 'state', 'salary', 'experience', 'employment', 'degree', 'industry', 'industryParent', 'description', 'responsibilities[]', 'requirements[]'],
 })
 class JobForm extends Component {
 
@@ -24,7 +24,7 @@ class JobForm extends Component {
         const industryParentObj = find(FIELD_OF_EXPERTISE_DROPDOWN_DATA, o => o.title == this.props.fields.industryParent.value)
         this.state = {industries: industryParentObj ? industryParentObj.items : []}
     }
-    
+
     componentWillReceiveProps() {
         const industryParentObj = find(FIELD_OF_EXPERTISE_DROPDOWN_DATA, o => o.title == this.props.fields.industryParent.value)
         if(industryParentObj) {
@@ -98,6 +98,10 @@ class JobForm extends Component {
             </div>
           </div>
 
+        <TextArea field={description} label="Description" />
+
+        <TextArray field={responsibilities} label="Responsibilities" />
+        <TextArray field={requirements} label="Requirements" />
 
   </div>
     )
@@ -141,6 +145,44 @@ const TextArea = (props) => {
               // see: https://github.com/facebook/react/issues/2533
               value={field.value || ''}/>
           </div>
+        </div>
+    )
+}
+
+const TextInput = (props) => {
+    const { field, label } = props
+    return (
+        <div>
+          <label>{label}</label>
+          <div>
+            <input type="text"
+              {...field}
+              // required for reset form to work (only on textarea's)
+              // see: https://github.com/facebook/react/issues/2533
+              value={field.value || ''}/>
+          </div>
+        </div>
+    )
+}
+
+const TextArray = (props) => {
+    const { field, label } = props
+    return (
+        <div>
+            <button type="button" onClick={() => {
+              field.addField()    // pushes empty child field onto the end of the array
+            }}><i/> Add {label}
+            </button>
+
+            {field.map((child, index) =>
+                <div key={index}>
+                    <TextInput field={child} label={label} />
+                    <button type="button" onClick={() => {
+                      field.removeField(index)  // remove from index
+                    }}><i>Remove</i>
+                    </button>
+                </div>
+            )}
         </div>
     )
 }
