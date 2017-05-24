@@ -5,12 +5,6 @@ import { call, put, select } from 'redux-saga/effects';
 import { push } from 'react-router-redux';
 // import states from './../constants/states.json';
 import {
-    START_MATCHING,
-    CLOSE_JOB,
-    DELETE_JOB
-} from './../constants/companyJobs'
-
-import {
     API_URL,
     API_ALL_JOBS,
     // API_OPEN_JOBS,
@@ -18,20 +12,24 @@ import {
     // API_CLOSED_JOBS,
     API_VACANCY_ROOT,
 } from './../constants/api';
+
 import {
     ROUTE_COMPANY_JOBS_OPEN,
     ROUTE_COMPANY_JOBS_DRAFTS,
     ROUTE_COMPANY_JOBS_CLOSED,
 } from './../constants/routes';
+
 import {
     ANNUAL_INCOME_DROPDOWN_DATA,
     EXPERIENCE_DROPDOWN_DATA,
     FIELD_OF_EXPERTISE_DROPDOWN_DATA,
 } from './../constants/candidateOnboarding';
+
 import {
     DEGREES_DROPDOWN_DATA,
     EMPLOYEMENTS_DROPDOWN_DATA,
 } from './../constants/companyJobs';
+
 import {
     // ROUTE_TO_OPEN,
     // ROUTE_TO_DRAFTS,
@@ -79,12 +77,12 @@ import {
     // fetchClosedSucceeded,
     // fetchClosedFailed,
 
-    saveSummaryDataSucceeded,
-    saveSummaryDataFailed,
+    // saveSummaryDataSucceeded,
+    // saveSummaryDataFailed,
 
-    // routeToOpen,
-    // routeToDrafts,
-    // routeToClosed,
+    routeToOpen,
+    routeToDrafts,
+    routeToClosed,
     // clearNewJobState
 } from './../actions/companyJobs';
 // import {
@@ -278,26 +276,26 @@ export default function () {
         //         console.log(`Delete job fails with id ${id}`)
         //     }
         // }),
-        takeLatest(START_MATCHING, function * (action) {
-            const { accessToken } = yield select(getAccessToken);
-            const { id } = action.payload
-
-            try {
-                yield call(updateJob, {
-                    id,
-                    accessToken,
-                    body : {
-                        status: 'opened'
-                    }
-                })
-                yield put(routeToDrafts())
-            } catch (ex) {
-                console.log(`Start matching fails with id ${id}`)
-            }
-        }),
-        takeLatest(CLOSE_OPENED_NEW_JOB_CARD, function * (action) {
-            yield put(routeToDrafts());
-            yield put(clearNewJobState())
-        })
+        // takeLatest(START_MATCHING, function * (action) {
+        //     const { accessToken } = yield select(getAccessToken);
+        //     const { id } = action.payload
+        //
+        //     try {
+        //         yield call(updateJob, {
+        //             id,
+        //             accessToken,
+        //             body : {
+        //                 status: 'opened'
+        //             }
+        //         })
+        //         yield put(routeToDrafts())
+        //     } catch (ex) {
+        //         console.log(`Start matching fails with id ${id}`)
+        //     }
+        // }),
+        // takeLatest(CLOSE_OPENED_NEW_JOB_CARD, function * (action) {
+        //     yield put(routeToDrafts());
+        //     yield put(clearNewJobState())
+        // })
     ];
 }
