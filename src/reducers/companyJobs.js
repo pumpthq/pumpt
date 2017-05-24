@@ -226,28 +226,15 @@ export default (state = defaultState, action) => {
             }
         }
 
-<<<<<<< HEAD
-            // TODO what is this???? O_o
-        //case SHOW_SUMMARY_HEAD_STANDARD :
-        case SHOW_SUMMARY_HEAD_EDIT : {
-=======
         case CLOSE_JOB_SUCCEEDED : {
             let jobs = _.clone(state.jobs)
             _.find(jobs, job => job._id == payload.id).status = 'closed'
->>>>>>> parent of 17f3cb8... Revert "Implement open, close, delete and update jobs actions"
             return {
                 ...state,
                 jobs,
             }
         }
 
-<<<<<<< HEAD
-        case UPDATE_COMPANY_SUCCEEDED : {
-            const { company } = payload
-            return {
-                ...state,
-                company
-=======
         case OPEN_JOB_SUCCEEDED : {
             let jobs = _.clone(state.jobs)
             _.find(jobs, job => job._id == payload.id).status = 'opened'
@@ -263,7 +250,6 @@ export default (state = defaultState, action) => {
             return {
                 ...state,
                 jobs,
->>>>>>> parent of 17f3cb8... Revert "Implement open, close, delete and update jobs actions"
             }
         }
 
