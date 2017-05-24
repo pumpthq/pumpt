@@ -160,14 +160,14 @@ export default class Profile extends Component {
             <div className="card__middle-block">
                 <span className="text  summary-head__label">Responsibilities</span>
 
-                { responsibilities }
-                { /* { responsibilities && responsibilities.map( (item, key) => {
+                {/* { responsibilities } */}
+                { responsibilities && responsibilities.map( (item, key) => {
                     return (
                         <p key={key} className="mdl-card__supporting-text card__supporting-text">{item}</p>
                     );
 
                     })
-                } */}
+                }
             </div>
         );
     }
@@ -178,14 +178,14 @@ export default class Profile extends Component {
             <div className="card__middle-block">
                 <span className="text  summary-head__label">Requirements</span>
 
-                { requirements }
-                {/* { requirements && requirements.map( (item, key) => {
+                {/* { requirements } */}
+                { requirements && requirements.map( (item, key) => {
                     return (
                         <p key={key} className="mdl-card__supporting-text card__supporting-text">{item}</p>
                     );
 
                     })
-                } */}
+                }
             </div>
         );
     }
