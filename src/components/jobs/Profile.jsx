@@ -77,16 +77,16 @@ const defaultProps = {
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     addToBookmark: () => {
-      dispatch(postBookmark(ownProps.id))
+      dispatch(postBookmark(ownProps._id))
     },
     postReject: () => {
-      dispatch(postReject(ownProps.id))
+      dispatch(postReject(ownProps._id))
   },
     postApprove: () => {
-      dispatch(postApprove(ownProps.id))
+      dispatch(postApprove(ownProps._id))
   },
     hideFullDescription: () => {
-      dispatch(hideFullDescription(ownProps.id))
+      dispatch(hideFullDescription(ownProps._id))
     }
 
   }
