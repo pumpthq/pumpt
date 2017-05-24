@@ -111,37 +111,6 @@ export default (state = defaultState, action) => {
             return { ...state, vacancies }
         }
 
-        case SHOW_FULL_DESCRIPTION:
-            all = _.clone(state.all)
-            bookmarked = _.clone(state.bookmarked)
-            notInterested = _.clone(state.notInterested)
-            all.forEach( (job) => {
-                job.viewDetails = job.id === payload.id
-            })
-            bookmarked.forEach( (job) => {
-                job.viewDetails = job.id === payload.id
-            })
-            notInterested.forEach( (job) => {
-                job.viewDetails = job.id === payload.id
-            })
-
-
-            return {...state, all, bookmarked, notInterested };
-
-        case HIDE_FULL_DESCRIPTION:
-            const hide = job => job.viewDetails = false;
-                all = _.clone(state.all)
-                bookmarked = _.clone(state.bookmarked)
-                notInterested = _.clone(state.notInterested)
-
-                all.forEach(hide)
-                bookmarked.forEach(hide)
-                notInterested.forEach(hide)
-
-
-                return {...state, all, bookmarked, notInterested };
-
-
         case SET_DEFAULT_STATE :
             return defaultState;
 

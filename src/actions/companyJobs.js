@@ -48,13 +48,15 @@ import {
     SAVE_SUMMARY_DATA_SUCCEEDED,
     SAVE_SUMMARY_DATA_FAILED,
 
-    CLOSE_JOB,
-    DELETE_JOB,
-    START_MATCHING,
-    SET_DEFAULT_STATE,
-    SET_DEFAULT_NEW_JOB_STATE,
+    OPEN_JOB_SUCCEEDED,
+    CLOSE_JOB_SUCCEEDED,
+    DELETE_JOB_SUCCEEDED,
 
-    CLOSE_OPENED_NEW_JOB_CARD,
+    // START_MATCHING,
+    // SET_DEFAULT_STATE,
+    // SET_DEFAULT_NEW_JOB_STATE,
+    //
+    // CLOSE_OPENED_NEW_JOB_CARD,
 
     CREATE_JOB_SUCCEEDED,
     CREATE_JOB_FAILED,
@@ -79,15 +81,15 @@ import {
 } from './../constants/api';
 
 
-export const getAllJobs = () => {
-    return {
-    type:API,
-    payload:{
-        method: 'GET',
-        url: API_ALL_JOBS,
-    }
-  }
-};
+// export const getAllJobs = () => {
+//     return {
+//     type:API,
+//     payload:{
+//         method: 'GET',
+//         url: API_ALL_JOBS,
+//     }
+//   }
+// };
 
 export const updateJob = (id, data)  => {
     return {
@@ -96,15 +98,18 @@ export const updateJob = (id, data)  => {
           method: 'PUT',
           url: `${API_VACANCY_ROOT}/${id}`,
           data,
+          success: updateJobSucceeded(id, data),
       }
     }
 };
 
-export const updateJobSucceeded = job => {
+export const updateJobSucceeded = (id, data) => job => {
     return {
       type: UPDATE_JOB_SUCCEEDED,
       payload: {
-          job
+          id,
+          data,
+          job,
       }
     }
 };
@@ -116,17 +121,6 @@ export const updateJobFailed = err => {
           err
       }
     }
-};
-
-
-export const deleteJob = (id) => {
-    return {
-        type:API,
-        payload:{
-            method: 'DELETE',
-            url: `${API_VACANCY_ROOT}/${id}`,
-        }
-      }
 };
 
 
@@ -167,7 +161,7 @@ export const fetchJobs = () => {
         type : API,
         payload:{
             method: 'GET',
-            url:'/vacancies',
+            url: API_VACANCY_ROOT,
             success: fetchJobsSucceeded,
             error: fetchJobsFailed,
         }
@@ -432,30 +426,69 @@ export const saveSummaryDataFailed = ({}) => deprecated({
     payload : {}
 })
 
-// export const closeJob = ({ id }) => ({
-//     type: CLOSE_JOB,
-//     payload: { id },
-// });
-//
-// export const deleteJob = ({ id }) => ({
-//     type: DELETE_JOB,
-//     payload: { id },
-// });
+export const closeJob = id => ({
+    type: API,
+    payload: {
+        url: `${API_VACANCY_ROOT}/${id}`,
+        method: 'PUT',
+        data: { status: 'closed' },
+        success: closeJobSucceeded(id)
+    }
+});
 
 
-export const startMatching = ({ id }) => ({
-    type: START_MATCHING,
+export const closeJobSucceeded = id => data => ({
+    type: CLOSE_JOB_SUCCEEDED,
     payload: { id },
 });
 
-export const clearCompanyJobsState = () => ({
-    type: SET_DEFAULT_STATE,
+
+export const deleteJob = id => ({
+    type: API,
+    payload: {
+        url: `${API_VACANCY_ROOT}/${id}`,
+        method: 'DELETE',
+        success: deleteJobSucceeded(id)
+    }
 });
 
-export const clearNewJobState = () => ({
-    type: SET_DEFAULT_NEW_JOB_STATE,
+export const deleteJobSucceeded = id => data => ({
+    type: DELETE_JOB_SUCCEEDED,
+    payload: { id },
 });
 
-export const closeOpenedNewJobCard = () => ({
-    type: CLOSE_OPENED_NEW_JOB_CARD
-})
+
+export const openJob = id => ({
+    type: API,
+    payload: {
+        url: `${API_VACANCY_ROOT}/${id}`,
+        method: 'PUT',
+        data: { status: 'opened' },
+        success: openJobSucceeded(id)
+    }
+});
+
+
+export const openJobSucceeded = id => data => ({
+    type: OPEN_JOB_SUCCEEDED,
+    payload: { id },
+});
+
+
+//
+// export const startMatching = ({ id }) => ({
+//     type: START_MATCHING,
+//     payload: { id },
+// });
+//
+// export const clearCompanyJobsState = () => ({
+//     type: SET_DEFAULT_STATE,
+// });
+//
+// export const clearNewJobState = () => ({
+//     type: SET_DEFAULT_NEW_JOB_STATE,
+// });
+//
+// export const closeOpenedNewJobCard = () => ({
+//     type: CLOSE_OPENED_NEW_JOB_CARD
+// })
