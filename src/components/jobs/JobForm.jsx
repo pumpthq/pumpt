@@ -53,46 +53,52 @@ class JobForm extends Component {
         <div className="mdl-card card card_state_open card_state_scroll">
             <a class="button_type_close" onClick={browserHistory.goBack}>×</a>
 
-        <form onSubmit={handleSubmit}>
-        <div>
-          <label>Title</label>
-          <div>
-            <input type="text" placeholder="Title" {...title}/>
+          <div className="recruter__newjob-card">
+            <div className="recruter__newjob-card__form-top">
+              <form onSubmit={handleSubmit}>
+                <div>
+                  <label>Title</label>
+                  <div>
+                    <input class="mdl-textfield__input" type="text" placeholder="Enter Job Title" {...title}/>
+                  </div>
+                </div>
+                <div>
+                  <label>Location</label>
+                  <div>
+                    <select {...state} value={state.value || ''}>
+                      <option value='' disabled>Select One...</option>
+                      {Object.keys(STATES).map(state =>
+                        <option key={state} value={STATES[state]}>{STATES[state]}</option>
+                      )}
+                    </select>
+                  </div>
+                </div>
+
+                <EnumSelector field={salary} label="Salary" options={ANNUAL_INCOME_DROPDOWN_DATA} />
+                <EnumSelector field={experience} label="Experience" options={EXPERIENCE_DROPDOWN_DATA} />
+                <EnumSelector field={employment} label="Employment" options={EMPLOYEMENTS_DROPDOWN_DATA} />
+                <EnumSelector field={degree} label="Degree" options={DEGREES_DROPDOWN_DATA} />
+                <EnumSelector field={industryParent} label="Industry" options={FIELD_OF_EXPERTISE_DROPDOWN_DATA}
+                              onBlur={this.updateIndustries} />
+                <EnumSelector field={industry} label="Field of Expertise" options={this.state.industries} />
+
+                <TextArea field={description} label="Description" />
+                <TextArea field={responsibilities} label="Responsibilities" />
+                <TextArea field={requirements} label="Requirements" />
+
+                <div>
+                  <button type="submit" disabled={submitting}>
+                    {submitting ? <i/> : <i/>} Submit
+                  </button>
+                  {/* <button type="button" disabled={submitting} onClick={resetForm}>
+                   Clear Values
+                   </button> */}
+                </div>
+              </form>
+            </div>
           </div>
-        </div>
-        <div>
-          <label>Location</label>
-          <div>
-            <select {...state} value={state.value || ''}>
-              <option value='' disabled>Select One...</option>
-              {Object.keys(STATES).map(state =>
-                  <option key={state} value={STATES[state]}>{STATES[state]}</option>
-              )}
-            </select>
-          </div>
-        </div>
 
-        <EnumSelector field={salary} label="Salary" options={ANNUAL_INCOME_DROPDOWN_DATA} />
-        <EnumSelector field={experience} label="Experience" options={EXPERIENCE_DROPDOWN_DATA} />
-        <EnumSelector field={employment} label="Employment" options={EMPLOYEMENTS_DROPDOWN_DATA} />
-        <EnumSelector field={degree} label="Degree" options={DEGREES_DROPDOWN_DATA} />
-        <EnumSelector field={industryParent} label="Industry" options={FIELD_OF_EXPERTISE_DROPDOWN_DATA}
-            onBlur={this.updateIndustries} />
-        <EnumSelector field={industry} label="Field of Expertise" options={this.state.industries} />
 
-        <TextArea field={description} label="Description" />
-        <TextArea field={responsibilities} label="Responsibilities" />
-        <TextArea field={requirements} label="Requirements" />
-
-        <div>
-          <button type="submit" disabled={submitting}>
-            {submitting ? <i/> : <i/>} Submit
-          </button>
-          {/* <button type="button" disabled={submitting} onClick={resetForm}>
-            Clear Values
-          </button> */}
-        </div>
-      </form>
   </div>
     )
   }
@@ -111,7 +117,8 @@ const EnumSelector = (props) => {
               // when resetting
               value={field.value || ''}
               disabled={options.length === 0}
-              onBlur={onBlur}>
+              onBlur={onBlur}
+              className="mdl-textfield__input">
               <option value="" disabled>Select One...</option>
               {options.map( ({id,title}) =>
                   <option key={id} value={title}>{title}</option>

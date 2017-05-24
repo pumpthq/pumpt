@@ -151,11 +151,7 @@ export default class Summary extends Component {
                     <form className="card__actions-wrapper">
                         <div className="mdl-card__actions card__actions">
                             {/* <div className="mdl-layout-spacer" /> */}
-                            <div className="col-xs-6">
-                                {this.renderApproveReject()}
-                                {this.renderBookmarks()}
-                            </div>
-                            <div className="col-xs-6">
+                            <div>
                                 <Link className="link" to={`candidate/matches/company/${_company}/vacancy/${_vacancy}`}>
                                     View Full Description
                                 </Link>
