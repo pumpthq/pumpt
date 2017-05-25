@@ -1,4 +1,7 @@
 import {
+    FETCH_CANDIDATE_SUCCEEDED,
+    UPDATE_CANDIDATE_SUCCEEDED,
+
     MATCHES_FETCH_SUCCEEDED,
 
     ROUTE_TO_ALL,
@@ -22,6 +25,38 @@ import {
 
 } from './../constants/candidateMatches';
 import { API } from '../constants/actionTypes'
+
+export const fetchCandidate = () => ({
+    type : API,
+    payload : {
+        url : '/candidates/current',
+        success: fetchCandidateSucceeded,
+    }
+})
+
+export const fetchCandidateSucceeded = candidate => ({
+    type : FETCH_CANDIDATE_SUCCEEDED,
+    payload : {
+        candidate
+    }
+})
+
+export const updateCandidate = (data) => ({
+    type : API,
+    payload : {
+        method: 'PUT',
+        url : '/candidates/current',
+        success: fetchCandidateSucceeded,
+        data,
+    }
+})
+
+export const updateCandidateSucceeded = candidate => ({
+    type : UPDATE_CANDIDATE_SUCCEEDED,
+    payload : {
+        candidate
+    }
+})
 
 export const fetchMatches = () => ({
     type : API,

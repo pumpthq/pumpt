@@ -45,7 +45,7 @@ import {
     logOutSucceeded,
 } from './../actions/authorization';
 
-import { fetchMatches } from './../actions/candidateMatches';
+import { fetchMatches, fetchCandidate } from './../actions/candidateMatches';
 import { fetchJobs, fetchCompany, fetchRecruiter } from './../actions/companyJobs';
 // import {
 //     getAccessToken,
@@ -204,15 +204,14 @@ export default function () {
             const { payload } = action;
             const { isCandidate, isNotApproved, isRecruiter } = payload
 
-            console.log('resolving user')
             if (isCandidate && isNotApproved) {
-                yield put(getLatestCandidateProfile());
+                yield put(fetchCandidate());
                 yield put(push(ROUTE_APPLICATION_CANDIDATE));
             } else if (isRecruiter && isNotApproved) {
                 yield put(getLatestCompanyProfile());
                 yield put(push(ROUTE_APPLICATION_COMPANY));
             } else if (isCandidate) {
-                yield put(getLatestCandidateProfile());
+                yield put(fetchCandidate());
                 yield put(fetchMatches())
             } else if (isRecruiter) {
                 // yield put(getLatestCompanyProfile());
@@ -244,6 +243,7 @@ export default function () {
                     yield put(push(ROUTE_APPLICATION_COMPANY));
                 } else if (isCandidate && !isNotApproved) {
                     yield put(getLatestCandidateProfile());
+                    yield put(fetchCandidate());
                     yield put(fetchMatches())
                     yield put(push(ROUTE_CANDIDATE_MATCHES_ALL));
                 } else if (isRecruiter && !isNotApproved) {

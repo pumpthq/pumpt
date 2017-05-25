@@ -1,10 +1,10 @@
-import CompanyApplicationApp from './company/App'
-import CandidateApplicationApp from './candidate/App'
+import CompanyApplicationContainer from './company/App'
+import CandidateApplicationContainer from './candidate/ApplicationContainer'
 
 module.exports = {
     path: 'application',
     childRoutes: [
-        { path: 'company', component: CompanyApplicationApp },
-        { path: 'candidate', component: CandidateApplicationApp },
+        { path: 'company', component: CompanyApplicationContainer },
+        { path: 'candidate', component: CandidateApplicationContainer },
     ]
 };

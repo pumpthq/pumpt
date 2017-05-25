@@ -40,6 +40,20 @@ export const TextArea = (props) => {
     )
 }
 
+export const TextInput = (props) => {
+    const { field, label, ...rest } = props
+    return (
+        <div>
+          <label>{label}</label>
+          <div>
+            <input type="text"
+              {...field}
+              value={field.value} {...rest} />
+          </div>
+        </div>
+    )
+}
+
 export class PureInput extends Component {
   shouldComponentUpdate(nextProps) {
     return this.props.field !== nextProps.field
@@ -52,35 +66,34 @@ export class PureInput extends Component {
 }
 
 import STATES from 'constants/states.json';
+const stateMap = Object.keys(STATES).map(id=> ({id,title:STATES[id]}))
 
 export class Location extends Component {
-  shouldComponentUpdate(nextProps) {
-    return this.props.state !== nextProps.state ||
-      this.props.city !== nextProps.city
-  }
+  // shouldComponentUpdate(nextProps) {
+  //   return this.props.state !== nextProps.state ||
+  //     this.props.city !== nextProps.city
+  // }
 
   render() {
-    const { state, city } = this.props
+    const { field: {state, city, abilityToRelocate } } = this.props
     return (
         <div>
             <div>
               <label>City</label>
               <div>
-                <PureInput type="text" placeholder="City" field={city} title={city.error}/>
+                <PureInput type="text" placeholder="City" field={city}/>
               </div>
             </div>
 
             <div>
               <label>State</label>
               <div>
-                <select {...state} value={state.value || ''}>
-                  <option value='' disabled>Select One...</option>
-                  {Object.keys(STATES).map(state =>
-                      <option key={state} value={STATES[state]}>{STATES[state]}</option>
-                  )}
-                </select>
+                <EnumSelector field={state} options={stateMap}/>
               </div>
             </div>
+            {abilityToRelocate &&
+                <label><input type="checkbox" {...abilityToRelocate}/> Ability To Relocate</label>
+            }
         </div>
     )
   }
