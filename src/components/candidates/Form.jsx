@@ -48,7 +48,7 @@ export default class CandidateForm extends Component {
         submitting,
         } = this.props
       return (
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} className="candidate-edit-form">
                   <TextInput field={ firstName } label="First Name" />
                   <TextInput field={ lastName } label="Last Name" />
                   {/* <TextInput field={ email } label="Email" /> */}

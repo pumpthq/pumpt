@@ -5,7 +5,7 @@
   // TODO: refactor to overlay with tint
   background-size: cover;
   background-repeat: no-repeat;
-  padding: 10px 10px 20px;
+  padding: 20px 10px 20px;
 
   &:after {
     position: absolute;
@@ -15,7 +15,8 @@
     width: 100%;
     height: 100%;
     opacity: 0.3;
-    background-color: #6f4065;
+    background-color: #fff;
+    border-bottom: 1px solid grey;
   }
 
   &__title {
@@ -32,7 +33,7 @@
       &_type {
 
         &_alignment {
-          padding-left: 99px;
+          padding-left: 107px;
           justify-content: flex-start;
 
           .summary-head__title-column {
@@ -79,6 +80,7 @@
 
     &-column {
       min-width: 96px;
+      margin-left: 15px;
 
       .card__actions-summary & {
         display: flex;
@@ -118,6 +120,11 @@
   &__title-block {
     display: inline-block;
     vertical-align: top;
+    margin-left: 10px;
+
+    .link {
+      padding-left: 20px;
+    }
   }
 
   &__media {
