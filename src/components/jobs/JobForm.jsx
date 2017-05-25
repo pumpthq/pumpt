@@ -50,60 +50,64 @@ class JobForm extends Component {
       } = this.props
 
     return (
-        <div className="mdl-card card card_state_open card_state_scroll">
-            <a class="button_type_close" onClick={browserHistory.goBack}>×</a>
+      <div className="mdl-card card card_state_open card_state_scroll">
+        <a class="button_type_close" onClick={browserHistory.goBack}>×</a>
 
-          <div className="recruter__newjob-card">
+        <div className="recruter__newjob-card">
+
+          <form onSubmit={handleSubmit}>
             <div className="recruter__newjob-card__form-top">
-              <form onSubmit={handleSubmit}>
+              <div>
+                <label>Title</label>
                 <div>
-                  <label>Title</label>
-                  <div>
-                    <input class="mdl-textfield__input" type="text" placeholder="Enter Job Title" {...title}/>
-                  </div>
+                  <input className="mdl-textfield__input job-title" type="text" placeholder="Enter Job Title" {...title}/>
                 </div>
+              </div>
+              <div>
+                <label>Location</label>
                 <div>
-                  <label>Location</label>
-                  <div>
-                    <select {...state} value={state.value || ''}>
-                      <option value='' disabled>Select One...</option>
-                      {Object.keys(STATES).map(state =>
-                        <option key={state} value={STATES[state]}>{STATES[state]}</option>
-                      )}
-                    </select>
-                  </div>
+                  <select {...state} value={state.value || ''} className="mdl-textfield__input">
+                    <option value='' disabled>Select One...</option>
+                    {Object.keys(STATES).map(state =>
+                      <option key={state} value={STATES[state]}>{STATES[state]}</option>
+                    )}
+                  </select>
                 </div>
+              </div>
 
-                <EnumSelector field={salary} label="Salary" options={ANNUAL_INCOME_DROPDOWN_DATA} />
-                <EnumSelector field={experience} label="Experience" options={EXPERIENCE_DROPDOWN_DATA} />
-                <EnumSelector field={employment} label="Employment" options={EMPLOYEMENTS_DROPDOWN_DATA} />
-                <EnumSelector field={degree} label="Degree" options={DEGREES_DROPDOWN_DATA} />
-                <EnumSelector field={industryParent} label="Industry" options={FIELD_OF_EXPERTISE_DROPDOWN_DATA}
-                              onBlur={this.updateIndustries} />
-                <EnumSelector field={industry} label="Field of Expertise" options={this.state.industries} />
+              <EnumSelector field={salary} label="Salary" options={ANNUAL_INCOME_DROPDOWN_DATA} />
+              <EnumSelector field={experience} label="Experience" options={EXPERIENCE_DROPDOWN_DATA} />
+              <EnumSelector field={employment} label="Employment" options={EMPLOYEMENTS_DROPDOWN_DATA} />
+              <EnumSelector field={degree} label="Degree" options={DEGREES_DROPDOWN_DATA} />
+              <EnumSelector field={industryParent} label="Industry" options={FIELD_OF_EXPERTISE_DROPDOWN_DATA}
+                            onBlur={this.updateIndustries} />
+              <EnumSelector field={industry} label="Field of Expertise" options={this.state.industries} />
 
-                <TextArea field={description} label="Description" />
-                <TextArea field={responsibilities} label="Responsibilities" />
-                <TextArea field={requirements} label="Requirements" />
+              <div>
+                <button className="new-job-submit-save" type="submit" disabled={submitting}>
+                  {submitting ? <i/> : <i/>} Save Job Summary
+                </button>
 
-                <div>
-                  <button type="submit" disabled={submitting}>
-                    {submitting ? <i/> : <i/>} Submit
-                  </button>
-                  {/* <button type="button" disabled={submitting} onClick={resetForm}>
-                   Clear Values
-                   </button> */}
-                </div>
-              </form>
+              </div>
             </div>
-          </div>
 
-        <TextArea field={description} label="Description" />
+            <div className="recruter__newjob-card__form-bottom">
 
-        <TextArray field={responsibilities} label="Responsibilities" />
-        <TextArray field={requirements} label="Requirements" />
+              <TextArea field={description} label="Job Description" />
 
-  </div>
+              <TextArray field={responsibilities} label="Responsibilities" />
+              <TextArray field={requirements} label="Skills & Requirements" />
+
+              <button className="new-job-submit-matching" type="submit" disabled={submitting}>
+                {submitting ? <i/> : <i/>} Start Matching
+              </button>
+            </div>
+
+          </form>
+
+        </div>
+
+      </div>
     )
   }
 }
@@ -152,16 +156,13 @@ const TextArea = (props) => {
 const TextInput = (props) => {
     const { field, label } = props
     return (
-        <div>
-          <label>{label}</label>
           <div>
-            <input type="text"
+            <input type="text" placeholder={label}
               {...field}
               // required for reset form to work (only on textarea's)
               // see: https://github.com/facebook/react/issues/2533
               value={field.value || ''}/>
           </div>
-        </div>
     )
 }
 
@@ -169,7 +170,7 @@ const TextArray = (props) => {
     const { field, label } = props
     return (
         <div>
-            <button type="button" onClick={() => {
+            <button className="mdl-button new-job-add-button" type="button" onClick={() => {
               field.addField()    // pushes empty child field onto the end of the array
             }}><i/> Add {label}
             </button>
@@ -179,7 +180,7 @@ const TextArray = (props) => {
                     <TextInput field={child} label={label} />
                     <button type="button" onClick={() => {
                       field.removeField(index)  // remove from index
-                    }}><i>Remove</i>
+                    }}><i>Cancel</i>
                     </button>
                 </div>
             )}
