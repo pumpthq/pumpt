@@ -11,6 +11,7 @@ app.use(morgan('dev'))
 app.use('/', express.static(path.join(__dirname, 'static')));
 app.use('/static', express.static(path.join(__dirname, 'static')));
 
+
 switch (NODE_ENV) {
     case 'local' :
         const webpack = require('webpack');
