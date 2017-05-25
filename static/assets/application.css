@@ -175,6 +175,33 @@ section#links {
   background-size: cover;
 }
 
+section#candidate-info{
+	background:url("/static/assets/House+background.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+	min-height:800px;
+}
+
+section#candidate-values{
+	background:
+		linear-gradient(
+		rgba(54, 78, 150, 0.85), 
+		rgba(54, 78, 150, 0.85)
+		),
+		url("/static/assets/stock_photo_3.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+	min-height:800px;
+}
+
+section#candidate-matching{
+	background:#eef2ff;
+}
+
+.conversation-img{
+	padding:0px 20px;
+}
+
 /* Utilities */
 .light-input ::-webkit-input-placeholder {
   /* WebKit, Blink, Edge */
