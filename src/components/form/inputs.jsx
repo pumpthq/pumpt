@@ -25,12 +25,13 @@ export const EnumSelector = (props) => {
 }
 
 export const TextArea = (props) => {
-    const { field, label } = props
+    const { field, label, classLb, classTa } = props
     return (
         <div>
-          <label>{label}</label>
+          <label className={classLb}>{label}</label>
           <div>
             <textarea
+              className={classTa}
               {...field}
               // required for reset form to work (only on textarea's)
               // see: https://github.com/facebook/react/issues/2533
@@ -41,12 +42,13 @@ export const TextArea = (props) => {
 }
 
 export const TextInput = (props) => {
-    const { field, label, ...rest } = props
+    const { field, label, classLb, classIp, ...rest } = props
     return (
         <div>
-          <label>{label}</label>
+          <label className={classLb}>{label}</label>
           <div>
             <input type="text"
+              className={classIp}
               {...field}
               value={field.value} {...rest} />
           </div>
