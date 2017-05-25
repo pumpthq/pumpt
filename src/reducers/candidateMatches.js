@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import {
+    FETCH_CANDIDATE_SUCCEEDED,
     MATCHES_FETCH_SUCCEEDED,
     BOOKMARK_POST_SUCCEEDED,
     REJECT_POST_SUCCEEDED,
@@ -31,6 +32,10 @@ export default (state = defaultState, action) => {
     const { type, payload } = action;
     let all, bookmarked, notInterested, matchings, approved
     switch (type) {
+        case FETCH_CANDIDATE_SUCCEEDED : {
+            const { candidate } = payload
+            return { ...state, candidate }
+        }
         case MATCHES_FETCH_SUCCEEDED :
               all = []
               , bookmarked = []
