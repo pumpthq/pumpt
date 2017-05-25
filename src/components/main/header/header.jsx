@@ -8,7 +8,7 @@ export default class Header extends Component {
         return (
             <header class='header'>
                 <div class='header__item'>
-                    <a href='/' class='logo'>
+                    <a href='/home.html' class='logo'>
                         <svg class='icon icon-logo'>
                         </svg>
                     </a>
