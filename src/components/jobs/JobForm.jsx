@@ -93,7 +93,7 @@ class JobForm extends Component {
 
             <div className="recruter__newjob-card__form-bottom">
 
-              <TextArea field={description} label="Job Description" />
+              <TextArea field={description} label="Job Description" classLb="job-decription-label" classTa="job-decription-ta"/>
 
               <TextArray field={responsibilities} label="Responsibilities" />
               <TextArray field={requirements} label="Skills & Requirements" />
@@ -138,12 +138,12 @@ const EnumSelector = (props) => {
 }
 
 const TextArea = (props) => {
-    const { field, label } = props
+    const { field, label, classLb, classTa } = props
     return (
         <div>
-          <label>{label}</label>
+          <label className={classLb}>{label}</label>
           <div>
-            <textarea
+            <textarea className={classTa}
               {...field}
               // required for reset form to work (only on textarea's)
               // see: https://github.com/facebook/react/issues/2533
