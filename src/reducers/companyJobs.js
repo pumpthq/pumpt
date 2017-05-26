@@ -40,12 +40,14 @@ import {
     UPDATE_COMPANY_SUCCEEDED,
     UPDATE_COMPANY_FAILED,
 
+    UPDATE_RECRUITER_SUCCEEDED,
+    UPDATE_RECRUITER_FAILED,
 
      DESCRIPTION_STEP,
      SHOW_DESCRIPTION_STEP,
      SAVE_DESCRIPTION_DATA,
      CLOSE_DESCRIPTION_STEP,
-    
+
      RESPONSIBILITIES_STEP,
      SHOW_RESPONSIBILITIES_STEP,
      SAVE_RESPONSIBILITIES_DATA,
@@ -55,15 +57,20 @@ import {
      SHOW_SKILLS_AND_REQUIREMENTS_STEP,
      SAVE_SKILLS_AND_REQUIREMENTS_DATA,
      CLOSE_SKILLS_AND_REQUIREMENTS_STEP,
-    
+
      SAVE_SUMMARY_DATA,
      SHOW_SUMMARY_HEAD_STANDARD,
      SHOW_SUMMARY_HEAD_EDIT,
      SAVE_SUMMARY_DATA_SUCCEEDED,
-    
+
      SET_DEFAULT_STATE,
      SET_DEFAULT_NEW_JOB_STATE,
 } from './../constants/companyJobs';
+
+import {
+    APPLICATION_UPDATE_COMPANY_SUCCEEDED,
+    APPLICATION_UPDATE_RECRUITER_SUCCEEDED,
+} from './../constants/applicationCompany';
 
 import {
     API_URL,
@@ -74,6 +81,14 @@ const defaultState = {
     jobs: [],
     matches: [],
     candidates: [],
+    company: {
+        name: '{name}',
+        locationHeadquarters: {
+            city: '{city}',
+            state: '{state}'
+        }
+    },
+    recruiter: {},
 }
 //     open: [{
 //         id: ShortID.generate(),
@@ -162,6 +177,26 @@ export default (state = defaultState, action) => {
         case FETCH_CANDIDATE_SUCCEEDED : {
             const candidates = _.uniqBy( [payload.candidate].concat(state.candidates), '_id' )
             return { ...state, candidates };
+        }
+
+        case UPDATE_COMPANY_SUCCEEDED : {
+            const { company } = payload;
+            return { ...state, company };
+        }
+
+        case UPDATE_RECRUITER_SUCCEEDED : {
+            const { recruiter } = payload;
+            return { ...state, recruiter };
+        }
+
+        case APPLICATION_UPDATE_COMPANY_SUCCEEDED : {
+            const { company } = payload;
+            return { ...state, company };
+        }
+
+        case APPLICATION_UPDATE_RECRUITER_SUCCEEDED : {
+            const { recruiter } = payload;
+            return { ...state, recruiter };
         }
 
         // case OPEN_FETCH_SUCCEEDED :

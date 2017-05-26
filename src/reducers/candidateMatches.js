@@ -1,5 +1,7 @@
 import _ from 'lodash';
 import {
+
+    UPDATE_CANDIDATE_SUCCEEDED,
     FETCH_CANDIDATE_SUCCEEDED,
     MATCHES_FETCH_SUCCEEDED,
     BOOKMARK_POST_SUCCEEDED,
@@ -26,6 +28,12 @@ const defaultState = {
     activeTab: ALL_TAB,
     companies: [],
     vacancies: [],
+    candidate: {
+        location: {
+            city: '{city}',
+            state: '{state}'
+        }
+    },
 };
 
 export default (state = defaultState, action) => {
@@ -33,6 +41,10 @@ export default (state = defaultState, action) => {
     let all, bookmarked, notInterested, matchings, approved
     switch (type) {
         case FETCH_CANDIDATE_SUCCEEDED : {
+            const { candidate } = payload
+            return { ...state, candidate }
+        }
+        case UPDATE_CANDIDATE_SUCCEEDED : {
             const { candidate } = payload
             return { ...state, candidate }
         }
