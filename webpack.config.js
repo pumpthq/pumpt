@@ -26,7 +26,6 @@ module.exports = {
             },
             {
                 test : /\.css$/,
-                include: SRC_PATH,
                 loader : 'style!css?sourceMap'
             },
             {

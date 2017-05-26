@@ -6,7 +6,7 @@ import { dispatchProp } from 'components/helpers'
 import { fetchVacancy, fetchCompany } from 'actions/candidateMatches'
 import VerticalScroller from 'components/VerticalScroller'
 
-import CompanySummary from 'components/company/Summary'
+import CompanySummary from 'components/company/shared/Summary'
 
 const mapStateToProps = (state, ownProps) => {
     const vacancy = find(state.candidateMatches.vacancies, card => card._id === ownProps.id)

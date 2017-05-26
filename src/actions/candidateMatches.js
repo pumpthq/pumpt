@@ -46,7 +46,7 @@ export const updateCandidate = (data) => ({
     payload : {
         method: 'PUT',
         url : '/candidates/current',
-        success: fetchCandidateSucceeded,
+        success: updateCandidateSucceeded,
         data,
     }
 })

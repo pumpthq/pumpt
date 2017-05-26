@@ -4,7 +4,8 @@ import { reduxForm } from 'redux-form'
 import { tintedBackground } from 'components/helpers'
 import { browserHistory } from 'react-router'
 
-import { Location, EnumSelector, TextArea, TextInput } from 'components/form/inputs'
+import { Location, EnumSelector, TextArea, TextInput, DateInput } from 'components/form/inputs'
+
 import {
     EMPLOYEMENTS_DROPDOWN_DATA,
     DEGREES_DROPDOWN_DATA,
@@ -21,25 +22,26 @@ const ExperienceEntry = props => {
             <TextInput field={position} placeholder="Title" />
             <EnumSelector field={location} options={stateMap} />
             <TextInput field={duty} placeholder="Description of your work" />
-
+            <DateInput field={startWorkingAt} />
+            <DateInput field={endWorkingAt} />
         </div>
     )
 }
 
 const EducationEntry = props => {
-    console.log(DEGREES_DROPDOWN_DATA)
     const { field: { schoolName, speciality, degree, startStudyAt, endStudyAt } } = props
     return (
         <div>
             <TextInput field={schoolName} placeholder="School Name" />
             <TextInput field={speciality} placeholder="Field of Study" />
             <EnumSelector field={degree} label="Degree" options={DEGREES_DROPDOWN_DATA} />
+            <DateInput field={startStudyAt} />
+            <DateInput field={endStudyAt} />
         </div>
     )
 }
 
 const InterestEntry = props => {
-    console.log(DEGREES_DROPDOWN_DATA)
     const { field: { image, description } } = props
     return (
         <div>
