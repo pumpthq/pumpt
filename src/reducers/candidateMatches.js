@@ -28,7 +28,12 @@ const defaultState = {
     activeTab: ALL_TAB,
     companies: [],
     vacancies: [],
-    candidate: {},
+    candidate: {
+        location: {
+            city: '{city}',
+            state: '{state}'
+        }
+    },
 };
 
 export default (state = defaultState, action) => {

@@ -125,9 +125,10 @@ export class Location extends Component {
   // }
 
   render() {
-    const { field: {state, city, abilityToRelocate } } = this.props
+    const { field: {state, city, abilityToRelocate }, label } = this.props
     return (
         <div>
+            <label>{label}</label>
             <div>
               <label>City</label>
               <div>
@@ -147,4 +148,28 @@ export class Location extends Component {
         </div>
     )
   }
+}
+
+
+export const FieldArray = (props) => {
+    const { field, label } = props
+    const Item = props.component
+    return (
+        <div>
+            <button type="button" onClick={() => {
+              field.addField()    // pushes empty child field onto the end of the array
+            }}><i/> Add {label}
+            </button>
+
+            {field.map((child, index) =>
+                <div key={index}>
+                    <Item field={child} />
+                    <button type="button" onClick={() => {
+                      field.removeField(index)  // remove from index
+                    }}><i>Remove</i>
+                    </button>
+                </div>
+            )}
+        </div>
+    )
 }

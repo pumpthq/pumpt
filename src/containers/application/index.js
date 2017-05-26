@@ -1,4 +1,4 @@
-import CompanyApplicationContainer from './company/App'
+import CompanyApplicationContainer from './company/ApplicationContainer'
 import CandidateApplicationContainer from './candidate/ApplicationContainer'
 
 module.exports = {

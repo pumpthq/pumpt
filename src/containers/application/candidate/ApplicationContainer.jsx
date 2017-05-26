@@ -15,24 +15,6 @@ import { updateCandidate } from 'actions/candidateMatches'
 import Panel from 'components/main/panel';
 import StepProgress from 'components/application/stepProgress';
 import Footer from 'components/main/footer/footer';
-// @connect(
-//     (state) => {
-//         const {
-//             summary,
-//             profilePhoto,
-//             progress,
-//         } = state.applicationCandidate;
-//         const { firstName, lastName } = summary;
-//
-//         return {
-//             firstName,
-//             lastName,
-//             profilePhoto,
-//             progress: STARTUP_COMPLETED_STEPS + progress.length,
-//         };
-//     }
-// )
-//
 
 function mapStateToProps(state, ownProps) {
     return { candidate: state.candidateMatches.candidate, authorization: state.authorization }
@@ -99,10 +81,10 @@ export default class ApplicationContainer extends Component {
     }
 }
 
-ApplicationContainer.defaultProps = {
-    candidate: {
-        avatar: '{avatar}',
-        firstName: '{firstName}',
-        lastName: '{lastName}'
-    }
-}
+// ApplicationContainer.defaultProps = {
+//     candidate: {
+//         avatar: '{avatar}',
+//         firstName: '{firstName}',
+//         lastName: '{lastName}'
+//     }
+// }
