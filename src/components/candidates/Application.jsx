@@ -110,9 +110,9 @@ export default class ApplicationForm extends Component {
                     <Location field={location} />
                     <CardDivider/>
 
-                    <TextInput field={socialMedia.linkedInUrl} label="LinkedIn"/>
-                    <TextInput field={socialMedia.twitterAcc} label="Twitter"/>
-                    <TextInput field={socialMedia.faceBookUrl} label="Facebook"/>
+                    <TextInput field={socialMedia.linkedInUrl} label="LinkedIn" classItm="label-item" />
+                    <TextInput field={socialMedia.twitterAcc} label="Twitter" classItm="label-item" />
+                    <TextInput field={socialMedia.faceBookUrl} label="Facebook" clasclassItm="label-item" />
                     <CardDivider/>
 
                     {/* <FieldArray field={skills} label="Skills" component={SkillEntry} /> */}
@@ -196,7 +196,7 @@ const FieldArray = (props) => {
             </button>
 
             {field.map((child, index) =>
-                <div key={index}>
+                <div key={index} className="info-block">
                     <Item field={child} />
                     <button className="remove-entry" type="button" onClick={() => {
                       field.removeField(index)  // remove from index

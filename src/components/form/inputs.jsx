@@ -42,9 +42,9 @@ export const TextArea = (props) => {
 }
 
 export const TextInput = (props) => {
-    const { field, label, classLb, classInp, ...rest } = props
+    const { field, label, classItm, classLb, classInp, ...rest } = props
     return (
-        <div>
+        <div className={classItm}>
           <label className={classLb}>{label}</label>
           <div>
             <input type="text"
