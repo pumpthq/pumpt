@@ -35,7 +35,7 @@ import Footer from 'components/main/footer/footer';
 //
 
 function mapStateToProps(state, ownProps) {
-    return { candidate: state.candidateMatches.candidate || {}, authorization: state.authorization }
+    return { candidate: state.candidateMatches.candidate, authorization: state.authorization }
 }
 
 @connect(mapStateToProps)
