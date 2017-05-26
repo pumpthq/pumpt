@@ -96,7 +96,7 @@ export default class ApplicationForm extends Component {
 
       return (
 
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} className="candidate-application-form">
 
                     <FieldArray field={workingExperience} label="Experience" component={ExperienceEntry} />
                     <CardDivider/>
@@ -170,7 +170,8 @@ export default class ApplicationForm extends Component {
 
 
                   <div>
-                    <button type="submit" disabled={submitting}>
+                    <button type="submit" disabled={submitting}
+                    className="mdl-button button invisible-mobile button_type_colored button_size_m candidate-submit">
                       {submitting ? <i/> : <i/>} Submit
                     </button>
                     {/* <button type="button" disabled={submitting} onClick={resetForm}>
@@ -188,8 +189,8 @@ const FieldArray = (props) => {
     const { field, label } = props
     const Item = props.component
     return (
-        <div>
-            <button type="button" onClick={() => {
+        <div className="application-item">
+            <button className="application-item-button" type="button" onClick={() => {
               field.addField()    // pushes empty child field onto the end of the array
             }}><i/> Add {label}
             </button>
@@ -197,7 +198,7 @@ const FieldArray = (props) => {
             {field.map((child, index) =>
                 <div key={index}>
                     <Item field={child} />
-                    <button type="button" onClick={() => {
+                    <button className="remove-entry" type="button" onClick={() => {
                       field.removeField(index)  // remove from index
                     }}><i>Remove</i>
                     </button>

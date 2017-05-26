@@ -1,4 +1,5 @@
 .candidate-edit-form {
+  margin-bottom: 30px;
 
   & > div {
     margin-top: 15px;
@@ -16,5 +17,49 @@
 
   & > div > div {
     margin-left: 200px;
+  }
+
+  input[type=text] {
+    border-bottom: 1px solid rgba(128, 128, 128, 0.3);
+  }
+}
+
+.candidate-application-form {
+
+  .application-item {
+    margin: 14px 0;
+  }
+
+  .application-item-button {
+    color: #5a83f5;
+    font-size: 16px;
+    font-weight: 800;
+    background-color: #fff;
+    border: 0;
+    cursor: pointer;
+  }
+
+  input {
+    border: 0;
+    font-size: 16px;
+  }
+
+  select {
+    background-color: #fff;
+  }
+
+  button.remove-entry {
+    border: 0;
+    font-size: 14px;
+    color: #5a83f5;
+    background-color: #fff;
+
+    i {
+      font-style: inherit;
+    }
+  }
+
+  button.candidate-submit {
+    margin-top: 20px;
   }
 }
