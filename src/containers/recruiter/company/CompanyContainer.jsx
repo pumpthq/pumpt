@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux'
-import CompanyForm from 'components/company/Form'
+import CompanyForm from 'components/company/PreviewForm'
 import {tintedBackground} from 'components/helpers'
 
 import VerticalScroller from 'components/VerticalScroller'
