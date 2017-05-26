@@ -52,8 +52,7 @@ const InterestEntry = props => {
     )
 }
 
-// TODO: put here adding/removing form style class='text-input-underlined'
-const onEdit = () => {alert('edit the form!')}
+
 
 
 @reduxForm({
@@ -94,6 +93,15 @@ const onEdit = () => {alert('edit the form!')}
 })
 
 export default class ApplicationForm extends Component {
+    constructor(props) {
+      super(props)
+      this.state = { isEdit: false }
+    }
+
+    onEdit = () => {
+      this.setState({ isEdit: true})
+    }
+
     render() {
       const {
         fields: { avatar, workingExperience, location, skills, interests, education, socialMedia },
@@ -103,9 +111,11 @@ export default class ApplicationForm extends Component {
         } = this.props
 
       return (
-                <form onSubmit={handleSubmit} className="candidate-application-form text-input-underlined">
+                <form onSubmit={handleSubmit} className={`candidate-application-form ${this.state.isEdit && "text-input-underlined"}`}>
 
-                    <a class="link edit-link" onClick={onEdit}
+                  {
+                    !this.state.isEdit &&
+                    <a class="link edit-link" onClick={this.onEdit}
                        style={{
                          visibility: 'visible',
                          opacity: 1
@@ -113,6 +123,7 @@ export default class ApplicationForm extends Component {
                       <PencilIcon />
                       &nbsp;Edit
                     </a>
+                  }
 
                     <FieldArray field={workingExperience} label="Experience" component={ExperienceEntry} />
                     <CardDivider/>
@@ -188,7 +199,7 @@ export default class ApplicationForm extends Component {
                   <div>
                     <button type="submit" disabled={submitting}
                     className="mdl-button button invisible-mobile button_type_colored button_size_m candidate-submit">
-                      {submitting ? <i/> : <i/>} Submit
+                      {submitting ? <i/> : <i/>} Save
                     </button>
                     {/* <button type="button" disabled={submitting} onClick={resetForm}>
                      Clear Values

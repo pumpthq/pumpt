@@ -32,7 +32,7 @@ export const EnumSelector = (props) => {
 export const TextArea = (props) => {
     const { field, label, classLb, classTa } = props
     return (
-        <div>
+        <div className="form-item">
           <label className={classLb}>{label}</label>
           <div>
             <textarea
