@@ -96,7 +96,10 @@ export default class ApplicationForm extends Component {
 
       return (
 
-                <form onSubmit={handleSubmit} className="candidate-application-form">
+                <form onSubmit={handleSubmit} className="candidate-application-form text-input-underlined">
+
+                    <a style={{ marginLeft: "400px", position: "absolute",
+                      cursor: "pointer" }}>pencil + edit link</a>
 
                     <FieldArray field={workingExperience} label="Experience" component={ExperienceEntry} />
                     <CardDivider/>
