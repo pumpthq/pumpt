@@ -12,6 +12,8 @@ import {
 } from 'constants/companyJobs';
 import STATES from 'constants/states.json';
 
+import PencilIcon from 'components/icons/pencil'
+
 const stateMap = Object.keys(STATES).map(id=> ({id,title:STATES[id]}))
 
 const ExperienceEntry = props => {
@@ -22,8 +24,8 @@ const ExperienceEntry = props => {
             <TextInput field={position} placeholder="Title" />
             <EnumSelector field={location} options={stateMap} />
             <TextInput field={duty} placeholder="Description of your work" />
-            <DateInput field={startWorkingAt} />
-            <DateInput field={endWorkingAt} />
+            <DateInput field={startWorkingAt} placeholder="start date" />
+            <DateInput field={endWorkingAt} placeholder="end date" />
         </div>
     )
 }
@@ -35,8 +37,8 @@ const EducationEntry = props => {
             <TextInput field={schoolName} placeholder="School Name" />
             <TextInput field={speciality} placeholder="Field of Study" />
             <EnumSelector field={degree} label="Degree" options={DEGREES_DROPDOWN_DATA} />
-            <DateInput field={startStudyAt} />
-            <DateInput field={endStudyAt} />
+            <DateInput field={startStudyAt} placeholder="start date" />
+            <DateInput field={endStudyAt} placeholder="end date" />
         </div>
     )
 }
@@ -49,6 +51,10 @@ const InterestEntry = props => {
         </div>
     )
 }
+
+// TODO: put here adding/removing form style class='text-input-underlined'
+const onEdit = () => {alert('edit the form!')}
+
 
 @reduxForm({
     form: 'candidate-application',
@@ -97,11 +103,16 @@ export default class ApplicationForm extends Component {
         } = this.props
 
       return (
-
                 <form onSubmit={handleSubmit} className="candidate-application-form text-input-underlined">
 
-                    <a style={{ marginLeft: "400px", position: "absolute",
-                      cursor: "pointer" }}>pencil + edit link</a>
+                    <a class="link edit-link" onClick={onEdit}
+                       style={{
+                         visibility: 'visible',
+                         opacity: 1
+                       }}>
+                      <PencilIcon />
+                      &nbsp;Edit
+                    </a>
 
                     <FieldArray field={workingExperience} label="Experience" component={ExperienceEntry} />
                     <CardDivider/>

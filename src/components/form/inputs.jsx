@@ -95,11 +95,13 @@ export class DateInput extends Component{
     }
 
     render() {
-        const { field, label, ...rest } = this.props
+        const { field, label, placeholder, ...rest } = this.props
         return (
             <div>
               <label>{label}</label>
-              <DatePicker {...field} dateFormat={DATE_FORMAT} selected={this.state.selectedDate} onChange={this.handleChange}/>
+              <DatePicker {...field} dateFormat={DATE_FORMAT} selected={this.state.selectedDate} onChange={this.handleChange}
+                          placeholderText={placeholder}
+              />
             </div>
         )
     }

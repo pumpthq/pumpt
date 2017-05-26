@@ -61,24 +61,14 @@ class HeadingProgress extends Component {
         //if profile is approved and NOT filled. Button "Get Matches" is visible and DISABLED
         else if (!isNotApproved && !isFilled) {
             return (
-                <div>
+                <div class="text-center">
                     <H1 class="heading heading_type_four  heading_button_true ">
                         Your application is approved!
-                        <Button
-                            class="invisible-mobile"
-                            type='submit'
-                            typeColored
-                            buttonSize='l'
-                            onClick={onClickGetMatches}
-                        >
-                            Get Matches
-                        </Button>
                     </H1>
                     <p class="text text_after_big-head text_size_xs">
                         Improve your match results by completing your profile.
                     </p>
                     <Button
-                        class="invisible-desktop"
                         type='submit'
                         typeColored
                         buttonSize='l'
