@@ -12,6 +12,8 @@ import {
 } from 'constants/companyJobs';
 import STATES from 'constants/states.json';
 
+import PencilIcon from 'components/icons/pencil'
+
 const stateMap = Object.keys(STATES).map(id=> ({id,title:STATES[id]}))
 
 const ExperienceEntry = props => {
@@ -22,8 +24,8 @@ const ExperienceEntry = props => {
             <TextInput field={position} placeholder="Title" />
             <EnumSelector field={location} options={stateMap} />
             <TextInput field={duty} placeholder="Description of your work" />
-            <DateInput field={startWorkingAt} />
-            <DateInput field={endWorkingAt} />
+            <DateInput field={startWorkingAt} placeholder="start date" />
+            <DateInput field={endWorkingAt} placeholder="end date" />
         </div>
     )
 }
@@ -35,8 +37,8 @@ const EducationEntry = props => {
             <TextInput field={schoolName} placeholder="School Name" />
             <TextInput field={speciality} placeholder="Field of Study" />
             <EnumSelector field={degree} label="Degree" options={DEGREES_DROPDOWN_DATA} />
-            <DateInput field={startStudyAt} />
-            <DateInput field={endStudyAt} />
+            <DateInput field={startStudyAt} placeholder="start date" />
+            <DateInput field={endStudyAt} placeholder="end date" />
         </div>
     )
 }
@@ -49,6 +51,9 @@ const InterestEntry = props => {
         </div>
     )
 }
+
+
+
 
 @reduxForm({
     form: 'candidate-application',
@@ -88,6 +93,15 @@ const InterestEntry = props => {
 })
 
 export default class ApplicationForm extends Component {
+    constructor(props) {
+      super(props)
+      this.state = { isEdit: false }
+    }
+
+    onEdit = () => {
+      this.setState({ isEdit: true})
+    }
+
     render() {
       const {
         fields: { avatar, workingExperience, location, skills, interests, education, socialMedia },
@@ -97,8 +111,19 @@ export default class ApplicationForm extends Component {
         } = this.props
 
       return (
+                <form onSubmit={handleSubmit} className={`candidate-application-form ${this.state.isEdit && "text-input-underlined"}`}>
 
-                <form onSubmit={handleSubmit}>
+                  {
+                    !this.state.isEdit &&
+                    <a class="link edit-link" onClick={this.onEdit}
+                       style={{
+                         visibility: 'visible',
+                         opacity: 1
+                       }}>
+                      <PencilIcon />
+                      &nbsp;Edit
+                    </a>
+                  }
 
                     <FieldArray field={workingExperience} label="Experience" component={ExperienceEntry} />
                     <CardDivider/>
@@ -112,9 +137,9 @@ export default class ApplicationForm extends Component {
                     <Location field={location} />
                     <CardDivider/>
 
-                    <TextInput field={socialMedia.linkedInUrl} label="LinkedIn"/>
-                    <TextInput field={socialMedia.twitterAcc} label="Twitter"/>
-                    <TextInput field={socialMedia.faceBookUrl} label="Facebook"/>
+                    <TextInput field={socialMedia.linkedInUrl} label="LinkedIn" classItm="label-item" />
+                    <TextInput field={socialMedia.twitterAcc} label="Twitter" classItm="label-item" />
+                    <TextInput field={socialMedia.faceBookUrl} label="Facebook" clasclassItm="label-item" />
                     <CardDivider/>
 
                     {/* <FieldArray field={skills} label="Skills" component={SkillEntry} /> */}
@@ -172,8 +197,9 @@ export default class ApplicationForm extends Component {
 
 
                   <div>
-                    <button type="submit" disabled={submitting}>
-                      {submitting ? <i/> : <i/>} Submit
+                    <button type="submit" disabled={submitting}
+                    className="mdl-button button invisible-mobile button_type_colored button_size_m candidate-submit">
+                      {submitting ? <i/> : <i/>} Save
                     </button>
                     {/* <button type="button" disabled={submitting} onClick={resetForm}>
                      Clear Values
@@ -190,16 +216,16 @@ const FieldArray = (props) => {
     const { field, label } = props
     const Item = props.component
     return (
-        <div>
-            <button type="button" onClick={() => {
+        <div className="application-item">
+            <button className="application-item-button" type="button" onClick={() => {
               field.addField()    // pushes empty child field onto the end of the array
             }}><i/> Add {label}
             </button>
 
             {field.map((child, index) =>
-                <div key={index}>
+                <div key={index} className="info-block">
                     <Item field={child} />
-                    <button type="button" onClick={() => {
+                    <button className="remove-entry" type="button" onClick={() => {
                       field.removeField(index)  // remove from index
                     }}><i>Remove</i>
                     </button>

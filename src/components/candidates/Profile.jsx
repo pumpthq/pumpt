@@ -1,5 +1,4 @@
 import React, {Component, PropTypes} from 'react';
-
 import { browserHistory } from 'react-router'
 
 const propTypes = {};
@@ -18,6 +17,7 @@ export default class CandidateProfile extends Component {
         return (
 
             <div className="mdl-card card card_type_mini card_state_open">
+
                 <a class="button_type_close" onClick={browserHistory.goBack}>×</a>
 
                 <h2>Job: { title }</h2>

@@ -18,7 +18,7 @@ export const EnumSelector = (props) => {
               // when resetting
               value={field.value || ''}
               disabled={options.length === 0}
-              onBlur={onBlur}>
+              onBlur={onBlur} className="enum-selector">
               <option value="" disabled>Select One...</option>
               {options.map( ({id,title}) =>
                   <option key={id} value={title}>{title}</option>
@@ -32,7 +32,7 @@ export const EnumSelector = (props) => {
 export const TextArea = (props) => {
     const { field, label, classLb, classTa } = props
     return (
-        <div>
+        <div className="form-item">
           <label className={classLb}>{label}</label>
           <div>
             <textarea
@@ -47,13 +47,13 @@ export const TextArea = (props) => {
 }
 
 export const TextInput = (props) => {
-    const { field, label, classLb, classIp, ...rest } = props
+    const { field, label, classItm, classLb, classInp, ...rest } = props
     return (
-        <div>
+        <div className={classItm}>
           <label className={classLb}>{label}</label>
           <div>
             <input type="text"
-              className={classIp}
+              className={classInp}
               {...field}
               value={field.value} {...rest} />
           </div>
@@ -95,11 +95,13 @@ export class DateInput extends Component{
     }
 
     render() {
-        const { field, label, ...rest } = this.props
+        const { field, label, placeholder, ...rest } = this.props
         return (
             <div>
               <label>{label}</label>
-              <DatePicker {...field} dateFormat={DATE_FORMAT} selected={this.state.selectedDate} onChange={this.handleChange}/>
+              <DatePicker {...field} dateFormat={DATE_FORMAT} selected={this.state.selectedDate} onChange={this.handleChange}
+                          placeholderText={placeholder}
+              />
             </div>
         )
     }

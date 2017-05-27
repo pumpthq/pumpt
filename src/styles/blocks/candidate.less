@@ -1,4 +1,6 @@
-.candidate-edit-form {
+.candidate-edit-form,
+.recruiter-form, .candidate-company-form {
+  margin-bottom: 30px;
 
   & > div {
     margin-top: 15px;
@@ -17,4 +19,21 @@
   & > div > div {
     margin-left: 200px;
   }
+
+  input[type=text] {
+    border-bottom: 1px solid rgba(128, 128, 128, 0.3);
+    width: 350px;
+  }
 }
+
+
+.candidate-application-form {
+  .application-form;
+}
+
+.text-input-underlined {
+  input[type='text'] {
+    border-bottom: 1px solid lightgrey;
+  }
+}
+

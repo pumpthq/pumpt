@@ -17,16 +17,16 @@ export default class RecruiterForm extends Component {
         submitting,
         } = this.props
       return (
-                <form onSubmit={handleSubmit}>
-                  <TextInput field={ firstName } label="First Name" />
-                  <TextInput field={ lastName } label="Last Name" />
-                  <TextInput field={ position } label="Position" />
+                <form onSubmit={handleSubmit} className="recruiter-form">
+                  <TextInput field={ firstName } label="First Name" classInp="mdl-textfield mdl-js-textfield textfield" />
+                  <TextInput field={ lastName } label="Last Name" classInp="mdl-textfield mdl-js-textfield textfield " />
+                  <TextInput field={ position } label="Position" classInp="mdl-textfield mdl-js-textfield textfield " />
 
                   <div>
-                    <button type="submit" disabled={submitting}>
+                    <button type="submit" disabled={submitting} className="mdl-button button button_type_colored button_size_m">
                         {submitting ? <i/> : <i/>} Save
                     </button>
-                    <button type="button" disabled={submitting} onClick={onCancel}>
+                    <button type="button" disabled={submitting} onClick={onCancel} className="mdl-button button button_type_colored button_size_m">
                         Cancel
                     </button>
                   </div>

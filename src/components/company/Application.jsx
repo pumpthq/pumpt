@@ -33,12 +33,11 @@ export default class ApplicationForm extends Component {
         handleSubmit,
         resetForm,
         submitting,
-        } = this.props
+        } = this.props;
 
       return (
 
-                <form onSubmit={handleSubmit}>
-
+                <form onSubmit={handleSubmit} className="company-application-form text-input-underlined">
                     <CardDivider/>
 
                     <TextInput field={socialMedia.websiteUrl} label="Website"/>
@@ -68,7 +67,9 @@ export default class ApplicationForm extends Component {
                     <CardDivider/>
 
                   <div>
-                    <button type="submit" disabled={submitting}>
+                    <button type="submit" disabled={submitting}
+                            className="mdl-button button invisible-mobile button_type_colored button_size_m company-submit"
+                    >
                       {submitting ? <i/> : <i/>} Save
                     </button>
                     {/* <button type="button" disabled={submitting} onClick={resetForm}>

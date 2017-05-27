@@ -49,8 +49,8 @@ export default class CandidateForm extends Component {
         } = this.props
       return (
                 <form onSubmit={handleSubmit} className="candidate-edit-form">
-                  <TextInput field={ firstName } label="First Name" />
-                  <TextInput field={ lastName } label="Last Name" />
+                  <TextInput field={ firstName } label="First Name" classLb="" classInp="mdl-textfield mdl-js-textfield textfield" />
+                  <TextInput field={ lastName } label="Last Name" classLb="" classInp="mdl-textfield mdl-js-textfield textfield " />
                   {/* <TextInput field={ email } label="Email" /> */}
 
                   <EnumSelector field={recentWorkingAreaParent} label="Industry" options={FIELD_OF_EXPERTISE_DROPDOWN_DATA}
@@ -64,10 +64,10 @@ export default class CandidateForm extends Component {
 
 
                   <div>
-                    <button type="submit" disabled={submitting}>
+                    <button type="submit" disabled={submitting} className="mdl-button button button_type_colored button_size_m">
                         {submitting ? <i/> : <i/>} Save
                     </button>
-                    <button type="button" disabled={submitting} onClick={onCancel}>
+                    <button type="button" disabled={submitting} onClick={onCancel} className="mdl-button button button_type_colored button_size_m">
                         Cancel
                     </button>
                   </div>
