@@ -51,12 +51,12 @@ export const resolveUserFailed = () => ({
     type: RESOLVE_USER_FAILED,
 });
 
-export const changePassword = (oldPassword, newPassword) => ({
+export const changePassword = (data) => ({
     type: API,
     payload: {
         method: 'PATCH',
         url: API_CHANGE_PASSWORD,
-        data: { oldPassword, newPassword },
+        data,
         success: changePasswordSucceeded,
         error: fetchFailed
     }

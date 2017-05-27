@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import IconPerson from './../../icons/photo';
 import { logOut } from './../../../actions/authorization';
 
-import ChangePassLink from '../../../containers/ChangePassword.jsx';
+// import ChangePassLink from '../../../containers/ChangePassword.jsx';
 
 import {
     API_URL,
@@ -107,7 +107,8 @@ export default class HeaderMini extends Component {
                             </a>
                             <div class="dropdown">
                                 <ul class="list list_type_s list_type_links list_type_nowrap">
-                                    <ChangePassLink />
+                                    {/* <ChangePassLink /> */}
+
                                     <li class="list__item" onClick={() => {
                                         dispatch(logOut());
                                     }}>
