@@ -10,6 +10,10 @@ import { validateChangePassword } from 'utils';
 
 import { browserHistory } from 'react-router'
 
+const buttonStyle = {
+    cursor: 'pointer',
+};
+
 @reduxForm({
     form: 'changePassword',
     fields: ['oldPassword', 'newPassword', 'confirmPass'],

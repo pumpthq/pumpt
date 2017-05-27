@@ -5,6 +5,7 @@ import { changePassword } from '../actions/authorization'
 import ChangePassForm from 'components/changePass/Form';
 import VerticalScroller from 'components/VerticalScroller'
 
+@connect()
 export default class ChangePassword extends Component {
     render() {
         const {dispatch} = this.props
