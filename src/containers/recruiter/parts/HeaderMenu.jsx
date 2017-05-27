@@ -15,44 +15,11 @@ import {
 } from './../../../constants/routes';
 import { logOut } from './../../../actions/authorization';
 
-// const propTypes = {
-//     dispatch: PropTypes.func,
-//     companyName: PropTypes.string,
-//     profilePhoto: PropTypes.string,
-//     progress: PropTypes.number,
-//     completed: PropTypes.number,
-// };
-const defaultProps = {
-    recruiter: {},
-    company: {},
-    completed: 5,
-};
-
-// @connect(
-//     (state, ownProps) => {
-//         const { companyName } = state.applicationCompany.summary;
-//         const {
-//             profilePhoto,
-//             progress,
-//         } = state.applicationCompany;
-//
-//         const { completed } = ownProps;
-//
-//         return {
-//             companyName,
-//             profilePhoto,
-//             progress: completed + progress.length,
-//             completed,
-//         };
-//     },
-// )
-//
-//
-const mapStateToProps = state => ({...state.companyJobs})
-const mapDispatchToProps = dispatch => ({dispatch})
-
-@connect(mapStateToProps,mapDispatchToProps)
-class JobsHeaderMenu extends Component {
+const mapStateToProps = state => {
+    return {recruiter: state.companyJobs.recruiter, company: state.companyJobs.company}
+}
+@connect(mapStateToProps)
+export default class RecruiterHeaderMenu extends Component {
 
     render() {
         const {
@@ -64,11 +31,11 @@ class JobsHeaderMenu extends Component {
             <HeaderFull
                 links={[
                     <Link
-                        to={ROUTE_COMPANY_MATCHES_ALL}
+                        to={"/recruiter/edit"}
                         activeClassName="navigation__link navigation__link_active"
                         className="navigation__link"
                     >
-                        Candidates
+                        Profile
                     </Link>,
                     <Link
                         to={ROUTE_COMPANY_JOBS_OPEN}
@@ -90,11 +57,11 @@ class JobsHeaderMenu extends Component {
                         userName={`${recruiter.firstName} ${recruiter.lastName} @ ${company.name}`}
                         userAvatar={company.logo}
                         progress={company.fillProgress}
-                        linkTo={ROUTE_APPLICATION_COMPANY}
+                        linkTo={"/recruiter/edit"}
                     >
-                        <HeaderDropDownItem to={ROUTE_EDIT_COMPANY}>Profile</HeaderDropDownItem>
+                        {/* <HeaderDropDownItem to={ROUTE_EDIT_COMPANY}>Profile</HeaderDropDownItem> */}
                         <HeaderDropDownItem>Change Password</HeaderDropDownItem>
-                        <HeaderDropDownItem>Notification Settings</HeaderDropDownItem>
+                        {/* <HeaderDropDownItem>Notification Settings</HeaderDropDownItem> */}
                         <HeaderDropDownItem>Help &amp; Support</HeaderDropDownItem>
                         <HeaderDropDownItem
                             onClick={() => {
@@ -109,8 +76,3 @@ class JobsHeaderMenu extends Component {
         );
     }
 }
-
-// JobsHeaderMenu.propTypes = propTypes;
-JobsHeaderMenu.defaultProps = defaultProps;
-
-export default JobsHeaderMenu;
