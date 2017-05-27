@@ -60,7 +60,7 @@ export default class RecruiterHeaderMenu extends Component {
                         linkTo={"/recruiter/edit"}
                     >
                         {/* <HeaderDropDownItem to={ROUTE_EDIT_COMPANY}>Profile</HeaderDropDownItem> */}
-                        <HeaderDropDownItem>Change Password</HeaderDropDownItem>
+                        <HeaderDropDownItem to={'/recruiter/changePass'}>Change Password</HeaderDropDownItem>
                         {/* <HeaderDropDownItem>Notification Settings</HeaderDropDownItem> */}
                         <HeaderDropDownItem>Help &amp; Support</HeaderDropDownItem>
                         <HeaderDropDownItem

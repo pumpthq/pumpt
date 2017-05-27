@@ -49,7 +49,7 @@ export default class CandidateHeaderMenu extends Component {
                         progress={candidate.fillProgress}
                         linkTo={"/candidate/matches/edit"}
                     >
-                        <HeaderDropDownItem>Change Password</HeaderDropDownItem>
+                        <HeaderDropDownItem to={'/candidate/matches/changePass'}>Change Password</HeaderDropDownItem>
                         {/* <HeaderDropDownItem>Notification Settings</HeaderDropDownItem> */}
                         <HeaderDropDownItem>Help &amp; Support</HeaderDropDownItem>
                         <HeaderDropDownItem

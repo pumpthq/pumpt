@@ -31,23 +31,23 @@ export const validateLogin = ({ email, password }) => {
     return errors;
 };
 
-export const validateChangePassword = ({ currentPass, newPass, confirmPass }) => {
+export const validateChangePassword = ({ oldPassword, newPassword, confirmPass }) => {
     const errors = {};
 
-    if (!currentPass) {
-        errors.currentPass = 'Can\'t be blank';
-    } else if (currentPass.length < MIN_PASSWORD_LENGTH) {
-        errors.currentPass = 'Not valid password';
+    if (!oldPassword) {
+        errors.oldPassword = 'Can\'t be blank';
+    } else if (oldPassword.length < MIN_PASSWORD_LENGTH) {
+        errors.oldPassword = 'Not valid password';
     }
 
-    if (newPass && confirmPass && newPass !== confirmPass) {
+    if (newPassword && confirmPass && newPassword !== confirmPass) {
         errors.confirmPass = 'Passwords not matched';
     }
 
-    if (!newPass) {
-        errors.newPass = 'Can\'t be blank';
-    } else if (newPass.length < MIN_PASSWORD_LENGTH) {
-        errors.newPass = 'Not valid password';
+    if (!newPassword) {
+        errors.newPassword = 'Can\'t be blank';
+    } else if (newPassword.length < MIN_PASSWORD_LENGTH) {
+        errors.newPassword = 'Not valid password';
     }
 
     if (!confirmPass) {

@@ -5,6 +5,8 @@ import VacancyContainer from './candidate/VacancyContainer'
 import CompanyContainer from './CompanyContainer'
 import EditContainer from './candidate/EditContainer'
 
+import ChangePasswordContainer from 'containers/ChangePasswordContainer'
+
 module.exports = {
     path: 'candidate/matches',
     component: MatchesContainer,
@@ -14,6 +16,7 @@ module.exports = {
         { path: 'company/:cid/vacancy/:id', component: (props) => <VacancyContainer cid={props.params.cid} id={props.params.id} /> },
         { path: 'all', component: AllMatchesSlider },
         { path: 'bookmarked', component: BookmarkedMatchesSlider },
-        { path: 'not-interested', component: NotInterestedMatchesSlider }
+        { path: 'not-interested', component: NotInterestedMatchesSlider },
+        { path: 'changePass', component: ChangePasswordContainer }
     ]
 };

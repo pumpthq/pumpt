@@ -6,6 +6,8 @@ import SubmitButton from './SubmitButton.jsx';
 import CancelLink from './CancelLink.jsx';
 import PassInput from './PassInput.jsx';
 import Title from './Title.jsx';
+import { deprecate } from 'core-decorators'
+import { browserHistory } from 'react-router'
 
 const bodyStyle = {
     width: '100%',
@@ -17,7 +19,7 @@ const contentStyle = {
 const buttonStyle = {
     cursor: 'pointer',
 };
-
+@deprecate
 export default class ChangePassPopup extends Component {
     static propTypes = {
         fields: PropTypes.object,
@@ -31,10 +33,7 @@ export default class ChangePassPopup extends Component {
 
     handleToggle = e => {
         e && e.preventDefault();
-
-        this.setState({
-            isOpen: !this.state.isOpen,
-        });
+        browserHistory.goBack();
     };
 
     handleSubmit = e => {
@@ -60,15 +59,11 @@ export default class ChangePassPopup extends Component {
         const isDisabled = invalid || submitting;
 
         return (
-            <li className="list__item">
-                <a className="text" onClick={this.handleToggle}>
-                    Change Password
-                </a>
                 <Dialog
                     bodyStyle={bodyStyle}
                     contentStyle={contentStyle}
                     modal={false}
-                    open={this.state.isOpen}
+                    open={true}
                     onRequestClose={this.handleToggle}
                 >
                     <button
@@ -96,7 +91,6 @@ export default class ChangePassPopup extends Component {
                         </form>
                     </div>
                 </Dialog>
-            </li>
         );
     }
 }
