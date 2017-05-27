@@ -1,19 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import Wrapper from './../../components/main/wrapper';
-import CompanyHeader from './parts/HeaderMenu';
-
-const propTypes = {
-    children : PropTypes.node,
-};
-const defaultProps = {};
+import RecruiterHeader from './parts/HeaderMenu';
 
 class RecruiterContainer extends Component {
-
-    constructor(props) {
-        super(props);
-
-        this.state = {};
-    }
 
     render() {
         const { children } = this.props;
@@ -23,7 +12,7 @@ class RecruiterContainer extends Component {
                 <div className="container">
                     <div className="row row-padding-bigger">
                         <div className="col-lg-12">
-                            <CompanyHeader />
+                            <RecruiterHeader />
                         </div>
                     </div>
                 </div>
@@ -33,8 +22,5 @@ class RecruiterContainer extends Component {
     }
 
 }
-
-RecruiterContainer.propTypes = propTypes;
-RecruiterContainer.defaultProps = defaultProps;
 
 module.exports = RecruiterContainer
