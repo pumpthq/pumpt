@@ -9,6 +9,10 @@ import { resolveUser } from '../actions/authorization'
 
 import './../styles/app.less';
 
+// ⚠️ Tap event required to support material-ui click events
+import injectTapEventPlugin from 'react-tap-event-plugin';
+injectTapEventPlugin();
+
 const propTypes = {
     children: PropTypes.oneOfType([
         PropTypes.string,
