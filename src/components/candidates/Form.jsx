@@ -63,7 +63,7 @@ export default class CandidateForm extends Component {
                   <EnumSelector field={recentAreaExperience} label="Experience" options={EXPERIENCE_DROPDOWN_DATA} />
 
 
-                  <div>
+                  <div className="candidate-buttons">
                     <button type="submit" disabled={submitting} className="mdl-button button button_type_colored button_size_m">
                         {submitting ? <i/> : <i/>} Save
                     </button>
