@@ -11,7 +11,6 @@ export default class CompanySummary extends Component {
         const { city, state } = locationHeadquarters
         const { authorization: {email}, onEdit} = this.props
         return (
-            <div class="mdl-card card card_type_mini card_onb-info card_onb-info_filled">
                 <div class="summary-head">
                     <div class="summary-head__title mdl-card__title">
 
@@ -56,7 +55,6 @@ export default class CompanySummary extends Component {
                         </div>
                     </div>
                 </div>
-            </div>
         )
     }
 }

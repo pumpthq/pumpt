@@ -35,13 +35,7 @@ export default class EditContainer extends Component {
         const { recruiter, company, dispatch } = this.props
 
         return (
-                <ScrollContainer>
-                    <div class="content__wrapper">
-                        <div class="content">
-                            <div class="container">
-                                <div class="row row-padding-bigger">
-                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 column__wrapper">
-                                        <Panel>
+                <div className="mdl-card col-xs-12">
                                             {this.state.editRecruiterSummary ?
                                                 <RecruiterForm
                                                     initialValues={recruiter}
@@ -62,13 +56,8 @@ export default class EditContainer extends Component {
                                             <CompanyApplicationForm
                                                 initialValues={company}
                                                 onSubmit={values=> {dispatch(updateCompany(values)) } }/>
-                                        </Panel>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
                     </div>
-                </ScrollContainer>
         )
     }
 }

@@ -22,23 +22,19 @@ class MatchesContainer extends Component {
 
         return (
             <Wrapper>
-                <WallpapersSwitcher
+                {/* <WallpapersSwitcher
                     step={'sixth'}
                     isRichWallpaperNeeded={true}
-                />
+                /> */}
                 <div className="container">
                     <div className="row row-padding-bigger">
-                        <div className="col-lg-12">
+                        <div className="col-xs-12">
                             <CompanyHeader />
                         </div>
                     </div>
                 </div>
-                <div className="container slider-container">
-                    <div className="row row-padding-bigger">
-                        <div className="col-lg-12">
-                            {children}
-                        </div>
-                    </div>
+                <div className="container">
+                    {children}
                 </div>
                 <TabBar />
             </Wrapper>

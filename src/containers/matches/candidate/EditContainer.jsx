@@ -28,13 +28,7 @@ class EditContainer extends Component {
     render() {
         const { dispatch, candidate } = this.props
         return (
-            <ScrollContainer>
-                <div class="content__wrapper">
-                    <div class="content">
-                        <div class="container">
-                            <div class="row row-padding-bigger">
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 column__wrapper">
-                                    <Panel>
+            <div className="mdl-card col-xs-12">
 
                 {this.state.editSummary ?
                     <CandidateForm
@@ -50,13 +44,8 @@ class EditContainer extends Component {
 
                 {/* <CandidateForm initialValues={candidate} onSubmit={values=> dispatch(updateCandidate(id,values))}/> */}
 
-                                </Panel>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
             </div>
-        </ScrollContainer>
 
         );
     }

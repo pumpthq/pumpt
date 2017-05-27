@@ -16,7 +16,9 @@ class RecruiterContainer extends Component {
                         </div>
                     </div>
                 </div>
-                {children}
+                <div className="container">
+                    {children}
+                </div>
             </Wrapper>
         );
     }
