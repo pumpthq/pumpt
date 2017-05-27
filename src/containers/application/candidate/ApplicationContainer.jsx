@@ -55,14 +55,13 @@ export default class ApplicationContainer extends Component {
                         </div>
                     </div>
                 </div>
-                <ScrollContainer>
-                    <div class="content__wrapper">
-                        <div class="content">
-                            <div class="container">
-                                <div class="row row-padding-bigger">
-                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 column__wrapper">
-                                        <Panel>
-                                            <HeadingProgress/>
+                <div className="container">
+                    <div className="mdl-card col-xs-12">
+                        <HeadingProgress/>
+                    </div>
+
+                    <div className="mdl-card col-xs-12">
+
                                             {this.state.editSummary ?
                                                 <CandidateForm
                                                     initialValues={candidate}
@@ -74,15 +73,10 @@ export default class ApplicationContainer extends Component {
                                             <CandidateApplicationForm
                                                 initialValues={candidate}
                                                 onSubmit={values=> {dispatch(updateCandidate(values)) } }/>
-                                        </Panel>
-                                    </div>
-                                </div>
-                            </div>
-                            <Footer />
-                        </div>
-                    </div>
-                </ScrollContainer>
 
+                    </div>
+                </div>
+                <Footer />
 
                 {/* ⚠️ temporary button to open dialog */}
                 <button onClick={this.openDialog}>open application success dialog {JSON.stringify(this.state.lastApproved)}</button>
