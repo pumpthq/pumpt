@@ -24,22 +24,22 @@ export default class CandidateForm extends Component {
         submitting,
         } = this.props
       return (
-                <form onSubmit={handleSubmit}>
-                  <TextInput field={ name } label="Company Name" />
+                <form onSubmit={handleSubmit} className="candidate-company-form">
+                  <TextInput field={ name } label="Company Name" classInp="mdl-textfield mdl-js-textfield textfield" />
 
 
                   <EnumSelector field={type} label="Number of Employees" options={COMPANY_TYPE_DATA} />
 
                   <EnumSelector field={employeesAmount} label="Company Type" options={COMPANY_EMPLOYEES_DATA} />
 
-                  <TextInput field={ foundDate } label="Year founded" />
+                  <TextInput field={ foundDate } label="Year founded" classInp="mdl-textfield mdl-js-textfield textfield" />
 
 
                   <div>
-                    <button type="submit" disabled={submitting}>
+                    <button type="submit" disabled={submitting} className="mdl-button button button_type_colored button_size_m">
                         {submitting ? <i/> : <i/>} Save
                     </button>
-                    <button type="button" disabled={submitting} onClick={onCancel}>
+                    <button type="button" disabled={submitting} onClick={onCancel} className="mdl-button button button_type_colored button_size_m">
                         Cancel
                     </button>
                   </div>

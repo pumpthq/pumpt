@@ -18,7 +18,7 @@ export const EnumSelector = (props) => {
               // when resetting
               value={field.value || ''}
               disabled={options.length === 0}
-              onBlur={onBlur}>
+              onBlur={onBlur} className="enum-selector">
               <option value="" disabled>Select One...</option>
               {options.map( ({id,title}) =>
                   <option key={id} value={title}>{title}</option>
