@@ -7,6 +7,7 @@ import PassInput from './PassInput.jsx';
 import Title from './Title.jsx';
 import ScrollContainer from 'components/main/scrollContainer'
 import { validateChangePassword } from 'utils';
+import './style.less'
 
 import { browserHistory } from 'react-router'
 
@@ -41,7 +42,7 @@ export default class ChangePassForm extends Component {
         const isDisabled = invalid || submitting;
 
         return (
-                <div className='mdl-card col-xs-12'>
+                <div className='change-password-popup'>
                     <button
                         style={buttonStyle}
                         className="button button_type_close"
