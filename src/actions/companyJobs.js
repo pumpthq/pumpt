@@ -67,6 +67,10 @@ import {
     UPDATE_COMPANY_SUCCEEDED,
     UPDATE_COMPANY_FAILED,
 
+    UPDATE_RECRUITER_SUCCEEDED,
+    UPDATE_RECRUITER_FAILED,
+
+
 } from './../constants/companyJobs';
 import { API } from '../constants/actionTypes'
 import {
@@ -225,6 +229,28 @@ export const fetchCompanyFailed = () => ({
     type : FETCH_COMPANY_FAILED
 })
 
+
+export const updateRecruiter = (data)  => {
+    return {
+      type: API,
+      payload:{
+          method: 'PUT',
+          url: `${API_RECRUITER_ROOT}/current`,
+          data,
+          success: updateRecruiterSucceeded(data),
+      }
+    }
+};
+
+export const updateRecruiterSucceeded = (data) => recruiter => {
+    return {
+      type: UPDATE_RECRUITER_SUCCEEDED,
+      payload: {
+          data,
+          recruiter,
+      }
+    }
+};
 
 export const fetchRecruiter = () => {
     return {

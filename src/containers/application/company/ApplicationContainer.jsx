@@ -4,53 +4,59 @@ import Wrapper from 'components/main/wrapper'
 import { HeaderMini } from 'components/main/header'
 import ScrollContainer from 'components/main/scrollContainer'
 import HeadingProgress from 'containers/application/headingProgress';
-import CandidateForm from 'components/candidates/Form';
-import CandidateSummary from 'components/candidates/Summary';
-import CandidateApplicationForm from 'components/candidates/Application';
-import SummaryHead from './summaryHead';
-// import EntryBlock from './EntryBlock'
+
+import RecruiterForm from 'components/recruiters/Form';
+import RecruiterSummary from 'components/recruiters/Summary';
+import CompanyForm from 'components/company/Form';
+import CompanySummary from 'components/company/Summary';
+import CompanyApplicationForm from 'components/company/Application';
+
 import logoImage from 'img/sprites-svg/logo.svg'
-import { updateCandidate } from 'actions/candidateMatches'
-// import { STARTUP_COMPLETED_STEPS } from './../../../constants/applicationCandidate';
+import { updateRecruiter, updateCompany } from 'actions/applicationCompany'
 import Panel from 'components/main/panel';
 import StepProgress from 'components/application/stepProgress';
 import Footer from 'components/main/footer/footer';
+
 import ApplicationSuccessDialog from 'components/application/ApplicationSuccessDialog'
 
 function mapStateToProps(state, ownProps) {
-    return { candidate: state.candidateMatches.candidate, authorization: state.authorization }
+    return { recruiter: state.companyJobs.recruiter, company: state.companyJobs.company, authorization: state.authorization }
 }
 
 @connect(mapStateToProps)
 export default class ApplicationContainer extends Component {
     constructor(props) {
         super(props)
-        this.state = { editSummary: false }
+        this.state = { editRecruiterSummary: false, editCompanySummary: false }
+        console.log(props)
     }
 
-    editSummary = (val) => {
-        this.setState({editSummary:val})
+    editRecruiterSummary = (val) => {
+        this.setState({editRecruiterSummary:val})
+    }
+
+    editCompanySummary = (val) => {
+        this.setState({editCompanySummary:val})
     }
 
     openDialog = () => {
         this.setState({lastApproved:(new Date)})
     }
 
-
     render() {
-        const { candidate, dispatch } = this.props
+        const { recruiter, company, dispatch } = this.props
 
         return (
-            <Wrapper id='onboarding-candidate'>
+            <Wrapper id='onboarding-recruiter'>
                 <div class='container'>
                     <div class='row row-padding-bigger'>
                         <div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
                             <HeaderMini
                                 class="header_small"
-                                profilePhoto={candidate.avatar}
+                                profilePhoto={recruiter.avatar}
                                 logo={logoImage}
-                                name={`${candidate.firstName} ${candidate.lastName}`}
-                                progress={candidate.fillProgress}
+                                name={`${recruiter.firstName} ${recruiter.lastName}`}
+                                progress={recruiter.fillProgress}
                             />
                         </div>
                     </div>
@@ -63,17 +69,26 @@ export default class ApplicationContainer extends Component {
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 column__wrapper">
                                         <Panel>
                                             <HeadingProgress/>
-                                            {this.state.editSummary ?
-                                                <CandidateForm
-                                                    initialValues={candidate}
-                                                    onSubmit={values=> {dispatch(updateCandidate(values)); this.editSummary(false)}}
-                                                    onCancel={()=>this.editSummary(false)} />
+                                            {this.state.editRecruiterSummary ?
+                                                <RecruiterForm
+                                                    initialValues={recruiter}
+                                                    onSubmit={values=> {dispatch(updateRecruiter(values)); this.editRecruiterSummary(false)}}
+                                                    onCancel={()=>this.editRecruiterSummary(false)} />
                                                 :
-                                                <CandidateSummary {...this.props} onEdit={()=>this.editSummary(true)}/>
+                                                <RecruiterSummary {...this.props} onEdit={()=>this.editRecruiterSummary(true)}/>
                                             }
-                                            <CandidateApplicationForm
-                                                initialValues={candidate}
-                                                onSubmit={values=> {dispatch(updateCandidate(values)) } }/>
+                                            {this.state.editCompanySummary ?
+                                                <CompanyForm
+                                                    initialValues={company}
+                                                    onSubmit={values=> {dispatch(updateCompany(values)); this.editCompanySummary(false)}}
+                                                    onCancel={()=>this.editCompanySummary(false)} />
+                                                :
+                                                <CompanySummary {...this.props} onEdit={()=>this.editCompanySummary(true)}/>
+                                            }
+
+                                            <CompanyApplicationForm
+                                                initialValues={company}
+                                                onSubmit={values=> {dispatch(updateCompany(values)) } }/>
                                         </Panel>
                                     </div>
                                 </div>
@@ -82,7 +97,6 @@ export default class ApplicationContainer extends Component {
                         </div>
                     </div>
                 </ScrollContainer>
-
 
                 {/* ⚠️ temporary button to open dialog */}
                 <button onClick={this.openDialog}>open application success dialog {JSON.stringify(this.state.lastApproved)}</button>
@@ -95,9 +109,9 @@ export default class ApplicationContainer extends Component {
 }
 
 // ApplicationContainer.defaultProps = {
-//     candidate: {
+//     recruiter: {
 //         avatar: '{avatar}',
 //         firstName: '{firstName}',
 //         lastName: '{lastName}'
-//     }
+//     },
 // }

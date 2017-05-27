@@ -1,4 +1,9 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { change } from 'redux-form'
+import DatePicker from 'react-datepicker';
+import moment from 'moment';
+import 'react-datepicker/dist/react-datepicker.css';
 
 export const EnumSelector = (props) => {
     const {field, label, options, onChange, onBlur} = props
@@ -56,6 +61,51 @@ export const TextInput = (props) => {
     )
 }
 
+const DATE_FORMAT = "MM/DD/YYYY"
+
+export class DateInput extends Component{
+
+    constructor (props) {
+        super(props);
+        if(this.props.field.value) {
+            this.state = { selectedDate: moment(this.props.field.value) }
+        }else{
+            this.state = { selectedDate: undefined }
+        }
+    }
+
+    syncDatePickerWithField = () => {
+        if(this.state.selectedDate && this.props.field.value && this.props.field.value !== this.state.selectedDate.format(DATE_FORMAT)) {
+            console.log('unsynced datepicker field detected')
+            //console.log(this.props.field.value, '!=', this.state.selectedDate.format(DATE_FORMAT))
+            this.handleChange(moment(this.props.field.value)) // ❗ this line is needed to correctly display the formatted date in the input field
+        }
+    }
+
+    componentWillMount() {
+        this.syncDatePickerWithField()
+    }
+    componentDidUpdate() {
+        this.syncDatePickerWithField()
+    }
+
+    handleChange = (date) => {
+      this.setState({ selectedDate: date });
+      this.props.field.onChange(date.format(DATE_FORMAT)) // ❗ this line is needed to correctly display the formatted date in the input field
+    }
+
+    render() {
+        const { field, label, ...rest } = this.props
+        return (
+            <div>
+              <label>{label}</label>
+              <DatePicker {...field} dateFormat={DATE_FORMAT} selected={this.state.selectedDate} onChange={this.handleChange}/>
+            </div>
+        )
+    }
+
+}
+
 export class PureInput extends Component {
   shouldComponentUpdate(nextProps) {
     return this.props.field !== nextProps.field
@@ -77,9 +127,10 @@ export class Location extends Component {
   // }
 
   render() {
-    const { field: {state, city, abilityToRelocate } } = this.props
+    const { field: {state, city, abilityToRelocate }, label } = this.props
     return (
         <div>
+            <label>{label}</label>
             <div>
               <label>City</label>
               <div>
@@ -101,6 +152,26 @@ export class Location extends Component {
   }
 }
 
-// PureInput.propTypes = {
-//   field: PropTypes.object.isRequired
-// }
+
+export const FieldArray = (props) => {
+    const { field, label } = props
+    const Item = props.component
+    return (
+        <div>
+            <button type="button" onClick={() => {
+              field.addField()    // pushes empty child field onto the end of the array
+            }}><i/> Add {label}
+            </button>
+
+            {field.map((child, index) =>
+                <div key={index}>
+                    <Item field={child} />
+                    <button type="button" onClick={() => {
+                      field.removeField(index)  // remove from index
+                    }}><i>Remove</i>
+                    </button>
+                </div>
+            )}
+        </div>
+    )
+}
