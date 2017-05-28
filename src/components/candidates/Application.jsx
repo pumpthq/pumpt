@@ -4,22 +4,26 @@ import { reduxForm } from 'redux-form'
 import { tintedBackground } from 'components/helpers'
 import { browserHistory } from 'react-router'
 
-import CaseIcon from 'components/icons-application/case'
-import Education from 'components/icons-application/education'
-import Heart from 'components/icons-application/heart'
-import Pin from 'components/icons-application/pin'
-import Social from 'components/icons-application/social'
-import './style.less'
-
 import { Location, EnumSelector, TextArea, TextInput, DateInput } from 'components/form/inputs'
 
 import {
     EMPLOYEMENTS_DROPDOWN_DATA,
     DEGREES_DROPDOWN_DATA,
 } from 'constants/companyJobs';
+
 import STATES from 'constants/states.json';
 
 import PencilIcon from 'components/icons/pencil'
+import CaseIcon from 'components/icons-application/case'
+import Education from 'components/icons-application/education'
+import Heart from 'components/icons-application/heart'
+import Pin from 'components/icons-application/pin'
+import Social from 'components/icons-application/social'
+import LinkedInIcon from 'components/icons-application/linkedIn'
+import TwitterIcon from 'components/icons-application/twitter'
+import FacebookIcon from 'components/icons-application/facebook'
+import './style.less'
+
 
 const stateMap = Object.keys(STATES).map(id=> ({id,title:STATES[id]}))
 
@@ -149,9 +153,17 @@ export default class ApplicationForm extends Component {
                     <CardDivider/>
 
                     <Social/><p className="icon-item">Social Media</p>
-                    <TextInput field={socialMedia.linkedInUrl} label="LinkedIn" classItm="label-item" />
-                    <TextInput field={socialMedia.twitterAcc} label="Twitter" classItm="label-item" />
-                    <TextInput field={socialMedia.faceBookUrl} label="Facebook" clasclassItm="label-item" />
+
+                    <div className="social-media-block">
+                      <LinkedInIcon />
+                      <TextInput field={socialMedia.linkedInUrl} label="LinkedIn" classItm="label-item-location" />
+
+                      <TwitterIcon />
+                      <TextInput field={socialMedia.twitterAcc} label="Twitter" classItm="label-item-location" />
+
+                      <FacebookIcon />
+                      <TextInput field={socialMedia.faceBookUrl} label="Facebook" clasclassItm="label-item-location" />
+                    </div>
                     <CardDivider/>
 
                     {/* <FieldArray field={skills} label="Skills" component={SkillEntry} /> */}

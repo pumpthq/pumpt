@@ -131,7 +131,7 @@ export class Location extends Component {
   render() {
     const { field: {state, city, abilityToRelocate }, label } = this.props
     return (
-        <div>
+        <div className="location-field">
             <label>{label}</label>
             <div>
               <label>City</label>
