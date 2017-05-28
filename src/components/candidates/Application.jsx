@@ -4,6 +4,13 @@ import { reduxForm } from 'redux-form'
 import { tintedBackground } from 'components/helpers'
 import { browserHistory } from 'react-router'
 
+import CaseIcon from 'components/icons-application/case'
+import Education from 'components/icons-application/education'
+import Heart from 'components/icons-application/heart'
+import Pin from 'components/icons-application/pin'
+import Social from 'components/icons-application/social'
+import './style.less'
+
 import { Location, EnumSelector, TextArea, TextInput, DateInput } from 'components/form/inputs'
 
 import {
@@ -125,18 +132,23 @@ export default class ApplicationForm extends Component {
                     </a>
                   }
 
+                    <CaseIcon/>
                     <FieldArray field={workingExperience} label="Experience" component={ExperienceEntry} />
                     <CardDivider/>
 
+                    <Education/>
                     <FieldArray field={education} label="Education" component={EducationEntry} />
                     <CardDivider/>
 
+                    <Heart/>
                     <FieldArray field={interests} label="Interests" component={InterestEntry} />
                     <CardDivider/>
 
+                    <Pin/><p className="icon-item">Location</p>
                     <Location field={location} />
                     <CardDivider/>
 
+                    <Social/><p className="icon-item">Social Media</p>
                     <TextInput field={socialMedia.linkedInUrl} label="LinkedIn" classItm="label-item" />
                     <TextInput field={socialMedia.twitterAcc} label="Twitter" classItm="label-item" />
                     <TextInput field={socialMedia.faceBookUrl} label="Facebook" clasclassItm="label-item" />
