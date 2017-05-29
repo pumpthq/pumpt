@@ -79,6 +79,7 @@ export default function() {
                 recentJob : onboardingState.jobTitle.value,
                 recentAnnualIncome : onboardingState.income.value,
                 recentAreaExperience : onboardingState.experience.value,
+								preferredCompanySize : onboardingState.companySize.value,
                 valueAssessments : onboardingState.valueAssessments
             }
 
