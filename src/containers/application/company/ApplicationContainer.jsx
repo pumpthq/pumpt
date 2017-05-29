@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import Wrapper from 'components/main/wrapper'
 import { HeaderMini } from 'components/main/header'
 import ScrollContainer from 'components/main/scrollContainer'
-import HeadingProgress from 'containers/application/headingProgress';
+import HeadingProgress from 'containers/application/company/headingProgress';
 
 import RecruiterForm from 'components/recruiters/Form';
 import RecruiterSummary from 'components/recruiters/Summary';

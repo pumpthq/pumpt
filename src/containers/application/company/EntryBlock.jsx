@@ -61,7 +61,6 @@ class EntryBlock extends Component {
                                         <HeadingProgress/>
 																				<br />
 																				<br />
-																				<ImportFromLinkedInButton isImporter={true}/>
 																			</Panel>
                                     <Panel paddingFalse>
                                         <SummaryHead />
