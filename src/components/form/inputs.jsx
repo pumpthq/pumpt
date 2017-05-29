@@ -156,17 +156,17 @@ export class Location extends Component {
 
 
 export const FieldArray = (props) => {
-    const { field, label } = props
+    const { field, label, classFA, classFABtn } = props
     const Item = props.component
     return (
-        <div>
-            <button type="button" onClick={() => {
+        <div className={classFA}>
+            <button type="button" className={classFABtn} onClick={() => {
               field.addField()    // pushes empty child field onto the end of the array
             }}><i/> Add {label}
             </button>
 
             {field.map((child, index) =>
-                <div key={index}>
+                <div key={index} className="field-array-items">
                     <Item field={child} />
                     <button type="button" onClick={() => {
                       field.removeField(index)  // remove from index
