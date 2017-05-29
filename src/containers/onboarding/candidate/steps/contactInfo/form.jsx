@@ -142,7 +142,7 @@ class ContactInfoForm extends Component {
                 </fieldset>
                 <fieldset className="form__row">
                     <OnboardingInput
-                        label="Location"
+                        label="Employment Location"
                         {...location}
                         error={location.touched && location.error}
                     />

@@ -57,7 +57,7 @@ export class To extends Component {
                 onClick={() => {
                     if (isEnabled) dispatch(showFieldOfExpertiseStep())
                 }}
-                textLabel='Field of Expertise'
+                textLabel='Area of Expertise'
                 textFilledWith={value}
             />
         )

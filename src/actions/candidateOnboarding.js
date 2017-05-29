@@ -20,6 +20,9 @@ import {
     SHOW_EXPERIENCE_STEP,
     SAVE_EXPERIENCE_DATA,
 
+		SHOW_COMPANY_SIZE_STEP,
+		SAVE_COMPANY_SIZE_DATA,
+
     SHOW_VALUES_STEP,
     SAVE_VALUES_DATA,
 
@@ -120,6 +123,17 @@ export const saveExperienceData = ({ experience }) => ({
     type : SAVE_EXPERIENCE_DATA,
     payload : {
         experience
+    }
+})
+
+export const showCompanySizeStep = () => ({
+    type : SHOW_COMPANY_SIZE_STEP
+})
+
+export const saveCompanySizeData = ({ companySize }) => ({
+    type : SAVE_COMPANY_SIZE_DATA,
+    payload : {
+        companySize
     }
 })
 

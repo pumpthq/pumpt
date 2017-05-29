@@ -12,6 +12,7 @@ import {
     SHOW_INCOME_STEP,
     SHOW_EXPERIENCE_STEP,
     SHOW_VALUES_STEP,
+    SHOW_COMPANY_SIZE_STEP,
     SHOW_SET_UP_PASSWORD_STEP
 } from './../../constants/candidateOnboarding'
 

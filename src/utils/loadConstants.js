@@ -32,6 +32,9 @@ export default () =>
             data.ANNUAL_INCOME_DROPDOWN_DATA.forEach(el => {
                 ANNUAL_INCOME_DROPDOWN_DATA.push(el);
             });
+            data.COMPANY_SIZE_DROPDOWN_DATA.forEach(el => {
+                COMPANY_SIZE_DROPDOWN_DATA.push(el);
+            });
             data.EMPLOYEMENTS_DROPDOWN_DATA.forEach(el => {
                 EMPLOYEMENTS_DROPDOWN_DATA.push(el);
             });

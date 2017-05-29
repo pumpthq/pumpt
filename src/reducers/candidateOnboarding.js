@@ -20,6 +20,9 @@ import {
     SHOW_VALUES_STEP,
     SAVE_VALUES_DATA,
 
+    SHOW_COMPANY_SIZE_STEP,
+    SAVE_COMPANY_SIZE_DATA,
+
 		SHOW_APPLICATION_STEP,
 		//SAVE...
 
@@ -124,6 +127,17 @@ export default (state = defaultState, action) => {
             return saveStep({
                 state,
                 step: SHOW_VALUES_STEP,
+                payload,
+            });
+        case SHOW_COMPANY_SIZE_STEP :
+            return {
+                ...state,
+                step,
+            };
+        case SAVE_COMPANY_SIZE_DATA :
+            return saveStep({
+                state,
+                step: SHOW_COMPANY_SIZE_STEP,
                 payload,
             });
 

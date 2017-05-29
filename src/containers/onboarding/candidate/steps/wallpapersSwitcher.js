@@ -10,6 +10,7 @@ import {
     SHOW_INCOME_STEP,
     SHOW_EXPERIENCE_STEP,
     SHOW_VALUES_STEP,
+		SHOW_COMPANY_SIZE_STEP,
     SHOW_SET_UP_PASSWORD_STEP
 } from './../../../../constants/candidateOnboarding'
 
@@ -53,6 +54,9 @@ export default class WallpapersSwitcher extends Component {
                 break
             case SHOW_VALUES_STEP :
                 type = 'sixth'
+                break
+            case SHOW_COMPANY_SIZE_STEP :
+                type = 'second'
                 break
             case SHOW_SET_UP_PASSWORD_STEP :
                 type = 'final'
