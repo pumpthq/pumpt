@@ -29,10 +29,6 @@ const defaultProps = {
             description: '{description}',
         }
     },
-    status: {
-        bookmarked: false,
-        approved: false,
-    },
     score: '{score}',
     backgroundTint: [50,50,50,.75],
 };
@@ -48,9 +44,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     postApprove: () => {
       dispatch(postApprove(ownProps._id))
   },
-    viewVacancy: () => {
-      dispatch(viewVacancy(ownProps._company, ownProps._vacancy))
-    }
+
 
   }
 }
@@ -119,7 +113,7 @@ export default class Summary extends Component {
     renderBookmarks() {
         const { candidate: { status }, addToBookmark } = this.props;
 
-        if (status.bookmarked === null && status.approved === null) {
+        if (status === "new") {
             return (
                 <a onClick={addToBookmark} className="button button_type_icons col-xs-12">
                     <BookmarkOpen /> BOOKMARK
@@ -130,7 +124,7 @@ export default class Summary extends Component {
     renderApproveReject() {
         const { candidate: { status }, postReject, postApprove } = this.props;
 
-        if (status.approved === null) {
+        if (status === "new" || status === "bookmarked") {
             return (
                 <div>
                     <a onClick={postApprove} className="mdl_button button col-xs-12">
@@ -142,7 +136,7 @@ export default class Summary extends Component {
         }
     }
     render() {
-        const { viewVacancy, _vacancy, _company } = this.props;
+        const { _vacancy, _company, _id } = this.props;
         return (
             <div className="slider__item">
                 <div className="mdl-card card">
@@ -152,11 +146,12 @@ export default class Summary extends Component {
                         <div className="mdl-card__actions card__actions">
                             {/* <div className="mdl-layout-spacer" /> */}
                             <div>
-                                <Link className="link" to={`candidate/matches/company/${_company}/vacancy/${_vacancy}`}>
+                                <Link className="link" to={`candidate/matches/match/${_id}/company/${_company}/vacancy/${_vacancy}`}>
                                     View Full Description
                                 </Link>
                             </div>
-
+                            {this.renderBookmarks()}
+                            {this.renderApproveReject()}
                         </div>
                     </form>
                 </div>

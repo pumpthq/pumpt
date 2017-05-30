@@ -5,21 +5,21 @@ import MatchSummary from 'components/matches/Summary'
 import './style.less'
 
 @connect( state => ({
-    items: state.candidateMatches.all,
+    items: state.candidateMatches.matches.filter(match=>match.vacancy.status=='new'),
     component: MatchSummary,
     placeholder: AllPlaceholder,
 }) )
 export class AllMatchesSlider extends CardSlider {}
 
 @connect( state => ({
-    items: state.candidateMatches.bookmarked,
+    items: state.candidateMatches.matches.filter(match=>match.vacancy.status=='bookmarked'),
     component: MatchSummary,
     placeholder: BookmarkedPlaceholder,
 }) )
 export class BookmarkedMatchesSlider extends CardSlider {}
 
 @connect( state => ({
-    items: state.candidateMatches.notInterested,
+    items: state.candidateMatches.matches.filter(match=>match.vacancy.status=='rejected'),
     component: MatchSummary,
     placeholder: NotInterestedPlaceholder,
 }) )

@@ -13,10 +13,10 @@ module.exports = {
     childRoutes: [
         { path: 'edit', component: EditContainer },
         { path: 'company/:id', component: (props) => <CompanyContainer id={props.params.id} /> },
-        { path: 'company/:cid/vacancy/:id', component: (props) => <VacancyContainer cid={props.params.cid} id={props.params.id} /> },
+        { path: 'match/:mid/company/:cid/vacancy/:id', component: (props) => <VacancyContainer mid={props.params.mid} cid={props.params.cid} id={props.params.id} /> },
         { path: 'all', component: AllMatchesSlider },
         { path: 'bookmarked', component: BookmarkedMatchesSlider },
         { path: 'not-interested', component: NotInterestedMatchesSlider },
-        { path: 'changePass', component: ChangePasswordContainer }
+        { path: 'changePass', component: ChangePasswordContainer },
     ]
 };

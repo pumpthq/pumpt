@@ -77,18 +77,14 @@ const defaultProps = {
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     addToBookmark: () => {
-      dispatch(postBookmark(ownProps._id))
+        dispatch(postBookmark(ownProps._id))
     },
     postReject: () => {
-      dispatch(postReject(ownProps._id))
-  },
+        dispatch(postReject(ownProps._id))
+    },
     postApprove: () => {
-      dispatch(postApprove(ownProps._id))
-  },
-    hideFullDescription: () => {
-      dispatch(hideFullDescription(ownProps._id))
-    }
-
+        dispatch(postApprove(ownProps._id))
+    },
   }
 }
 
@@ -97,7 +93,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 export default class Profile extends Component {
 
     renderMatchInformation() {
-        const { company, title, state, match, salary, experience, employment, backgroundTint, degree } = this.props
+        const { company, title, state, salary, experience, employment, backgroundTint, degree } = this.props
         const { name, logo, background } = company
         return (
             <div className="summary-head" style={ tintedBackground(background,...backgroundTint) }>
@@ -190,23 +186,8 @@ export default class Profile extends Component {
         );
     }
 
-
-
-    renderBookmarks() {
-        const { status, addToBookmark } = this.props
-
-
-        if (status.bookmarked === undefined && status.approved === undefined) {
-            return (
-                <a onClick={addToBookmark} className="button button_type_icons">
-
-                </a>
-            )
-        }
-    }
-
     render() {
-        const { children, additionElements, postReject, postApprove, hideFullDescription } = this.props
+        const { children } = this.props
         return (
                     <div>
                         <div className="mdl-card card card_state_open card_state_scroll">
@@ -218,22 +199,8 @@ export default class Profile extends Component {
 
                             {this.renderRequirements()}
 
-                            <form className="card__actions-wrapper">
-
-                                <div className="mdl-card__actions card__actions">
-                                    <ButtonApply onClick={postApprove} icon={<ApproveOpen className="icon_inline invisible-tablet"/>}>
-                                        Apply
-                                    </ButtonApply>
-                                    <ButtonLink onClick={postReject} icon={<Decline className="icon_inline invisible-tablet"/>}>
-                                        Not interested
-                                    </ButtonLink>
-                                    <div className="mdl-layout-spacer"/>
-                                    {this.renderBookmarks()}
-                                </div>
-                            </form>
+                            {children}
                         </div>
-                        {additionElements}
-                        {children}
                     </div>
         )
     }

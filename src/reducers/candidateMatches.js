@@ -21,11 +21,11 @@ import {
 } from './../constants/candidateMatches';
 
 const defaultState = {
-    all: [],
-    bookmarked: [],
-    notInterested: [],
-    approved: [],
-    activeTab: ALL_TAB,
+    // all: [],
+    // bookmarked: [],
+    // notInterested: [],
+    // approved: [],
+    matches: [],
     companies: [],
     vacancies: [],
     candidate: {
@@ -38,7 +38,7 @@ const defaultState = {
 
 export default (state = defaultState, action) => {
     const { type, payload } = action;
-    let all, bookmarked, notInterested, matchings, approved
+    // let all, bookmarked, notInterested, matchings, approved
     switch (type) {
         case FETCH_CANDIDATE_SUCCEEDED : {
             const { candidate } = payload
@@ -48,71 +48,58 @@ export default (state = defaultState, action) => {
             const { candidate } = payload
             return { ...state, candidate }
         }
-        case MATCHES_FETCH_SUCCEEDED :
-              all = []
-              , bookmarked = []
-              , notInterested = []
-              , approved = []
+        case MATCHES_FETCH_SUCCEEDED : {
+            //   all = []
+            //   , bookmarked = []
+            //   , notInterested = []
+            //   , approved = []
 
-            payload.matches.forEach(match => {
-                var card = match.vacancy
-                // ⚠️ TODO: review specs how cards are filtered into matches-tabs
-                if(card.status.approved !== null) {
-                    if (!card.status.approved) notInterested.push(match)
-                    else approved.push(card)
-                }
-                else if(card.status.bookmarked !== null && card.status.bookmarked) bookmarked.push(match)
-                else all.push(match)
-            })
+            // payload.matches.forEach(match => {
+            //     var card = match.vacancy
+            //     // ⚠️ TODO: review specs how cards are filtered into matches-tabs
+            //     if(card.status.approved !== null) {
+            //         if (!card.status.approved) notInterested.push(match)
+            //         else approved.push(card)
+            //     }
+            //     else if(card.status.bookmarked !== null && card.status.bookmarked) bookmarked.push(match)
+            //     else all.push(match)
+            // })
+
+            const { matches } = payload
 
             return {
                 ...state,
-                all,
-                bookmarked,
-                notInterested
+                matches
             }
+        }
 
-        case BOOKMARK_POST_SUCCEEDED: // then move newly bookmarked matching to bookmark collection in state
-            all = _.clone(state.all)
-
-            matchings = _.remove(all, matching => matching.id == payload.id)
-            bookmarked = state.bookmarked.concat(matchings)
-
-            matchings[0].status.bookmarked = true
-
-            return { ...state, all, bookmarked }
-
-        case REJECT_POST_SUCCEEDED: // then move newly rejected matching to notInterested collection in state
-            all = _.clone(state.all)
-            bookmarked = _.clone(state.bookmarked)
-
-            matchings = _.remove(all, matching => matching.id == payload.id)
-
-            if(matchings.length === 0) { //could not find matching in 'all', so it should be in 'bookmarked'
-                matchings = _.remove(bookmarked, matching => matching.id == payload.id)
+        case BOOKMARK_POST_SUCCEEDED: {// then move newly bookmarked matching to bookmark collection in state
+            let matches = _.clone(state.matches)
+            _.find(matches, o => o._id == payload.id).vacancy.status = 'bookmarked'
+            return {
+                ...state,
+                matches
             }
+        }
 
-            matchings[0].status.approved = false
-
-            notInterested = state.notInterested.concat(matchings)
-
-            return { ...state, all, bookmarked, notInterested }
-
-        case APPROVE_POST_SUCCEEDED: // then move newly rejected matching to notInterested collection in state
-            all = _.clone(state.all)
-            bookmarked = _.clone(state.bookmarked)
-
-            matchings = _.remove(all, matching => matching.id == payload.id)
-
-            if(matchings.length === 0) { //could not find matching in 'all', so it should be in 'bookmarked'
-                matchings = _.remove(bookmarked, matching => matching.id == payload.id)
+        case REJECT_POST_SUCCEEDED: {// then move newly rejected matching to notInterested collection in state
+            let matches = _.clone(state.matches)
+            _.find(matches, o => o._id == payload.id).vacancy.status = 'rejected'
+            return {
+                ...state,
+                matches,
             }
+        }
 
-            matchings[0].status.approved = true
-
-            approved = state.notInterested.concat(matchings)
-
-            return { ...state, all, bookmarked, approved }
+        case APPROVE_POST_SUCCEEDED: {// then move newly rejected matching to notInterested collection in state
+            let matches = _.clone(state.matches)
+            _.find(matches, o => o._id == payload.id).vacancy.status = 'approved'
+            return {
+                ...state,
+                matches,
+                lastApproved: (new Date),
+            }
+        }
 
         case FETCH_COMPANY_SUCCEEDED: {
             const { company } = payload;
