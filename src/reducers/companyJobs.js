@@ -43,28 +43,33 @@ import {
     UPDATE_RECRUITER_SUCCEEDED,
     UPDATE_RECRUITER_FAILED,
 
-     DESCRIPTION_STEP,
-     SHOW_DESCRIPTION_STEP,
-     SAVE_DESCRIPTION_DATA,
-     CLOSE_DESCRIPTION_STEP,
+    REJECT_POST_SUCCEEDED,
+    APPROVE_POST_SUCCEEDED,
 
-     RESPONSIBILITIES_STEP,
-     SHOW_RESPONSIBILITIES_STEP,
-     SAVE_RESPONSIBILITIES_DATA,
-     CLOSE_RESPONSIBILITIES_STEP,
 
-     SKILLS_AND_REQUIREMENTS_STEP,
-     SHOW_SKILLS_AND_REQUIREMENTS_STEP,
-     SAVE_SKILLS_AND_REQUIREMENTS_DATA,
-     CLOSE_SKILLS_AND_REQUIREMENTS_STEP,
-
-     SAVE_SUMMARY_DATA,
-     SHOW_SUMMARY_HEAD_STANDARD,
-     SHOW_SUMMARY_HEAD_EDIT,
-     SAVE_SUMMARY_DATA_SUCCEEDED,
+    OPEN_APPROVE_AND_EMAIL,
+    //  DESCRIPTION_STEP,
+    //  SHOW_DESCRIPTION_STEP,
+    //  SAVE_DESCRIPTION_DATA,
+    //  CLOSE_DESCRIPTION_STEP,
+     //
+    //  RESPONSIBILITIES_STEP,
+    //  SHOW_RESPONSIBILITIES_STEP,
+    //  SAVE_RESPONSIBILITIES_DATA,
+    //  CLOSE_RESPONSIBILITIES_STEP,
+     //
+    //  SKILLS_AND_REQUIREMENTS_STEP,
+    //  SHOW_SKILLS_AND_REQUIREMENTS_STEP,
+    //  SAVE_SKILLS_AND_REQUIREMENTS_DATA,
+    //  CLOSE_SKILLS_AND_REQUIREMENTS_STEP,
+     //
+    //  SAVE_SUMMARY_DATA,
+    //  SHOW_SUMMARY_HEAD_STANDARD,
+    //  SHOW_SUMMARY_HEAD_EDIT,
+    //  SAVE_SUMMARY_DATA_SUCCEEDED,
 
      SET_DEFAULT_STATE,
-     SET_DEFAULT_NEW_JOB_STATE,
+    //  SET_DEFAULT_NEW_JOB_STATE,
 } from './../constants/companyJobs';
 
 import {
@@ -285,6 +290,33 @@ export default (state = defaultState, action) => {
             return {
                 ...state,
                 jobs,
+            }
+        }
+
+        case REJECT_POST_SUCCEEDED: {// then move newly rejected matching to notInterested collection in state
+            let matches = _.clone(state.matches)
+            _.find(matches, o => o._id == payload.id).candidate.status = 'rejected'
+            return {
+                ...state,
+                matches,
+            }
+        }
+
+        case APPROVE_POST_SUCCEEDED: {// then move newly rejected matching to notInterested collection in state
+            let matches = _.clone(state.matches)
+            _.find(matches, o => o._id == payload.id).candidate.status = 'approved'
+            return {
+                ...state,
+                matches,
+                lastApproved: (new Date),
+            }
+        }
+
+        case OPEN_APPROVE_AND_EMAIL: {
+            const match = _.find(state.matches, o => o._id === payload.id);
+            return {
+                ...state,
+                lastOpenApproved: {...match}
             }
         }
 
