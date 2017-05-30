@@ -23,6 +23,8 @@ import {
 
     RESOLVE_USER_SUCCEEDED,
 
+    FINISH_APPLICATION_SUCCEEDED
+
     // FORGOT_PASSWORD,
 } from './../constants/authorization';
 import {
@@ -143,3 +145,16 @@ export const resendToken = (email) => ({
 export const resendTokenSucceeded = () => ({
     type: RESEND_TOKEN_SUCCEEDED,
 });
+
+export const finishApplication = () => ({
+    type: API,
+    payload: {
+        method: 'POST',
+        url:`/users/finish`,
+        success: finishApplicationSucceeded
+    }
+})
+
+export const finishApplicationSucceeded = () => ({
+    type: FINISH_APPLICATION_SUCCEEDED,
+})

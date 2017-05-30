@@ -2,28 +2,28 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 
-import { H1 } from './../../components/main/heading'
-import Button from './../../components/main/button'
+import { H1 } from 'components/main/heading'
+import Button from 'components/main/button'
+import { finishApplication } from 'actions/authorization'
 
-import SESSION from '../../constants/session';
 @connect(
     function mapStateToProps(state, ownProps) {
-        const { isNotApproved } = state.authorization
+        const { isNotApproved, isFinished } = state.authorization
         return {
-            isNotApproved
+            isNotApproved, isFinished
         }
     }
 )
 class HeadingProgress extends Component {
-    handleClick = () => {
-        push('candidate/matches/all');
+    onClickGetMatches = () => {
+        push('recruiter/jobs/all');
     };
 
     render() {
         const {
             isNotApproved,
             isFilled,
-            onClickGetMatches
+            isFinished,
         } = this.props;
 
         // const isApproved = SESSION[0].user && SESSION[0].user.isApproved;
@@ -38,7 +38,7 @@ class HeadingProgress extends Component {
                             type='submit'
                             typeColored
                             buttonSize='l'
-                            onClick={onClickGetMatches}
+                            onClick={this.onClickGetMatches}
                         >
                             Get Matches
                         </Button>
@@ -51,7 +51,7 @@ class HeadingProgress extends Component {
                         type='submit'
                         typeColored
                         buttonSize='l'
-                        onClick={onClickGetMatches}
+                        onClick={this.onClickGetMatches}
                     >
                         Get Matches
                     </Button>
@@ -72,7 +72,7 @@ class HeadingProgress extends Component {
                         type='submit'
                         typeColored
                         buttonSize='l'
-                        onClick={onClickGetMatches}
+                        onClick={this.onClickGetMatches}
                     >
                         Get Matches
                     </Button>
@@ -80,21 +80,32 @@ class HeadingProgress extends Component {
             )
         }
         // Default view. if profile is NOT approved & NOT filled. There is no button "Get Matches".
+        if(!isFinished) {
+            return (
+                <div className="text-center">
+                    <H1 noGutter typeFour class='row'>Just a couple more steps.</H1>
+                    <p class="text text_after_big-head text_size_xs">
+    								Please take this opportunity to tell us more about your company and what makes your culture unique.
+                    </p>
+
+                  <Button
+                    type='submit'
+                    typeColored
+                    buttonSize='l'
+                    onClick={()=>dispatch(finishApplication())}
+                  >
+                    Finished ?
+                  </Button>
+                </div>
+            )
+        }
+
         return (
             <div className="text-center">
-                <H1 noGutter typeFour class='row'>Just a couple more steps.</H1>
+                <H1 noGutter typeFour class='row'>Your Application is awaiting approval</H1>
                 <p class="text text_after_big-head text_size_xs">
-								Please take this opportunity to tell us more about your company and what makes your culture unique.
+                    Soon you will be able to access your matches!
                 </p>
-
-              <Button
-                type='submit'
-                typeColored
-                buttonSize='l'
-                onClick={onClickGetMatches}
-              >
-                Finished ?
-              </Button>
             </div>
         )
     }

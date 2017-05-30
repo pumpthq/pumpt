@@ -18,7 +18,7 @@ import Footer from 'components/main/footer/footer';
 import ApplicationSuccessDialog from 'components/application/ApplicationSuccessDialog'
 
 function mapStateToProps(state, ownProps) {
-    return { candidate: state.candidateMatches.candidate, authorization: state.authorization }
+    return { candidate: state.candidateMatches.candidate, authorization: state.authorization,  }
 }
 
 @connect(mapStateToProps)
@@ -38,7 +38,7 @@ export default class ApplicationContainer extends Component {
 
 
     render() {
-        const { candidate, dispatch } = this.props
+        const { candidate, dispatch, authorization } = this.props
 
         return (
             <Wrapper id='onboarding-candidate'>
@@ -81,7 +81,7 @@ export default class ApplicationContainer extends Component {
                 {/* ⚠️ temporary button to open dialog */}
                 <button onClick={this.openDialog}>open application success dialog {JSON.stringify(this.state.lastApproved)}</button>
 
-                <ApplicationSuccessDialog trigger={this.state.lastApproved} />
+                <ApplicationSuccessDialog trigger={authorization.lastFinished} />
 
             </Wrapper>
         )

@@ -12,6 +12,7 @@ import {
     CHANGE_PASSWORD_SUCCEEDED,
     FORGOT_PASSWORD_SUCCEEDED,
     USER_LOGOUT_SUCCEEDED,
+    FINISH_APPLICATION_SUCCEEDED,
 } from './../constants/authorization';
 
 const defaultState = {
@@ -84,6 +85,14 @@ export default (state = defaultState, action) => {
             return {
                 ...state,
                 lastChangePass: (new Date)
+            };
+        }
+        case FINISH_APPLICATION_SUCCEEDED : {
+
+            return {
+                ...state,
+                isFinished: true,
+                lastFinished: (new Date),
             };
         }
         default :
