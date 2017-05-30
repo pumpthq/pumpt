@@ -39,16 +39,22 @@ const AllPlaceholder = (props) => {
 
 const BookmarkedPlaceholder = (props) => {
     return (
-        <div>
-            YOU HAVE NO BOOKMARKED MATCHES
+        <div className="welcome-to-matches-popup">
+            <h3>No Saved Jobs...Yet</h3>
+            <div className="message">
+						Bookmark any jobs you're intersted in and they will show up here.
+						</div>
         </div>
     )
 }
 
 const NotInterestedPlaceholder = (props) => {
     return (
-        <div>
-            YOU HAVE NO REJECTED MATCHES
+        <div className="welcome-to-matches-popup">
+            <h3>Your Rejected Jobs</h3>
+            <div className="message">
+						We'll keep track of jobs you are not interested in. We use them to give you better matches in the future, and we'll also keep them here if you ever change your mind.
+						</div>
         </div>
     )
 }
