@@ -81,7 +81,7 @@ export default class ApplicationContainer extends Component {
                 {/* ⚠️ temporary button to open dialog */}
                 <button onClick={this.openDialog}>open application success dialog {JSON.stringify(this.state.lastApproved)}</button>
 
-                <ApplicationSuccessDialog lastApproved={this.state.lastApproved} />
+                <ApplicationSuccessDialog trigger={this.state.lastApproved} />
 
             </Wrapper>
         )

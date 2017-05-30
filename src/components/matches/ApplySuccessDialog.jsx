@@ -19,7 +19,7 @@ export default class ApplySuccessDialog extends Component {
     };
 
     componentWillReceiveProps(nextProps) {
-        if(nextProps.lastApproved !== this.props.lastApproved) {
+        if(nextProps.trigger !== this.props.trigger) {
             this.handleOpen();
         }
     }

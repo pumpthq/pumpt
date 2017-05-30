@@ -63,7 +63,7 @@ export default class VacancyContainer extends Component {
                     <CompanySummary {...this.props.company} />
 
 
-                    <ApplySuccessDialog lastApproved={this.props.lastApproved} onClose={browserHistory.goBack}/>
+                    <ApplySuccessDialog trigger={this.props.lastApproved} onClose={browserHistory.goBack}/>
             </VerticalScroller>
 
         )
