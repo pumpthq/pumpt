@@ -62,7 +62,7 @@ export default (state = defaultState, action) => {
                 ...payload,
             }
         }
-        
+
         case FORGOT_PASSWORD_SUCCEEDED : {
             return {
                 ...state,
@@ -80,8 +80,11 @@ export default (state = defaultState, action) => {
         //     return defaultState;
 
         case CHANGE_PASSWORD_SUCCEEDED : {
-            alert('You successfully changed password.');
-            return state;
+
+            return {
+                ...state,
+                lastChangePass: (new Date)
+            };
         }
         default :
             return state;
