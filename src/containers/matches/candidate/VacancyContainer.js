@@ -7,6 +7,8 @@ import { fetchVacancy, fetchCompany } from 'actions/candidateMatches'
 import { postBookmark, postReject, postApprove } from 'actions/candidateMatches'
 import { browserHistory } from 'react-router'
 import ApplySuccessDialog from 'components/matches/ApplySuccessDialog'
+import RejectSuccessDialog from 'components/matches/RejectSuccessDialog'
+import BookmarkSuccessDialog from 'components/matches/BookmarkSuccessDialog'
 
 import VerticalScroller from 'components/VerticalScroller'
 import MatchCandidateActions from 'components/matches/CandidateActions'
@@ -19,9 +21,11 @@ const mapStateToProps = (state, ownProps) => {
     const vacancy = find(state.candidateMatches.vacancies, card => card._id === ownProps.id)
     const company = find(state.candidateMatches.companies, card => card._id === ownProps.cid)
     const lastApproved = state.candidateMatches.lastApproved;
+    const lastRejected = state.candidateMatches.lastRejected;
+    const lastBookmarked = state.candidateMatches.lastBookmarked;
 
     if(vacancy) vacancy.company = company
-    return { match, vacancy, company, lastApproved }
+    return { match, vacancy, company, lastApproved, lastRejected, lastBookmarked }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
@@ -62,8 +66,10 @@ export default class VacancyContainer extends Component {
                     </VacancyProfile>
                     <CompanySummary {...this.props.company} />
 
-
+                    <RejectSuccessDialog trigger={this.props.lastRejected} onClose={browserHistory.goBack}/>
                     <ApplySuccessDialog trigger={this.props.lastApproved} onClose={browserHistory.goBack}/>
+                    <BookmarkSuccessDialog trigger={this.props.lastBookmarked} onClose={browserHistory.goBack}/>
+
             </VerticalScroller>
 
         )

@@ -150,8 +150,6 @@ export default class Summary extends Component {
                                     View Full Description
                                 </Link>
                             </div>
-                            {this.renderBookmarks()}
-                            {this.renderApproveReject()}
                         </div>
                     </form>
                 </div>

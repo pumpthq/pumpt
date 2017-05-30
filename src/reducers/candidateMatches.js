@@ -78,7 +78,8 @@ export default (state = defaultState, action) => {
             _.find(matches, o => o._id == payload.id).vacancy.status = 'bookmarked'
             return {
                 ...state,
-                matches
+                matches,
+                lastBookmarked: (new Date),
             }
         }
 
@@ -88,6 +89,7 @@ export default (state = defaultState, action) => {
             return {
                 ...state,
                 matches,
+                lastRejected: (new Date),
             }
         }
 
