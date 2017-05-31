@@ -70,6 +70,10 @@ import {
     UPDATE_RECRUITER_SUCCEEDED,
     UPDATE_RECRUITER_FAILED,
 
+    REJECT_POST_SUCCEEDED,
+    APPROVE_POST_SUCCEEDED,
+
+    OPEN_APPROVE_AND_EMAIL,
 
 } from './../constants/companyJobs';
 import { API } from '../constants/actionTypes'
@@ -499,6 +503,39 @@ export const openJobSucceeded = id => data => ({
     type: OPEN_JOB_SUCCEEDED,
     payload: { id },
 });
+
+
+export const postReject = (matchingId) => ({
+    type : API,
+    payload : {
+        url : `/matches/reject/${matchingId}`,
+        success: postRejectSucceeded(matchingId),
+    }
+})
+
+export const postRejectSucceeded = id => data => ({
+    type: REJECT_POST_SUCCEEDED,
+    payload: { id }
+})
+
+export const openApprove = (id) => ({
+    type: OPEN_APPROVE_AND_EMAIL,
+    payload: { id }
+})
+
+export const postApprove = (matchingId) => ({
+    type : API,
+    payload : {
+        url : `/matches/approve/${matchingId}`,
+        success: postApproveSucceeded(matchingId),
+    }
+})
+
+export const postApproveSucceeded = id => data => ({
+    type: APPROVE_POST_SUCCEEDED,
+    payload: { id }
+})
+
 
 
 //

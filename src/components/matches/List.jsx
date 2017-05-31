@@ -1,20 +1,25 @@
 import React, {Component, PropTypes} from 'react';
 import { Link, browserHistory } from 'react-router'
+import { find } from 'lodash'
 
+import MatchRecruiterActions from 'components/matches/RecruiterActions'
 const propTypes = {};
 const defaultProps = {
-    _id: '{_id}',
-    title: '{title}',
-    candidates: {
-        briefs: [],
-    }
+    job: {
+        _id: '{_id}',
+        title: '{title}',
+        candidates: {
+            briefs: [],
+        }
+    },
+    matches: []
 };
 
 
 export default class MatchesList extends Component {
 
     render() {
-        const {title, candidates, _id} = this.props
+        const {job: {title, candidates, _id}, matches} = this.props
         return (
 
             <div className="mdl-card card card_type_mini card_state_open">
@@ -23,22 +28,42 @@ export default class MatchesList extends Component {
                 <h2>{ title }</h2>
                 <CardDivider />
 
-                <h4>{ candidates.briefs.length } MATCHES</h4>
+                <h4>{ matches.length } MATCHES</h4>
 
-                { candidates.briefs && candidates.briefs.map( candidate =>
-                    <div>
-                        {candidate.firstName}
-                        {candidate.lastName}
-                        <img src={candidate.avatar} />
-
-                        <Link className="link" to={`recruiter/jobs/${_id}/candidates/${candidate._id}`}>
-                            View Candidate Details
-                        </Link>
-                        <CardDivider />
-                    </div>
+                { matches.map( match =>
+                    <CandidateItem key={match._id} match={match} />
                 )}
             </div>
         )
+    }
+}
+
+const CandidateItem = (props) => {
+    const {match} = props
+    const {candidate: {status, brief:{firstName, lastName, avatar}}} = match
+    return (
+        <div className="col-xs-12">
+
+            <h4>status: {status}</h4>
+            <h4>{firstName} {lastName}</h4>
+            <img src={avatar} className="col-xs-4"/>
+
+            <MatchRecruiterActions match={match} />
+
+            <Link className="link" to={`recruiter/jobs/${match._vacancy}/candidates/${match._candidate}`}>
+                View Candidate Details
+            </Link>
+
+            <CardDivider />
+
+        </div>
+
+    )
+}
+
+CandidateItem.defaultProps = {
+    match: {
+        candidate: {}
     }
 }
 
