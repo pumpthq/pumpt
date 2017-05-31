@@ -31,7 +31,7 @@ export default class MatchesList extends Component {
                 <h4>{ matches.length } MATCHES</h4>
 
                 { matches.map( match =>
-                    <CandidateItem key={match._id} match={match)} />
+                    <CandidateItem key={match._id} match={match} />
                 )}
             </div>
         )
