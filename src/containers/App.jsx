@@ -24,38 +24,12 @@ const defaultProps = {
     children: '',
 };
 
-export const mapStateToProps = (state) =>
-     ({ state })
-;
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        onMount: () => dispatch(resolveUser())
-    }
-}
-
-@connect(mapStateToProps, mapDispatchToProps)
 class App extends Component {
-
-    componentWillMount() {
-        // if (SESSION.length && SESSION[0].message) {
-        //     const { message: { value } } = SESSION[0];
-        //     value && alert(value);
-        // }
-    }
-
-    componentDidMount() {
-        this.props.onMount()
-        // this.props.cleanMessage();
-        // if (SESSION.length && SESSION[0].message) {
-        //     SESSION[0].message = undefined;
-        // }
-    }
 
     render() {
         return (
             <MuiThemeProvider>
-                <div className="app">
+                <div className="app page wall wall_type_revert wall_image_second">
                     {this.props.children}
                 </div>
             </MuiThemeProvider>

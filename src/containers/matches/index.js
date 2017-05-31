@@ -7,9 +7,11 @@ import EditContainer from './candidate/EditContainer'
 
 import ChangePasswordContainer from 'containers/ChangePasswordContainer'
 
+import RequireAuth from 'wrappers/RequireAuth'
+
 module.exports = {
     path: 'candidate/matches',
-    component: MatchesContainer,
+    component: RequireAuth(MatchesContainer),
     childRoutes: [
         { path: 'edit', component: EditContainer },
         { path: 'company/:id', component: (props) => <CompanyContainer id={props.params.id} /> },
