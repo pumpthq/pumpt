@@ -36,6 +36,25 @@ Because `pm2` will run our instances as separate child processes, errors and oth
 
 To print production logs into the console, run `pm2 logs`
 
+## Requiring authentication for specific components
+The component wrapper/decorator defined in `src/wrappers/RequireAuth.jsx` is used to ensure that a user is logged in before rendering the wrapped component.
+
+Here's an example of usage within a `react-router` definition. It will add the login requirement to accessing the route `/`, which renders the `App` component:
+
+```javascript
+import RequireAuth from 'src/wrappers/RequireAuth.jsx'
+import App from 'src/containers/App.jsx'
+
+const rootRoute = {
+    path: '/',
+    component: RequireAuth(App), //require login to render App
+}
+
+/* ... */
+```
+
+
+
 ## Requirements
 
 Node `^6.8`, NPM `^3.8`
