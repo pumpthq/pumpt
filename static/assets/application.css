@@ -7,7 +7,7 @@ body {
 
 .btn {
   font-size: 16px;
-  letter-spacing: 0.125em;
+  /*letter-spacing: 0.125em;*/
 }
 
 .white-btn{
@@ -48,14 +48,14 @@ p {
 
 h1 {
 	font-family: 'Montserrat', sans-serif;
-  font-size: 32px;
+  font-size: 38px;
   font-weight: 700;
 	color:#fff;
 }
 
 h2 {
-  font-size: 20px;
-  font-weight: 800;
+  font-size: 26px;
+  font-weight: 400;
 	font-family: 'Source Sans Pro', sans-serif;
 	color:#fff;
 	line-height: 1.4;
@@ -139,7 +139,12 @@ section {
 .navbar-default{
 	background-color:inherit;
 	border-color:inherit;
+	    font-size: 18px;
 	padding:0px 100px;
+}
+
+.navbar-default li a:hover{
+	    color: white !important;
 }
 
 .navbar-brand img{
