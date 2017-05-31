@@ -7,7 +7,8 @@ import IconPhoto from 'components/icons/photo'
 
 export default class RecruiterSummary extends Component {
     render() {
-        const { recruiter: { firstName, lastName, position } } = this.props
+        //const { recruiter: { firstName, lastName, position } } = this.props
+        const { recruiter: { fullName, position } } = this.props
         const { authorization: {email}, onEdit} = this.props
         return (
             <div class="summary-head">
@@ -21,7 +22,7 @@ export default class RecruiterSummary extends Component {
                             <div class="summary-head__title-block">
                                 <h2 class="mdl-card__title-text heading heading_type_two">
                                     <span class="ellipsis-text">
-                                        {firstName} {lastName}
+                                        {fullName}
                                     </span>
                                     <a class="link" onClick={onEdit}
                                        style={{

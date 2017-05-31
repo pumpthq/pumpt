@@ -54,7 +54,7 @@ export default class RecruiterHeaderMenu extends Component {
                 ]}
                 addition={
                     <HeaderDropDownMenu
-                        userName={`${recruiter.firstName} ${recruiter.lastName} @ ${company.name}`}
+                        userName={`${recruiter.fullName} @ ${company.name}`}
                         userAvatar={company.logo}
                         progress={company.fillProgress}
                         linkTo={"/recruiter/edit"}
