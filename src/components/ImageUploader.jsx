@@ -5,6 +5,7 @@ import uuid from 'uuid'
 
 import {API_URL,API_IMAGES} from 'constants/api'
 import {uploadImage} from 'actions/upload'
+import {apiImage} from 'components/helpers'
 
 @connect()
 export default class ImageUploader extends Component {
@@ -40,7 +41,7 @@ export default class ImageUploader extends Component {
         const inputId = uuid.v4()
 
         if (imageId) {
-            const imageUrl = `${API_URL}${API_IMAGES}/${imageId}`
+            const imageUrl = apiImage(imageId)
             const imageStyle = {
                 backgroundImage : `url(${imageUrl})`,
                 backgroundSize : 'cover',
