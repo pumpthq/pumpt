@@ -97,7 +97,7 @@ export default class HeaderMini extends Component {
                                 { profilePhoto ?
                                     <img
                                         class="image image_round image_size_xs"
-                                        src={`${API_URL}${API_IMAGES}/${profilePhoto}`}
+                                        src={profilePhoto}
                                     /> :
                                     <span class="image image_round image_size_xxl image_empty image_photo">
                                         <IconPerson />

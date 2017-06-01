@@ -13,6 +13,8 @@ import {
 } from './../../../../constants/routes';
 import { logOut } from './../../../../actions/authorization';
 
+import {apiImage} from 'components/helpers'
+
 const mapStateToProps = state => {
     return {candidate: state.candidateMatches.candidate}
 }
@@ -45,7 +47,7 @@ export default class CandidateHeaderMenu extends Component {
                 addition={
                     <HeaderDropDownMenu
                         userName={`${candidate.firstName} ${candidate.lastName}`}
-                        userAvatar={candidate.avatar}
+                        userAvatar={apiImage(candidate.avatar)}
                         progress={candidate.fillProgress}
                         linkTo={"/candidate/matches/edit"}
                     >

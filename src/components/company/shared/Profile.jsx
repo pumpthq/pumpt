@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import GlassDoorImage from 'img/glassdoor.jpg'
 
-import { tintedBackground } from 'components/helpers'
+import { tintedBackground, apiImage } from 'components/helpers'
 import { browserHistory } from 'react-router'
 
 const propTypes = {
@@ -120,7 +120,9 @@ export default class CompanyProfile extends Component {
         const { images } = this.props
         return (
             <div className="card__middle-block">
-                {images}
+                {images.map(image => {
+                    <img src={apiImage(image)} class="image" />
+                })}
             </div>
         );
     }
@@ -149,14 +151,14 @@ export default class CompanyProfile extends Component {
 
             <div className="mdl-card card card_type_mini card_state_open">
                 <a class="button_type_close" onClick={browserHistory.goBack}>×</a>
-                <div className="summary-hero" style={ tintedBackground(background,255,255,255,0) }></div>
+                <div className="summary-hero" style={ tintedBackground(apiImage(background),255,255,255,0) }></div>
                 <div className="summary-head">
 
                     <div className="summary-head__title mdl-card__title">
                         <div className="summary-head__title-item">
                             <div className="summary-head__title-column">
                                 <img className="image image_round image_size_xxl image_type_company-logo"
-                                src={logo}/>
+                                src={apiImage(logo)}/>
                                 <div className="summary-head__title-block">
                                     <h2 className="mdl-card__title-text heading heading_type_two">
                                         {name}

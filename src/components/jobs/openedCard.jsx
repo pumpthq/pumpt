@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { closeJob } from './../../actions/companyJobs';
 import { Link } from 'react-router'
 
+import { apiImage } from 'components/helpers'
+
 const propTypes = {
     title: PropTypes.string,
     state: PropTypes.string,
@@ -102,7 +104,7 @@ class Card extends Component {
                             <div className="col-xs-6">
                                 <div className="text-right">
                                     {candidates.briefs.map(candidate =>
-                                        <img className="image image_size_m image_round" src={candidate.avatar} />
+                                        <img className="image image_size_m image_round" src={apiImage(candidate.avatar)} />
                                     )}
                                 </div>
                             </div>

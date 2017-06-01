@@ -3,6 +3,9 @@ import { Link, browserHistory } from 'react-router'
 import { find } from 'lodash'
 
 import MatchRecruiterActions from 'components/matches/RecruiterActions'
+
+import { apiImage } from 'components/helpers'
+
 const propTypes = {};
 const defaultProps = {
     job: {
@@ -46,7 +49,7 @@ const CandidateItem = (props) => {
 
             <h4>status: {status}</h4>
             <h4>{firstName} {lastName}</h4>
-            <img src={avatar} className="col-xs-4"/>
+            <img src={apiImage(avatar)} className="col-xs-4"/>
 
             <MatchRecruiterActions match={match} />
 

@@ -17,6 +17,8 @@ import StepProgress from 'components/application/stepProgress';
 import Footer from 'components/main/footer/footer';
 import ApplicationSuccessDialog from 'components/application/ApplicationSuccessDialog'
 
+import {apiImage} from 'components/helpers'
+
 function mapStateToProps(state, ownProps) {
     return { candidate: state.candidateMatches.candidate, authorization: state.authorization,  }
 }
@@ -47,7 +49,7 @@ export default class ApplicationContainer extends Component {
                         <div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
                             <HeaderMini
                                 class="header_small"
-                                profilePhoto={candidate.avatar}
+                                profilePhoto={apiImage(candidate.avatar)}
                                 logo={logoImage}
                                 name={`${candidate.firstName} ${candidate.lastName}`}
                                 progress={candidate.fillProgress}

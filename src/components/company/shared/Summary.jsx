@@ -7,6 +7,8 @@ import { find } from 'lodash'
 import { dispatchProp } from 'components/helpers'
 import { viewCompany } from 'actions/candidateMatches'
 
+import { apiImage } from 'components/helpers'
+
 const propTypes = {
     // name: PropTypes.string,
     // logo: PropTypes.string,
@@ -114,7 +116,7 @@ export default class CompanySummary extends Component {
                         <div className="summary-head__title-item">
                             <div className="summary-head__title-column">
                                 <img className="image image_round image_size_xxl image_type_company-logo"
-                                src={logo}/>
+                                src={apiImage(logo)}/>
                                 <div className="summary-head__title-block">
                                     <h2 className="mdl-card__title-text heading heading_type_two">
                                         {name}
