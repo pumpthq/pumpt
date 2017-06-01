@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import { browserHistory } from 'react-router'
+import './profile.less'
 
 const propTypes = {};
 const defaultProps = {
@@ -16,32 +17,32 @@ export default class CandidateProfile extends Component {
 
         return (
 
-            <div className="mdl-card card card_type_mini card_state_open">
+            <div className="candidate-profile mdl-card card card_type_mini card_state_open">
 
                 <a class="button_type_close" onClick={browserHistory.goBack}>×</a>
 
-                <h2>Job: { title }</h2>
+              <div className="profile-head">
 
-                <CardDivider />
-
-                <div className="col-xs-4">
-                    <img src={avatar}></img>
+                <div className="profile-avatar">
+                  <img src={avatar}></img>
                 </div>
 
-                <div className="col-xs-8">
-                    <h4>{ `${lastName}, ${firstName}` }</h4>
-                    <LabeledValue label="Recent Income" value={candidate.recentAnnualIncome} />
-                    <LabeledValue label="Recent Job" value={candidate.recentJob} />
-                    <LabeledValue label="Experience Duration" value={candidate.recentAreaExperience} />
-
+                <div className="profile-head-info">
+                  <h2>Job: { title }</h2>
+                  <h4>{ `${lastName}, ${firstName}` }</h4>
+                  <LabeledValue label="Recent Income" value={candidate.recentAnnualIncome} />
+                  <LabeledValue label="Recent Job" value={candidate.recentJob} />
+                  <LabeledValue label="Experience Duration" value={candidate.recentAreaExperience} />
                 </div>
-                <CardDivider />
 
-                <div className="col-xs-12">
-                    <pre>
-                        { JSON.stringify(candidate, null, 4) }
-                    </pre>
-                </div>
+              </div>
+
+              <div className="profile-main-data">
+
+                  <pre>
+                      { JSON.stringify(candidate, null, 4) }
+                  </pre>
+              </div>
 
 
             </div>
