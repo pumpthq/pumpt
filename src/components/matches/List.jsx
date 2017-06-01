@@ -3,6 +3,8 @@ import { Link, browserHistory } from 'react-router'
 import { find } from 'lodash'
 
 import MatchRecruiterActions from 'components/matches/RecruiterActions'
+import './matches.less'
+
 const propTypes = {};
 const defaultProps = {
     job: {
@@ -25,10 +27,11 @@ export default class MatchesList extends Component {
             <div className="mdl-card card card_type_mini card_state_open">
                 <a class="button_type_close" onClick={browserHistory.goBack}>×</a>
 
+              <div className="matches-head">
                 <h2>{ title }</h2>
                 <CardDivider />
-
-                <h4>{ matches.length } MATCHES</h4>
+                <div className="matches-number">{ matches.length } Matches</div>
+              </div>
 
                 { matches.map( match =>
                     <CandidateItem key={match._id} match={match} />
@@ -40,21 +43,36 @@ export default class MatchesList extends Component {
 
 const CandidateItem = (props) => {
     const {match} = props
-    const {candidate: {status, brief:{firstName, lastName, avatar}}} = match
+    const {candidate: {status, brief:{firstName, lastName, avatar}},
+      vacancy: {brief:{industry, salary}}} = match
+
+    console.log('=== match: ', match);
+
     return (
-        <div className="col-xs-12">
+        <div className="matched-item">
 
-            <h4>status: {status}</h4>
+          <div className="match-avatar-block">
+            <img src={avatar} className="match-avatar"/>
+            <br/>
+            <h4>status: <span>{status}</span></h4>
+          </div>
+
+          <div className="match-avatar-info">
+
             <h4>{firstName} {lastName}</h4>
-            <img src={avatar} className="col-xs-4"/>
+            <div className="vacancy-details">{industry}</div>
+            <div className="vacancy-details">{salary}</div>
 
-            <MatchRecruiterActions match={match} />
+            <div className="button-block">
+              <MatchRecruiterActions match={match} />
 
-            <Link className="link" to={`recruiter/jobs/${match._vacancy}/candidates/${match._candidate}`}>
-                View Candidate Details
-            </Link>
+              <Link className="link" to={`recruiter/jobs/${match._vacancy}/candidates/${match._candidate}`}>
+                  View Candidate Details
+              </Link>
+            </div>
+          </div>
 
-            <CardDivider />
+            {/*<CardDivider />*/}
 
         </div>
 
