@@ -51,7 +51,7 @@ export default class CandidateHeaderMenu extends Component {
                     >
                         <HeaderDropDownItem to={'/candidate/matches/changePass'}>Change Password</HeaderDropDownItem>
                         {/* <HeaderDropDownItem>Notification Settings</HeaderDropDownItem> */}
-                        <HeaderDropDownItem>Help &amp; Support</HeaderDropDownItem>
+                        <HeaderDropDownItem to={'http://104.236.237.143/faq'}>Help &amp; Support</HeaderDropDownItem>
                         <HeaderDropDownItem
                             onClick={() => {
                                 dispatch(logOut());
