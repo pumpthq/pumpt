@@ -58,7 +58,7 @@ export default class ApplicationSuccessDialog extends Component {
                         ×
                     </button> */}
                     <div>
-                        Your Application is ready for approval!  Now just wait.
+												You’ll be notified via email when you’ve been accepted (or not) by Pumpt.
                     </div>
                 </Dialog>
         );

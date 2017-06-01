@@ -29,10 +29,8 @@ export class NotInterestedMatchesSlider extends CardSlider {}
 const AllPlaceholder = (props) => {
     return (
         <div className="welcome-to-matches-popup">
-            <h3>Welcome to matches!</h3>
-            <div className="message">Our proprietary technology smartly matches Candidates with Employers based on
-                constructor professional backgrounds and goals, shared values, and culture fit – reducing the time
-                and resources spent on typical job searches.</div>
+            <h3>Welcome To Pumpt’s Matching Section!</h3>
+            <div className="message">You’ll be notified via email as soon as you’ve been matched to jobs.</div>
         </div>
     )
 }
@@ -40,9 +38,9 @@ const AllPlaceholder = (props) => {
 const BookmarkedPlaceholder = (props) => {
     return (
         <div className="welcome-to-matches-popup">
-            <h3>No Saved Jobs...Yet</h3>
+            <h3>You Want to Save Your Job Matches? Use The Bookmark Feature.</h3>
             <div className="message">
-						Bookmark any jobs you're intersted in and they will show up here.
+						You’ll be able to save all job matches you’re interested in by bookmarking them.
 						</div>
         </div>
     )
@@ -51,9 +49,9 @@ const BookmarkedPlaceholder = (props) => {
 const NotInterestedPlaceholder = (props) => {
     return (
         <div className="welcome-to-matches-popup">
-            <h3>Your Rejected Jobs</h3>
+            <h3>We Save All Your Rejected Job Matches</h3>
             <div className="message">
-						We'll keep track of jobs you are not interested in. We use them to give you better matches in the future, and we'll also keep them here if you ever change your mind.
+						And if you ever change your mind, all your rejected matches will be saved in here.
 						</div>
         </div>
     )
