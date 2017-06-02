@@ -1,5 +1,12 @@
 import React, {Component, PropTypes} from 'react';
 import { browserHistory } from 'react-router'
+
+import Case from '../icons-application/case'
+import Education from '../icons-application/education'
+import Pin from '../icons-application/pin'
+import Social from '../icons-application/social'
+import Skills from '../icons-application/skills'
+import Heart from '../icons-application/heart'
 import './profile.less'
 
 const propTypes = {};
@@ -12,7 +19,8 @@ export default class CandidateProfile extends Component {
 
     render() {
         const { candidate, job } = this.props
-        const { firstName, lastName, avatar } = candidate
+        const { firstName, lastName, avatar, socialMedia, location,
+          education, interests, workingExperience, skills} = candidate
         const { title } = job
 
         return (
@@ -24,7 +32,7 @@ export default class CandidateProfile extends Component {
               <div className="profile-head">
 
                 <div className="profile-avatar">
-                  <img src={avatar}></img>
+                  <img src={avatar}/>
                 </div>
 
                 <div className="profile-head-info">
@@ -37,13 +45,57 @@ export default class CandidateProfile extends Component {
 
               </div>
 
-              <div className="profile-main-data">
+              <div className="profile-data">
 
-                  <pre>
-                      { JSON.stringify(candidate, null, 4) }
-                  </pre>
+                <div className="profile-data__item">
+                  <Case/><span className="item-title">Experience</span>
+                  {
+                    workingExperience.map(exp => <div className="item-title-text">Company: {exp.companyName}<br/>
+                    Position: {exp.position}<br/>Location: {exp.location}<br/>Duty: {exp.duty}</div>)
+                  }
+                </div>
+
+                <div className="profile-data__item">
+                  <Education/><span className="item-title">Education</span>
+                  {
+                    education.map(exp => <div className="item-title-text">School Name: {exp.schoolName}<br/>
+                    Speciality: {exp.speciality}<br/>Degree: {exp.degree}</div>)
+                  }
+                </div>
+
+                <div className="profile-data__item">
+                  <Pin/><span className="item-title">Location</span>
+                  <div className="item-title-text">
+                    City: {location.city}<br/>
+                    State: {location.state}
+                    </div>
+                </div>
+
+                <div className="profile-data__item">
+                  <Social/><span className="item-title">Social Media</span>
+                  <div className="item-title-text">
+                    LinkedIn: <a href="{socialMedia.linkedInUrl}">{socialMedia.linkedInUrl}</a><br/>
+                    Twitter: {socialMedia.twitterAcc}<br/>
+                  </div>
+                </div>
+
+                <div className="profile-data__item">
+                  <Skills/><span className="item-title">Skills</span>
+
+                </div>
+
+                <div className="profile-data__item">
+                  <Heart/><span className="item-title">Interests</span>
+
+                </div>
+
+
+                {/*<hr/>*/}
+                  {/*<pre>*/}
+                      {/*{ JSON.stringify(candidate, null, 4) }*/}
+                  {/*</pre>*/}
+
               </div>
-
 
             </div>
         )
