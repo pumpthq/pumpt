@@ -47,10 +47,8 @@ const CandidateItem = (props) => {
     const {candidate: {status, brief:{firstName, lastName, avatar}},
       vacancy: {brief:{industry, salary}}} = match
 
-    console.log('=== match: ', match);
-
     return (
-        <div className="matched-item">
+        <div className={ status === 'rejected' ? "matched-item dimmed" : "matched-item" }>
 
           <div className="match-avatar-block">
             <img src={avatar} className="match-avatar"/>
@@ -75,7 +73,6 @@ const CandidateItem = (props) => {
           </div>
 
             {/*<CardDivider />*/}
-
         </div>
 
     )
