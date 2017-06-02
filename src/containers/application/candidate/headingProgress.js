@@ -80,29 +80,6 @@ class HeadingProgress extends Component {
                 </div>
             )
         }
-        // Default view. if profile is NOT approved & NOT filled. There is no button "Get Matches".
-
-        if(!isFinished) {
-            return (
-
-                <div className="text-center">
-                    <H1 noGutter typeFour class='row'>Just a couple more steps.</H1>
-                    <p class="text text_after_big-head text_size_xs">
-    								We'd like to get to know you better. Tell us a bit about your professional background and anything else you'd like to share. We'll only use this information
-    								to improve the accuracy of your matches and whether Pumpt is the right fit for you.
-                    </p>
-                  <Button
-                    type='submit'
-                    typeColored
-                    buttonSize='l'
-                    onClick={()=>dispatch(finishApplication())}
-                  >
-                    Finished ?
-                  </Button>
-                </div>
-            )
-        }
-
 
         return (
             <div className="text-center">

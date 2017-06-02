@@ -16,12 +16,15 @@ import Panel from 'components/main/panel';
 import StepProgress from 'components/application/stepProgress';
 import Footer from 'components/main/footer/footer';
 import ApplicationSuccessDialog from 'components/application/ApplicationSuccessDialog'
+import Button from 'components/main/button'
+import { finishApplication } from 'actions/authorization'
 
 import {apiImage} from 'components/helpers'
 
 function mapStateToProps(state, ownProps) {
     return { candidate: state.candidateMatches.candidate, authorization: state.authorization,  }
 }
+
 
 @connect(mapStateToProps)
 export default class ApplicationContainer extends Component {
@@ -64,17 +67,37 @@ export default class ApplicationContainer extends Component {
 
                     <div className="mdl-card col-xs-12">
 
-                                            {this.state.editSummary ?
-                                                <CandidateForm
-                                                    initialValues={candidate}
-                                                    onSubmit={values=> {dispatch(updateCandidate(values)); this.editSummary(false)}}
-                                                    onCancel={()=>this.editSummary(false)} />
-                                                :
-                                                <CandidateSummary {...this.props} onEdit={()=>this.editSummary(true)}/>
-                                            }
-                                            <CandidateApplicationForm
-                                                initialValues={candidate}
-                                                onSubmit={values=> {dispatch(updateCandidate(values)) } }/>
+												{this.state.editSummary ?
+														<CandidateForm
+																initialValues={candidate}
+																onSubmit={values=> {dispatch(updateCandidate(values)); this.editSummary(false)}}
+																onCancel={()=>this.editSummary(false)} />
+														:
+														<CandidateSummary {...this.props} onEdit={()=>this.editSummary(true)}/>
+												}
+												<CandidateApplicationForm
+														initialValues={candidate}
+														onSubmit={values=> {dispatch(updateCandidate(values)) } }/>
+
+															//WIP: putting the submit button here is causeing issue with the state not working (API complains) also wasn't able to combine this function with the
+															//...finishApplication action
+
+												<div className="text-center">
+													<Button
+														type='submit'
+														typeColored
+														buttonSize='l'
+														onClick={()=>dispatch(finishApplication())}
+
+													>
+														All Set For Now?
+													</Button>
+
+												</div>
+												<span>
+												<br></br>
+												<br></br>
+												</span>
 
                     </div>
                 </div>

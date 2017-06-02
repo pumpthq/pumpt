@@ -211,7 +211,7 @@ export default class ApplicationForm extends Component {
                   <div>
                     <button type="submit" disabled={submitting}
                     className="mdl-button button invisible-mobile button_type_colored button_size_m candidate-submit">
-                      {submitting ? <i/> : <i/>} Save
+                      {submitting ? <i/> : <i/>} Save Progress
                     </button>
                     {/* <button type="button" disabled={submitting} onClick={resetForm}>
                      Clear Values
