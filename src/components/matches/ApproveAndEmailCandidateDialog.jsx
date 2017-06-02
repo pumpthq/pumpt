@@ -59,7 +59,7 @@ export default class ApproveAndEmailCandidateDialog extends Component {
                             <TextInput field={subject} label="Subject" />
                             <TextArea field={body} label="Message" />
                         </div>
-                        <a href={`mailto:${trigger ? trigger.candidate.brief.email : 'no@email.com'}?subject=${subject.value}&body=${body.value}`} onClick={this.handleSubmit}>Approve and Email</a>
+                        <a href={`mailto:${trigger ? trigger.candidate.brief.user.email : 'no@email.com'}?subject=${subject.value}&body=${body.value}`} onClick={this.handleSubmit}>Approve and Email</a>
                     </div>
                 </Dialog>
         );
