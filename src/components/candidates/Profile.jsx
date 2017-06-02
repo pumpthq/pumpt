@@ -16,6 +16,35 @@ const defaultProps = {
     job: false,
 };
 
+function ExperienceDisplay(props){
+	var html = null;
+	if ((props.workingExperience === null) || (typeof props.workingExperience === 'undefined')){
+	}else{
+		var listItems = props.workingExperience.map(exp => <div className="item-title-text">Company: {exp.companyName}<br/>Position: {exp.position}<br/>Location: {exp.location}<br/>Duty: {exp.duty}</div>);
+		html = listItems; 
+	}
+	return html;
+}
+
+function EducationDisplay(props){
+	var html = null;
+	if (props.education === null){
+	}else{
+		html = education.map(exp => <div className="item-title-text">School Name: {exp.schoolName}<br/>Speciality: {exp.speciality}<br/>Degree: {exp.degree}</div>);
+	}
+	return html;
+}
+
+
+function LocationDisplay(props){
+	var html = null;
+	if (props.location === null){
+	}else{
+		html="<div className='item-title-text'>City: {props.location.city}<br/>State: {props.location.state}</div>";
+	}
+	return html;
+}
+
 export default class CandidateProfile extends Component {
 
     render() {
@@ -50,33 +79,24 @@ export default class CandidateProfile extends Component {
                 <div className="col-xs-8">
 										<div className="profile-data__item">
 											<Case/><span className="item-title">Experience</span>
-											{
-												workingExperience ? workingExperience.map(exp => <div className="item-title-text">Company: {exp.companyName}<br/> : ""
-												Position: {exp.position}<br/>Location: {exp.location}<br/>Duty: {exp.duty}</div>)
-											}
+												{workingExperience.map((exp) => <div className="item-title-text">Company: {exp.companyName}<br/>Position: {exp.position}<br/>Location: {exp.location}<br/>Duty: {exp.duty}</div>)};
 										</div>
 
 										<div className="profile-data__item">
 											<Education/><span className="item-title">Education</span>
-											{
-												education.map(exp => <div className="item-title-text">School Name: {exp.schoolName}<br/>
-												Speciality: {exp.speciality}<br/>Degree: {exp.degree}</div>)
-											}
+												<EducationDisplay education={education} />,
 										</div>
 
 										<div className="profile-data__item">
 											<Pin/><span className="item-title">Location</span>
-											<div className="item-title-text">
-												City: {location.city}<br/>
-												State: {location.state}
-												</div>
+												<LocationDisplay location={location} />,
 										</div>
 
 										<div className="profile-data__item">
 											<Social/><span className="item-title">Social Media</span>
 											<div className="item-title-text">
-												LinkedIn: <a href="{socialMedia.linkedInUrl}">{socialMedia.linkedInUrl}</a><br/>
-												Twitter: {socialMedia.twitterAcc}<br/>
+												LinkedIn: <a href="{socialMedia.linkedInUrl}">{socialMedia ? socialMedia.linkedInUrl : null}</a><br/>
+												Twitter: {socialMedia ? socialMedia.twitterAcc : null}<br/>
 											</div>
 										</div>
 
