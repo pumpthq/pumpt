@@ -53,7 +53,7 @@ export default class CandidateProfile extends Component {
                 <div className="profile-data__item">
                   <Case/><span className="item-title">Experience</span>
                   {
-                    workingExperience.map(exp => <div className="item-title-text">Company: {exp.companyName}<br/>
+                    workingExperience && workingExperience.map(exp => <div className="item-title-text">Company: {exp.companyName}<br/>
                     Position: {exp.position}<br/>Location: {exp.location}<br/>Duty: {exp.duty}</div>)
                   }
                 </div>
@@ -61,7 +61,7 @@ export default class CandidateProfile extends Component {
                 <div className="profile-data__item">
                   <Education/><span className="item-title">Education</span>
                   {
-                    education.map(exp => <div className="item-title-text">School Name: {exp.schoolName}<br/>
+                    education && education.map(exp => <div className="item-title-text">School Name: {exp.schoolName}<br/>
                     Speciality: {exp.speciality}<br/>Degree: {exp.degree}</div>)
                   }
                 </div>
