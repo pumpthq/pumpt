@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import IconPerson from './../../icons/photo';
 import { logOut } from './../../../actions/authorization';
 
-import ChangePassLink from '../../../containers/ChangePassword.jsx';
+// import ChangePassLink from '../../../containers/ChangePassword.jsx';
 
 import {
     API_URL,
@@ -97,7 +97,7 @@ export default class HeaderMini extends Component {
                                 { profilePhoto ?
                                     <img
                                         class="image image_round image_size_xs"
-                                        src={`${API_URL}${API_IMAGES}/${profilePhoto}`}
+                                        src={profilePhoto}
                                     /> :
                                     <span class="image image_round image_size_xxl image_empty image_photo">
                                         <IconPerson />
@@ -107,7 +107,8 @@ export default class HeaderMini extends Component {
                             </a>
                             <div class="dropdown">
                                 <ul class="list list_type_s list_type_links list_type_nowrap">
-                                    <ChangePassLink />
+                                    {/* <ChangePassLink /> */}
+
                                     <li class="list__item" onClick={() => {
                                         dispatch(logOut());
                                     }}>

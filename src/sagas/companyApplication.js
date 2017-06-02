@@ -59,17 +59,21 @@ const updateCompany = ({ id, accessToken, body }) =>
      axios({
          method: 'PUT',
          baseURL: API_URL,
-         url: `${API_COMPANY_ROOT}/${id}`,
-         headers: {
-             'access-token': accessToken,
-         },
+         url: `${API_COMPANY_ROOT}/current`,
+        //  headers: {
+        //      'access-token': accessToken,
+        //  },
          data: body,
          responseType: 'json',
      }).then(response => response.data)
 ;
+const fetchCompany = () =>
+     axios.get(`${API_URL}${API_COMPANY_ROOT}/current`)
+        .then(response => response.data)
+;
 
-const fetchProfile = ({ id }) =>
-     axios.get(`${API_URL}${API_RECRUITER_ROOT}/${id}`)
+const fetchProfile = () =>
+     axios.get(`${API_URL}${API_RECRUITER_ROOT}/current`)
         .then(response => response.data)
 ;
 
@@ -271,17 +275,23 @@ export default function () {
             yield put(persistTempOffices({ offices: newOffices }));
         }),
         takeLatest(GET_LATEST_PROFILE, function* () {
-            const { entityId } = yield select(getAccessToken);
+            // const { entityId } = yield select(getAccessToken);
 
-            let profile;
+
+            console.log('getting latest company profile')
+
+            let profile, company;
 
             try {
-                profile = yield call(fetchProfile, { id: entityId });
+                profile = yield call(fetchProfile);
+                company = yield call(fetchCompany);
+
             } catch (ex) {
+                throw ex;
+                console.log("failed to make profile",err)
                 return yield fillInProfileFailed({});
             }
             const progress = [];
-            const { company } = profile;
             const {
                 name,
                 type,
@@ -298,7 +308,7 @@ export default function () {
                 linkedInUrl,
                 twitterAcc,
                 websiteUrl,
-            } = company.socialMedia;
+            } = company.socialMedia || {};
 
             const location = [
                 company.locationHeadquarters,
@@ -355,7 +365,6 @@ export default function () {
                 patch.quoteOrMotto = quoteOrMotto;
                 progress.push(QUOTE_OR_MOTTO_STEP);
             }
-
             yield put(fillInProfileSucceeded(patch));
         }),
         takeLatest([

@@ -1,4 +1,4 @@
-import Card from './card'
+import Card from './openedCard'
 import CardOpen from './cardOpen'
 import DraftsCard from './draftsCard'
 import CreateJobCard from './createJobCard'

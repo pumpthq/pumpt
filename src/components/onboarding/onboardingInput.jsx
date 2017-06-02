@@ -2,9 +2,9 @@ import React, { Component, PropTypes } from 'react';
 import uuid from 'uuid';
 import { connect } from 'react-redux';
 
-import { resetApiError } from '../../actions/apiError';
+// import { resetApiError } from '../../actions/api';
 
-@connect(undefined, { resetApiError })
+// @connect(undefined, { resetApiError })
 class OnboardingInput extends Component {
     constructor(props) {
         super(props);
@@ -85,7 +85,7 @@ class OnboardingInput extends Component {
                 <input
                     {...props}
                     ref="input"
-                    style={{}}
+                    style={{ paddingLeft: "25px" }}
                     class="mdl-textfield__input textfield__input"
                     id={inputId}
                     onChange={inputOnChange}
@@ -113,7 +113,7 @@ class OnboardingInput extends Component {
     }
 
     inputOnFocus(event) {
-        this.props.resetApiError();
+        // this.props.resetApiError();
         this.dirtying(true);
         this.focusing(true);
         this.props.onFocus.apply(this, [event]);

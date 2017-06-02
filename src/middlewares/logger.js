@@ -1,11 +1,5 @@
-export default store => next => action => {
-    console.group(action.type)
-    console.info('dispatching', action)
-    
-    const result = next(action)
+import createLogger from 'redux-logger'
 
-    console.log('next state', store.getState())
-    console.groupEnd(action.type)
+const logger = createLogger()
 
-    return result
-}
+export default logger

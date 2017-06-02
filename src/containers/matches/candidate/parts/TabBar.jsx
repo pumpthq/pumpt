@@ -25,17 +25,17 @@ class TabBar extends Component {
                     title : ` All Matches `,
                     icon : <MatchesIcon className="icon_inline" />,
                     route : ROUTE_CANDIDATE_MATCHES_ALL,
-                    action : routeToAll
+                    // action : routeToAll
                 }, {
                     title : ` Bookmarked `,
                     icon : <BookmarkFill className="icon-bookmark-fill_size_small icon_inline" />,
                     route : ROUTE_CANDIDATE_MATCHES_BOOKMARKED,
-                    action : routeToBookmarked
+                    // action : routeToBookmarked
                 }, {
                     title: ` Not Interested `,
                     icon: <DeclineIcon className="icon_inline" />,
                     route: ROUTE_CANDIDATE_MATCHES_NOT_INTERESTED,
-                    action : routeToNotInterested
+                    // action : routeToNotInterested
                 }]}
             </TabBarView>
         )

@@ -1,4 +1,11 @@
 import {
+
+    APPLICATION_UPDATE_COMPANY_SUCCEEDED,
+    APPLICATION_UPDATE_COMPANY_FAILED,
+
+    APPLICATION_UPDATE_RECRUITER_SUCCEEDED,
+    APPLICATION_UPDATE_RECRUITER_FAILED,
+
     ONBOARDING_TO_APPLICATION_MIGRATION,
 
     IMPORT_STARTED,
@@ -44,6 +51,12 @@ import {
 
     SET_DEFAULT_STATE,
 } from './../constants/applicationCompany';
+import {API} from 'constants/actionTypes'
+import {
+    API_VACANCY_ROOT,
+    API_RECRUITER_ROOT,
+    API_COMPANY_ROOT,
+} from 'constants/api';
 
 export const saveSummaryData = ({
     companyName,
@@ -69,6 +82,50 @@ export const saveSummaryData = ({
         foundationYear,
     },
 });
+
+export const updateCompany = (data)  => {
+    return {
+      type: API,
+      payload:{
+          method: 'PUT',
+          url: `${API_COMPANY_ROOT}/current`,
+          data,
+          success: updateCompanySucceeded(data),
+      }
+    }
+};
+
+export const updateCompanySucceeded = (data) => company => {
+    return {
+      type: APPLICATION_UPDATE_COMPANY_SUCCEEDED,
+      payload: {
+          data,
+          company,
+      }
+    }
+};
+
+export const updateRecruiter = (data)  => {
+    return {
+      type: API,
+      payload:{
+          method: 'PUT',
+          url: `${API_RECRUITER_ROOT}/current`,
+          data,
+          success: updateRecruiterSucceeded(data),
+      }
+    }
+};
+
+export const updateRecruiterSucceeded = (data) => recruiter => {
+    return {
+      type: APPLICATION_UPDATE_RECRUITER_SUCCEEDED,
+      payload: {
+          data,
+          recruiter,
+      }
+    }
+};
 
 export const getSummary = (state) =>
      state.applicationCompany.summary

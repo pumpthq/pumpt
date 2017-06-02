@@ -23,9 +23,9 @@ const defaultProps = {
 export default class Wrapper extends Component {
     render() {
         const { id, children } = this.props
-        
+
         return (
-            <div class='page wall wall_type_revert wall_image_second' id={id}>
+            <div id={id}>
                 {children}
             </div>
         )

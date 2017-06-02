@@ -28,9 +28,7 @@ class EmptyMatches extends Component {
                                         <Panel className="panel_padding_big panel_size_fixed panel_pos_center panel_type_content">
                                             <H1 typeFour>Welcome to matches!</H1>
                                             <p className="text text_size_xs text_type_content">
-                                                Our proprietary technology smartly matches Candidates with
-                                                Employers based on professional backgrounds and goals, shared values,
-                                                and culture fit — reducing the time and resources spent on typical job searches.
+																						You’ll be notified via email as soon as you’ve been matched to jobs.
                                             </p>
                                             <H2 typeTwo>Blacklist</H2>
                                             <p className="text text_size_xs text_type_content">
@@ -39,17 +37,6 @@ class EmptyMatches extends Component {
                                                 our 'Blacklist’ feature will prevent you from being matched with
                                                 these companies as well.
                                             </p>
-                                            <p className="text text_size_xs text_type_content">
-                                                Would you like to add your current employer on blacklist?
-                                            </p>
-                                            <ul className="list list_type_inline">
-                                                <li className="list__item">
-                                                    <a href="" className="link link_size_xs">Yes, I would </a>
-                                                </li>
-                                                <li className="list__item">
-                                                    <a href="" className="link link_size_xs"> No, I wouldn't</a>
-                                                </li>
-                                            </ul>
                                         </Panel>
                                     </div>
                                 </div>

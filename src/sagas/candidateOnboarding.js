@@ -27,7 +27,7 @@ import {
     migrateOnboardingToApplication
 } from './../actions/applicationCandidate'
 import {
-    signIn,
+    login,
     signInCandidate,
 } from './../actions/authorization'
 import { saveSummaryData } from './../actions/applicationCandidate'
@@ -77,19 +77,20 @@ export default function() {
                 recentWorkingArea : onboardingState.fieldOfExpertise.value,
                 recentWorkingAreaParent : onboardingState.fieldOfExpertiseHead.value,
                 recentJob : onboardingState.jobTitle.value,
-                recentJobParent : onboardingState.jobTitleHead.value,
                 recentAnnualIncome : onboardingState.income.value,
                 recentAreaExperience : onboardingState.experience.value,
+								preferredCompanySize : onboardingState.companySize.value,
                 valueAssessments : onboardingState.valueAssessments
             }
 
             try {
+							console.log("trying to register member!");
                 yield call(registerMembership, payload)
                 yield put(migrateOnboardingToApplication(onboardingState))
 
                 const { email, password } = yield select(getSummary)
 
-                yield put(signIn({ email, password }))
+                yield put(login({ email, password }))
                 yield take(AUTHENTICATION_SUCCEEDED)
                 yield put(push(ROUTE_APPLICATION_CANDIDATE))
                 yield put(applyForMembershipSucceeded({}))

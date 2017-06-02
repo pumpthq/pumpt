@@ -2,11 +2,16 @@ import React, { Component, PropTypes } from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { connect } from 'react-redux';
 
-import { cleanMessage } from '../actions/session';
+import { resolveUser } from '../actions/authorization'
+// import { cleanMessage } from '../actions/session';
 
-import SESSION from '../constants/session';
+// import SESSION from '../constants/session';
 
 import './../styles/app.less';
+
+// ⚠️ Tap event required to support material-ui click events
+import injectTapEventPlugin from 'react-tap-event-plugin';
+injectTapEventPlugin();
 
 const propTypes = {
     children: PropTypes.oneOfType([
@@ -19,31 +24,12 @@ const defaultProps = {
     children: '',
 };
 
-export const mapStateToProps = (state) =>
-     ({ state })
-;
-
-@connect(mapStateToProps, { cleanMessage })
 class App extends Component {
-
-    componentWillMount() {
-        if (SESSION.length && SESSION[0].message) {
-            const { message: { value } } = SESSION[0];
-            value && alert(value);
-        }
-    }
-
-    componentDidMount() {
-        this.props.cleanMessage();
-        if (SESSION.length && SESSION[0].message) {
-            SESSION[0].message = undefined;
-        }
-    }
 
     render() {
         return (
             <MuiThemeProvider>
-                <div className="app">
+                <div className="app page wall wall_type_revert wall_image_second">
                     {this.props.children}
                 </div>
             </MuiThemeProvider>

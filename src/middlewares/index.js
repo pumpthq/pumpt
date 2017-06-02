@@ -7,7 +7,7 @@ import apiMiddleware from './api'
 
 const middleware = compose(
     applyMiddleware(
-        loggerMiddleware,
+        // loggerMiddleware,
         apiMiddleware,
         thunkMiddleware,
         routerMiddleware,

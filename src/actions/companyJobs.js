@@ -1,19 +1,32 @@
+import { deprecated } from 'core-decorators'
 import {
-    ALL_FETCH_REQUESTED,
-    ALL_FETCH_SUCCEEDED,
-    ALL_FETCH_FAILED,
+    // FETCH_JOBS_REQUESTED,
+    FETCH_JOBS_SUCCEEDED,
+    FETCH_JOBS_FAILED,
 
-    OPEN_FETCH_REQUESTED,
-    OPEN_FETCH_SUCCEEDED,
-    OPEN_FETCH_FAILED,
+    FETCH_COMPANY_SUCCEEDED,
+    FETCH_COMPANY_FAILED,
 
-    DRAFTS_FETCH_REQUESTED,
-    DRAFTS_FETCH_SUCCEEDED,
-    DRAFTS_FETCH_FAILED,
+    FETCH_RECRUITER_SUCCEEDED,
+    FETCH_RECRUITER_FAILED,
 
-    CLOSED_FETCH_REQUESTED,
-    CLOSED_FETCH_SUCCEEDED,
-    CLOSED_FETCH_FAILED,
+    FETCH_MATCHES_SUCCEEDED,
+    FETCH_MATCHES_FAILED,
+
+    FETCH_CANDIDATE_SUCCEEDED,
+    FETCH_CANDIDATE_FAILED,
+
+    // OPEN_FETCH_REQUESTED,
+    // OPEN_FETCH_SUCCEEDED,
+    // OPEN_FETCH_FAILED,
+    //
+    // DRAFTS_FETCH_REQUESTED,
+    // DRAFTS_FETCH_SUCCEEDED,
+    // DRAFTS_FETCH_FAILED,
+    //
+    // CLOSED_FETCH_REQUESTED,
+    // CLOSED_FETCH_SUCCEEDED,
+    // CLOSED_FETCH_FAILED,
 
     ROUTE_TO_OPEN,
     ROUTE_TO_DRAFTS,
@@ -23,104 +36,345 @@ import {
     SAVE_DESCRIPTION_DATA,
     CLOSE_DESCRIPTION_STEP,
 
-    SHOW_RESPONSIBILITIES_STEP,
-    SAVE_RESPONSIBILITIES_DATA,
-    CLOSE_RESPONSIBILITIES_STEP,
-
     SHOW_SKILLS_AND_REQUIREMENTS_STEP,
     SAVE_SKILLS_AND_REQUIREMENTS_DATA,
     CLOSE_SKILLS_AND_REQUIREMENTS_STEP,
+
+    SHOW_RESPONSIBILITIES_STEP,
+    SAVE_RESPONSIBILITIES_DATA,
+    CLOSE_RESPONSIBILITIES_STEP,
 
     SAVE_SUMMARY_DATA,
     SAVE_SUMMARY_DATA_SUCCEEDED,
     SAVE_SUMMARY_DATA_FAILED,
 
-    CLOSE_JOB,
-    DELETE_JOB,
-    START_MATCHING,
-    SET_DEFAULT_STATE,
-    SET_DEFAULT_NEW_JOB_STATE,
+    OPEN_JOB_SUCCEEDED,
+    CLOSE_JOB_SUCCEEDED,
+    DELETE_JOB_SUCCEEDED,
 
-    CLOSE_OPENED_NEW_JOB_CARD
+    // START_MATCHING,
+    // SET_DEFAULT_STATE,
+    // SET_DEFAULT_NEW_JOB_STATE,
+    //
+    // CLOSE_OPENED_NEW_JOB_CARD,
+
+    CREATE_JOB_SUCCEEDED,
+    CREATE_JOB_FAILED,
+
+    UPDATE_JOB_SUCCEEDED,
+    UPDATE_JOB_FAILED,
+
+    UPDATE_COMPANY_SUCCEEDED,
+    UPDATE_COMPANY_FAILED,
+
+    UPDATE_RECRUITER_SUCCEEDED,
+    UPDATE_RECRUITER_FAILED,
+
+    REJECT_POST_SUCCEEDED,
+    APPROVE_POST_SUCCEEDED,
+
+    OPEN_APPROVE_AND_EMAIL,
+
 } from './../constants/companyJobs';
+import { API } from '../constants/actionTypes'
+import {
+    // API_URL,
+    // API_ALL_JOBS,
+    // API_OPEN_JOBS,
+    // API_DRAFT_JOBS,
+    // API_CLOSED_JOBS,
+    API_VACANCY_ROOT,
+    API_RECRUITER_ROOT,
+    API_COMPANY_ROOT,
+} from './../constants/api';
 
-export const fetchAll = () => ({
-    type : ALL_FETCH_REQUESTED
-})
 
-export const fetchAllSucceeded = () => ({
-    type : ALL_FETCH_SUCCEEDED
-})
+// export const getAllJobs = () => {
+//     return {
+//     type:API,
+//     payload:{
+//         method: 'GET',
+//         url: API_ALL_JOBS,
+//     }
+//   }
+// };
 
-export const fetchAllFailed = () => ({
-    type : ALL_FETCH_FAILED
-})
+export const updateJob = (id, data)  => {
+    return {
+      type: API,
+      payload:{
+          method: 'PUT',
+          url: `${API_VACANCY_ROOT}/${id}`,
+          data,
+          success: updateJobSucceeded(id, data),
+      }
+    }
+};
 
-export const fetchOpen = () => ({
-    type : OPEN_FETCH_REQUESTED
-})
+export const updateJobSucceeded = (id, data) => job => {
+    return {
+      type: UPDATE_JOB_SUCCEEDED,
+      payload: {
+          id,
+          data,
+          job,
+      }
+    }
+};
 
-export const fetchOpenSucceeded = ({ jobs }) => ({
-    type : OPEN_FETCH_SUCCEEDED,
-    payload : {
+export const updateJobFailed = err => {
+    return {
+      type: UPDATE_JOB_FAILED,
+      payload: {
+          err
+      }
+    }
+};
+
+
+export const createJob = (data) => {
+    return {
+    type:API, payload:{
+        method: 'POST',
+        url: API_VACANCY_ROOT,
+        data,
+        success: createJobSucceeded,
+        failed: createJobFailed
+    }
+  }
+};
+
+
+export const createJobSucceeded = job => {
+    return {
+      type: CREATE_JOB_SUCCEEDED,
+      payload: {
+          job
+      }
+    }
+};
+
+export const createJobFailed = err => {
+    return {
+      type: CREATE_JOB_FAILED,
+      payload: {
+          err
+      }
+    }
+};
+
+
+export const fetchJobs = () => {
+    return {
+        type : API,
+        payload:{
+            method: 'GET',
+            url: API_VACANCY_ROOT,
+            success: fetchJobsSucceeded,
+            error: fetchJobsFailed,
+        }
+    }
+};
+
+export const fetchJobsSucceeded = jobs => ({
+    type : FETCH_JOBS_SUCCEEDED,
+    payload: {
         jobs
     }
 })
 
-export const fetchOpenFailed = ({ statusCode }) => ({
-    type : OPEN_FETCH_FAILED,
-    payload : {
-        statusCode
+export const fetchJobsFailed = () => ({
+    type : FETCH_JOBS_FAILED
+})
+
+
+export const updateCompany = (data)  => {
+    return {
+      type: API,
+      payload:{
+          method: 'PUT',
+          url: `${API_COMPANY_ROOT}/current`,
+          data,
+          success: updateCompanySucceeded(data),
+      }
+    }
+};
+
+export const updateCompanySucceeded = (data) => company => {
+    return {
+      type: UPDATE_COMPANY_SUCCEEDED,
+      payload: {
+          data,
+          company,
+      }
+    }
+};
+
+export const fetchCompany = () => {
+    return {
+        type : API,
+        payload:{
+            method: 'GET',
+            url: `${API_COMPANY_ROOT}/current`,
+            success: fetchCompanySucceeded,
+            error: fetchCompanyFailed,
+        }
+    }
+};
+
+export const fetchCompanySucceeded = company => ({
+    type : FETCH_COMPANY_SUCCEEDED,
+    payload: {
+        company
     }
 })
 
-export const fetchDrafts = () => ({
-    type : DRAFTS_FETCH_REQUESTED
+export const fetchCompanyFailed = () => ({
+    type : FETCH_COMPANY_FAILED
 })
 
-export const fetchDraftsSucceeded = ({ jobs }) => ({
-    type : DRAFTS_FETCH_SUCCEEDED,
-    payload : {
-        jobs
+
+export const updateRecruiter = (data)  => {
+    return {
+      type: API,
+      payload:{
+          method: 'PUT',
+          url: `${API_RECRUITER_ROOT}/current`,
+          data,
+          success: updateRecruiterSucceeded(data),
+      }
+    }
+};
+
+export const updateRecruiterSucceeded = (data) => recruiter => {
+    return {
+      type: UPDATE_RECRUITER_SUCCEEDED,
+      payload: {
+          data,
+          recruiter,
+      }
+    }
+};
+
+export const fetchRecruiter = () => {
+    return {
+        type : API,
+        payload:{
+            method: 'GET',
+            url: `${API_RECRUITER_ROOT}/current`,
+            success: fetchRecruiterSucceeded,
+            error: fetchRecruiterFailed,
+        }
+    }
+};
+
+export const fetchRecruiterSucceeded = recruiter => ({
+    type : FETCH_RECRUITER_SUCCEEDED,
+    payload: {
+        recruiter
     }
 })
 
-export const fetchDraftsFailed = ({ statusCode }) => ({
-    type : DRAFTS_FETCH_FAILED,
+export const fetchRecruiterFailed = () => ({
+    type : FETCH_RECRUITER_FAILED
+})
+
+export const fetchMatches = (id) => ({
+    type : API,
     payload : {
-        statusCode
+        url : `/matches/vacancy/${id}`,
+        success: fetchMatchesSucceeded,
     }
 })
 
-export const fetchClosed = () => ({
-    type : CLOSED_FETCH_REQUESTED
-})
-
-export const fetchClosedSucceeded = ({ jobs }) => ({
-    type : CLOSED_FETCH_SUCCEEDED,
+export const fetchMatchesSucceeded = matches => ({
+    type : FETCH_MATCHES_SUCCEEDED,
     payload : {
-        jobs
+        matches
     }
 })
 
-export const fetchClosedFailed = ({ statusCode }) => ({
-    type : CLOSED_FETCH_FAILED,
+export const fetchCandidate = (id) => ({
+    type : API,
     payload : {
-        statusCode
+        url : `/candidates/${id}`,
+        success: fetchCandidateSucceeded,
     }
 })
 
-export const routeToOpen = () => ({
-    type : ROUTE_TO_OPEN
+export const fetchCandidateSucceeded = candidate => ({
+    type : FETCH_CANDIDATE_SUCCEEDED,
+    payload : {
+        candidate
+    }
 })
 
-export const routeToDrafts = () => ({
-    type : ROUTE_TO_DRAFTS
-})
+//
+// export const fetchOpen = () => ({
+//     type : OPEN_FETCH_REQUESTED
+// })
+//
+// export const fetchOpenSucceeded = ({ jobs }) => ({
+//     type : OPEN_FETCH_SUCCEEDED,
+//     payload : {
+//         jobs
+//     }
+// })
+//
+// export const fetchOpenFailed = ({ statusCode }) => ({
+//     type : OPEN_FETCH_FAILED,
+//     payload : {
+//         statusCode
+//     }
+// })
+//
+// export const fetchDrafts = () => ({
+//     type : DRAFTS_FETCH_REQUESTED
+// })
+//
+// export const fetchDraftsSucceeded = ({ jobs }) => ({
+//     type : DRAFTS_FETCH_SUCCEEDED,
+//     payload : {
+//         jobs
+//     }
+// })
+//
+// export const fetchDraftsFailed = ({ statusCode }) => ({
+//     type : DRAFTS_FETCH_FAILED,
+//     payload : {
+//         statusCode
+//     }
+// })
+//
+// export const fetchClosed = () => ({
+//     type : CLOSED_FETCH_REQUESTED
+// })
+//
+// export const fetchClosedSucceeded = ({ jobs }) => ({
+//     type : CLOSED_FETCH_SUCCEEDED,
+//     payload : {
+//         jobs
+//     }
+// })
+//
+// export const fetchClosedFailed = ({ statusCode }) => ({
+//     type : CLOSED_FETCH_FAILED,
+//     payload : {
+//         statusCode
+//     }
+// })
 
-export const routeToClosed = () => ({
-    type : ROUTE_TO_CLOSED
-})
+// export const routeToOpen = () => ({
+//     type : ROUTE_TO_OPEN
+// })
+//
+// export const routeToDrafts = () => ({
+//     type : ROUTE_TO_DRAFTS
+// })
+//
+// export const routeToClosed = () => ({
+//     type : ROUTE_TO_CLOSED
+// })
 
 export const showDescriptionStep = () => ({
     type : SHOW_DESCRIPTION_STEP
@@ -191,39 +445,113 @@ export const saveSummaryData = ({
     },
 });
 
-export const saveSummaryDataSucceeded = ({}) => ({
+
+export const saveSummaryDataSucceeded = ({}) => deprecated({
     type : SAVE_SUMMARY_DATA_SUCCEEDED,
     payload : {}
 })
 
-export const saveSummaryDataFailed = ({}) => ({
+export const saveSummaryDataFailed = ({}) => deprecated({
     type : SAVE_SUMMARY_DATA_FAILED,
     payload : {}
 })
 
-export const closeJob = ({ id }) => ({
-    type: CLOSE_JOB,
+export const closeJob = id => ({
+    type: API,
+    payload: {
+        url: `${API_VACANCY_ROOT}/${id}`,
+        method: 'PUT',
+        data: { status: 'closed' },
+        success: closeJobSucceeded(id)
+    }
+});
+
+
+export const closeJobSucceeded = id => data => ({
+    type: CLOSE_JOB_SUCCEEDED,
     payload: { id },
 });
 
-export const deleteJob = ({ id }) => ({
-    type: DELETE_JOB,
+
+export const deleteJob = id => ({
+    type: API,
+    payload: {
+        url: `${API_VACANCY_ROOT}/${id}`,
+        method: 'DELETE',
+        success: deleteJobSucceeded(id)
+    }
+});
+
+export const deleteJobSucceeded = id => data => ({
+    type: DELETE_JOB_SUCCEEDED,
     payload: { id },
 });
 
-export const startMatching = ({ id }) => ({
-    type: START_MATCHING,
+
+export const openJob = id => ({
+    type: API,
+    payload: {
+        url: `${API_VACANCY_ROOT}/${id}`,
+        method: 'PUT',
+        data: { status: 'opened' },
+        success: openJobSucceeded(id)
+    }
+});
+
+
+export const openJobSucceeded = id => data => ({
+    type: OPEN_JOB_SUCCEEDED,
     payload: { id },
 });
 
-export const clearCompanyJobsState = () => ({
-    type: SET_DEFAULT_STATE,
-});
 
-export const clearNewJobState = () => ({
-    type: SET_DEFAULT_NEW_JOB_STATE,
-});
-
-export const closeOpenedNewJobCard = () => ({
-    type: CLOSE_OPENED_NEW_JOB_CARD
+export const postReject = (matchingId) => ({
+    type : API,
+    payload : {
+        url : `/matches/reject/${matchingId}`,
+        success: postRejectSucceeded(matchingId),
+    }
 })
+
+export const postRejectSucceeded = id => data => ({
+    type: REJECT_POST_SUCCEEDED,
+    payload: { id }
+})
+
+export const openApprove = (id) => ({
+    type: OPEN_APPROVE_AND_EMAIL,
+    payload: { id }
+})
+
+export const postApprove = (matchingId) => ({
+    type : API,
+    payload : {
+        url : `/matches/approve/${matchingId}`,
+        success: postApproveSucceeded(matchingId),
+    }
+})
+
+export const postApproveSucceeded = id => data => ({
+    type: APPROVE_POST_SUCCEEDED,
+    payload: { id }
+})
+
+
+
+//
+// export const startMatching = ({ id }) => ({
+//     type: START_MATCHING,
+//     payload: { id },
+// });
+//
+// export const clearCompanyJobsState = () => ({
+//     type: SET_DEFAULT_STATE,
+// });
+//
+// export const clearNewJobState = () => ({
+//     type: SET_DEFAULT_NEW_JOB_STATE,
+// });
+//
+// export const closeOpenedNewJobCard = () => ({
+//     type: CLOSE_OPENED_NEW_JOB_CARD
+// })

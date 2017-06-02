@@ -13,45 +13,18 @@ import {
 } from './../../../../constants/routes';
 import { logOut } from './../../../../actions/authorization';
 
-const propTypes = {
-    dispatch: PropTypes.func,
-    fullName: PropTypes.string,
-    profilePhoto: PropTypes.string,
-    progress: PropTypes.number,
-    completed: PropTypes.number,
-};
-const defaultProps = {
-    completed: 5,
-};
+import {apiImage} from 'components/helpers'
 
-@connect(
-    (state, ownProps) => {
-        const {
-            firstName,
-            lastName
-        } = state.applicationCandidate.summary;
-        const {
-            profilePhoto,
-            progress,
-        } = state.applicationCandidate;
-        const { completed } = ownProps;
-
-        return {
-            fullName : `${firstName} ${lastName}`,
-            profilePhoto,
-            progress: completed + progress.length,
-            completed,
-        };
-    },
-)
-class MatchesHeaderMenu extends Component {
+const mapStateToProps = state => {
+    return {candidate: state.candidateMatches.candidate}
+}
+@connect(mapStateToProps)
+export default class CandidateHeaderMenu extends Component {
 
     render() {
         const {
-            fullName,
-            profilePhoto,
+            candidate,
             dispatch,
-            progress,
         } = this.props;
         return (
             <HeaderFull
@@ -64,25 +37,23 @@ class MatchesHeaderMenu extends Component {
                         Matches
                     </Link>,
                     <Link
-                        to={ROUTE_CANDIDATE_MESSAGES}
+                        to={"/candidate/matches/edit"}
                         className="navigation__link"
                         activeClassName="navigation__link navigation__link_active"
                     >
-                        Messages
+                        Profile
                     </Link>,
                 ]}
                 addition={
                     <HeaderDropDownMenu
-                        userName={fullName}
-                        userAvatar={profilePhoto}
-                        progress={progress}
-                        linkTo={ROUTE_APPLICATION_CANDIDATE}
+                        userName={`${candidate.firstName} ${candidate.lastName}`}
+                        userAvatar={apiImage(candidate.avatar)}
+                        progress={candidate.fillProgress}
+                        linkTo={"/candidate/matches/edit"}
                     >
-                        <HeaderDropDownItem>Profile</HeaderDropDownItem>
-                        <HeaderDropDownItem>Change Password</HeaderDropDownItem>
-                        <HeaderDropDownItem>Notification Settings</HeaderDropDownItem>
-                        <HeaderDropDownItem>Blacklisted Companies</HeaderDropDownItem>
-                        <HeaderDropDownItem>Help &amp; Support</HeaderDropDownItem>
+                        <HeaderDropDownItem to={'/candidate/matches/changePass'}>Change Password</HeaderDropDownItem>
+                        {/* <HeaderDropDownItem>Notification Settings</HeaderDropDownItem> */}
+                        <HeaderDropDownItem to={'http://104.236.237.143/faq'}>Help &amp; Support</HeaderDropDownItem>
                         <HeaderDropDownItem
                             onClick={() => {
                                 dispatch(logOut());
@@ -96,8 +67,3 @@ class MatchesHeaderMenu extends Component {
         );
     }
 }
-
-MatchesHeaderMenu.propTypes = propTypes;
-MatchesHeaderMenu.defaultProps = defaultProps;
-
-export default MatchesHeaderMenu;

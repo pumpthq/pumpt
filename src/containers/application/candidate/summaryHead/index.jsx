@@ -44,11 +44,11 @@ class SummaryHead extends Component {
         // TODO class edit ? filled
         return (
             <div class={`mdl-card card card_type_mini card_onb-info card_onb-info_${isEditing ? 'edit' : accordionState ? 'filled' : ''}`}>
+                {accordionState ? null : <ImportButton />}
                 {isEditing ?
                     <SummaryHeadEdit onCancel={this.triggerEditState}/> :
                     <SummaryHeadStandard onEdit={this.triggerEditState}/>
                 }
-                {accordionState ? null : <ImportButton />}
             </div>
         )
     }

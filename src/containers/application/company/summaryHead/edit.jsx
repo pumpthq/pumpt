@@ -6,7 +6,7 @@ import UploadImage from './../parts/uploadImage';
 import ApplicationFieldset from'./../../../../components/application/applicationFieldset';
 import ApplicationFieldsetDropdown from './../../../../components/application/applicationFieldsetDropdown';
 import Button from './../../../../components/main/button';
-import { saveSummaryData } from './../../../../actions/applicationCompany';
+import { updateJob } from './../../../../actions/applicationCompany';
 import {
     COMPANY_EMPLOYEES_DATA,
     COMPANY_TYPE_DATA,
@@ -25,10 +25,13 @@ const InputProps = {
         const {
             companyName,
             companyType,
-            email,
             numberOfEmployees,
             foundationYear
         } = state.applicationCompany.summary
+        const {
+            email
+        } = state.authorization
+
         const ddCheckedNumberOfEmployees = findById({
             id : numberOfEmployees ? numberOfEmployees.id : null,
             data : COMPANY_EMPLOYEES_DATA
@@ -43,11 +46,11 @@ const InputProps = {
         }
 
         const initialValues = {
-            companyName : companyName || 'Rakuten Global',
-            email : email || 'nick.thornton@rakuten.global',
-            companyType : companyType ? companyType.value : 'Digital Media',
-            numberOfEmployees : numberOfEmployees ? numberOfEmployees.value : '< 10 employees',
-            foundationYear : foundationYear || '1911'
+            companyName : companyName || '{name}',
+            email : email || '{email}',
+            companyType : companyType ? companyType.value : 'type',
+            numberOfEmployees : numberOfEmployees ? numberOfEmployees.value : '{numberOfEmployees}',
+            foundationYear : foundationYear || '{founded}'
         }
 
         return {
@@ -179,8 +182,7 @@ class SummaryHeadEdit extends Component {
                                         },
                                         foundationYear : fields.foundationYear
                                     }
-
-                                    dispatch(saveSummaryData(data))
+                                    // dispatch(updateJob(this.props.id,data))
                                     onCancel()
                                     })
                                 }>

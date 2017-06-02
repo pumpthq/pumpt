@@ -13,13 +13,9 @@
   ],
   "ignore" : [],
   "env": {
-    "test": {
-      "presets": []
-    },
-    "development": {
-      "presets": ["react-hmre"]
-    },
-    "production": {
-    }
+    "local": {},
+    "test": {},
+    "development": {},
+    "production": {}
   }
 }

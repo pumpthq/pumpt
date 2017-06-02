@@ -9,7 +9,9 @@ import LinkToFieldOfExpertiseStep from './links/toFieldOfExpertise'
 import LinkToJobTitleStep from './links/toJobTitle'
 import LinkToIncomeStep from './links/toIncome'
 import LinkToExperienceStep from './links/toExperience'
+import LinkToCompanySizeStep from './links/toCompanySize'
 import LinkToValuesStep from './links/toValues'
+//import LinkToApplicationStep from './links/toApplication'
 
 @connect(
     function mapStateToProps(state) {
@@ -36,6 +38,7 @@ class OnboardingCandidateLinker extends Component {
                     <LinkToJobTitleStep {...props}/>
                     <LinkToIncomeStep {...props}/>
                     <LinkToExperienceStep {...props}/>
+                    <LinkToCompanySizeStep {...props}/>
                     <LinkToValuesStep {...props}/>
                 </Navigation>
             </Panel>

@@ -5,7 +5,6 @@ import ScrollContainer from './../../../components/main/scrollContainer';
 import logoImage from './../../../img/sprites-svg/logo.svg';
 
 import OnboardingCandidateStepSwitcher from './steps/stepSwitcher';
-import WallpapersSwitcher from './steps/wallpapersSwitcher';
 
 class OnboardingCandidate extends Component {
 
@@ -16,7 +15,6 @@ class OnboardingCandidate extends Component {
     render() {
         return (
             <Wrapper id="onboarding-candidate">
-                <WallpapersSwitcher />
                 <div className="container">
                     <div className="row row-padding-bigger">
                         <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -46,4 +44,4 @@ OnboardingCandidate.propTypes = {
     state: PropTypes.object,
 };
 
-export default OnboardingCandidate;
+module.exports = OnboardingCandidate;

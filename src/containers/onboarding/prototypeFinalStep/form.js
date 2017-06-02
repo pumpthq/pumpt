@@ -73,7 +73,7 @@ class FinalForm extends Component {
                         buttonSize='l'
                         disabled={isDisabledSubmit}
                     >
-                        Apply for Membership
+                        Next
                     </Button>
                     <p class='text'>
                         By clicking ‘Apply for Membership’,

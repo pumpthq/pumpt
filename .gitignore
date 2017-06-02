@@ -70,3 +70,6 @@ build/Release
 # Dependency directories
 node_modules
 jspm_packages
+
+# Build Files - Staging Server
+*.json.gzip

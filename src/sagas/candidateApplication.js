@@ -60,17 +60,14 @@ const updateCandidate = ({ id, accessToken, body }) => {
     return axios({
         method : 'PUT',
         baseURL : API_URL,
-        url : `${API_CANDIDATE_ROOT}/${id}`,
-        headers : {
-            'access-token' : accessToken
-        },
+        url : `${API_CANDIDATE_ROOT}/current`,
         data : body,
         responseType : 'json'
     }).then(response => response.data)
 }
 
 const fetchProfile = ({ id }) => {
-    return axios.get(`${API_URL}${API_CANDIDATE_ROOT}/${id}`)
+    return axios.get(`${API_URL}${API_CANDIDATE_ROOT}/current`)
         .then(response => response.data)
 }
 
@@ -113,8 +110,6 @@ export default function() {
                     recentWorkingAreaParent : selectedItemFieldOfExpertise.parent ?
                         selectedItemFieldOfExpertise.parent.title : null,
                     recentJob : jobTitle.value,
-                    recentJobParent : selectedItemJobTitle.parent ?
-                        selectedItemJobTitle.parent.title : null,
                     recentAnnualIncome : summary.income.value,
                     recentAreaExperience : summary.experience.value
                 }
@@ -366,14 +361,16 @@ export default function() {
                     }
                 } = profile
                 const {
-                    education : {
-                        schoolName,
-                        speciality,
-                        startStudyAt,
-                        endStudyAt,
-                        degree
-                    }
+                    education
                 } = profile
+
+                const {
+                   schoolName,
+                   speciality,
+                   startStudyAt,
+                   endStudyAt,
+                   degree
+               } = education || {}
                 const {
                     skills
                 } = profile
@@ -391,7 +388,7 @@ export default function() {
                     summary : {
                         firstName : profile.firstName,
                         lastName : profile.lastName,
-                        email : profile.user.email,
+                        // email : profile.user.email,
                         industry : {
                             id : null,
                             value : profile.interestWorkingArea
@@ -431,15 +428,10 @@ export default function() {
 
                 if (jobTitlePath) {
                     const selectedItem = jobTitlePath.pop()
-                    const parentItem = jobTitlePath.shift()
 
                     patch.summary.jobTitle = {
                         id : selectedItem.id,
                         value : profile.recentJob
-                    }
-                    patch.summary.jobTitleHead = {
-                        id : parentItem.id,
-                        value : parentItem.title
                     }
                 }
                 if(avatar) {

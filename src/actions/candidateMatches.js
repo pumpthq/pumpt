@@ -1,26 +1,68 @@
 import {
-    MATCHES_FETCH_SUCCEEDED,
-    BOOKMARKED_FETCH_SUCCEEDED,
+    FETCH_CANDIDATE_SUCCEEDED,
+    UPDATE_CANDIDATE_SUCCEEDED,
 
-    NOT_INTERESTED_FETCH_REQUESTED,
-    NOT_INTERESTED_FETCH_SUCCEEDED,
-    NOT_INTERESTED_FETCH_FAILED,
+    MATCHES_FETCH_SUCCEEDED,
 
     ROUTE_TO_ALL,
     ROUTE_TO_BOOKMARKED,
     ROUTE_TO_NOT_INTERESTED,
 
+    BOOKMARK_POST_SUCCEEDED,
+    REJECT_POST_SUCCEEDED,
+    APPROVE_POST_SUCCEEDED,
+
+    SHOW_FULL_DESCRIPTION,
+    HIDE_FULL_DESCRIPTION,
+
     SET_DEFAULT_STATE,
+
+    FETCH_COMPANY_SUCCEEDED,
+    VIEW_COMPANY,
+
+    FETCH_VACANCY_SUCCEEDED,
+    VIEW_VACANCY,
+
 } from './../constants/candidateMatches';
 import { API } from '../constants/actionTypes'
-import { fetchFailed } from './apiError'
+
+export const fetchCandidate = () => ({
+    type : API,
+    payload : {
+        url : '/candidates/current',
+        success: fetchCandidateSucceeded,
+    }
+})
+
+export const fetchCandidateSucceeded = candidate => ({
+    type : FETCH_CANDIDATE_SUCCEEDED,
+    payload : {
+        candidate
+    }
+})
+
+export const updateCandidate = (data) => ({
+    type : API,
+    payload : {
+        method: 'PUT',
+        url : '/candidates/current',
+        success: updateCandidateSucceeded,
+        data,
+    }
+})
+
+export const updateCandidateSucceeded = candidate => ({
+    type : UPDATE_CANDIDATE_SUCCEEDED,
+    payload : {
+        candidate
+    }
+})
 
 export const fetchMatches = () => ({
     type : API,
     payload : {
         url : '/matches/candidate',
         success: fetchMatchesSucceeded,
-        error: fetchFailed
     }
 })
 
@@ -31,37 +73,56 @@ export const fetchMatchesSucceeded = data => ({
     }
 })
 
-export const fetchBookmarked = () => ({
+export const postBookmark = (matchingId) => ({
     type : API,
-    payload: {
-        url: '/matches',
-        success: fetchBookmarkedSucceeded,
-        error: fetchFailed
+    payload : {
+        url : `/matches/bookmark/${matchingId}`,
+        success: postBookmarkSucceeded(matchingId),
     }
 })
 
-export const fetchBookmarkedSucceeded = data => ({
-    type : BOOKMARKED_FETCH_SUCCEEDED,
+export const postBookmarkSucceeded = id => data => ({
+    type: BOOKMARK_POST_SUCCEEDED,
+    payload: { id }
+})
+
+export const postReject = (matchingId) => ({
+    type : API,
     payload : {
-        matches: data
+        url : `/matches/reject/${matchingId}`,
+        success: postRejectSucceeded(matchingId),
     }
 })
 
-export const fetchNotInterested = () => ({
-    type : NOT_INTERESTED_FETCH_REQUESTED
+export const postRejectSucceeded = id => data => ({
+    type: REJECT_POST_SUCCEEDED,
+    payload: { id }
 })
 
-export const fetchNotInterestedSucceeded = ({ matches }) => ({
-    type : NOT_INTERESTED_FETCH_SUCCEEDED,
+export const postApprove = (matchingId) => ({
+    type : API,
     payload : {
-        matches
+        url : `/matches/approve/${matchingId}`,
+        success: postApproveSucceeded(matchingId),
     }
 })
 
-export const fetchNotInterestedFailed = ({ statusCode }) => ({
-    type : NOT_INTERESTED_FETCH_FAILED,
+export const postApproveSucceeded = id => data => ({
+    type: APPROVE_POST_SUCCEEDED,
+    payload: { id }
+})
+
+export const showFullDescription = (matchingId) => ({
+    type : SHOW_FULL_DESCRIPTION,
     payload : {
-        statusCode
+        id : matchingId,
+    }
+})
+
+export const hideFullDescription = (matchingId) => ({
+    type : HIDE_FULL_DESCRIPTION,
+    payload : {
+        id : matchingId,
     }
 })
 
@@ -80,3 +141,47 @@ export const routeToNotInterested = () => ({
 export const clearCandidateMatchesState = () => ({
     type: SET_DEFAULT_STATE,
 });
+
+export const fetchCompany = (id) => ({
+    type : API,
+    payload : {
+        url : `/companies/${id}`,
+        success: fetchCompanySucceeded(id),
+    }
+})
+
+export const fetchCompanySucceeded = id => company => ({
+    type : FETCH_COMPANY_SUCCEEDED,
+    payload : {
+        company
+    }
+})
+
+export const viewCompany = id => ({
+    type : VIEW_COMPANY,
+    payload : {
+        id
+    }
+})
+
+export const fetchVacancy = (id) => ({
+    type : API,
+    payload : {
+        url : `/vacancies/${id}`,
+        success: fetchVacancySucceeded(id),
+    }
+})
+
+export const fetchVacancySucceeded = id => vacancy => ({
+    type : FETCH_VACANCY_SUCCEEDED,
+    payload : {
+        vacancy
+    }
+})
+
+export const viewVacancy = (cid, id) => ({
+    type : VIEW_VACANCY,
+    payload : {
+        cid, id
+    }
+})

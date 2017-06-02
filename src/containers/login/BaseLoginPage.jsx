@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react'
 import PopUpBig from './../../components/main/popup'
 
 import Wrapper from './../../components/main/wrapper';
-import WallpapersSwitcher from './../onboarding/candidate/steps/wallpapersSwitcher';
 
 import {
     SHOW_CONTACT_INFO_STEP,
@@ -12,6 +11,7 @@ import {
     SHOW_INCOME_STEP,
     SHOW_EXPERIENCE_STEP,
     SHOW_VALUES_STEP,
+    SHOW_COMPANY_SIZE_STEP,
     SHOW_SET_UP_PASSWORD_STEP
 } from './../../constants/candidateOnboarding'
 
@@ -28,10 +28,6 @@ class BaseLoginPage extends Component {
 
         return (
             <Wrapper id="onboarding-candidate">
-                <WallpapersSwitcher
-                    step={'sixth'}
-                    isRichWallpaperNeeded={true}
-                />
                 <PopUpBig
                     heading='Log In'
                     children={children}

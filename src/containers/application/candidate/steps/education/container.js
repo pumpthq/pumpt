@@ -47,7 +47,6 @@ class EducationsContainer extends Component {
                     <EducationBlockEdit/>
                 </div> :
                 <div>
-                    <h2>Display</h2>
                     <EducationBlockDisplay/>
                 </div>
             }

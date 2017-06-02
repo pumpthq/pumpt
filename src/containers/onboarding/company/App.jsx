@@ -6,14 +6,12 @@ import ScrollContainer from './../../../components/main/scrollContainer'
 import logoImage from './../../../img/sprites-svg/logo.svg'
 
 import OnboardingCompanyStepSwitcher from './steps/stepSwitcher'
-import WallpapersSwitcher from './steps/wallpapersSwitcher'
 
 class OnboardingCompany extends Component {
 
     render() {
         return (
             <Wrapper id='onboarding-company'>
-                <WallpapersSwitcher/>
                 <div class='container'>
                     <div class='row row-padding-bigger'>
                         <div class='col-lg-12'>
@@ -41,4 +39,4 @@ OnboardingCompany.propTypes = {
     state : PropTypes.object
 }
 
-export default OnboardingCompany
+module.exports = OnboardingCompany

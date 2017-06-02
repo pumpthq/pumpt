@@ -58,7 +58,7 @@ class TabBar extends Component {
                             className="navigation__link"
                             activeClassName="navigation__link navigation__link_active"
                             onClick={() => {
-                                dispatch(action())
+                                // dispatch(action())
                             }}
                         >
                             {icon}

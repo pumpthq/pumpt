@@ -20,6 +20,12 @@ import {
     SHOW_VALUES_STEP,
     SAVE_VALUES_DATA,
 
+    SHOW_COMPANY_SIZE_STEP,
+    SAVE_COMPANY_SIZE_DATA,
+
+		SHOW_APPLICATION_STEP,
+		//SAVE...
+
     SHOW_SET_UP_PASSWORD_STEP,
     SAVE_SET_UP_PASSWORD_DATA,
 
@@ -123,6 +129,23 @@ export default (state = defaultState, action) => {
                 step: SHOW_VALUES_STEP,
                 payload,
             });
+        case SHOW_COMPANY_SIZE_STEP :
+            return {
+                ...state,
+                step,
+            };
+        case SAVE_COMPANY_SIZE_DATA :
+            return saveStep({
+                state,
+                step: SHOW_COMPANY_SIZE_STEP,
+                payload,
+            });
+
+        case SHOW_APPLICATION_STEP :
+            return {
+                ...state,
+                step,
+            };
 
         case SHOW_SET_UP_PASSWORD_STEP :
             return {

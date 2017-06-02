@@ -6,8 +6,8 @@ import PopupError from './../../../components/PopupError'
 const propTypes = {
     children : PropTypes.node,
     heading : PropTypes.string,
-    loginPageError : PropTypes.string,
-    backgroundTransparency: PropTypes.boolean
+    loginPageError : PropTypes.bool,
+    backgroundTransparency: PropTypes.bool
 }
 const defaultProps = {
     loginPageError: false,

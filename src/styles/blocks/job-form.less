@@ -1,0 +1,139 @@
+.recruter__newjob-card {
+
+  &__form-top {
+    padding: 35px;
+    background-color: rgb(79, 104, 172);
+    color: #fff;
+
+    input.job-title {
+      font-size: 18px;
+    }
+
+    & > div {
+      width: 500px;
+      margin-bottom: 15px;
+
+      & > label {
+        float: left;
+        color: #c5cbe0;
+      }
+
+      & > div {
+        margin-left: 150px;
+
+        & select {
+          border-radius: 0;
+        }
+      }
+    }
+
+    .mdl-textfield__input {
+      border-bottom: 1px solid #8496c5;
+      font-family: 'Proxima Nova', Helvetica, Arial, sans-serif;
+      font-weight: 400;
+    }
+  }
+
+  &__form-bottom {
+    padding: 35px;
+    background-color: #fff;
+
+    .job-decription-label {
+      color: #5a83f5;
+      font-weight: 500;
+      font-family: "Roboto","Helvetica","Arial",sans-serif;
+      font-size: 16px;
+    }
+
+    .job-decription-ta {
+      resize: none;
+      border: 0;
+      border-bottom: 1px solid #7888b3;
+      width: 350px;
+      font-size: 13px;
+      outline: none;
+      margin-bottom: 10px;
+    }
+
+    & button[type=button]{
+      color: #5a83f5;
+      font-weight: 500;
+      border: 0;
+      background-color: #fff;
+    }
+
+    input[type=text] {
+      color: #000;
+      border: 0;
+      font-size: 13px;
+      border-bottom: 1px solid #7888b3;
+      width: 350px;
+      font-size: 13px;
+    }
+
+    i {
+      font-style: inherit;
+    }
+  }
+
+  .new-job-add-button {
+    padding: 0;
+    font-size: 16px;
+    text-transform: inherit;
+
+    &:active {
+      background-color: blue;
+    }
+
+    &:focus {
+      background-color: #fff;
+    }
+  }
+
+  .new-job-submit-matching,
+  .new-job-submit-save {
+    margin-top: 20px;
+    background: 0 0;
+    border: none;
+    border-radius: 2px;
+    position: relative;
+    height: 36px;
+    min-width: 64px;
+    padding: 0 16px;
+    display: inline-block;
+    font-family: "Roboto","Helvetica","Arial",sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    letter-spacing: 0;
+    overflow: hidden;
+    will-change: box-shadow;
+    transition: box-shadow .2s cubic-bezier(.4,0,1,1),background-color .2s cubic-bezier(.4,0,.2,1),color .2s cubic-bezier(.4,0,.2,1);
+    outline: none;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    line-height: 36px;
+    vertical-align: middle;
+  }
+
+  .new-job-submit-save {
+    color: #fff;
+    background-color: #5a83f5;
+
+    &:active {
+      background-color: #d9d9d9;
+      font-weight: 600;
+    }
+  }
+
+  .new-job-submit-matching {
+    color: #fff;
+    background-color: #5a83f5;
+
+    &:active {
+      background-color: #d9d9d9;
+      font-weight: 600;
+    }
+  }
+}
+

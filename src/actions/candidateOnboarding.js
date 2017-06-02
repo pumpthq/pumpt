@@ -20,6 +20,9 @@ import {
     SHOW_EXPERIENCE_STEP,
     SAVE_EXPERIENCE_DATA,
 
+		SHOW_COMPANY_SIZE_STEP,
+		SAVE_COMPANY_SIZE_DATA,
+
     SHOW_VALUES_STEP,
     SAVE_VALUES_DATA,
 
@@ -123,6 +126,17 @@ export const saveExperienceData = ({ experience }) => ({
     }
 })
 
+export const showCompanySizeStep = () => ({
+    type : SHOW_COMPANY_SIZE_STEP
+})
+
+export const saveCompanySizeData = ({ companySize }) => ({
+    type : SAVE_COMPANY_SIZE_DATA,
+    payload : {
+        companySize
+    }
+})
+
 export const showValuesStep = () => ({
     type : SHOW_VALUES_STEP
 })
@@ -134,6 +148,16 @@ export const saveValuesData = ({ values }) => ({
     }
 })
 
+export const showApplicationStep = () => ({
+    type : SHOW_APPLICATION_STEP
+})
+
+/*export const saveApplicationData = ({ values }) => ({
+    type : SAVE_VALUES_DATA,
+    payload : {
+        values
+    }
+})*/
 
 export const showSetUpPasswordStep = () => ({
     type : SHOW_SET_UP_PASSWORD_STEP

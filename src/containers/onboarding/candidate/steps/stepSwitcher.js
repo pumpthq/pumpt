@@ -9,7 +9,8 @@ import {
     SHOW_INCOME_STEP,
     SHOW_EXPERIENCE_STEP,
     SHOW_SET_UP_PASSWORD_STEP,
-    SHOW_VALUES_STEP
+    SHOW_VALUES_STEP,
+    SHOW_COMPANY_SIZE_STEP,
 } from './../../../../constants/candidateOnboarding'
 
 import ContactInfoStep from './contactInfo'
@@ -19,6 +20,7 @@ import JobTitleStep from './jobTitle'
 import IncomeStep from './income'
 import ExperienceStep from './experience'
 import ValuesStep from './values'
+import CompanySizeStep from './companySize'
 import FinalStep from './final'
 
 export function mapStateToProps(state, ownProps) {
@@ -59,6 +61,8 @@ class OnboardingCandidateStepSwitcher extends Component {
                 return (<ExperienceStep {...props}/>)
             case SHOW_VALUES_STEP :
                 return (<ValuesStep {...props}/>)
+            case SHOW_COMPANY_SIZE_STEP :
+                return (<CompanySizeStep {...props}/>)
             case SHOW_SET_UP_PASSWORD_STEP :
                 return (<FinalStep {...props}/>)
             default : return (<ContactInfoStep/>)

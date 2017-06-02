@@ -2,26 +2,15 @@ const path = require('path');
 const proxy = require('http-proxy-middleware');
 const cors = require('cors');
 const express = require('express');
-const winston = require('winston');
-const expressWinston = require('express-winston');
-
+const morgan = require('morgan')
 const { NODE_ENV, HOST, PORT, REMOTE_API_HOST, REMOTE_API_PORT } = require('./config');
 const app = express();
 
-app.use(cors());
-app.use(expressWinston.logger({
-    transports : [
-        new winston.transports.Console({
-            json : true,
-            colorize : true
-        })
-    ],
-    meta : true,
-    msg : 'HTTP {{req.method}} {{req.url}}',
-    expressFormat : true,
-    colorStatus : true,
-    ignoreRoute : function (req, res) { return false; }
-}));
+// app.use(cors());
+app.use(morgan('dev'))
+app.use('/', express.static(path.join(__dirname, 'static')));
+app.use('/static', express.static(path.join(__dirname, 'static')));
+
 
 switch (NODE_ENV) {
     case 'local' :
@@ -40,7 +29,8 @@ switch (NODE_ENV) {
             },
             stats : {
                 colors : true
-            }
+            },
+            publicPath: webpackConfig.output.publicPath
         }));
         app.use(require('webpack-hot-middleware')(compiler));
 

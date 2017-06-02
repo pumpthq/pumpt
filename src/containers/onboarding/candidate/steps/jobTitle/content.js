@@ -17,22 +17,18 @@ import {
 
 @connect(
     function mapStateToProps(state) {
-        const { jobTitle, jobTitleHead } = state.candidateOnboarding
+        const { jobTitle } = state.candidateOnboarding
         return {
-            prefilledJobTitle: {
-                jobTitle,
-                jobTitleHead
-            }
+            prefilledJobTitle: jobTitle
         }
     },
     function mapDispatchToProps(dispatch) {
-        const nextStep = ({id, value, parent }) => {
+        const nextStep = ({id, value }) => {
             dispatch(saveJobTitleStep({
                 jobTitle : {
                     id,
                     value
                 },
-                jobTitleHead: parent
             }))
             dispatch(showIncomeStep())
         };
@@ -53,45 +49,40 @@ class JobTitleContent extends Component {
             stepValid: false,
             id: '',
             vaule: '',
-            parent: ''
         }
         if(prefilledJobTitle) {
-            if(prefilledJobTitle.jobTitle && prefilledJobTitle.jobTitleHead) {
-                this.state = {
-                    stepValid: true,
-                    id: prefilledJobTitle.jobTitle.id,
-                    value: prefilledJobTitle.jobTitle.value,
-                    parent: prefilledJobTitle.jobTitleHead.value
-                }
-            }
+						this.state = {
+								stepValid: true,
+								id: prefilledJobTitle.id,
+								value: prefilledJobTitle.value,
+						}
         }
 
         this.handleListChange = this.handleListChange.bind(this)
         this.handleNextButtonCLick = this.handleNextButtonCLick.bind(this)
     }
 
-    handleListChange({ id, value, parent }) {
+    handleListChange({ id, value }) {
         this.setState({
             stepValid: value !== '',
             id: id,
             value: value,
-            parent: parent
+            
         })
     }
 
     handleNextButtonCLick(e) {
         const { dispatch, nextStep } = this.props
-        const { id, value, parent } = this.state
-        nextStep({ id, value, parent })
+        const { id, value } = this.state
+        nextStep({ id, value })
     }
 
     render() {
         const convertedItems = apiEnumToListData(JOB_TITLE_DROPDOWN_DATA)
         const classesToAdd = [
-            'list_type_onboarding',
-            'list_sublayer_true'
+            'list_type_onboarding'
         ]
-        const { stepValid, id, value, parent } = this.state
+        const { stepValid, id, value } = this.state
         return(
             <div>
                 <List
@@ -101,7 +92,8 @@ class JobTitleContent extends Component {
                     listValueSelected={this.handleListChange}
                     preselectedItem={id}
                     preselectedValue={value}
-                    handleGroups={true}
+                    handleGroups={false}
+                    otherPlaceholder={'enter title here'}
                 />
                 <div class='form__actions'>
                     <Button
