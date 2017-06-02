@@ -78,7 +78,7 @@ class FinalForm extends Component {
                     <p class='text'>
                         By clicking ‘Apply for Membership’,
                         you agree to the
-                        <a class='link' href='http://pumpthq.com/terms-of-use.html'> Terms &amp; Conditions</a>.
+                        <a class='link' target="_blank" href='http://pumpthq.com/terms'> Terms &amp; Conditions</a>.
                     </p>
                 </div>
             </Form>
