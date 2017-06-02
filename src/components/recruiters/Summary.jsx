@@ -1,23 +1,27 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 
-import UploadImage from 'containers/application/candidate/parts/uploadImage'
 import PencilIcon from 'components/icons/pencil'
+
+import ImageUploader from 'components/ImageUploader'
 import IconPhoto from 'components/icons/photo'
+import {updateRecruiter} from 'actions/companyJobs'
 
 export default class RecruiterSummary extends Component {
     render() {
         //const { recruiter: { firstName, lastName, position } } = this.props
-        const { recruiter: { fullName, position } } = this.props
+        const { recruiter: { fullName, position, avatar } } = this.props
         const { authorization: {email}, onEdit} = this.props
         return (
             <div class="summary-head">
                 <div class="summary-head__title mdl-card__title">
                     <div class="summary-head__title-item">
                         <div class="summary-head__title-column">
-                            <UploadImage
+                            <ImageUploader
+                                label="Photo"
                                 iconPhoto={<IconPhoto />}
-                                controllerId='SummaryHeadRecruiter'
+                                imageId={avatar}
+                                onSuccessAction={(data) => updateRecruiter({avatar:data.id})}
                             />
                             <div class="summary-head__title-block">
                                 <h2 class="mdl-card__title-text heading heading_type_two">

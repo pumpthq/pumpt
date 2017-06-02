@@ -15,6 +15,8 @@ import {
 } from './../../../constants/routes';
 import { logOut } from './../../../actions/authorization';
 
+import {apiImage} from 'components/helpers'
+
 const mapStateToProps = state => {
     return {recruiter: state.companyJobs.recruiter, company: state.companyJobs.company}
 }
@@ -55,7 +57,7 @@ export default class RecruiterHeaderMenu extends Component {
                 addition={
                     <HeaderDropDownMenu
                         userName={`${recruiter.fullName} @ ${company.name}`}
-                        userAvatar={company.logo}
+                        userAvatar={apiImage(company.logo)}
                         progress={company.fillProgress}
                         linkTo={"/recruiter/edit"}
                     >

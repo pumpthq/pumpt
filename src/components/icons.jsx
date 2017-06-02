@@ -9,3 +9,5 @@ export const OkIcon = fa('ok')
 
 export const AprroveFill = fa('heart')
 export const ApproveOpen = fa('heart-o')
+
+export const FileImage = fa('file-image-o')

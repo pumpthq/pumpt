@@ -4,7 +4,7 @@ import { Link } from 'react-router'
 import { postBookmark, postReject, postApprove, viewVacancy } from '../../actions/candidateMatches'
 
 import { BookmarkOpen, BookmarkFill, Decline, ApproveOpen, ApproveFill } from 'components/icons'
-import { tintedBackground } from 'components/helpers'
+import { tintedBackground, apiImage } from 'components/helpers'
 
 import './card.less'
 
@@ -57,11 +57,11 @@ export default class Summary extends Component {
     renderMatchInformation() {
         const { score, company, vacancy, backgroundTint } = this.props
         return (
-            <div className="summary-head" style={ tintedBackground(company.brief.background,...backgroundTint) } >
+            <div className="summary-head" style={ tintedBackground(apiImage(company.brief.background),...backgroundTint) } >
                 <div className="summary-head__title mdl-card__title">
                     <div className="summary-head__title-item">
                         <div className="summary-head__title-column">
-                            <img className="image image_round image_size_xxl image_type_company-logo" src={company.brief.logo}/>
+                            <img className="image image_round image_size_xxl image_type_company-logo" src={apiImage(company.brief.logo)}/>
                             <div className="summary-head__title-block">
                                 <h2 className="mdl-card__title-text heading heading_color_invert heading_type_two">
                                     {company.brief.name}

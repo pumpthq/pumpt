@@ -9,7 +9,7 @@ import ButtonLink from 'components/parts/buttonLink'
 
 import { ApproveOpen, Decline } from 'components/icons'
 
-import { tintedBackground } from 'components/helpers'
+import { tintedBackground, apiImage } from 'components/helpers'
 
 import { browserHistory } from 'react-router'
 
@@ -96,11 +96,11 @@ export default class Profile extends Component {
         const { company, title, state, salary, experience, employment, backgroundTint, degree } = this.props
         const { name, logo, background } = company
         return (
-            <div className="summary-head" style={ tintedBackground(background,...backgroundTint) }>
+            <div className="summary-head" style={ tintedBackground(apiImage(background),...backgroundTint) }>
                 <div className="summary-head__title mdl-card__title">
                     <div className="summary-head__title-item">
                         <div className="summary-head__title-column">
-                            <img className="image image_round image_size_xxl image_type_company-logo" src={logo}/>
+                            <img className="image image_round image_size_xxl image_type_company-logo" src={apiImage(logo)}/>
                             <div className="summary-head__title-block">
                                 <h2 className="mdl-card__title-text heading heading_color_invert heading_type_two">
                                     {name}

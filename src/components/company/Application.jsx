@@ -62,7 +62,7 @@ export default class ApplicationForm extends Component {
 
                     <CardDivider/>
 
-                    <FieldArray field={images} label="Photos" component={ImageEntry} />
+                    <UploadArray field={images} label="Photos" component={ImageEntry} />
 
                     <CardDivider/>
 
@@ -82,12 +82,50 @@ export default class ApplicationForm extends Component {
   }
 }
 
+import ImageUploader from 'components/ImageUploader'
+import {FileImage} from 'components/icons'
+
+export const UploadArray = (props) => {
+    const { field, label } = props
+    const Item = props.component
+    return (
+        <div>
+            <ImageUploader
+                label="Image"
+                iconPhoto={<FileImage size='2x'/>}
+                onSuccessAction={(data) => {
+                    field.addField(data.id); // ⚠️ this is a hack to work around for building an action for the reducer!
+                    return {type:"FAKE_ACTION_HACK_FOR_ADDING_IMAGE_TO_FIELD_ARRAY"}
+
+                    //🌟 below is the correct way, to build and return the action dispatched by `field.addField(data.id)`
+                    // return {
+                    //     type: "redux-form/ADD_ARRAY_VALUE",
+                    //     path: "images",
+                    //     fields: [""],
+                    //     value: data.id,
+                    //     form: "company-application"
+                    // }
+
+                }}
+            />
+            {field.map((child, index) =>
+                <div key={index}>
+                    <Item field={child} />
+                    <button type="button" onClick={() => {
+                      field.removeField(index)  // remove from index
+                    }}><i>Remove</i>
+                    </button>
+                </div>
+            )}
+        </div>
+    )
+}
+
+import {apiImage} from 'components/helpers'
 const ImageEntry = props => {
     const { field } = props
     return (
-        <div>
-            [image entry placeholder]
-        </div>
+        <img src={apiImage(field.value)} className="image image_width_full"/>
     )
 }
 

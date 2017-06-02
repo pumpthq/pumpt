@@ -1,9 +1,8 @@
 import CompanyApplicationContainer from './company/ApplicationContainer'
 import CandidateApplicationContainer from './candidate/ApplicationContainer'
-
+import ApplicationContainer from 'containers/application/ApplicationContainer'
 import RequireAuth from 'wrappers/RequireAuth'
 
-const ApplicationContainer = (props) => (<div>{props.children}</div>)
 
 module.exports = {
     path: 'application',

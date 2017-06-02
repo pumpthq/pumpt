@@ -19,6 +19,8 @@ import Footer from 'components/main/footer/footer';
 
 import ApplicationSuccessDialog from 'components/application/ApplicationSuccessDialog'
 
+import {apiImage} from 'components/helpers'
+
 function mapStateToProps(state, ownProps) {
     return { recruiter: state.companyJobs.recruiter, company: state.companyJobs.company, authorization: state.authorization }
 }
@@ -53,7 +55,7 @@ export default class ApplicationContainer extends Component {
                         <div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
                             <HeaderMini
                                 class="header_small"
-                                profilePhoto={recruiter.avatar}
+                                profilePhoto={apiImage(recruiter.avatar)}
                                 logo={logoImage}
                                 name={`${recruiter.firstName} ${recruiter.lastName}`}
                                 progress={recruiter.fillProgress}

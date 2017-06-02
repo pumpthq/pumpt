@@ -4,6 +4,7 @@ import { find } from 'lodash'
 
 import MatchRecruiterActions from 'components/matches/RecruiterActions'
 import './matches.less'
+import { apiImage } from 'components/helpers'
 
 const propTypes = {};
 const defaultProps = {
@@ -62,6 +63,7 @@ const CandidateItem = (props) => {
             <h4>{firstName} {lastName}</h4>
             <div className="vacancy-details">{industry}</div>
             <div className="vacancy-details">{salary}</div>
+            <img src={apiImage(avatar)} className="col-xs-4"/>
 
             <div className="button-block">
               <MatchRecruiterActions match={match} />

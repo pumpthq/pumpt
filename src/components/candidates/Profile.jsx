@@ -1,6 +1,8 @@
 import React, {Component, PropTypes} from 'react';
 import { browserHistory } from 'react-router'
 
+import { apiImage } from 'components/helpers'
+
 const propTypes = {};
 const defaultProps = {
     candidate: false,
@@ -25,7 +27,7 @@ export default class CandidateProfile extends Component {
                 <CardDivider />
 
                 <div className="col-xs-4">
-                    <img src={avatar}></img>
+                    <img src={apiImage(avatar)}></img>
                 </div>
 
                 <div className="col-xs-8">
