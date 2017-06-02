@@ -45,6 +45,14 @@ export default class ApplicationContainer extends Component {
         this.setState({lastApproved:(new Date)})
     }
 
+    handleFinished = () => {
+
+        //🔧 use 'ref' prop to find and submit the application form (handled by redux-form) and dispatch finishApplication action
+        this.refs.applicationForm.submit();
+        this.props.dispatch(finishApplication());
+    }
+
+
     render() {
         const { recruiter, company, dispatch } = this.props
 
@@ -87,9 +95,26 @@ export default class ApplicationContainer extends Component {
                                             }
 
                                             <CompanyApplicationForm
+                                                ref="applicationForm"
                                                 initialValues={company}
                                                 onSubmit={values=> {dispatch(updateCompany(values)) } }/>
                                             </div>
+
+                                            {/* hide the "FINISH" button if already finished */}
+                                            {!authorization.isFinished &&
+                                                <div className="text-center">
+                                                    <Button
+                                                        type='submit'
+                                                        typeColored
+                                                        buttonSize='l'
+                                                        onClick={this.handleFinished}
+
+                                                    >
+                                                        All Set For Now?
+                                                    </Button>
+
+                                                </div>
+                                            }
                                         </div>
                                             <Footer />
 

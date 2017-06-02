@@ -80,34 +80,16 @@ class HeadingProgress extends Component {
             )
         }
         // Default view. if profile is NOT approved & NOT filled. There is no button "Get Matches".
-        if(!isFinished) {
+        if(isFinished) {
             return (
                 <div className="text-center">
-                    <H1 noGutter typeFour class='row'>Just a couple more steps.</H1>
+                    <H1 noGutter typeFour class='row'>Your Application is awaiting approval</H1>
                     <p class="text text_after_big-head text_size_xs">
-    								Please take this opportunity to tell us more about your company and what makes your culture unique.
+                        Soon you will be able to access your matches!
                     </p>
-
-                  <Button
-                    type='submit'
-                    typeColored
-                    buttonSize='l'
-                    onClick={()=>dispatch(finishApplication())}
-                  >
-                    Finished ?
-                  </Button>
                 </div>
             )
         }
-
-        return (
-            <div className="text-center">
-                <H1 noGutter typeFour class='row'>Your Application is awaiting approval</H1>
-                <p class="text text_after_big-head text_size_xs">
-                    Soon you will be able to access your matches!
-                </p>
-            </div>
-        )
     }
 }
 
