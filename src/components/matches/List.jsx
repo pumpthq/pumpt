@@ -51,7 +51,7 @@ const CandidateItem = (props) => {
         <div className={ status === 'rejected' ? "matched-item dimmed" : "matched-item" }>
 
           <div className="match-avatar-block">
-            <img src={avatar} className="match-avatar"/>
+            <img src={apiImage(avatar)} className="match-avatar"/>
             <br/>
             <h4>status: <span>{status}</span></h4>
           </div>
@@ -61,7 +61,6 @@ const CandidateItem = (props) => {
             <h4>{firstName} {lastName}</h4>
             <div className="vacancy-details">{industry}</div>
             <div className="vacancy-details">{salary}</div>
-            <img src={apiImage(avatar)} className="col-xs-4"/>
 
             <div className="button-block">
               <MatchRecruiterActions match={match} />

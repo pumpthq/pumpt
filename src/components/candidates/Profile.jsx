@@ -47,11 +47,11 @@ export default class CandidateProfile extends Component {
 
               <div className="profile-data">
 
-                <div className="col-xs-4">
+                <div className="col-xs-8">
 										<div className="profile-data__item">
 											<Case/><span className="item-title">Experience</span>
 											{
-												workingExperience.map(exp => <div className="item-title-text">Company: {exp.companyName}<br/>
+												workingExperience ? "" : workingExperience.map(exp => <div className="item-title-text">Company: {exp.companyName}<br/>
 												Position: {exp.position}<br/>Location: {exp.location}<br/>Duty: {exp.duty}</div>)
 											}
 										</div>
