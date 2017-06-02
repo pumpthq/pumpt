@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import { browserHistory } from 'react-router'
 
-import { apiImage } from 'components/helpers'
+//import { apiImage } from 'components/helpers'
 import Case from '../icons-application/case'
 import Education from '../icons-application/education'
 import Pin from '../icons-application/pin'
@@ -33,7 +33,6 @@ export default class CandidateProfile extends Component {
               <div className="profile-head">
 
                 <div className="profile-avatar">
-                    <img src={avatar}></img>
                 </div>
 
                 <div className="profile-head-info">
