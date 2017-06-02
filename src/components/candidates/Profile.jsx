@@ -77,15 +77,22 @@ export default class CandidateProfile extends Component {
               <div className="profile-data">
 
                 <div className="col-xs-8">
-										<div className="profile-data__item">
-											<Case/><span className="item-title">Experience</span>
-												{workingExperience.map((exp) => <div className="item-title-text">Company: {exp.companyName}<br/>Position: {exp.position}<br/>Location: {exp.location}<br/>Duty: {exp.duty}</div>)};
-										</div>
+                    <img src={apiImage(avatar)}></img>
+                <div className="profile-data__item">
+                  <Case/><span className="item-title">Experience</span>
+                  {
+                    workingExperience && workingExperience.map(exp => <div className="item-title-text">Company: {exp.companyName}<br/>
+                    Position: {exp.position}<br/>Location: {exp.location}<br/>Duty: {exp.duty}</div>)
+                  }
+                </div>
 
-										<div className="profile-data__item">
-											<Education/><span className="item-title">Education</span>
-												<EducationDisplay education={education} />,
-										</div>
+                <div className="profile-data__item">
+                  <Education/><span className="item-title">Education</span>
+                  {
+                    education && education.map(exp => <div className="item-title-text">School Name: {exp.schoolName}<br/>
+                    Speciality: {exp.speciality}<br/>Degree: {exp.degree}</div>)
+                  }
+                </div>
 
 										<div className="profile-data__item">
 											<Pin/><span className="item-title">Location</span>
