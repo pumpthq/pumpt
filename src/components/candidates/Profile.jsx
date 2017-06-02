@@ -33,7 +33,7 @@ export default class CandidateProfile extends Component {
               <div className="profile-head">
 
                 <div className="profile-avatar">
-                  <img src={avatar}/>
+                    <img src={avatar}></img>
                 </div>
 
                 <div className="profile-head-info">
@@ -49,7 +49,6 @@ export default class CandidateProfile extends Component {
               <div className="profile-data">
 
                 <div className="col-xs-4">
-                    <img src={apiImage(avatar)}></img>
 										<div className="profile-data__item">
 											<Case/><span className="item-title">Experience</span>
 											{
