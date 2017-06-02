@@ -111,7 +111,7 @@ const LabeledValue = (props) => (
         <span>{props.value}</span>
     </div>
 )
-const CardDivider = () => (<div className="summary-head__title-item summary-head__title-item_type_alignment summary-head__title-item_type_middle"></div>)
+const CardDivider = () => (<div className="summary-head__title-item summary-head__title-item_type_alignment summary-head__title-item_type_middle"></div>);
 
 CandidateProfile.propTypes = propTypes;
 CandidateProfile.defaultProps = defaultProps;
