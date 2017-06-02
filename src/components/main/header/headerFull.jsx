@@ -40,7 +40,7 @@ export default class HeaderFull extends Component {
         return (
             <header className="header header-full">
                 <div className="header__item">
-                    <a href="/" className="logo">
+                    <a href="http://pumpthq.com/" className="logo">
                         {this.renderLogo(logoImage)}
                     </a>
                     <nav className="navigation navigation_color_invert navigation_inline">

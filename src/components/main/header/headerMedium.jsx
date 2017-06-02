@@ -8,7 +8,7 @@ export default class HeaderMedium extends Component {
         return (
             <header class='header header_mini'>
                 <div class='header__item'>
-                    <a href='/' class='logo logo_full'>
+                    <a href="http://pumpthq.com/" class="logo logo_full">
                         <svg class='icon icon-logo'>
                         </svg>
                     </a>

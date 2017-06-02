@@ -77,7 +77,7 @@ export default class HeaderMini extends Component {
         return (
             <header class={`header ${className}`}>
                 <div class="header__item">
-                    <a href="" class="logo logo_full">
+                    <a href="http://pumpthq.com/" class="logo logo_full">
                         { logo ?
                             <img class="icon icon-logo" src={logo} />
                             : null
