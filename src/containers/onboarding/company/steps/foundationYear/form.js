@@ -12,7 +12,7 @@ import {
 
 const InputProps = {
     type : 'number',
-    min : 1,
+    min : 1700,
     max : new Date().getFullYear()
 }
 
