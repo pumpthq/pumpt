@@ -54,7 +54,7 @@ export default class ApplicationContainer extends Component {
 
 
     render() {
-        const { recruiter, company, dispatch } = this.props
+        const { recruiter, company, dispatch, authorization } = this.props
 
         return (
             <Wrapper id='onboarding-recruiter'>
