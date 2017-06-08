@@ -3,6 +3,7 @@ import GlassDoorImage from 'img/glassdoor.jpg'
 import { reduxForm } from 'redux-form'
 import { tintedBackground } from 'components/helpers'
 import { browserHistory } from 'react-router'
+import { Picker } from 'react-month-picker'
 
 import { Location, EnumSelector, TextArea, TextInput, DateInput } from 'components/form/inputs'
 import ExperiencedInputDropdown from '../../components/parts/experiencedInputDropdown';
@@ -14,9 +15,11 @@ import {
     DEGREES_DROPDOWN_DATA,
 } from 'constants/companyJobs';
 
+
 import STATES from 'constants/states.json';
 
 import PencilIcon from 'components/icons/pencil'
+import Skills from 'components/icons-application/skills'
 import CaseIcon from 'components/icons-application/case'
 import Education from 'components/icons-application/education'
 import Heart from 'components/icons-application/heart'
@@ -29,6 +32,35 @@ import './style.less'
 
 
 const stateMap = Object.keys(STATES).map(id=> ({id,title:STATES[id]}))
+const pickerLang = {
+            months: ['Jan', 'Feb', 'Mar', 'Spr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+            , from: 'From', to: 'To'
+        }
+        , mvalue = {year: 2015, month: 11}
+        , mrange = {from: {year: 2014, month: 8}, to: {year: 2015, month: 5}}
+
+const makeText = m => {
+        if (m && m.year && m.month) return (pickerLang.months[m.month-1] + '. ' + m.year)
+        return '?'
+    }
+
+class MonthBox extends Component {
+		constructor(props, context) {
+				super(props, context)
+
+				this.state = {
+						value: this.props.value || 'N/A'
+				}
+
+				this._handleClick = this._handleClick.bind(this)
+		}
+
+		componentWillReceiveProps(nextProps){
+				this.setState({
+						value: nextProps.value || 'N/A'
+				})
+		}};
+export MonthBox;
 
 const ExperienceEntry = props => {
     const { field: { companyName, position, city, state, duty, isCurrentJob, startWorkingAt, endWorkingAt } } = props
@@ -50,14 +82,25 @@ const ExperienceEntry = props => {
             <TextInput field={duty} placeholder="Description of your work" />
 					</div>
 					<div class="col-md-3">
-            <DateInput field={startWorkingAt} placeholder="Start Date" />
+            <TextInput field={startWorkingAt} placeholder="Start Date" />
 					</div>
 					<div class="col-md-3">
-            <DateInput field={endWorkingAt} placeholder="End Date" />
+						<Picker
+							ref="pickAMonth"
+							years={[2008, 2010, 2011, 2012, 2014, 2015, 2016, 2017]}
+							value={ {year:2017, month:5} }
+							lang={pickerLang.months}
+							/*onChange={this.handleAMonthChange}
+							onDismiss={this.handleAMonthDissmis}*/
+							>
+							<MonthBox value={makeText(mvalue)} onClick={this.handleClickMonthBox} />
+						</Picker>
 					</div>
         </div>
     )
 }
+
+
 
 const EducationEntry = props => {
     const { field: { schoolName, speciality, degree, startStudyAt, endStudyAt } } = props
@@ -80,6 +123,16 @@ const EducationEntry = props => {
 					</div>
         </div>
     )
+}
+
+
+const SkillEntry = props => {
+	const { field: { title, value, alternative, items } } = props
+	return (
+			<div class="row skill-application-item">
+			SKILLS
+			</div>
+		)
 }
 
 @reduxForm({
@@ -149,29 +202,24 @@ export default class ApplicationForm extends Component {
                     <FieldArray field={education} label="Education" component={EducationEntry} />
                     <CardDivider/>
 
-                    <Heart/>
-                    <UploadArray field={interests} label="Interests" component={InterestEntry} />
-                    <CardDivider/>
+                    <Skills/>
+                    <FieldArray field={skills} label="Skills" component={SkillEntry} />
 
-                    <Pin/><p className="icon-item">Location</p>
-                    <Location field={location} />
-                    <CardDivider/>
-
-                    <Social/><p className="icon-item">Social Media</p>
+                    <Social/>
+										<h2 className="social-application-item">Add Social Media</h2>
 
                     <div className="social-media-block">
                       <LinkedInIcon />
-                      <TextInput field={socialMedia.linkedInUrl} label="LinkedIn" classItm="label-item-location" />
+                      <TextInput field={socialMedia.linkedInUrl} label="LinkedIn" classItm="label-item-social" />
 
                       <TwitterIcon />
-                      <TextInput field={socialMedia.twitterAcc} label="Twitter" classItm="label-item-location" />
+                      <TextInput field={socialMedia.twitterAcc} label="Twitter" classItm="label-item-social" />
 
                       <FacebookIcon />
-                      <TextInput field={socialMedia.faceBookUrl} label="Facebook" clasclassItm="label-item-location" />
+                      <TextInput field={socialMedia.faceBookUrl} label="Facebook" classItm="label-item-social" />
                     </div>
                     <CardDivider/>
 
-                    {/* <FieldArray field={skills} label="Skills" component={SkillEntry} /> */}
 
                     {/* <div>
                         <button type="button" onClick={() => {
@@ -274,11 +322,10 @@ import ImageUploader from 'components/ImageUploader'
 import {FileImage} from 'components/icons'
 
 export const UploadArray = (props) => {
-    const { field: {image, description}, label } = props
+    const { field, label } = props
     const Item = props.component
     return (
         <div className="application-item">
-            <TextInput field={description} placeholder="Description" />
             <ImageUploader
                 label="Add Interest"
                 onSuccessAction={(data) => {
