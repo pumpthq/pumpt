@@ -32,35 +32,6 @@ import './style.less'
 
 
 const stateMap = Object.keys(STATES).map(id=> ({id,title:STATES[id]}))
-const pickerLang = {
-            months: ['Jan', 'Feb', 'Mar', 'Spr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-            , from: 'From', to: 'To'
-        }
-        , mvalue = {year: 2015, month: 11}
-        , mrange = {from: {year: 2014, month: 8}, to: {year: 2015, month: 5}}
-
-const makeText = m => {
-        if (m && m.year && m.month) return (pickerLang.months[m.month-1] + '. ' + m.year)
-        return '?'
-    }
-
-class MonthBox extends Component {
-		constructor(props, context) {
-				super(props, context)
-
-				this.state = {
-						value: this.props.value || 'N/A'
-				}
-
-				this._handleClick = this._handleClick.bind(this)
-		}
-
-		componentWillReceiveProps(nextProps){
-				this.setState({
-						value: nextProps.value || 'N/A'
-				})
-		}};
-export MonthBox;
 
 const ExperienceEntry = props => {
     const { field: { companyName, position, city, state, duty, isCurrentJob, startWorkingAt, endWorkingAt } } = props
@@ -85,16 +56,7 @@ const ExperienceEntry = props => {
             <TextInput field={startWorkingAt} placeholder="Start Date" />
 					</div>
 					<div class="col-md-3">
-						<Picker
-							ref="pickAMonth"
-							years={[2008, 2010, 2011, 2012, 2014, 2015, 2016, 2017]}
-							value={ {year:2017, month:5} }
-							lang={pickerLang.months}
-							/*onChange={this.handleAMonthChange}
-							onDismiss={this.handleAMonthDissmis}*/
-							>
-							<MonthBox value={makeText(mvalue)} onClick={this.handleClickMonthBox} />
-						</Picker>
+            <TextInput field={endWorkingAt} placeholder="End Date" />
 					</div>
         </div>
     )
@@ -116,10 +78,10 @@ const EducationEntry = props => {
             <EnumSelector field={degree} label="Degree" options={DEGREES_DROPDOWN_DATA} />
 					</div>
 					<div class="col-md-3">
-            <DateInput field={startStudyAt} placeholder="Start Date" />
+            <TextInput field={startStudyAt} placeholder="Start Date" />
 					</div>
 					<div class="col-md-3">
-            <DateInput field={endStudyAt} placeholder="End Date" />
+            <TextInput field={endStudyAt} placeholder="End Date" />
 					</div>
         </div>
     )
@@ -130,7 +92,7 @@ const SkillEntry = props => {
 	const { field: { title, value, alternative, items } } = props
 	return (
 			<div class="row skill-application-item">
-			SKILLS
+				<TextInput field={title} placeholder="Skill" />
 			</div>
 		)
 }
