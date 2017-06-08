@@ -5,6 +5,9 @@ import { tintedBackground } from 'components/helpers'
 import { browserHistory } from 'react-router'
 
 import { Location, EnumSelector, TextArea, TextInput, DateInput } from 'components/form/inputs'
+import ExperiencedInputDropdown from '../../components/parts/experiencedInputDropdown';
+import LocationFilter from '../../components/parts/locationFilter';
+import { OnboardingInput } from '../../components/onboarding';
 
 import {
     EMPLOYEMENTS_DROPDOWN_DATA,
@@ -28,15 +31,30 @@ import './style.less'
 const stateMap = Object.keys(STATES).map(id=> ({id,title:STATES[id]}))
 
 const ExperienceEntry = props => {
-    const { field: { companyName, position, location, duty, isCurrentJob, startWorkingAt, endWorkingAt } } = props
+    const { field: { companyName, position, city, state, duty, isCurrentJob, startWorkingAt, endWorkingAt } } = props
     return (
-        <div>
+        <div class="row">
+					<div class="col-md-12">
             <TextInput field={companyName} placeholder="Company Name" />
+					</div>
+					<div class="col-md-6">
             <TextInput field={position} placeholder="Title" />
-            <EnumSelector field={location} options={stateMap} />
+					</div>
+					<div class="col-md-3">
+            <TextInput field={city} placeholder="City" />
+					</div>
+					<div class="col-md-3">
+            <TextInput field={state} placeholder="State" />
+					</div>
+					<div class="col-md-12">
             <TextInput field={duty} placeholder="Description of your work" />
-            <DateInput field={startWorkingAt} placeholder="start date" />
-            <DateInput field={endWorkingAt} placeholder="end date" />
+					</div>
+					<div class="col-md-3">
+            <DateInput field={startWorkingAt} placeholder="Start Date" />
+					</div>
+					<div class="col-md-3">
+            <DateInput field={endWorkingAt} placeholder="End Date" />
+					</div>
         </div>
     )
 }
@@ -44,12 +62,22 @@ const ExperienceEntry = props => {
 const EducationEntry = props => {
     const { field: { schoolName, speciality, degree, startStudyAt, endStudyAt } } = props
     return (
-        <div>
+        <div class="row">
+					<div class="col-md-12">
             <TextInput field={schoolName} placeholder="School Name" />
+					</div>
+					<div class="col-md-6">
             <TextInput field={speciality} placeholder="Field of Study" />
+					</div>
+					<div class="col-md-6">
             <EnumSelector field={degree} label="Degree" options={DEGREES_DROPDOWN_DATA} />
-            <DateInput field={startStudyAt} placeholder="start date" />
-            <DateInput field={endStudyAt} placeholder="end date" />
+					</div>
+					<div class="col-md-3">
+            <DateInput field={startStudyAt} placeholder="Start Date" />
+					</div>
+					<div class="col-md-3">
+            <DateInput field={endStudyAt} placeholder="End Date" />
+					</div>
         </div>
     )
 }
@@ -61,7 +89,8 @@ const EducationEntry = props => {
         'workingExperience[].companyName',
         'workingExperience[].position',
         'workingExperience[].duty',
-        'workingExperience[].location',
+        'workingExperience[].city',
+        'workingExperience[].state',
         'workingExperience[].startWorkingAt',
         'workingExperience[].endWorkingAt',
         'workingExperience[].isCurrentJob',
@@ -94,7 +123,7 @@ const EducationEntry = props => {
 export default class ApplicationForm extends Component {
     constructor(props) {
       super(props)
-      this.state = { isEdit: false }
+      this.state = { isEdit: true }
     }
 
     onEdit = () => {
@@ -111,18 +140,6 @@ export default class ApplicationForm extends Component {
 
       return (
                 <form onSubmit={handleSubmit} className={`candidate-application-form ${this.state.isEdit && "text-input-underlined"}`}>
-
-                  {
-                    !this.state.isEdit &&
-                    <a class="link edit-link" onClick={this.onEdit}
-                       style={{
-                         visibility: 'visible',
-                         opacity: 1
-                       }}>
-                      <PencilIcon />
-                      &nbsp;Edit
-                    </a>
-                  }
 
                     <CaseIcon/>
                     <FieldArray field={workingExperience} label="Experience" component={ExperienceEntry} />
@@ -231,7 +248,8 @@ const FieldArray = (props) => {
         <div className="application-item">
             <button className="application-item-button" type="button" onClick={() => {
               field.addField()    // pushes empty child field onto the end of the array
-            }}><i/> Add {label}
+            }}><i/>
+						{field.length === 0 && 'Add'} {label}
             </button>
 
             {field.map((child, index) =>
@@ -243,6 +261,11 @@ const FieldArray = (props) => {
                     </button>
                 </div>
             )}
+
+					{field.length > 0 && <button className="add-entry mdl-button" type="button" onClick={() => {
+							field.addField()    // pushes empty child field onto the end of the array
+						}}>Add
+					</button>}
         </div>
     )
 }
@@ -251,12 +274,13 @@ import ImageUploader from 'components/ImageUploader'
 import {FileImage} from 'components/icons'
 
 export const UploadArray = (props) => {
-    const { field, label } = props
+    const { field: {image, description}, label } = props
     const Item = props.component
     return (
         <div className="application-item">
+            <TextInput field={description} placeholder="Description" />
             <ImageUploader
-                label="Interest"
+                label="Add Interest"
                 onSuccessAction={(data) => {
                     field.addField({image:data.id,description:''}); // ⚠️ this is a hack to work around for building an action for the reducer!
                     return {type:"FAKE_ACTION_HACK_FOR_ADDING_IMAGE_TO_FIELD_ARRAY"}
@@ -294,9 +318,12 @@ import {apiImage} from 'components/helpers'
 const InterestEntry = props => {
     const { field: { image, description } } = props
     return (
-        <div>
-            <img src={apiImage(image.value)} className="image image_width_full"/>
+        <div className="application-item interest-application-item">
+					<div class="row">
+
             <TextInput field={description} placeholder="Description" />
+            <img src={apiImage(image.value)} className="image image_width_full"/>
+					</div>
         </div>
     )
 }
