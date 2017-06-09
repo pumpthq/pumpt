@@ -89,10 +89,12 @@ const EducationEntry = props => {
 
 
 const SkillEntry = props => {
-	const { field: { title, value, alternative, items } } = props
+	const { field: { title, value, alternative } } = props
 	return (
 			<div class="row skill-application-item">
-				<TextInput field={title} placeholder="Skill" />
+				<div clas="col-md-12 skill-application-item-input">
+					<TextInput field={title} placeholder="Skill" />
+				</div>
 			</div>
 		)
 }
@@ -111,6 +113,9 @@ const SkillEntry = props => {
         'workingExperience[].isCurrentJob',
 
         'skills[]',
+        'skills[].title',
+        'skills[].value',
+        'skills[].alternative',
 
         'interests[]',
         'interests[].image',
@@ -165,7 +170,7 @@ export default class ApplicationForm extends Component {
                     <CardDivider/>
 
                     <Skills/>
-                    <FieldArray field={skills} label="Skills" component={SkillEntry} />
+                    <FieldArray field={skills} label="Skills" className="skill-application-items" component={SkillEntry} />
 
                     <Social/>
 										<h2 className="social-application-item">Add Social Media</h2>
