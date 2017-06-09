@@ -236,10 +236,6 @@ export default class ApplicationForm extends Component {
                   <TextArea field={responsibilities} label="Responsibilities" />
                   <TextArea field={requirements} label="Requirements" /> */}
 
-
-
-
-
                   <div>
                     <button type="submit" disabled={submitting}
                     className="mdl-button button invisible-mobile button_type_colored button_size_m candidate-submit">
@@ -266,6 +262,7 @@ const FieldArray = (props) => {
             }}><i/>
 						{field.length === 0 && 'Add'} {label}
             </button>
+						{field.length > 0 && label !== "Skills"  && <p class="application-item-subtitle">Please add in chronological order</p>}
 
             {field.map((child, index) =>
                 <div key={index} className="info-block">
