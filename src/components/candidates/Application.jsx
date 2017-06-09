@@ -3,7 +3,6 @@ import GlassDoorImage from 'img/glassdoor.jpg'
 import { reduxForm } from 'redux-form'
 import { tintedBackground } from 'components/helpers'
 import { browserHistory } from 'react-router'
-import { Picker } from 'react-month-picker'
 
 import { Location, EnumSelector, TextArea, TextInput, DateInput } from 'components/form/inputs'
 import ExperiencedInputDropdown from '../../components/parts/experiencedInputDropdown';
