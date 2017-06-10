@@ -87,11 +87,7 @@ export default class ApplicationContainer extends Component {
 														initialValues={candidate}
 														onSubmit={values=> {dispatch(updateCandidate(values)) } }/>
 
-															{/* //WIP: putting the submit button here is causeing issue with the state not working (API complains) also wasn't able to combine this function with the
-															//...finishApplication action */}
 
-                                                {/* hide the "FINISH" button if already finished */}
-												{!authorization.isFinished &&
                                                     <div className="text-center">
     													<Button
     														type='submit'
@@ -100,11 +96,10 @@ export default class ApplicationContainer extends Component {
     														onClick={this.handleFinished}
 
     													>
-    														All Set For Now?
+    													 Done	
     													</Button>
 
     												</div>
-                                                }
 												<span>
 												<br></br>
 												<br></br>
