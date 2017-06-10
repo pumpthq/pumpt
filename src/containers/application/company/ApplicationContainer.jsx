@@ -100,8 +100,6 @@ export default class ApplicationContainer extends Component {
                                                 onSubmit={values=> {dispatch(updateCompany(values)) } }/>
                                             </div>
 
-                                            {/* hide the "FINISH" button if already finished */}
-                                            {!authorization.isFinished &&
                                                 <div className="text-center">
                                                     <Button
                                                         type='submit'
@@ -110,18 +108,13 @@ export default class ApplicationContainer extends Component {
                                                         onClick={this.handleFinished}
 
                                                     >
-                                                        All Set For Now?
+                                                       Done 
                                                     </Button>
 
                                                 </div>
                                             }
                                         </div>
                                             <Footer />
-
-                {/* ⚠️ temporary button to open dialog */}
-                <button onClick={this.openDialog}>open application success dialog {JSON.stringify(this.state.lastApproved)}</button>
-
-                <ApplicationSuccessDialog trigger={this.state.lastApproved} />
 
             </Wrapper>
         )
