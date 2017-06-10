@@ -49,10 +49,8 @@ class SummaryHeadStandard extends Component {
                                 iconPhoto={<IconPhoto />}
                                 controllerId='SummaryHeadCandidate'
                             />
-                            {`
-
-
-            `}
+														<br></br>
+														<br></br>
                             <div class="summary-head__title-block">
                                 <h2 class="mdl-card__title-text heading heading_type_two">
                                     <span class="ellipsis-text">

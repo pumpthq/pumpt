@@ -40,6 +40,7 @@ class HeadingProgress extends Component {
                             typeColored
                             buttonSize='l'
                             onClick={this.onClickGetMatches}
+														href="http://app.pumpthq.com/#/candidate/matches/all"
                         >
                             Get Matches
                         </Button>
@@ -53,6 +54,7 @@ class HeadingProgress extends Component {
                         typeColored
                         buttonSize='l'
                         onClick={this.onClickGetMatches}
+														href="http://app.pumpthq.com/#/candidate/matches/all"
                     >
                         Get Matches
                     </Button>
@@ -74,6 +76,7 @@ class HeadingProgress extends Component {
                         typeColored
                         buttonSize='l'
                         onClick={this.onClickGetMatches}
+														href="http://app.pumpthq.com/#/candidate/matches/all"
                     >
                         Get Matches
                     </Button>
