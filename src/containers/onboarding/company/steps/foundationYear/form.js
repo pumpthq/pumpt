@@ -41,11 +41,9 @@ const InputProps = {
             const minYear = InputProps.min
             const maxYear = InputProps.max
 
+
             if (intYear < minYear || intYear > maxYear) {
                 throw new Error('Year is out of boundaries')
-            }
-						if (Number.isInteger(intYear)) {
-                throw new Error('Not a Number')
             }
         } catch (ex) {
             errors.foundationYear = 'Invalid year'
