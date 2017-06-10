@@ -83,9 +83,9 @@ class HeadingProgress extends Component {
         if(isFinished) {
             return (
                 <div className="text-center">
-                    <H1 noGutter typeFour class='row'>Your Application is awaiting approval</H1>
+                    <H1 noGutter typeFour class='row'>Just a Few More Steps</H1>
                     <p class="text text_after_big-head text_size_xs">
-                        Soon you will be able to access your matches!
+										Please take this opportunity to tell us more about your company and what makes your culture unique.
                     </p>
                 </div>
             )
