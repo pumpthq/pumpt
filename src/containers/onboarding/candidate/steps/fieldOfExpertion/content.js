@@ -103,7 +103,7 @@ class FieldOfExpertiseContent extends Component {
                     preselectedItem={id}
                     preselectedValue={value}
                     handleGroups={true}
-                    otherPlaceholder={'enter experience here'}
+                    otherPlaceholder={'Enter Experience Here'}
                 />
                 <div class='form__actions'>
                     <Button

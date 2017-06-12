@@ -59,13 +59,6 @@ export default class ApplicationSuccessDialog extends Component {
                     open={this.state.open}
                     onRequestClose={this.handleClose}
                 >
-                    {/* <button
-                        style={buttonStyle}
-                        className="button button_type_close"
-                        onClick={this.handleToggle}
-                    >
-                        ×
-                    </button> */}
                     <div>
 												<h3>Thank you for your application!</h3>
 												<p>You’ll be notified via email when you’ve been accepted (or not) by Pumpt. In the meantime, you can log in anytime to add details to your application.</p>

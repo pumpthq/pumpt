@@ -91,7 +91,7 @@ const SkillEntry = props => {
 	const { field: { title, value, alternative } } = props
 	return (
 			<div class="row skill-application-item">
-				<div clas="col-md-12 skill-application-item-input">
+				<div class="col-md-12 skill-application-item-input">
 					<TextInput field={title} placeholder="Skill" />
 				</div>
 			</div>

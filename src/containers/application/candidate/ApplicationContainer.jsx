@@ -38,6 +38,7 @@ export default class ApplicationContainer extends Component {
     }
 
     openDialog = () => {
+			console.log("\nHANDLING FINISHED!!...");
         this.setState({lastApproved:(new Date)})
     }
 
@@ -46,6 +47,7 @@ export default class ApplicationContainer extends Component {
         //🔧 use 'ref' prop to find and submit the application form (handled by redux-form) and dispatch finishApplication action
         this.refs.applicationForm.submit();
         this.props.dispatch(finishApplication());
+				this.openDialog();
     }
 
 
@@ -94,10 +96,10 @@ export default class ApplicationContainer extends Component {
     														typeColored
     														buttonSize='l'
     														onClick={this.handleFinished}
-
     													>
     													 Done	
     													</Button>
+															<ApplicationSuccessDialog trigger={authorization.lastFinished} />
 
     												</div>
 												<span>

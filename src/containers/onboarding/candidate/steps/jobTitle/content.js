@@ -93,7 +93,7 @@ class JobTitleContent extends Component {
                     preselectedItem={id}
                     preselectedValue={value}
                     handleGroups={false}
-                    otherPlaceholder={'enter title here'}
+                    otherPlaceholder={'Enter Title Here'}
                 />
                 <div class='form__actions'>
                     <Button
