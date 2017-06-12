@@ -14,25 +14,39 @@ export default class CompanySummary extends Component {
         const { city, state } = locationHeadquarters
         const { authorization: {email}, onEdit} = this.props
         return (
-                <div class="summary-head">
-                    <div class="summary-head__title mdl-card__title">
-
-                        <div class="summary-head__title-item">
-                            <div class="summary-head__title-column">
+                <div class="summary-head company-summary-head">
+									<div class="summary-head__title mdl-card__title">
+										<div class="row">
+											<div class="col-md-1 col-lg-1 col-sm-2 col-xs-12">
+												<div class="row">
+													<div class="col-md-12 col-sm-12 col-xs-3">
                                 <ImageUploader
                                     label="Logo"
                                     iconPhoto={<BuildingIcon />}
                                     imageId={logo}
                                     onSuccessAction={(data) => updateCompany({logo:data.id})}
                                 />
+																<br></br>
+																<br></br>
+																<br></br>
+																<br></br>
+													</div>
+													<div class="col-md-12 col-sm-12 col-xs-3">
                                 <ImageUploader
                                     label="Background"
                                     iconPhoto={<BuildingIcon />}
                                     imageId={background}
                                     onSuccessAction={(data) => updateCompany({background:data.id})}
                                 />
+													</div>
+												</div>
+											</div>
+											<div class="col-md-11 col-lg-11 col-sm-10 col-xs-12">
 
+                        <div class="summary-head__title-item">
+                            <div class="row summary-head__title-column">
                                 <div class="summary-head__title-block">
+																	<div class="summary-head__title-block">
                                     <h2 class="mdl-card__title-text heading heading_type_two">
                                         {` ${name}`}
                                         <a class="link" onClick={onEdit}
@@ -46,8 +60,9 @@ export default class CompanySummary extends Component {
                                     </h2>
                                 </div>
                             </div>
+													</div>
                         </div>
-                        <div class="summary-head__title-item summary-head__title-item_type_alignment">
+                        <div class="summary-head__title-item">
                             <div class="summary-head__title-column">
                                 <span class="text summary-head__label">Headquarters</span>
                                 <span class="text text_size_s summary-head__summary">{`${city}, ${state.slice(0,2)}`}</span>
@@ -65,6 +80,8 @@ export default class CompanySummary extends Component {
                                 <span class="text text_size_s summary-head__summary">{` ${foundDate}`}</span>
                             </div>
                         </div>
+											</div>
+                    </div>
                     </div>
                 </div>
         )

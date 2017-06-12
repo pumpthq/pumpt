@@ -16,6 +16,8 @@ import { updateRecruiter, updateCompany } from 'actions/applicationCompany'
 import Panel from 'components/main/panel';
 import StepProgress from 'components/application/stepProgress';
 import Footer from 'components/main/footer/footer';
+import Button from 'components/main/button'
+import { finishApplication } from 'actions/authorization'
 
 import ApplicationSuccessDialog from 'components/application/ApplicationSuccessDialog'
 
@@ -50,6 +52,7 @@ export default class ApplicationContainer extends Component {
         //🔧 use 'ref' prop to find and submit the application form (handled by redux-form) and dispatch finishApplication action
         this.refs.applicationForm.submit();
         this.props.dispatch(finishApplication());
+				this.openDialog();
     }
 
 
@@ -98,7 +101,6 @@ export default class ApplicationContainer extends Component {
                                                 ref="applicationForm"
                                                 initialValues={company}
                                                 onSubmit={values=> {dispatch(updateCompany(values)) } }/>
-                                            </div>
 
                                                 <div className="text-center">
                                                     <Button
@@ -106,17 +108,19 @@ export default class ApplicationContainer extends Component {
                                                         typeColored
                                                         buttonSize='l'
                                                         onClick={this.handleFinished}
-
                                                     >
                                                        Done 
                                                     </Button>
-
+																										<ApplicationSuccessDialog trigger={authorization.lastFinished} />
                                                 </div>
-                                            }
+																								<span>
+																									<br></br>
+																									<br></br>
+																								</span>
+                                            </div>
                                         </div>
-                                            <Footer />
-
-            </Wrapper>
+																			<Footer />
+											</Wrapper>
         )
     }
 }

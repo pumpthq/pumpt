@@ -38,7 +38,6 @@ export default class ApplicationContainer extends Component {
     }
 
     openDialog = () => {
-			console.log("\nHANDLING FINISHED!!...");
         this.setState({lastApproved:(new Date)})
     }
 
@@ -85,12 +84,10 @@ export default class ApplicationContainer extends Component {
 														<CandidateSummary {...this.props} onEdit={()=>this.editSummary(true)}/>
 												}
 												<CandidateApplicationForm
-                                                        ref="applicationForm"
+														ref="applicationForm"
 														initialValues={candidate}
 														onSubmit={values=> {dispatch(updateCandidate(values)) } }/>
-
-
-                                                    <div className="text-center">
+														<div className="text-center">
     													<Button
     														type='submit'
     														typeColored
@@ -100,14 +97,12 @@ export default class ApplicationContainer extends Component {
     													 Done	
     													</Button>
 															<ApplicationSuccessDialog trigger={authorization.lastFinished} />
-
     												</div>
-												<span>
-												<br></br>
-												<br></br>
-												</span>
-
-                    </div>
+														<span>
+															<br></br>
+															<br></br>
+														</span>
+												</div>
                 </div>
                 <Footer />
 

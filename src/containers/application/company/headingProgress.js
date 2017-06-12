@@ -80,7 +80,7 @@ class HeadingProgress extends Component {
             )
         }
         // Default view. if profile is NOT approved & NOT filled. There is no button "Get Matches".
-        if(isFinished) {
+				else {
             return (
                 <div className="text-center">
                     <H1 noGutter typeFour class='row'>Just a Few More Steps</H1>
