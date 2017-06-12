@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import { reduxForm } from 'redux-form'
-import { Location, EnumSelector, TextArea, TextInput, FieldArray } from 'components/form/inputs'
+import { Location, EnumSelector, TextArea, TextInput} from 'components/form/inputs'
 
 import QuoteIcon from 'components/icons-application/quote'
 import ChainIcon from 'components/icons-application/chain'
@@ -62,9 +62,11 @@ export default class ApplicationForm extends Component {
                   </div>
 
                   <Pin/><p className="icon-item">Location</p>
-                  <div className="location">
-                    <Location field={locationHeadquarters} label="Headquarters" />
-                    <CardDivider/>
+                  <div>
+										<div className="application-item">
+											<Location  field={locationHeadquarters} label="Headquarters" />
+										</div>
+											<CardDivider/>
 
                     <FieldArray field={locationOffices} label="Offices" component={Location} />
                     <CardDivider/>
@@ -105,7 +107,7 @@ export const UploadArray = (props) => {
     const { field, label } = props
     const Item = props.component
     return (
-        <div>
+        <div class="image-upload">
             <ImageUploader
                 label="Image"
                 iconPhoto={<FileImage size='2x'/>}
@@ -133,6 +135,35 @@ export const UploadArray = (props) => {
                     </button>
                 </div>
             )}
+        </div>
+    )
+}
+
+const FieldArray = (props) => {
+    const { field, label } = props
+    const Item = props.component
+    return (
+        <div className="application-item">
+            <button className="application-item-button" type="button" onClick={() => {
+              field.addField()    // pushes empty child field onto the end of the array
+            }}><i/>
+						{field.length === 0 && 'Add'} {label}
+            </button>
+
+            {field.map((child, index) =>
+                <div key={index} className="info-block">
+                    <Item field={child} />
+                    <button className="remove-entry" type="button" onClick={() => {
+                      field.removeField(index)  // remove from index
+                    }}><i>Remove</i>
+                    </button>
+                </div>
+            )}
+
+					{field.length > 0 && <button className="add-entry mdl-button" type="button" onClick={() => {
+							field.addField()    // pushes empty child field onto the end of the array
+						}}>Add
+					</button>}
         </div>
     )
 }

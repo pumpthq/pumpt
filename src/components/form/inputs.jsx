@@ -133,19 +133,21 @@ export class Location extends Component {
     return (
         <div className="location-field">
             <label>{label}</label>
-            <div>
-              <label>City</label>
-              <div>
-                <PureInput type="text" placeholder="City" field={city}/>
-              </div>
-            </div>
+						<div class="row">
+							<div class="col-md-3">
+								<label>City</label>
+								<div>
+									<PureInput type="text" placeholder="City" field={city}/>
+								</div>
+							</div>
 
-            <div>
+            <div class="col-md-3">
               <label>State</label>
               <div>
                 <EnumSelector field={state} options={stateMap}/>
               </div>
             </div>
+					</div>
             {abilityToRelocate &&
                 <label><input type="checkbox" {...abilityToRelocate}/> Ability To Relocate</label>
             }
