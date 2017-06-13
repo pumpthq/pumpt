@@ -13,6 +13,7 @@ import { postApprove } from 'actions/companyJobs'
 export default class ApproveAndEmailCandidateDialog extends Component {
     state = {
         open: false,
+				messageText: ""
     };
 
     componentWillReceiveProps(nextProps) {
@@ -45,7 +46,7 @@ export default class ApproveAndEmailCandidateDialog extends Component {
 
     render() {
 
-        const { fields: { subject, body}, trigger } = this.props
+        const { fields: { subject, body}, trigger, messageText="" } = this.props
 
         return (
                 <Dialog
@@ -56,10 +57,11 @@ export default class ApproveAndEmailCandidateDialog extends Component {
                     <div>
                         Time to contact the candidate!
                         <div>
-                            <TextInput field={subject} label="Subject" />
-                            <TextArea field={body} label="Message" />
+
+                            <TextInput field={subject} label="Subject" value="Job Opportunity via Pumpt"/>
+														<TextArea field={body} classTa="message-textarea" label="Message" value={"Hi,\n\nYou were highly matched to a job we posted on Pumpt. I’d like to connect with you soon to discuss this position.\n\nPlease let me know when you’re available to speak.\n\nThank you."}/>
                         </div>
-                        <a href={`mailto:${trigger ? trigger.candidate.brief.user.email : 'no@email.com'}?subject=${subject.value}&body=${body.value}`} onClick={this.handleSubmit}>Approve and Email</a>
+                        <a href={`mailto:${trigger ? trigger.candidate.brief.user.email : 'no@email.com'}?subject=${subject.value}&body=${body.value}&bcc=$info@pumpthq.com`} onClick={this.handleSubmit}>Approve and Email</a>
                     </div>
                 </Dialog>
         );

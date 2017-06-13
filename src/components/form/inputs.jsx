@@ -30,7 +30,7 @@ export const EnumSelector = (props) => {
 }
 
 export const TextArea = (props) => {
-    const { field, label, classLb, classTa } = props
+    const { field, label, classLb, classTa, value } = props
     return (
         <div className="form-item">
           <label className={classLb}>{label}</label>
@@ -40,7 +40,7 @@ export const TextArea = (props) => {
               {...field}
               // required for reset form to work (only on textarea's)
               // see: https://github.com/facebook/react/issues/2533
-              value={field.value || ''}/>
+              value={value ? value : ''}/>
           </div>
         </div>
     )
