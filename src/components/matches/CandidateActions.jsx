@@ -29,7 +29,7 @@ function ApplyOption(props){
 	else if(props.vacancy.status=="approved"){
 	}
 	else{
-		html=<ButtonApply onClick={props.postApprove} icon={<ApproveOpen className=""/>}>Apply</ButtonApply>;
+		html=<ButtonApply onClick={props.postApprove} icon={<ApproveOpen className=""/>}>Connect</ButtonApply>;
 	}
 	return html;
 }
