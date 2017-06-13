@@ -21,6 +21,7 @@ const defaultProps = {
 class ClosedCard extends Component {
     render() {
         const {
+            _id,
             title,
             state,
             salary,
