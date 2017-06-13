@@ -40,7 +40,10 @@ function LocationDisplay(props){
 	var html = null;
 	if (props.location === null){
 		return null;
-	}else{
+	}else if(typeof props.location === 'undefined'){
+		return null;
+	}
+	else{
 		return (<div className='item-title-text'>City: {props.location.city}<br/>State: {props.location.state}</div>);
 	}
 }
