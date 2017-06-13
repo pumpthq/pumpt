@@ -15,7 +15,7 @@ import { find } from 'lodash'
 
 @reduxForm({
     form: 'job',
-    fields: ['title', 'state', 'salary', 'experience', 'employment', 'degree', 'industry', 'industryParent', 'description', 'responsibilities[]', 'requirements[]'],
+    fields: ['title', 'city', 'state', 'salary', 'experience', 'employment', 'degree', 'industry', 'industryParent', 'description', 'responsibilities[]', 'requirements[]'],
 })
 class JobForm extends Component {
 
@@ -43,7 +43,7 @@ class JobForm extends Component {
 
   render() {
     const {
-      fields: { title, state, salary, experience, employment, degree, industry, industryParent, description, responsibilities, requirements },
+      fields: { title, city, state, salary, experience, employment, degree, industry, industryParent, description, responsibilities, requirements },
       handleSubmit,
       resetForm,
       submitting,
@@ -65,13 +65,18 @@ class JobForm extends Component {
               </div>
               <div>
                 <label>Location</label>
-                <div>
-                  <select {...state} value={state.value || ''} className="mdl-textfield__input">
-                    <option value='' disabled>Select One...</option>
-                    {Object.keys(STATES).map(state =>
-                      <option key={state} value={STATES[state]}>{STATES[state]}</option>
-                    )}
-                  </select>
+                <div class="row">
+									<div class="col-md-6">
+										<input type="text" className="" field={city} placeholder="City" />
+									</div>
+									<div class="col-md-6">
+										<select {...state} value={state.value || ''} className="mdl-textfield__input">
+											<option value='' disabled>State</option>
+											{Object.keys(STATES).map(state =>
+												<option key={state} value={STATES[state]}>{STATES[state]}</option>
+											)}
+										</select>
+									</div>
                 </div>
               </div>
 
@@ -172,7 +177,8 @@ const TextArray = (props) => {
         <div>
             <button className="mdl-button new-job-add-button" type="button" onClick={() => {
               field.addField()    // pushes empty child field onto the end of the array
-            }}><i/> Add {label}
+            }}><i/>
+						{field.length === 0 && 'Add'} {label}
             </button>
 
             {field.map((child, index) =>
@@ -184,6 +190,10 @@ const TextArray = (props) => {
                     </button>
                 </div>
             )}
+					{field.length > 0 && <button className="add-entry mdl-button" type="button" onClick={() => {
+							field.addField()    // pushes empty child field onto the end of the array
+						}}>Add
+					</button>}
         </div>
     )
 }

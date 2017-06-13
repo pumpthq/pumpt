@@ -38,7 +38,7 @@ const AllPlaceholder = (props) => {
 const BookmarkedPlaceholder = (props) => {
     return (
         <div className="welcome-to-matches-popup">
-            <h3>You Want to Save Your Job Matches? Use The Bookmark Feature.</h3>
+            <h3>You Want to Save Your Job Matches?<br></br>Use The Bookmark Feature.</h3>
             <div className="message">
 						You’ll be able to save all job matches you’re interested in by bookmarking them.
 						</div>
