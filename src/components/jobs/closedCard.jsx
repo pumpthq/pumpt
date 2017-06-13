@@ -74,8 +74,7 @@ class ClosedCard extends Component {
                     <div className="card__middle-block">
                         <div className="row">
                             <div className="col-lg-5 no-right-gutter">
-                                <a className="link link_size_s" href="">{matches} Matches</a>
-                                <p className="text text_color_l-grey">67–98% match</p>
+                                <p className="link link_size_s">{matches} Matches</p>
                             </div>
                             <div className="col-lg-7">
                                 <div className="image__hor-list text-right">
@@ -95,7 +94,6 @@ class ClosedCard extends Component {
                             </Link>
 
                             <div className="mdl-layout-spacer" />
-                            <a href="" className="button button_type_text-icon button_color_grey"> ... </a>
                         </div>
                     </form>
                 </div>

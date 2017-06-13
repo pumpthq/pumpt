@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import { browserHistory } from 'react-router'
 
-//import { apiImage } from 'components/helpers'
+import { apiImage } from 'components/helpers'
 import Case from '../icons-application/case'
 import Education from '../icons-application/education'
 import Pin from '../icons-application/pin'
@@ -39,10 +39,10 @@ function EducationDisplay(props){
 function LocationDisplay(props){
 	var html = null;
 	if (props.location === null){
+		return null;
 	}else{
-		html="<div className='item-title-text'>City: {props.location.city}<br/>State: {props.location.state}</div>";
+		return (<div className='item-title-text'>City: {props.location.city}<br/>State: {props.location.state}</div>);
 	}
-	return html;
 }
 
 export default class CandidateProfile extends Component {
@@ -62,10 +62,10 @@ export default class CandidateProfile extends Component {
               <div className="profile-head">
 
                 <div className="profile-avatar">
+                    <img src={apiImage(avatar)}></img>
                 </div>
 
                 <div className="profile-head-info">
-                  <h2>Job: { title }</h2>
                   <h4>{ `${lastName}, ${firstName}` }</h4>
                   <LabeledValue label="Recent Income" value={candidate.recentAnnualIncome} />
                   <LabeledValue label="Recent Job" value={candidate.recentJob} />
@@ -77,7 +77,6 @@ export default class CandidateProfile extends Component {
               <div className="profile-data">
 
                 <div className="col-xs-8">
-                    <img src={apiImage(avatar)}></img>
                 <div className="profile-data__item">
                   <Case/><span className="item-title">Experience</span>
                   {
