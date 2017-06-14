@@ -49,7 +49,7 @@ const ExperienceEntry = props => {
             <TextInput field={state} placeholder="State" />
 					</div>
 					<div class="col-md-12">
-            <TextInput field={duty} placeholder="Description of your work" />
+            <TextArea field={duty} inputClass="text-area" placeholder="Description of your work" readOnly="false"/>
 					</div>
 					<div class="col-md-3">
             <TextInput field={startWorkingAt} placeholder="Start Date" />

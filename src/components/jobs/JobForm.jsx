@@ -12,6 +12,7 @@ import {
 } from 'constants/companyJobs';
 import STATES from 'constants/states.json';
 import { find } from 'lodash'
+import { TextArea } from 'components/form/inputs'
 
 @reduxForm({
     form: 'job',
@@ -98,10 +99,10 @@ class JobForm extends Component {
 
             <div className="recruter__newjob-card__form-bottom">
 
-              <TextArea field={description} label="Job Description" classLb="job-decription-label" classTa="job-decription-ta"/>
+              <TextArea field={description} label="Job Description" labelClass="job-decription-label" inputClass="text-area"/>
 
-              <TextArray field={responsibilities} label="Responsibilities" />
-              <TextArray field={requirements} label="Skills & Requirements" />
+              <TextArray field={responsibilities} label="Responsibilities" placeholder="New Responsiblity..." />
+              <TextArray field={requirements} label="Skills & Requirements"placeholder="New Skill/Requirement..." />
 
               <button className="new-job-submit-matching" type="submit" disabled={submitting}>
                 {submitting ? <i/> : <i/>} Start Matching
@@ -142,22 +143,6 @@ const EnumSelector = (props) => {
     )
 }
 
-const TextArea = (props) => {
-    const { field, label, classLb, classTa } = props
-    return (
-        <div>
-          <label className={classLb}>{label}</label>
-          <div>
-            <textarea className={classTa}
-              {...field}
-              // required for reset form to work (only on textarea's)
-              // see: https://github.com/facebook/react/issues/2533
-              value={field.value || ''}/>
-          </div>
-        </div>
-    )
-}
-
 const TextInput = (props) => {
     const { field, label } = props
     return (
@@ -172,7 +157,7 @@ const TextInput = (props) => {
 }
 
 const TextArray = (props) => {
-    const { field, label } = props
+    const { field, label, placeholder } = props
     return (
         <div>
             <button className="mdl-button new-job-add-button" type="button" onClick={() => {
@@ -183,10 +168,10 @@ const TextArray = (props) => {
 
             {field.map((child, index) =>
                 <div key={index}>
-                    <TextInput field={child} label={label} />
-                    <button type="button" onClick={() => {
+										<TextArea field={child} inputClass="text-area" placeholder={placeholder}/>
+                    <button type="button" className="remove-entry" onClick={() => {
                       field.removeField(index)  // remove from index
-                    }}><i>Cancel</i>
+                    }}><i>Remove</i>
                     </button>
                 </div>
             )}

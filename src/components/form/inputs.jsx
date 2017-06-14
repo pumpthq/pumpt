@@ -4,6 +4,7 @@ import { change } from 'redux-form'
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
+import { reduxForm } from 'redux-form'
 
 export const EnumSelector = (props) => {
     const {field, label, options, onChange, onBlur} = props
@@ -29,21 +30,38 @@ export const EnumSelector = (props) => {
     )
 }
 
-export const TextArea = (props) => {
-    const { field, label, classLb, classTa, value } = props
+export class TextArea extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: 				props.value,
+			placeholder: 	props.placeholder,
+			labelClass: 	props.labelClass,
+			inputClass: 	props.inputClass,
+			readOnly: 		props.readOnly,
+			field: 				props.field,
+			label:				props.label
+
+    };
+
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(event) {
+    this.setState({value: event.target.value});
+  }
+
+  render() {
+    const { field, label, inputClass, labelClass, value, placeholder, readOnly } = this.props
     return (
-        <div className="form-item">
-          <label className={classLb}>{label}</label>
-          <div>
-            <textarea
-              className={classTa}
-              {...field}
-              // required for reset form to work (only on textarea's)
-              // see: https://github.com/facebook/react/issues/2533
-              value={value ? value : ''}/>
-          </div>
-        </div>
-    )
+			<div>
+        <label class={this.state.labelClass}>
+				{this.state.label}
+          <textarea class={this.state.inputClass} value={this.state.value} placeholder={this.state.placeholder} onChange={this.handleChange} />
+        </label>
+			</div>
+    );
+  }
 }
 
 export const TextInput = (props) => {
