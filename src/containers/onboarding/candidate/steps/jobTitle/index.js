@@ -16,11 +16,11 @@ class JobTitleStep extends Component {
         return (
             <div class='container'>
                 <div class='row row-padding-bigger'>
-                    <div class='col-lg-12 col-md-12 col-sm-12 col-xs-12 column__wrapper'>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 column__wrapper">
                         <section class='column column_size_l'>
                             <Panel paddingBig>
                                 <H1 noGutter typeFour class='row'>
-                                    <span class='col-lg-10 col-md-10 col-sm-10 col-xs-10'>What is your current job title?</span>
+                                    <span class='onboarding-header col-lg-10 col-md-10 col-sm-10 col-xs-10'>What is your current job title?</span>
                                 <span class='col-lg-2 col-md-2 col-sm-2 col-xs-2'>
                                     <span class='image__wrapper'>
                                         <img class='icon icon-onboarding-2' src={on4Image}/>

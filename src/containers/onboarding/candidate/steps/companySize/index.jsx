@@ -18,7 +18,7 @@ class CompanySizeStep extends Component {
                         <section class="column column_size_l">
                             <Panel paddingBig>
                                 <H1 noGutter typeFour className="row">
-                                    <span className="col-lg-10 col-md-10 col-sm-10 col-xs-10">What is your preferred company size?</span>
+                                    <span className="onboarding-header col-lg-10 col-md-10 col-sm-10 col-xs-10">What is your preferred company size?</span>
                                 <span className="col-lg-2 col-md-2 col-sm-2 col-xs-2">
                                     <span className="image__wrapper">
                                         <img className="icon icon-onboarding-2" src={on5Image} />

@@ -16,7 +16,7 @@ class ContactInfoStep extends Component {
                         <section class='column column_size_l'>
                             <Panel paddingBig>
                                 <H1 noGutter typeFour class='row'>
-                                    <span class='col-lg-10 col-md-10 col-sm-10 col-xs-10'>Hello. Tell us a little about your company.</span>
+                                    <span class='onboarding-header col-lg-10 col-md-10 col-sm-10 col-xs-10'>Hello. Tell us a little about your company.</span>
                                     <span class='col-lg-2 col-md-2 col-sm-2 col-xs-2'>
                                         <span class='image__wrapper'>
                                             <img class='icon icon-onboarding-1' src={on1Image}/>

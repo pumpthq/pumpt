@@ -31,7 +31,13 @@ export default class MatchesList extends Component {
               <div className="matches-head">
                 <h2>{ title }</h2>
                 <CardDivider />
-                <div className="matches-number">{ matches.length } Matches</div>
+                <div className="matches-number">{ matches.length } Match{ matches.length !== 1 && 'es'}</div>
+								{ matches.length === 0 &&
+									<div className="empty-matches-message">
+										<h3 className="message">No Matches Yet!</h3>
+										<div className="message">We'll let you know when you have new interested candidates</div>
+									</div>
+								}	
               </div>
 
                 { matches.map( match =>

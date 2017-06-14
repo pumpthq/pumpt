@@ -85,7 +85,7 @@ class OnboardingInput extends Component {
                 <input
                     {...props}
                     ref="input"
-                    style={{ paddingLeft: "25px" }}
+                    style={{ paddingLeft: "5px" }}
                     class="mdl-textfield__input textfield__input"
                     id={inputId}
                     onChange={inputOnChange}

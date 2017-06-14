@@ -27,7 +27,8 @@ const defaultProps = {
     industry: '{industry}',
     candidates: {
         briefs: []
-    }
+    },
+		matches: []
 };
 
 @connect(
@@ -45,6 +46,7 @@ class Card extends Component {
             industry,
             candidates,
             dispatch,
+						matches,
             _id,
         } = this.props;
         return (
@@ -97,7 +99,9 @@ class Card extends Component {
                         <div className="row">
                             <div className="col-xs-6 no-right-gutter">
                                 <Link className="link" to={`recruiter/jobs/${_id}/candidates`}>
-                                    {candidates.briefs.length} Matching
+																{/*WIP:below not working (always displays 0)
+                                    {matches.length} Matching*/}
+                                    View Matches
                                 </Link>
                                 {/* <p className="text text_color_l-grey">67–98% match</p> */}
                             </div>

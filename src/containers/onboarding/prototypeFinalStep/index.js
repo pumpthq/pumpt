@@ -15,12 +15,12 @@ class PrototypeFinalStep extends Component {
                         <section class='column column_size_l'>
                             <Panel paddingBig>
                                 <H1 noGutter typeFour class='row'>
-                                    <span class='col-lg-10 col-md-10 col-sm-10 col-xs-12'>Set up your password to improve security.</span>
+                                    <span class='onboarding-header col-lg-10 col-md-10 col-sm-10 col-xs-12'>Set up your password to improve security.</span>
                                     <span class="col-lg-2 col-md-2 col-sm-2 hidden-xs">
                                         <span class="image__wrapper"></span>
                                     </span>
                                 </H1>
-                                <p class='text text_after_big-head text_size_xs'>
+                                <p class='onboarding-header text text_after_big-head text_size_xs'>
                                     Password must be at least 6 characters long.
                                     To make password more secure, use upper and lowercase letters, digits, and symbols.
                                 </p>

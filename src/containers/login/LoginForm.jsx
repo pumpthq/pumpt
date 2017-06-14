@@ -73,7 +73,7 @@ class LoginForm extends Component {
                     <button
                         type="submit"
                         class="mdl-button button button_margin-right_m button_type_colored button_size_50p"
-                        onClick={handleSubmit}
+                        onSubmit={this.props.handleSubmit}
                         disabled={isDisabledSubmit}>Log In</button>
                     <Link class="link" to='/story/forgot'>Forgot Password?</Link>
                     </div>
