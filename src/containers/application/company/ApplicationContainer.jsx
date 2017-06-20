@@ -68,7 +68,7 @@ export default class ApplicationContainer extends Component {
                                 class="header_small"
                                 profilePhoto={apiImage(recruiter.avatar)}
                                 logo={logoImage}
-                                name={`${recruiter.firstName} ${recruiter.lastName}`}
+                                name={`${recruiter.fullName}`}
                                 progress={recruiter.fillProgress}
                             />
                         </div>
