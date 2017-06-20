@@ -85,9 +85,9 @@ class JobForm extends Component {
               <EnumSelector field={experience} label="Experience" options={EXPERIENCE_DROPDOWN_DATA} />
               <EnumSelector field={employment} label="Employment" options={EMPLOYEMENTS_DROPDOWN_DATA} />
               <EnumSelector field={degree} label="Degree" options={DEGREES_DROPDOWN_DATA} />
-              <EnumSelector field={industryParent} label="Industry" options={FIELD_OF_EXPERTISE_DROPDOWN_DATA}
+              <EnumSelector field={industryParent} label="Field of Expertise" options={FIELD_OF_EXPERTISE_DROPDOWN_DATA}
                             onBlur={this.updateIndustries} />
-              <EnumSelector field={industry} label="Field of Expertise" options={this.state.industries} />
+              <EnumSelector field={industry} label="Specialty" options={this.state.industries} />
 
               <div>
                 <button className="new-job-submit-save" type="submit" disabled={submitting}>
