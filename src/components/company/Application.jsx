@@ -73,11 +73,13 @@ export default class ApplicationForm extends Component {
                   </div>
 
                   <Description/>
-                    <TextInput field={description} label="Description" classItm="description" classLb="description-label" classInp="description-input"/>
+										<h2 className="recruiter-application-item">Description</h2>
+										<TextArea field={description} inputClass="text-area recruiter-text-area" placeholder="Description of your work" readOnly="false"/>
                     <CardDivider/>
 
                   <QuoteIcon/>
-                    <TextInput field={quoteOrMotto} label="Quote Or Motto" classItm="quote" classLb="quote-label" classInp="quote-input"/>
+										<h2 className="recruiter-application-item">Quote Or Motto</h2>
+										<TextArea field={quoteOrMotto} inputClass="text-area recruiter-text-area" placeholder="Your Company's Motto" readOnly="false"/>
                     <CardDivider/>
 
                     <UploadArray field={images} label="Photos" component={ImageEntry} />
