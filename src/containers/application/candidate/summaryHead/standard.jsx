@@ -85,6 +85,10 @@ class SummaryHeadStandard extends Component {
                             <span class="text summary-head__label">Industry Experience </span>
                             <span class="text text_size_s summary-head__summary">{onboardingState.experience}</span>
                         </div>
+                        <div class="summary-head__title-column">
+                            <span class="text summary-head__label">Industry Experience </span>
+                            <span class="text text_size_s summary-head__summary">{onboardingState.experience}</span>
+                        </div>
                     </div>
                 </div>
             </div>

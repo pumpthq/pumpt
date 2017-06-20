@@ -69,6 +69,10 @@ export default class SummaryHead extends Component {
                             <span class="text summary-head__label">Industry Experience </span>
                             <span class="text text_size_s summary-head__summary">{list.experience}</span>
                         </div>
+                        <div class="summary-head__title-column">
+                            <span class="text summary-head__label">Industry Experience </span>
+                            <span class="text text_size_s summary-head__summary">{list.experience}</span>
+                        </div>
                     </div>
                 </div>
             </div>

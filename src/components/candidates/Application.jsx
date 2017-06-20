@@ -52,10 +52,10 @@ const ExperienceEntry = props => {
             <TextArea field={duty} inputClass="text-area" placeholder="Description of your work" readOnly="false"/>
 					</div>
 					<div class="col-md-3">
-            <TextInput field={startWorkingAt} placeholder="Start Date" />
+            <TextInput field={startWorkingAt} placeholder="Start Date (MM/YYYY)" />
 					</div>
 					<div class="col-md-3">
-            <TextInput field={endWorkingAt} placeholder="End Date" />
+            <TextInput field={endWorkingAt} placeholder="End Date *MM/YYYY)" />
 					</div>
         </div>
     )
@@ -77,10 +77,10 @@ const EducationEntry = props => {
             <EnumSelector field={degree} label="Degree" options={DEGREES_DROPDOWN_DATA} />
 					</div>
 					<div class="col-md-3">
-            <TextInput field={startStudyAt} placeholder="Start Date" />
+            <TextInput field={startStudyAt} placeholder="Start Date (MM/YYYY)" />
 					</div>
 					<div class="col-md-3">
-            <TextInput field={endStudyAt} placeholder="End Date" />
+            <TextInput field={endStudyAt} placeholder="End Date (MM/YYYY)" />
 					</div>
         </div>
     )

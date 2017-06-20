@@ -9,7 +9,7 @@ import {updateCandidate} from 'actions/candidateMatches'
 
 export default class CandidateSummary extends Component {
     render() {
-        const { candidate: { firstName, lastName, avatar, recentWorkingArea, recentWorkingAreaParent, recentJob, recentAnnualIncome, recentAreaExperience } } = this.props
+        const { candidate: { firstName, lastName, avatar, interestWorkingArea, recentWorkingArea, recentWorkingAreaParent, recentJob, recentAnnualIncome, recentAreaExperience } } = this.props
         const { authorization: {email}, onEdit} = this.props
         return (
             <div class="summary-head">
@@ -39,9 +39,9 @@ export default class CandidateSummary extends Component {
                                 <div class="mdl-card__subtitle-text summary-head__subtitle-text">
                                     <span class="text ellipsis-text">{email}</span>
                                     <ul class="list list_type_inline">
-                                        <li class="list__item"><span class="text">{recentWorkingAreaParent}</span></li>
-                                        <li class="list__item"><span class="text">{recentWorkingArea}</span></li>
-                                        <li class="list__item"><span class="text">{recentJob}</span></li>
+                                        <li class="list__item"><span class="text"><span class="text summary-head__label">Industry</span>{interestWorkingArea}</span></li>
+                                        <li class="list__item"><span class="text"><span class="text summary-head__label">Working Area</span>{recentWorkingAreaParent}</span></li>
+                                        <li class="list__item"><span class="text"><span class="text summary-head__label">Specialty</span>{recentWorkingArea}</span></li>
                                     </ul>
                                 </div>
                             </div>
@@ -51,6 +51,10 @@ export default class CandidateSummary extends Component {
                         <div class="summary-head__title-column">
                             <span class="text summary-head__label">Annual Income</span>
                             <span class="text text_size_s summary-head__summary">{recentAnnualIncome}</span>
+                        </div>
+                        <div class="summary-head__title-column">
+                            <span class="text summary-head__label">Job Title </span>
+                            <span class="text text_size_s summary-head__summary">{recentJob}</span>
                         </div>
                         <div class="summary-head__title-column">
                             <span class="text summary-head__label">Industry Experience </span>

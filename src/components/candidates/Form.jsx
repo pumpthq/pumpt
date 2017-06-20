@@ -14,7 +14,7 @@ import {
 
 @reduxForm({
     form: 'candidate',
-    fields: [ 'firstName', 'lastName', 'email', 'recentWorkingArea', 'recentWorkingAreaParent', 'recentJob', 'recentAnnualIncome', 'recentAreaExperience']
+    fields: [ 'firstName', 'lastName', 'email', 'recentWorkingArea', 'recentWorkingAreaParent', 'recentJob', 'interestWorkingArea', 'recentAnnualIncome', 'recentAreaExperience']
 })
 export default class CandidateForm extends Component {
 
@@ -41,7 +41,7 @@ export default class CandidateForm extends Component {
 
     render() {
       const {
-        fields: { firstName, lastName, recentWorkingArea, recentWorkingAreaParent, recentJob, recentAnnualIncome, recentAreaExperience },
+        fields: { firstName, lastName, recentWorkingArea, recentWorkingAreaParent, recentJob, interestWorkingArea, recentAnnualIncome, recentAreaExperience },
         handleSubmit,
         onCancel,
         resetForm,
@@ -53,15 +53,16 @@ export default class CandidateForm extends Component {
                   <TextInput field={ lastName } label="Last Name" classLb="" classInp="mdl-textfield mdl-js-textfield textfield " />
                   {/* <TextInput field={ email } label="Email" /> */}
 
-                  <EnumSelector field={recentWorkingAreaParent} label="Industry" options={FIELD_OF_EXPERTISE_DROPDOWN_DATA}
+									<EnumSelector field={interestWorkingArea} label="Industry" options={INDUSTRY_DROPDOWN_DATA[0].items} />
+
+                  <EnumSelector field={recentWorkingAreaParent} label="Field of Expertise" options={FIELD_OF_EXPERTISE_DROPDOWN_DATA}
                                 onBlur={this.updateIndustries} />
-                  <EnumSelector field={recentWorkingArea} label="Field of Expertise" options={this.state.industries} />
+                  <EnumSelector field={recentWorkingArea} label="Specialty" options={this.state.industries} />
 
                   <EnumSelector field={recentJob} label="Job Title" options={JOB_TITLE_DROPDOWN_DATA[0].items} />
 
                   <EnumSelector field={recentAnnualIncome} label="Income" options={ANNUAL_INCOME_DROPDOWN_DATA} />
                   <EnumSelector field={recentAreaExperience} label="Experience" options={EXPERIENCE_DROPDOWN_DATA} />
-
 
                   <div className="candidate-buttons">
                     <button type="submit" disabled={submitting} className="mdl-button button button_type_colored button_size_m">
