@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { reduxForm } from 'redux-form'
-import validateJs from 'validate.js'
 import Form from './../../../../../components/main/form'
 import Button from './../../../../../components/main/button'
 import { ListLink, ListItem } from './../../../../../components/main/list'

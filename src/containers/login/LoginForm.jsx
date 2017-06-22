@@ -1,102 +1,88 @@
-import React, {Component, PropTypes} from 'react'
+import React, {Component} from 'react'
 import { Link } from 'react-router'
-import { reduxForm } from 'redux-form'
-import { OnboardingInput } from './../../components/onboarding'
+import { reduxForm, Field } from 'redux-form'
 import { uiLogin } from './../../sagas/authorization'
-import emailValidator from 'email-validator'
+import { connect } from 'react-redux';
 
-@reduxForm({
-    form : 'login',
-    fields : [
-        'email',
-        'password'
-    ],
-    validate : (values) => {
-        const errors = {}
 
-        if (!values.email) {
-            errors.email = 'Can\'t be blank'
-        } else if (!emailValidator.validate(values.email)) {
-            errors.email = 'Invalid Email'
-        }
+//Validations
+const required = value => (value ? undefined : 'Can\'t be Blank')
+const email = value =>
+  value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)
+    ? 'Invalid email address'
+    : undefined
+export const minLength = min => value =>
+  value && value.length < min ? `Must be ${min} characters or more` : undefined
 
-        if (!values.password) {
-            errors.password = 'Can\'t be blank'
-        }
+//Generalized Redux Field
+const renderField = ({
+  input,
+  label,
+  type,
+  meta: { touched, error }
+}) => (
+  <div>
+    <div>
+      <input class="mdl-textfield__input textfield__input" {...input} placeholder={label} type={type} />
+      {touched && (error && <span class="textfield__error">{error}</span>)}
+    </div>
+  </div>
+)
 
-        return errors
-    },
-    onSubmit : (fields, dispatch) => {
-        return uiLogin.apply({ dispatch }, [fields])
-    },
-    returnRejectedSubmitPromise: true
-})
-class LoginForm extends Component {
+const LoginForm = props => {
+	const { handleSubmit, submitting} = props
 
-    constructor(props) {
-        super(props)
+	return (
+			<form class="form form_padding-size_xs" onSubmit={handleSubmit(uiLogin)}>
+				<fieldset class="form__row form__row_indent-size_m">
+					<div class="mdl-textfield mdl-js-textfield textfield is-upgraded textfield_size_l">
+						<Field
+							name="email"
+							type="email"
+							component={renderField}
+							label="Email"
+							validate={[required, email]}
+						/>
+					</div>
+				</fieldset>
 
-        this.state = {}
-    }
 
-    render() {
-        const {
-            fields : {
-                email,
-                password
-            },
-            handleSubmit,
-            submitting,
-            invalid
-        } = this.props
-        const isDisabledSubmit = invalid || submitting
+				<fieldset class="form__row form__row_indent-size_m">
+					<div class="mdl-textfield mdl-js-textfield textfield is-upgraded textfield_size_l">
+						<Field
+							name="password"
+							type="password"
+							component={renderField}
+							label="Password"
+							validate={[required]}
+						/>
+					</div>
+				</fieldset>
 
-        return (
-            <form class="form form_padding-size_xs" onSubmit={handleSubmit}>
-                <fieldset class="form__row form__row_indent-size_m">
-                    <OnboardingInput
-                        label='Email'
-                        type="email"
-                        {...email}
-                        error={email.touched && email.error}
-                    />
-                </fieldset>
-                <fieldset class="form__row form__row_indent-size_m">
-                    <OnboardingInput
-                        label='Password'
-                        type='password'
-                        {...password}
-                        error={password.touched && password.error}
-                    />
-                </fieldset>
-                <div class="form__actions">
-                    <button
-                        type="submit"
-                        class="mdl-button button button_margin-right_m button_type_colored button_size_50p"
-                        onSubmit={this.props.handleSubmit}
-                        disabled={isDisabledSubmit}>Log In</button>
-                    <Link class="link" to='/story/forgot'>Forgot Password?</Link>
-                    </div>
-                <div class="form__subinfo">Not a member member yet? {` Begin as `}
-                    <Link class="link" to='/onboarding/candidate'>Candidate</Link>
-                    {` or `}
-                    <Link class="link" to='/onboarding/company'>Employer</Link>
-                </div>
-            </form>
-        )
-    }
+					<div class="form__actions">
+						<button
+							type="submit"
+							onSubmit={handleSubmit}
+							class="mdl-button button button_margin-right_m button_type_colored button_size_50p"
+							disabled={submitting}
+							>Log In</button>
+						<Link class="link" to='/story/forgot'>Forgot Password?</Link>
+					</div>
+					<div class="form__subinfo">Not a member member yet? {` Begin as `}
+						<Link class="link" to='/onboarding/candidate'>Candidate</Link>
+						{` or `}
+						<Link class="link" to='/onboarding/company'>Employer</Link>
+					</div>
 
+			</form>
+	)
 }
 
-LoginForm.propTypes = {
-    fields : PropTypes.shape({
-        email : PropTypes.object,
-        password : PropTypes.object
-    }),
-    handleSubmit : PropTypes.func,
-    submitting : PropTypes.bool,
-    invalid : PropTypes.bool
-}
-LoginForm.defaultProps = {}
-
-export default LoginForm
+export default reduxForm({
+	form: 'loginForm',
+	onSubmit: (values, dispatch) => {
+		return uiLogin.apply( {dispatch} )
+	},
+	returnRejectedSubmitPromise: true
+	
+})(LoginForm)

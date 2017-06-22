@@ -1,11 +1,12 @@
-import React, { Component, PropTypes } from 'react';
-import { reduxForm } from 'redux-form';
+import React, {Component} from 'react'
+import { Link } from 'react-router'
+import { reduxForm, Field } from 'redux-form'
 import { connect } from 'react-redux';
+import PlacesAutocomplete from 'react-places-autocomplete'
+import { geocodeByAddress, geocodeByPlaceId } from 'react-places-autocomplete'
+
 import co from 'co';
-import emailValidator from 'email-validator';
-import Form from './../../../../../components/main/form';
 import Button from './../../../../../components/main/button';
-import { OnboardingInput } from './../../../../../components/onboarding';
 import {
     THIS_EMAIL_IS_ALREADY_REGISTERED,
 } from './../../../../../constants/candidateOnboarding';
@@ -17,55 +18,112 @@ import {
     showIndustryStep,
 } from './../../../../../actions/candidateOnboarding';
 
-@connect(
-    (state) => {
-        const { candidateOnboarding } = state;
-        const { firstName, lastName, email, location } = candidateOnboarding;
 
-        return {
-            initialValues: {
-                firstName,
-                lastName,
-                email,
-                location,
-            },
-        };
-    }
+//Validations
+const required = value => (value ? undefined : 'Can\'t be Blank')
+const email = value =>
+  value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)
+    ? 'Invalid email address'
+    : undefined
+export const minLength = min => value =>
+  value && value.length < min ? `Must be ${min} characters or more` : undefined
+
+//Generalized Redux Field
+const renderField = ({
+  input,
+  label,
+  type,
+  meta: { touched, error }
+}) => (
+  <div>
+    <div>
+      <input class="mdl-textfield__input textfield__input" {...input} placeholder={label} type={type} />
+      {touched && (error && <span class="textfield__error">{error}</span>)}
+    </div>
+  </div>
 )
+
+//Props for AutoComplete Item (Special)
+ const inputProps = {
+    value: '', // `value` is required
+    onChange: '', // `onChange` is required
+    onBlur: () => {
+      console.log('blur!')
+    },
+    type: 'search',
+    placeholder: 'Current Employment Location',
+    autoFocus: true,
+  }
+const cssClasses = {
+	input: 'mdl-textfield__input textfield__input'
+}
+
+//Form
+const OnboardingCandidateContactInfo = props => {
+	const { handleSubmit, submitting } = props
+
+		return (
+				<form onSubmit={handleSubmit}>
+						<fieldset className="form__row">
+								<Field
+										label="First Name"
+										name="firstName"
+										type="text"
+										component={renderField}
+										validate={required}
+									/>
+						</fieldset>
+						<fieldset className="form__row">
+								<Field
+										label="Last Name"
+										name="lastName"
+										type="text"
+										component={renderField}
+										validate={required}
+									/>
+						</fieldset>
+						<fieldset className="form__row">
+								<Field
+										label="Email"
+										name="email"
+										type="email"
+										component={renderField}
+										validate={[email,required]}
+									/>
+						</fieldset>
+						<fieldset className="form__row">
+							<PlacesAutocomplete
+								inputProps={inputProps}
+								classNames={cssClasses}/>
+
+								<Field
+									name="abilityToRelocate"
+									id="abilityToRelocation"
+									component="input"
+									type="checkbox"
+								/>
+								<label>Willing to Relocate</label>
+						</fieldset>
+						<div className="form__actions">
+								<Button
+										type="submit"
+										typeColored
+										buttonSize="l"
+										disabled={submitting}
+								>
+										Get Started
+								</Button>
+						</div>
+				</form>
+		);
+}
+
+
+/*
 @reduxForm({
     form: 'onboardingCandidateContactInfo',
-    fields: [
-        'firstName',
-        'lastName',
-        'email',
-        'location'
-    ],
     alwaysAsyncValidate: true,
     asyncBlurFields: ['email'],
-    validate: (values) => {
-        const errors = {};
-
-        if (!values.firstName) {
-            errors.firstName = 'Can\'t be blank';
-        }
-
-        if (!values.lastName) {
-            errors.lastName = 'Can\'t be blank';
-        }
-
-        if (!values.email) {
-            errors.email = 'Can\'t be blank';
-        } else if (!emailValidator.validate(values.email)) {
-            errors.email = 'Invalid Email';
-        }
-
-
-        if (!values.location) {
-          errors.location = 'Can\'t be blank';
-        }
-
-        return errors;
-    },
     asyncValidate: (values) => {
         const { email } = values;
         return co(function* () {
@@ -99,75 +157,15 @@ import {
         dispatch(saveContactInfoData(fields));
         dispatch(showIndustryStep());
     },
-})
-    // TODO
-class ContactInfoForm extends Component {
-    render() {
-        const {
-            fields: {
-                firstName,
-                lastName,
-                email,
-                location,
-            },
-            handleSubmit,
-            submitting,
-            invalid,
-        } = this.props;
-        const isDisabledSubmit = invalid || submitting;
-
-        return (
-            <Form onSubmit={handleSubmit}>
-                <fieldset className="form__row">
-                    <OnboardingInput
-                        label="First Name"
-                        {...firstName}
-                        error={firstName.touched && firstName.error}
-                    />
-                </fieldset>
-                <fieldset className="form__row">
-                    <OnboardingInput
-                        label="Last Name"
-                        {...lastName}
-                        error={lastName.touched && lastName.error}
-                    />
-                </fieldset>
-                <fieldset className="form__row">
-                    <OnboardingInput
-                        type="email"
-                        label="Email"
-                        {...email}
-                        error={email.touched && email.error}
-                    />
-                </fieldset>
-                <fieldset className="form__row">
-                    <OnboardingInput
-                        label="Employment Location"
-                        {...location}
-                        error={location.touched && location.error}
-                    />
-                </fieldset>
-                <div className="form__actions">
-                    <Button
-                        type="submit"
-                        typeColored
-                        buttonSize="l"
-                        disabled={isDisabledSubmit}
-                    >
-                        Get Started
-                    </Button>
-                </div>
-            </Form>
-        );
-    }
-}
-
-ContactInfoForm.propTypes = {
-    fields: PropTypes.object,
-    asyncValidating: PropTypes.bool,
-    submitting: PropTypes.bool,
-    invalid: PropTypes.bool,
-    handleSubmit: PropTypes.func,
-};
-
-export default ContactInfoForm;
+})*/
+export default reduxForm({
+	form: 'loginForm',
+	onSubmit: (fields, dispatch) => {
+		dispatch(saveContactInfoData(fields));
+		dispatch(showIndustryStep());
+	},
+	onChange: () => {
+		console.log("doing things!");
+	}
+	
+})(OnboardingCandidateContactInfo)

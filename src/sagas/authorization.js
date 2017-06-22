@@ -2,6 +2,7 @@ import axios from 'axios';
 import { takeLatest } from 'redux-saga';
 import { push } from 'react-router-redux';
 import { select, call, put, take } from 'redux-saga/effects';
+import { SubmissionError } from 'redux-form'
 
 // import { changePassword } from '../api';
 
@@ -112,10 +113,10 @@ import {
 // ;
 
 export function uiLogin({ email, password }) {
+	return dispatch => {
     const credentials = { email, password };
-    const { dispatch } = this;
-
-    return dispatch(login(credentials))
+		dispatch(login(credentials))
+	}
 }
 
 // const composeProfile = ({ response }) => {

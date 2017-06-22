@@ -10,13 +10,13 @@ import authorization from './authorization';
 import companyJobs from './companyJobs';
 import candidateMatches from './candidateMatches';
 import apiError from './api';
+import { reducer as forms } from 'redux-form';
 
 import '../constants/dropdownData';
 
 const rootReducer = combineReducers({
     apiError,
     routing,
-    form,
     candidateOnboarding,
     applicationCandidate,
     companyOnboarding,
@@ -25,6 +25,7 @@ const rootReducer = combineReducers({
     authorization,
     companyJobs,
     candidateMatches,
+		form: forms,
 });
 
 export default rootReducer;

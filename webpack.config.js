@@ -19,10 +19,10 @@ module.exports = {
 
     module : {
         loaders : [
-            {
+						{
                 test : /\.(js|jsx)$/,
                 include: SRC_PATH,
-                loaders : ['react-hot','babel-loader']
+                loaders : ['babel-loader']
             },
             {
                 test : /\.css$/,

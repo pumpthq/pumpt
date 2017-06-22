@@ -1,22 +1,17 @@
 import React, {Component, PropTypes} from 'react';
 import GlassDoorImage from 'img/glassdoor.jpg'
-import { reduxForm } from 'redux-form'
+import { reduxForm, Field } from 'redux-form'
 import { tintedBackground } from 'components/helpers'
 import { browserHistory } from 'react-router'
-
 import { Location, EnumSelector, TextArea, TextInput, DateInput } from 'components/form/inputs'
 import ExperiencedInputDropdown from '../../components/parts/experiencedInputDropdown';
 import LocationFilter from '../../components/parts/locationFilter';
 import { OnboardingInput } from '../../components/onboarding';
-
 import {
     EMPLOYEMENTS_DROPDOWN_DATA,
     DEGREES_DROPDOWN_DATA,
 } from 'constants/companyJobs';
-
-
 import STATES from 'constants/states.json';
-
 import PencilIcon from 'components/icons/pencil'
 import Skills from 'components/icons-application/skills'
 import CaseIcon from 'components/icons-application/case'
@@ -29,74 +24,7 @@ import TwitterIcon from 'components/icons-application/twitter'
 import FacebookIcon from 'components/icons-application/facebook'
 import './style.less'
 
-
 const stateMap = Object.keys(STATES).map(id=> ({id,title:STATES[id]}))
-
-const ExperienceEntry = props => {
-    const { field: { companyName, position, city, state, duty, isCurrentJob, startWorkingAt, endWorkingAt } } = props
-    return (
-        <div class="row">
-					<div class="col-md-12">
-            <TextInput field={companyName} placeholder="Company Name" />
-					</div>
-					<div class="col-md-6">
-            <TextInput field={position} placeholder="Title" />
-					</div>
-					<div class="col-md-3">
-            <TextInput field={city} placeholder="City" />
-					</div>
-					<div class="col-md-3">
-            <TextInput field={state} placeholder="State" />
-					</div>
-					<div class="col-md-12">
-            <TextArea field={duty} inputClass="text-area" placeholder="Description of your work" readOnly="false"/>
-					</div>
-					<div class="col-md-3">
-            <TextInput field={startWorkingAt} placeholder="Start Date (MM/YYYY)" />
-					</div>
-					<div class="col-md-3">
-            <TextInput field={endWorkingAt} placeholder="End Date *MM/YYYY)" />
-					</div>
-        </div>
-    )
-}
-
-
-
-const EducationEntry = props => {
-    const { field: { schoolName, speciality, degree, startStudyAt, endStudyAt } } = props
-    return (
-        <div class="row">
-					<div class="col-md-12">
-            <TextInput field={schoolName} placeholder="School Name" />
-					</div>
-					<div class="col-md-6">
-            <TextInput field={speciality} placeholder="Field of Study" />
-					</div>
-					<div class="col-md-6">
-            <EnumSelector field={degree} label="Degree" options={DEGREES_DROPDOWN_DATA} />
-					</div>
-					<div class="col-md-3">
-            <TextInput field={startStudyAt} placeholder="Start Date (MM/YYYY)" />
-					</div>
-					<div class="col-md-3">
-            <TextInput field={endStudyAt} placeholder="End Date (MM/YYYY)" />
-					</div>
-        </div>
-    )
-}
-
-
-const SkillEntry = props => {
-	const { field: { title, value, alternative } } = props
-	return (
-			<div class="row skill-application-item">
-				<div class="col-md-12 skill-application-item-input">
-					<TextInput field={title} placeholder="Skill" />
-				</div>
-			</div>
-		)
-}
 
 @reduxForm({
     form: 'candidate-application',
@@ -151,7 +79,7 @@ export default class ApplicationForm extends Component {
 
     render() {
       const {
-        fields: { avatar, workingExperience, location, skills, interests, education, socialMedia },
+        /*fields: { avatar, workingExperience, location, skills, interests, education, socialMedia }, */
         handleSubmit,
         resetForm,
         submitting,
@@ -336,6 +264,72 @@ const InterestEntry = props => {
 					</div>
         </div>
     )
+}
+
+const ExperienceEntry = props => {
+    const { field: { companyName, position, city, state, duty, isCurrentJob, startWorkingAt, endWorkingAt } } = props
+    return (
+        <div class="row">
+					<div class="col-md-12">
+            <TextInput field={companyName} placeholder="Company Name" />
+					</div>
+					<div class="col-md-6">
+            <TextInput field={position} placeholder="Title" />
+					</div>
+					<div class="col-md-3">
+            <TextInput field={city} placeholder="City" />
+					</div>
+					<div class="col-md-3">
+            <TextInput field={state} placeholder="State" />
+					</div>
+					<div class="col-md-12">
+            <TextArea field={duty} inputClass="text-area" placeholder="Description of your work" readOnly="false"/>
+					</div>
+					<div class="col-md-3">
+            <TextInput field={startWorkingAt} placeholder="Start Date (MM/YYYY)" />
+					</div>
+					<div class="col-md-3">
+            <TextInput field={endWorkingAt} placeholder="End Date *MM/YYYY)" />
+					</div>
+        </div>
+    )
+}
+
+
+
+const EducationEntry = props => {
+    const { field: { schoolName, speciality, degree, startStudyAt, endStudyAt } } = props
+    return (
+        <div class="row">
+					<div class="col-md-12">
+            <TextInput field={schoolName} placeholder="School Name" />
+					</div>
+					<div class="col-md-6">
+            <TextInput field={speciality} placeholder="Field of Study" />
+					</div>
+					<div class="col-md-6">
+            <EnumSelector field={degree} label="Degree" options={DEGREES_DROPDOWN_DATA} />
+					</div>
+					<div class="col-md-3">
+            <TextInput field={startStudyAt} placeholder="Start Date (MM/YYYY)" />
+					</div>
+					<div class="col-md-3">
+            <TextInput field={endStudyAt} placeholder="End Date (MM/YYYY)" />
+					</div>
+        </div>
+    )
+}
+
+
+const SkillEntry = props => {
+	const { field: { title, value, alternative } } = props
+	return (
+			<div class="row skill-application-item">
+				<div class="col-md-12 skill-application-item-input">
+					<TextInput field={title} placeholder="Skill" />
+				</div>
+			</div>
+		)
 }
 
 
