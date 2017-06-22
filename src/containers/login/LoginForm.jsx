@@ -32,7 +32,7 @@ const renderField = ({
 
 
 const LoginForm = props => {
-	const { handleSubmit, submitting, error, dispatch } = props
+	const { handleSubmit, submitting, error, valid, dispatch } = props
 
     // handleSubmit function with submit validation
     const submit = (values) => {
@@ -76,7 +76,7 @@ const LoginForm = props => {
 						<button
 							type="submit"
 							class="mdl-button button button_margin-right_m button_type_colored button_size_50p"
-							disabled={submitting}
+							disabled={!valid || submitting}
 							>Log In</button>
 						<Link class="link" to='/story/forgot'>Forgot Password?</Link>
 					</div>
