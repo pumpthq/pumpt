@@ -1,9 +1,10 @@
 import React, {Component} from 'react'
 import { Link } from 'react-router'
 import { reduxForm, Field } from 'redux-form'
-import { uiLogin } from './../../sagas/authorization'
 import { connect } from 'react-redux';
 
+import { login } from 'actions/authorization'
+import { SubmissionError } from 'redux-form'
 
 //Validations
 const required = value => (value ? undefined : 'Can\'t be Blank')
@@ -29,11 +30,22 @@ const renderField = ({
   </div>
 )
 
+
 const LoginForm = props => {
-	const { handleSubmit, submitting} = props
+	const { handleSubmit, submitting, error, dispatch } = props
+
+    // handleSubmit function with submit validation
+    const submit = (values) => {
+      return dispatch(login(values))
+        .catch(err => {
+            throw new SubmissionError({
+                _error: 'Login failed!' // 🍰 this will be the validation message to be display
+            })
+        })
+    }
 
 	return (
-			<form class="form form_padding-size_xs" onSubmit={handleSubmit(uiLogin)}>
+			<form class="form form_padding-size_xs" onSubmit={handleSubmit(submit)}>
 				<fieldset class="form__row form__row_indent-size_m">
 					<div class="mdl-textfield mdl-js-textfield textfield is-upgraded textfield_size_l">
 						<Field
@@ -59,10 +71,10 @@ const LoginForm = props => {
 					</div>
 				</fieldset>
 
+                    {error && <strong>{error}</strong>}
 					<div class="form__actions">
 						<button
 							type="submit"
-							onSubmit={handleSubmit}
 							class="mdl-button button button_margin-right_m button_type_colored button_size_50p"
 							disabled={submitting}
 							>Log In</button>
@@ -79,10 +91,5 @@ const LoginForm = props => {
 }
 
 export default reduxForm({
-	form: 'loginForm',
-	onSubmit: (values, dispatch) => {
-		return uiLogin.apply( {dispatch} )
-	},
-	returnRejectedSubmitPromise: true
-	
+	form: 'loginForm'
 })(LoginForm)
