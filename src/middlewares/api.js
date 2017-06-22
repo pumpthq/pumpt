@@ -6,7 +6,7 @@ import { fetchRequested, fetchSucceeded, fetchFailed } from '../actions/api'
 
 export default store => next => action => {
 
-    next(action) //always allow action to continue through middleware
+    if(next) next(action) //always allow action to continue through middleware
 
     const { type, payload } = action
     if(type === API) {
@@ -14,11 +14,12 @@ export default store => next => action => {
 
       store.dispatch(request({payload}))
 
-      axios({ baseURL: API_URL, method, url, data })
+      return axios({ baseURL: API_URL, method, url, data })
       .then(res => store.dispatch(success(res.data)))
       .catch(err => {
           if(err instanceof Error) throw err
           else store.dispatch(error(err))
+          return Promise.reject(err) //keep the err in the promise chain accessible from the return value
       })
     }
 }
