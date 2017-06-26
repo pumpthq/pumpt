@@ -24,159 +24,70 @@ import TwitterIcon from 'components/icons-application/twitter'
 import FacebookIcon from 'components/icons-application/facebook'
 import './style.less'
 
-const stateMap = Object.keys(STATES).map(id=> ({id,title:STATES[id]}))
+//const stateMap = Object.keys(STATES).map(id=> ({id,title:STATES[id]}))
 
-@reduxForm({
-    form: 'candidate-application',
-    fields: [
-        'workingExperience[]',
-        'workingExperience[].companyName',
-        'workingExperience[].position',
-        'workingExperience[].duty',
-        'workingExperience[].city',
-        'workingExperience[].state',
-        'workingExperience[].startWorkingAt',
-        'workingExperience[].endWorkingAt',
-        'workingExperience[].isCurrentJob',
-
-        'skills[]',
-        'skills[].title',
-        'skills[].value',
-        'skills[].alternative',
-
-        'interests[]',
-        'interests[].image',
-        'interests[].description',
-
-        'education[]',
-        'education[].schoolName',
-        'education[].speciality',
-        'education[].degree',
-        'education[].startStudyAt',
-        'education[].endStudyAt',
-        'socialMedia.linkedInUrl',
-        'socialMedia.twitterAcc',
-        'socialMedia.faceBookUrl',
-
-        'location',
-        'location.city',
-        'location.state',
-        'location.abilityToRelocate',
+//Generalized Redux Field
+const renderField = ({
+  input,
+  label,
+  type,
+  meta: { touched, error }
+}) => (
+  <div>
+    <div>
+      <input class="mdl-textfield__input textfield__input" {...input} placeholder={label} type={type} />
+      {touched && (error && <span class="textfield__error">{error}</span>)}
+    </div>
+  </div>
+)
 
 
-        'avatar',  ]
-})
+const ApplicationForm = props =>  {
+	const {handleSubmit, submitting, error, valid, dispatch } = props
 
-export default class ApplicationForm extends Component {
-    constructor(props) {
-      super(props)
-      this.state = { isEdit: true }
-    }
+		return (
+			<form onSubmit={handleSubmit}> 
 
-    onEdit = () => {
-      this.setState({ isEdit: true})
-    }
+					<CaseIcon/>
+					<FieldArray field={workingExperience} label="Experience" component={ExperienceEntry} />
+					<CardDivider/>
 
-    render() {
-      const {
-        /*fields: { avatar, workingExperience, location, skills, interests, education, socialMedia }, */
-        handleSubmit,
-        resetForm,
-        submitting,
-        } = this.props
+					<Education/>
+					<FieldArray field={education} label="Education" component={EducationEntry} />
+					<CardDivider/>
 
-      return (
-                <form onSubmit={handleSubmit} className={`candidate-application-form ${this.state.isEdit && "text-input-underlined"}`}>
+					<Skills/>
+					<FieldArray field={skills} label="Skills" className="skill-application-items" component={SkillEntry} />
 
-                    <CaseIcon/>
-                    <FieldArray field={workingExperience} label="Experience" component={ExperienceEntry} />
-                    <CardDivider/>
+					<Social/>
+					<h2 className="social-application-item">Add Social Media</h2>
 
-                    <Education/>
-                    <FieldArray field={education} label="Education" component={EducationEntry} />
-                    <CardDivider/>
+					<div className="social-media-block">
+						<LinkedInIcon />
+						<TextInput field={socialMedia.linkedInUrl} label="LinkedIn" classItm="label-item-social" />
 
-                    <Skills/>
-                    <FieldArray field={skills} label="Skills" className="skill-application-items" component={SkillEntry} />
+						<TwitterIcon />
+						<TextInput field={socialMedia.twitterAcc} label="Twitter" classItm="label-item-social" />
 
-                    <Social/>
-										<h2 className="social-application-item">Add Social Media</h2>
+						<FacebookIcon />
+						<TextInput field={socialMedia.faceBookUrl} label="Facebook" classItm="label-item-social" />
+					</div>
+					<CardDivider/>
 
-                    <div className="social-media-block">
-                      <LinkedInIcon />
-                      <TextInput field={socialMedia.linkedInUrl} label="LinkedIn" classItm="label-item-social" />
+				<div>
+					<button type="submit" disabled={submitting}
+					className="mdl-button button invisible-mobile button_type_colored button_size_m candidate-submit">
+						{submitting ? <i/> : <i/>} Save Progress
+					</button>
+				</div>
+			</form>
 
-                      <TwitterIcon />
-                      <TextInput field={socialMedia.twitterAcc} label="Twitter" classItm="label-item-social" />
+		)
+		}
 
-                      <FacebookIcon />
-                      <TextInput field={socialMedia.faceBookUrl} label="Facebook" classItm="label-item-social" />
-                    </div>
-                    <CardDivider/>
-
-
-                    {/* <div>
-                        <button type="button" onClick={() => {
-                          field.addField()    // pushes empty child field onto the end of the array
-                        }}><i/> Add {label}
-                        </button>
-
-                        {field.map((child, index) =>
-                            <div key={index}>
-                                <TextInput field={child} label={label} />
-                                <button type="button" onClick={() => {
-                                  field.removeField(index)  // remove from index
-                                }}><i>Remove</i>
-                                </button>
-                            </div>
-                        )}
-                    </div>
-
-
-                  <div>
-                    <label>Title</label>
-                    <div>
-                      <input class="mdl-textfield__input" type="text" placeholder="Enter Job Title" {...title}/>
-                    </div>
-                  </div>
-                  <div>
-                    <label>Location</label>
-                    <div>
-                      <select {...state} value={state.value || ''}>
-                        <option value='' disabled>Select One...</option>
-                        {Object.keys(STATES).map(state =>
-                          <option key={state} value={STATES[state]}>{STATES[state]}</option>
-                        )}
-                      </select>
-                    </div>
-                  </div>
-
-                  <EnumSelector field={salary} label="Salary" options={ANNUAL_INCOME_DROPDOWN_DATA} />
-                  <EnumSelector field={experience} label="Experience" options={EXPERIENCE_DROPDOWN_DATA} />
-                  <EnumSelector field={employment} label="Employment" options={EMPLOYEMENTS_DROPDOWN_DATA} />
-                  <EnumSelector field={degree} label="Degree" options={DEGREES_DROPDOWN_DATA} />
-                  <EnumSelector field={industryParent} label="Industry" options={FIELD_OF_EXPERTISE_DROPDOWN_DATA}
-                                onBlur={this.updateIndustries} />
-                  <EnumSelector field={industry} label="Field of Expertise" options={this.state.industries} />
-
-                  <TextArea field={description} label="Description" />
-                  <TextArea field={responsibilities} label="Responsibilities" />
-                  <TextArea field={requirements} label="Requirements" /> */}
-
-                  <div>
-                    <button type="submit" disabled={submitting}
-                    className="mdl-button button invisible-mobile button_type_colored button_size_m candidate-submit">
-                      {submitting ? <i/> : <i/>} Save Progress
-                    </button>
-                    {/* <button type="button" disabled={submitting} onClick={resetForm}>
-                     Clear Values
-                     </button> */}
-                  </div>
-                </form>
-
-      )
-    }
-  }
+export default reduxForm({
+	form: 'candidateApplication'
+})(ApplicationForm)
 
 
 const FieldArray = (props) => {
