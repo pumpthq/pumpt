@@ -46,16 +46,16 @@ const renderField = ({
 )
 
 //Async Validation - on if email is already registered
-/*const asyncValidate = (values) => {
+const asyncValidate = (values, dispatch) => {
 	const { email } = values
 	const error = { email: THIS_EMAIL_IS_ALREADY_REGISTERED }
 
-	return getCandidateByEmail(email).then(() => {
-		if (candidate.email === true) { throw error }
-		if (candidate.length) { throw error }
+	return dispatch(getCandidateByEmail(email)).then(() => {
+		if (values.email === true) { throw error }
+		if (values.email.length) { throw error }
 		else { return {} }
 	})
-}*/
+}
 
 //Form
 const OnboardingCandidateContactInfo = props => {
@@ -130,16 +130,8 @@ const OnboardingCandidateContactInfo = props => {
 		);
 }
 
-
-/*
-@reduxForm({
-    onSubmit: (fields, dispatch) => {
-        dispatch(saveContactInfoData(fields));
-        dispatch(showIndustryStep());
-    },
-})*/
 export default reduxForm({
-	form: 'onboardingCandidateContactForm'//,
-	//asyncValidate,
-  //asyncBlurFields: ['email']
+	form: 'onboardingCandidateContactForm',
+	asyncValidate,
+  asyncBlurFields: ['email']
 })(OnboardingCandidateContactInfo)

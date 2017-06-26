@@ -6,6 +6,11 @@ import { OnboardingInput } from '../../../components/onboarding'
 import Button from './../../../components/main/button'
 import { SubmissionError } from 'redux-form'
 
+import {
+    saveSetUpPasswordData,
+    applyForMembership,
+} from 'actions/candidateOnboarding';
+
 //Validations
 const required = value => (value ? undefined : 'Can\'t be Blank')
 export const minLength = min => value =>
@@ -28,18 +33,22 @@ const renderField = ({
 
 //form
 const FinalForm = props => {
-	const { handleSubmit, submitting, error, valid, dispatch } = props
+	const { handleSubmit, submitting, error, valid, dispatch, onSubmit } = props
 
-    // handleSubmit function with submit validation
-    const submit = (values) => {
-      return dispatch(login(values))
-        .catch(err => {
-            throw new SubmissionError({
-                _error: 'Sorry, something went wrong' 
-            })
-        })
-    }
-
+	// handleSubmit function with submit validation
+	// //WIP: NOTHING HAPPENS
+	const submit = function(values) {
+		return(dispatch) => {
+			try{
+				dispatch(saveSetUpPasswordData(values)).then(
+						dispatch(applyForMembership())
+					);
+			}
+			catch(err) {
+					throw new SubmissionError({ _error: 'Something Went Wrong' })
+			}
+		};
+	}
 
 	return (
 		<Form onSubmit={handleSubmit(submit)}>
@@ -65,6 +74,8 @@ const FinalForm = props => {
 						/>
 					</div>
 				</fieldset>
+
+                    {error && <span class="textfield__error">{error}</span>}
 				<div class='form__actions form__actions_v-align_center'>
 						<Button
 								type='submit'

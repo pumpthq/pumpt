@@ -21,7 +21,7 @@ class PrototypeFinalStep extends Component {
                                     </span>
                                 </H1>
                                 <p class='onboarding-header text text_after_big-head text_size_xs'>
-                                    Password must be at least 6 characters long.
+                                    Password must be at least 8 characters long.
                                     To make password more secure, use upper and lowercase letters, digits, and symbols.
                                 </p>
                                 <FinalForm onSubmit={onSubmit}/>
