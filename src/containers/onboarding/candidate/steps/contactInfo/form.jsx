@@ -16,12 +16,14 @@ import {
 import {
     saveContactInfoData,
     showIndustryStep,
-} from './../../../../../actions/candidateOnboarding';
+} from 'actions/candidateOnboarding';
+
+import { SubmissionError } from 'redux-form'
 
 
-//Validations
+//Field Validations
 const required = value => (value ? undefined : 'Can\'t be Blank')
-const email = value =>
+const email_validation = value =>
   value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)
     ? 'Invalid email address'
     : undefined
@@ -33,37 +35,46 @@ const renderField = ({
   input,
   label,
   type,
-  meta: { touched, error }
+  meta: { asyncValidating, touched, error }
 }) => (
   <div>
-    <div>
+		<div class={asyncValidating ? 'async-validating' : 'class'}>
       <input class="mdl-textfield__input textfield__input" {...input} placeholder={label} type={type} />
-      {touched && (error && <span class="textfield__error">{error}</span>)}
+      {touched && error && <span class="textfield__error"></span>}
     </div>
   </div>
 )
 
-//Props for AutoComplete Item (Special)
- const inputProps = {
-    value: '', // `value` is required
-    onChange: '', // `onChange` is required
-    onBlur: () => {
-      console.log('blur!')
-    },
-    type: 'search',
-    placeholder: 'Current Employment Location',
-    autoFocus: true,
-  }
-const cssClasses = {
-	input: 'mdl-textfield__input textfield__input'
-}
+//Async Validation - on if email is already registered
+/*const asyncValidate = (values) => {
+	const { email } = values
+	const error = { email: THIS_EMAIL_IS_ALREADY_REGISTERED }
+
+	return getCandidateByEmail(email).then(() => {
+		if (candidate.email === true) { throw error }
+		if (candidate.length) { throw error }
+		else { return {} }
+	})
+}*/
 
 //Form
 const OnboardingCandidateContactInfo = props => {
-	const { handleSubmit, submitting } = props
+		const { handleSubmit, submitting, error, valid, dispatch } = props
+
+		//Props for AutoComplete Item (Special)
+		const cssClasses = {
+			input: 'mdl-textfield__input textfield__input'
+		}
+
+    // handleSubmit function
+    const submit = (values, dispatch) => {
+	//		return dispatch(saveContactInfoData(values)).then(dispatch(showIndustryStep()))
+				return dispatch(showIndustryStep())
+		}
 
 		return (
-				<form onSubmit={handleSubmit}>
+				<form onSubmit={handleSubmit(submit)}>
+						
 						<fieldset className="form__row">
 								<Field
 										label="First Name"
@@ -88,12 +99,12 @@ const OnboardingCandidateContactInfo = props => {
 										name="email"
 										type="email"
 										component={renderField}
-										validate={[email,required]}
+										validate={[email_validation,required]}
 									/>
 						</fieldset>
 						<fieldset className="form__row">
 							<PlacesAutocomplete
-								inputProps={inputProps}
+								//inputProps={inputProps}
 								classNames={cssClasses}/>
 
 								<Field
@@ -104,6 +115,7 @@ const OnboardingCandidateContactInfo = props => {
 								/>
 								<label>Willing to Relocate</label>
 						</fieldset>
+						{error && <span class="textfield__error">{error}</span>}
 						<div className="form__actions">
 								<Button
 										type="submit"
@@ -121,51 +133,13 @@ const OnboardingCandidateContactInfo = props => {
 
 /*
 @reduxForm({
-    form: 'onboardingCandidateContactInfo',
-    alwaysAsyncValidate: true,
-    asyncBlurFields: ['email'],
-    asyncValidate: (values) => {
-        const { email } = values;
-        return co(function* () {
-            return yield {
-                * email() {
-                    const error = {
-                        email: THIS_EMAIL_IS_ALREADY_REGISTERED,
-                    };
-                    let candidate;
-
-                    try {
-                        candidate = yield getCandidateByEmail(email);
-                    } catch (ex) {
-                        throw error;
-                    }
-
-                    if (candidate.email === true) {
-                        throw error;
-                    }
-
-                    if (candidate.length) {
-                        throw error;
-                    }
-
-                    return {};
-                },
-            };
-        });
-    },
     onSubmit: (fields, dispatch) => {
         dispatch(saveContactInfoData(fields));
         dispatch(showIndustryStep());
     },
 })*/
 export default reduxForm({
-	form: 'loginForm',
-	onSubmit: (fields, dispatch) => {
-		dispatch(saveContactInfoData(fields));
-		dispatch(showIndustryStep());
-	},
-	onChange: () => {
-		console.log("doing things!");
-	}
-	
+	form: 'onboardingCandidateContactForm'//,
+	//asyncValidate,
+  //asyncBlurFields: ['email']
 })(OnboardingCandidateContactInfo)

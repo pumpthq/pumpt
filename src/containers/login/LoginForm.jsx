@@ -39,7 +39,7 @@ const LoginForm = props => {
       return dispatch(login(values))
         .catch(err => {
             throw new SubmissionError({
-                _error: 'Login failed!' // 🍰 this will be the validation message to be display
+                _error: 'Incorrect Username or Password' 
             })
         })
     }
@@ -71,7 +71,7 @@ const LoginForm = props => {
 					</div>
 				</fieldset>
 
-                    {error && <strong>{error}</strong>}
+                    {error && <span class="textfield__error">{error}</span>}
 					<div class="form__actions">
 						<button
 							type="submit"

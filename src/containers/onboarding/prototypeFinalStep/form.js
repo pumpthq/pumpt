@@ -1,97 +1,89 @@
 import React, { Component, PropTypes } from 'react'
-import { reduxForm } from 'redux-form'
+import { reduxForm, Field } from 'redux-form'
 
 import Form from '../../../components/main/form'
 import { OnboardingInput } from '../../../components/onboarding'
 import Button from './../../../components/main/button'
+import { SubmissionError } from 'redux-form'
 
-@reduxForm({
-    form : 'onboardingFinal',
-    fields : [
-        'password',
-        'passwordRepeat'
-    ],
-    validate : (values) => {
-        const errors = {}
+//Validations
+const required = value => (value ? undefined : 'Can\'t be Blank')
+export const minLength = min => value =>
+  value && value.length < min ? `Must be ${min} characters or more` : undefined
 
-        if (!values.password || values.password.length < 6) {
-            errors.password = 'Must be at least 6 characters long'
-        }
+//Generalized Redux Field
+const renderField = ({
+  input,
+  label,
+  type,
+  meta: { touched, error }
+}) => (
+  <div>
+    <div>
+      <input class="mdl-textfield__input textfield__input" {...input} placeholder={label} type={type} />
+      {touched && (error && <span class="textfield__error">{error}</span>)}
+    </div>
+  </div>
+)
 
-        if (!values.passwordRepeat) {
-            errors.passwordRepeat = 'Can\'t be blank'
-        }
+//form
+const FinalForm = props => {
+	const { handleSubmit, submitting, error, valid, dispatch } = props
 
-        if (values.passwordRepeat !== values.password) {
-            errors.passwordRepeat = 'The password doesn\'t match'
-        }
-
-        return errors
+    // handleSubmit function with submit validation
+    const submit = (values) => {
+      return dispatch(login(values))
+        .catch(err => {
+            throw new SubmissionError({
+                _error: 'Sorry, something went wrong' 
+            })
+        })
     }
-})
-class FinalForm extends Component {
-    render() {
-        const {
-            fields : {
-                password,
-                passwordRepeat
-            },
-            handleSubmit,
-            submitting,
-            invalid,
-            
-            onSubmit
-        } = this.props
-        const isDisabledSubmit = invalid || submitting
 
-        return (
-            <Form onSubmit={(event) => {
-                event.preventDefault()
 
-                handleSubmit(onSubmit)
-            }}>
-                <fieldset class="form__row">
-                    <OnboardingInput
-                        type='password'
-                        label='Password'
-                        {...password}
-                        error={password.touched && password.error}
-                    />
-                </fieldset>
-                <fieldset class="form__row">
-                    <OnboardingInput
-                        type='password'
-                        label='Confirm password'
-                        {...passwordRepeat}
-                        error={passwordRepeat.touched && passwordRepeat.error}
-                    />
-                </fieldset>
-                <div class='form__actions form__actions_v-align_center'>
-                    <Button
-                        type='submit'
-                        typeColored
-                        buttonSize='l'
-                        disabled={isDisabledSubmit}
-                    >
-                        Next
-                    </Button>
-                    <p class='text'>
-                        By clicking ‘Apply for Membership’,
-                        you agree to the
-                        <a class='link' target="_blank" href='http://pumpthq.com/terms'> Terms &amp; Conditions</a>.
-                    </p>
-                </div>
-            </Form>
-        )
-    }
+	return (
+		<Form onSubmit={handleSubmit(submit)}>
+				<fieldset class="form__row">
+					<div class="mdl-textfield mdl-js-textfield textfield is-upgraded textfield_size_l">
+						<Field
+								type='password'
+								name='password'
+								label='Password'
+								component={renderField}
+								validate={[required, minLength(8)]}
+							/>
+					</div>
+				</fieldset>
+				<fieldset class="form__row">
+					<div class="mdl-textfield mdl-js-textfield textfield is-upgraded textfield_size_l">
+						<Field
+								type='password'
+								name='passwordRepeat'
+								label='Confirm password'
+								component={renderField}
+								validate={[required, minLength(8)]}
+						/>
+					</div>
+				</fieldset>
+				<div class='form__actions form__actions_v-align_center'>
+						<Button
+								type='submit'
+								disabled={!valid || submitting}
+								typeColored
+								buttonSize='l'
+						>
+								Next
+						</Button>
+						<p class='text'>
+								By clicking ‘Apply for Membership’,
+								you agree to the
+								<a class='link' target="_blank" href='http://pumpthq.com/terms'> Terms &amp; Conditions</a>.
+						</p>
+				</div>
+		</Form>
+)
 }
 
-FinalForm.propTypes = {
-    fields : PropTypes.object,
-    submitting : PropTypes.bool,
-    invalid : PropTypes.bool,
-    handleSubmit : PropTypes.func,
-    onSubmit : PropTypes.func
-}
-
-export default FinalForm
+export default reduxForm({
+	form: 'onboardingFinal'
+})(FinalForm)
