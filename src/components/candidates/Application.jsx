@@ -1,6 +1,9 @@
 import React, {Component, PropTypes} from 'react';
+import { connect } from 'react-redux'
+import PlacesAutocomplete from 'react-places-autocomplete'
+
 import GlassDoorImage from 'img/glassdoor.jpg'
-import { reduxForm, Field } from 'redux-form'
+import { reduxForm, Field, FieldArray, formValueSelector } from 'redux-form'
 import { tintedBackground } from 'components/helpers'
 import { browserHistory } from 'react-router'
 import { Location, EnumSelector, TextArea, TextInput, DateInput } from 'components/form/inputs'
@@ -41,36 +44,104 @@ const renderField = ({
   </div>
 )
 
+//Places Autocomplete Field
+const AutocompleteItem = ({ formattedSuggestion }) => (
+	<div>
+		<strong>{ formattedSuggestion.mainText }</strong>{' '}
+		<small>{ formattedSuggestion.secondaryText }</small>
+	</div>
+)
 
-const ApplicationForm = props =>  {
-	const {handleSubmit, submitting, error, valid, dispatch } = props
+export const PlaceField = ({ values, input, label, meta: { touched, error }, ...rest }) => {
+	const hasError = touched && error;
+	const id = input.name;
+
+	const classes={
+		input: `form-control form-control-lg${hasError ? ' form-control-danger' : ''}`
+	}
+
+	/*const inputProps = {
+		value: locationValue, // `value` is required
+		onChange : (locationValue) => {update},
+		onBlur: () => {
+			console.log('blur!')
+		},
+		type: 'search',
+		placeholder: 'Search Places...',
+		autoFocus: true,
+	}*/
+
+	const inputProps = {
+		id : id,
+		typeAhead : false,
+		inputName : input.name,
+		autocompleteItem : AutocompleteItem,
+		classNames : classes
+	}
+
+	return (
+		<div className={`form-group${hasError ? ' has-danger' : ''}`}>
+			<label className="form-control-label" htmlFor={id}>{label}</label>
+			<PlacesAutocomplete 
+				inputProps={inputProps}
+			{hasError && <div className="form-control-feedback">{error}</div>}
+		</div>
+	);
+}
+
+//Field-level Validations
+const required = value => (value ? undefined : 'Can\'t be Blank')
+/*export const twitterUrl = value =>
+	value && /https:\/\/twitter.com\/
+*/
+
+//Form
+let ApplicationForm = props =>  {
+	const {handleSubmit, submitting, error, valid, dispatch, locationValue } = props
 
 		return (
-			<form onSubmit={handleSubmit}> 
+			<form onSubmit={handleSubmit} class="candidate-application-form text-input-underlined"> 
 
 					<CaseIcon/>
-					<FieldArray field={workingExperience} label="Experience" component={ExperienceEntry} />
+					<FieldArray name="workingExperiences" label="Working Experience" component={renderWorkingExperiences} />
 					<CardDivider/>
 
 					<Education/>
-					<FieldArray field={education} label="Education" component={EducationEntry} />
+					<FieldArray name="education" component={renderEducation} />
 					<CardDivider/>
 
 					<Skills/>
-					<FieldArray field={skills} label="Skills" className="skill-application-items" component={SkillEntry} />
+					<FieldArray name="skills" component={renderSkills} />
 
 					<Social/>
 					<h2 className="social-application-item">Add Social Media</h2>
 
 					<div className="social-media-block">
 						<LinkedInIcon />
-						<TextInput field={socialMedia.linkedInUrl} label="LinkedIn" classItm="label-item-social" />
+						{/*<TextInput field={socialMedia.linkedInUrl} label="LinkedIn" classItm="label-item-social" />*/}
+						<Field
+							name="linkedIn"
+							type="text"
+							component={renderField}
+							label="LinkedIn"
+							validate={[required]}
+						/>
 
 						<TwitterIcon />
-						<TextInput field={socialMedia.twitterAcc} label="Twitter" classItm="label-item-social" />
+						<Field
+							name="twitter"
+							type="text"
+							component={renderField}
+							label="Twitter"
+						/>
 
 						<FacebookIcon />
-						<TextInput field={socialMedia.faceBookUrl} label="Facebook" classItm="label-item-social" />
+						<Field
+							name="facebook"
+							type="text"
+							component={renderField}
+							label="Facebook"
+						/>
 					</div>
 					<CardDivider/>
 
@@ -83,14 +154,176 @@ const ApplicationForm = props =>  {
 			</form>
 
 		)
-		}
+	}
 
-export default reduxForm({
+//Define Form
+ApplicationForm = reduxForm({
 	form: 'candidateApplication'
 })(ApplicationForm)
 
+// Decorate with connect to read form values
+const selector = formValueSelector('candidateApplication')
+ApplicationForm = connect(state => {
 
-const FieldArray = (props) => {
+	const locationValue = selector(state, 'location')
+
+  return {
+    locationValue
+  }
+})(ApplicationForm)
+
+//Export Form
+export default ApplicationForm
+
+
+
+
+
+
+
+//FieldArray Definitions
+const renderWorkingExperiences = ({ fields, label, meta: { error } }) => (
+
+
+	<div className="application-item">
+			<button className="application-item-button" type="button" onClick={() => {
+				fields.push()
+			}}><i/>
+			{fields.length === 0 && 'Add'} Working Experience
+			</button>
+			{fields.map((workingExperience, index) => (
+				<div key={index} className="info-block">
+								<div class="row">
+									<div class="col-md-12">
+										<Field
+											name="companyName"
+											type="text"
+											component={renderField}
+											label="Company Name"
+										/>
+									</div>
+									<div class="col-md-6">
+										<Field
+											name="position"
+											type="text"
+											component={renderField}
+											label="Title"
+										/>
+									</div>
+									<div class="col-md-3">
+										<Field
+											name="location"
+											component={PlaceField}
+										 />
+									</div>
+									<div class="col-md-3">
+										<Field
+											name="state"
+											type="text"
+											component={renderField}
+											label="State"
+										/>
+									</div>
+									<div class="col-md-12">
+										<Field
+											name="duty"
+											type="textarea"
+											component={renderField}
+											label="Description of your work"
+										/>
+									</div>
+									<div class="col-md-3">
+										<Field
+											name="startWorkingAt"
+											type="text"
+											component={renderField}
+											label="Start Date (MM/YYYY)"
+										/>
+									</div>
+									<div class="col-md-3">
+										<Field
+											name="endWorkingAt"
+											type="text"
+											component={renderField}
+											label="End Date (MM/YYYY)"
+										/>
+									</div>
+								</div>
+
+					<button className="remove-entry" type="button" onClick={() => {
+						fields.remove(index)
+					}}><i>Remove</i>
+					</button>
+				</div>
+
+			))}
+			{error && <li className="error">{error}</li>}
+
+		{fields.length > 0 && <button className="add-entry mdl-button" type="button" onClick={() => {
+				fields.push()
+			}}>Add
+		</button>}
+</div>
+)
+
+const renderEducation = ({ fields, label, meta: { error } }) => (
+	<div className="application-item">
+		{fields.length === 0 && 'Add'} {label}
+		<ul>
+			<li>
+				<button type="button" onClick={() => fields.push()}>Add Education</button>
+			</li>
+			{fields.map((education, index) => (
+				<li key={index}>
+					<button
+						type="button"
+						title="Remove Hobby"
+						onClick={() => fields.remove(index)}
+					/>
+					<Field
+						name={education}
+						type="text"
+						component={renderField}
+						label={`EDU #${index + 1}`}
+					/>
+				</li>
+			))}
+			{error && <li className="error">{error}</li>}
+		</ul>
+</div>
+)
+
+const renderSkills = ({ fields, meta: { error } }) => (
+	<div className="application-item">
+		<ul>
+			<li>
+				<button type="button" onClick={() => fields.push()}>Add Skills</button>
+			</li>
+			{fields.map((skill, index) => (
+				<li key={index}>
+					<button
+						type="button"
+						title="Remove Skill"
+						onClick={() => fields.remove(index)}
+					/>
+					<Field
+            name="employed"
+            id="employed"
+            component="input"
+            type="checkbox"
+          />
+					 <label htmlFor="employed">MS Office (Word, Excel, PPt)</label>
+				</li>
+			))}
+			{error && <li className="error">{error}</li>}
+		</ul>
+</div>
+)
+
+
+//---------------------------------------------------------------------------------------------------------------------------------
+//ARCHIVE
+const FFieldArray = (props) => {
     const { field, label } = props
     const Item = props.component
     return (
@@ -104,7 +337,6 @@ const FieldArray = (props) => {
 
             {field.map((child, index) =>
                 <div key={index} className="info-block">
-                    <Item field={child} />
                     <button className="remove-entry" type="button" onClick={() => {
                       field.removeField(index)  // remove from index
                     }}><i>Remove</i>
@@ -246,3 +478,4 @@ const SkillEntry = props => {
 
 
 const CardDivider = () => (<div className="summary-head__title-item summary-head__title-item_type_alignment summary-head__title-item_type_middle"></div>)
+

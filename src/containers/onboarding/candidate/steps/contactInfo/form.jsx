@@ -3,7 +3,6 @@ import { Link } from 'react-router'
 import { reduxForm, Field } from 'redux-form'
 import { connect } from 'react-redux';
 import PlacesAutocomplete from 'react-places-autocomplete'
-import { geocodeByAddress, geocodeByPlaceId } from 'react-places-autocomplete'
 
 import co from 'co';
 import Button from './../../../../../components/main/button';
