@@ -15,7 +15,10 @@ export default store => next => action => {
       store.dispatch(request({payload}))
 
       return axios({ baseURL: API_URL, method, url, data })
-      .then(res => store.dispatch(success(res.data)))
+      .then(res => {
+          store.dispatch(success(res.data))
+          return Promise.resolve(res.data) //keep the response data in the promise chain accessible from the return value
+      })
       .catch(err => {
           if(err instanceof Error) throw err
           else store.dispatch(error(err))
