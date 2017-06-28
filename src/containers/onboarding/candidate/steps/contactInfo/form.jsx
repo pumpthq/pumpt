@@ -66,8 +66,8 @@ const OnboardingCandidateContactInfo = props => {
 
     // handleSubmit function
     const submit = (values, dispatch) => {
-	//		return dispatch(saveContactInfoData(values)).then(dispatch(showIndustryStep()))
-				return dispatch(showIndustryStep())
+			dispatch(saveContactInfoData(values))
+            dispatch(showIndustryStep()) //this can also be called in a saga
 		}
 
 		return (
