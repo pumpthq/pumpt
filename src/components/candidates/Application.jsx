@@ -82,8 +82,8 @@ export const PlaceField = ({ values, input, label, meta: { touched, error }, ...
 	return (
 		<div className={`form-group${hasError ? ' has-danger' : ''}`}>
 			<label className="form-control-label" htmlFor={id}>{label}</label>
-			<PlacesAutocomplete 
-				inputProps={inputProps}
+			<PlacesAutocomplete
+				inputProps={inputProps}/>
 			{hasError && <div className="form-control-feedback">{error}</div>}
 		</div>
 	);
@@ -478,4 +478,3 @@ const SkillEntry = props => {
 
 
 const CardDivider = () => (<div className="summary-head__title-item summary-head__title-item_type_alignment summary-head__title-item_type_middle"></div>)
-
