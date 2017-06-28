@@ -56,7 +56,8 @@ const asyncValidate = (values, dispatch) => {
 
 //Form
 const OnboardingCandidateContactInfo = props => {
-		const { handleSubmit, submitting, error, valid, dispatch } = props
+		const { handleSubmit, invalid, asyncValidating, submitting, error, valid, dispatch } = props
+			const submitDisabled = invalid || submitting || asyncValidating || error
 
 		//Props for AutoComplete Item (Special)
 		const cssClasses = {
@@ -118,7 +119,7 @@ const OnboardingCandidateContactInfo = props => {
 										type="submit"
 										typeColored
 										buttonSize="l"
-										disabled={submitting}
+										disabled={submitDisabled}
 								>
 										Get Started
 								</Button>
