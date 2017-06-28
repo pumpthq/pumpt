@@ -4,7 +4,7 @@ import middleware from './middlewares'
 import { runSaga } from './middlewares/saga'
 import stateEnhancer from './stateEnhancer'
 
-const store = createStore(reducers, middleware /*=> instead of stateEnhancer*/)
+const store = createStore(reducers, stateEnhancer /*=> instead of middleware*/)
 
 runSaga()
 
