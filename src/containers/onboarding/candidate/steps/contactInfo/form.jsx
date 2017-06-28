@@ -55,7 +55,7 @@ const asyncValidate = (values, dispatch) => {
 }
 
 //Form
-const OnboardingCandidateContactInfo = props => {
+let OnboardingCandidateContactInfo = props => {
 		const { handleSubmit, invalid, asyncValidating, submitting, error, valid, dispatch } = props
 			const submitDisabled = invalid || submitting || asyncValidating || error
 
@@ -128,8 +128,17 @@ const OnboardingCandidateContactInfo = props => {
 		);
 }
 
-export default reduxForm({
+OnboardingCandidateContactInfo = reduxForm({
 	form: 'onboardingCandidateContactForm',
 	asyncValidate,
   asyncBlurFields: ['email']
 })(OnboardingCandidateContactInfo)
+
+
+OnboardingCandidateContactInfo = connect(
+  state => ({
+    initialValues: state.candidateOnboarding // pull previous values from onboarding state
+  })
+)(OnboardingCandidateContactInfo)
+
+export default OnboardingCandidateContactInfo
