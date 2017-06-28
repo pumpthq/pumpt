@@ -33,21 +33,17 @@ const renderField = ({
 
 //form
 const FinalForm = props => {
-	const { handleSubmit, submitting, error, valid, dispatch, onSubmit } = props
+	const { handleSubmit, submitting, error, invalid, valid, dispatch, onSubmit } = props
+	const submitDisabled = invalid || submitting || error
 
 	// handleSubmit function with submit validation
 	// //WIP: NOTHING HAPPENS
-	const submit = function(values) {
-		return(dispatch) => {
-			try{
-				dispatch(saveSetUpPasswordData(values)).then(
-						dispatch(applyForMembership())
-					);
-			}
-			catch(err) {
+	const submit = (values, dispatch) => {
+				dispatch(saveSetUpPasswordData(values))
+				dispatch(applyForMembership())
+	/*		catch(err) {
 					throw new SubmissionError({ _error: 'Something Went Wrong' })
-			}
-		};
+			}*/
 	}
 
 	return (
