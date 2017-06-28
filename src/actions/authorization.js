@@ -34,6 +34,14 @@ import {
 import { API } from '../constants/actionTypes'
 import { fetchFailed } from '../actions/api';
 
+export const checkEmailAvailability = email => ({
+    type: API,
+    payload: {
+        url: `/users/${email}`,
+        method: 'GET',
+    }
+})
+
 export const resolveUser = () => ({
     type: API,
     payload : {

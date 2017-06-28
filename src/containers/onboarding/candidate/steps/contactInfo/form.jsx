@@ -10,15 +10,12 @@ import {
     THIS_EMAIL_IS_ALREADY_REGISTERED,
 } from './../../../../../constants/candidateOnboarding';
 import {
-    fetchByEmail as getCandidateByEmail,
-} from './../../../../../sagas/candidateOnboarding';
-import {
     saveContactInfoData,
     showIndustryStep,
 } from 'actions/candidateOnboarding';
 
 import { SubmissionError } from 'redux-form'
-
+import { checkEmailAvailability } from 'actions/authorization'
 
 //Field Validations
 const required = value => (value ? undefined : 'Can\'t be Blank')
@@ -39,7 +36,7 @@ const renderField = ({
   <div>
 		<div class={asyncValidating ? 'async-validating' : 'class'}>
       <input class="mdl-textfield__input textfield__input" {...input} placeholder={label} type={type} />
-      {touched && error && <span class="textfield__error"></span>}
+      {touched && error && <span class="textfield__error">{error}</span>}
     </div>
   </div>
 )
@@ -49,11 +46,12 @@ const asyncValidate = (values, dispatch) => {
 	const { email } = values
 	const error = { email: THIS_EMAIL_IS_ALREADY_REGISTERED }
 
-	return dispatch(getCandidateByEmail(email)).then(() => {
-		if (values.email === true) { throw error }
-		if (values.email.length) { throw error }
-		else { return {} }
-	})
+	return dispatch(checkEmailAvailability(email))
+        .then((data) => {
+    		if (data.email === true) { throw error }
+    		if (data.email.length) { throw error }
+    		else { return {} }
+    	})
 }
 
 //Form
@@ -73,7 +71,7 @@ const OnboardingCandidateContactInfo = props => {
 
 		return (
 				<form onSubmit={handleSubmit(submit)}>
-						
+
 						<fieldset className="form__row">
 								<Field
 										label="First Name"
