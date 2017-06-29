@@ -1,28 +1,24 @@
 import React, { Component } from 'react'
 import { reduxForm, Field} from 'redux-form'
 import { connect } from 'react-redux'
-import co from 'co'
 import emailValidator from 'email-validator'
 import PlacesAutocomplete from 'react-places-autocomplete'
 
-import Form from './../../../../../components/main/form'
-import Button from './../../../../../components/main/button'
-import { OnboardingInput } from './../../../../../components/onboarding'
+import Form from 'components/main/form'
+import Button from 'components/main/button'
+import { OnboardingInput } from 'components/onboarding'
 
 import {
     THIS_EMAIL_IS_ALREADY_REGISTERED,
     THIS_COMPANY_IS_ALREADY_REGISTERED
-} from './../../../../../constants/companyOnboarding'
-import {
-    fetchByEmail as getCompanyByEmail,
-    isAvailable as isAvailableCompanyName
-} from './../../../../../sagas/companyOnboarding'
+} from 'constants/companyOnboarding'
 import {
     saveContactInfoData,
     showCompanyTypeStep
-} from './../../../../../actions/companyOnboarding'
+} from 'actions/companyOnboarding'
 import { SubmissionError } from 'redux-form'
 import { checkEmailAvailability } from 'actions/authorization'
+import { checkCompanyNameAvailability } from 'actions/authorization'
 
 
 //Field Validations
@@ -50,8 +46,11 @@ const renderField = ({
 )
 
 //Async Validation - on if email is already registered
+//TODO: check for company name availability
 const asyncValidate = (values, dispatch) => {
-	const { email } = values
+	const { email } = values.email
+	const { name } = values.name
+
 	const error = { email: THIS_EMAIL_IS_ALREADY_REGISTERED }
 
 	return dispatch(checkEmailAvailability(email))

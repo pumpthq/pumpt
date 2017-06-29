@@ -42,6 +42,14 @@ export const checkEmailAvailability = email => ({
     }
 })
 
+export const checkCompanyNameAvailability = name => ({
+    type: API,
+    payload: {
+        url: `/companies/${name}`,
+        method: 'GET',
+    }
+})
+
 export const resolveUser = () => ({
     type: API,
     payload : {
