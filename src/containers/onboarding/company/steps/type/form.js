@@ -1,15 +1,15 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { OnboardingInput } from './../../../../../components/onboarding'
-import List, { ListLink, ListItem } from './../../../../../components/main/list'
-import { COMPANY_TYPE_DATA } from './../../../../../constants/companyOnboarding'
+import { OnboardingInput } from 'components/onboarding'
+import List, { ListLink, ListItem } from 'components/main/list'
+import { COMPANY_TYPE_DATA } from 'constants/companyOnboarding'
 import uuid from 'uuid'
-import { findById } from '../../../../../constants/dropdownData'
+import { findById } from 'constants/dropdownData'
 
 import {
     saveCompanyTypeData,
     showHeadquartersLocationStep
-} from './../../../../../actions/companyOnboarding'
+} from 'actions/companyOnboarding'
 
 import { AlternativeListItem, StepListLink } from '../../../renderHelpers'
 

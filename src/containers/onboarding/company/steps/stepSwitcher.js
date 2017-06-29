@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import {
     SHOW_CONTACT_INFO_STEP,
     SHOW_COMPANY_TYPE_STEP,
-    SHOW_HEADQUATERS_LOCATION_STEP,
+    SHOW_HEADQUARTERS_LOCATION_STEP,
     SHOW_NUMBER_OF_EMPLOYEES_STEP,
     SHOW_FOUNDATION_YEAR_STEP,
     SHOW_WEBSITE_AND_SOCIAL_MEDIA_STEP,
@@ -49,7 +49,7 @@ class OnboardingCompanyStepSwitcher extends Component {
                 return (<ContactInfoStep/>)
             case SHOW_COMPANY_TYPE_STEP :
                 return (<TypeStep {...props}/>)
-            case SHOW_HEADQUATERS_LOCATION_STEP :
+            case SHOW_HEADQUARTERS_LOCATION_STEP :
                 return (<LocationInfoStep {...props}/>)
             case SHOW_NUMBER_OF_EMPLOYEES_STEP :
                 return (<NumberOfEmployeesStep {...props}/>)
