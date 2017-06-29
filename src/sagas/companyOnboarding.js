@@ -99,7 +99,7 @@ export default function () {
                     foundDate: `${onboardingState.foundationYear}`,
                     type: onboardingState.companyType.value,
                     employeesAmount: onboardingState.numberOfEmployees.value,
-                    locationHeadquarters: onboardingState.headquatersLocation.value,
+                    headquartersLocation: onboardingState.headquartersLocation.value,
                     socialMedia: {
                         websiteUrl: websiteUrl,
                         linkedInUrl: linkedInProfileUrl,

@@ -5,8 +5,8 @@ import {
     SHOW_COMPANY_TYPE_STEP,
     SAVE_COMPANY_TYPE_DATA,
 
-    SHOW_HEADQUATERS_LOCATION_STEP,
-    SAVE_HEADQUATERS_LOCATION_DATA,
+    SHOW_HEADQUARTERS_LOCATION_STEP,
+    SAVE_HEADQUARTERS_LOCATION_DATA,
 
     SHOW_NUMBER_OF_EMPLOYEES_STEP,
     SAVE_NUMBER_OF_EMPLOYEES_DATA,
@@ -62,15 +62,15 @@ export default (state = defaultState, action) => {
                 payload,
             });
 
-        case SHOW_HEADQUATERS_LOCATION_STEP :
+        case SHOW_HEADQUARTERS_LOCATION_STEP :
             return {
                 ...state,
                 step: type,
             };
-        case SAVE_HEADQUATERS_LOCATION_DATA :
+        case SAVE_HEADQUARTERS_LOCATION_DATA :
             return saveStep({
                 state,
-                step: SHOW_HEADQUATERS_LOCATION_STEP,
+                step: SHOW_HEADQUARTERS_LOCATION_STEP,
                 payload,
             });
 

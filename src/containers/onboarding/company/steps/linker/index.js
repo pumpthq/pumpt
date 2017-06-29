@@ -5,7 +5,7 @@ import Navigation from './../../../../../components/main/navigation'
 
 import LinkToContactInfoStep from './links/toContactInfo' 
 import LinkToCompanyTypeStep from './links/toType'
-import LinkToHeadquatersLocationStep from './links/toLocation'
+import LinkToHeadquartersLocationStep from './links/toLocation'
 import LinkToNumberOfEmployeesStep from './links/toNumberOfEmployees'
 import LinkToFoundationYearStep from './links/toFoundationYear'
 import LinkToSocialMediaStep from './links/toSocialMedia'
@@ -32,7 +32,7 @@ class OnboardingCompanyLinker extends Component {
                 <Navigation type='onboarding'>
                     <LinkToContactInfoStep {...props}/>
                     <LinkToCompanyTypeStep {...props}/>
-                    <LinkToHeadquatersLocationStep {...props}/>
+                    <LinkToHeadquartersLocationStep {...props}/>
                     <LinkToNumberOfEmployeesStep {...props}/>
                     <LinkToFoundationYearStep {...props}/>
                     <LinkToSocialMediaStep {...props}/>

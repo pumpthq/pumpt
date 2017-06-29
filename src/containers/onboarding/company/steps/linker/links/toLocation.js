@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { SHOW_HEADQUATERS_LOCATION_STEP } from './../../../../../../constants/companyOnboarding'
-import { showHeadquatersLocationStep } from './../../../../../../actions/companyOnboarding'
+import { showHeadquartersLocationStep } from './../../../../../../actions/companyOnboarding'
 import { NavigationLink, NavigationLink2 } from './../../../../../../components/main/navigation'
 import CallStep from './../../../../callStep'
 
@@ -29,9 +29,9 @@ export class To extends Component {
             isEnabled,
             dispatch
         } = this.props
-				const { headquatersLocation } = onboardingState
-        const location = `${headquatersLocation}`
-        const text = (headquatersLocation ? location : 'Headquarters')
+				const { headquartersLocation } = onboardingState
+        const location = `${headquartersLocation}`
+        const text = (headquartersLocation ? location : 'Headquarters')
 
         return (
             <NavigationLink2
@@ -41,7 +41,7 @@ export class To extends Component {
                 active={isActive}
                 filled={isFilled}
                 onClick={() => {
-                    if (isEnabled) dispatch(showHeadquatersLocationStep())
+                    if (isEnabled) dispatch(showHeadquartersLocationStep())
                 }}
                 textLabel='Headquarters'
                 textFilledWith={text}
@@ -58,7 +58,7 @@ To.propTypes = {
     dispatch : PropTypes.func
 }
 
-const LinkToHeadquatersLocationStep = ({ onboardingState }) => {
+const LinkToHeadquartersLocationStep = ({ onboardingState }) => {
     return (
         <CallStep {...{
             activeOnStep : SHOW_HEADQUATERS_LOCATION_STEP,
@@ -68,8 +68,8 @@ const LinkToHeadquatersLocationStep = ({ onboardingState }) => {
     )
 }
 
-LinkToHeadquatersLocationStep.propTypes = {
+LinkToHeadquartersLocationStep.propTypes = {
     onboardingState : PropTypes.object
 }
 
-export default LinkToHeadquatersLocationStep
+export default LinkToHeadquartersLocationStep

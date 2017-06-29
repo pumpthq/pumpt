@@ -8,7 +8,7 @@ import { findById } from '../../../../../constants/dropdownData'
 
 import {
     saveCompanyTypeData,
-    showHeadquatersLocationStep
+    showHeadquartersLocationStep
 } from './../../../../../actions/companyOnboarding'
 
 import { AlternativeListItem, StepListLink } from '../../../renderHelpers'
@@ -32,7 +32,7 @@ import { AlternativeListItem, StepListLink } from '../../../renderHelpers'
                     value
                 }
             }))
-            dispatch(showHeadquatersLocationStep())
+            dispatch(showHeadquartersLocationStep())
         }
         return {
             dispatch,

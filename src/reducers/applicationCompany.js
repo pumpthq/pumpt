@@ -143,7 +143,7 @@ export default (state = defaultState, action) => {
                         if (index === 0) {
                             return {
                                 ...item,
-                                location: payload.headquatersLocation,
+                                location: payload.headquartersLocation,
                             };
                         }
 

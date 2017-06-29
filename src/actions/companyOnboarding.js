@@ -8,8 +8,8 @@ import {
     SHOW_COMPANY_TYPE_STEP,
     SAVE_COMPANY_TYPE_DATA,
 
-    SHOW_HEADQUATERS_LOCATION_STEP,
-    SAVE_HEADQUATERS_LOCATION_DATA,
+    SHOW_HEADQUARTERS_LOCATION_STEP,
+    SAVE_HEADQUARTERS_LOCATION_DATA,
 
     SHOW_NUMBER_OF_EMPLOYEES_STEP,
     SAVE_NUMBER_OF_EMPLOYEES_DATA,
@@ -77,14 +77,14 @@ export const saveCompanyTypeData = ({ companyType }) => ({
     },
 });
 
-export const showHeadquatersLocationStep = () => ({
-    type: SHOW_HEADQUATERS_LOCATION_STEP,
+export const showHeadquartersLocationStep = () => ({
+    type: SHOW_HEADQUARTERS_LOCATION_STEP,
 });
 
-export const saveHeadquatersLocationStep = ({ headquatersLocation }) => ({
-    type: SAVE_HEADQUATERS_LOCATION_DATA,
+export const saveHeadquartersLocationStep = ({ headquartersLocation }) => ({
+    type: SAVE_HEADQUARTERS_LOCATION_DATA,
     payload: {
-        headquatersLocation,
+        headquartersLocation,
     },
 });
 

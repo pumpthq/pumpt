@@ -6,10 +6,11 @@ import { OnboardingInput } from '../../../components/onboarding'
 import Button from './../../../components/main/button'
 import { SubmissionError } from 'redux-form'
 
-import {
-    saveSetUpPasswordData,
-    applyForMembership,
-} from 'actions/candidateOnboarding';
+import { saveSetUpPasswordData as candidateSaveSetUpPasswordData } from 'actions/candidateOnboarding';
+import { applyForMembership as candidateApplyForMembership } from 'actions/candidateOnboarding';
+import { saveSetUpPasswordData as companySaveSetUpPasswordData } from 'actions/companyOnboarding';
+import { applyForMembership as companyApplyForMembership } from 'actions/companyOnboarding';
+
 
 //Validations
 const validate = values => {
@@ -55,15 +56,24 @@ const FinalForm = props => {
 	const submitDisabled = invalid || submitting || error
 
 	const submit = (values, dispatch) => {
-				dispatch(saveSetUpPasswordData(values))
-				dispatch(applyForMembership())
+		const candidate = (values.industry !== undefined)
+			if(candidate){
+				console.log("CANDIDATE ACTIONS")
+				dispatch(candidateSaveSetUpPasswordData(values))
+				dispatch(candidateApplyForMembership())
+			}
+			else{
+				console.log("COMPANY ACTIONS")
+				dispatch(companySaveSetUpPasswordData(values))
+				dispatch(companyApplyForMembership())
+			}
 				{/*		catch(err) {
 					throw new SubmissionError({ _error: 'Something Went Wrong' })
 				}*/}
 	}
 
 	return (
-		<Form onSubmit={handleSubmit(submit)}>
+		<form onSubmit={handleSubmit(submit)}>
 				<fieldset class="form__row">
 					<div class="mdl-textfield mdl-js-textfield textfield is-upgraded textfield_size_l">
 						<Field
@@ -101,7 +111,7 @@ const FinalForm = props => {
 								<a class='link' target="_blank" href='http://pumpthq.com/terms'> Terms &amp; Conditions</a>.
 						</p>
 				</div>
-		</Form>
+		</form>
 )
 }
 

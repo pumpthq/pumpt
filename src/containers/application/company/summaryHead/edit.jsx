@@ -72,8 +72,7 @@ const InputProps = {
         'companyName',
         'email',
         'companyType',
-        'headquatersCity',
-        'headquatersState',
+        'headquartersLocation',
         'numberOfEmployees',
         'foundationYear'
     ],
@@ -140,8 +139,7 @@ class SummaryHeadEdit extends Component {
                 companyName,
                 email,
                 companyType,
-                headquatersCity,
-                headquatersState,
+                headquartersLocation,
                 numberOfEmployees,
                 foundationYear
             },
