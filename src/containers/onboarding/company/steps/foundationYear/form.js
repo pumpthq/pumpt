@@ -17,7 +17,7 @@ import { checkEmailAvailability } from 'actions/authorization'
 const validate = values => {
   const errors = {}
 
-	if (values.foundationYear < 1700 || values.foundationYear > (new Date().getFullYear()+1)){
+	if (values.foundationYear < 1700 || values.foundationYear > (new Date().getFullYear())){
 		errors.foundationYear = 'Year is out of Range'
 	}
 	else if (!values.foundationYear){
