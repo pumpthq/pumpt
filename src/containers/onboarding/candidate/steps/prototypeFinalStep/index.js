@@ -1,10 +1,10 @@
 import React, { Component, PropTypes } from 'react'
-import Panel from '../../../components/main/panel'
-import { H1 } from '../../../components/main/heading'
+import Panel from 'components/main/panel'
+import { H1 } from 'components/main/heading'
 
-import FinalForm from './form'
+import CandidateFinalForm from './form'
 
-class PrototypeFinalStep extends Component {
+class CandidatePrototypeFinalStep extends Component {
     render() {
         const { onSubmit, OnboardingLinker } = this.props
         
@@ -24,7 +24,7 @@ class PrototypeFinalStep extends Component {
                                     Password must be at least 8 characters long.
                                     To make password more secure, use upper and lowercase letters, digits, and symbols.
                                 </p>
-                                <FinalForm onSubmit={onSubmit}/>
+                                <CandidateFinalForm onSubmit={onSubmit}/>
                             </Panel>
                         </section>
                         <aside class='column column_size_s'>
@@ -37,9 +37,9 @@ class PrototypeFinalStep extends Component {
     }
 }
 
-PrototypeFinalStep.propTypes = {
+CandidatePrototypeFinalStep.propTypes = {
     onSubmit : PropTypes.func,
     OnboardingLinker : PropTypes.func
 }
 
-export default PrototypeFinalStep
+export default CandidatePrototypeFinalStep

@@ -21,7 +21,7 @@ import IncomeStep from './income'
 import ExperienceStep from './experience'
 import ValuesStep from './values'
 import CompanySizeStep from './companySize'
-import FinalStep from './final'
+import CandidateFinalStep from './final'
 
 export function mapStateToProps(state, ownProps) {
     const { step } = state.candidateOnboarding
@@ -64,7 +64,7 @@ class OnboardingCandidateStepSwitcher extends Component {
             case SHOW_COMPANY_SIZE_STEP :
                 return (<CompanySizeStep {...props}/>)
             case SHOW_SET_UP_PASSWORD_STEP :
-                return (<FinalStep {...props}/>)
+                return (<CandidateFinalStep {...props}/>)
             default : return (<ContactInfoStep/>)
         }
     }

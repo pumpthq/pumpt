@@ -5,16 +5,16 @@ import {
     saveSetUpPasswordData,
     applyForMembership,
 } from './../../../../../actions/candidateOnboarding';
-import PrototypeFinalStep from './../../../prototypeFinalStep';
+import CandidatePrototypeFinalStep from 'containers/onboarding/candidate/steps/prototypeFinalStep';
 
-class FinalStep extends Component {
+class CandidateFinalStep extends Component {
     componentDidMount() {
         this.props.scrollTop();
     }
 
     render() {
         return (
-            <PrototypeFinalStep
+            <CandidatePrototypeFinalStep
                 {...{
                     onSubmit: (fields, dispatch) => {
                         dispatch(saveSetUpPasswordData(fields));
@@ -27,8 +27,8 @@ class FinalStep extends Component {
     }
 }
 
-FinalStep.propTypes = {
+CandidateFinalStep.propTypes = {
     scrollTop: PropTypes.func,
 };
 
-export default FinalStep;
+export default CandidateFinalStep;

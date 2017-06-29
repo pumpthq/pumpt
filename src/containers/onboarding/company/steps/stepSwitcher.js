@@ -19,7 +19,7 @@ import NumberOfEmployeesStep from './numberOfEmployees'
 import FoundationYearStep from './foundationYear'
 import SocialMediaStep from './socialMedia'
 import ValuesStep from './values'
-import FinalStep from './final'
+import CompanyFinalStep from './final'
 
 export function mapStateToProps(state, ownProps) {
     const { step } = state.companyOnboarding
@@ -58,7 +58,7 @@ class OnboardingCompanyStepSwitcher extends Component {
             case SHOW_WEBSITE_AND_SOCIAL_MEDIA_STEP :
                 return (<SocialMediaStep {...props}/>)
             case SHOW_SET_UP_PASSWORD_STEP :
-                return (<FinalStep {...props}/>)
+                return (<CompanyFinalStep {...props}/>)
             case SHOW_VALUES_STEP :
                 return (<ValuesStep {...props}/>)
             default : return (<ContactInfoStep/>)

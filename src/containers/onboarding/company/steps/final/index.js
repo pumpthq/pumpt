@@ -4,18 +4,18 @@ import OnboardingCompanyLinker from './../linker'
 import {
     saveSetUpPasswordData,
     applyForMembership
-} from './../../../../../actions/companyOnboarding'
+} from 'actions/companyOnboarding'
 
-import PrototypeFinalStep from './../../../prototypeFinalStep'
+import CompanyPrototypeFinalStep from 'containers/onboarding/company/steps/prototypeFinalStep'
 
-class FinalStep extends Component {
+class CompanyFinalStep extends Component {
     componentDidMount() {
         this.props.scrollTop()
     }
     
     render() {
         return (
-            <PrototypeFinalStep {...{
+            <CompanyPrototypeFinalStep {...{
                 onSubmit : (fields, dispatch) => {
                     dispatch(saveSetUpPasswordData(fields))
                     dispatch(applyForMembership())
@@ -26,8 +26,8 @@ class FinalStep extends Component {
     }
 }
 
-FinalStep.propTypes = {
+CompanyFinalStep.propTypes = {
     scrollTop : PropTypes.func
 }
 
-export default FinalStep
+export default CompanyFinalStep

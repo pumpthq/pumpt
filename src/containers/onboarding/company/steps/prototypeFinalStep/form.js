@@ -1,13 +1,11 @@
 import React, { Component, PropTypes } from 'react'
 import { reduxForm, Field } from 'redux-form'
 
-import Form from '../../../components/main/form'
-import { OnboardingInput } from '../../../components/onboarding'
-import Button from './../../../components/main/button'
+import Form from 'components/main/form'
+import { OnboardingInput } from 'components/onboarding'
+import Button from 'components/main/button'
 import { SubmissionError } from 'redux-form'
 
-import { saveSetUpPasswordData as candidateSaveSetUpPasswordData } from 'actions/candidateOnboarding';
-import { applyForMembership as candidateApplyForMembership } from 'actions/candidateOnboarding';
 import { saveSetUpPasswordData as companySaveSetUpPasswordData } from 'actions/companyOnboarding';
 import { applyForMembership as companyApplyForMembership } from 'actions/companyOnboarding';
 
@@ -51,22 +49,14 @@ const renderField = ({
 )
 
 //form
-const FinalForm = props => {
+const CompanyFinalForm = props => {
 	const { handleSubmit, submitting, error, invalid, valid, dispatch, onSubmit } = props
 	const submitDisabled = invalid || submitting || error
 
 	const submit = (values, dispatch) => {
-		const candidate = (values.industry !== undefined)
-			if(candidate){
-				console.log("CANDIDATE ACTIONS")
-				dispatch(candidateSaveSetUpPasswordData(values))
-				dispatch(candidateApplyForMembership())
-			}
-			else{
 				console.log("COMPANY ACTIONS")
 				dispatch(companySaveSetUpPasswordData(values))
 				dispatch(companyApplyForMembership())
-			}
 				{/*		catch(err) {
 					throw new SubmissionError({ _error: 'Something Went Wrong' })
 				}*/}
@@ -116,6 +106,6 @@ const FinalForm = props => {
 }
 
 export default reduxForm({
-	form: 'onboardingFinal',
+	form: 'companyOnboardingFinal',
 	validate
-})(FinalForm)
+})(CompanyFinalForm)
