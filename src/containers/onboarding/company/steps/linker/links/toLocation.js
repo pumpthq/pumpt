@@ -29,9 +29,9 @@ export class To extends Component {
             isEnabled,
             dispatch
         } = this.props
-        const { headquatersCity, headquatersState } = onboardingState
-        const location = `${headquatersCity}, ${headquatersState}`
-        const text = (headquatersCity && headquatersState ? location : 'Headquarters')
+				const { headquatersLocation } = onboardingState
+        const location = `${headquatersLocation}`
+        const text = (headquatersLocation ? location : 'Headquarters')
 
         return (
             <NavigationLink2

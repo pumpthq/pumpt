@@ -18,7 +18,7 @@ import PlacesAutocomplete from 'react-places-autocomplete'
 import {
     saveHeadquatersLocationStep,
     showNumberOfEmployeesStep,
-} from './../../../../../actions/companyOnboarding';
+} from 'actions/companyOnboarding';
 
 //Field Validations
 const required = value => (value ? undefined : 'Can\'t be Blank')
@@ -106,7 +106,7 @@ let LocationInfoForm = props => {
 									<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
 											<fieldset class="form__row">
 											<Field
-												name="location"
+												name="headquatersLocation"
 												component={PlaceField}
 											 />
 											</fieldset>

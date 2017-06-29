@@ -195,22 +195,16 @@ export default function() {
         }),
         takeLatest(SAVE_LOCATION_DATA, function * () {
             const { entityId, accessToken } = yield select(getAccessToken)
-            const {
-                location : {
-										location,
-                    canRelocate
-                }
-            } = yield select(getApplicationCandidate)
+            const candidateApp = yield select(getApplicationCandidate)
 
             const patch = {
                 id : entityId,
                 accessToken,
                 body : {
-                    location : {
-											location,
-											abilityToRelocate : canRelocate
-                }
-            }
+									location,
+									canRelocate
+								}
+            };
 
             try {
                 yield call(updateCandidate, patch)
@@ -346,7 +340,7 @@ export default function() {
                     workingExperience : {
                         companyName,
                         position,
-                        location,
+                        jobLocation,
                         startWorkingAt,
                         endWorkingAt,
                         isCurrentJob,

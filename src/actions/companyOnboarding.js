@@ -81,11 +81,10 @@ export const showHeadquatersLocationStep = () => ({
     type: SHOW_HEADQUATERS_LOCATION_STEP,
 });
 
-export const saveHeadquatersLocationStep = ({ headquatersCity, headquatersState }) => ({
+export const saveHeadquatersLocationStep = ({ headquatersLocation }) => ({
     type: SAVE_HEADQUATERS_LOCATION_DATA,
     payload: {
-        headquatersCity,
-        headquatersState,
+        headquatersLocation,
     },
 });
 
