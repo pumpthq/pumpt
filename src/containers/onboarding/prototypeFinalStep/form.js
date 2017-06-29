@@ -12,9 +12,27 @@ import {
 } from 'actions/candidateOnboarding';
 
 //Validations
-const required = value => (value ? undefined : 'Can\'t be Blank')
-export const minLength = min => value =>
-  value && value.length < min ? `Must be ${min} characters or more` : undefined
+const validate = values => {
+  const errors = {}
+
+	if (!values.password) {
+		errors.password = "Can\'t be Blank"
+	}
+	else if (!values.passwordRepeat) {
+		errors.passwordRepeat = "Can\'t be Blank"
+	}
+	else if (values.password.length < 8) {
+		errors.password = "Must be 8 characters or More"
+	}
+	else if (values.passwordRepeat.length < 8) {
+		errors.passwordRepeat = "Must be 8 characters or More"
+	}
+	else if (values.passwordRepeat !== values.password){
+		errors.passwordRepeat = 'Passwords do not match.'
+	}
+
+	return errors
+}
 
 //Generalized Redux Field
 const renderField = ({
@@ -36,14 +54,12 @@ const FinalForm = props => {
 	const { handleSubmit, submitting, error, invalid, valid, dispatch, onSubmit } = props
 	const submitDisabled = invalid || submitting || error
 
-	// handleSubmit function with submit validation
-	// //WIP: NOTHING HAPPENS
 	const submit = (values, dispatch) => {
 				dispatch(saveSetUpPasswordData(values))
 				dispatch(applyForMembership())
-	/*		catch(err) {
+				{/*		catch(err) {
 					throw new SubmissionError({ _error: 'Something Went Wrong' })
-			}*/
+				}*/}
 	}
 
 	return (
@@ -55,7 +71,6 @@ const FinalForm = props => {
 								name='password'
 								label='Password'
 								component={renderField}
-								validate={[required, minLength(8)]}
 							/>
 					</div>
 				</fieldset>
@@ -66,7 +81,6 @@ const FinalForm = props => {
 								name='passwordRepeat'
 								label='Confirm password'
 								component={renderField}
-								validate={[required, minLength(8)]}
 						/>
 					</div>
 				</fieldset>
@@ -92,5 +106,6 @@ const FinalForm = props => {
 }
 
 export default reduxForm({
-	form: 'onboardingFinal'
+	form: 'onboardingFinal',
+	validate
 })(FinalForm)

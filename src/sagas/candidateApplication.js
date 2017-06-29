@@ -53,7 +53,6 @@ import {
     FIELD_OF_EXPERTISE_DROPDOWN_DATA,
     JOB_TITLE_DROPDOWN_DATA
 } from './../constants/candidateOnboarding'
-import states from './../constants/states.json'
 import moment from 'moment'
 
 const updateCandidate = ({ id, accessToken, body }) => {
@@ -198,8 +197,7 @@ export default function() {
             const { entityId, accessToken } = yield select(getAccessToken)
             const {
                 location : {
-                    city,
-                    state,
+										location,
                     canRelocate
                 }
             } = yield select(getApplicationCandidate)
@@ -209,10 +207,8 @@ export default function() {
                 accessToken,
                 body : {
                     location : {
-                        city,
-                        state : states[state],
-                        abilityToRelocate : canRelocate
-                    }
+											location,
+											abilityToRelocate : canRelocate
                 }
             }
 
@@ -333,10 +329,7 @@ export default function() {
                     avatar
                 } = profile
                 const {
-                    location : {
-                        city,
-                        state
-                    }
+                    location 
                 } = profile
                 const locationState = state ? state.split(' ').shift() : null
                 const fieldOfExpertisePath = findSequence({
@@ -488,16 +481,6 @@ export default function() {
                 //     }
                 //     progress.push(SOCIAL_MEDIA_STEP)
                 // }
-
-                if (city && state) {
-                    patch.location = {
-                        city,
-                        state : locationState,
-                        place : `${city}, ${locationState}`,
-                        canRelocate : profile.location.abilityToRelocate
-                    }
-                    progress.push(LOCATION_STEP)
-                }
 
                 if (progress.length) {
                     patch.accordion = SHOW_ACCORDION

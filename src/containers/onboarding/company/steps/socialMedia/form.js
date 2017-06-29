@@ -1,6 +1,6 @@
-import React, { Component, PropTypes } from 'react'
+import React, {Component} from 'react'
 import { connect } from 'react-redux'
-import { reduxForm } from 'redux-form'
+import { reduxForm, Field } from 'redux-form'
 import Form from './../../../../../components/main/form'
 import Button from './../../../../../components/main/button'
 import { ListLink, ListItem } from './../../../../../components/main/list'
@@ -14,157 +14,93 @@ import {
     saveWebsiteAndSocialMediaData,
     showValuesStep
 } from './../../../../../actions/companyOnboarding'
+import { SubmissionError } from 'redux-form'
 
-@connect(
-    function mapStateToProps(state, ownProps) {
-        const { companyOnboarding } = state
-        const { websiteUrl, linkedInProfileUrl, twitterUsername, facebookProfileUrl } = companyOnboarding
+//Field Validations
+const required = value => (value ? undefined : 'Can\'t be Blank')
 
-        return {
-            initialValues : {
-                websiteUrl,
-                linkedInProfileUrl,
-                twitterUsername,
-                facebookProfileUrl
-            }
-        }
-    }
+//Generalized Redux Field
+const renderField = ({
+  input,
+  label,
+  type,
+  meta: { asyncValidating, touched, error }
+}) => (
+  <div>
+		<div class={asyncValidating ? 'async-validating' : 'class'}>
+      <input class="mdl-textfield__input textfield__input" {...input} placeholder={label} type={type} />
+      {touched && error && <span class="textfield__error">{error}</span>}
+    </div>
+  </div>
 )
-@reduxForm({
-    form : 'websiteAndSocialMediaCompanyOnboarding',
-    fields : [
-        'websiteUrl',
-        'linkedInProfileUrl',
-        'twitterUsername',
-        'facebookProfileUrl'
-    ],
-    validate : (values) => {
-        const errors = {}
-        const {
-            websiteUrl,
-            linkedInProfileUrl,
-            twitterUsername,
-            facebookProfileUrl
-        } = values
-        const urlSchema = {
-            url : true
-        }
 
-        if (!websiteUrl) {
-            errors.websiteUrl = 'Can\'t be blank'
-        } else if (validateJs.single(`http://${websiteUrl.replace('http://').replace('https://')}`, urlSchema)) {
-            errors.websiteUrl = 'Invalid URL'
-        }
+let SocialMediaForm = props => {
+		const { handleSubmit, invalid, asyncValidating, submitting, error, valid, dispatch } = props
+		const submitDisabled = invalid || submitting || asyncValidating || error
 
-        /*if (!linkedInProfileUrl) {
-            errors.linkedInProfileUrl = 'Can\'t be blank'
-        } else */
-
-        if (linkedInProfileUrl && validateJs.single(`http://${linkedInProfileUrl.replace('http://').replace('https://')}`, urlSchema)) {
-            errors.linkedInProfileUrl = 'Invalid URL'
-        }
-
-        /*if (!twitterUsername) {
-            errors.twitterUsername = 'Can\'t be blank'
-        }*/
-
-        /*if (!facebookProfileUrl) {
-            errors.facebookProfileUrl = 'Can\'t be blank'
-        } else */
-
-        if (facebookProfileUrl && validateJs.single(`http://${facebookProfileUrl.replace('http://').replace('https://')}`, urlSchema)) {
-            errors.facebookProfileUrl = 'Invalid URL'
-        }
-
-        return errors
-    },
-    onSubmit : (fields, dispatch) => {
-        dispatch(saveWebsiteAndSocialMediaData(fields))
-        dispatch(showValuesStep())
-    }
-})
-class SocialMediaForm extends Component {
-    render() {
-        const {
-            fields : {
-                websiteUrl,
-                linkedInProfileUrl,
-                twitterUsername,
-                facebookProfileUrl
-            },
-            handleSubmit,
-            submitting,
-            invalid
-        } = this.props
-        const isDisabledSubmit = invalid || submitting
-
-        return (
-            <Form onSubmit={handleSubmit}>
-                <fieldset class="form__row">
-                    <OnboardingInput
-                        label='Website URL'
-                        beforeImg={
-                            <ChainIcon/>
-                        }
-                        additionalClass='textfield_type_social'
-                        {...websiteUrl}
-                        error={websiteUrl.touched && websiteUrl.error}
-                    />
-                </fieldset>
-                <fieldset class="form__row">
-                    <OnboardingInput
-                        label='LinkedIn Profile URL'
-                        beforeImg={
-                            <LinkedInIcon/>
-                        }
-                        additionalClass='textfield_type_social'
-                        {...linkedInProfileUrl}
-                        error={linkedInProfileUrl.touched && linkedInProfileUrl.error}
-                    />
-                </fieldset>
-                <fieldset class="form__row">
-                    <OnboardingInput
-                        label='Twitter @username'
-                        type="text"
-                        beforeImg={
-                            <TwitterIcon/>
-                        }
-                        additionalClass='textfield_type_social'
-                        {...twitterUsername}
-                        error={twitterUsername.touched && twitterUsername.error}
-                    />
-                </fieldset>
-                <fieldset class="form__row">
-                    <OnboardingInput
-                        label='Facebook Profile URL'
-                        beforeImg={
-                            <FacebookIcon/>
-                        }
-                        additionalClass='textfield_type_social'
-                        {...facebookProfileUrl}
-                        error={facebookProfileUrl.touched && facebookProfileUrl.error}
-                    />
-                </fieldset>
-                <div class='form__actions'>
-                    <Button 
-                        type='submit'
-                        typeColored
-                        buttonSize='l'
-                        disabled={isDisabledSubmit}
-                    >
-                        Next
-                    </Button>
-                </div>
-            </Form>
-        )
-    }
+    // handleSubmit function
+    const submit = (values, dispatch) => {
+			dispatch(saveWebsiteAndSocialMediaData(values))
+			dispatch(showValuesStep())
+		}
+	return (
+			<form onSubmit={handleSubmit(submit)}>
+					<fieldset class="form__row">
+						<Field
+								label="Website URL"
+								name="websiteUrl"
+								type="text"
+								component={renderField}
+								validate={required}
+							/>
+					</fieldset>
+					<fieldset class="form__row">
+						<Field
+								label="LinkedIn Profile URL"
+								name="linkedIneUrl"
+								type="text"
+								component={renderField}
+							/>
+					</fieldset>
+					<fieldset class="form__row">
+						<Field
+								label="Twitter @username"
+								name="twitterUrl"
+								type="text"
+								component={renderField}
+							/>
+					</fieldset>
+					<fieldset class="form__row">
+						<Field
+								label="Facebook Profile URL"
+								name="facebookUrl"
+								type="text"
+								component={renderField}
+							/>
+					</fieldset>
+					<div class='form__actions'>
+							<Button 
+									type='submit'
+									typeColored
+									buttonSize='l'
+									disabled={submitDisabled}
+							>
+									Next
+							</Button>
+					</div>
+			</form>
+	)
 }
 
-SocialMediaForm.propTypes = {
-    fields : PropTypes.object,
-    submitting : PropTypes.bool,
-    invalid : PropTypes.bool,
-    handleSubmit : PropTypes.func
-}
+SocialMediaForm = reduxForm({
+	form: 'socialMediaForm',
+})(SocialMediaForm)
+
+
+SocialMediaForm = connect(
+  state => ({
+    initialValues: state.candidateOnboarding // pull previous values from onboarding state
+  })
+)(SocialMediaForm)
 
 export default SocialMediaForm

@@ -21,7 +21,6 @@ import {
 import { createJob } from './../../../../../actions/companyJobs';
 import { mapDropdown } from './../../../../../components/parts/mapDropdown';
 
-import states from 'constants/states.json';
 
 const propTypes = {
     fields: PropTypes.object,
@@ -272,7 +271,7 @@ class SummaryHeadActive extends Component {
                                     experience: data.experience.value,
                                     employment: data.employment.value,
                                     degree: data.degree.value,
-                                    state: states[locationState],
+																		location: data.location.value
                             };
 
                             dispatch(createJob(patchedData));
@@ -345,7 +344,7 @@ class SummaryHeadActive extends Component {
                                         });
                                     },
                                     onClickListItem: ({ place, filter }) => {
-                                        const value = `${place.city}, ${place.state}`;
+                                        const value = `${place.location}`;
                                         this.setState({
                                             location: value,
                                         });

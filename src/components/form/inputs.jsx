@@ -137,44 +137,6 @@ export class PureInput extends Component {
   }
 }
 
-import STATES from 'constants/states.json';
-const stateMap = Object.keys(STATES).map(id=> ({id,title:STATES[id]}))
-
-export class Location extends Component {
-  // shouldComponentUpdate(nextProps) {
-  //   return this.props.state !== nextProps.state ||
-  //     this.props.city !== nextProps.city
-  // }
-
-  render() {
-    const { field: {state, city, abilityToRelocate }, label } = this.props
-    return (
-        <div className="location-field">
-            <label>{label}</label>
-						<div class="row">
-							<div class="col-md-3">
-								<label>City</label>
-								<div>
-									<PureInput type="text" placeholder="City" field={city}/>
-								</div>
-							</div>
-
-            <div class="col-md-3">
-              <label>State</label>
-              <div>
-                <EnumSelector field={state} options={stateMap}/>
-              </div>
-            </div>
-					</div>
-            {abilityToRelocate &&
-                <label><input type="checkbox" {...abilityToRelocate}/> Ability To Relocate</label>
-            }
-        </div>
-    )
-  }
-}
-
-
 export const FieldArray = (props) => {
     const { field, label, classFA, classFABtn } = props
     const Item = props.component

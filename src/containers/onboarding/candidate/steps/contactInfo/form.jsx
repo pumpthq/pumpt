@@ -57,7 +57,7 @@ const asyncValidate = (values, dispatch) => {
 //Form
 let OnboardingCandidateContactInfo = props => {
 		const { handleSubmit, invalid, asyncValidating, submitting, error, valid, dispatch } = props
-			const submitDisabled = invalid || submitting || asyncValidating || error
+		const submitDisabled = invalid || submitting || asyncValidating || error
 
 		//Props for AutoComplete Item (Special)
 		const cssClasses = {
@@ -67,7 +67,7 @@ let OnboardingCandidateContactInfo = props => {
     // handleSubmit function
     const submit = (values, dispatch) => {
 			dispatch(saveContactInfoData(values))
-            dispatch(showIndustryStep()) //this can also be called in a saga
+			dispatch(showIndustryStep()) //this can also be called in a saga
 		}
 
 		return (

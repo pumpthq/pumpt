@@ -1,8 +1,9 @@
-import React, { Component, PropTypes } from 'react'
-import { reduxForm } from 'redux-form'
+import React, { Component } from 'react'
+import { reduxForm, Field} from 'redux-form'
 import { connect } from 'react-redux'
 import co from 'co'
 import emailValidator from 'email-validator'
+import PlacesAutocomplete from 'react-places-autocomplete'
 
 import Form from './../../../../../components/main/form'
 import Button from './../../../../../components/main/button'
@@ -20,175 +21,120 @@ import {
     saveContactInfoData,
     showCompanyTypeStep
 } from './../../../../../actions/companyOnboarding'
+import { SubmissionError } from 'redux-form'
+import { checkEmailAvailability } from 'actions/authorization'
 
-@connect(
-    function mapStateToProps(state, ownProps) {
-        const { companyOnboarding } = state
-        const { companyName, fullName, jobTitle, email } = companyOnboarding
 
-        return {
-            initialValues : {
-                companyName,
-                fullName,
-                jobTitle,
-                email
-            }
-        }
-    }
+//Field Validations
+const required = value => (value ? undefined : 'Can\'t be Blank')
+const email_validation = value =>
+  value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)
+    ? 'Invalid email address'
+    : undefined
+export const minLength = min => value =>
+  value && value.length < min ? `Must be ${min} characters or more` : undefined
+
+//Generalized Redux Field
+const renderField = ({
+  input,
+  label,
+  type,
+  meta: { asyncValidating, touched, error }
+}) => (
+  <div>
+		<div class={asyncValidating ? 'async-validating' : 'class'}>
+      <input class="mdl-textfield__input textfield__input" {...input} placeholder={label} type={type} />
+      {touched && error && <span class="textfield__error">{error}</span>}
+    </div>
+  </div>
 )
-@reduxForm({
-    form : 'onboardingCompanyContactInfo',
-    fields : [
-        'companyName',
-        'fullName',
-        'jobTitle',
-        'email'
-    ],
-    alwaysAsyncValidate : true,
-    asyncBlurFields : ['email', 'companyName'],
-    validate : (values) => {
-        const errors = {}
 
-        if (!values.companyName) {
-            errors.companyName = 'Can\'t be blank'
-        }
+//Async Validation - on if email is already registered
+const asyncValidate = (values, dispatch) => {
+	const { email } = values
+	const error = { email: THIS_EMAIL_IS_ALREADY_REGISTERED }
 
-        if (!values.fullName) {
-            errors.fullName = 'Can\'t be blank'
-        }
+	return dispatch(checkEmailAvailability(email))
+        .then((data) => {
+    		if (data.email === true) { throw error }
+    		if (data.email.length) { throw error }
+    		else { return {} }
+    	})
+}
 
-        if (!values.jobTitle) {
-            errors.jobTitle = 'Can\'t be blank'
-        }
+let OnboardingCompanyContactInfo = props => {
+		const { handleSubmit, invalid, asyncValidating, submitting, error, valid, dispatch } = props
+		const submitDisabled = invalid || submitting || error
 
-        if (!values.email) {
-            errors.email = 'Can\'t be blank'
-        } else if (!emailValidator.validate(values.email)) {
-            errors.email = 'Invalid Email'
-        }
-
-        return errors
-    },
-    asyncValidate : (values, dispatch) => {
-        const { email, companyName } = values
-
-        return co(function * () {
-            return yield {
-                companyName : companyName ? function * () {
-                    const error = {
-                        companyName : THIS_COMPANY_IS_ALREADY_REGISTERED
-                    }
-                    let metaData
-
-                    try {
-                        metaData = yield isAvailableCompanyName({ companyName })
-                    } catch (ex) {
-                        throw error
-                    }
-
-                    if (!metaData.isAvailable) {
-                        throw error
-                    }
-
-                    return {}
-                } : null,
-                email : email ? function * () {
-                    const error = {
-                        email : THIS_EMAIL_IS_ALREADY_REGISTERED
-                    }
-                    let company
-
-                    try {
-                        company = yield getCompanyByEmail(email)
-                    } catch (ex) {
-                        throw error
-                    }
-
-                    if (company.email == true) {
-                        throw error
-                    }
-
-                    if (company.length) {
-                        throw error
-                    }
-
-                    return {}
-                } : null
-            }
-        })
-    },
-    onSubmit : (fields, dispatch) => {
-        dispatch(saveContactInfoData(fields))
+    // handleSubmit function
+    const submit = (values, dispatch) => {
+        dispatch(saveContactInfoData(values))
         dispatch(showCompanyTypeStep())
-    }
-})
-class ContactInfoForm extends Component {
-    render() {
-        const {
-            fields : {
-                companyName,
-                fullName,
-                jobTitle,
-                email
-            },
-            handleSubmit,
-            submitting,
-            invalid
-        } = this.props
-        const isDisabledSubmit = invalid || submitting
+		}
 
-        return (
-            <Form onSubmit={handleSubmit}>
-                <fieldset class="form__row">
-                    <OnboardingInput
-                        label='Company Name'
-                        {...companyName}
-                        error={companyName.touched && companyName.error}
-                    />
-                </fieldset>
-                <fieldset class="form__row">
-                    <OnboardingInput
-                        label='Your Name'
-                        {...fullName}
-                        error={fullName.touched && fullName.error}
-                    />
-                </fieldset>
-                <fieldset class="form__row">
-                    <OnboardingInput
-                        label='Job Title'
-                        {...jobTitle}
-                        error={jobTitle.touched && jobTitle.error}
-                    />
-                </fieldset>
-                <fieldset class="form__row">
-                    <OnboardingInput
-                        type='email'
-                        label='Email'
-                        {...email}
-                        error={email.touched && email.error}
-                    />
-                </fieldset>
-                <div class='form__actions'>
-                    <Button
-                        type='submit'
-                        typeColored
-                        buttonSize='l'
-                        disabled={isDisabledSubmit}
-                    >
-                        Get Started
-                    </Button>
-                </div>
-            </Form>
-        )
-    }
+		return (
+				<form onSubmit={handleSubmit(submit)}>
+						<fieldset class="form__row">
+							<Field
+									label="Company Name"
+									name="companyName"
+									type="text"
+									component={renderField}
+									validate={required}
+								/>
+						</fieldset>
+						<fieldset class="form__row">
+							<Field
+									label="Your Name"
+									name="fullName"
+									type="text"
+									component={renderField}
+									validate={required}
+								/>
+						</fieldset>
+						<fieldset class="form__row">
+							<Field
+									label="Your Job Title"
+									name="jobTitle"
+									type="text"
+									component={renderField}
+									validate={required}
+								/>
+						</fieldset>
+						<fieldset class="form__row">
+							<Field
+									label="Email"
+									name="email"
+									type="email"
+									component={renderField}
+									validate={[required, email_validation]}
+								/>
+						</fieldset>
+						<div class='form__actions'>
+								<Button
+										type='submit'
+										typeColored
+										buttonSize='l'
+										disabled={submitDisabled}
+								>
+										Get Started
+								</Button>
+						</div>
+				</form>
+		)
 }
 
-ContactInfoForm.propTypes = {
-    fields : PropTypes.object,
-    asyncValidating : PropTypes.bool,
-    submitting : PropTypes.bool,
-    invalid : PropTypes.bool,
-    handleSubmit : PropTypes.func
-}
+OnboardingCompanyContactInfo = reduxForm({
+	form: 'onboardingCompanyContactForm',
+	asyncValidate,
+  asyncBlurFields: ['email']
+})(OnboardingCompanyContactInfo)
 
-export default ContactInfoForm
+
+OnboardingCompanyContactInfo = connect(
+  state => ({
+    initialValues: state.companyOnboarding // pull previous values from onboarding state
+  })
+)(OnboardingCompanyContactInfo)
+
+export default OnboardingCompanyContactInfo

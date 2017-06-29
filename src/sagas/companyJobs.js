@@ -3,7 +3,6 @@ import { deprecated } from 'core-decorators'
 import { takeLatest } from 'redux-saga';
 import { call, put, select } from 'redux-saga/effects';
 import { push } from 'react-router-redux';
-// import states from './../constants/states.json';
 import {
     API_URL,
     API_ALL_JOBS,

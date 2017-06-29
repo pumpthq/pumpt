@@ -10,13 +10,12 @@ import {
     DEGREES_DROPDOWN_DATA,
     EMPLOYEMENTS_DROPDOWN_DATA,
 } from 'constants/companyJobs';
-import STATES from 'constants/states.json';
 import { find } from 'lodash'
 import { TextArea } from 'components/form/inputs'
 
 @reduxForm({
     form: 'job',
-    fields: ['title', 'city', 'state', 'salary', 'experience', 'employment', 'degree', 'industry', 'industryParent', 'description', 'responsibilities[]', 'requirements[]'],
+    fields: ['title', 'location', 'salary', 'experience', 'employment', 'degree', 'industry', 'industryParent', 'description', 'responsibilities[]', 'requirements[]'],
 })
 class JobForm extends Component {
 
@@ -44,7 +43,7 @@ class JobForm extends Component {
 
   render() {
     const {
-      fields: { title, city, state, salary, experience, employment, degree, industry, industryParent, description, responsibilities, requirements },
+      fields: { title, location, salary, experience, employment, degree, industry, industryParent, description, responsibilities, requirements },
       handleSubmit,
       resetForm,
       submitting,
@@ -68,15 +67,10 @@ class JobForm extends Component {
                 <label>Location</label>
                 <div class="row">
 									<div class="col-md-6">
-										<input type="text" className="" field={city} placeholder="City" />
+										<input type="text" className="" field={location} placeholder="City" />
 									</div>
 									<div class="col-md-6">
-										<select {...state} value={state.value || ''} className="mdl-textfield__input">
-											<option value='' disabled>State</option>
-											{Object.keys(STATES).map(state =>
-												<option key={state} value={STATES[state]}>{STATES[state]}</option>
-											)}
-										</select>
+									INSERT FORM FOR LOACTION HURR
 									</div>
                 </div>
               </div>

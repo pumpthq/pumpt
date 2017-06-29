@@ -143,11 +143,7 @@ export default (state = defaultState, action) => {
                         if (index === 0) {
                             return {
                                 ...item,
-                                city: payload.headquatersCity,
-                                state: payload.headquatersState,
-                                place:
-                                    `${payload.headquatersCity},
-                                    ${payload.headquatersState}`,
+                                location: payload.headquatersLocation,
                             };
                         }
 

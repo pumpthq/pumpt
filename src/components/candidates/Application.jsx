@@ -14,7 +14,6 @@ import {
     EMPLOYEMENTS_DROPDOWN_DATA,
     DEGREES_DROPDOWN_DATA,
 } from 'constants/companyJobs';
-import STATES from 'constants/states.json';
 import PencilIcon from 'components/icons/pencil'
 import Skills from 'components/icons-application/skills'
 import CaseIcon from 'components/icons-application/case'
@@ -27,7 +26,6 @@ import TwitterIcon from 'components/icons-application/twitter'
 import FacebookIcon from 'components/icons-application/facebook'
 import './style.less'
 
-//const stateMap = Object.keys(STATES).map(id=> ({id,title:STATES[id]}))
 
 //Generalized Redux Field
 const renderField = ({
@@ -210,19 +208,11 @@ const renderWorkingExperiences = ({ fields, label, meta: { error } }) => (
 											label="Title"
 										/>
 									</div>
-									<div class="col-md-3">
+									<div class="col-md-6">
 										<Field
 											name="location"
 											component={PlaceField}
 										 />
-									</div>
-									<div class="col-md-3">
-										<Field
-											name="state"
-											type="text"
-											component={renderField}
-											label="State"
-										/>
 									</div>
 									<div class="col-md-12">
 										<Field
@@ -410,7 +400,7 @@ const InterestEntry = props => {
 }
 
 const ExperienceEntry = props => {
-    const { field: { companyName, position, city, state, duty, isCurrentJob, startWorkingAt, endWorkingAt } } = props
+    const { field: { companyName, position, location, duty, isCurrentJob, startWorkingAt, endWorkingAt } } = props
     return (
         <div class="row">
 					<div class="col-md-12">
@@ -420,10 +410,7 @@ const ExperienceEntry = props => {
             <TextInput field={position} placeholder="Title" />
 					</div>
 					<div class="col-md-3">
-            <TextInput field={city} placeholder="City" />
-					</div>
-					<div class="col-md-3">
-            <TextInput field={state} placeholder="State" />
+            <TextInput field={location} placeholder="Location" />
 					</div>
 					<div class="col-md-12">
             <TextArea field={duty} inputClass="text-area" placeholder="Description of your work" readOnly="false"/>

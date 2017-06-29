@@ -28,7 +28,6 @@ import { getCompanyOnboarding } from './../reducers/companyOnboarding';
 import { migrateOnboardingToApplication } from './../actions/applicationCompany';
 import { getSummary } from './../reducers/applicationCompany';
 import { login } from './../actions/authorization';
-import states from './../constants/states.json';
 import { ROUTE_APPLICATION_COMPANY } from './../constants/routes';
 
 import { formatUrl } from './../utils'
@@ -100,10 +99,7 @@ export default function () {
                     foundDate: `${onboardingState.foundationYear}`,
                     type: onboardingState.companyType.value,
                     employeesAmount: onboardingState.numberOfEmployees.value,
-                    locationHeadquarters: {
-                        city: onboardingState.headquatersCity,
-                        state: states[onboardingState.headquatersState],
-                    },
+                    locationHeadquarters: onboardingState.headquatersLocation.value,
                     socialMedia: {
                         websiteUrl: websiteUrl,
                         linkedInUrl: linkedInProfileUrl,

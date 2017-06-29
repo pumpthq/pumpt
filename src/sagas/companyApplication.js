@@ -2,7 +2,6 @@ import axios from 'axios';
 import { takeLatest } from 'redux-saga';
 import { call, fork, put, select } from 'redux-saga/effects';
 import { getValues } from 'redux-form';
-import apiUSAStates from './../constants/states.json';
 import {
     API_URL,
     API_COMPANY_ROOT,
@@ -164,21 +163,16 @@ export default function () {
                 .pop();
             const offices = companyApp.location
                 .slice(1)
-                .filter((item) => (item.city && item.state));
 
             const patch = {
                 id: companyId,
                 accessToken,
                 body: {
-                    locationHeadquarters: {
-                        city: headOffice.city,
-                        state: apiUSAStates[headOffice.state],
-                    },
+                    locationHeadquarters,
                     locationOffices: offices
                         .map((item) =>
                              ({
-                                 city: item.city,
-                                 state: apiUSAStates[item.state],
+                                 location: item.location
                              })
                         ),
                 },
@@ -246,28 +240,26 @@ export default function () {
             }
         }),
         takeLatest(SET_CITY_AND_STATE_TO_OFFICE, function* (action) {
-            const { id, city, state } = action.payload;
+            const { id, location } = action.payload;
 
             yield put({
                 type: 'redux-form/CHANGE',
-                field: 'state',
-                value: state,
+                field: 'location',
+                value: location,
                 touch: true,
                 form: id,
             });
-            const newOffices = yield select((state) => {
-                const tempOffices = getTempOffices(state);
-                const reduxForms = state.form;
+            const newOffices = yield select((location) => {
+                const tempOffices = getTempOffices(location);
+                const reduxForms = location.form;
 
                 return tempOffices.map((item) => {
                     const currentReduxForm = getValues(reduxForms[item.id]);
-                    const { city, state } = currentReduxForm || {};
+                    const { location } = currentReduxForm || {};
 
                     return {
                         ...item,
-                        city,
-                        state,
-                        place: city && state ? `${city}, ${state}` : null,
+												location,
                     };
                 });
             });
@@ -316,8 +308,7 @@ export default function () {
             ]
                 .slice(0)
                 .map((item) => ({
-                    city: item.city,
-                    state: item.state.slice(0, 2),
+									location
                 }));
 
             const patch = {

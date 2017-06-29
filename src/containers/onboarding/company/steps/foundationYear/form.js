@@ -1,6 +1,6 @@
-import React, { Component, PropTypes } from 'react'
+import React, {Component} from 'react'
 import { connect } from 'react-redux'
-import { reduxForm } from 'redux-form'
+import { reduxForm, Field } from 'redux-form'
 import Form from './../../../../../components/main/form'
 import Button from './../../../../../components/main/button'
 import { OnboardingInput } from './../../../../../components/onboarding'
@@ -10,98 +10,71 @@ import {
     showWebsiteAndSocialMediaStep
 } from './../../../../../actions/companyOnboarding'
 
-const InputProps = {
-    type : 'number',
-    min : 1700,
-    max : new Date().getFullYear()
+import { SubmissionError } from 'redux-form'
+import { checkEmailAvailability } from 'actions/authorization'
+
+//Validations
+const validate = values => {
+  const errors = {}
+
+	if (values.foundationYear < 1700 || values.foundationYear > (new Date().getFullYear()+1)){
+		errors.foundationYear = 'Year is out of Range'
+	}
+	else if (!values.foundationYear){
+		errors.foundationYear = 'Can\'t be Blank'
+	}
+
+	return errors
 }
 
-@connect(
-    function mapStateToProps(state, ownProps) {
-        const { companyOnboarding } = state
-
-        return {
-            initialValues : {
-                foundationYear : companyOnboarding.foundationYear
-            }
-        }
-    }
+//Generalized Redux Field
+const renderField = ({
+  input,
+  label,
+  type,
+  meta: { touched, error }
+}) => (
+  <div>
+    <div>
+      <input class="mdl-textfield__input textfield__input" {...input} placeholder={label} type={type} />
+      {touched && (error && <span class="textfield__error">{error}</span>)}
+    </div>
+  </div>
 )
-@reduxForm({
-    form : 'onboardingCandidateContactInfo',
-    fields : [
-        'foundationYear'
-    ],
-    touchOnChange : true,
-    validate : (values) => {
-        const errors = {}
-
-        try {
-            const intYear = parseInt(values.foundationYear)
-            const minYear = InputProps.min
-            const maxYear = InputProps.max
 
 
-            if (intYear < minYear || intYear > maxYear) {
-                throw new Error('Year is out of boundaries')
-            }
-        } catch (ex) {
-            errors.foundationYear = 'Invalid year'
-        }
+const FoundationYearForm = props => {
 
-        return errors
-    },
-    onSubmit : (fields, dispatch) => {
-        dispatch(saveFoundationYearData(fields))
+	const { handleSubmit, submitting, error, invalid, valid, dispatch, onSubmit } = props
+	const submitDisabled = invalid || submitting || error
+
+	const submit = (values, dispatch) => {
+        dispatch(saveFoundationYearData(values))
         dispatch(showWebsiteAndSocialMediaStep())
-    }
-})
-class FoundationYearForm extends Component {
-    render() {
-        const {
-            fields : {
-                foundationYear
-            },
-            handleSubmit,
-            submitting,
-            invalid
-        } = this.props
-        const isDisabledSubmit = invalid || submitting
+	}
 
-        return (
-            <Form ref='innerForm' onSubmit={handleSubmit}>
-                <OnboardingInput
-                    label={'Year'}
-                    {...InputProps}
-                    {...foundationYear}
-                    error={foundationYear.touched && foundationYear.error}
-                    onBlur={function(event) {
-                        const { value } = event.target
-
-                         if (value.length > 0) {
-                            this.dirtying(true)
-                         }
-                    }}
-                />
-                <div class='form__actions'>
-                    <Button type='submit'
-                            typeColored 
-                            buttonSize='l'
-                            disabled={isDisabledSubmit}
-                    >
-                        Next
-                    </Button>
-                </div>
-            </Form>
-        )
-    }
+	return (
+			<form ref='innerForm' onSubmit={handleSubmit(submit)}>
+			<Field
+					type='int'
+					name='foundationYear'
+					label='Year'
+					component={renderField}
+			/>
+					<div class='form__actions'>
+							<Button type='submit'
+											typeColored 
+											buttonSize='l'
+											disabled={submitDisabled}
+							>
+									Next
+							</Button>
+					</div>
+			</form>
+	)
 }
 
-FoundationYearForm.propTypes = {
-    fields : PropTypes.object,
-    submitting : PropTypes.bool,
-    invalid : PropTypes.bool,
-    handleSubmit : PropTypes.func
-}
-
-export default FoundationYearForm
+export default reduxForm({
+	form: 'foundationYearForm',
+	validate
+})(FoundationYearForm)

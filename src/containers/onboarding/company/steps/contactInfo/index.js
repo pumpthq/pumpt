@@ -4,7 +4,7 @@ import { H1 } from './../../../../../components/main/heading'
 import { OnboardingInput } from './../../../../../components/onboarding'
 import on1Image from './../../../../../img/sprites-svg/on1.svg'
 
-import ContactInfoForm from './form'
+import OnboardingCompanyContactInfoForm from './form'
 import OnboardingCompanyLinker from './../linker'
 
 class ContactInfoStep extends Component {
@@ -23,7 +23,7 @@ class ContactInfoStep extends Component {
                                         </span>
                                     </span>
                                 </H1>
-                                <ContactInfoForm/>
+                                <OnboardingCompanyContactInfoForm/>
                             </Panel>
                         </section>
                         <aside class='column column_size_s'>
