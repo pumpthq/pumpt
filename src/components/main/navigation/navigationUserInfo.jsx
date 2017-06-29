@@ -4,12 +4,14 @@ const propTypes = {
     name: PropTypes.string,
     onClick : PropTypes.func,
     email: PropTypes.string,
+		location: PropTypes.string,
     style : PropTypes.object
 };
 
 const defaultProps = {
     name: '',
     email: '',
+		location: '',
     onClick : (event) => {},
     style : {}
 };
@@ -26,7 +28,8 @@ export default class NavigationUserInfo extends Component {
                     }}
             >
                 <span class="text text_size_xl text_weight_semibold">{this.props.name}</span><br/>
-                <span class="text text_size_xs">{this.props.email}</span>
+                <span class="text text_size_xs">{this.props.email}</span><br/>
+                <span class="text text_size_xs">{this.props.location}</span>
             </span>
         )
     }

@@ -11,12 +11,9 @@ import Button from './../../../../../components/main/button';
 //Places Autocomplete Library
 import PlacesAutocomplete from 'react-places-autocomplete'
 
-//import ExperiencedInputDropdown from '../../../../../components/parts/experiencedInputDropdown';
-//import LocationFilter from './../../../../../components/parts/locationFilter';
-
 //Actions
 import {
-    saveHeadquatersLocationStep,
+    saveHeadquartersLocationStep,
     showNumberOfEmployeesStep,
 } from 'actions/companyOnboarding';
 
@@ -96,7 +93,7 @@ let LocationInfoForm = props => {
 
     // handleSubmit function
     const submit = (values, dispatch) => {
-			dispatch(saveHeadquatersLocationStep(values))
+			dispatch(saveHeadquartersLocationStep(values))
 			dispatch(showNumberOfEmployeesStep())
 		}
 
@@ -106,7 +103,7 @@ let LocationInfoForm = props => {
 									<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
 											<fieldset class="form__row">
 											<Field
-												name="headquatersLocation"
+												name="headquartersLocation"
 												component={PlaceField}
 											 />
 											</fieldset>

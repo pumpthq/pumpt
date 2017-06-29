@@ -31,7 +31,7 @@ export class To extends Component {
         } = this.props
 
         if (isFilled) {
-            const { firstName, lastName, email } = onboardingState
+            const { firstName, lastName, email, location } = onboardingState
             const fullName = `${firstName || ''} ${lastName || ''}`
 
             return (
@@ -41,6 +41,7 @@ export class To extends Component {
                     }}
                     name={fullName} 
                     email={email}
+										location={location}
                     onClick={() => {
                     if (isEnabled) dispatch(showContactInfoStep())
                 }}

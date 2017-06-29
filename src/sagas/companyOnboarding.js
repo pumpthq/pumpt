@@ -23,7 +23,7 @@ import {
     applyForMembershipSucceeded,
     applyForMembershipFailed,
     showContactInfoStep,
-} from './../actions/companyOnboarding';
+} from 'actions/companyOnboarding';
 import { getCompanyOnboarding } from './../reducers/companyOnboarding';
 import { migrateOnboardingToApplication } from './../actions/applicationCompany';
 import { getSummary } from './../reducers/applicationCompany';
@@ -106,6 +106,7 @@ export default function () {
                         twitterAcc: `${onboardingState.twitterUsername}`,
                         facebookUrl: facebookProfileUrl,
                     },
+										valueAssessments : onboardingState.valueAssessments ? onboardingState.valueAssessments.value :  ''
                 },
             };
             try {
