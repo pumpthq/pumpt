@@ -45,11 +45,17 @@ const renderField = ({
   </div>
 )
 
+function composeAsyncValidators(validatorFns) {
+  return async (values, dispatch, props, field) => {
+    const validatorFn = validatorFns[field]
+    await validatorFn(values, dispatch, props, field);
+  };
+}
+
 //Async Validation - on if email is already registered
 //TODO: check for company name availability
-const asyncValidate = (values, dispatch) => {
-	const { email } = values.email
-	const { name } = values.name
+const emailValidate = (values, dispatch) => {
+	const { email } = values
 
 	const error = { email: THIS_EMAIL_IS_ALREADY_REGISTERED }
 
@@ -60,6 +66,31 @@ const asyncValidate = (values, dispatch) => {
     		else { return {} }
     	})
 }
+
+const companyNameValidate = (values, dispatch) => {
+	const { companyName } = values
+
+	const error = { companyName: THIS_COMPANY_IS_ALREADY_REGISTERED }
+
+    // below is for debug purpose
+    const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+    return sleep(1000).then(() => { // simulate server latency
+        if(companyName === 'New York Times') throw error;
+    });
+
+    // TODO: delete debug code above and uncomment lines below once api endpoint is patched
+    // return dispatch(checkCompanyNameAvailability(companyName))
+    //     .then((data) => {
+    // 		if (data.companyName === true) { throw error }
+    // 		if (data.companyName.length) { throw error }
+    // 		else { return {} }
+    // 	})
+}
+
+const asyncValidate = composeAsyncValidators({
+  email:emailValidate,
+  companyName:companyNameValidate
+});
 
 let OnboardingCompanyContactInfo = props => {
 		const { handleSubmit, invalid, asyncValidating, submitting, error, valid, dispatch } = props
@@ -126,7 +157,7 @@ let OnboardingCompanyContactInfo = props => {
 OnboardingCompanyContactInfo = reduxForm({
 	form: 'onboardingCompanyContactForm',
 	asyncValidate,
-  asyncBlurFields: ['email']
+  asyncBlurFields: ['email', 'companyName']
 })(OnboardingCompanyContactInfo)
 
 
