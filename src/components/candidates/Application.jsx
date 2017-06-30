@@ -304,16 +304,38 @@ const renderSkills = ({ showSkills, fields, meta: { error } }) => (
 				<div className="info-block">
 							<div class="row">
 								<div class="application-detail col-md-12">
-									<Field name="pepperoni" component={Checkbox} label="Pepperoni" />
+									<Field name="ms-office" component={Checkbox} label="MS Office (Word,Excel, PPt)" />
 								</div>
 								<div class="application-detail col-md-12">
-									<Field name="mushrooms" component={Checkbox} label="Mushrooms" />
+									<Field name="coms-core" component={Checkbox} label="Coms Core" />
 								</div>
 								<div class="application-detail col-md-12">
-									<Field name="peppers" component={Checkbox} label="Peppers" />
+									<Field name="google-analytics" component={Checkbox} label="Google Analytics" />
 								</div>
-								{/*{fields.map((skill, index) => (
-							))}*/}
+								<div class="application-detail col-md-12">
+									<Field name="iab-certification" component={Checkbox} label="IAB Certification" />
+								</div>
+								<div class="application-detail col-md-12">
+									<Field name="salesforce" component={Checkbox} label="SalesForce" />
+								</div>
+								<div class="application-detail col-md-12">
+									<Field name="adserving-platforms" component={Checkbox} label="Ad-Serving Platforms" />
+								</div>
+								{fields.map((skill, index) => (
+									<div class="application-detail col-md-4">
+										<Field name={`${index}`} className="short-field" component={renderField} label="Add Your Own..." />
+										<button className="remove-entry" type="button" onClick={() => {
+											fields.remove(index)
+										}}><i>X</i>
+										</button>
+										<br/>
+									</div>
+
+							))}
+							{fields.length > 0 && <button className="add-entry mdl-button" type="button" onClick={() => {
+									fields.push()
+								}}>Add
+							</button>}
 						</div>
 				</div>
 			}

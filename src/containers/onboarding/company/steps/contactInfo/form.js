@@ -23,6 +23,7 @@ import {
 } from './../../../../../actions/companyOnboarding'
 import { SubmissionError } from 'redux-form'
 import { checkEmailAvailability } from 'actions/authorization'
+import { checkCompanyNameAvailability } from 'actions/authorization'
 
 
 //Field Validations
@@ -100,7 +101,7 @@ const companyNameValidate = (values, dispatch) => {
 
 const asyncValidate = composeAsyncValidators({
   email:emailValidate,
-/*  companyName:companyNameValidate*/
+  companyName:companyNameValidate
 });
 
 let OnboardingCompanyContactInfo = props => {
