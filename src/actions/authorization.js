@@ -45,7 +45,7 @@ export const checkEmailAvailability = email => ({
 export const checkCompanyNameAvailability = name => ({
     type: API,
     payload: {
-        url: `/companies/${name}`,
+        url: `/companies/is-available/${name}`,
         method: 'GET',
     }
 })

@@ -53,7 +53,6 @@ function composeAsyncValidators(validatorFns) {
 }
 
 //Async Validation - on if email is already registered
-//TODO: check for company name availability
 const emailValidate = (values, dispatch) => {
 	const { email } = values
 
@@ -72,19 +71,10 @@ const companyNameValidate = (values, dispatch) => {
 
 	const error = { companyName: THIS_COMPANY_IS_ALREADY_REGISTERED }
 
-    // below is for debug purpose
-    const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
-    return sleep(1000).then(() => { // simulate server latency
-        if(companyName === 'New York Times') throw error;
-    });
-
-    // TODO: delete debug code above and uncomment lines below once api endpoint is patched
-    // return dispatch(checkCompanyNameAvailability(companyName))
-    //     .then((data) => {
-    // 		if (data.companyName === true) { throw error }
-    // 		if (data.companyName.length) { throw error }
-    // 		else { return {} }
-    // 	})
+    return dispatch(checkCompanyNameAvailability(companyName))
+			.then((data) => {
+				if (data.companyName === true) {throw error}
+			})
 }
 
 const asyncValidate = composeAsyncValidators({
