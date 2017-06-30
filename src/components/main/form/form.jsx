@@ -2,9 +2,6 @@ import React, {Component, PropTypes} from 'react'
 import { connect } from 'react-redux';
 import { reduxForm, Field, SubmissionError } from 'redux-form'
 
-//Places Autocomplete Library
-import PlacesAutocomplete from 'react-places-autocomplete'
-
 const propTypes = {
     children : PropTypes.oneOfType([
         PropTypes.node,

@@ -36,27 +36,28 @@ export default class CandidateSummary extends Component {
                                         &nbsp;Edit
                                     </a>
                                 </h2>
-                                <div class="mdl-card__subtitle-text summary-head__subtitle-text">
+																<br/>
                                     <span class="text ellipsis-text">{email}</span>
-                                    <ul class="list list_type_inline">
-                                        <li class="list__item"><span class="text"><span class="text summary-head__label">Industry</span>{interestWorkingArea}</span></li>
-                                        <li class="list__item"><span class="text"><span class="text summary-head__label">Working Area</span>{recentWorkingAreaParent}</span></li>
-                                        <li class="list__item"><span class="text"><span class="text summary-head__label">Specialty</span>{recentWorkingArea}</span></li>
-                                    </ul>
-                                </div>
+
                             </div>
                         </div>
                     </div>
                     <div class="summary-head__title-item summary-head__title-item_type_alignment">
                         <div class="summary-head__title-column">
+														<span class="text summary-head__label">Industry</span>
+														<span class="text text_size_s summary-head__summary">{interestWorkingArea}</span>
                             <span class="text summary-head__label">Annual Income</span>
                             <span class="text text_size_s summary-head__summary">{recentAnnualIncome}</span>
                         </div>
                         <div class="summary-head__title-column">
+														<span class="text summary-head__label">Working Area</span>
+														<span class="text text_size_s summary-head__summary">{recentWorkingAreaParent}</span>
                             <span class="text summary-head__label">Job Title </span>
                             <span class="text text_size_s summary-head__summary">{recentJob}</span>
                         </div>
                         <div class="summary-head__title-column">
+														<span class="text summary-head__label">Specialty</span>
+														<span class="text text_size_s summary-head__summary">{recentWorkingArea}</span>
                             <span class="text summary-head__label">Industry Experience </span>
                             <span class="text text_size_s summary-head__summary">{recentAreaExperience}</span>
                         </div>

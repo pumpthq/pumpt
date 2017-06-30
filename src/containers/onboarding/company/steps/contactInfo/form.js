@@ -45,6 +45,7 @@ const renderField = ({
   </div>
 )
 
+//Async Validation - on if email is already registered + on Company Name Uniqueness
 function composeAsyncValidators(validatorFns) {
   return async (values, dispatch, props, field) => {
     const validatorFn = validatorFns[field]
@@ -52,7 +53,6 @@ function composeAsyncValidators(validatorFns) {
   };
 }
 
-//Async Validation - on if email is already registered
 const emailValidate = (values, dispatch) => {
 	const { email } = values
 
@@ -100,7 +100,7 @@ let OnboardingCompanyContactInfo = props => {
 									name="companyName"
 									type="text"
 									component={renderField}
-									validate={required}
+									validate={[required, minLength(3)]}
 								/>
 						</fieldset>
 						<fieldset class="form__row">

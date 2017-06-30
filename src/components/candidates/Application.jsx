@@ -1,9 +1,11 @@
 import React, {Component, PropTypes} from 'react';
 import { connect } from 'react-redux'
-import PlacesAutocomplete from 'react-places-autocomplete'
+import { reduxForm, FieldArray, Field, SubmissionError } from 'redux-form'
+
+//Places Autocomplete Library
+import { PlaceField } from 'components/main/form/PlaceField'
 
 import GlassDoorImage from 'img/glassdoor.jpg'
-import { reduxForm, Field, FieldArray, formValueSelector } from 'redux-form'
 import { tintedBackground } from 'components/helpers'
 import { browserHistory } from 'react-router'
 import { Location, EnumSelector, TextArea, TextInput, DateInput } from 'components/form/inputs'
@@ -28,64 +30,20 @@ import './style.less'
 
 
 //Generalized Redux Field
-const renderField = ({
+export const renderField = ({
   input,
   label,
   type,
-  meta: { touched, error }
+  meta: { asyncValidating, touched, error }
 }) => (
   <div>
-    <div>
+		<div class={asyncValidating ? 'async-validating' : 'class'}>
       <input class="mdl-textfield__input textfield__input" {...input} placeholder={label} type={type} />
-      {touched && (error && <span class="textfield__error">{error}</span>)}
+      {touched && error && <span class="textfield__error">{error}</span>}
     </div>
   </div>
 )
 
-//Places Autocomplete Field
-const AutocompleteItem = ({ formattedSuggestion }) => (
-	<div>
-		<strong>{ formattedSuggestion.mainText }</strong>{' '}
-		<small>{ formattedSuggestion.secondaryText }</small>
-	</div>
-)
-
-export const PlaceField = ({ values, input, label, meta: { touched, error }, ...rest }) => {
-	const hasError = touched && error;
-	const id = input.name;
-
-	const classes={
-		input: `form-control form-control-lg${hasError ? ' form-control-danger' : ''}`
-	}
-
-	/*const inputProps = {
-		value: locationValue, // `value` is required
-		onChange : (locationValue) => {update},
-		onBlur: () => {
-			console.log('blur!')
-		},
-		type: 'search',
-		placeholder: 'Search Places...',
-		autoFocus: true,
-	}*/
-
-	const inputProps = {
-		id : id,
-		typeAhead : false,
-		inputName : input.name,
-		autocompleteItem : AutocompleteItem,
-		classNames : classes
-	}
-
-	return (
-		<div className={`form-group${hasError ? ' has-danger' : ''}`}>
-			<label className="form-control-label" htmlFor={id}>{label}</label>
-			<PlacesAutocomplete
-				inputProps={inputProps}/>
-			{hasError && <div className="form-control-feedback">{error}</div>}
-		</div>
-	);
-}
 
 //Field-level Validations
 const required = value => (value ? undefined : 'Can\'t be Blank')
@@ -95,7 +53,7 @@ const required = value => (value ? undefined : 'Can\'t be Blank')
 
 //Form
 let ApplicationForm = props =>  {
-	const {handleSubmit, submitting, error, valid, dispatch, locationValue } = props
+	const {handleSubmit, submitting, error, valid, dispatch} = props
 
 		return (
 			<form onSubmit={handleSubmit} class="candidate-application-form text-input-underlined"> 
@@ -124,6 +82,10 @@ let ApplicationForm = props =>  {
 							label="LinkedIn"
 							validate={[required]}
 						/>
+							<Field
+								name="location"
+								component={PlaceField}
+							 />
 
 						<TwitterIcon />
 						<Field
@@ -159,30 +121,18 @@ ApplicationForm = reduxForm({
 	form: 'candidateApplication'
 })(ApplicationForm)
 
-// Decorate with connect to read form values
-const selector = formValueSelector('candidateApplication')
-ApplicationForm = connect(state => {
-
-	const locationValue = selector(state, 'location')
-
-  return {
-    locationValue
-  }
-})(ApplicationForm)
+/*ApplicationForm = connect(
+  state => ({
+    initialValues: state.candidateOnboarding // pull previous values from onboarding state
+  })
+)(ApplicationForm)*/
 
 //Export Form
 export default ApplicationForm
 
 
-
-
-
-
-
 //FieldArray Definitions
 const renderWorkingExperiences = ({ fields, label, meta: { error } }) => (
-
-
 	<div className="application-item">
 			<button className="application-item-button" type="button" onClick={() => {
 				fields.push()
@@ -194,7 +144,7 @@ const renderWorkingExperiences = ({ fields, label, meta: { error } }) => (
 								<div class="row">
 									<div class="col-md-12">
 										<Field
-											name="companyName"
+											name={`${workingExperience}.companyName`}
 											type="text"
 											component={renderField}
 											label="Company Name"
@@ -202,7 +152,7 @@ const renderWorkingExperiences = ({ fields, label, meta: { error } }) => (
 									</div>
 									<div class="col-md-6">
 										<Field
-											name="position"
+											name={`${workingExperience}.position`}
 											type="text"
 											component={renderField}
 											label="Title"
@@ -210,13 +160,13 @@ const renderWorkingExperiences = ({ fields, label, meta: { error } }) => (
 									</div>
 									<div class="col-md-6">
 										<Field
-											name="location"
+											name={`${workingExperience}.location`}
 											component={PlaceField}
 										 />
 									</div>
 									<div class="col-md-12">
 										<Field
-											name="duty"
+											name={`${workingExperience}.duty`}
 											type="textarea"
 											component={renderField}
 											label="Description of your work"
@@ -224,7 +174,7 @@ const renderWorkingExperiences = ({ fields, label, meta: { error } }) => (
 									</div>
 									<div class="col-md-3">
 										<Field
-											name="startWorkingAt"
+											name={`${workingExperience}.startWorkingAt`}
 											type="text"
 											component={renderField}
 											label="Start Date (MM/YYYY)"
@@ -232,7 +182,7 @@ const renderWorkingExperiences = ({ fields, label, meta: { error } }) => (
 									</div>
 									<div class="col-md-3">
 										<Field
-											name="endWorkingAt"
+											name={`${workingExperience}.endWorkingAt`}
 											type="text"
 											component={renderField}
 											label="End Date (MM/YYYY)"
