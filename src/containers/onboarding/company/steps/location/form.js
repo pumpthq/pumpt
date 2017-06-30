@@ -5,7 +5,7 @@ import { reduxForm, Field, SubmissionError } from 'redux-form'
 //import { Form, renderField, PlaceField } from 'components/main/form';
 
 //Places Autocomplete Library
-import { Form, PlaceField} from 'components/main/form';
+import { Form, PlaceField} from 'components/main/form/PlaceField';
 
 //General Components
 import Button from './../../../../../components/main/button';

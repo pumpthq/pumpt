@@ -179,7 +179,7 @@ export default function() {
                 body : {
                     education : {
                         schoolName,
-                        speciality : fieldOfStudy,
+                        specialty : fieldOfStudy,
                         startStudyAt : fromDate,
                         endStudyAt : toDate,
                         degree : degree
@@ -353,7 +353,7 @@ export default function() {
 
                 const {
                    schoolName,
-                   speciality,
+                   specialty,
                    startStudyAt,
                    endStudyAt,
                    degree
@@ -443,7 +443,7 @@ export default function() {
                 if (schoolName) {
                     patch.education = {
                         schoolName,
-                        fieldOfStudy : speciality,
+                        fieldOfStudy : specialty,
                         fromDate : moment(startStudyAt, 'YYYY-MM'),
                         toDate : moment(endStudyAt, 'YYYY-MM'),
                         degree

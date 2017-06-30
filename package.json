@@ -48,7 +48,7 @@
     "react-router-redux": "4.0.5",
     "react-textarea-autosize": "4.0.4",
     "redux": "^3.7.0",
-    "redux-form": "bitstrider/redux-form#v6.8.0-multiple-async",
+    "redux-form": "github:bitstrider/redux-form#v6.8.0-multiple-async",
     "redux-localstorage": "0.4.1",
     "redux-logger": "2.6.1",
     "redux-saga": "0.10.5",

@@ -1,24 +1,28 @@
 import React, { Component } from 'react'
 import { reduxForm, Field} from 'redux-form'
 import { connect } from 'react-redux'
+import co from 'co'
 import emailValidator from 'email-validator'
 import PlacesAutocomplete from 'react-places-autocomplete'
 
-import Form from 'components/main/form'
-import Button from 'components/main/button'
-import { OnboardingInput } from 'components/onboarding'
+import Form from './../../../../../components/main/form'
+import Button from './../../../../../components/main/button'
+import { OnboardingInput } from './../../../../../components/onboarding'
 
 import {
     THIS_EMAIL_IS_ALREADY_REGISTERED,
     THIS_COMPANY_IS_ALREADY_REGISTERED
-} from 'constants/companyOnboarding'
+} from './../../../../../constants/companyOnboarding'
+import {
+    fetchByEmail as getCompanyByEmail,
+    isAvailable as isAvailableCompanyName
+} from './../../../../../sagas/companyOnboarding'
 import {
     saveContactInfoData,
     showCompanyTypeStep
-} from 'actions/companyOnboarding'
+} from './../../../../../actions/companyOnboarding'
 import { SubmissionError } from 'redux-form'
 import { checkEmailAvailability } from 'actions/authorization'
-import { checkCompanyNameAvailability } from 'actions/authorization'
 
 
 //Field Validations
@@ -45,17 +49,9 @@ const renderField = ({
   </div>
 )
 
-//Async Validation - on if email is already registered + on Company Name Uniqueness
-function composeAsyncValidators(validatorFns) {
-  return async (values, dispatch, props, field) => {
-    const validatorFn = validatorFns[field]
-    await validatorFn(values, dispatch, props, field);
-  };
-}
-
-const emailValidate = (values, dispatch) => {
+//Async Validation - on if email is already registered
+const asyncValidate = (values, dispatch) => {
 	const { email } = values
-
 	const error = { email: THIS_EMAIL_IS_ALREADY_REGISTERED }
 
 	return dispatch(checkEmailAvailability(email))
@@ -77,10 +73,10 @@ const companyNameValidate = (values, dispatch) => {
 			})
 }
 
-const asyncValidate = composeAsyncValidators({
+/*const asyncValidate = composeAsyncValidators({
   email:emailValidate,
   companyName:companyNameValidate
-});
+});*/
 
 let OnboardingCompanyContactInfo = props => {
 		const { handleSubmit, invalid, asyncValidating, submitting, error, valid, dispatch } = props

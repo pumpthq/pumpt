@@ -30,7 +30,7 @@ function EducationDisplay(props){
 	var html = null;
 	if (props.education === null){
 	}else{
-		html = education.map(exp => <div className="item-title-text">School Name: {exp.schoolName}<br/>Speciality: {exp.speciality}<br/>Degree: {exp.degree}</div>);
+		html = education.map(exp => <div className="item-title-text">School Name: {exp.schoolName}<br/>Specialty: {exp.specialty}<br/>Degree: {exp.degree}</div>);
 	}
 	return html;
 }
@@ -92,7 +92,7 @@ export default class CandidateProfile extends Component {
                   <Education/><span className="item-title">Education</span>
                   {
                     education && education.map(exp => <div className="item-title-text">School Name: {exp.schoolName}<br/>
-                    Speciality: {exp.speciality}<br/>Degree: {exp.degree}</div>)
+                    Specialty: {exp.specialty}<br/>Degree: {exp.degree}</div>)
                   }
                 </div>
 

@@ -41,6 +41,7 @@ export const PlaceField = ({ values, input, onChange, label, meta: { touched, er
 		inputName : input.name,
 		autocompleteItem : AutocompleteItem,
 		classNames : classes,
+		placeholder : "Location",
 	}
 
 	return (

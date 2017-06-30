@@ -5,6 +5,13 @@ import { reduxForm, FieldArray, Field, SubmissionError } from 'redux-form'
 //Places Autocomplete Library
 import { PlaceField } from 'components/main/form/PlaceField'
 
+//Material Ui AutoComplete
+import {AutoComplete as MUIAutoComplete} from 'material-ui';
+import {
+  AutoComplete,
+  Checkbox,
+} from 'redux-form-material-ui';
+
 import GlassDoorImage from 'img/glassdoor.jpg'
 import { tintedBackground } from 'components/helpers'
 import { browserHistory } from 'react-router'
@@ -63,7 +70,7 @@ let ApplicationForm = props =>  {
 					<CardDivider/>
 
 					<Education/>
-					<FieldArray name="education" component={renderEducation} />
+					<FieldArray name="education" component={renderEducations} />
 					<CardDivider/>
 
 					<Skills/>
@@ -142,7 +149,7 @@ const renderWorkingExperiences = ({ fields, label, meta: { error } }) => (
 			{fields.map((workingExperience, index) => (
 				<div key={index} className="info-block">
 								<div class="row">
-									<div class="col-md-12">
+									<div class="application-detail col-md-12">
 										<Field
 											name={`${workingExperience}.companyName`}
 											type="text"
@@ -150,7 +157,7 @@ const renderWorkingExperiences = ({ fields, label, meta: { error } }) => (
 											label="Company Name"
 										/>
 									</div>
-									<div class="col-md-6">
+									<div class="application-detail col-md-6">
 										<Field
 											name={`${workingExperience}.position`}
 											type="text"
@@ -158,13 +165,13 @@ const renderWorkingExperiences = ({ fields, label, meta: { error } }) => (
 											label="Title"
 										/>
 									</div>
-									<div class="col-md-6">
+									<div class="application-detail col-md-6">
 										<Field
 											name={`${workingExperience}.location`}
 											component={PlaceField}
 										 />
 									</div>
-									<div class="col-md-12">
+									<div class="application-detail col-md-12">
 										<Field
 											name={`${workingExperience}.duty`}
 											type="textarea"
@@ -172,7 +179,7 @@ const renderWorkingExperiences = ({ fields, label, meta: { error } }) => (
 											label="Description of your work"
 										/>
 									</div>
-									<div class="col-md-3">
+									<div class="application-detail col-md-3">
 										<Field
 											name={`${workingExperience}.startWorkingAt`}
 											type="text"
@@ -180,7 +187,7 @@ const renderWorkingExperiences = ({ fields, label, meta: { error } }) => (
 											label="Start Date (MM/YYYY)"
 										/>
 									</div>
-									<div class="col-md-3">
+									<div class="application-detail col-md-3">
 										<Field
 											name={`${workingExperience}.endWorkingAt`}
 											type="text"
@@ -206,57 +213,110 @@ const renderWorkingExperiences = ({ fields, label, meta: { error } }) => (
 </div>
 )
 
-const renderEducation = ({ fields, label, meta: { error } }) => (
+const renderEducations = ({ fields, label, meta: { error } }) => (
 	<div className="application-item">
-		{fields.length === 0 && 'Add'} {label}
-		<ul>
-			<li>
-				<button type="button" onClick={() => fields.push()}>Add Education</button>
-			</li>
+			<button className="application-item-button" type="button" onClick={() => {
+				fields.push()
+			}}><i/>
+			{fields.length === 0 && 'Add'} Education
+			</button>
 			{fields.map((education, index) => (
-				<li key={index}>
-					<button
-						type="button"
-						title="Remove Hobby"
-						onClick={() => fields.remove(index)}
-					/>
-					<Field
-						name={education}
-						type="text"
-						component={renderField}
-						label={`EDU #${index + 1}`}
-					/>
-				</li>
+				<div key={index} className="info-block">
+								<div class="row">
+									<div class="application-detail col-md-12">
+										<Field
+											name={`${education}.schoolName`}
+											type="text"
+											component={renderField}
+											label="School Name"
+										/>
+									</div>
+									<div class="application-detail col-md-6">
+										<Field
+											name={`${education}.specialty`}
+											type="text"
+											component={renderField}
+											label="Field of Study"
+										/>
+									</div>
+									<div class="application-detail col-md-6">
+										<Field
+											name={`${education}.degree`}
+											component={AutoComplete}
+											floatingLabelText="Degree"
+											openOnFocus
+											filter={MUIAutoComplete.fuzzyFilter}
+											dataSource={['High School','Undergraduate','Graduate','Other']}
+											//FIXME: above is not being pulled from single source data in API
+										/>
+									</div>
+									<div class="application-detail col-md-12">
+										<Field
+											name={`${education}.duty`}
+											type="textarea"
+											component={renderField}
+											label="Description of your work"
+										/>
+									</div>
+									<div class="application-detail col-md-3">
+										<Field
+											name={`${education}.startStudyAt`}
+											type="text"
+											component={renderField}
+											label="Start Date (MM/YYYY)"
+										/>
+									</div>
+									<div class="application-detail col-md-3">
+										<Field
+											name={`${education}.endStudyAt`}
+											type="text"
+											component={renderField}
+											label="End Date (MM/YYYY)"
+										/>
+									</div>
+								</div>
+
+					<button className="remove-entry" type="button" onClick={() => {
+						fields.remove(index)
+					}}><i>Remove</i>
+					</button>
+				</div>
+
 			))}
 			{error && <li className="error">{error}</li>}
-		</ul>
+
+		{fields.length > 0 && <button className="add-entry mdl-button" type="button" onClick={() => {
+				fields.push()
+			}}>Add
+		</button>}
 </div>
 )
-
-const renderSkills = ({ fields, meta: { error } }) => (
+const renderSkills = ({ showSkills, fields, meta: { error } }) => (
 	<div className="application-item">
-		<ul>
-			<li>
-				<button type="button" onClick={() => fields.push()}>Add Skills</button>
-			</li>
-			{fields.map((skill, index) => (
-				<li key={index}>
-					<button
-						type="button"
-						title="Remove Skill"
-						onClick={() => fields.remove(index)}
-					/>
-					<Field
-            name="employed"
-            id="employed"
-            component="input"
-            type="checkbox"
-          />
-					 <label htmlFor="employed">MS Office (Word, Excel, PPt)</label>
-				</li>
-			))}
-			{error && <li className="error">{error}</li>}
-		</ul>
+			<button className="application-item-button" type="button" onClick={() => {
+				fields.push()
+			}}><i/>
+			{fields.length === 0 && 'Add'} Skills
+			</button>
+
+			{fields.length !== 0 &&
+
+				<div className="info-block">
+							<div class="row">
+								<div class="application-detail col-md-12">
+									<Field name="pepperoni" component={Checkbox} label="Pepperoni" />
+								</div>
+								<div class="application-detail col-md-12">
+									<Field name="mushrooms" component={Checkbox} label="Mushrooms" />
+								</div>
+								<div class="application-detail col-md-12">
+									<Field name="peppers" component={Checkbox} label="Peppers" />
+								</div>
+								{/*{fields.map((skill, index) => (
+							))}*/}
+						</div>
+				</div>
+			}
 </div>
 )
 
@@ -349,43 +409,17 @@ const InterestEntry = props => {
     )
 }
 
-const ExperienceEntry = props => {
-    const { field: { companyName, position, location, duty, isCurrentJob, startWorkingAt, endWorkingAt } } = props
-    return (
-        <div class="row">
-					<div class="col-md-12">
-            <TextInput field={companyName} placeholder="Company Name" />
-					</div>
-					<div class="col-md-6">
-            <TextInput field={position} placeholder="Title" />
-					</div>
-					<div class="col-md-3">
-            <TextInput field={location} placeholder="Location" />
-					</div>
-					<div class="col-md-12">
-            <TextArea field={duty} inputClass="text-area" placeholder="Description of your work" readOnly="false"/>
-					</div>
-					<div class="col-md-3">
-            <TextInput field={startWorkingAt} placeholder="Start Date (MM/YYYY)" />
-					</div>
-					<div class="col-md-3">
-            <TextInput field={endWorkingAt} placeholder="End Date *MM/YYYY)" />
-					</div>
-        </div>
-    )
-}
-
 
 
 const EducationEntry = props => {
-    const { field: { schoolName, speciality, degree, startStudyAt, endStudyAt } } = props
+    const { field: { schoolName, specialty, degree, startStudyAt, endStudyAt } } = props
     return (
         <div class="row">
 					<div class="col-md-12">
             <TextInput field={schoolName} placeholder="School Name" />
 					</div>
 					<div class="col-md-6">
-            <TextInput field={speciality} placeholder="Field of Study" />
+            <TextInput field={specialty} placeholder="Field of Study" />
 					</div>
 					<div class="col-md-6">
             <EnumSelector field={degree} label="Degree" options={DEGREES_DROPDOWN_DATA} />
