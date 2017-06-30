@@ -90,7 +90,6 @@ const emailValidate = (values, dispatch) => {
 
 const companyNameValidate = (values, dispatch) => {
 	const { companyName } = values
-
 	const error = { companyName: THIS_COMPANY_IS_ALREADY_REGISTERED }
 
     return dispatch(checkCompanyNameAvailability(companyName))
@@ -101,7 +100,7 @@ const companyNameValidate = (values, dispatch) => {
 
 const asyncValidate = composeAsyncValidators({
   email:emailValidate,
-  companyName:companyNameValidate
+/*  companyName:companyNameValidate*/
 });
 
 let OnboardingCompanyContactInfo = props => {
