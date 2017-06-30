@@ -99,10 +99,10 @@ const companyNameValidate = (values, dispatch) => {
 			})
 }
 
-/*const asyncValidate = composeAsyncValidators({
+const asyncValidate = composeAsyncValidators({
   email:emailValidate,
   companyName:companyNameValidate
-});*/
+});
 
 let OnboardingCompanyContactInfo = props => {
 		const { handleSubmit, invalid, asyncValidating, submitting, error, valid, dispatch } = props
