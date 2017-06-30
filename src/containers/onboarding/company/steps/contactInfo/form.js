@@ -49,8 +49,34 @@ const renderField = ({
   </div>
 )
 
-//Async Validation - on if email is already registered
-const asyncValidate = (values, dispatch) => {
+//Async Validation - on if email is already registered + on Company Name Uniqueness
+function composeAsyncValidators(validatorFns) {
+  return async (values, dispatch, props, field) => {
+      if(field) {
+          const validatorFn = validatorFns[field]
+          return validatorFn(values, dispatch, props, field);
+      }else{ // form is trying to run async validations on submit
+
+          // OPTION 1: perform all async validations onSubmit, delaying submission
+          let errors;
+          for (const validatorFn of Object.values(validatorFns)) {
+            try {
+              await validatorFn(values, dispatch, props, field);
+            } catch (err) {
+              errors = Object.assign({}, errors, err);
+            }
+          }
+
+          if (errors) throw errors;
+          return new Promise((resolve)=> {resolve()})
+
+          // OPTION 2: skip async validations onSubmit and just return a resolved promise
+          //return new Promise(resolve=> resolve())
+      }
+  };
+}
+
+const emailValidate = (values, dispatch) => {
 	const { email } = values
 	const error = { email: THIS_EMAIL_IS_ALREADY_REGISTERED }
 
@@ -80,7 +106,7 @@ const companyNameValidate = (values, dispatch) => {
 
 let OnboardingCompanyContactInfo = props => {
 		const { handleSubmit, invalid, asyncValidating, submitting, error, valid, dispatch } = props
-		const submitDisabled = invalid || submitting || error
+		const submitDisabled = invalid || submitting || error || asyncValidating
 
     // handleSubmit function
     const submit = (values, dispatch) => {
