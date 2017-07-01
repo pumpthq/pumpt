@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import { Link } from 'react-router'
 import { reduxForm, Field } from 'redux-form'
 import { connect } from 'react-redux';
+import { required, email_validation } from 'components/main/form/validations'
 
 //Places Autocomplete Library
 import PlacesAutocomplete from 'react-places-autocomplete'
@@ -19,14 +20,8 @@ import {
 import { SubmissionError } from 'redux-form'
 import { checkEmailAvailability } from 'actions/authorization'
 
-//Field Validations
-const required = value => (value ? undefined : 'Can\'t be Blank')
-const email_validation = value =>
-  value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)
-    ? 'Invalid email address'
-    : undefined
-export const minLength = min => value =>
-  value && value.length < min ? `Must be ${min} characters or more` : undefined
+//Places Autocomplete Library
+import { PlaceField } from 'components/main/form/PlaceField'
 
 //Generalized Redux Field
 const renderField = ({
@@ -42,57 +37,6 @@ const renderField = ({
     </div>
   </div>
 )
-
-//Places Autocomplete Field
-const AutocompleteItem = ({ formattedSuggestion }) => (
-	<div>
-		<strong>{ formattedSuggestion.mainText }</strong>{' '}
-		<small>{ formattedSuggestion.secondaryText }</small>
-	</div>
-)
-
-export const PlaceField = ({ values, input, onChange, label, meta: { touched, error }, ...rest }) => {
-	const hasError = touched && error;
-	const id = input.name;
-
-	const classes={
-		input: 'mdl-textfield__input'
-	}
-
-	//NOTE: restrict to city results only
-	const options = {
-		types: ['(cities)']
-		//componentRestrictions: new google.maps.ComponentRestrictions('country:us|country:pr|country:vi|country:gu|country:mp')
-	}
-
-	//WIP: restrict results to US only (US already prioritizes, but not exlusive)
-	//Trying to configure using [https://github.com/kenny-hibino/react-places-autocomplete, https://developers.google.com/maps/documentation/javascript/reference#AutocompletionRequest]
-
-
-	const inputProps = {
-		value : input.value,
-		onChange : input.onChange,
-		id : id,
-		typeAhead : false,
-		inputName : input.name,
-		autocompleteItem : AutocompleteItem,
-		placeholder : label,
-		classNames : classes,
-	}
-
-	return (
-		<div className={`form-group${hasError ? ' has-danger' : ''}`}>
-			<label className="form-control-label" htmlFor={id}>{input.label}</label>
-
-			<PlacesAutocomplete
-				inputProps={inputProps}
-				options={options}
-			/>
-
-			{hasError && <div className="form-control-feedback">{error}</div>}
-		</div>
-	);
-}
 
 //Async Validation - on if email is already registered
 const asyncValidate = (values, dispatch) => {

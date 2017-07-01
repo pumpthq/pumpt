@@ -1,7 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import { connect } from 'react-redux'
 import { reduxForm, FieldArray, Field, SubmissionError, getFormValues, getFormNames } from 'redux-form'
-import validator from 'validator';
 
 //Places Autocomplete Library
 import { PlaceField } from 'components/main/form/PlaceField'
@@ -15,21 +14,16 @@ import {
 	MenuItem,
 } from 'redux-form-material-ui';
 
+//Actions
+import { updateCandidate } from 'actions/candidateMatches'
+
 //Field-level Validations & Normalizations
 import { url, date, require } from 'components/main/form/validations'
 import { normalizeDate, normalizeTwitter } from 'components/main/form/normalizations'
 
 import GlassDoorImage from 'img/glassdoor.jpg'
-import { tintedBackground } from 'components/helpers'
 import { browserHistory } from 'react-router'
-import { Location, EnumSelector, TextArea, TextInput, DateInput } from 'components/form/inputs'
-import ExperiencedInputDropdown from '../../components/parts/experiencedInputDropdown';
-import LocationFilter from '../../components/parts/locationFilter';
-import { OnboardingInput } from '../../components/onboarding';
-import {
-    EMPLOYEMENTS_DROPDOWN_DATA,
-    DEGREES_DROPDOWN_DATA,
-} from 'constants/companyJobs';
+import { EMPLOYEMENTS_DROPDOWN_DATA, DEGREES_DROPDOWN_DATA } from 'constants/companyJobs';
 import PencilIcon from 'components/icons/pencil'
 import Skills from 'components/icons-application/skills'
 import CaseIcon from 'components/icons-application/case'
@@ -58,14 +52,18 @@ export const renderField = ({
   </div>
 )
 
+const CardDivider = () => (<div className="summary-head__title-item summary-head__title-item_type_alignment summary-head__title-item_type_middle"></div>)
 
 //Form
-let ApplicationForm = props =>  {
+let CandidateApplicationForm = props =>  {
 	const {handleSubmit, submitting, error, invalid, valid, dispatch, names, values} = props
 		const submitDisabled = invalid || submitting
+		const submit = (values, dispatch) => {
+			dispatch(updateCandidate(values))
+		}
 
 		return (
-			<form onSubmit={handleSubmit} class="candidate-application-form text-input-underlined"> 
+			<form onSubmit={handleSubmit(submit)} class="candidate-application-form text-input-underlined"> 
 
 					<CaseIcon/>
 					<FieldArray name="workingExperiences" label="Working Experience" component={renderWorkingExperiences} />
@@ -94,21 +92,20 @@ let ApplicationForm = props =>  {
 	}
 
 //Define Form
-ApplicationForm = reduxForm({
+CandidateApplicationForm = reduxForm({
 	form: 'candidateApplication'
-})(ApplicationForm)
+})(CandidateApplicationForm)
 
-ApplicationForm = connect(
+CandidateApplicationForm = connect(
   state => ({
 		//names: getFormNames('candidateApplication')(state),
 		values: getFormValues('candidateApplication')(state),
     initialValues: state.candidateOnboarding // pull previous values from onboarding state
   })
-)(ApplicationForm)
+)(CandidateApplicationForm)
 
 //Export Form
-export default ApplicationForm
-
+export default CandidateApplicationForm
 
 //FieldArray Definitions
 const renderWorkingExperiences = ({ fields, label, meta: { error } }) => (
@@ -441,4 +438,3 @@ const InterestEntry = props => {
     )
 }
 
-const CardDivider = () => (<div className="summary-head__title-item summary-head__title-item_type_alignment summary-head__title-item_type_middle"></div>)
