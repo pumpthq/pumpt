@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import { connect } from 'react-redux'
-import { reduxForm, FieldArray, Field, SubmissionError } from 'redux-form'
+import { reduxForm, FieldArray, Field, SubmissionError, getFormValues, getFormNames } from 'redux-form'
+import validator from 'validator';
 
 //Places Autocomplete Library
 import { PlaceField } from 'components/main/form/PlaceField'
@@ -10,7 +11,13 @@ import {AutoComplete as MUIAutoComplete} from 'material-ui';
 import {
   AutoComplete,
   Checkbox,
+	SelectField,
+	MenuItem,
 } from 'redux-form-material-ui';
+
+//Field-level Validations & Normalizations
+import { url, date, require } from 'components/main/form/validations'
+import { normalizeDate, normalizeTwitter } from 'components/main/form/normalizations'
 
 import GlassDoorImage from 'img/glassdoor.jpg'
 import { tintedBackground } from 'components/helpers'
@@ -35,15 +42,15 @@ import TwitterIcon from 'components/icons-application/twitter'
 import FacebookIcon from 'components/icons-application/facebook'
 import './style.less'
 
-
 //Generalized Redux Field
 export const renderField = ({
   input,
   label,
   type,
+	className,
   meta: { asyncValidating, touched, error }
 }) => (
-  <div>
+  <div class={className}>
 		<div class={asyncValidating ? 'async-validating' : 'class'}>
       <input class="mdl-textfield__input textfield__input" {...input} placeholder={label} type={type} />
       {touched && error && <span class="textfield__error">{error}</span>}
@@ -52,15 +59,10 @@ export const renderField = ({
 )
 
 
-//Field-level Validations
-const required = value => (value ? undefined : 'Can\'t be Blank')
-/*export const twitterUrl = value =>
-	value && /https:\/\/twitter.com\/
-*/
-
 //Form
 let ApplicationForm = props =>  {
-	const {handleSubmit, submitting, error, valid, dispatch} = props
+	const {handleSubmit, submitting, error, invalid, valid, dispatch, names, values} = props
+		const submitDisabled = invalid || submitting
 
 		return (
 			<form onSubmit={handleSubmit} class="candidate-application-form text-input-underlined"> 
@@ -75,51 +77,19 @@ let ApplicationForm = props =>  {
 
 					<Skills/>
 					<FieldArray name="skills" component={renderSkills} />
+					<CardDivider/>
 
 					<Social/>
-					<h2 className="social-application-item">Add Social Media</h2>
-
-					<div className="social-media-block">
-						<LinkedInIcon />
-						{/*<TextInput field={socialMedia.linkedInUrl} label="LinkedIn" classItm="label-item-social" />*/}
-						<Field
-							name="linkedIn"
-							type="text"
-							component={renderField}
-							label="LinkedIn"
-							validate={[required]}
-						/>
-							<Field
-								name="location"
-								component={PlaceField}
-							 />
-
-						<TwitterIcon />
-						<Field
-							name="twitter"
-							type="text"
-							component={renderField}
-							label="Twitter"
-						/>
-
-						<FacebookIcon />
-						<Field
-							name="facebook"
-							type="text"
-							component={renderField}
-							label="Facebook"
-						/>
-					</div>
+					<FieldArray name="social" component={renderSocial} />
 					<CardDivider/>
 
 				<div>
-					<button type="submit" disabled={submitting}
+					<button type="submit" disabled={submitDisabled}
 					className="mdl-button button invisible-mobile button_type_colored button_size_m candidate-submit">
 						{submitting ? <i/> : <i/>} Save Progress
 					</button>
 				</div>
 			</form>
-
 		)
 	}
 
@@ -128,11 +98,13 @@ ApplicationForm = reduxForm({
 	form: 'candidateApplication'
 })(ApplicationForm)
 
-/*ApplicationForm = connect(
+ApplicationForm = connect(
   state => ({
+		//names: getFormNames('candidateApplication')(state),
+		values: getFormValues('candidateApplication')(state),
     initialValues: state.candidateOnboarding // pull previous values from onboarding state
   })
-)(ApplicationForm)*/
+)(ApplicationForm)
 
 //Export Form
 export default ApplicationForm
@@ -185,6 +157,8 @@ const renderWorkingExperiences = ({ fields, label, meta: { error } }) => (
 											type="text"
 											component={renderField}
 											label="Start Date (MM/YYYY)"
+											normalize={normalizeDate}
+											validate={date}
 										/>
 									</div>
 									<div class="application-detail col-md-3">
@@ -193,7 +167,14 @@ const renderWorkingExperiences = ({ fields, label, meta: { error } }) => (
 											type="text"
 											component={renderField}
 											label="End Date (MM/YYYY)"
+											normalize={normalizeDate}
+											validate={date}
 										/>
+										<Field
+											name={`${education}.currentEducation`}
+											component={Checkbox}
+											label="Currently Work Here"
+											/>
 									</div>
 								</div>
 
@@ -240,15 +221,15 @@ const renderEducations = ({ fields, label, meta: { error } }) => (
 										/>
 									</div>
 									<div class="application-detail col-md-6">
-										<Field
+									<Field
 											name={`${education}.degree`}
 											component={AutoComplete}
 											floatingLabelText="Degree"
 											openOnFocus
 											filter={MUIAutoComplete.fuzzyFilter}
-											dataSource={['High School','Undergraduate','Graduate','Other']}
-											//FIXME: above is not being pulled from single source data in API
+											dataSource={['High School', 'Undergraduate', 'Graduate', 'Other']}
 										/>
+											{/*FIXME: Not pulling data from enums/api - need to make this dynamic*/}
 									</div>
 									<div class="application-detail col-md-12">
 										<Field
@@ -261,9 +242,11 @@ const renderEducations = ({ fields, label, meta: { error } }) => (
 									<div class="application-detail col-md-3">
 										<Field
 											name={`${education}.startStudyAt`}
-											type="text"
 											component={renderField}
+											type="text"
 											label="Start Date (MM/YYYY)"
+											normalize={normalizeDate}
+											validate={date}
 										/>
 									</div>
 									<div class="application-detail col-md-3">
@@ -272,7 +255,14 @@ const renderEducations = ({ fields, label, meta: { error } }) => (
 											type="text"
 											component={renderField}
 											label="End Date (MM/YYYY)"
+											normalize={normalizeDate}
+											validate={date}
 										/>
+										<Field
+											name={`${education}.currentEducation`}
+											component={Checkbox}
+											label="Currently Attending"
+											/>
 									</div>
 								</div>
 
@@ -303,22 +293,22 @@ const renderSkills = ({ showSkills, fields, meta: { error } }) => (
 
 				<div className="info-block">
 							<div class="row">
-								<div class="application-detail col-md-12">
+								<div class="application-detail checkbox-item col-md-12">
 									<Field name="ms-office" component={Checkbox} label="MS Office (Word,Excel, PPt)" />
 								</div>
-								<div class="application-detail col-md-12">
+								<div class="application-detail checkbox-item col-md-12">
 									<Field name="coms-core" component={Checkbox} label="Coms Core" />
 								</div>
-								<div class="application-detail col-md-12">
+								<div class="application-detail checkbox-item col-md-12">
 									<Field name="google-analytics" component={Checkbox} label="Google Analytics" />
 								</div>
-								<div class="application-detail col-md-12">
+								<div class="application-detail checkbox-item col-md-12">
 									<Field name="iab-certification" component={Checkbox} label="IAB Certification" />
 								</div>
-								<div class="application-detail col-md-12">
+								<div class="application-detail checkbox-item col-md-12">
 									<Field name="salesforce" component={Checkbox} label="SalesForce" />
 								</div>
-								<div class="application-detail col-md-12">
+								<div class="application-detail checkbox-item col-md-12">
 									<Field name="adserving-platforms" component={Checkbox} label="Ad-Serving Platforms" />
 								</div>
 								{fields.map((skill, index) => (
@@ -342,37 +332,57 @@ const renderSkills = ({ showSkills, fields, meta: { error } }) => (
 </div>
 )
 
+const renderSocial = ({ showSkills, fields, meta: { error } }) => (
+	<div className="application-item">
+			<button className="application-item-button" type="button" onClick={() => {
+				fields.push()
+			}}><i/>
+			{fields.length === 0 && 'Add'} Social Media
+			</button>
+
+			{fields.length !== 0 &&
+
+				<div className="info-block">
+					<div class="row">
+						<div className="social-media-block">
+							<LinkedInIcon />
+							<Field
+								name="linkedIn"
+								type="text"
+								component={renderField}
+								label="LinkedIn"
+								className="social-application-item"
+								validate={url}
+							/>
+							<TwitterIcon />
+							<Field
+								name="twitter"
+								type="text"
+								className="social-application-item"
+								component={renderField}
+								normalize={normalizeTwitter}
+								label="Twitter"
+							/>
+							<FacebookIcon />
+							<Field
+								name="facebook"
+								type="text"
+								component={renderField}
+								className="social-application-item"
+								label="Facebook"
+								validate={url}
+							/>
+						</div>
+					</div>
+				</div>
+			}
+</div>
+
+)
+
 
 //---------------------------------------------------------------------------------------------------------------------------------
 //ARCHIVE
-const FFieldArray = (props) => {
-    const { field, label } = props
-    const Item = props.component
-    return (
-        <div className="application-item">
-            <button className="application-item-button" type="button" onClick={() => {
-              field.addField()    // pushes empty child field onto the end of the array
-            }}><i/>
-						{field.length === 0 && 'Add'} {label}
-            </button>
-						{field.length > 0 && label !== "Skills"  && <p class="application-item-subtitle">Please add in chronological order</p>}
-
-            {field.map((child, index) =>
-                <div key={index} className="info-block">
-                    <button className="remove-entry" type="button" onClick={() => {
-                      field.removeField(index)  // remove from index
-                    }}><i>Remove</i>
-                    </button>
-                </div>
-            )}
-
-					{field.length > 0 && <button className="add-entry mdl-button" type="button" onClick={() => {
-							field.addField()    // pushes empty child field onto the end of the array
-						}}>Add
-					</button>}
-        </div>
-    )
-}
 
 import ImageUploader from 'components/ImageUploader'
 import {FileImage} from 'components/icons'
@@ -430,44 +440,5 @@ const InterestEntry = props => {
         </div>
     )
 }
-
-
-
-const EducationEntry = props => {
-    const { field: { schoolName, specialty, degree, startStudyAt, endStudyAt } } = props
-    return (
-        <div class="row">
-					<div class="col-md-12">
-            <TextInput field={schoolName} placeholder="School Name" />
-					</div>
-					<div class="col-md-6">
-            <TextInput field={specialty} placeholder="Field of Study" />
-					</div>
-					<div class="col-md-6">
-            <EnumSelector field={degree} label="Degree" options={DEGREES_DROPDOWN_DATA} />
-					</div>
-					<div class="col-md-3">
-            <TextInput field={startStudyAt} placeholder="Start Date (MM/YYYY)" />
-					</div>
-					<div class="col-md-3">
-            <TextInput field={endStudyAt} placeholder="End Date (MM/YYYY)" />
-					</div>
-        </div>
-    )
-}
-
-
-const SkillEntry = props => {
-	const { field: { title, value, alternative } } = props
-	return (
-			<div class="row skill-application-item">
-				<div class="col-md-12 skill-application-item-input">
-					<TextInput field={title} placeholder="Skill" />
-				</div>
-			</div>
-		)
-}
-
-
 
 const CardDivider = () => (<div className="summary-head__title-item summary-head__title-item_type_alignment summary-head__title-item_type_middle"></div>)
