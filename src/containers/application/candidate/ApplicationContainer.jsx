@@ -43,8 +43,9 @@ export default class ApplicationContainer extends Component {
 
     handleFinished = () => {
 
+			//WIP: This workaround died with the changes to the new redux form and app-wide changes
         //🔧 use 'ref' prop to find and submit the application form (handled by redux-form) and dispatch finishApplication action
-        this.refs.applicationForm.submit();
+        //this.refs.applicationForm.submit();
         this.props.dispatch(finishApplication());
 				this.openDialog();
     }

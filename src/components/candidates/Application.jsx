@@ -93,14 +93,13 @@ let CandidateApplicationForm = props =>  {
 
 //Define Form
 CandidateApplicationForm = reduxForm({
-	form: 'candidateApplication'
+	form: 'candidateApplication',
+	enableReinitialize : true
 })(CandidateApplicationForm)
 
 CandidateApplicationForm = connect(
   state => ({
-		//names: getFormNames('candidateApplication')(state),
-		values: getFormValues('candidateApplication')(state),
-    initialValues: state.candidateOnboarding // pull previous values from onboarding state
+    initialValues: state.candidateMatches.candidate
   })
 )(CandidateApplicationForm)
 
@@ -218,48 +217,44 @@ const renderEducations = ({ fields, label, meta: { error } }) => (
 										/>
 									</div>
 									<div class="application-detail col-md-6">
-									<Field
-											name={`${education}.degree`}
-											component={AutoComplete}
-											floatingLabelText="Degree"
-											openOnFocus
-											filter={MUIAutoComplete.fuzzyFilter}
-											dataSource={['High School', 'Undergraduate', 'Graduate', 'Other']}
-										/>
-											{/*FIXME: Not pulling data from enums/api - need to make this dynamic*/}
+										<Field label="Degree" class="mdl-textfield__input textfield__input" name={`${education}.degree`} component="select">
+											<option value="" class="disabled-text-option" disabled selected>Degree</option>
+											<option value="high-school">High School</option>
+											<option value="undergraduate">Undergraduate</option>
+											<option value="graduate">Graduate</option>
+											<option value="other">Other</option>
+										</Field>
+									{/*FIXME: Not pulling data from enums/api - need to make this dynamic*/}
 									</div>
 									<div class="application-detail col-md-12">
-										<Field
-											name={`${education}.duty`}
-											type="textarea"
-											component={renderField}
-											label="Description of your work"
-										/>
-									</div>
-									<div class="application-detail col-md-3">
-										<Field
-											name={`${education}.startStudyAt`}
-											component={renderField}
-											type="text"
-											label="Start Date (MM/YYYY)"
-											normalize={normalizeDate}
-											validate={date}
-										/>
-									</div>
-									<div class="application-detail col-md-3">
-										<Field
-											name={`${education}.endStudyAt`}
-											type="text"
-											component={renderField}
-											label="End Date (MM/YYYY)"
-											normalize={normalizeDate}
-											validate={date}
-										/>
-										<Field
-											name={`${education}.currentEducation`}
-											component={Checkbox}
-											label="Currently Attending"
-											/>
+										<div class="row">
+
+											<div class="application-detail col-md-4 col-sm-6">
+												<Field
+													name={`${education}.startStudyAt`}
+													component={renderField}
+													type="text"
+													label="Start Date (MM/YYYY)"
+													normalize={normalizeDate}
+													validate={date}
+												/>
+											</div>
+											<div class="application-detail col-md-4 col-sm-6">
+												<Field
+													name={`${education}.endStudyAt`}
+													type="text"
+													component={renderField}
+													label="End Date (MM/YYYY)"
+													normalize={normalizeDate}
+													validate={date}
+												/>
+												<Field
+													name={`${education}.currentEducation`}
+													component={Checkbox}
+													label="Currently Attending"
+													/>
+											</div>
+										</div>
 									</div>
 								</div>
 
