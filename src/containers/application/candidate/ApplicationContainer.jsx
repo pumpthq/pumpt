@@ -4,7 +4,7 @@ import Wrapper from 'components/main/wrapper'
 import { HeaderMini } from 'components/main/header'
 import ScrollContainer from 'components/main/scrollContainer'
 import HeadingProgress from 'containers/application/candidate/headingProgress';
-import CandidateForm from 'components/candidates/Form';
+import CandidateSummaryForm from 'components/candidates/Form';
 import CandidateSummary from 'components/candidates/Summary';
 import CandidateApplicationForm from 'components/candidates/Application';
 import SummaryHead from './summaryHead';
@@ -26,11 +26,15 @@ function mapStateToProps(state, ownProps) {
 }
 
 
+import { submit } from 'redux-form'
+
+
 @connect(mapStateToProps)
 export default class ApplicationContainer extends Component {
     constructor(props) {
         super(props)
-        this.state = { editSummary: false }
+        this.state = {
+					editSummary: false}
     }
 
     editSummary = (val) => {
@@ -40,6 +44,9 @@ export default class ApplicationContainer extends Component {
     openDialog = () => {
         this.setState({lastApproved:(new Date)})
     }
+
+		componentDidMount() {
+		}
 
     handleFinished = () => {
 
@@ -52,7 +59,7 @@ export default class ApplicationContainer extends Component {
 
 
     render() {
-        const { candidate, dispatch, authorization } = this.props
+        const { candidate, dispatch, jobTitleData, authorization } = this.props
 
         return (
             <Wrapper id='onboarding-candidate'>
@@ -77,17 +84,36 @@ export default class ApplicationContainer extends Component {
                     <div className="mdl-card col-xs-12">
 
 												{this.state.editSummary ?
-														<CandidateForm
+													<div>
+														<CandidateSummaryForm
 																initialValues={candidate}
-																onSubmit={values=> {dispatch(updateCandidate(values)); this.editSummary(false)}}
 																onCancel={()=>this.editSummary(false)} />
+
+															<div className="candidate-buttons">
+																<button
+																	onClick={()=>
+																		dispatch(submit('candidateSummaryForm'),
+																		this.editSummary(false))
+																	}
+																	type="button"
+																	className="mdl-button button button_type_colored button_size_m">
+
+																	{/*{submitting ? <i/> : <i/>} Save*/}
+																	Save
+
+																</button>
+															</div>
+														</div>
+
 														:
+
 														<CandidateSummary {...this.props} onEdit={()=>this.editSummary(true)}/>
 												}
 												<CandidateApplicationForm
 														ref="applicationForm"
 														initialValues={candidate}
-														onSubmit={values=> {dispatch(updateCandidate(values)) } }/>
+													/>
+
 														<div className="text-center">
     													<Button
     														type='submit'

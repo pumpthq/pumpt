@@ -29,7 +29,7 @@ export const getAppData = () =>
              const response = yield axios.get(`${API_URL}/enums/all`);
              const data = response.data;
 
-             data.CURRENT_UNDUSTRIES_DROPDOWN_DATA.forEach((element) => INDUSTRY_DROPDOWN_DATA.push(element));
+             data.CURRENT_INDUSTRIES_DROPDOWN_DATA.forEach((element) => INDUSTRY_DROPDOWN_DATA.push(element));
              data.CURRENT_EXPERIENCE_DROPDOWN_DATA.forEach((element) => FIELD_OF_EXPERTISE_DROPDOWN_DATA.push(element));
              data.CURRENT_JOBS_DROPDOWN_DATA.forEach((element) => JOB_TITLE_DROPDOWN_DATA.push(element));
              data.ANNUAL_INCOME_DROPDOWN_DATA.forEach((element) => ANNUAL_INCOME_DROPDOWN_DATA.push(element));
@@ -38,7 +38,7 @@ export const getAppData = () =>
              data.EXPERIENCE_DROPDOWN_DATA.forEach((element) => EXPERIENCE_DROPDOWN_DATA.push(element));
 
              data.EMPLOYEES_AMOUNTS_DROPDOWN_DATA.forEach((element) => COMPANY_EMPLOYEES_DATA.push(element));
-             data.CURRENT_UNDUSTRIES_DROPDOWN_DATA.forEach((element) => COMPANY_TYPE_DATA.push(element));
+             data.CURRENT_INDUSTRIES_DROPDOWN_DATA.forEach((element) => COMPANY_TYPE_DATA.push(element));
              data.EMPLOYEMENTS_DROPDOWN_DATA.forEach((element) => EMPLOYEMENTS_DROPDOWN_DATA.push(element));
              data.DEGREES_DROPDOWN_DATA.forEach((element) => DEGREES_DROPDOWN_DATA.push(element));
 

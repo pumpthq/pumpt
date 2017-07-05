@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import { connect } from 'react-redux'
-import { reduxForm, FieldArray, Field, SubmissionError, getFormValues, getFormNames } from 'redux-form'
+import { reduxForm, FieldArray, Field, SubmissionError} from 'redux-form'
 
 //Places Autocomplete Library
 import { PlaceField } from 'components/main/form/PlaceField'
@@ -147,7 +147,7 @@ const renderWorkingExperiences = ({ fields, label, meta: { error } }) => (
 											label="Description of your work"
 										/>
 									</div>
-									<div class="application-detail col-md-3">
+									<div class="application-detail col-md-4 col-sm-6">
 										<Field
 											name={`${workingExperience}.startWorkingAt`}
 											type="text"
@@ -157,7 +157,7 @@ const renderWorkingExperiences = ({ fields, label, meta: { error } }) => (
 											validate={date}
 										/>
 									</div>
-									<div class="application-detail col-md-3">
+									<div class="application-detail col-md-4 col-sm-6">
 										<Field
 											name={`${workingExperience}.endWorkingAt`}
 											type="text"

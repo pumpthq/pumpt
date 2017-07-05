@@ -23,7 +23,7 @@ export default () =>
             data.CURRENT_EXPERIENCE_DROPDOWN_DATA.forEach(el => {
                 FIELD_OF_EXPERTISE_DROPDOWN_DATA.push(el);
             });
-            data.CURRENT_UNDUSTRIES_DROPDOWN_DATA.forEach(el => {
+            data.CURRENT_INDUSTRIES_DROPDOWN_DATA.forEach(el => {
                 INDUSTRY_DROPDOWN_DATA.push(el);
             });
             data.EMPLOYEES_AMOUNTS_DROPDOWN_DATA.forEach(el => {
@@ -38,7 +38,7 @@ export default () =>
             data.EMPLOYEMENTS_DROPDOWN_DATA.forEach(el => {
                 EMPLOYEMENTS_DROPDOWN_DATA.push(el);
             });
-            data.CURRENT_UNDUSTRIES_DROPDOWN_DATA.forEach(el => {
+            data.CURRENT_INDUSTRIES_DROPDOWN_DATA.forEach(el => {
                 COMPANY_TYPE_DATA.push(el);
             });
             data.CURRENT_JOBS_DROPDOWN_DATA.forEach(el => {
