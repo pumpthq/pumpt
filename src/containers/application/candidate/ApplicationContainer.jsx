@@ -84,26 +84,11 @@ export default class ApplicationContainer extends Component {
                     <div className="mdl-card col-xs-12">
 
 												{this.state.editSummary ?
-													<div>
-														<CandidateSummaryForm
-																initialValues={candidate}
-																onCancel={()=>this.editSummary(false)} />
-
-															<div className="candidate-buttons">
-																<button
-																	onClick={()=>
-																		dispatch(submit('candidateSummaryForm'),
-																		this.editSummary(false))
-																	}
-																	type="button"
-																	className="mdl-button button button_type_colored button_size_m">
-
-																	{/*{submitting ? <i/> : <i/>} Save*/}
-																	Save
-
-																</button>
-															</div>
-														</div>
+													<CandidateSummaryForm
+														initialValues={candidate}
+                                                        onSubmit={values=> {dispatch(updateCandidate(values)); this.editSummary(false)}}
+														onCancel={()=>this.editSummary(false)}
+                                                        />
 
 														:
 
@@ -121,7 +106,7 @@ export default class ApplicationContainer extends Component {
     														buttonSize='l'
     														onClick={this.handleFinished}
     													>
-    													 Done	
+    													 Done
     													</Button>
 															<ApplicationSuccessDialog trigger={authorization.lastFinished} />
     												</div>

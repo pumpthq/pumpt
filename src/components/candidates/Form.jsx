@@ -115,27 +115,21 @@ const experienceData = [
   {name:'16+ years',		value:'gt15'},
 ]
 
-export function submit(values, dispatch) {
-	dispatch(updateCandidate(values))
-}
-
 //Form
 let CandidateSummaryForm = props =>  {
 	const {
-		handleSubmit, 
-		submitting, 
-		error, 
-		invalid, 
-		valid, 
-		dispatch, 
+		handleSubmit,
+		submitting,
+		error,
+		invalid,
+		valid,
+		dispatch,
 		names,
 	 	values,
+        onCancel,
 	} = props
 
 	const submitDisabled = invalid || submitting
-	const submit = (values, dispatch) => {
-		dispatch(updateCandidate(values))
-	}
 
 		return (
 
@@ -143,7 +137,7 @@ let CandidateSummaryForm = props =>  {
 				<div class="row">
 					<div class="col-md-4">
 						<Field
-							name={`{candidate.firstName}` }
+							name="firstName"
 							type="text"
 							component={renderField}
 							label="First Name"
@@ -151,7 +145,7 @@ let CandidateSummaryForm = props =>  {
 					</div>
 					<div class="col-md-4">
 						<Field
-							name={ `{candidate.lastName}` }
+							name="lastName"
 							type="text"
 							component={renderField}
 							label="Last Name"
@@ -163,7 +157,7 @@ let CandidateSummaryForm = props =>  {
 								<Field
 									label="Industry"
 									class="mdl-textfield__input textfield__input small_textfield_input"
-									name={ `{candidate.interestWorkingArea}`}
+									name="interestWorkingArea"
 									component="select">
 									<option value="" class="disabled-text-option" disabled selected>Industry</option>
 									{ industryData.map((item) => {return <option value={item.value}>{item.name}</option>}) }
@@ -173,7 +167,7 @@ let CandidateSummaryForm = props =>  {
 								<Field
 									label="Working Area"
 									class="mdl-textfield__input textfield__input"
-									name={`{candidate.recentWorkingAreaParent}`}
+									name="recentWorkingAreaParent"
 									component="select">
 									<option value="" class="disabled-text-option" disabled selected>Working Area</option>
 									{ workingAreaData.map((item) => {return <option value={item.value}>{item.name}</option>}) }
@@ -183,7 +177,7 @@ let CandidateSummaryForm = props =>  {
 								<Field
 									label="Specialty"
 									class="mdl-textfield__input textfield__input"
-									name={`{candidate.recentWorkingArea}`}
+									name="recentWorkingArea"
 									component="select">
 									<option value="" class="disabled-text-option" disabled selected>Specialty</option>
 									{ specialtyData.map((item) => {return <option value={item.value}>{item.name}</option>}) }
@@ -193,7 +187,7 @@ let CandidateSummaryForm = props =>  {
 								<Field
 									label="Income"
 									class="mdl-textfield__input textfield__input"
-									name={`{candidate.recentAnnualIncome}`}
+									name="recentAnnualIncome"
 									component="select">
 									<option value="" class="disabled-text-option" disabled selected>Annual Income</option>
 									{ annualIncomeData.map((item) => {return <option value={item.value}>{item.name}</option>}) }
@@ -203,7 +197,7 @@ let CandidateSummaryForm = props =>  {
 								<Field
 									label="Job Title"
 									class="mdl-textfield__input textfield__input"
-									name={`{candidate.recentJob}`}
+									name="recentJob"
 									component="select">
 									<option value="" class="disabled-text-option" disabled selected>Job Title</option>
 									{ jobTitleData.map((item) => {return <option value={item.value}>{item.name}</option>}) }
@@ -213,7 +207,7 @@ let CandidateSummaryForm = props =>  {
 								<Field
 									label="Experience"
 									class="mdl-textfield__input textfield__input"
-									name={`{candidate.recentAreaExperience}`}
+									name="recentAreaExperience"
 									component="select">
 									<option value="" class="disabled-text-option" disabled selected>Industry Experience</option>
 									{ experienceData.map((item) => {return <option value={item.value}>{item.name}</option>}) }
@@ -230,7 +224,12 @@ let CandidateSummaryForm = props =>  {
 					<button type="submit" disabled={submitDisabled} className="mdl-button button button_type_colored button_size_m">
 							{submitting ? <i/> : <i/>} Save
 					</button>
+                    <button type="button" disabled={submitting} onClick={onCancel} className="mdl-button button button_type_colored button_size_m">
+                        Cancel
+                    </button>
 				</div>
+
+
 			</form>
 		)
 	}
@@ -239,15 +238,9 @@ let CandidateSummaryForm = props =>  {
 CandidateSummaryForm = reduxForm({
 	form: 'candidateSummaryForm',
 	enableReinitialize : true,
-	onSubmit: submit
+	// onSubmit: submit /* use onSubmit prop passed to component instead */
 })(CandidateSummaryForm)
 
-CandidateSummaryForm = connect(
-  state => ({
-    initialValues: state.candidateMatches.candidate
-    //initialValues: state.candidateOnboarding
-  })
-)(CandidateSummaryForm)
 
 //Export Form
 export default CandidateSummaryForm
