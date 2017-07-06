@@ -15,3 +15,5 @@ export const email_validation = value =>
 
 export const minLength = min => value =>
   value && value.length < min ? `Must be ${min} characters or more` : undefined
+
+const hasText = fieldLabel => value => (value ? undefined : `${fieldLabel} cannot be blank`)

@@ -1,4 +1,4 @@
-
+//Normalize Date format to be MM/YYYY
 export const normalizeDate = value => {
 	if (!value) { return value }
 
@@ -14,6 +14,7 @@ export const normalizeDate = value => {
 	}
 }
 
+//Normalize Twiiter to be an @handle
 export const normalizeTwitter = value => {
 	if (!value) { return value }
 
@@ -21,6 +22,10 @@ export const normalizeTwitter = value => {
 	return twitterHandle.replace(' ','')
 	
 }
+
+//Normalize the industry dropdown to be specificed to a parent (if present)
+export const normalizeChildIndustry = otherField => (value, previousValue, allValues) =>
+	find(FIELD_OF_EXPERTISE_DROPDOWN_DATA, o => (o.title === otherField.value) ? "" : "") 
 
 //WIP: CANNOT ACCESS OTHER FIELD FORM VALUES IN NORMALIZATION FUNCTIONS
 export const disableEndDate = otherField => (value, previousValue, allValues) => {
