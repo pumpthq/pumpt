@@ -115,10 +115,6 @@ const experienceData = [
   {name:'16+ years',		value:'gt15'},
 ]
 
-export function submit(values, dispatch) {
-	dispatch(updateCandidate(values))
-}
-
 //Form
 let CandidateSummaryForm = props =>  {
 	const {
