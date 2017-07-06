@@ -112,7 +112,7 @@ let JobForm = props => {
 								</Field>
 
 								{industryValue && 
-									<Field name="industry" component={renderSelectField} label={industryValue} class="mdl-textfield__input textfield__input textfield__light">
+									<Field name="industry" component={renderSelectField} label="Specialty" class="mdl-textfield__input textfield__input textfield__light">
 										{ industryParentObj(industryValue).map((item) => {return <option value={item.title}>{item.title}</option>})  }
 									</Field>
 								}

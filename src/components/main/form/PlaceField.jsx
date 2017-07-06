@@ -53,7 +53,7 @@ export const PlaceField = ({ values, input, onChange, label, meta: { touched, er
 				options={options}
 			/>
 
-			{hasError && <div className="ftextfield__error textfield__error_small">{error}</div>}
+			{hasError && <div className="textfield__error textfield__error_small">{error}</div>}
 		</div>
 	);
 }
