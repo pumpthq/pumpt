@@ -189,19 +189,19 @@ export default class Profile extends Component {
     render() {
         const { children } = this.props
         return (
-                    <div>
-                        <div className="mdl-card card card_state_open card_state_scroll">
-                            <a class="button_type_close" onClick={browserHistory.goBack}>×</a>
+						<div>
+								<div className="mdl-card card card_state_open card_state_scroll">
+										<a class="button_type_close" onClick={browserHistory.goBack}>×</a>
 
-                            {this.renderMatchInformation()}
-                            {this.renderLongContent()}
-                            {this.renderResponsibilities()}
+										{this.renderMatchInformation()}
+										{this.renderLongContent()}
+										{this.renderResponsibilities()}
 
-                            {this.renderRequirements()}
+										{this.renderRequirements()}
 
-                            {children}
-                        </div>
-                    </div>
+										{children}
+								</div>
+						</div>
         )
     }
 }
