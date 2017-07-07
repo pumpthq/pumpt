@@ -10,8 +10,7 @@ import {updateCompany} from 'actions/applicationCompany'
 export default class CompanySummary extends Component {
 
     render() {
-        const { company: { name, type, locationHeadquarters, foundDate, employeesAmount, logo, background } } = this.props
-        const { city, state } = locationHeadquarters
+        const { company: { name, type, headquartersLocation, foundDate, employeesAmount, logo, background } } = this.props
         const { authorization: {email}, onEdit} = this.props
         return (
                 <div class="summary-head company-summary-head">
@@ -65,7 +64,7 @@ export default class CompanySummary extends Component {
                         <div class="summary-head__title-item">
                             <div class="summary-head__title-column">
                                 <span class="text summary-head__label">Headquarters</span>
-                                <span class="text text_size_s summary-head__summary">{`${city}, ${state.slice(0,2)}`}</span>
+                                <span class="text text_size_s summary-head__summary">{`${headquartersLocation}`}</span>
                             </div>
                             <div class="summary-head__title-column">
                                 <span class="text summary-head__label">Company Type</span>

@@ -18,10 +18,6 @@ import {
 } from 'constants/candidateOnboarding';
 
 
-//Special Normalizer for Data Fields
-const lessThan = otherField => (value, previousValue, allValues) =>
-  parseFloat(value) < parseFloat(allValues[otherField]) ? value : previousValue
-
 //Generalized Redux Field
 export const renderField = ({
   input,

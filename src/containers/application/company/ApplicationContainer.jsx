@@ -50,7 +50,7 @@ export default class ApplicationContainer extends Component {
     handleFinished = () => {
 
         //🔧 use 'ref' prop to find and submit the application form (handled by redux-form) and dispatch finishApplication action
-        this.refs.applicationForm.submit();
+        this.refs.companyApplicationForm.submit();
         this.props.dispatch(finishApplication());
 				this.openDialog();
     }
@@ -98,7 +98,7 @@ export default class ApplicationContainer extends Component {
                                             }
 
                                             <CompanyApplicationForm
-                                                ref="applicationForm"
+                                                ref="companyApplicationForm"
                                                 initialValues={company}
                                                 onSubmit={values=> {dispatch(updateCompany(values)) } }/>
 
