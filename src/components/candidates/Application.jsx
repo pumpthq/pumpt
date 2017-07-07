@@ -58,11 +58,10 @@ const CardDivider = () => (<div className="summary-head__title-item summary-head
 //Form
 let CandidateApplicationForm = props =>  {
 	const { handleSubmit, submitting, error, invalid, valid, dispatch, names, values} = props
-		const submitDisabled = invalid || submitting
-		const submit = (values, dispatch) => {
-			dispatch(updateCandidate(values))
-		}
-		const optionsList = [{id: 1, name: 'Optoin1'}, {id: 2, name: 'Option 2'}]
+	const submitDisabled = invalid || submitting
+	const submit = (values, dispatch) => {
+		dispatch(updateCandidate(values))
+	}
 
 		return (
 			<form onSubmit={handleSubmit(submit)} class="candidate-application-form text-input-underlined"> 
@@ -428,7 +427,7 @@ CandidateApplicationForm = reduxForm({
 	enableReinitialize : true
 })(CandidateApplicationForm)
 
-const selector = formValueSelector('jobForm')
+const selector = formValueSelector('candidateApplicationForm')
 
 CandidateApplicationForm = connect(
 		state => {

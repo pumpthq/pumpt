@@ -1,6 +1,13 @@
 import React, {Component, PropTypes} from 'react';
-import { reduxForm } from 'redux-form'
-import { Location, EnumSelector, TextArea, TextInput} from 'components/form/inputs'
+import { connect } from 'react-redux'
+import { reduxForm, FieldArray, Field, SubmissionError, formValueSelector} from 'redux-form'
+
+import ImageUploader from 'components/ImageUploader'
+import {FileImage} from 'components/icons'
+import { TextArea } from 'components/form/inputs'
+
+//Places Autocomplete Library
+import { PlaceField } from 'components/main/form/PlaceField'
 
 import QuoteIcon from 'components/icons-application/quote'
 import ChainIcon from 'components/icons-application/chain'
@@ -14,161 +21,231 @@ import TwitterIcon from 'components/icons-application/twitter'
 import FacebookIcon from 'components/icons-application/facebook'
 import './style.less'
 
-@reduxForm({
-    form: 'company-application',
-    fields: [
-        'socialMedia.websiteUrl',
-        'socialMedia.linkedInUrl',
-        'socialMedia.twitterAcc',
-        'socialMedia.faceBookUrl',
+//Actions
+import { updateCompany } from 'actions/applicationCompany'
 
-        'locationHeadquarters',
-        'locationHeadquarters.city',
-        'locationHeadquarters.state',
+//Field-level Validations & Normalizations
+import { url, date, require } from 'components/main/form/validations'
+import { normalizeDate, normalizeTwitter } from 'components/main/form/normalizations'
 
-        'locationOffices[]',
-        'locationOffices[].city',
-        'locationOffices[].state',
+//Generalized Redux Field
+export const renderField = ({
+  input,
+  label,
+  type,
+	className,
+  meta: { asyncValidating, touched, error }
+}) => (
+  <div class={className}>
+		<div class={asyncValidating ? 'async-validating' : 'class'}>
+      <input class="mdl-textfield__input textfield__input" {...input} placeholder={label} type={type} />
+      {touched && error && <span class="textfield__error">{error}</span>}
+    </div>
+  </div>
+)
+const CardDivider = () => (<div className="summary-head__title-item summary-head__title-item_type_alignment summary-head__title-item_type_middle"></div>)
 
-        'description',
-        'quoteOrMotto',
+//Form
+let CompanyApplicationForm = props => {
 
-        'images[]',
+	const { handleSubmit, submitting, error, invalid, valid, dispatch, names, values} = props
+	const submitDisabled = invalid || submitting
+	const submit = (values, dispatch) => {
+		dispatch(updateCompany(values))
+	}
 
-        ]
-})
+	return (
+		<form onSubmit={handleSubmit(submit)} class="company-application-form text-input-underlined"> 
+			<CardDivider/>
 
-export default class ApplicationForm extends Component {
-    render() {
-      const {
-        fields: { quoteOrMotto, description, locationHeadquarters, locationOffices, socialMedia, images },
-        handleSubmit,
-        resetForm,
-        submitting,
-        } = this.props;
+			<Social/>
+			<FieldArray name="social" component={renderSocial} />
+			<CardDivider/>
 
-      return (
+			<Pin/>
+			<FieldArray name="locationOffices" component={renderOfficeLocations} />
+			<CardDivider/>
 
-                <form onSubmit={handleSubmit} className="company-application-form text-input-underlined">
-                  <CardDivider/>
+			<Description/>
+				<h2 className="recruiter-application-item">Description</h2>
+					<TextArea name="description" inputClass="text-area" placeholder="Description of Your Company..."/>
+				<CardDivider/>
 
-                  <Social/><p className="icon-item">Website & Social Media</p>
-                  <div className="social-links">
-                    <ChainIcon/><TextInput field={socialMedia.websiteUrl} label="Website"/>
-                    <LinkedInIcon/><TextInput field={socialMedia.linkedInUrl} label="LinkedIn"/>
-                    <TwitterIcon/><TextInput field={socialMedia.twitterAcc} label="Twitter"/>
-                    <FacebookIcon/><TextInput field={socialMedia.faceBookUrl} label="Facebook"/>
-                    <CardDivider/>
-                  </div>
+			<QuoteIcon/>
+				<h2 className="recruiter-application-item">Quote Or Motto</h2>
+					<TextArea name="quoteOrMotto" inputClass="text-area" placeholder="Your Company's Motto..."/>
+				<CardDivider/>
 
-                  <Pin/><p className="icon-item">Location</p>
-                  <div>
-										<div className="application-item">
-											<Location  field={locationHeadquarters} label="Headquarters" />
-										</div>
-											<CardDivider/>
+			{/*	<FieldArray fields="images" label="Photos" component={renderImages} />*/}
+				<CardDivider/>
 
-                    <FieldArray field={locationOffices} label="Offices" component={Location} />
-                    <CardDivider/>
-                  </div>
-
-                  <Description/>
-										<h2 className="recruiter-application-item">Description</h2>
-										<TextArea field={description} inputClass="text-area recruiter-text-area" placeholder="Description of your work" readOnly="false"/>
-                    <CardDivider/>
-
-                  <QuoteIcon/>
-										<h2 className="recruiter-application-item">Quote Or Motto</h2>
-										<TextArea field={quoteOrMotto} inputClass="text-area recruiter-text-area" placeholder="Your Company's Motto" readOnly="false"/>
-                    <CardDivider/>
-
-                    <UploadArray field={images} label="Photos" component={ImageEntry} />
-
-                    <CardDivider/>
-
-                  <div>
-                    <button type="submit" disabled={submitting}
-                            className="mdl-button button invisible-mobile button_type_colored button_size_m company-submit"
-                    >
-                      {submitting ? <i/> : <i/>} Save
-                    </button>
-                    {/* <button type="button" disabled={submitting} onClick={resetForm}>
-                     Clear Values
-                     </button> */}
-                  </div>
-                </form>
-
-      )
-  }
+			<div>
+				<button type="submit" disabled={submitDisabled}
+								className="mdl-button button invisible-mobile button_type_colored button_size_m company-submit"
+				>
+					{submitting ? <i/> : <i/>} Save
+				</button>
+				{/* <button type="button" disabled={submitting} onClick={resetForm}>
+				 Clear Values
+				 </button> */}
+			</div>
+		</form>
+	)
 }
 
-import ImageUploader from 'components/ImageUploader'
-import {FileImage} from 'components/icons'
+const renderSocial = ({ fields, meta: { error } }) => (
+	<div className="application-item">
+			<button className="application-item-button" type="button" onClick={() => {
+				fields.length === 0 ? fields.push() : fields.remove()
+			}}><i/>
+			{fields.length === 0 && 'Add'} Social Media
+			</button>
 
-export const UploadArray = (props) => {
-    const { field, label } = props
-    const Item = props.component
-    return (
-        <div class="image-upload">
-            <ImageUploader
-                label="Image"
-                iconPhoto={<FileImage size='2x'/>}
-                onSuccessAction={(data) => {
-                    field.addField(data.id); // ⚠️ this is a hack to work around for building an action for the reducer!
-                    return {type:"FAKE_ACTION_HACK_FOR_ADDING_IMAGE_TO_FIELD_ARRAY"}
+			{fields.length !== 0 &&
 
-                    //🌟 below is the correct way, to build and return the action dispatched by `field.addField(data.id)`
-                    // return {
-                    //     type: "redux-form/ADD_ARRAY_VALUE",
-                    //     path: "images",
-                    //     fields: [""],
-                    //     value: data.id,
-                    //     form: "company-application"
-                    // }
+				<div className="info-block">
+					<div class="row">
+						<div className="social-media-block">
+							<ChainIcon/>
+							<Field
+								name="websiteUrl"
+								type="text"
+								component={renderField}
+								label="Website"
+								className="social-application-item"
+								validate={url}
+							/>
+							<LinkedInIcon />
+							<Field
+								name="linkedIn"
+								type="text"
+								component={renderField}
+								label="LinkedIn"
+								className="social-application-item"
+								validate={url}
+							/>
+							<TwitterIcon />
+							<Field
+								name="twitter"
+								type="text"
+								className="social-application-item"
+								component={renderField}
+								normalize={normalizeTwitter}
+								label="Twitter"
+							/>
+							<FacebookIcon />
+							<Field
+								name="facebook"
+								type="text"
+								component={renderField}
+								className="social-application-item"
+								label="Facebook"
+								validate={url}
+							/>
+						</div>
+					</div>
+				</div>
+			}
+</div>
 
-                }}
-            />
-            {field.map((child, index) =>
-                <div key={index}>
-                    <Item field={child} />
-                    <button type="button" onClick={() => {
-                      field.removeField(index)  // remove from index
-                    }}><i>Remove</i>
-                    </button>
-                </div>
-            )}
-        </div>
-    )
+)
+
+const renderOfficeLocations = ({ fields, label, meta: { error } }) => (
+	<div className="application-item">
+			<button className="application-item-button" type="button" onClick={() => {
+				fields.push()
+			}}><i/>
+			{fields.length === 0 && 'Add'} Office Locations
+			</button>
+			<Field
+				name="headquatersLocation"
+				component={PlaceField}
+				label="Headquarters"
+			 />
+			{fields.map((officeLocation, index) => (
+				<div key={index} className="info-block">
+								<div class="row">
+									<div class="application-detail col-md-6 col-xs-12">
+										<Field
+											name={`${officeLocation}.location`}
+											component={PlaceField}
+											label="Office Location"
+										 />
+									</div>
+								</div>
+
+					<button className="remove-entry" type="button" onClick={() => {
+						fields.remove(index)
+					}}><i>Remove</i>
+					</button>
+				</div>
+
+			))}
+			{error && <li className="error">{error}</li>}
+
+		{fields.length > 0 && <button className="add-entry mdl-button" type="button" onClick={() => {
+				fields.push()
+			}}>Add
+		</button>}
+</div>
+)
+
+const renderImages = ({ fields, label, meta: { error } }) => (
+	<div className="application-item">
+			<button className="application-item-button" type="button" onClick={() => {
+				fields.push()
+			}}><i/>
+			{fields.length === 0 && 'Add'} Image
+			</button>
+			{fields.map((image, index) => (
+				<div key={index} className="info-block">
+								<div class="row">
+									<div class="application-detail col-md-12">
+										<Field
+											name={`${image}.image`}
+											component={renderDropzoneInput}
+										 />
+									</div>
+								</div>
+
+					<button className="remove-entry" type="button" onClick={() => {
+						fields.remove(index)
+					}}><i>Remove</i>
+					</button>
+				</div>
+
+			))}
+			{error && <li className="error">{error}</li>}
+
+		{fields.length > 0 && <button className="add-entry mdl-button" type="button" onClick={() => {
+				fields.push()
+			}}>Add
+		</button>}
+</div>
+)
+
+const renderDropzoneInput = (field) => {
+  const files = field.input.value;
+  return (
+    <div>
+      <Dropzone
+        name={field.name}
+        onDrop={( filesToUpload, e ) => field.input.onChange(filesToUpload)}
+      >
+        <div>Try dropping some files here, or click to select files to upload.</div>
+      </Dropzone>
+      {field.meta.touched &&
+        field.meta.error &&
+        <span className="error">{field.meta.error}</span>}
+      {files && Array.isArray(files) && (
+        <ul>
+          { files.map((file, i) => <li key={i}>{file.name}</li>) }
+        </ul>
+      )}
+    </div>
+  );
 }
 
-const FieldArray = (props) => {
-    const { field, label } = props
-    const Item = props.component
-    return (
-        <div className="application-item">
-            <button className="application-item-button" type="button" onClick={() => {
-              field.addField()    // pushes empty child field onto the end of the array
-            }}><i/>
-						{field.length === 0 && 'Add'} {label}
-            </button>
-
-            {field.map((child, index) =>
-                <div key={index} className="info-block">
-                    <Item field={child} />
-                    <button className="remove-entry" type="button" onClick={() => {
-                      field.removeField(index)  // remove from index
-                    }}><i>Remove</i>
-                    </button>
-                </div>
-            )}
-
-					{field.length > 0 && <button className="add-entry mdl-button" type="button" onClick={() => {
-							field.addField()    // pushes empty child field onto the end of the array
-						}}>Add
-					</button>}
-        </div>
-    )
-}
 
 import {apiImage} from 'components/helpers'
 const ImageEntry = props => {
@@ -178,4 +255,21 @@ const ImageEntry = props => {
     )
 }
 
-const CardDivider = () => (<div className="summary-head__title-item summary-head__title-item_type_alignment summary-head__title-item_type_middle"></div>)
+
+//Define Form
+CompanyApplicationForm = reduxForm({
+	form: 'companyApplicationForm',
+	enableReinitialize : true
+})(CompanyApplicationForm)
+
+const selector = formValueSelector('candidateApplicationForm')
+
+CompanyApplicationForm = connect(
+		state => {
+		//	initialValues: state.companyMatches.company
+				//wip????corrent inti values or nahh?
+		}
+)(CompanyApplicationForm)
+
+//Export Form
+export default CompanyApplicationForm
