@@ -19,7 +19,6 @@ import {
     EMPLOYEMENTS_DROPDOWN_DATA,
 } from 'constants/companyJobs';
 import { find } from 'lodash'
-import { TextArea } from 'components/form/inputs'
 
 //Field-level Validations & Normalizations
 import { url, date, required, hasText } from 'components/main/form/validations'
@@ -150,7 +149,7 @@ const renderLists = ({ fields, label, validate, placeholder, meta: { error } }) 
 
             {fields.map((child, index) =>
                 <div key={index}>
-										<TextArea field={child} validate={validate} inputClass="text-area" placeholder={ `${placeholder}`+" #"+(index+1)+"..." }/>
+										<Field name={child} component="textarea" validate={validate} class="text-area" placeholder={ `${placeholder}`+" #"+(index+1)+"..." }/>
                     <button type="button" className="remove-entry" onClick={() => {
 											fields.remove(index)
                     }}><i>Remove</i>
@@ -177,7 +176,7 @@ const renderDescription = ({ fields, label, validate, placeholder, meta: { error
 
             {fields.map((child, index) =>
                 <div key={index}>
-									<TextArea validate={validate} field={child} inputClass="text-area" placeholder={placeholder}/>
+									<Field name={child} validate={validate} component="textarea" class="text-area" placeholder={placeholder} />
                 </div>
             )}
 

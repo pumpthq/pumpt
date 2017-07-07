@@ -68,12 +68,12 @@ let CompanyApplicationForm = props => {
 
 			<Description/>
 				<h2 className="recruiter-application-item">Description</h2>
-					<TextArea name="description" inputClass="text-area" placeholder="Description of Your Company..."/>
+					<Field name="description" component="textarea" class="text-area" placeholder="Your Company's Motto..." />
 				<CardDivider/>
 
 			<QuoteIcon/>
 				<h2 className="recruiter-application-item">Quote Or Motto</h2>
-					<TextArea name="quoteOrMotto" inputClass="text-area" placeholder="Your Company's Motto..."/>
+					<Field name="quoteOrMotto" component="textarea" class="text-area" placeholder="Your Company's Motto..." />
 				<CardDivider/>
 
 			{/*	<FieldArray fields="images" label="Photos" component={renderImages} />*/}
@@ -108,7 +108,7 @@ const renderSocial = ({ fields, meta: { error } }) => (
 						<div className="social-media-block">
 							<ChainIcon/>
 							<Field
-								name="websiteUrl"
+								name="socialMedia.websiteUrl"
 								type="text"
 								component={renderField}
 								label="Website"
@@ -117,7 +117,7 @@ const renderSocial = ({ fields, meta: { error } }) => (
 							/>
 							<LinkedInIcon />
 							<Field
-								name="linkedIn"
+								name="socialMedia.linkedInUrl"
 								type="text"
 								component={renderField}
 								label="LinkedIn"
@@ -126,7 +126,7 @@ const renderSocial = ({ fields, meta: { error } }) => (
 							/>
 							<TwitterIcon />
 							<Field
-								name="twitter"
+								name="socialMedia.twitterAcc"
 								type="text"
 								className="social-application-item"
 								component={renderField}
@@ -135,7 +135,7 @@ const renderSocial = ({ fields, meta: { error } }) => (
 							/>
 							<FacebookIcon />
 							<Field
-								name="facebook"
+								name="socialMedia.facebookUrl"
 								type="text"
 								component={renderField}
 								className="social-application-item"
@@ -157,31 +157,38 @@ const renderOfficeLocations = ({ fields, label, meta: { error } }) => (
 			}}><i/>
 			{fields.length === 0 && 'Add'} Office Locations
 			</button>
-			<Field
-				name="headquatersLocation"
-				component={PlaceField}
-				label="Headquarters"
-			 />
-			{fields.map((officeLocation, index) => (
-				<div key={index} className="info-block">
-								<div class="row">
-									<div class="application-detail col-md-6 col-xs-12">
-										<Field
-											name={`${officeLocation}.location`}
-											component={PlaceField}
-											label="Office Location"
-										 />
-									</div>
+			<div class="row">
+				<div class="col-md-12">
+					<Field
+						name="headquartersLocation"
+						component={PlaceField}
+						label="Headquarters"
+					 />
+				 </div>
+				 <div class="col-md-12">
+					 <div class="row">
+							{fields.map((officeLocation, index) => (
+							<div class="col-md-6">
+								<div key={index} className="info-block">
+										<div class="application-detail">
+											<Field
+												name={`${officeLocation}.location`}
+												component={PlaceField}
+												label="Office Location"
+											 />
+												<button className="remove-entry" type="button" onClick={() => {
+													fields.remove(index)
+												}}><i>X</i>
+												</button>
+										</div>
 								</div>
+							</div>
 
-					<button className="remove-entry" type="button" onClick={() => {
-						fields.remove(index)
-					}}><i>Remove</i>
-					</button>
+							))}
+							{error && <li className="error">{error}</li>}
+						</div>
+					</div>
 				</div>
-
-			))}
-			{error && <li className="error">{error}</li>}
 
 		{fields.length > 0 && <button className="add-entry mdl-button" type="button" onClick={() => {
 				fields.push()
@@ -205,6 +212,8 @@ const renderImages = ({ fields, label, meta: { error } }) => (
 											name={`${image}.image`}
 											component={renderDropzoneInput}
 										 />
+
+
 									</div>
 								</div>
 
