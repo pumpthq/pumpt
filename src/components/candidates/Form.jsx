@@ -110,18 +110,26 @@ let CandidateSummaryForm = props =>  {
 									</Field>
 								}
 							</div>
-							<div class="col-md-4">
-								<Field name="salary" component={renderSelectField} label="Income" class="mdl-textfield__input textfield__input textfield__light">
-									{ ANNUAL_INCOME_DROPDOWN_DATA.map(item => <option key={item.id}  value={item.title}>{item.title}</option>) }
-								</Field>
-							</div>
+							{industryValue ?
+								<div class="col-md-4">
+									<Field name="recentAnnualIncome" component={renderSelectField} label="Income" class="mdl-textfield__input textfield__input textfield__light">
+										{ ANNUAL_INCOME_DROPDOWN_DATA.map(item => <option key={item.id}  value={item.title}>{item.title}</option>) }
+									</Field>
+								</div>
+								:
+								<div class="col-md-4 col-md-offset-4">
+									<Field name="recentAnnualIncome" component={renderSelectField} label="Income" class="mdl-textfield__input textfield__input textfield__light">
+										{ ANNUAL_INCOME_DROPDOWN_DATA.map(item => <option key={item.id}  value={item.title}>{item.title}</option>) }
+									</Field>
+								</div>
+							}
 							<div class="col-md-4">
 								<Field name="recentJob" component={renderSelectField} label="Job Title" class="mdl-textfield__input textfield__input textfield__light">
-									{ JOB_TITLE_DROPDOWN_DATA.map(item => <option key={item.id}  value={item.title}>{item.title}</option>) }
+									{ JOB_TITLE_DROPDOWN_DATA[0].items.map(item => <option key={item.id}  value={item.title}>{item.title}</option>) }
 								</Field>
 							</div>
 							<div class="col-md-4">
-								<Field name="experience" component={renderSelectField} label="Industry Experience" class="mdl-textfield__input textfield__input textfield__light">
+								<Field name="recentAreaExperience" component={renderSelectField} label="Industry Experience" class="mdl-textfield__input textfield__input textfield__light">
 									{ EXPERIENCE_DROPDOWN_DATA.map((item) => {return <option key={item.id}  value={item.title}>{item.title}</option>}) }
 								</Field>
 							</div>
