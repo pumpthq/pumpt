@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import { connect } from 'react-redux'
-import { reduxForm, FieldArray, Field, SubmissionError} from 'redux-form'
+import { reduxForm, FieldArray, Field, SubmissionError, formValueSelector} from 'redux-form'
 
 //Places Autocomplete Library
 import { PlaceField } from 'components/main/form/PlaceField'
@@ -54,19 +54,21 @@ export const renderField = ({
 
 const CardDivider = () => (<div className="summary-head__title-item summary-head__title-item_type_alignment summary-head__title-item_type_middle"></div>)
 
+
 //Form
 let CandidateApplicationForm = props =>  {
-	const {handleSubmit, submitting, error, invalid, valid, dispatch, names, values} = props
+	const { handleSubmit, submitting, error, invalid, valid, dispatch, names, values} = props
 		const submitDisabled = invalid || submitting
 		const submit = (values, dispatch) => {
 			dispatch(updateCandidate(values))
 		}
+		const optionsList = [{id: 1, name: 'Optoin1'}, {id: 2, name: 'Option 2'}]
 
 		return (
 			<form onSubmit={handleSubmit(submit)} class="candidate-application-form text-input-underlined"> 
 
 					<CaseIcon/>
-					<FieldArray name="workingExperiences" label="Working Experience" component={renderWorkingExperiences} />
+					<FieldArray name="workingExperience" label="Working Experience" component={renderWorkingExperiences} />
 					<CardDivider/>
 
 					<Education/>
@@ -90,21 +92,6 @@ let CandidateApplicationForm = props =>  {
 			</form>
 		)
 	}
-
-//Define Form
-CandidateApplicationForm = reduxForm({
-	form: 'candidateApplication',
-	enableReinitialize : true
-})(CandidateApplicationForm)
-
-CandidateApplicationForm = connect(
-  state => ({
-    initialValues: state.candidateMatches.candidate
-  })
-)(CandidateApplicationForm)
-
-//Export Form
-export default CandidateApplicationForm
 
 //FieldArray Definitions
 const renderWorkingExperiences = ({ fields, label, meta: { error } }) => (
@@ -167,7 +154,7 @@ const renderWorkingExperiences = ({ fields, label, meta: { error } }) => (
 											validate={date}
 										/>
 										<Field
-											name={`${education}.currentEducation`}
+											name={`${workingExperience}.currentEducation`}
 											component={Checkbox}
 											label="Currently Work Here"
 											/>
@@ -273,21 +260,22 @@ const renderEducations = ({ fields, label, meta: { error } }) => (
 		</button>}
 </div>
 )
-const renderSkills = ({ showSkills, fields, meta: { error } }) => (
+
+const renderSkills = ({ fields, meta: { error } }) => (
 	<div className="application-item">
 			<button className="application-item-button" type="button" onClick={() => {
-				fields.push()
+				fields.length === 0 ? fields.push() : ''
 			}}><i/>
 			{fields.length === 0 && 'Add'} Skills
 			</button>
 
-			{fields.length !== 0 &&
-
+			{fields.map((skill, index) => (
 				<div className="info-block">
 							<div class="row">
 								<div class="application-detail checkbox-item col-md-12">
-									<Field name="ms-office" component={Checkbox} label="MS Office (Word,Excel, PPt)" />
+									<Field name={`${skill}.value`} component={Checkbox} label="MS Office (Word,Excel, PPt)" />
 								</div>
+
 								<div class="application-detail checkbox-item col-md-12">
 									<Field name="coms-core" component={Checkbox} label="Coms Core" />
 								</div>
@@ -320,14 +308,15 @@ const renderSkills = ({ showSkills, fields, meta: { error } }) => (
 							</button>}
 						</div>
 				</div>
-			}
-</div>
+		)	)}
+		</div>
 )
 
-const renderSocial = ({ showSkills, fields, meta: { error } }) => (
+
+const renderSocial = ({ fields, meta: { error } }) => (
 	<div className="application-item">
 			<button className="application-item-button" type="button" onClick={() => {
-				fields.push()
+				fields.length === 0 ? fields.push() : fields.remove()
 			}}><i/>
 			{fields.length === 0 && 'Add'} Social Media
 			</button>
@@ -433,3 +422,19 @@ const InterestEntry = props => {
     )
 }
 
+//Define Form
+CandidateApplicationForm = reduxForm({
+	form: 'candidateApplication',
+	enableReinitialize : true
+})(CandidateApplicationForm)
+
+const selector = formValueSelector('jobForm')
+
+CandidateApplicationForm = connect(
+		state => {
+			initialValues: state.candidateMatches.candidate
+		}
+)(CandidateApplicationForm)
+
+//Export Form
+export default CandidateApplicationForm
