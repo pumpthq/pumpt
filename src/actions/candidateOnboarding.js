@@ -59,13 +59,14 @@ export const emailValidateSucceeded = (email) => ({
     }
 })
 
-export const saveContactInfoData = ({ firstName, lastName, email, location }) => ({
+export const saveContactInfoData = ({ firstName, lastName, email, location, abilityToRelocate }) => ({
     type : SAVE_CONTACT_INFO_DATA,
     payload : {
         firstName,
         lastName,
         email,
         location,
+				abilityToRelocate,
     }
 })
 

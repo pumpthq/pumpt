@@ -41,12 +41,11 @@ export const PlaceField = ({ values, input, onChange, label, meta: { touched, er
 		inputName : input.name,
 		autocompleteItem : AutocompleteItem,
 		classNames : classes,
-		placeholder : "Location",
+		placeholder : label,
 	}
 
 	return (
 		<div className={`form-group${hasError ? ' has-danger' : ''}`}>
-			<label className="form-control-label" htmlFor={id}>{label}</label>
 
 			<PlacesAutocomplete
 				inputProps={inputProps}

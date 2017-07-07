@@ -709,9 +709,9 @@
   background-color: transparent;
   border: 0;
 }
-.hidden {
+/*.hidden {
   display: none !important;
-}
+}*/
 .affix {
   position: fixed;
 }

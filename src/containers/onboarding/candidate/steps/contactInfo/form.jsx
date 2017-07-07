@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import { Link } from 'react-router'
 import { reduxForm, Field } from 'redux-form'
+import { Checkbox, Form } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { required, email_validation } from 'components/main/form/validations'
 
@@ -36,6 +37,16 @@ const renderField = ({
       {touched && error && <span class="textfield__error">{error}</span>}
     </div>
   </div>
+)
+
+const renderCheckbox = ({ input, label }) => (
+	<Form.Field>
+		<Checkbox
+			label={label}
+			checked={input.value ? true : false}
+			onChange={(e, { checked }) => input.onChange(checked)}
+		/>
+	</Form.Field>
 )
 
 //Async Validation - on if email is already registered
@@ -98,20 +109,17 @@ let OnboardingCandidateContactInfo = props => {
 									/>
 						</fieldset>
 						<fieldset className="form__row">
-											<Field
-												name="location"
-												label="Current Location"
-												component={PlaceField}
-												validate={required}
-											 />
-
+								<Field
+									name="location"
+									label="Current Location"
+									component={PlaceField}
+									validate={required}
+								 />
 								<Field
 									name="abilityToRelocate"
-									id="abilityToRelocation"
-									component="input"
-									type="checkbox"
+									label="Willing to Relocate?"
+									component={renderCheckbox}
 								/>
-								<label>Willing to Relocate</label>
 						</fieldset>
 						{error && <span class="textfield__error">{error}</span>}
 						<div className="form__actions">
