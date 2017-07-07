@@ -15,7 +15,7 @@ const AutocompleteItem = ({ formattedSuggestion }) => (
 	</div>
 )
 
-export const PlaceField = ({ values, input, onChange, label, meta: { touched, error }, ...rest }) => {
+export const PlaceField = ({ values, name, input, onChange, label, meta: { touched, error }, ...rest }) => {
 	const hasError = touched && error;
 	const id = input.name;
 
@@ -42,6 +42,7 @@ export const PlaceField = ({ values, input, onChange, label, meta: { touched, er
 		autocompleteItem : AutocompleteItem,
 		classNames : classes,
 		placeholder : label,
+		name : name,
 	}
 
 	return (

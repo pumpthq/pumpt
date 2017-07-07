@@ -131,10 +131,10 @@ export const showCompanySizeStep = () => ({
     type : SHOW_COMPANY_SIZE_STEP
 })
 
-export const saveCompanySizeData = ({ companySize }) => ({
+export const saveCompanySizeData = ({ preferredCompanySize }) => ({
     type : SAVE_COMPANY_SIZE_DATA,
     payload : {
-        companySize
+        preferredCompanySize
     }
 })
 

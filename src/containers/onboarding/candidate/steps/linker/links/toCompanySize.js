@@ -30,7 +30,7 @@ export class To extends Component {
             isEnabled,
             dispatch
         } = this.props
-        const stateItem = onboardingState.companySize
+        const stateItem = onboardingState.preferredCompanySize
 
         let value = ''
         if(stateItem) {

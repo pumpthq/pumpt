@@ -99,14 +99,14 @@ export default function () {
                     foundDate: `${onboardingState.foundationYear}`,
                     type: onboardingState.companyType.value,
                     employeesAmount: onboardingState.numberOfEmployees.value,
-                    headquartersLocation: onboardingState.headquartersLocation.value,
+                    headquartersLocation: onboardingState.headquartersLocation,
                     socialMedia: {
                         websiteUrl: websiteUrl,
                         linkedInUrl: linkedInProfileUrl,
                         twitterAcc: `${onboardingState.twitterUsername}`,
                         facebookUrl: facebookProfileUrl,
                     },
-										valueAssessments : onboardingState.valueAssessments ? onboardingState.valueAssessments.value :  ''
+										values : onboardingState.values ? onboardingState.values.values :  ''
                 },
             };
             try {

@@ -38,7 +38,7 @@ import saveStep from './saveOnboardingStep';
 const defaultState = {
     step: SHOW_CONTACT_INFO_STEP,
     progress: [],
-    valueAssessments : []
+    values : []
 };
 
 export default (state = defaultState, action) => {

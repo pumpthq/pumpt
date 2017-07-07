@@ -73,14 +73,16 @@ export default function() {
                 },
                 firstName : onboardingState.firstName,
                 lastName : onboardingState.lastName,
+								location : onboardingState.location,
+								abilityToRelocate : onboardingState.abilityToRelocate,
                 interestWorkingArea : onboardingState.industry.value,
                 recentWorkingArea : onboardingState.fieldOfExpertise.value,
                 recentWorkingAreaParent : onboardingState.fieldOfExpertiseHead.value,
                 recentJob : onboardingState.jobTitle.value,
                 recentAnnualIncome : onboardingState.income.value,
                 recentAreaExperience : onboardingState.experience.value,
-								preferredCompanySize : onboardingState.companySize.value,
-                valueAssessments : onboardingState.valueAssessments
+								preferredCompanySize : onboardingState.preferredCompanySize.value,
+                values : onboardingState.values
             }
 
             try {

@@ -14,9 +14,9 @@ import { COMPANY_SIZE_DROPDOWN_DATA } from './../../../../../constants/candidate
 
 @connect(
     function mapStateToProps(state, ownProps) {
-        const { companySize } = state.candidateOnboarding
+        const { preferredCompanySize } = state.candidateOnboarding
         const activeItem = findById({
-            id : companySize ? companySize.id : null,
+            id : preferredCompanySize ? preferredCompanySize.id : null,
             data : COMPANY_SIZE_DROPDOWN_DATA
         })
 
@@ -27,7 +27,7 @@ import { COMPANY_SIZE_DROPDOWN_DATA } from './../../../../../constants/candidate
     function mapDispatchToProps(dispatch, ownProps) {
         const nextStep = ({ id, value }) => {
             dispatch(saveCompanySizeData({
-                companySize : {
+                preferredCompanySize : {
                     id,
                     value
                 }

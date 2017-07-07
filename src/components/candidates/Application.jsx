@@ -264,36 +264,36 @@ const renderEducations = ({ fields, label, meta: { error } }) => (
 const renderSkills = ({ fields, meta: { error } }) => (
 	<div className="application-item">
 			<button className="application-item-button" type="button" onClick={() => {
-				fields.length === 0 ? fields.push() : ''
+				fields.push()
 			}}><i/>
 			{fields.length === 0 && 'Add'} Skills
 			</button>
 
+			<div class="application-detail checkbox-item col-md-12">
+				<Field name="ms-office" component={Checkbox} label="MS Office (Word,Excel, PPt)" />
+			</div>
+			<div class="application-detail checkbox-item col-md-12">
+				<Field name="coms-core" component={Checkbox} label="Coms Core" />
+			</div>
+			<div class="application-detail checkbox-item col-md-12">
+				<Field name="google-analytics" component={Checkbox} label="Google Analytics" />
+			</div>
+			<div class="application-detail checkbox-item col-md-12">
+				<Field name="iab-certification" component={Checkbox} label="IAB Certification" />
+			</div>
+			<div class="application-detail checkbox-item col-md-12">
+				<Field name="salesforce" component={Checkbox} label="SalesForce" />
+			</div>
+			<div class="application-detail checkbox-item col-md-12">
+				<Field name="adserving-platforms" component={Checkbox} label="Ad-Serving Platforms" />
+			</div>
+
 			{fields.map((skill, index) => (
 				<div className="info-block">
 							<div class="row">
-								<div class="application-detail checkbox-item col-md-12">
-									<Field name={`${skill}.value`} component={Checkbox} label="MS Office (Word,Excel, PPt)" />
-								</div>
-
-								<div class="application-detail checkbox-item col-md-12">
-									<Field name="coms-core" component={Checkbox} label="Coms Core" />
-								</div>
-								<div class="application-detail checkbox-item col-md-12">
-									<Field name="google-analytics" component={Checkbox} label="Google Analytics" />
-								</div>
-								<div class="application-detail checkbox-item col-md-12">
-									<Field name="iab-certification" component={Checkbox} label="IAB Certification" />
-								</div>
-								<div class="application-detail checkbox-item col-md-12">
-									<Field name="salesforce" component={Checkbox} label="SalesForce" />
-								</div>
-								<div class="application-detail checkbox-item col-md-12">
-									<Field name="adserving-platforms" component={Checkbox} label="Ad-Serving Platforms" />
-								</div>
 								{fields.map((skill, index) => (
 									<div class="application-detail col-md-4">
-										<Field name={`${index}`} className="short-field" component={renderField} label="Add Your Own..." />
+										<Field name={`${skill}`} className="short-field" component={renderField} label="Add Your Own..." />
 										<button className="remove-entry" type="button" onClick={() => {
 											fields.remove(index)
 										}}><i>X</i>
