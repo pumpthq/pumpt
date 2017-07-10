@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import Wrapper from './../../../components/main/wrapper';
-import TabBar from './parts/TabBar'
 
 const propTypes = {
     children : PropTypes.node,
@@ -27,7 +26,6 @@ class ShowContainer extends Component {
                         </div>
                     </div>
                 </div>
-                <TabBar />
               </div>
         );
     }

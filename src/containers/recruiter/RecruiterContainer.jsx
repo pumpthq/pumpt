@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import Wrapper from 'components/main/wrapper';
 import RecruiterHeader from './parts/HeaderMenu';
+import TabBar from 'containers/recruiter/jobs/parts/TabBar'
 
 class RecruiterContainer extends Component {
 
@@ -19,6 +20,7 @@ class RecruiterContainer extends Component {
                 <div className="container">
                     {children}
                 </div>
+                <TabBar />
             </Wrapper>
         );
     }
