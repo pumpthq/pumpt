@@ -21,7 +21,7 @@ module.exports = {
               { path: 'drafts', component: DraftJobsSlider },
           ]
       },
-      { path: ':id/show', component: (props) => <ShowContainer id={props.params.id} /> },
+      { path: ':id/show', component: (props) => <ShowContainer id={props.params.id} matches={this.props.matches} /> },
       { path: ':id/edit', component: (props) => <EditContainer id={props.params.id}/> },
 
       { path: ':id/candidates', component: (props) => <MatchesContainer id={props.params.id}/> },

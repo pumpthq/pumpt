@@ -99,8 +99,7 @@ class Card extends Component {
                         <div className="row">
                             <div className="col-xs-6 no-right-gutter">
                                 <Link className="link" to={`recruiter/jobs/${_id}/candidates`}>
-																{/*WIP:below not working (always displays 0)
-                                    {matches.length} Matching*/}
+																{/* {matches.length} Matching<br/> */}
                                     View Matches
                                 </Link>
                                 {/* <p className="text text_color_l-grey">67–98% match</p> */}
