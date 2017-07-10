@@ -7,6 +7,10 @@ import ImageUploader from 'components/ImageUploader'
 import BuildingIcon from 'components/icons/building'
 import {updateCompany} from 'actions/applicationCompany'
 
+const shortenLocation  = value => {
+	return value.match(/[^,]+,[^,]/)
+}
+
 export default class CompanySummary extends Component {
 
     render() {
@@ -64,7 +68,9 @@ export default class CompanySummary extends Component {
                         <div class="summary-head__title-item">
                             <div class="summary-head__title-column">
                                 <span class="text summary-head__label">Headquarters</span>
-                                <span class="text text_size_s summary-head__summary">{headquartersLocation ? `${headquartersLocation}` : ''}</span>
+																{headquartersLocation &&
+																		<span class="text text_size_s summary-head__summary">{`${shortenLocation(headquartersLocation)}`}</span>
+																}
                             </div>
                             <div class="summary-head__title-column">
                                 <span class="text summary-head__label">Company Type</span>
