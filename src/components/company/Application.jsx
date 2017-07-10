@@ -162,7 +162,7 @@ const renderOfficeLocations = ({ fields, label, meta: { error } }) => (
 			<button className="application-item-button" type="button" onClick={() => {
 				fields.push()
 			}}><i/>
-			{fields.length === 0 && 'Add'} Office Locations
+			Office Locations
 			</button>
 			<div class="row">
 				<div class="col-md-12">
@@ -197,10 +197,10 @@ const renderOfficeLocations = ({ fields, label, meta: { error } }) => (
 					</div>
 				</div>
 
-		{fields.length > 0 && <button className="add-entry mdl-button" type="button" onClick={() => {
-				fields.push()
-			}}>Add
-		</button>}
+		 		<button className="add-entry mdl-button" type="button" onClick={() => {
+					fields.push()
+					}}>Add {fields.length === 0 && 'Office Location'}
+				</button>
 </div>
 )
 
