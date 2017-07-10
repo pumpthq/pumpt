@@ -25,6 +25,7 @@ class ClosedCard extends Component {
             title,
             state,
             salary,
+						location,
             experience,
             employment,
             degree,
@@ -42,7 +43,7 @@ class ClosedCard extends Component {
                                             {title}
                                         </h2>
                                         <span className="mdl-card__subtitle-text summary-head__subtitle-text text text_color_invert text_size_xs">
-                                            {state}
+                                            {location ? location : ""}
                                         </span>
                                     </div>
                                 </div>

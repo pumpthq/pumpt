@@ -72,6 +72,7 @@ import {
 
     REJECT_POST_SUCCEEDED,
     APPROVE_POST_SUCCEEDED,
+    RESTORE_POST_SUCCEEDED,
 
     OPEN_APPROVE_AND_EMAIL,
 
@@ -537,6 +538,18 @@ export const postApproveSucceeded = id => data => ({
 })
 
 
+export const postRestore = (matchingId) => ({
+    type : API,
+    payload : {
+        url : `/matches/restore/${matchingId}`,
+        success: postRestoreSucceeded(matchingId),
+    }
+})
+
+export const postRestoreSucceeded = id => data => ({
+    type: RESTORE_POST_SUCCEEDED,
+    payload: { id }
+})
 
 //
 // export const startMatching = ({ id }) => ({

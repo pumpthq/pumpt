@@ -62,17 +62,16 @@ export default class CandidateProfile extends Component {
 
 							<a class="button_type_close" onClick={browserHistory.goBack}>×</a>
 
-              <div className="profile-head">
-
-                <div className="profile-avatar">
-                    <img src={apiImage(avatar)}></img>
+              <div className="profile-head row">
+                <div className="profile-head-info col-md-9 col-xs-12">
+                  <h4>{ `${lastName}, ${firstName}` }</h4>
+                  <LabeledValue label="Current Total Compensation" value={candidate.recentAnnualIncome} />
+                  <LabeledValue label="Current Title" value={candidate.recentJob} />
+                  <LabeledValue label="Experience" value={candidate.recentAreaExperience} />
                 </div>
 
-                <div className="profile-head-info">
-                  <h4>{ `${lastName}, ${firstName}` }</h4>
-                  <LabeledValue label="Recent Income" value={candidate.recentAnnualIncome} />
-                  <LabeledValue label="Recent Job" value={candidate.recentJob} />
-                  <LabeledValue label="Experience Duration" value={candidate.recentAreaExperience} />
+                <div className="profile-avatar col-md-2 col-xs-12">
+                    <img src={apiImage(avatar)}></img>
                 </div>
 
               </div>

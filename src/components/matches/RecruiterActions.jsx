@@ -7,7 +7,7 @@ import ButtonLink from 'components/parts/buttonLink'
 
 import { BookmarkOpen, BookmarkFill, ApproveOpen, Decline } from 'components/icons'
 
-import { postBookmark, postReject, postApprove, openApprove } from 'actions/companyJobs'
+import { postBookmark, postReject, postRestore, postApprove, openApprove } from 'actions/companyJobs'
 
 
 const mapDispatchToProps = (dispatch, ownProps) => {
@@ -22,6 +22,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
             postApprove: () => {
                 dispatch(postApprove(ownProps.match._id))
             },
+            postRestore: () => {
+                dispatch(postRestore(ownProps.match._id))
+            },
             openApprove: () => {
                 dispatch(openApprove(ownProps.match._id))
             }
@@ -33,15 +36,15 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 export default class RecruiterActions extends Component {
 
     render() {
-        const { actions: { postApprove, postReject, addToBookmark, openApprove }, match: { candidate } } = this.props
+        const { actions: { postApprove, postReject, postRestore, addToBookmark, openApprove }, match: { candidate } } = this.props
 
         if(candidate.status==='new') {
             return (
                 <div>
-                <ButtonApply onClick={openApprove} icon={<ApproveOpen className=""/>}>
-                    Apply
+                <ButtonApply onClick={openApprove} >
+                    Connect
                 </ButtonApply>
-                <ButtonLink onClick={postReject} icon={<Decline className=""/>}>
+                <ButtonLink onClick={postReject} >
                     Not interested
                 </ButtonLink>
                 </div>
@@ -50,7 +53,7 @@ export default class RecruiterActions extends Component {
 
         if(candidate.status==='approved') {
             return (
-                <ButtonApply onClick={openApprove} icon={<ApproveOpen className=""/>}>
+                <ButtonApply onClick={openApprove} >
                     Send Message
                 </ButtonApply>
             )
@@ -58,7 +61,7 @@ export default class RecruiterActions extends Component {
 
         if(candidate.status==='rejected') {
             return(
-                <ButtonLink onClick={()=>alert('restore')}>
+                <ButtonLink onClick={postRestore}>
                     Restore
                 </ButtonLink>
             )

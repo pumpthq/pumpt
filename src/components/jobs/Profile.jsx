@@ -93,7 +93,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 export default class Profile extends Component {
 
     renderMatchInformation() {
-        const { company, title, state, salary, experience, employment, backgroundTint, degree } = this.props
+        const { company, title, location, salary, experience, employment, backgroundTint, degree } = this.props
         const { name, logo, background } = company
         return (
             <div className="summary-head" style={ tintedBackground(apiImage(background),...backgroundTint) }>
@@ -108,7 +108,7 @@ export default class Profile extends Component {
                                 <span
                                     className="mdl-card__subtitle-text summary-head__subtitle-text text text_color_invert">
                                     {title}<br/>
-                                    {state}
+                                    {location ? location : ''}
                                 </span>
                             </div>
                         </div>

@@ -64,16 +64,19 @@ const CandidateItem = (props) => {
 
           <div className="match-avatar-info">
 
-            <h4>{firstName} {lastName}</h4>
+						<h4>{ `${firstName} ${lastName}` }</h4>
             <div className="vacancy-details">{industry}</div>
             <div className="vacancy-details">{salary}</div>
 
-            <div className="button-block">
-              <MatchRecruiterActions match={match} />
-
-              <Link className="link" to={`recruiter/jobs/${match._vacancy}/candidates/${match._candidate}`}>
-                  View Candidate Details
-              </Link>
+            <div className="row button-block">
+							<div class="col-md-4">
+								<Link className="link mdl-button button button_type_colored button_include_icon" to={`recruiter/jobs/${match._vacancy}/candidates/${match._candidate}`}>
+										View Candidate Details
+								</Link>
+							</div>
+							<div class="col-md-8">
+								<MatchRecruiterActions match={match} />
+							</div>
             </div>
           </div>
 
