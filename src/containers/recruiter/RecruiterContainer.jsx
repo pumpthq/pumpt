@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import Wrapper from './../../components/main/wrapper';
+import Wrapper from 'components/main/wrapper';
 import RecruiterHeader from './parts/HeaderMenu';
 
 class RecruiterContainer extends Component {

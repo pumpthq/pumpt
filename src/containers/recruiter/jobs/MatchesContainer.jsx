@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux'
 import MatchesList from 'components/matches/List'
-import ApproveAndEmailCandidateDialog from 'components/matches/ApproveAndEmailCandidateDialog'
+import { ApproveAndEmailCandidateDialog } from 'components/matches/ApproveAndEmailCandidateDialog'
 import VerticalScroller from 'components/VerticalScroller'
 import { fetchMatches } from 'actions/companyJobs'
 
@@ -24,7 +24,7 @@ class MatchesContainer extends Component {
         if(matches.length==0) {
             dispatch(fetchMatches(id))
         }
-    }
+    } 
 
 
     render() {

@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import ShowContainer from './ShowContainer'
-import EditContainer from './EditContainer'
-import ListContainer from './ListContainer'
-import MatchesContainer from './MatchesContainer'
-import CandidateContainer from './CandidateContainer'
+import { ShowContainer } from './ShowContainer'
+import { EditContainer } from './EditContainer'
+import { ListContainer } from './ListContainer'
+import { MatchesContainer } from './MatchesContainer'
+import { CandidateContainer } from './CandidateContainer'
 
 import { OpenJobsSlider, DraftJobsSlider, ClosedJobsSlider } from './Sliders'
 

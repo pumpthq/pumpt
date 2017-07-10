@@ -314,6 +314,7 @@ export default (state = defaultState, action) => {
 
         case OPEN_APPROVE_AND_EMAIL: {
             const match = _.find(state.matches, o => o._id === payload.id);
+						console.log("Calling reducer on trigger action...");
             return {
                 ...state,
                 lastOpenApproved: {...match}
