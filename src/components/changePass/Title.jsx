@@ -6,7 +6,7 @@ export default () => (
             Change Password
         </h3>
         <p className="text">
-            Password must be at least 6 characters long.
+            Password must be at least 8 characters long.
             To make password more secure, use upper and lowercase letters, digits, and symbols.
         </p>
     </div>

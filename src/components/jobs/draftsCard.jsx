@@ -40,6 +40,7 @@ class DraftsCard extends Component {
             degree,
             _id,
             dispatch,
+						location,
         } = this.props;
         return (
             <div className="slider__item slider__item_content_middle">

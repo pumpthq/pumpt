@@ -30,3 +30,6 @@ const year = values => {
 
 	return errors
 }
+
+const passwordConfirm = otherField => (value, previousValue, allValues) =>
+	value !== otherField.value ? 'Passwords do not match.' : undefined

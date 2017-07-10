@@ -49,13 +49,21 @@ const renderSelectField = ({ input, label, type, meta: { touched, error }, child
       {touched && error && <span>{error}</span>}
     </div>
 )
+const buttonStyle = {
+    cursor: 'pointer',
+};
 
 let JobForm = props => { 
 	const {handleSubmit, submitting, touched, error, invalid, valid, dispatch, names, values, industryValue} = props
-	const submitDisabled = invalid || submitting
+	const submitDisabled = invalid || submitting || error
 
 	const submit = (values, dispatch) => {
-		dispatch(createJob(values))
+		return dispatch(createJob(values))
+			.catch(err => {
+					throw new SubmissionError({
+							_error: 'Error Creating Job. Please Correct Any Errors Above and Try Again'
+					})
+			})
 	}
 	const industryParentObj = (parentValue) => {
 		const output = find(FIELD_OF_EXPERTISE_DROPDOWN_DATA, o => o.title === parentValue)
@@ -64,8 +72,14 @@ let JobForm = props => {
 
 	return (
 		<div>
-			<a class="button_type_close" onClick={browserHistory.goBack}>×</a>
         <div className="recruter__newjob-card">
+							<button
+									style={buttonStyle}
+									className="button button_type_close"
+									onClick={browserHistory.goBack}
+							>
+									×
+							</button>
 					<form onSubmit={handleSubmit(submit)} class="mdl-card card card_state_open card_state_scroll">
             <div className="recruter__newjob-card__form-top">
               <div>
@@ -81,7 +95,7 @@ let JobForm = props => {
               </div>
               <div>
                 <label>Location</label>
-                <div>
+                <div class="dark">
 									<Field
 										name="location"
 										component={PlaceField}
@@ -116,10 +130,11 @@ let JobForm = props => {
 									</Field>
 								}
 
-              <div>
-                <button className="new-job-submit-save" type="submit" disabled={submitting}>
-                  {submitting ? <i/> : <i/>} Save Job Summary
-                </button>
+								<div>
+									<button type="submit" disabled={submitDisabled}
+									className="mdl-button button invisible-mobile button_type_colored button_size_m candidate-submit">
+										{submitting ? <i/> : <i/>} Save Job Summary
+									</button>
               </div>
             </div>
 
@@ -129,9 +144,16 @@ let JobForm = props => {
 							<FieldArray name="responsibilities" label="Responsibility" 	validate={hasText}	placeholder="Responsibility" component={renderLists} />
 							<FieldArray name="requirements" 		label="Requirements" 		validate={hasText}	placeholder="Requirement" component={renderLists} />
 
-              <button className="new-job-submit-matching" type="submit" disabled={submitDisabled}>
-                {submitting ? <i/> : <i/>} Start Matching
-              </button>
+							{error && <span class="textfield__error">{error}</span>}
+								<br/>
+
+							<div>
+								<button type="submit" disabled={submitDisabled}
+								className="mdl-button button invisible-mobile button_type_colored button_size_m candidate-submit">
+									{submitting ? <i/> : <i/>} Start Matching
+								</button>
+							</div>
+
             </div>
           </form>
         </div>

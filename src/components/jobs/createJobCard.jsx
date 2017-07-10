@@ -15,7 +15,7 @@ export default class CreateJobCard extends Component {
                         +
                     </span>
                     <span className="text text_color_l-grey text_size_m">
-                        Create new job
+                        Create New Job
                     </span>
                 </Link>
             </div>

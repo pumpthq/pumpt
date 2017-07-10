@@ -1,14 +1,13 @@
 import React, { Component, PropTypes } from 'react'
 import { reduxForm, Field } from 'redux-form'
 
-import Form from 'components/main/form'
-import { OnboardingInput } from 'components/onboarding'
 import Button from 'components/main/button'
 import { SubmissionError } from 'redux-form'
 
 import { saveSetUpPasswordData as candidateSaveSetUpPasswordData } from 'actions/candidateOnboarding';
 import { applyForMembership as candidateApplyForMembership } from 'actions/candidateOnboarding';
 
+import {required, passwordConfirm, minLength } from 'components/main/form/validations'
 
 //Validations
 const validate = values => {
@@ -71,6 +70,7 @@ const CandidateFinalForm = props => {
 								name='password'
 								label='Password'
 								component={renderField}
+		//						validate={[required, minLength(8)]}
 							/>
 					</div>
 				</fieldset>
@@ -81,6 +81,7 @@ const CandidateFinalForm = props => {
 								name='passwordRepeat'
 								label='Confirm password'
 								component={renderField}
+			//					validate={[required, minLength(8), passwordConfirm]}
 						/>
 					</div>
 				</fieldset>
@@ -107,5 +108,5 @@ const CandidateFinalForm = props => {
 
 export default reduxForm({
 	form: 'candidateOnboardingFinal',
-	validate
+	validate,
 })(CandidateFinalForm)
