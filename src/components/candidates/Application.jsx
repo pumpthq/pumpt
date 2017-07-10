@@ -59,8 +59,13 @@ const CardDivider = () => (<div className="summary-head__title-item summary-head
 let CandidateApplicationForm = props =>  {
 	const { handleSubmit, submitting, error, invalid, valid, dispatch, names, values} = props
 	const submitDisabled = invalid || submitting
-	const submit = (values, dispatch) => {
-		dispatch(updateCandidate(values))
+	const submit = (values) => {
+		return dispatch(updateCandidate(values))
+			.catch(err => {
+					throw new SubmissionError({
+							_error: 'Error Occured While Trying to Save Your Profile' 
+					})
+			})
 	}
 
 		return (

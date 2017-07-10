@@ -41,6 +41,10 @@ const renderSelectField = ({ input, label, type, meta: { touched, error }, child
     </div>
 )
 
+//Validations
+import {year} from 'components/main/form/validations'
+import {normalizeYear} from 'components/main/form/normalizations'
+
 
 //Form
 let CompanySummaryForm = props =>  {
@@ -78,7 +82,7 @@ let CompanySummaryForm = props =>  {
 					</div>
 					<div class="col-md-4">
 						<Field name="type" component={renderSelectField} label="Company Type" class="mdl-textfield__input textfield__input textfield__light">
-							{ COMPANY_TYPE_DATA.map((item) => {return <option value={item.title}>{item.title}</option>}) }
+							{ COMPANY_TYPE_DATA[0].items.map((item) => {return <option value={item.title}>{item.title}</option>}) }
 						</Field>
 					</div>
 					<div class="col-md-4">
@@ -87,6 +91,8 @@ let CompanySummaryForm = props =>  {
 							type="text"
 							component={renderField}
 							label="YearFounded"
+							validate={year}
+							normalize={normalizeYear}
 						/>
 					</div>
 			</div>

@@ -17,3 +17,16 @@ export const minLength = min => value =>
   value && value.length < min ? `Must be ${min} characters or more` : undefined
 
 const hasText = fieldLabel => value => (value ? undefined : `${fieldLabel} cannot be blank`)
+
+const year = values => {
+  const errors = {}
+
+	if (values.foundationYear < 1700 || values.foundationYear > (new Date().getFullYear())){
+		errors.foundationYear = 'Year is out of Range'
+	}
+	else if (!values.foundationYear){
+		errors.foundationYear = 'Can\'t be Blank'
+	}
+
+	return errors
+}

@@ -51,7 +51,12 @@ let CompanyApplicationForm = props => {
 	const { handleSubmit, submitting, error, invalid, valid, dispatch, names, values} = props
 	const submitDisabled = invalid || submitting
 	const submit = (values, dispatch) => {
-		dispatch(updateCompany(values))
+		return dispatch(updateCompany(values))
+			.catch(err => {
+					throw new SubmissionError({
+							_error: 'Error Saving Profile. Please correct any errors, try again, and let us know if the issue persists' 
+					})
+			})
 	}
 
 	return (
@@ -80,6 +85,8 @@ let CompanyApplicationForm = props => {
 				<CardDivider/>
 
 			<div>
+			{error && <span class="textfield__error">{error}</span>}
+				<br/>
 				<button type="submit" disabled={submitDisabled}
 								className="mdl-button button invisible-mobile button_type_colored button_size_m company-submit"
 				>

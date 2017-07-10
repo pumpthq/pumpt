@@ -14,6 +14,19 @@ export const normalizeDate = value => {
 	}
 }
 
+export const normalizeYear = value => {
+	if (!value) { return value }
+
+	const onlyNums = value.replace(/[^\d]/g, '')
+	if (onlyNums.length < 4) { return onlyNums }
+	else {
+		const minYear = onlyNums.replace(/^[0-1][0-8][0-9][0-9]$/,'1900')
+		const year = minYear.replace(/^[2-9][1-9][0-9][0-9]|20[2-9][0-9][0-9]|201[8-9]$/,'2017')
+
+		return `${year.slice(0,4)}`
+	}
+}
+
 //Normalize Twiiter to be an @handle
 export const normalizeTwitter = value => {
 	if (!value) { return value }

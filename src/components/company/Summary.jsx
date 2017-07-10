@@ -64,7 +64,7 @@ export default class CompanySummary extends Component {
                         <div class="summary-head__title-item">
                             <div class="summary-head__title-column">
                                 <span class="text summary-head__label">Headquarters</span>
-                                <span class="text text_size_s summary-head__summary">{`${headquartersLocation}`}</span>
+                                <span class="text text_size_s summary-head__summary">{headquartersLocation ? `${headquartersLocation}` : ''}</span>
                             </div>
                             <div class="summary-head__title-column">
                                 <span class="text summary-head__label">Company Type</span>

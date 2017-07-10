@@ -14,18 +14,8 @@ import { SubmissionError } from 'redux-form'
 import { checkEmailAvailability } from 'actions/authorization'
 
 //Validations
-const validate = values => {
-  const errors = {}
-
-	if (values.foundationYear < 1700 || values.foundationYear > (new Date().getFullYear())){
-		errors.foundationYear = 'Year is out of Range'
-	}
-	else if (!values.foundationYear){
-		errors.foundationYear = 'Can\'t be Blank'
-	}
-
-	return errors
-}
+import {year} from 'components/main/form/validations'
+import {normalizeYear} from 'components/main/form/normalizations'
 
 //Generalized Redux Field
 const renderField = ({
@@ -59,6 +49,8 @@ const FoundationYearForm = props => {
 					type='int'
 					name='foundationYear'
 					label='Year'
+					validate={year}
+					normalize={normalizeYear}
 					component={renderField}
 			/>
 					<div class='form__actions'>
@@ -76,5 +68,4 @@ const FoundationYearForm = props => {
 
 export default reduxForm({
 	form: 'foundationYearForm',
-	validate
 })(FoundationYearForm)
