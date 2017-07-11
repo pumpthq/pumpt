@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
-import { Dialog } from 'material-ui/Dialog'
+import  Dialog from 'material-ui/Dialog'
 import { postApprove } from 'actions/companyJobs'
-import { MessageCandidateForm } from 'components/matches/MessageCandidateForm'
+import  MessageCandidateForm from 'components/matches/MessageCandidateForm'
 
 export default class ApproveAndEmailCandidateDialog extends Component {
     state = {
