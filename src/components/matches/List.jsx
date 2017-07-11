@@ -57,7 +57,7 @@ const CandidateItem = (props) => {
         <div className={ status === 'rejected' ? "matched-item dimmed" : "matched-item" }>
 
           <div className="match-avatar-block">
-            <img src={apiImage(avatar)} className="match-avatar"/>
+						{avatar && <img src={apiImage(avatar)} className="match-avatar"/>}
             <br/>
             <h4>status: <span>{status}</span></h4>
           </div>
