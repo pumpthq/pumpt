@@ -11,13 +11,13 @@ function BookmarkOption(props){
 	var html = null;
 
 	if (props.vacancy.status=="bookmarked") {
-		html = <button className="mdl-button" disabled><BookmarkFill className=""/>Bookmarked</button>;
+		html = <ButtonLink className="mdl-button" disabled="true" ><BookmarkFill className=""/> Bookmarked</ButtonLink>;
 	}
 	else if(props.vacancy.status=="rejected"){
-		html = <button className="mdl-button" onClick={props.addToBookmark}><ButtonLink className="">Restore</ButtonLink></button>;
+		html = <ButtonLink onClick={props.addToBookmark}> Restore</ButtonLink>;
 	}
 	else{
-		html=<button className="mdl-button" onClick={props.addToBookmark}><BookmarkOpen className=""/>Bookmark</button>;
+		html=<ButtonLink onClick={props.addToBookmark}><BookmarkOpen className=""/> Bookmark</ButtonLink>;
 	}
 	return html;
 }
@@ -29,7 +29,7 @@ function ApplyOption(props){
 	else if(props.vacancy.status=="approved"){
 	}
 	else{
-		html=<ButtonApply onClick={props.postApprove} icon={<ApproveOpen className=""/>}>Connect</ButtonApply>;
+		html=<ButtonApply onClick={props.postApprove} icon={<ApproveOpen className=""/>}> Connect</ButtonApply>;
 	}
 	return html;
 }
@@ -41,7 +41,7 @@ function RejectOption(props){
 	else if(props.vacancy.status=="approved"){
 	}
 	else{
-		html=<ButtonLink onClick={props.postReject} icon={<Decline className=""/>}>Not interested</ButtonLink>;
+		html=<ButtonLink onClick={props.postReject} icon={<Decline className=""/>}> Not interested</ButtonLink>;
 	}
 	return html;
 }
