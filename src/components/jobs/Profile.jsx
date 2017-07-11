@@ -13,6 +13,10 @@ import { tintedBackground, apiImage } from 'components/helpers'
 
 import { browserHistory } from 'react-router'
 
+const buttonStyle = {
+    cursor: 'pointer',
+};
+
 const propTypes = {
 //     name: PropTypes.string,
 //     logo: PropTypes.string,
@@ -190,8 +194,8 @@ export default class Profile extends Component {
         const { children } = this.props
         return (
 						<div>
+								<button style={buttonStyle} className="button button_type_close" onClick={browserHistory.goBack}>×</button>
 								<div className="mdl-card card card_state_open card_state_scroll">
-										<a class="button_type_close" onClick={browserHistory.goBack}>×</a>
 
 										{this.renderMatchInformation()}
 										{this.renderLongContent()}
