@@ -47,6 +47,9 @@ function LocationDisplay(props){
 		return (<div className='item-title-text'>City: {props.location.city}<br/>State: {props.location.state}</div>);
 	}
 }
+const buttonStyle = {
+    cursor: 'pointer',
+};
 
 export default class CandidateProfile extends Component {
 
@@ -58,72 +61,72 @@ export default class CandidateProfile extends Component {
 
         return (
 
-            <div className="candidate-profile mdl-card card card_type_mini card_state_open">
+						<div>
+							<button style={buttonStyle} className="button button_type_close" onClick={browserHistory.goBack}>×</button>
+							<div className="candidate-profile mdl-card card card_type_mini card_state_open">
+								<div className="profile-head row">
+									<div className="profile-head-info col-md-9 col-xs-12">
+										<h4>{ `${lastName}, ${firstName}` }</h4>
+										<LabeledValue label="Current Total Compensation" value={candidate.recentAnnualIncome} />
+										<LabeledValue label="Current Title" value={candidate.recentJob} />
+										<LabeledValue label="Experience" value={candidate.recentAreaExperience} />
+									</div>
 
-							<a class="button_type_close" onClick={browserHistory.goBack}>×</a>
+									<div className="profile-avatar col-md-2 col-xs-12">
+											<img src={apiImage(avatar)}></img>
+									</div>
 
-              <div className="profile-head row">
-                <div className="profile-head-info col-md-9 col-xs-12">
-                  <h4>{ `${lastName}, ${firstName}` }</h4>
-                  <LabeledValue label="Current Total Compensation" value={candidate.recentAnnualIncome} />
-                  <LabeledValue label="Current Title" value={candidate.recentJob} />
-                  <LabeledValue label="Experience" value={candidate.recentAreaExperience} />
-                </div>
+								</div>
 
-                <div className="profile-avatar col-md-2 col-xs-12">
-                    <img src={apiImage(avatar)}></img>
-                </div>
+								<div className="profile-data">
 
-              </div>
+									<div className="col-xs-8">
+									<div className="profile-data__item">
+										<Case/><span className="item-title">Experience</span>
+										{
+											workingExperience && workingExperience.map(exp => <div className="item-title-text">Company: {exp.companyName}<br/>
+											Position: {exp.position}<br/>Location: {exp.location}<br/>Duty: {exp.duty}</div>)
+										}
+									</div>
 
-              <div className="profile-data">
+									<div className="profile-data__item">
+										<Education/><span className="item-title">Education</span>
+										{
+											education && education.map(exp => <div className="item-title-text">School Name: {exp.schoolName}<br/>
+											Specialty: {exp.specialty}<br/>Degree: {exp.degree}</div>)
+										}
+									</div>
 
-                <div className="col-xs-8">
-                <div className="profile-data__item">
-                  <Case/><span className="item-title">Experience</span>
-                  {
-                    workingExperience && workingExperience.map(exp => <div className="item-title-text">Company: {exp.companyName}<br/>
-                    Position: {exp.position}<br/>Location: {exp.location}<br/>Duty: {exp.duty}</div>)
-                  }
-                </div>
-
-                <div className="profile-data__item">
-                  <Education/><span className="item-title">Education</span>
-                  {
-                    education && education.map(exp => <div className="item-title-text">School Name: {exp.schoolName}<br/>
-                    Specialty: {exp.specialty}<br/>Degree: {exp.degree}</div>)
-                  }
-                </div>
-
-										<div className="profile-data__item">
-											<Pin/><span className="item-title">Location</span>
-												<LocationDisplay location={location} />,
-										</div>
-
-										<div className="profile-data__item">
-											<Social/><span className="item-title">Social Media</span>
-											<div className="item-title-text">
-												LinkedIn: <a href="{socialMedia.linkedInUrl}">{socialMedia ? socialMedia.linkedInUrl : null}</a><br/>
-												Twitter: {socialMedia ? socialMedia.twitterAcc : null}<br/>
+											<div className="profile-data__item">
+												<Pin/><span className="item-title">Location</span>
+													<LocationDisplay location={location} />,
 											</div>
-										</div>
 
-										<div className="profile-data__item">
-											<Skills/><span className="item-title">Skills</span>
+											<div className="profile-data__item">
+												<Social/><span className="item-title">Social Media</span>
+												<div className="item-title-text">
+													LinkedIn: <a href="{socialMedia.linkedInUrl}">{socialMedia ? socialMedia.linkedInUrl : null}</a><br/>
+													Twitter: {socialMedia ? socialMedia.twitterAcc : null}<br/>
+												</div>
+											</div>
 
-										</div>
+											<div className="profile-data__item">
+												<Skills/><span className="item-title">Skills</span>
 
-										<div className="profile-data__item">
-											<Heart/><span className="item-title">Interests</span>
+											</div>
 
-										</div>
+											<div className="profile-data__item">
+												<Heart/><span className="item-title">Interests</span>
+
+											</div>
 
 
-                {/*<hr/>*/}
-                  {/*<pre>*/}
-                      {/*{ JSON.stringify(candidate, null, 4) }*/}
-                  {/*</pre>*/}
+									{/*<hr/>*/}
+										{/*<pre>*/}
+												{/*{ JSON.stringify(candidate, null, 4) }*/}
+										{/*</pre>*/}
 
+									</div>
 								</div>
 							</div>
 						</div>
