@@ -138,13 +138,12 @@ let CandidateSummaryForm = props =>  {
 
 				<div className="candidate-buttons">
 					<button type="submit" disabled={submitDisabled} className="mdl-button button button_type_colored button_size_m">
-							{submitting ? <i/> : <i/>} Save
+						{submitting ? <i/> : <i/>} Save
 					</button>
-                    <button type="button" disabled={submitting} onClick={onCancel} className="mdl-button button button_type_colored button_size_m">
-                        Cancel
-                    </button>
+					<button type="button" disabled={submitting} onClick={onCancel} className="mdl-button button button_type_colored button_size_m">
+						Cancel
+					</button>
 				</div>
-
 
 			</form>
 		)

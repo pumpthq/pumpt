@@ -11,7 +11,8 @@ function mapStateToProps(state, ownProps) {
     return {
         job: find(state.companyJobs.jobs, card => card._id === ownProps.id),
         matches: filter(state.companyJobs.matches, match => match._vacancy == ownProps.id),
-        lastOpenApproved: state.companyJobs.lastOpenApproved
+        lastOpenApproved: state.companyJobs.lastOpenApproved,
+				recruiter: state.companyJobs.recruiter
     }
 }
 
@@ -31,7 +32,7 @@ class MatchesContainer extends Component {
         return (
             <VerticalScroller>
                 <MatchesList job={this.props.job} matches={this.props.matches} />
-                <ApproveAndEmailCandidateDialog trigger={this.props.lastOpenApproved} />
+                <ApproveAndEmailCandidateDialog recruiter={this.props.recruiter} trigger={this.props.lastOpenApproved} />
             </VerticalScroller>
         );
     }

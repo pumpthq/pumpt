@@ -1,12 +1,21 @@
 import React, { Component, PropTypes } from 'react'
+import { connect } from 'react-redux'
 import  Dialog from 'material-ui/Dialog'
 import { postApprove } from 'actions/companyJobs'
 import  MessageCandidateForm from 'components/matches/MessageCandidateForm'
 
+const propTypes = {};
+
+function mapStateToProps(state, ownProps) {
+	return { }
+}
+
+@connect(mapStateToProps)
 export default class ApproveAndEmailCandidateDialog extends Component {
+
     state = {
         open: false,
-				messageText: ""
+				messageText: "",
     };
 
     componentWillReceiveProps(nextProps) {
@@ -25,8 +34,10 @@ export default class ApproveAndEmailCandidateDialog extends Component {
     };
 
     handleSubmit = (values) => {
-        const {dispatch, trigger} = this.props
+        const {dispatch, trigger, recruiter} = this.props
 
+
+				window.location.href = `mailto:${trigger ? trigger.candidate.brief.user.email : 'no@email.com'}?subject=${values.subject}&body=${values.body}&bcc=info@pumpthq.com`
         dispatch(postApprove(trigger._id))
 
         // ⚠️ window.open and window.location.href do not work as expected with react-router
@@ -45,7 +56,10 @@ export default class ApproveAndEmailCandidateDialog extends Component {
                     onRequestClose={this.handleClose}
                 >
                     <div>
-											<MessageCandidateForm />
+											<MessageCandidateForm
+												{...this.props}
+												onSubmit={this.handleSubmit}
+											/>
                     </div>
                 </Dialog>
         );
