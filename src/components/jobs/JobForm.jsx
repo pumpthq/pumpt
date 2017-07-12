@@ -80,7 +80,7 @@ let JobForm = props => {
 							>
 									×
 							</button>
-					<form onSubmit={handleSubmit(submit)} class="mdl-card card card_state_open card_state_scroll">
+					<form onSubmit={handleSubmit} class="mdl-card card card_state_open card_state_scroll">
             <div className="recruter__newjob-card__form-top">
               <div>
                 <label>Title</label>
