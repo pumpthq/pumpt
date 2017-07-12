@@ -128,6 +128,7 @@ const renderWorkingExperiences = ({ fields, label, meta: { error } }) => (
 										<Field
 											name={`${workingExperience}.location`}
 											component={PlaceField}
+											label="Company Location"
 										 />
 									</div>
 									<div class="application-detail col-md-12">

@@ -98,6 +98,7 @@ let JobForm = props => {
                 <div class="dark">
 									<Field
 										name="location"
+										label="Location"
 										component={PlaceField}
 										validate={required}
 									 />

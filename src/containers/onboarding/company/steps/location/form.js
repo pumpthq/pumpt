@@ -56,6 +56,7 @@ let LocationInfoForm = props => {
 											<Field
 												name="headquartersLocation"
 												component={PlaceField}
+												label="Headquarters Location"
 											 />
 											</fieldset>
 									</div>
