@@ -55,7 +55,7 @@ const defaultProps = {
 
 @reduxForm({
     form: 'company',
-    fields: [ 'name', 'type', 'quoteOrMotto', 'description', 'employeesAmount', 'foundDate', 'background', 'logo', 'locationHeadquarters.city', 'locationHeadquarters.state'  ]
+    fields: [ 'name', 'type', 'quoteOrMotto', 'description', 'employeesAmount', 'foundDate', 'background', 'logo', 'locationHeadquarters'  ]
 })
 export default class CompanyForm extends Component {
 
@@ -186,7 +186,8 @@ export default class CompanyForm extends Component {
                                         <img src={ratingImage}
                                              className="image image_inline image_type_rating invisible-tablet"/>
                                         <span className="text text_color_grey invisible-tablet">
-                                            {ratingCount} reviews
+																				{/*//FIXME: add back in with Glassdoor integration*/}
+																				{/* {ratingCount} reviews */}
                                         </span>
                                     </h2>
                                     <div className="mdl-card__subtitle-text summary-head__subtitle-text">
@@ -202,7 +203,8 @@ export default class CompanyForm extends Component {
                                         <img src={ratingImage}
                                              className="image image_inline image_type_rating"/>
                                         <br/>
-                                        <span className="text text_color_grey">{ratingCount} reviews</span>
+																				{/*//FIXME: add back in with Glassdoor integration*/}
+																				{/* <span className="text text_color_grey">{ratingCount} reviews</span> */}
                                     </span>
                                     <span className="summary-head__subtitle-head">
                                         <span className="text text_color_l-grey">

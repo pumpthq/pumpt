@@ -4,6 +4,10 @@ import GlassDoorImage from 'img/glassdoor.jpg'
 import { tintedBackground, apiImage } from 'components/helpers'
 import { browserHistory } from 'react-router'
 
+const buttonStyle = {
+    cursor: 'pointer',
+};
+
 const propTypes = {
     // name: PropTypes.string,
     // logo: PropTypes.string,
@@ -148,9 +152,15 @@ export default class CompanyProfile extends Component {
     render() {
         const { name, background, logo, ratingImage, ratingCount, onClickGoToCompanyPage, onClickGoToBlacklistCompany } = this.props
         return (
-
+					<div>
+							<button
+									style={buttonStyle}
+									className="button button_type_close"
+									onClick={browserHistory.goBack}
+							>
+									×
+									</button>
             <div className="mdl-card card card_type_mini card_state_open">
-                <a class="button_type_close" onClick={browserHistory.goBack}>×</a>
                 <div className="summary-hero" style={ tintedBackground(apiImage(background),255,255,255,0) }></div>
                 <div className="summary-head">
 
@@ -165,7 +175,8 @@ export default class CompanyProfile extends Component {
                                         <img src={ratingImage}
                                              className="image image_inline image_type_rating invisible-tablet"/>
                                         <span className="text text_color_grey invisible-tablet">
-                                            {ratingCount} reviews
+																				{/*//FIXME: add back in with Glassdoor integration*/}
+																					{/* {ratingCount} reviews */}
                                         </span>
                                     </h2>
                                     <div className="mdl-card__subtitle-text summary-head__subtitle-text">
@@ -181,7 +192,8 @@ export default class CompanyProfile extends Component {
                                         <img src={ratingImage}
                                              className="image image_inline image_type_rating"/>
                                         <br/>
-                                        <span className="text text_color_grey">{ratingCount} reviews</span>
+																				{/*//FIXME: add back in with Glassdoor integration*/}
+																				{/* <span className="text text_color_grey">{ratingCount} reviews</span> */}
                                     </span>
                                     <span className="summary-head__subtitle-head">
                                         <span className="text text_color_l-grey">
@@ -215,6 +227,7 @@ export default class CompanyProfile extends Component {
                 <CardDivider />
                 {this.renderLocationSection()}
             </div>
+					</div>
         )
     }
 }

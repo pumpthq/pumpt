@@ -39,27 +39,11 @@ const propTypes = {
 };
 
 const defaultProps = {
-    // name: 'New York Times',
-    // logo: '//superrepo.org/static/images/icons/original/xplugin.video.nytimes.png.pagespeed.ic.XOPQITkLio.png',
-    // ratingImage: '',
-    // ratingCount: 2,
-    // rakuten: '',
-    // facebook: '',
-    // linkedin: '',
-    // twitter: '',
-    // locationHeadquarters: 'New York, NY',
-    // type: 'Publishing',
-    // employeesAmount: '500-1000',
-    // foundDate: '1982',
-    // onClickGoToCompanyPage: e => {},
-    // onClickGoToBlacklistCompany: e => {}
-    _id: '{_id}',
-    name: '{name}',
-    type: '{type}',
-    employeesAmount: '{employeesAmount}',
-    foundDate: '{foundDate}',
-    logo: 'https://placeholdit.imgix.net/~text?txtsize=9&txt=50x50&w=50&h=50',
-    locationHeadquarters: {city:'{city}', state:'{state}'}
+    _id: '--',
+    type: '--',
+    locationHeadquarters: '--',
+    employeesAmount: '--',
+    foundDate: '--',
 };
 @connect(undefined,dispatchProp)
 export default class CompanySummary extends Component {
@@ -90,9 +74,9 @@ export default class CompanySummary extends Component {
         return (
             <div
                 className="summary-head__title-item summary-head__title-item_type_alignment summary-head__title-item_type_middle">
-                <div className="summary-head__title-column"><span
-                    className="text summary-head__label">locationHeadquarters</span> <span
-                    className="text text_size_s summary-head__summary">{locationHeadquarters.city}, {locationHeadquarters.state.substring(0,2)}</span>
+                <div className="summary-head__title-column">
+									<span className="text summary-head__label">Headquarters</span>
+									<span className="text text_size_s summary-head__summary">{locationHeadquarters}</span>
                 </div>
                 <div className="summary-head__title-column"><span
                     className="text summary-head__label">Company Type</span> <span
@@ -102,7 +86,7 @@ export default class CompanySummary extends Component {
                     className="text summary-head__label"># of employees</span> <span
                     className="text text_size_s summary-head__summary">{employeesAmount}</span></div>
                 <div className="summary-head__title-column"><span
-                    className="text summary-head__label">foundDate</span> <span
+                    className="text summary-head__label">Founded</span> <span
                     className="text text_size_s summary-head__summary">{foundDate}</span></div>
             </div>
         )
@@ -123,7 +107,8 @@ export default class CompanySummary extends Component {
                                         <img src={ratingImage}
                                              className="image image_inline image_type_rating invisible-tablet"/>
                                         <span className="text text_color_grey invisible-tablet">
-                                            {ratingCount} reviews
+																				{/*FIXME: add back in with Glassdoor integration*/}
+																				{/* {ratingCount} reviews */}
                                         </span>
                                     </h2>
                                     <div className="mdl-card__subtitle-text summary-head__subtitle-text">
@@ -139,7 +124,8 @@ export default class CompanySummary extends Component {
                                         <img src={ratingImage}
                                              className="image image_inline image_type_rating"/>
                                         <br/>
-                                        <span className="text text_color_grey">{ratingCount} reviews</span>
+																				{/*FIXME: add back in with Glassdoor integration*/}
+																				{/* <span className="text text_color_grey">{ratingCount} reviews</span> */}
                                     </span>
                                     <span className="summary-head__subtitle-head">
                                         <span className="text text_color_l-grey">
