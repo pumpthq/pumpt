@@ -67,7 +67,7 @@ let CompanySummaryForm = props =>  {
 
 			<form onSubmit={handleSubmit} class="company-edit-form"> 
 				<div class="row">
-					<div class="col-md-4">
+					<div class="col-md-6 col-md-offset-3">
 						<Field
 							name="name"
 							type="text"
@@ -75,6 +75,8 @@ let CompanySummaryForm = props =>  {
 							label="Company Name"
 						/>
 					</div>
+				</div>
+				<div class="row">
 					<div class="col-md-4">
 						<Field name="employeesAmount" component={renderSelectField} label="Number of Employees" class="mdl-textfield__input textfield__input textfield__light">
 							{ COMPANY_EMPLOYEES_DATA.map((item) => {return <option value={item.title}>{item.title}</option>}) }

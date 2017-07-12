@@ -134,9 +134,9 @@ const renderWorkingExperiences = ({ fields, label, meta: { error } }) => (
 									<div class="application-detail col-md-12">
 										<Field
 											name={`${workingExperience}.duty`}
-											type="textarea"
-											component={renderField}
-											label="Description of your work"
+											component="textarea"
+											class="text-area" 
+											placeholder="Description of your work"
 										/>
 									</div>
 									<div class="application-detail col-md-4 col-sm-6">

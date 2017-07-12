@@ -1,37 +1,79 @@
 import React, {Component, PropTypes} from 'react';
-import { reduxForm } from 'redux-form'
-import { Location, EnumSelector, TextArea, TextInput } from 'components/form/inputs'
+import { reduxForm, Field, SubmissionError, formValueSelector } from 'redux-form'
+import { connect } from 'react-redux'
+import { updateRecruiter } from 'actions/applicationCompany'
 
-@reduxForm({
-    form: 'recruiter',
-    fields: [ 'firstName', 'lastName', 'position']
-})
-export default class RecruiterForm extends Component {
+//Generalized Redux Field
+export const renderField = ({
+  input,
+  label,
+  type,
+	className,
+  meta: { asyncValidating, touched, error }
+}) => (
+  <div class={className}>
+		<div class={asyncValidating ? 'async-validating' : 'class'}>
+      <input class="mdl-textfield__input textfield__input" {...input} placeholder={label} type={type} />
+      {touched && error && <span class="textfield__error">{error}</span>}
+    </div>
+  </div>
+)
 
-    render() {
-      const {
-        fields: { firstName, lastName, position },
-        handleSubmit,
+let RecruiterForm = props => {
+
+	const {
+		handleSubmit,
+		submitting,
+		error,
+		invalid,
+		valid,
+		dispatch,
+		names,
+	 	values,
+		industryValue,
         onCancel,
-        resetForm,
-        submitting,
-        } = this.props
-      return (
-                <form onSubmit={handleSubmit} className="recruiter-form">
-                  <TextInput field={ firstName } label="First Name" classInp="mdl-textfield mdl-js-textfield textfield" />
-                  <TextInput field={ lastName } label="Last Name" classInp="mdl-textfield mdl-js-textfield textfield " />
-                  <TextInput field={ position } label="Position" classInp="mdl-textfield mdl-js-textfield textfield " />
+	} = props
 
-                  <div>
-                    <button type="submit" disabled={submitting} className="mdl-button button button_type_colored button_size_m">
-                        {submitting ? <i/> : <i/>} Save
-                    </button>
-                    <button type="button" disabled={submitting} onClick={onCancel} className="mdl-button button button_type_colored button_size_m">
-                        Cancel
-                    </button>
-                  </div>
-                </form>
+	const submitDisabled = invalid || submitting
 
-      )
-    }
+	return (
+			<form onSubmit={handleSubmit} className="recruiter-form">
+				<Field
+					name="fullName"
+					type="text"
+					component={renderField}
+					label="Your Name"
+				/>
+				<Field
+					name="position"
+					type="text"
+					component={renderField}
+					label="Position"
+				/>
+
+				<div>
+					<button type="submit" disabled={submitDisabled} className="mdl-button button button_type_colored button_size_m">
+							{submitting ? <i/> : <i/>} Save
+					</button>
+					<button type="button" disabled={submitDisabled} onClick={onCancel} className="mdl-button button button_type_colored button_size_m">
+							Cancel
+					</button>
+				</div>
+			</form>
+		)
   }
+
+//Define Form
+RecruiterForm = reduxForm({
+	form: 'recruiterForm',
+	enableReinitialize : true,
+	// onSubmit: submit /* use onSubmit prop passed to component instead */
+})(RecruiterForm)
+
+
+RecruiterForm = connect(state => {
+})(RecruiterForm)
+
+
+//Export Form
+export default RecruiterForm

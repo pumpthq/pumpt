@@ -73,7 +73,7 @@ let CompanyApplicationForm = props => {
 
 			<Description/>
 				<h2 className="recruiter-application-item">Description</h2>
-					<Field name="description" component="textarea" class="text-area" placeholder="Your Company's Motto..." />
+					<Field name="description" component="textarea" class="text-area" placeholder="Tell us More About Your Company..." />
 				<CardDivider/>
 
 			<QuoteIcon/>
