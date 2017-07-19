@@ -14,14 +14,15 @@ export default class CandidateSummary extends Component {
         return (
             <div class="summary-head">
                 <div class="summary-head__title mdl-card__title">
-                    <div class="summary-head__title-item">
+                    <div class="summary-head__title-item summary-head__title-item_type_alignment">
                         <div class="summary-head__title-column">
+													{/* //FIXME:not showing until we have better x=browser testing on photo upload
                             <ImageUploader
                                 label="Photo"
                                 iconPhoto={<IconPhoto />}
                                 imageId={avatar}
                                 onSuccessAction={(data) => updateCandidate({avatar:data.id})}
-                            />
+                            />*/}
                             <div class="summary-head__title-block">
                                 <h2 class="mdl-card__title-text heading heading_type_two">
                                     <span class="ellipsis-text">
