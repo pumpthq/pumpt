@@ -4,6 +4,7 @@ import { reduxForm, FieldArray, Field, SubmissionError, formValueSelector} from 
 
 //Places Autocomplete Library
 import { PlaceField } from 'components/main/form/PlaceField'
+import { CheckboxGroup } from 'components/main/form/CheckboxGroup'
 
 //Material Ui AutoComplete
 import {AutoComplete as MUIAutoComplete} from 'material-ui';
@@ -264,6 +265,8 @@ const renderEducations = ({ fields, label, meta: { error } }) => (
 </div>
 )
 
+
+
 const renderSkills = ({ fields, meta: { error } }) => (
 	<div className="application-item">
 			<button className="application-item-button" type="button" onClick={() => {
@@ -272,11 +275,14 @@ const renderSkills = ({ fields, meta: { error } }) => (
 			{fields.length === 0 && 'Add'} Skills
 			</button>
 
+
+			{/*<CheckboxGroup name="langs" options={DEGREES_DROPDOWN_DATA} />*/}
+
 			<div class="application-detail checkbox-item col-md-12">
 				<Field name="ms-office" component={Checkbox} label="MS Office (Word,Excel, PPt)" />
 			</div>
 			<div class="application-detail checkbox-item col-md-12">
-				<Field name="coms-core" component={Checkbox} label="Coms Core" />
+				<Field name="coms-core" component={Checkbox} label="comScore" />
 			</div>
 			<div class="application-detail checkbox-item col-md-12">
 				<Field name="google-analytics" component={Checkbox} label="Google Analytics" />
