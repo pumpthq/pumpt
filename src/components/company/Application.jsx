@@ -102,13 +102,7 @@ let CompanyApplicationForm = props => {
 
 const renderSocial = ({ fields, meta: { error } }) => (
 	<div className="application-item">
-			<button className="application-item-button" type="button" onClick={() => {
-				fields.length === 0 ? fields.push() : fields.remove()
-			}}><i/>
-			{fields.length === 0 && 'Add'} Social Media
-			</button>
-
-			{fields.length !== 0 &&
+			<button class="application-item-button">Social Media</button>
 
 				<div className="info-block">
 					<div class="row">
@@ -152,7 +146,6 @@ const renderSocial = ({ fields, meta: { error } }) => (
 						</div>
 					</div>
 				</div>
-			}
 </div>
 
 )
@@ -166,11 +159,13 @@ const renderOfficeLocations = ({ fields, label, meta: { error } }) => (
 			</button>
 			<div class="row">
 				<div class="col-md-12">
-					<Field
-						name="headquartersLocation"
-						component={PlaceField}
-						label="Headquarters"
-					 />
+					<div class="application-detail">
+						<Field
+							name="headquartersLocation"
+							component={PlaceField}
+							label="Headquarters"
+						 />
+					 </div>
 				 </div>
 				 <div class="col-md-12">
 					 <div class="row">

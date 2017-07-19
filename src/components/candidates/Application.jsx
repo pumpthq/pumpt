@@ -19,7 +19,7 @@ import { updateCandidate } from 'actions/candidateMatches'
 
 //Field-level Validations & Normalizations
 import { url, date, require } from 'components/main/form/validations'
-import { normalizeDate, normalizeTwitter } from 'components/main/form/normalizations'
+import { normalizeDate, normalizeYear, normalizeTwitter } from 'components/main/form/normalizations'
 
 import GlassDoorImage from 'img/glassdoor.jpg'
 import { browserHistory } from 'react-router'
@@ -209,7 +209,7 @@ const renderEducations = ({ fields, label, meta: { error } }) => (
 										/>
 									</div>
 									<div class="application-detail col-md-6">
-										<Field label="Degree" class="mdl-textfield__input textfield__input" name={`${education}.degree`} component="select">
+										<Field label="Degree" class="mdl-textfield__input textfield__input pad-top" name={`${education}.degree`} component="select">
 											<option value="" class="disabled-text-option" disabled selected>Degree</option>
 											<option value="high-school">High School</option>
 											<option value="undergraduate">Undergraduate</option>
@@ -226,9 +226,8 @@ const renderEducations = ({ fields, label, meta: { error } }) => (
 													name={`${education}.startStudyAt`}
 													component={renderField}
 													type="text"
-													label="Start Date (MM/YYYY)"
-													normalize={normalizeDate}
-													validate={date}
+													label="Start Date (YYYY)"
+													normalize={normalizeYear}
 												/>
 											</div>
 											<div class="application-detail col-md-4 col-sm-6">
@@ -236,9 +235,8 @@ const renderEducations = ({ fields, label, meta: { error } }) => (
 													name={`${education}.endStudyAt`}
 													type="text"
 													component={renderField}
-													label="End Date (MM/YYYY)"
-													normalize={normalizeDate}
-													validate={date}
+													label="End Date (YYYY)"
+													normalize={normalizeYear}
 												/>
 												<Field
 													name={`${education}.currentEducation`}
