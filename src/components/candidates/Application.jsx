@@ -4,7 +4,7 @@ import { reduxForm, FieldArray, Field, SubmissionError, formValueSelector} from 
 
 //Places Autocomplete Library
 import { PlaceField } from 'components/main/form/PlaceField'
-import { CheckboxGroup } from 'components/main/form/CheckboxGroup'
+import CheckboxGroup from 'components/main/form/CheckboxGroup'
 
 //Material Ui AutoComplete
 import {AutoComplete as MUIAutoComplete} from 'material-ui';
@@ -72,6 +72,7 @@ let CandidateApplicationForm = props =>  {
 		return (
 			<form onSubmit={handleSubmit(submit)} class="candidate-application-form text-input-underlined"> 
 
+					<CardDivider/>
 					<CaseIcon/>
 					<FieldArray name="workingExperience" label="Working Experience" component={renderWorkingExperiences} />
 					<CardDivider/>
@@ -266,6 +267,7 @@ const renderEducations = ({ fields, label, meta: { error } }) => (
 )
 
 
+{/*let optionsList = {{id: 1, name: 'Optoin1'}, {id: 2, name: 'Option 2'}}*/}
 
 const renderSkills = ({ fields, meta: { error } }) => (
 	<div className="application-item">
@@ -275,8 +277,12 @@ const renderSkills = ({ fields, meta: { error } }) => (
 			{fields.length === 0 && 'Add'} Skills
 			</button>
 
-
-			{/*<CheckboxGroup name="langs" options={DEGREES_DROPDOWN_DATA} />*/}
+		{/*	{optionsList.map(item => {
+				<Field component="input" 
+					type="checkbox"
+					name={`item.${item.value}`}
+				/>
+			})}*/}
 
 			<div class="application-detail checkbox-item col-md-12">
 				<Field name="ms-office" component={Checkbox} label="MS Office (Word,Excel, PPt)" />

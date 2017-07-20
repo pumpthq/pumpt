@@ -11,7 +11,7 @@ export default class CaseIcon extends Prototype {
     }
     render() {
         return (
-            <svg className={this.makeClasses('icon icon-case')}>
+            <svg className={this.makeClasses('icon pad-top icon-case')}>
                 <use xlinkHref='#case'>
                     <svg id='case'>
                         <g>
