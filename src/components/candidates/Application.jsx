@@ -95,7 +95,7 @@ let CandidateApplicationForm = props =>  {
 
 				<div>
 					<button type="submit" disabled={submitDisabled}
-					className="mdl-button button invisible-mobile button_type_colored button_size_m candidate-submit">
+					className="mdl-button button button_type_colored button_size_m candidate-submit">
 						{submitting ? <i/> : <i/>} Save Progress
 					</button>
 				</div>
@@ -164,11 +164,7 @@ const renderWorkingExperiences = ({ fields, label, meta: { error } }) => (
 											normalize={normalizeDate}
 											validate={date}
 										/>
-										<Field
-											name={`${workingExperience}.currentEducation`}
-											component={Checkbox}
-											label="Currently Work Here"
-											/>
+										<Field name={`${workingExperience}.isCurrentJob`} id={`${workingExperience}.currentEducation`} component={Checkbox} label="Currently Work Here"/>
 									</div>
 								</div>
 
@@ -244,11 +240,7 @@ const renderEducations = ({ fields, label, meta: { error } }) => (
 													label="End Date (YYYY)"
 													normalize={normalizeYear}
 												/>
-												<Field
-													name={`${education}.currentEducation`}
-													component={Checkbox}
-													label="Currently Attending"
-													/>
+												<Field name={`${education}.isCurrentSchool`} id={`${education}.currentEducation`} component={Checkbox} label="Currently Attending"/>
 											</div>
 										</div>
 									</div>
