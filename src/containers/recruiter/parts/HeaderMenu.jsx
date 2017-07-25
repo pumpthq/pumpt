@@ -64,7 +64,7 @@ export default class RecruiterHeaderMenu extends Component {
                         {/* <HeaderDropDownItem to={ROUTE_EDIT_COMPANY}>Profile</HeaderDropDownItem> */}
                         <HeaderDropDownItem to={'/recruiter/changePass'}>Change Password</HeaderDropDownItem>
                         {/* <HeaderDropDownItem>Notification Settings</HeaderDropDownItem> */}
-                        <HeaderDropDownItem to={'http://104.236.237.143/faq'}>Help &amp; Support</HeaderDropDownItem>
+                        <HeaderDropDownItem to={'mailto:support@pumpthq.com'}>Help &amp; Support</HeaderDropDownItem>
                         <HeaderDropDownItem
                             onClick={() => {
                                 dispatch(logOut());
