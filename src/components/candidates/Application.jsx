@@ -85,10 +85,6 @@ let CandidateApplicationForm = props =>  {
 					<FieldArray name="education" component={renderEducations} />
 					<CardDivider/>
 
-
-
-					{/*	<CheckboxGroup name="langs" options={options} />*/}
-
 					<Skills/>
 					<FieldArray name="skills" component={renderSkills} />
 					<CardDivider/>
