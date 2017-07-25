@@ -94,7 +94,7 @@ const defaultState = {
             'IAB Certification',
             'SalesForce',
         ].map((title) => ({
-            title,
+            name,
             value: false,
             alternative: false,
             items: false,
@@ -104,7 +104,7 @@ const defaultState = {
             alternative: true,
             items: false,
         }, {
-            title: 'Ad-Serving Platforms',
+            name: 'Ad-Serving Platforms',
             placeholder: 'Type of platform',
             value: false,
             alternative: true,

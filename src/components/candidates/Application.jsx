@@ -4,7 +4,6 @@ import { reduxForm, FieldArray, Field, SubmissionError, formValueSelector} from 
 
 //Places Autocomplete Library
 import { PlaceField } from 'components/main/form/PlaceField'
-import CheckboxGroup from 'components/main/form/CheckboxGroup'
 
 //Material Ui AutoComplete
 import {AutoComplete as MUIAutoComplete} from 'material-ui';
@@ -69,10 +68,15 @@ let CandidateApplicationForm = props =>  {
 			})
 	}
 
+	const options = [
+		{label: 'English', value: 'en'},
+		{label: '繁體中文', value: 'zh-TW'},
+		{label: 'Tibetan', value: 'bo'}
+	];
+
 		return (
 			<form onSubmit={handleSubmit(submit)} class="candidate-application-form text-input-underlined"> 
 
-					<CardDivider/>
 					<CaseIcon/>
 					<FieldArray name="workingExperience" label="Working Experience" component={renderWorkingExperiences} />
 					<CardDivider/>
@@ -80,6 +84,10 @@ let CandidateApplicationForm = props =>  {
 					<Education/>
 					<FieldArray name="education" component={renderEducations} />
 					<CardDivider/>
+
+
+
+					{/*	<CheckboxGroup name="langs" options={options} />*/}
 
 					<Skills/>
 					<FieldArray name="skills" component={renderSkills} />
@@ -276,54 +284,24 @@ const renderSkills = ({ fields, meta: { error } }) => (
 			}}><i/>
 			{fields.length === 0 && 'Add'} Skills
 			</button>
-
-		{/*	{optionsList.map(item => {
-				<Field component="input" 
-					type="checkbox"
-					name={`item.${item.value}`}
-				/>
-			})}*/}
-
 			<div class="application-detail checkbox-item col-md-12">
-				<Field name="ms-office" component={Checkbox} label="MS Office (Word,Excel, PPt)" />
+				<Field name="skills[0].value" id="skills[0].value" component={Checkbox} label="MS Office (Word,Excel, PPt)"/>
 			</div>
 			<div class="application-detail checkbox-item col-md-12">
-				<Field name="coms-core" component={Checkbox} label="comScore" />
+				<Field name="skills[1].value" id="skills[1].value" component={Checkbox} label="comScore"/>
 			</div>
 			<div class="application-detail checkbox-item col-md-12">
-				<Field name="google-analytics" component={Checkbox} label="Google Analytics" />
+				<Field name="skills[2].value" id="skills[2].value" component={Checkbox} label="Google Analytics"/>
 			</div>
 			<div class="application-detail checkbox-item col-md-12">
-				<Field name="iab-certification" component={Checkbox} label="IAB Certification" />
+				<Field name="skills[3].value" id="skills[3].value" component={Checkbox} label="IAB Certification"/>
 			</div>
 			<div class="application-detail checkbox-item col-md-12">
-				<Field name="salesforce" component={Checkbox} label="SalesForce" />
+				<Field name="skills[4].value" id="skills[4].value" component={Checkbox} label="SalesForce"/>
 			</div>
 			<div class="application-detail checkbox-item col-md-12">
-				<Field name="adserving-platforms" component={Checkbox} label="Ad-Serving Platforms" />
+				<Field name="skills[5].value" id="skills[5].value" component={Checkbox} label="Ad-Serving Platforms"/>
 			</div>
-
-			{fields.map((skill, index) => (
-				<div className="info-block">
-							<div class="row">
-								{fields.map((skill, index) => (
-									<div class="application-detail col-md-4">
-										<Field name={`${skill}`} className="short-field" component={renderField} label="Add Your Own..." />
-										<button className="remove-entry" type="button" onClick={() => {
-											fields.remove(index)
-										}}><i>X</i>
-										</button>
-										<br/>
-									</div>
-
-							))}
-							{fields.length > 0 && <button className="add-entry mdl-button" type="button" onClick={() => {
-									fields.push()
-								}}>Add
-							</button>}
-						</div>
-				</div>
-		)	)}
 		</div>
 )
 

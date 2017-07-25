@@ -11,7 +11,7 @@ export default class Education extends Prototype {
     }
     render() {
         return (
-            <svg className={this.makeClasses('icon icon-education')}>
+            <svg className={this.makeClasses('icon pad-top icon-education')}>
                 <use xlinkHref='#education'>
                     <svg id='education'>
                         <g>
