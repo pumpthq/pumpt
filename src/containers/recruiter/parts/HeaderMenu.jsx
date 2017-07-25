@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
+import Mailto from 'react-mailto';
+
 import {
     HeaderFull,
     HeaderDropDownMenu,
@@ -64,7 +66,11 @@ export default class RecruiterHeaderMenu extends Component {
                         {/* <HeaderDropDownItem to={ROUTE_EDIT_COMPANY}>Profile</HeaderDropDownItem> */}
                         <HeaderDropDownItem to={'/recruiter/changePass'}>Change Password</HeaderDropDownItem>
                         {/* <HeaderDropDownItem>Notification Settings</HeaderDropDownItem> */}
-                        <HeaderDropDownItem to={'mailto:support@pumpthq.com'}>Help &amp; Support</HeaderDropDownItem>
+                        <HeaderDropDownItem>
+													<Mailto email="support@pumpthq.com" obfuscate={true}>
+														Help &amp; Support
+													</Mailto>
+												</HeaderDropDownItem>
                         <HeaderDropDownItem
                             onClick={() => {
                                 dispatch(logOut());
