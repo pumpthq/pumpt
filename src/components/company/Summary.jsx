@@ -8,7 +8,7 @@ import BuildingIcon from 'components/icons/building'
 import {updateCompany} from 'actions/applicationCompany'
 
 const shortenLocation  = value => {
-	return value.match(/[^,]+,[^,]/)
+	return value.match(/[^,]+,[^,]+/)
 }
 
 export default class CompanySummary extends Component {

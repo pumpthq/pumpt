@@ -68,11 +68,6 @@ let CandidateApplicationForm = props =>  {
 			})
 	}
 
-	const options = [
-		{label: 'English', value: 'en'},
-		{label: '繁體中文', value: 'zh-TW'},
-		{label: 'Tibetan', value: 'bo'}
-	];
 
 		return (
 			<form onSubmit={handleSubmit(submit)} class="candidate-application-form text-input-underlined"> 
@@ -211,7 +206,7 @@ const renderEducations = ({ fields, label, meta: { error } }) => (
 										/>
 									</div>
 									<div class="application-detail col-md-6">
-										<Field label="Degree" class="mdl-textfield__input textfield__input pad-top" name={`${education}.degree`} component="select">
+										<Field label="Degree" class="mdl-textfield__input textfield__input pad-top-30" name={`${education}.degree`} component="select">
 											<option value="" class="disabled-text-option" disabled selected>Degree</option>
 											<option value="high-school">High School</option>
 											<option value="undergraduate">Undergraduate</option>
@@ -262,9 +257,6 @@ const renderEducations = ({ fields, label, meta: { error } }) => (
 </div>
 )
 
-
-{/*let optionsList = {{id: 1, name: 'Optoin1'}, {id: 2, name: 'Option 2'}}*/}
-
 const renderSkills = ({ fields, meta: { error } }) => (
 	<div className="application-item">
 			<button className="application-item-button" type="button" onClick={() => {
@@ -297,19 +289,15 @@ const renderSkills = ({ fields, meta: { error } }) => (
 const renderSocial = ({ fields, meta: { error } }) => (
 	<div className="application-item">
 			<button className="application-item-button" type="button" onClick={() => {
-				fields.length === 0 ? fields.push() : fields.remove()
 			}}><i/>
-			{fields.length === 0 && 'Add'} Social Media
+			Social Media
 			</button>
-
-			{fields.length !== 0 &&
-
 				<div className="info-block">
 					<div class="row">
 						<div className="social-media-block">
 							<LinkedInIcon />
 							<Field
-								name="linkedIn"
+								name="socialMedia.linkedInUrl"
 								type="text"
 								component={renderField}
 								label="LinkedIn"
@@ -318,7 +306,7 @@ const renderSocial = ({ fields, meta: { error } }) => (
 							/>
 							<TwitterIcon />
 							<Field
-								name="twitter"
+								name="socialMedia.twitterAcc"
 								type="text"
 								className="social-application-item"
 								component={renderField}
@@ -327,7 +315,7 @@ const renderSocial = ({ fields, meta: { error } }) => (
 							/>
 							<FacebookIcon />
 							<Field
-								name="facebook"
+								name="socialMedia.faceBookUrl"
 								type="text"
 								component={renderField}
 								className="social-application-item"
@@ -337,7 +325,6 @@ const renderSocial = ({ fields, meta: { error } }) => (
 						</div>
 					</div>
 				</div>
-			}
 </div>
 
 )
@@ -402,6 +389,7 @@ const InterestEntry = props => {
         </div>
     )
 }
+//---------------------------------------------------------------------------------------------------------------------------------
 
 //Define Form
 CandidateApplicationForm = reduxForm({

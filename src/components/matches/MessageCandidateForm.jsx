@@ -39,7 +39,7 @@ let MessageCandidateForm = props => {
 				<br />
 
 				<div class="row">
-					<div class="col-md-2 margin-top">
+					<div class="col-md-2 margin-top-15">
 						<span class="email-label">Subject:</span>
 					</div>
 					<div class="col-md-10">

@@ -11,7 +11,7 @@ export default class Social extends Prototype {
     }
     render() {
         return (
-            <svg className={this.makeClasses('icon pad-top icon-social')}>
+            <svg className={this.makeClasses('icon pad-top-30 icon-social')}>
                 <use xlinkHref='#social'>
                     <svg id='social'>
                         <g>

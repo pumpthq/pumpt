@@ -33,7 +33,7 @@ export const renderField = ({
 
 const renderSelectField = ({ input, label, type, meta: { touched, error }, children }) => (
     <div>
-      <select {...input} class="mdl-textfield__input textfield__input textfield__light">
+      <select {...input} class="margin-top-15 mdl-textfield__input textfield__input textfield__light">
 				<option value="" class="disabled-text-option" disabled selected>{label}</option>
         {children}
       </select>
