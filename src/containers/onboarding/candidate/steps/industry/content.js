@@ -65,7 +65,7 @@ class IndustryContent extends Component {
 
     handleListChange({ id, value }) {
         this.setState({
-            stepValid: value !== '',
+            stepValid: (value !== '' && value.charAt(0) !== ' '),
             id: id,
             value: value
         })

@@ -73,7 +73,7 @@ class FieldOfExpertiseContent extends Component {
 
     handleListChange({ id, value, parent }) {
         this.setState({
-            stepValid: value !== '',
+            stepValid: (value !== '' && value.charAt(0) !== ' '),
             id: id,
             value: value,
             parent: parent
