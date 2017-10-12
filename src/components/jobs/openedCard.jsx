@@ -115,8 +115,12 @@ class Card extends Component {
                     </div>
                     <form className="card__actions-wrapper">
                         <div className="mdl-card__actions mdl-card--border card__actions">
-                            <Link className="link" to={`recruiter/jobs/${_id}/show`}>
-                                View Job Description
+                            <Link className="link link_type_spaced" to={`recruiter/jobs/${_id}/show`}>
+                                View Job
+                            </Link>
+														|
+                            <Link to={`/recruiter/jobs/${_id}/edit`} className="link link_type_spaced">
+                                Edit Job
                             </Link>
 
                             <div className="mdl-layout-spacer" />

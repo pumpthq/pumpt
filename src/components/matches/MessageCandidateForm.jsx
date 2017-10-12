@@ -57,7 +57,7 @@ let MessageCandidateForm = props => {
 				<button
 					type="submit"
 					disabled={submitDisabled}
-					className="center mdl-button button invisible-mobile button_type_colored button_size_m candidate-submit"
+					className="center mdl-button buttone button_type_colored button_size_m candidate-submit"
 						>
 					{submitting ? <i/> : <i/>} Approve and Email
 				</button>

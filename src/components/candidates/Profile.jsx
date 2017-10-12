@@ -66,9 +66,10 @@ export default class CandidateProfile extends Component {
 							<div className="candidate-profile mdl-card card card_type_mini card_state_open">
 								<div className="profile-head row">
 									<div className="profile-head-info col-md-9 col-xs-12">
-										<h4>{ `${lastName}, ${firstName}` }</h4>
-										<LabeledValue label="Current Total Compensation" value={candidate.recentAnnualIncome} />
+										<h4>{ `${firstName} ${lastName}` }</h4>
+										<LabeledValue label="Current Working Area" value={ `${candidate.recentWorkingAreaParent} | ${candidate.recentWorkingArea}` }/>
 										<LabeledValue label="Current Title" value={candidate.recentJob} />
+										<LabeledValue label="Current Total Compensation" value={candidate.recentAnnualIncome} />
 										<LabeledValue label="Experience" value={candidate.recentAreaExperience} />
 									</div>
 
@@ -82,7 +83,7 @@ export default class CandidateProfile extends Component {
 
 									<div className="col-xs-8">
 									<div className="profile-data__item">
-										<Case/><span className="item-title">Experience</span>
+										<span className="item-title">Experience</span>
 										{
 											workingExperience && workingExperience.map(exp => <div className="item-title-text">Company: {exp.companyName}<br/>
 											Position: {exp.position}<br/>Location: {exp.location}<br/>Duty: {exp.duty}</div>)
@@ -90,7 +91,7 @@ export default class CandidateProfile extends Component {
 									</div>
 
 									<div className="profile-data__item">
-										<Education/><span className="item-title">Education</span>
+										<span className="item-title">Education</span>
 										{
 											education && education.map(exp => <div className="item-title-text">School Name: {exp.schoolName}<br/>
 											Specialty: {exp.specialty}<br/>Degree: {exp.degree}</div>)
@@ -98,20 +99,21 @@ export default class CandidateProfile extends Component {
 									</div>
 
 											<div className="profile-data__item">
-												<Pin/><span className="item-title">Location</span>
+												<span className="item-title">Location</span>
 													<LocationDisplay location={location} />,
 											</div>
 
 											<div className="profile-data__item">
-												<Social/><span className="item-title">Social Media</span>
+												<span className="item-title">Social Media</span>
 												<div className="item-title-text">
-													LinkedIn: <a href="{socialMedia.linkedInUrl}">{socialMedia ? socialMedia.linkedInUrl : null}</a><br/>
+													LinkedIn: <a href={socialMedia.linkedInUrl}>{socialMedia ? socialMedia.linkedInUrl : null}</a><br/>
+													Facebook: <a href="{socialMedia.faceBookUrl}">{socialMedia ? socialMedia.faceBookUrl : null}</a><br/>
 													Twitter: {socialMedia ? socialMedia.twitterAcc : null}<br/>
 												</div>
 											</div>
 
 											<div className="profile-data__item">
-												<Skills/><span className="item-title">Skills</span>
+												<span className="item-title">Skills</span>
 
 											</div>
 

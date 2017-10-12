@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 
 import { connect } from 'react-redux'
+import { Link, browserHistory } from 'react-router'
 
 import ButtonApply from 'components/parts/buttonApply'
 import ButtonLink from 'components/parts/buttonLink'
@@ -36,17 +37,20 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 export default class RecruiterActions extends Component {
 
     render() {
-        const { actions: { postApprove, postReject, postRestore, addToBookmark, openApprove }, match: { candidate } } = this.props
+        const { actions: { postApprove, postReject, postRestore, addToBookmark, openApprove }, match: { candidate }, match } = this.props
 
         if(candidate.status==='new') {
             return (
                 <div>
-                <ButtonApply onClick={openApprove} >
-                    Connect
-                </ButtonApply>
-                <ButtonLink onClick={postReject} >
-                    Not interested
-                </ButtonLink>
+									<Link className="link mdl-button button button_type_colored button_include_icon" to={`recruiter/jobs/${match._vacancy}/candidates/${match._candidate}`}>
+											View Candidate Details
+									</Link>
+									<ButtonApply onClick={openApprove} >
+											Connect
+									</ButtonApply>
+									<ButtonLink onClick={postReject} >
+											Not interested
+									</ButtonLink>
                 </div>
             )
         }

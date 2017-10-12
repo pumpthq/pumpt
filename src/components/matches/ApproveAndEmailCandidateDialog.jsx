@@ -54,6 +54,7 @@ export default class ApproveAndEmailCandidateDialog extends Component {
                     modal={false}
                     open={this.state.open}
                     onRequestClose={this.handleClose}
+										autoScrollBodyContent={true}
                 >
                     <div>
 											<MessageCandidateForm

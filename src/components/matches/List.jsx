@@ -70,12 +70,7 @@ const CandidateItem = (props) => {
 						<LabeledValue label="Current Toral Compensation" value={recentAnnualIncome} /> 
 
             <div className="row button-block">
-							<div class="col-md-4">
-								<Link className="link mdl-button button button_type_colored button_include_icon" to={`recruiter/jobs/${match._vacancy}/candidates/${match._candidate}`}>
-										View Candidate Details
-								</Link>
-							</div>
-							<div class="col-md-8">
+							<div class="col-md-12">
 								<MatchRecruiterActions match={match} />
 							</div>
             </div>

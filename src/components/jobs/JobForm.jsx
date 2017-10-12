@@ -133,7 +133,7 @@ let JobForm = props => {
 
 								<div>
 									<button type="submit" disabled={submitDisabled}
-									className="mdl-button button invisible-mobile button_type_colored button_size_m candidate-submit">
+									className="mdl-button button button_type_colored button_size_m candidate-submit">
 										{submitting ? <i/> : <i/>} Save Job Summary
 									</button>
               </div>
@@ -141,8 +141,15 @@ let JobForm = props => {
 
             <div className="recruter__newjob-card__form-bottom">
 
-							<FieldArray name="description" 			label="Description" 		validate={hasText}	placeholder="Description of the Position..." component={renderDescription} />
-							<FieldArray name="responsibilities" label="Responsibility" 	validate={hasText}	placeholder="Responsibility" component={renderLists} />
+            <label className="blue">Add Description</label>
+										<Field
+											name="description"
+											type="text"
+											component={renderField}
+											label="Description of the Position...?"
+											validate={required}/>
+											
+							<FieldArray name="responsibilities" label="Responsibilities" 	validate={hasText}	placeholder="Responsibility" component={renderLists} />
 							<FieldArray name="requirements" 		label="Requirements" 		validate={hasText}	placeholder="Requirement" component={renderLists} />
 
 							{error && <span class="textfield__error">{error}</span>}
@@ -150,8 +157,8 @@ let JobForm = props => {
 
 							<div>
 								<button type="submit" disabled={submitDisabled}
-								className="mdl-button button invisible-mobile button_type_colored button_size_m candidate-submit">
-									{submitting ? <i/> : <i/>} Start Matching
+								className="mdl-button button button_type_colored button_size_m candidate-submit">
+									{submitting ? <i/> : <i/>} Save Job Description
 								</button>
 							</div>
 
@@ -185,25 +192,6 @@ const renderLists = ({ fields, label, validate, placeholder, meta: { error } }) 
 							fields.push()
 						}}>Add
 					</button>}
-        </div>
-
-)
-
-const renderDescription = ({ fields, label, validate, placeholder, meta: { error } }) => (
-					<div>
-            <button className="mdl-button new-job-add-button" type="button" onClick={() => {
-							(fields.length === 0) ? fields.push() : ''
-						}}><i/>
-						{fields.length === 0 && 'Add'} {label}
-						</button>
-
-            {fields.map((child, index) =>
-                <div key={index}>
-									<Field name={child} validate={validate} component="textarea" class="text-area" placeholder={placeholder} />
-                </div>
-            )}
-
-					{error && <li className="error">{error}</li>}
         </div>
 
 )

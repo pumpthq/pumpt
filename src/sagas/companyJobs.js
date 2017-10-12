@@ -56,44 +56,6 @@ import {
 
 } from './../constants/companyJobs';
 
-// import {
-//     getCompanyJobs
-// } from './../reducers/companyJobs';
-import {
-    // fetchAll,
-    // fetchAllSucceeded,
-    // fetchAllFailed,
-
-    // fetchOpen,
-    // fetchOpenSucceeded,
-    // fetchOpenFailed,
-    //
-    // fetchDrafts,
-    // fetchDraftsSucceeded,
-    // fetchDraftsFailed,
-
-    // fetchClosed,
-    // fetchClosedSucceeded,
-    // fetchClosedFailed,
-
-    // saveSummaryDataSucceeded,
-    // saveSummaryDataFailed,
-
-    routeToOpen,
-    routeToDrafts,
-    routeToClosed,
-    // clearNewJobState
-} from './../actions/companyJobs';
-// import {
-//     logOut,
-// } from './../actions/authorization';
-// import {
-//     getAccessToken,
-// } from './../reducers/authorization';
-// import {
-//     findById as findDropdownItemById,
-// } from '../constants/dropdownData';
-
 export default function () {
     return [
         takeLatest(CREATE_JOB_SUCCEEDED, function * (action) {
@@ -105,7 +67,11 @@ export default function () {
         takeLatest(UPDATE_JOB_SUCCEEDED, function * (action) {
           // yield put(push(ROUTE_TO_DRAFTS)); //or route to view job
           const { job } = action.payload
-          yield put(push(ROUTE_COMPANY_JOBS_DRAFTS))
+          if(job.status === 'opened') {
+						yield put(push(ROUTE_COMPANY_JOBS_OPEN))
+					} else {
+						yield put(push(ROUTE_COMPANY_JOBS_DRAFTS))
+					}
         }),
 
         takeLatest(UPDATE_COMPANY_SUCCEEDED, function * (action) {
