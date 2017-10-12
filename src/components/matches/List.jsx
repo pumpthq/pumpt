@@ -50,7 +50,7 @@ export default class MatchesList extends Component {
 
 const CandidateItem = (props) => {
     const {match} = props
-    const {candidate: {status, brief:{firstName, lastName, avatar}},
+    const {candidate: {status, brief:{firstName, lastName, avatar, recentWorkingArea, recentWorkingAreaParent, recentAnnualIncome}},
       vacancy: {brief:{industry, salary}}} = match
 
     return (
@@ -64,9 +64,10 @@ const CandidateItem = (props) => {
 
           <div className="match-avatar-info">
 
+
 						<h4>{ `${firstName} ${lastName}` }</h4>
-            <div className="vacancy-details">{industry}</div>
-            <div className="vacancy-details">{salary}</div>
+						<LabeledValue label="Current Working Area" value={ `${recentWorkingAreaParent} | ${recentWorkingArea}` }/>
+						<LabeledValue label="Current Toral Compensation" value={recentAnnualIncome} /> 
 
             <div className="row button-block">
 							<div class="col-md-4">
@@ -85,6 +86,13 @@ const CandidateItem = (props) => {
 
     )
 }
+
+const LabeledValue = (props) => (
+    <div className={props.className || 'labeled-value'} >
+        <label>{props.label}:</label>
+        <span>{props.value}</span>
+    </div>
+)
 
 CandidateItem.defaultProps = {
     match: {
