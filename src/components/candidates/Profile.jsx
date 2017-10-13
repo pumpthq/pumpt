@@ -51,6 +51,10 @@ const buttonStyle = {
     cursor: 'pointer',
 };
 
+function linkify(link) {
+	return link;
+};
+
 export default class CandidateProfile extends Component {
 
     render() {
@@ -106,9 +110,9 @@ export default class CandidateProfile extends Component {
 											<div className="profile-data__item">
 												<span className="item-title">Social Media</span>
 												<div className="item-title-text">
-													LinkedIn: <a href={socialMedia.linkedInUrl}>{socialMedia ? socialMedia.linkedInUrl : null}</a><br/>
-													Facebook: <a href="{socialMedia.faceBookUrl}">{socialMedia ? socialMedia.faceBookUrl : null}</a><br/>
-													Twitter: {socialMedia ? socialMedia.twitterAcc : null}<br/>
+													<b>LinkedIn:</b><br/> {socialMedia ? socialMedia.linkedInUrl : null}<br/>
+													<b>Facebook:</b><br/>  {socialMedia ? socialMedia.faceBookUrl : null}<br/>
+													<b>Twitter:</b><br/>  {socialMedia ? socialMedia.twitterAcc : null}<br/>
 												</div>
 											</div>
 
