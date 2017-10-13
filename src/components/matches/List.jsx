@@ -71,7 +71,7 @@ const CandidateItem = (props) => {
 
             <div className="row button-block">
 							<div class="col-md-12">
-								<MatchRecruiterActions match={match} />
+								<MatchRecruiterActions match={match} status={status}/>
 							</div>
             </div>
           </div>

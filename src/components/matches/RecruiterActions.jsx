@@ -70,6 +70,9 @@ export default class RecruiterActions extends Component {
                 </ButtonLink>
             )
         }
+				else{
+					return(<div></div>)
+				}
     }
 
 }
