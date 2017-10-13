@@ -21,7 +21,7 @@ let MessageCandidateForm = props => {
 
 	return (
 		<div>
-		<form action="mailto:chip@case.edu" onSubmit={handleSubmit}>
+		<form action="mailto:no@email.com" onSubmit={handleSubmit}>
 
 			<div class="fa-icon"><FaEnvelopeO />
 			<br />
@@ -69,12 +69,16 @@ let MessageCandidateForm = props => {
 }
 
 //Define Form
+//
+//
+const formattedEmailBody = 
+
 MessageCandidateForm = reduxForm({
 	form: 'messageCandidateForm',
 	enableReinitialize : true,
 	initialValues: {
 		subject: 'Job Opportunity via Pumpt',
-		body: 'Hi,\n\nYou were highly matched to a job we posted on Pumpt. I’d like to connect with you soon to discuss this position.\n\nPlease let me know when you’re available to speak.\n\nThank you.'
+		body: 'Hi,\n\nYou were highly matched to a job we posted on Pumpt. I’d like to connect with you soon to discuss this position.\n\nPlease let me know when you’re available to speak.\n\nThank you.',
 	}
 })(MessageCandidateForm)
 
