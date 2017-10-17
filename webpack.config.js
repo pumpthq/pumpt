@@ -7,7 +7,7 @@ const BUILD_PATH = path.resolve(__dirname, 'build')
 
 module.exports = {
 
-    entry : ['webpack-hot-middleware/client', './src/app'],
+    entry : ['react-hot-loader/patch', 'webpack-hot-middleware/client', './src/app'],
 
     output : {
         publicPath : '/',

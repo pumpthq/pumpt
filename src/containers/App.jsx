@@ -3,6 +3,8 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { connect } from 'react-redux';
 
 import { resolveUser } from '../actions/authorization'
+import { getAppData } from '../onLoad';
+
 // import { cleanMessage } from '../actions/session';
 
 // import SESSION from '../constants/session';
@@ -25,8 +27,24 @@ const defaultProps = {
 };
 
 class App extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {isLoading:false}
+  }
+  componentWillMount() {
+    getAppData()
+    .then(()=>{
+      console.info('app data finished loading')
+      this.setState({isLoading:true})
+    })
+  }
+
 
     render() {
+      const {isLoading} = this.state
+      if(!isLoading) {
+        return (<div>Loading app data...</div>)
+      }else{
         return (
             <MuiThemeProvider>
                 <div className="app page wall wall_type_revert wall_image_second">
@@ -34,6 +52,7 @@ class App extends Component {
                 </div>
             </MuiThemeProvider>
         );
+      }
     }
 }
 
