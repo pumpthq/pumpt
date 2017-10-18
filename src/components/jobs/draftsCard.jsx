@@ -100,7 +100,7 @@ class DraftsCard extends Component {
                                 dispatch(openJob(_id));
                             }}
                         >
-                            Start Matching
+                            Publish Job
                         </Button>
                     </div>
                     <form className="card__actions-wrapper">
