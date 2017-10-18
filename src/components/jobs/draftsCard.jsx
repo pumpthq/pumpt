@@ -51,7 +51,7 @@ class DraftsCard extends Component {
                                 <div className="summary-head__title-column">
                                     <div className="summary-head__title-block">
                                         <H2 className="mdl-card__title-text heading heading_color_invert heading_type_two">
-                                            {title || 'Untitled'}
+                                          {title || 'Untitled'} : [DRAFT] 
                                         </H2>
                                         <span className="mdl-card__subtitle-text summary-head__subtitle-text text text_color_invert text_size_xs">
                                             {location ? location : 'Location is not specified'}
