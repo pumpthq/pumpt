@@ -99,6 +99,15 @@ let OnboardingCandidateContactInfo = props => {
 										validate={[email_validation,required]}
 									/>
 						</fieldset>
+            <fieldset className="form__row">
+								<Field
+										label="LinkedIn Url"
+										name="socialMedia.linkedInUrl"
+										type="text"
+										component={renderField}
+										validate={[required]}
+									/>
+						</fieldset>
 						<fieldset className="form__row">
 								<Field
 									name="location"
