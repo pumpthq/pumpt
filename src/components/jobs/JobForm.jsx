@@ -40,6 +40,13 @@ export const renderField = ({
   </div>
 )
 
+export const TextAreaField = ({input, label, meta: { asyncValidating, touched, error } }) => (
+		<span>
+      <textarea class="mdl-textfield__input textfield__input" {...input} placeholder={label} />
+      {touched && error && <span class="textfield__error textfield__error_small">{error}</span>}
+    </span>
+)
+
 const renderSelectField = ({ input, label, type, meta: { touched, error }, children }) => (
     <div>
       <select {...input} class="mdl-textfield__input textfield__input textfield__light">
@@ -53,9 +60,8 @@ const buttonStyle = {
     cursor: 'pointer',
 };
 
-let JobForm = props => { 
+let JobForm = props => {
 	const {handleSubmit, submitting, touched, error, invalid, valid, dispatch, names, values, industryValue} = props
-	const submitDisabled = invalid || submitting || error
 
 	const submit = (values, dispatch) => {
 		return dispatch(createJob(values))
@@ -125,14 +131,24 @@ let JobForm = props => {
 									{ FIELD_OF_EXPERTISE_DROPDOWN_DATA.map((item) => {return <option key={item.id} value={item.title}>{item.title}</option>}) }
 								</Field>
 
-								{industryValue && 
+								{industryValue &&
 									<Field name="industry" component={renderSelectField} label="Specialty" class="mdl-textfield__input textfield__input textfield__light">
 										{ industryParentObj(industryValue).map((item) => {return <option value={item.title}>{item.title}</option>})  }
 									</Field>
 								}
+                <div>
+                  <label>Add Description</label>
+    										<Field
+    											name="description"
+    											type="text"
+    											component={TextAreaField}
+    											label="Description of the Position...?"
+    											validate={required}/>
+                </div>
+
 
 								<div>
-									<button type="submit" disabled={submitDisabled}
+									<button type="submit"
 									className="mdl-button button button_type_colored button_size_m candidate-submit">
 										{submitting ? <i/> : <i/>} Save Job Summary
 									</button>
@@ -141,14 +157,7 @@ let JobForm = props => {
 
             <div className="recruter__newjob-card__form-bottom">
 
-            <label className="blue">Add Description</label>
-										<Field
-											name="description"
-											type="text"
-											component={renderField}
-											label="Description of the Position...?"
-											validate={required}/>
-											
+
 							<FieldArray name="responsibilities" label="Responsibilities" 	validate={hasText}	placeholder="Responsibility" component={renderLists} />
 							<FieldArray name="requirements" 		label="Requirements" 		validate={hasText}	placeholder="Requirement" component={renderLists} />
 
@@ -156,7 +165,7 @@ let JobForm = props => {
 								<br/>
 
 							<div>
-								<button type="submit" disabled={submitDisabled}
+								<button type="submit"
 								className="mdl-button button button_type_colored button_size_m candidate-submit">
 									{submitting ? <i/> : <i/>} Save Job Description
 								</button>
