@@ -40,22 +40,28 @@ export const renderField = ({
   </div>
 )
 
+export const TextAreaField = ({input, label, meta: { asyncValidating, touched, error } }) => (
+		<span>
+      <textarea class="mdl-textfield__input textfield__input" {...input} placeholder={label} />
+      {touched && error && <span class="textfield__error textfield__error_small">{error}</span>}
+    </span>
+)
+
 const renderSelectField = ({ input, label, type, meta: { touched, error }, children }) => (
     <div>
       <select {...input} class="mdl-textfield__input textfield__input textfield__light">
 				<option value="" class="disabled-text-option" disabled selected>{label}</option>
         {children}
       </select>
-      {touched && error && <span>{error}</span>}
+      {touched && error && <span class="textfield__error textfield__error_small">{error}</span>}
     </div>
 )
 const buttonStyle = {
     cursor: 'pointer',
 };
 
-let JobForm = props => { 
+let JobForm = props => {
 	const {handleSubmit, submitting, touched, error, invalid, valid, dispatch, names, values, industryValue} = props
-	const submitDisabled = invalid || submitting || error
 
 	const submit = (values, dispatch) => {
 		return dispatch(createJob(values))
@@ -105,50 +111,53 @@ let JobForm = props => {
 								</div>
               </div>
 
-								<Field name="salary" component={renderSelectField} label="Income" class="mdl-textfield__input textfield__input textfield__light">
+								<Field name="salary" component={renderSelectField} validate={required} label="Income" class="mdl-textfield__input textfield__input textfield__light">
 									{ ANNUAL_INCOME_DROPDOWN_DATA.map(item => <option key={item.id}  value={item.title}>{item.title}</option>) }
 								</Field>
 
-								<Field name="experience" component={renderSelectField} label="Industry Experience" class="mdl-textfield__input textfield__input textfield__light">
+								<Field name="experience" component={renderSelectField} validate={required} label="Industry Experience" class="mdl-textfield__input textfield__input textfield__light">
 									{ EXPERIENCE_DROPDOWN_DATA.map((item) => {return <option key={item.id}  value={item.title}>{item.title}</option>}) }
 								</Field>
 
-								<Field name="employment" component={renderSelectField} label="Employment Type" class="mdl-textfield__input textfield__input textfield__light">
+								<Field name="employment" component={renderSelectField} validate={required} label="Employment Type" class="mdl-textfield__input textfield__input textfield__light">
 									{ EMPLOYEMENTS_DROPDOWN_DATA.map((item) => {return <option key={item.id}  value={item.title}>{item.title}</option>}) }
 								</Field>
 
-								<Field name="degree" component={renderSelectField} label="Lowest Degree Needed" class="mdl-textfield__input textfield__input textfield__light">
+								<Field name="degree" component={renderSelectField} validate={required} label="Lowest Degree Needed" class="mdl-textfield__input textfield__input textfield__light">
 									{ DEGREES_DROPDOWN_DATA.map((item) => {return <option key={item.id}  value={item.title}>{item.title}</option>}) }
 								</Field>
 
-								<Field name="industryParent" component={renderSelectField} label="Field of Expertise" class="mdl-textfield__input textfield__input textfield__light">
+								<Field name="industryParent" component={renderSelectField} validate={required} label="Field of Expertise" class="mdl-textfield__input textfield__input textfield__light">
 									{ FIELD_OF_EXPERTISE_DROPDOWN_DATA.map((item) => {return <option key={item.id} value={item.title}>{item.title}</option>}) }
 								</Field>
 
-								{industryValue && 
-									<Field name="industry" component={renderSelectField} label="Specialty" class="mdl-textfield__input textfield__input textfield__light">
+								{industryValue &&
+									<Field name="industry" component={renderSelectField} validate={required} label="Specialty" class="mdl-textfield__input textfield__input textfield__light">
 										{ industryParentObj(industryValue).map((item) => {return <option value={item.title}>{item.title}</option>})  }
 									</Field>
 								}
+                <div>
+                  <label>Description</label>
+    										<Field
+    											name="description"
+    											type="text"
+    											component={TextAreaField}
+    											validate={required}/>
+                </div>
+
 
 								<div>
-									<button type="submit" disabled={submitDisabled}
-									className="mdl-button button button_type_colored button_size_m candidate-submit">
-										{submitting ? <i/> : <i/>} Save Job Summary
+									<button type="submit"
+									className="mdl-button button button_type_colored button_size_m candidate-submit"
+                  disabled={submitting}>
+										{submitting ? <i/> : <i/>} Save Job
 									</button>
               </div>
             </div>
 
             <div className="recruter__newjob-card__form-bottom">
 
-            <label className="blue">Add Description</label>
-										<Field
-											name="description"
-											type="text"
-											component={renderField}
-											label="Description of the Position...?"
-											validate={required}/>
-											
+
 							<FieldArray name="responsibilities" label="Responsibilities" 	validate={hasText}	placeholder="Responsibility" component={renderLists} />
 							<FieldArray name="requirements" 		label="Requirements" 		validate={hasText}	placeholder="Requirement" component={renderLists} />
 
@@ -156,9 +165,10 @@ let JobForm = props => {
 								<br/>
 
 							<div>
-								<button type="submit" disabled={submitDisabled}
-								className="mdl-button button button_type_colored button_size_m candidate-submit">
-									{submitting ? <i/> : <i/>} Save Job Description
+								<button type="submit"
+								className="mdl-button button button_type_colored button_size_m candidate-submit"
+                disabled={submitting}>
+									{submitting ? <i/> : <i/>} Save Job
 								</button>
 							</div>
 
