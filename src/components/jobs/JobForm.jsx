@@ -149,7 +149,8 @@ let JobForm = props => {
 
 								<div>
 									<button type="submit"
-									className="mdl-button button button_type_colored button_size_m candidate-submit">
+									className="mdl-button button button_type_colored button_size_m candidate-submit"
+                  disabled={submitting}>
 										{submitting ? <i/> : <i/>} Save Job Summary
 									</button>
               </div>
@@ -166,7 +167,8 @@ let JobForm = props => {
 
 							<div>
 								<button type="submit"
-								className="mdl-button button button_type_colored button_size_m candidate-submit">
+								className="mdl-button button button_type_colored button_size_m candidate-submit"
+                disabled={submitting}>
 									{submitting ? <i/> : <i/>} Save Job Description
 								</button>
 							</div>
