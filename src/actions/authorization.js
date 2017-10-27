@@ -23,12 +23,13 @@ import {
 
     RESOLVE_USER_SUCCEEDED,
 
-    FINISH_APPLICATION_SUCCEEDED
+    FINISH_APPLICATION_SUCCEEDED,
 
-    // FORGOT_PASSWORD,
+    FORGOT_PASSWORD_SUCCEEDED,
 } from './../constants/authorization';
 import {
-    API_CHANGE_PASSWORD
+    API_CHANGE_PASSWORD,
+    API_FORGOT_PASSWORD
 } from './../constants/api'
 
 import { API } from '../constants/actionTypes'
