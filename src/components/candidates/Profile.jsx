@@ -21,7 +21,7 @@ function ExperienceDisplay(props){
 	if ((props.workingExperience === null) || (typeof props.workingExperience === 'undefined')){
 	}else{
 		var listItems = props.workingExperience.map(exp => <div className="item-title-text">Company: {exp.companyName}<br/>Position: {exp.position}<br/>Location: {exp.location}<br/>Duty: {exp.duty}</div>);
-		html = listItems; 
+		html = listItems;
 	}
 	return html;
 }
@@ -89,7 +89,7 @@ export default class CandidateProfile extends Component {
 									<div className="profile-data__item">
 										<span className="item-title">Experience</span>
 										{
-											workingExperience && workingExperience.map(exp => <div className="item-title-text">Company: {exp.companyName}<br/>
+											workingExperience && workingExperience.filter(exp => exp).map(exp => <div className="item-title-text">Company: {exp.companyName}<br/>
 											Position: {exp.position}<br/>Location: {exp.location}<br/>Duty: {exp.duty}</div>)
 										}
 									</div>
@@ -97,7 +97,7 @@ export default class CandidateProfile extends Component {
 									<div className="profile-data__item">
 										<span className="item-title">Education</span>
 										{
-											education && education.map(exp => <div className="item-title-text">School Name: {exp.schoolName}<br/>
+											education && education.filter(exp => exp).map(exp => <div className="item-title-text">School Name: {exp.schoolName}<br/>
 											Specialty: {exp.specialty}<br/>Degree: {exp.degree}</div>)
 										}
 									</div>
