@@ -44,6 +44,7 @@ import {
     UPDATE_RECRUITER_FAILED,
 
     REJECT_POST_SUCCEEDED,
+    RESTORE_POST_SUCCEEDED,
     APPROVE_POST_SUCCEEDED,
 
 
@@ -296,6 +297,15 @@ export default (state = defaultState, action) => {
         case REJECT_POST_SUCCEEDED: {// then move newly rejected matching to notInterested collection in state
             let matches = _.clone(state.matches)
             _.find(matches, o => o._id == payload.id).candidate.status = 'rejected'
+            return {
+                ...state,
+                matches,
+            }
+        }
+
+        case RESTORE_POST_SUCCEEDED: {
+            let matches = _.clone(state.matches)
+            _.find(matches, o => o._id == payload.id).candidate.status = 'new'
             return {
                 ...state,
                 matches,
