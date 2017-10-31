@@ -144,15 +144,6 @@ let JobForm = props => {
     											component={TextAreaField}
     											validate={required}/>
                 </div>
-
-
-								<div>
-									<button type="submit"
-									className="mdl-button button button_type_colored button_size_m candidate-submit"
-                  disabled={submitting}>
-										{submitting ? <i/> : <i/>} Save Job
-									</button>
-              </div>
             </div>
 
             <div className="recruter__newjob-card__form-bottom">
