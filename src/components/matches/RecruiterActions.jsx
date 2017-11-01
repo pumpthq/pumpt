@@ -57,9 +57,15 @@ export default class RecruiterActions extends Component {
 
         if(candidate.status==='approved') {
             return (
+              <div>
+                <Link className="link mdl-button button button_type_colored button_include_icon" to={`recruiter/jobs/${match._vacancy}/candidates/${match._candidate}`}>
+                    View Candidate Details
+                </Link>
                 <ButtonApply onClick={openApprove} >
                     Send Message
                 </ButtonApply>
+              </div>
+
             )
         }
 
