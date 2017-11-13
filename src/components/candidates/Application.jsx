@@ -24,6 +24,7 @@ import { normalizeDate, normalizeYear, normalizeTwitter } from 'components/main/
 import GlassDoorImage from 'img/glassdoor.jpg'
 import { browserHistory } from 'react-router'
 import { EMPLOYEMENTS_DROPDOWN_DATA, DEGREES_DROPDOWN_DATA } from 'constants/companyJobs';
+import { SKILLS } from 'constants/candidateOnboarding';
 import PencilIcon from 'components/icons/pencil'
 import Skills from 'components/icons-application/skills'
 import CaseIcon from 'components/icons-application/case'
@@ -63,14 +64,14 @@ let CandidateApplicationForm = props =>  {
 		return dispatch(updateCandidate(values))
 			.catch(err => {
 					throw new SubmissionError({
-							_error: 'Error Occured While Trying to Save Your Profile' 
+							_error: 'Error Occured While Trying to Save Your Profile'
 					})
 			})
 	}
 
 
 		return (
-			<form onSubmit={handleSubmit(submit)} class="candidate-application-form text-input-underlined"> 
+			<form onSubmit={handleSubmit(submit)} class="candidate-application-form text-input-underlined">
 
 					<CaseIcon/>
 					<FieldArray name="workingExperience" label="Working Experience" component={renderWorkingExperiences} />
@@ -136,7 +137,7 @@ const renderWorkingExperiences = ({ fields, label, meta: { error } }) => (
 										<Field
 											name={`${workingExperience}.duty`}
 											component="textarea"
-											class="text-area" 
+											class="text-area"
 											placeholder="Description of your work"
 										/>
 									</div>
@@ -259,29 +260,12 @@ const renderEducations = ({ fields, label, meta: { error } }) => (
 
 const renderSkills = ({ fields, meta: { error } }) => (
 	<div className="application-item">
-			<button className="application-item-button" type="button" onClick={() => {
-				fields.push()
-			}}><i/>
-			{fields.length === 0 && 'Add'} Skills
-			</button>
-			<div class="application-detail checkbox-item col-md-12">
-				<Field name="skills[0].value" id="skills[0].value" component={Checkbox} label="MS Office (Word,Excel, PPt)"/>
-			</div>
-			<div class="application-detail checkbox-item col-md-12">
-				<Field name="skills[1].value" id="skills[1].value" component={Checkbox} label="comScore"/>
-			</div>
-			<div class="application-detail checkbox-item col-md-12">
-				<Field name="skills[2].value" id="skills[2].value" component={Checkbox} label="Google Analytics"/>
-			</div>
-			<div class="application-detail checkbox-item col-md-12">
-				<Field name="skills[3].value" id="skills[3].value" component={Checkbox} label="IAB Certification"/>
-			</div>
-			<div class="application-detail checkbox-item col-md-12">
-				<Field name="skills[4].value" id="skills[4].value" component={Checkbox} label="SalesForce"/>
-			</div>
-			<div class="application-detail checkbox-item col-md-12">
-				<Field name="skills[5].value" id="skills[5].value" component={Checkbox} label="Ad-Serving Platforms"/>
-			</div>
+			<button className="application-item-button" type="button">Skills</button>
+      {SKILLS.map((skill,index) =>
+        <div class="application-detail checkbox-item col-md-12">
+  				<Field name={`skills[${index}].value`} id={`skills[${index}].value`} component={Checkbox} label={skill}/>
+  			</div>
+      )}
 		</div>
 )
 
