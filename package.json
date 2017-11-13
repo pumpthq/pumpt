@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server",
     "start:dev": "cross-env NODE_ENV=development node server",
-    "start:prod": "cross-env NODE_ENV=production pm2 start process.js",
+    "start:prod": "cross-env NODE_ENV=production pm2 start server.js",
     "build": "cross-env NODE_ENV=production webpack --colors --config webpack.production.config.js",
     "test": "cross-env karma start --single-run --no-auto-watch karma.config.js",
     "test:chrome": "cross-env karma start --auto-watch --no-single-run karma.chrome.config.js",
