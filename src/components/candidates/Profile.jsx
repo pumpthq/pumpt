@@ -131,9 +131,9 @@ export default class CandidateProfile extends Component {
 											<div className="profile-data__item">
 												<span className="item-title">Social Media</span>
 												<div className="item-title-text">
-													<b>LinkedIn:</b><br/> {socialMedia ? socialMedia.linkedInUrl : null}<br/>
-													<b>Facebook:</b><br/>  {socialMedia ? socialMedia.faceBookUrl : null}<br/>
-													<b>Twitter:</b><br/>  {socialMedia ? socialMedia.twitterAcc : null}<br/>
+													<b>LinkedIn:</b><br/> {socialMedia && socialMedia.linkedInUrl && <a href={socialMedia.linkedInUrl} target="_blank">{socialMedia.linkedInUrl}</a>}<br/>
+													<b>Facebook:</b><br/> {socialMedia && socialMedia.faceBookUrl && <a href={socialMedia.faceBookUrl} target="_blank">{socialMedia.faceBookUrl}</a>}<br/>
+													<b>Twitter:</b><br/> {socialMedia ? socialMedia.twitterAcc : null}<br/>
 												</div>
 											</div>
 
