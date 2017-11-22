@@ -1,8 +1,13 @@
 const path = require('path');
 const webpack = require('webpack');
+const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
+const AutoDllPlugin = require('autodll-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const webpackConfig = require('./webpack.config');
+
+const SRC_PATH = path.resolve(__dirname, 'src')
+const BUILD_PATH = path.resolve(__dirname, 'build')
+const vendor = require('./vendor.json')
 
 module.exports = {
 
@@ -11,7 +16,7 @@ module.exports = {
     },
 
     output : {
-        path : __dirname + '/build',
+        path : BUILD_PATH,
         publicPath : '',
         filename: '[name].js',
         chunkFilename: '[id].chunk.js',
@@ -19,44 +24,52 @@ module.exports = {
 
     module : {
         loaders : [
-            {
-                test : /\.(js|jsx)?$/,
-                exclude : /(node_modules|bower_components)/,
-                loader : 'babel'
-            },
+          {
+              test : /\.jsx?$/,
+              include: SRC_PATH,
+              loaders : ['babel-loader']
+          },
             {
                 test : /\.css$/,
-                loader : ExtractTextPlugin.extract('style', 'css?minimize')
+                loader : ExtractTextPlugin.extract({
+                  fallback:'style-loader',
+                  use: 'css-loader?minimize'
+                })
             },
             {
                 test : /\.less/,
-                loader : ExtractTextPlugin.extract('style', 'css!less')
+                include: SRC_PATH,
+                loader : ExtractTextPlugin.extract({
+                  fallback: 'style-loader',
+                  use: 'css-loader!less-loader'
+                })
             },
             {
                 test : /\.(png|jpg|gif|svg|ttf|eot|woff|woff2)/,
                 include : /\/node_modules\//,
-                loader : 'file?name=[1]?[hash]&regExp=node_modules/(.*)'
+                loader : 'file-loader?name=[1]?[hash]&regExp=node_modules/(.*)'
             },
             {
                 test : /\.(png|jpg|gif|svg|ttf|eot|woff|woff2)/,
-                exclude : /\/node_modules\//,
-                loader : 'file?name=[path][name].[ext]?[hash]'
+                include: SRC_PATH,
+                loader : 'file-loader?name=[path][name].[ext]?[hash]'
             },
             {
                 test : /\.json$/,
-                exclude : /\/node_modules\//,
-                loader : 'json'
+                include: SRC_PATH,
+                loader : 'json-loader'
             }
         ]
     },
 
     resolve : {
-        extensions : ['', '.js', '.jsx'],
-        modulesDirectories : ['src', 'node_modules']
+        extensions : ['.js', '.jsx'],
+        modules : ['src', 'node_modules']
     },
 
     plugins : [
-        new webpack.NoErrorsPlugin(),
+        new HardSourceWebpackPlugin(),
+        new webpack.NoEmitOnErrorsPlugin(),
         new ExtractTextPlugin('styles.css'),
         new webpack.optimize.UglifyJsPlugin({
             compress : {
@@ -68,6 +81,11 @@ module.exports = {
         new HtmlWebpackPlugin({
             template : './src/index.html',
             inject : 'body'
-        })
+        }),
+        new AutoDllPlugin({
+          inject: true, // will inject the DLL bundles to index.html
+          filename: '[name]_[hash].js',
+          entry: {vendor}
+      })
     ]
 };

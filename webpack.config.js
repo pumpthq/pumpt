@@ -1,9 +1,12 @@
 const path = require('path');
 const webpack = require('webpack');
+const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
+const AutoDllPlugin = require('autodll-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const SRC_PATH = path.resolve(__dirname, 'src')
 const BUILD_PATH = path.resolve(__dirname, 'build')
+const vendor = require('./vendor.json')
 
 module.exports = {
 
@@ -20,50 +23,56 @@ module.exports = {
     module : {
         loaders : [
 						{
-                test : /\.(js|jsx)$/,
+                test : /\.jsx?$/,
                 include: SRC_PATH,
-                loaders : ['babel-loader']
+                loader : 'babel-loader'
             },
             {
                 test : /\.css$/,
-                loader : 'style!css?sourceMap'
+                loader : 'style-loader!css-loader?sourceMap'
             },
             {
                 test : /\.less$/,
                 include: SRC_PATH,
-                loader : 'style!css!less'
+                loader : 'style-loader!css-loader!less-loader?sourceMap'
             },
+            // {
+            //     test : /\.(png|jpg|gif|svg|ttf|eot|woff|woff2)/,
+            //     include : /\/node_modules\//,
+            //     loader : 'url-loader?name=[1].[ext]?[hash]&regExp=node_modules/(.*)?limit=4096'
+            // },
             {
                 test : /\.(png|jpg|gif|svg|ttf|eot|woff|woff2)/,
-                include : /\/node_modules\//,
-                loader : 'url?name=[1].[ext]?[hash]&regExp=node_modules/(.*)?limit=4096'
-            },
-            {
-                test : /\.(png|jpg|gif|svg|ttf|eot|woff|woff2)/,
-                include: SRC_PATH,
-                loader : 'url?name=[path][name].[ext]?[hash]?limit=4096'
+                include : SRC_PATH,
+                loader : 'url-loader?name=[path][name].[ext]?[hash]?limit=4096'
             },
             {
                 test : /\.json$/,
                 include: SRC_PATH,
-                loader : 'json'
+                loader : 'json-loader'
             }
         ]
     },
 
     resolve : {
-        extensions : ['', '.js', '.jsx'],
-        modulesDirectories: ['src', 'node_modules']
+        extensions : ['.js', '.jsx'],
+        modules: ['src', 'node_modules']
     },
 
     plugins : [
-        new webpack.optimize.OccurenceOrderPlugin(),
+        new HardSourceWebpackPlugin(),
+        new webpack.optimize.OccurrenceOrderPlugin(),
         new webpack.HotModuleReplacementPlugin(),
-        new webpack.NoErrorsPlugin(),
+        new webpack.NoEmitOnErrorsPlugin(),
         new HtmlWebpackPlugin({
             template : './src/index.html',
             inject : 'body'
-        })
+        }),
 
+        new AutoDllPlugin({
+          inject: true, // will inject the DLL bundles to index.html
+          filename: '[name]_[hash].js',
+          entry: {vendor}
+      })
     ]
 };
