@@ -5,8 +5,7 @@
 To launch spa please do following steps:
 
 1. `npm install`
-2. `npm run start:dev` in order to work with latest deployed API
-or `npm run start` to continue working with local API.
+2. `npm run start` to run the application in development mode.
 
 To do a commit, use `npm run commit` in order to follow conventional commit system.
 Before any push action project will run `npm run lint` to check code style.
@@ -21,16 +20,16 @@ Currently, the app is configured for [Redux DevTools](https://chrome.google.com/
 ## Staging deployment
 
 1. `npm install`
-2. `npm run build` in order to make a build.
-3. `npm run start:dev`
+2. `npm run build:staging` in order to make a build.
+3. `npm run start:staging`
 
 ## Production deployment
 
 In production, `pm2` is used to auto-scale and load-balance instances of our application to meet demand. To deploy:
 
 1. `npm install`
-2. `npm run build` in order to make a build.
-4. `npm run start:prod`
+2. `npm run build:production` in order to make a build.
+4. `npm run start:production`
 
 Because `pm2` will run our instances as separate child processes, errors and other logs will not be produced in the console.  
 

@@ -1,6 +1,5 @@
 module.exports = process.env
 
-process.env.BABEL_ENV='local'
 process.env.REMOTE_API_HOST='http://localhost'
 process.env.REMOTE_API_PORT=3000
 process.env.HOST='localhost'

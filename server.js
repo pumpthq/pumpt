@@ -8,12 +8,11 @@ const app = express();
 
 // app.use(cors());
 app.use(morgan('dev'))
-app.use('/', express.static(path.join(__dirname, 'static')));
 app.use('/static', express.static(path.join(__dirname, 'static')));
 
 
 switch (NODE_ENV) {
-    case 'local' :
+    case 'development' :
         const webpack = require('webpack');
         const webpackConfig = require('./webpack.config');
         const compiler = webpack(webpackConfig);

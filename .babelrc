@@ -6,16 +6,9 @@
   ],
   "plugins" : [
     "transform-react-jsx",
-    "transform-runtime",
+    ["transform-runtime", {"polyfill":false, "regenerator":true}],
     "react-html-attrs",
     "transform-class-properties",
     "transform-decorators-legacy",
-  ],
-  "ignore" : [],
-  "env": {
-    "local": {},
-    "test": {},
-    "development": {},
-    "production": {}
-  }
+  ]
 }
