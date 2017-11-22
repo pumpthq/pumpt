@@ -53,12 +53,16 @@ const CandidateFinalForm = props => {
 	const submitDisabled = invalid || submitting || error
 
 	const submit = (values, dispatch) => {
-				console.log("CANDIDATE ACTIONS")
-				dispatch(candidateSaveSetUpPasswordData(values))
-				dispatch(candidateApplyForMembership())
-				{/*		catch(err) {
-					throw new SubmissionError({ _error: 'Something Went Wrong' })
-				}*/}
+			dispatch(candidateSaveSetUpPasswordData(values))
+
+      /* workaround for using redux-saga to handle a redux-form submission */
+      const P = new Promise((resolve,reject) => {
+          dispatch(candidateApplyForMembership(resolve,reject)) //injecting resolve/reject into the saga generator
+      })
+
+      return P.catch(err => { //from reject call from saga generator
+        	throw new SubmissionError({ _error: JSON.stringify(err) })
+      })
 	}
 
 	return (

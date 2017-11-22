@@ -65,6 +65,7 @@ export default function() {
             }
         }),
         takeLatest(APPLY_FOR_MEMBERSHIP_REQUESTED, function * (action) {
+            const {resolve, reject} = action.payload
             const onboardingState = yield select(getCandidateOnboarding)
             const payload = {
                 user : {
@@ -87,8 +88,13 @@ export default function() {
             }
 
             try {
-							console.log("trying to register member!");
                 yield call(registerMembership, payload)
+                resolve()
+            } catch (ex) {
+                reject(ex.data)
+            }
+
+            try {
                 yield put(migrateOnboardingToApplication(onboardingState))
 
                 const { email, password } = yield select(getSummary)

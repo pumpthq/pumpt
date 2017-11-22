@@ -14,15 +14,7 @@ class CandidateFinalStep extends Component {
 
     render() {
         return (
-            <CandidatePrototypeFinalStep
-                {...{
-                    onSubmit: (fields, dispatch) => {
-                        dispatch(saveSetUpPasswordData(fields));
-                        dispatch(applyForMembership());
-                    },
-                    OnboardingLinker: OnboardingCandidateLinker,
-                }}
-            />
+            <CandidatePrototypeFinalStep OnboardingLinker={OnboardingCandidateLinker}/>
         );
     }
 }
