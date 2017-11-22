@@ -27,11 +27,17 @@ class CandidateContainer extends Component {
 
 
     render() {
+      const {candidate, job, cid} = this.props
+      if(!candidate || !job) {
+        return <div>Loading...</div>
+      }else{
+        const candidateBrief = job.candidates.briefs.find(c => c._id === cid)
         return (
             <VerticalScroller>
-                <CandidateProfile {...this.props} />
+                <CandidateProfile {...candidate} {...candidateBrief} />
             </VerticalScroller>
         );
+      }
     }
 
 }

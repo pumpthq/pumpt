@@ -84,10 +84,8 @@ function linkify(link) {
 export default class CandidateProfile extends Component {
 
     render() {
-        const { candidate, job } = this.props
         const { firstName, lastName, avatar, socialMedia, location,
-          education, interests, workingExperience, skills} = candidate
-        const { title } = job
+          education, interests, workingExperience, skills} = this.props
 
         return (
 
