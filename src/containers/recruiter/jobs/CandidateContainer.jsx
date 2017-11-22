@@ -27,11 +27,19 @@ class CandidateContainer extends Component {
 
 
     render() {
+      const {candidate, job, cid} = this.props
+      if(!candidate || !job) {
+        return <div>Loading...</div>
+      }else{
+        const candidateBrief = job.candidates.briefs.find(c => c._id === cid)
+
+        //NOTE: merging candidate's latest data with periodically cached data (aka. brief) for consistency between views
         return (
             <VerticalScroller>
-                <CandidateProfile {...this.props} />
+                <CandidateProfile {...candidate} {...candidateBrief} />
             </VerticalScroller>
         );
+      }
     }
 
 }

@@ -84,10 +84,8 @@ function linkify(link) {
 export default class CandidateProfile extends Component {
 
     render() {
-        const { candidate, job } = this.props
         const { firstName, lastName, avatar, socialMedia, location,
-          education, interests, workingExperience, skills} = candidate
-        const { title } = job
+          education, interests, workingExperience, skills, recentWorkingArea, recentWorkingAreaParent, recentJob, recentAnnualIncome, recentAreaExperience} = this.props
 
         return (
 
@@ -97,10 +95,10 @@ export default class CandidateProfile extends Component {
 								<div className="profile-head row">
 									<div className="profile-head-info col-md-9 col-xs-12">
 										<h4>{ `${firstName} ${lastName}` }</h4>
-										<LabeledValue label="Current Working Area" value={ `${candidate.recentWorkingAreaParent} | ${candidate.recentWorkingArea}` }/>
-										<LabeledValue label="Current Title" value={candidate.recentJob} />
-										<LabeledValue label="Current Total Compensation" value={candidate.recentAnnualIncome} />
-										<LabeledValue label="Experience" value={candidate.recentAreaExperience} />
+										<LabeledValue label="Current Working Area" value={ `${recentWorkingAreaParent} | ${recentWorkingArea}` }/>
+										<LabeledValue label="Current Title" value={recentJob} />
+										<LabeledValue label="Current Total Compensation" value={recentAnnualIncome} />
+										<LabeledValue label="Experience" value={recentAreaExperience} />
 									</div>
 
 									<div className="profile-avatar col-md-2 col-xs-12">
