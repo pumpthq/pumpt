@@ -16,8 +16,7 @@ import {
 } from './../../../../../actions/companyOnboarding'
 import { SubmissionError } from 'redux-form'
 
-//Field Validations
-const required = value => (value ? undefined : 'Can\'t be Blank')
+import * as V from 'components/main/form/validations'
 
 //Generalized Redux Field
 const renderField = ({
@@ -51,7 +50,7 @@ let SocialMediaForm = props => {
 								name="websiteUrl"
 								type="text"
 								component={renderField}
-								validate={required}
+								validate={[V.required,V.url]}
 							/>
 					</fieldset>
 					<fieldset class="form__row">
@@ -60,14 +59,16 @@ let SocialMediaForm = props => {
 								name="linkedIneUrl"
 								type="text"
 								component={renderField}
+                validate={[V.url]}
 							/>
 					</fieldset>
 					<fieldset class="form__row">
 						<Field
-								label="Twitter @username"
+								label="Twitter URL"
 								name="twitterUrl"
 								type="text"
 								component={renderField}
+                validate={[V.url]}
 							/>
 					</fieldset>
 					<fieldset class="form__row">
@@ -76,10 +77,11 @@ let SocialMediaForm = props => {
 								name="facebookUrl"
 								type="text"
 								component={renderField}
+                validate={[V.url]}
 							/>
 					</fieldset>
 					<div class='form__actions'>
-							<Button 
+							<Button
 									type='submit'
 									typeColored
 									buttonSize='l'

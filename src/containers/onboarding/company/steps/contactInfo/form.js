@@ -25,16 +25,7 @@ import { SubmissionError } from 'redux-form'
 import { checkEmailAvailability } from 'actions/authorization'
 import { checkCompanyNameAvailability } from 'actions/authorization'
 
-
-//Field Validations
-const required = value => (value ? undefined : 'Can\'t be Blank')
-const email_validation = value =>
-  value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)
-    ? 'Invalid email address'
-    : undefined
-export const minLength = min => value =>
-  value && value.length < min ? `Must be ${min} characters or more` : undefined
-
+import * as V from 'components/main/form/validations'
 //Generalized Redux Field
 const renderField = ({
   input,
@@ -122,7 +113,7 @@ let OnboardingCompanyContactInfo = props => {
 									name="companyName"
 									type="text"
 									component={renderField}
-									validate={[required, minLength(3)]}
+									validate={[V.required, V.minLength(3)]}
 								/>
 						</fieldset>
 						<fieldset class="form__row">
@@ -131,7 +122,7 @@ let OnboardingCompanyContactInfo = props => {
 									name="fullName"
 									type="text"
 									component={renderField}
-									validate={required}
+									validate={V.required}
 								/>
 						</fieldset>
 						<fieldset class="form__row">
@@ -140,7 +131,7 @@ let OnboardingCompanyContactInfo = props => {
 									name="jobTitle"
 									type="text"
 									component={renderField}
-									validate={required}
+									validate={V.required}
 								/>
 						</fieldset>
 						<fieldset class="form__row">
@@ -149,7 +140,7 @@ let OnboardingCompanyContactInfo = props => {
 									name="email"
 									type="email"
 									component={renderField}
-									validate={[required, email_validation]}
+									validate={[V.required, V.email_validation]}
 								/>
 						</fieldset>
 						<div class='form__actions'>

@@ -16,20 +16,15 @@ export const email_validation = value =>
 export const minLength = min => value =>
   value && value.length < min ? `Must be ${min} characters or more` : undefined
 
-const hasText = fieldLabel => value => (value ? undefined : `${fieldLabel} cannot be blank`)
+export const hasText = fieldLabel => value => (value ? undefined : `${fieldLabel} cannot be blank`)
 
-const year = values => {
-  const errors = {}
-
-	if (values.foundationYear < 1700 || values.foundationYear > (new Date().getFullYear())){
-		errors.foundationYear = 'Year is out of Range'
+export const year = value => {
+	if (value < 1700 || value > (new Date().getFullYear())){
+		return 'Year is out of Range'
 	}
-	else if (!values.foundationYear){
-		errors.foundationYear = 'Can\'t be Blank'
-	}
-
-	return errors
 }
 
-const passwordConfirm = otherField => (value, previousValue, allValues) =>
+
+
+export const passwordConfirm = otherField => (value, previousValue, allValues) =>
 	value !== otherField.value ? 'Passwords do not match.' : undefined

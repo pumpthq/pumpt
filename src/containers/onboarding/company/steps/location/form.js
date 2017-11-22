@@ -19,8 +19,7 @@ import {
     showNumberOfEmployeesStep,
 } from 'actions/companyOnboarding';
 
-//Field Validations
-const required = value => (value ? undefined : 'Can\'t be Blank')
+import * as V from 'components/main/form/validations'
 
 //Generalized Redux Field
 export const renderField = ({
@@ -57,6 +56,7 @@ let LocationInfoForm = props => {
 												name="headquartersLocation"
 												component={PlaceField}
 												label="Headquarters Location"
+                        validate={[V.required]}
 											 />
 											</fieldset>
 									</div>

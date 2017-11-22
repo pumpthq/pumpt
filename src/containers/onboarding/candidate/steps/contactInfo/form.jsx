@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import { Link } from 'react-router'
 import { reduxForm, Field } from 'redux-form'
 import { connect } from 'react-redux';
-import { required, email_validation } from 'components/main/form/validations'
+import * as V from 'components/main/form/validations'
 
 //Places Autocomplete Library
 import PlacesAutocomplete from 'react-places-autocomplete'
@@ -78,7 +78,7 @@ let OnboardingCandidateContactInfo = props => {
 										name="firstName"
 										type="text"
 										component={renderField}
-										validate={required}
+										validate={V.required}
 									/>
 						</fieldset>
 						<fieldset className="form__row">
@@ -87,7 +87,7 @@ let OnboardingCandidateContactInfo = props => {
 										name="lastName"
 										type="text"
 										component={renderField}
-										validate={required}
+										validate={V.required}
 									/>
 						</fieldset>
 						<fieldset className="form__row">
@@ -96,7 +96,7 @@ let OnboardingCandidateContactInfo = props => {
 										name="email"
 										type="email"
 										component={renderField}
-										validate={[email_validation,required]}
+										validate={[V.email_validation,V.required]}
 									/>
 						</fieldset>
             <fieldset className="form__row">
@@ -105,7 +105,7 @@ let OnboardingCandidateContactInfo = props => {
 										name="socialMedia.linkedInUrl"
 										type="text"
 										component={renderField}
-										validate={[required]}
+										validate={[V.required,V.url]}
 									/>
 						</fieldset>
 						<fieldset className="form__row">
@@ -113,7 +113,7 @@ let OnboardingCandidateContactInfo = props => {
 									name="location"
 									label="Current Location"
 									component={PlaceField}
-									validate={required}
+									validate={V.required}
 								 />
 
 								<Field name="abilityToRelocate" id="abilityToRelocate" component={Checkbox} label="Willing to Relocate?"/>

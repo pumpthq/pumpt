@@ -36,6 +36,7 @@ export const PlaceField = ({ values, name, input, onChange, label, meta: { touch
 	const inputProps = {
 		value : input.value,
 		onChange : input.onChange,
+		onBlur: input.onBlur,
 		id : id,
 		typeAhead : false,
 		inputName : input.name,
@@ -57,4 +58,3 @@ export const PlaceField = ({ values, name, input, onChange, label, meta: { touch
 		</div>
 	);
 }
-

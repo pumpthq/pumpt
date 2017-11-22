@@ -14,7 +14,7 @@ import { SubmissionError } from 'redux-form'
 import { checkEmailAvailability } from 'actions/authorization'
 
 //Validations
-import {year} from 'components/main/form/validations'
+import * as V from 'components/main/form/validations'
 import {normalizeYear} from 'components/main/form/normalizations'
 
 //Generalized Redux Field
@@ -49,13 +49,13 @@ const FoundationYearForm = props => {
 					type='int'
 					name='foundationYear'
 					label='Year'
-					validate={year}
+					validate={[V.required,V.year]}
 					normalize={normalizeYear}
 					component={renderField}
 			/>
 					<div class='form__actions'>
 							<Button type='submit'
-											typeColored 
+											typeColored
 											buttonSize='l'
 											disabled={submitDisabled}
 							>
