@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react'
 import OnboardingCompanyLinker from './../linker'
-
 import {
     saveSetUpPasswordData,
     applyForMembership
@@ -12,16 +11,10 @@ class CompanyFinalStep extends Component {
     componentDidMount() {
         this.props.scrollTop()
     }
-    
+
     render() {
         return (
-            <CompanyPrototypeFinalStep {...{
-                onSubmit : (fields, dispatch) => {
-                    dispatch(saveSetUpPasswordData(fields))
-                    dispatch(applyForMembership())
-                },
-                OnboardingLinker : OnboardingCompanyLinker
-            }} />
+            <CompanyPrototypeFinalStep OnboardingLinker={OnboardingCompanyLinker} />
         )
     }
 }

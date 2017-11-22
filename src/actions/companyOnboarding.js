@@ -152,8 +152,9 @@ export const saveSetUpPasswordData = ({ password }) => ({
     },
 });
 
-export const applyForMembership = () => ({
+export const applyForMembership = (resolve,reject) => ({
     type: APPLY_FOR_MEMBERSHIP_REQUESTED,
+    payload: {resolve, reject}
 });
 
 export const applyForMembershipSucceeded = (payload = {}) => ({

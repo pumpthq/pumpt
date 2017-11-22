@@ -68,7 +68,9 @@ export default function () {
                 yield put(emailAlreadyRegistered(ex.message));
             }
         }),
-        takeLatest(APPLY_FOR_MEMBERSHIP_REQUESTED, function* () {
+        takeLatest(APPLY_FOR_MEMBERSHIP_REQUESTED, function* (action) {
+            const {resolve, reject} = action.payload
+
             const onboardingState = yield select(getCompanyOnboarding);
 
             if (!onboardingState.linkedInProfileUrl) {
@@ -109,8 +111,14 @@ export default function () {
 										values : onboardingState.values ? onboardingState.values.values :  ''
                 },
             };
-            try {
+            try { //submitting membership registration request via api
                 yield call(registerMembership, payload);
+                resolve()
+            } catch (ex) { //and pass it back to have the error displayed
+                reject(ex.data)
+            }
+
+            try { //migrating data to application phase and logging to new membership
                 yield put(migrateOnboardingToApplication(onboardingState));
                 const { email, password } = yield select(getSummary);
                 yield put(login({ email, password }));
@@ -118,6 +126,7 @@ export default function () {
                 yield put(push(ROUTE_APPLICATION_COMPANY));
                 yield put(applyForMembershipSucceeded({}));
             } catch (ex) {
+                console.error(ex)
                 yield put(applyForMembershipFailed({}));
             }
         }),
