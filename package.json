@@ -5,6 +5,7 @@
   "author": "Collectively LLC",
   "scripts": {
     "start": "cross-env NODE_ENV=development node server",
+    "start/api:staging": "cross-env NODE_ENV=development API_ENV=staging node server",
     "start:staging": "cross-env NODE_ENV=staging node server",
     "start:production": "cross-env NODE_ENV=production pm2 start server.js",
     "build:staging": "cross-env NODE_ENV=staging webpack --colors --config webpack.production.config.js",

@@ -1,9 +1,14 @@
+require('./config')
+require('./config/api')
+
 const path = require('path');
 const proxy = require('http-proxy-middleware');
 const cors = require('cors');
 const express = require('express');
 const morgan = require('morgan')
-const { NODE_ENV, HOST, PORT, REMOTE_API_HOST, REMOTE_API_PORT } = require('./config');
+
+const { NODE_ENV, HOST, PORT, REMOTE_API_HOST, REMOTE_API_PORT } = process.env
+
 const app = express();
 
 // app.use(cors());

@@ -2,14 +2,21 @@
 
 ## Quick overview
 
-To launch spa please do following steps:
+To run in development mode, do following steps:
 
 1. `npm install`
-2. `npm run start` to run the application in development mode.
+2. `npm run start`
 
-To do a commit, use `npm run commit` in order to follow conventional commit system.
+Alternatively, to run in development mode with proxying to the staging API:
+
+1. `npm install`
+2. `npm run start/api:staging`
+
+Using this mixed mode it convenient because it doesnt require the API server to be run locally.
+
+~~To do a commit, use `npm run commit` in order to follow conventional commit system.
 Before any push action project will run `npm run lint` to check code style.
-If you want to skip it go with `git push --no-verify`
+If you want to skip it go with `git push --no-verify`~~
 
 ## DevTools
 
@@ -56,4 +63,4 @@ const rootRoute = {
 
 ## Requirements
 
-Node `^6.8`, NPM `^3.8`
+Node `^8.9`, NPM `^5.5`
