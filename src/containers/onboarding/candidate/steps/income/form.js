@@ -6,7 +6,8 @@ import { findById } from '../../../../../constants/dropdownData'
 
 import {
     saveIncomeData,
-    showExperienceStep
+    showExperienceStep,
+    gotoExperienceStep,
 } from './../../../../../actions/candidateOnboarding'
 
 import { StepListLink } from '../../../renderHelpers'
@@ -33,6 +34,7 @@ import { ANNUAL_INCOME_DROPDOWN_DATA } from './../../../../../constants/candidat
                 }
             }))
             dispatch(showExperienceStep())
+            dispatch(gotoExperienceStep())
         }
 
         return {

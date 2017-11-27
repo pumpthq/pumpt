@@ -23,29 +23,29 @@ import ValuesStep from './values'
 import CompanySizeStep from './companySize'
 import CandidateFinalStep from './final'
 
-export function mapStateToProps(state, ownProps) {
-    const { step } = state.candidateOnboarding
-    
-    return {
-        state,
-        step
-    }
-}
+// export function mapStateToProps(state, ownProps) {
+//     // const { step } = state.candidateOnboarding
+//
+//     return {
+//         state,
+//         // step
+//     }
+// }
 
-export function mapDispatchToProps(dispatch, ownProps) {
-    return {
-        dispatch
-    }
-}
+// export function mapDispatchToProps(dispatch, ownProps) {
+//     return {
+//         dispatch
+//     }
+// }
 
-@connect(mapStateToProps, mapDispatchToProps)
+@connect()
 class OnboardingCandidateStepSwitcher extends Component {
     render() {
         const { step, scrollTop } = this.props
         const props = {
             scrollTop
         }
-        
+
         switch (step) {
             case SHOW_CONTACT_INFO_STEP :
                 return (<ContactInfoStep/>)

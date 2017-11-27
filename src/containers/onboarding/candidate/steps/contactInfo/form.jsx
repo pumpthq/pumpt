@@ -17,6 +17,8 @@ import {
 import {
     saveContactInfoData,
     showIndustryStep,
+    gotoIndustryStep,
+
 } from 'actions/candidateOnboarding';
 
 import { SubmissionError } from 'redux-form'
@@ -67,6 +69,8 @@ let OnboardingCandidateContactInfo = props => {
     const submit = (values, dispatch) => {
 			dispatch(saveContactInfoData(values))
 			dispatch(showIndustryStep()) //this can also be called in a saga
+      dispatch(gotoIndustryStep()) 
+
 		}
 
 		return (

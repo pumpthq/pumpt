@@ -7,7 +7,8 @@ import uuid from 'uuid'
 
 import {
     saveIndustryData,
-    showFieldOfExpertiseStep
+    showFieldOfExpertiseStep,
+    gotoFieldOfExpertiseStep,
 } from './../../../../../actions/candidateOnboarding'
 
 import { AlternativeListItem, StepListLink } from '../../../renderHelpers'
@@ -33,6 +34,7 @@ import { AlternativeListItem, StepListLink } from '../../../renderHelpers'
                 }
             }))
             dispatch(showFieldOfExpertiseStep())
+            dispatch(gotoFieldOfExpertiseStep())
         }
 
         return {

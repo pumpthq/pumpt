@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { SHOW_INDUSTRY_STEP, INDUSTRY_DROPDOWN_DATA } from './../../../../../../constants/candidateOnboarding'
-import { showIndustryStep } from './../../../../../../actions/candidateOnboarding'
+import { showIndustryStep, gotoIndustryStep } from './../../../../../../actions/candidateOnboarding'
 import { NavigationLink, NavigationLink2 } from './../../../../../../components/main/navigation'
 import CallStep from './../../../../callStep'
 import { findById } from '../../../../../../constants/dropdownData'
@@ -46,7 +46,10 @@ export class To extends Component {
                 active={isActive}
                 filled={isFilled}
                 onClick={() => {
-                    if (isEnabled) dispatch(showIndustryStep())
+                    if (isEnabled) {
+                      dispatch(showIndustryStep())
+                      dispatch(gotoIndustryStep())
+                    }
                 }}
                 textLabel='Industry'
                 textFilledWith={item ? stateItem.value || item.title : ''}

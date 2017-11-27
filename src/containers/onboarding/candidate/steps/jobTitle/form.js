@@ -4,7 +4,8 @@ import { findById } from '../../../../../constants/dropdownData'
 
 import {
     saveJobTitleStep,
-    showIncomeStep
+    showIncomeStep,
+    gotoIncomeStep,
 } from './../../../../../actions/candidateOnboarding'
 
 //import { StepTopAccordion } from '../../../renderHelpers'
@@ -32,6 +33,7 @@ import { JOB_TITLE_DROPDOWN_DATA } from './../../../../../constants/candidateOnb
                 },
             }))
             dispatch(showIncomeStep())
+            dispatch(gotoIncomeStep())
         }
 
         return {

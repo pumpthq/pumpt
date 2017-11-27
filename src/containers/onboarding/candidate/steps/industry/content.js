@@ -12,7 +12,8 @@ import { apiEnumToListData } from './../../../../../utils'
 
 import {
     saveIndustryData,
-    showFieldOfExpertiseStep
+    showFieldOfExpertiseStep,
+    gotoFieldOfExpertiseStep,
 } from './../../../../../actions/candidateOnboarding'
 
 @connect(
@@ -31,6 +32,7 @@ import {
                 }
             }))
             dispatch(showFieldOfExpertiseStep())
+            dispatch(gotoFieldOfExpertiseStep())
         };
 
         return {

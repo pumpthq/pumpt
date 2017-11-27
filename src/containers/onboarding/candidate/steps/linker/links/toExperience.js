@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { SHOW_EXPERIENCE_STEP, EXPERIENCE_DROPDOWN_DATA } from './../../../../../../constants/candidateOnboarding'
-import { showExperienceStep } from './../../../../../../actions/candidateOnboarding'
+import { showExperienceStep, gotoExperienceStep } from './../../../../../../actions/candidateOnboarding'
 import { NavigationLink, NavigationLink2 } from './../../../../../../components/main/navigation'
 import CallStep from './../../../../callStep'
 import { findById } from '../../../../../../constants/dropdownData'
@@ -45,7 +45,10 @@ export class To extends Component {
                 active={isActive}
                 filled={isFilled}
                 onClick={() => {
-                    if (isEnabled) dispatch(showExperienceStep())
+                    if (isEnabled) {
+                      dispatch(showExperienceStep())
+                      dispatch(gotoExperienceStep())
+                    }
                 }}
                 textLabel='Experience'
                 textFilledWith={value}

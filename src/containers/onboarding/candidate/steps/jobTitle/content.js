@@ -12,7 +12,8 @@ import { apiEnumToListData } from './../../../../../utils'
 
 import {
     saveJobTitleStep,
-    showIncomeStep
+    showIncomeStep,
+    gotoIncomeStep,
 } from './../../../../../actions/candidateOnboarding'
 
 @connect(
@@ -31,6 +32,7 @@ import {
                 },
             }))
             dispatch(showIncomeStep())
+            dispatch(gotoIncomeStep())
         };
 
         return {
@@ -67,7 +69,7 @@ class JobTitleContent extends Component {
             stepValid: (value !== '' && value.charAt(0) !== ' '),
             id: id,
             value: value,
-            
+
         })
     }
 

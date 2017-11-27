@@ -13,6 +13,7 @@ import { apiEnumToListData } from './../../../../../utils'
 import {
     saveFieldOfExpertiseStep,
     showJobTitleStep,
+    gotoJobTitleStep,
 } from './../../../../../actions/candidateOnboarding'
 
 
@@ -36,6 +37,7 @@ import {
                 fieldOfExpertiseHead: parent
             }))
             dispatch(showJobTitleStep())
+            dispatch(gotoJobTitleStep())
         };
 
         return {

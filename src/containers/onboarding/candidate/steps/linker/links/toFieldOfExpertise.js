@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { SHOW_FIELD_OF_EXPERTISE_STEP, FIELD_OF_EXPERTISE_DROPDOWN_DATA } from './../../../../../../constants/candidateOnboarding'
-import { showFieldOfExpertiseStep } from './../../../../../../actions/candidateOnboarding'
+import { showFieldOfExpertiseStep, gotoFieldOfExpertiseStep  } from './../../../../../../actions/candidateOnboarding'
 import { NavigationLink, NavigationLink2 } from './../../../../../../components/main/navigation'
 import CallStep from './../../../../callStep'
 import { NavLinkLabel } from '../../../../renderHelpers'
@@ -55,7 +55,10 @@ export class To extends Component {
                 active={isActive}
                 filled={isFilled}
                 onClick={() => {
-                    if (isEnabled) dispatch(showFieldOfExpertiseStep())
+                    if (isEnabled) {
+                      dispatch(showFieldOfExpertiseStep())
+                      dispatch(gotoFieldOfExpertiseStep())
+                    }
                 }}
                 textLabel='Area of Expertise'
                 textFilledWith={value}

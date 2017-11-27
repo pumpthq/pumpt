@@ -26,6 +26,7 @@ class OnboardingCandidate extends Component {
                     ref={(node) => { this.scrollContainer = node; }}
                 >
                     <OnboardingCandidateStepSwitcher
+                      step={this.props.params.step}
                         scrollTop={() => {
                             const Scroll = this.scrollContainer;
                             if (Scroll) {

@@ -6,6 +6,7 @@ import { StepTopAccordion } from '../../../renderHelpers';
 import {
     saveFieldOfExpertiseStep,
     showJobTitleStep,
+    gotoJobTitleStep,
 } from './../../../../../actions/candidateOnboarding';
 
 import { FIELD_OF_EXPERTISE_DROPDOWN_DATA } from './../../../../../constants/candidateOnboarding';
@@ -54,6 +55,7 @@ export default connect(
                 },
             }));
             dispatch(showJobTitleStep());
+            dispatch(gotoJobTitleStep());
         };
         return {
             dispatch,

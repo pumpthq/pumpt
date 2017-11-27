@@ -34,6 +34,28 @@ import {
     APPLY_FOR_MEMBERSHIP_FAILED
 } from './../constants/candidateOnboarding'
 
+import {push} from 'react-router-redux'
+
+export const gotoStep = (step) => push('/onboarding/candidate/'+step)
+
+export const gotoContactInfoStep = () => gotoStep(SHOW_CONTACT_INFO_STEP)
+
+export const gotoIndustryStep = () => gotoStep(SHOW_INDUSTRY_STEP)
+
+export const gotoFieldOfExpertiseStep = () => gotoStep(SHOW_FIELD_OF_EXPERTISE_STEP)
+
+export const gotoJobTitleStep = () => gotoStep(SHOW_JOB_TITLE_STEP)
+
+export const gotoIncomeStep = () => gotoStep(SHOW_INCOME_STEP)
+
+export const gotoExperienceStep = () => gotoStep(SHOW_EXPERIENCE_STEP)
+
+export const gotoCompanySizeStep = () => gotoStep(SHOW_COMPANY_SIZE_STEP)
+
+export const gotoValuesStep = () => gotoStep(SHOW_VALUES_STEP)
+
+export const gotoSetUpPasswordStep = () => gotoStep(SHOW_SET_UP_PASSWORD_STEP)
+
 export const showContactInfoStep = () => ({
     type : SHOW_CONTACT_INFO_STEP
 })

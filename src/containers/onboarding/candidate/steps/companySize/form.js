@@ -7,6 +7,7 @@ import { findById } from '../../../../../constants/dropdownData'
 import {
     saveCompanySizeData,
     showValuesStep,
+    gotoValuesStep,
 } from './../../../../../actions/candidateOnboarding'
 
 import { StepListLink } from '../../../renderHelpers'
@@ -33,6 +34,7 @@ import { COMPANY_SIZE_DROPDOWN_DATA } from './../../../../../constants/candidate
                 }
             }))
             dispatch(showValuesStep())
+            dispatch(gotoValuesStep())
         }
 
         return {

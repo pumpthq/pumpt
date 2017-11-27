@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { SHOW_JOB_TITLE_STEP, JOB_TITLE_DROPDOWN_DATA } from './../../../../../../constants/candidateOnboarding'
-import { showJobTitleStep } from './../../../../../../actions/candidateOnboarding'
+import { showJobTitleStep, gotoJobTitleStep } from './../../../../../../actions/candidateOnboarding'
 import { NavigationLink, NavigationLink2 } from './../../../../../../components/main/navigation'
 import CallStep from './../../../../callStep'
 import { NavLinkLabel } from '../../../../renderHelpers'
@@ -50,7 +50,10 @@ export class To extends Component {
                 active={isActive}
                 filled={isFilled}
                 onClick={() => {
-                    if (isEnabled) dispatch(showJobTitleStep())
+                    if (isEnabled) {
+                      dispatch(showJobTitleStep())
+                      dispatch(gotoJobTitleStep())
+                    }
                 }}
                 textLabel='Job Title'
                 textFilledWith={value}

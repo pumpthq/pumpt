@@ -5,7 +5,8 @@ import List from './../../../../../components/main/list';
 import { findById } from '../../../../../constants/dropdownData';
 import {
     saveExperienceData,
-		showCompanySizeStep,
+    showCompanySizeStep,
+		gotoCompanySizeStep,
 } from './../../../../../actions/candidateOnboarding';
 import { StepListLink } from '../../../renderHelpers';
 import { EXPERIENCE_DROPDOWN_DATA } from './../../../../../constants/candidateOnboarding';
@@ -31,6 +32,7 @@ import { EXPERIENCE_DROPDOWN_DATA } from './../../../../../constants/candidateOn
                 },
             }));
             dispatch(showCompanySizeStep());
+            dispatch(gotoCompanySizeStep());
         };
 
         return {

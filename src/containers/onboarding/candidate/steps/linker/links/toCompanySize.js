@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { SHOW_COMPANY_SIZE_STEP, COMPANY_SIZE_DROPDOWN_DATA } from './../../../../../../constants/candidateOnboarding'
-import { showCompanySizeStep } from './../../../../../../actions/candidateOnboarding'
+import { showCompanySizeStep, gotoCompanySizeStep } from './../../../../../../actions/candidateOnboarding'
 import { NavigationLink, NavigationLink2 } from './../../../../../../components/main/navigation'
 import CallStep from './../../../../callStep'
 import { findById } from '../../../../../../constants/dropdownData'
@@ -45,7 +45,10 @@ export class To extends Component {
                 active={isActive}
                 filled={isFilled}
                 onClick={() => {
-                    if (isEnabled) dispatch(showCompanySizeStep())
+                    if (isEnabled) {
+                      dispatch(showCompanySizeStep())
+                      dispatch(gotoCompanySizeStep())
+                    }
                 }}
                 textLabel='Preferred Company Size'
                 textFilledWith={value}

@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { SHOW_VALUES_STEP, VALUE_ASSESSMENTS_DROPDOWN_DATA } from './../../../../../../constants/candidateOnboarding'
-import { showValuesStep } from './../../../../../../actions/candidateOnboarding'
+import { showValuesStep, gotoValuesStep } from './../../../../../../actions/candidateOnboarding'
 import { NavigationLink, NavigationLink2 } from './../../../../../../components/main/navigation'
 import CallStep from './../../../../callStep'
 import { findById } from '../../../../../../constants/dropdownData'
@@ -60,7 +60,10 @@ export class To extends Component {
                 active={isActive}
                 filled={isFilled}
                 onClick={() => {
-                    if (isEnabled) dispatch(showValuesStep())
+                    if (isEnabled) {
+                      dispatch(showValuesStep())
+                      dispatch(gotoValuesStep())
+                    }
                 }}
                 textLabel='Values Assessment'
                 textFilledWith={value}

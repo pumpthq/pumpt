@@ -7,7 +7,8 @@ import { findById } from '../../../../../constants/dropdownData'
 
 import {
     saveValuesData,
-		showSetUpPasswordStep
+    showSetUpPasswordStep,
+		gotoSetUpPasswordStep,
 } from './../../../../../actions/candidateOnboarding'
 
 import { StepListCheckLink } from '../../../renderHelpers'
@@ -34,7 +35,7 @@ import { VALUE_ASSESSMENTS_DROPDOWN_DATA } from './../../../../../constants/cand
         }
     },
     function mapDispatchToProps(dispatch, ownProps) {
-        
+
         const select = (a) => {
             for(let i in ownProps.activeItems) {
                 if(ownProps.activeItems[i].id == a.id) {
@@ -43,7 +44,7 @@ import { VALUE_ASSESSMENTS_DROPDOWN_DATA } from './../../../../../constants/cand
                         values : ownProps.activeItems
                     }))
                     return;
-                } 
+                }
             }
             if(ownProps.activeItems.length == 3) {
                 ownProps.activeItems.splice(0,1);
@@ -59,7 +60,8 @@ import { VALUE_ASSESSMENTS_DROPDOWN_DATA } from './../../../../../constants/cand
         }
 
         const nextStep = ({ id, value }) => {
-            dispatch(showSetUpPasswordStep())
+          dispatch(showSetUpPasswordStep())
+          dispatch(gotoSetUpPasswordStep())
         }
 
         return {
