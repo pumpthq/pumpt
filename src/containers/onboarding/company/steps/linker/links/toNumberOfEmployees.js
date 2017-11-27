@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { SHOW_NUMBER_OF_EMPLOYEES_STEP, COMPANY_EMPLOYEES_DATA } from './../../../../../../constants/companyOnboarding'
-import { showNumberOfEmployeesStep } from './../../../../../../actions/companyOnboarding'
+import { showNumberOfEmployeesStep, gotoNumberOfEmployeesStep } from './../../../../../../actions/companyOnboarding'
 import { NavigationLink, NavigationLink2 } from './../../../../../../components/main/navigation'
 import CallStep from './../../../../callStep'
 import { findById } from '../../../../../../constants/dropdownData'
@@ -46,7 +46,10 @@ export class To extends Component {
                 active={isActive}
                 filled={isFilled}
                 onClick={() => {
-                    if (isEnabled) dispatch(showNumberOfEmployeesStep())
+                    if (isEnabled) {
+                      dispatch(showNumberOfEmployeesStep())
+                      dispatch(gotoNumberOfEmployeesStep())
+                    }
                 }}
                 textLabel='Company Size'
                 textFilledWith={stateItem ? stateItem.value || item.value : ''}

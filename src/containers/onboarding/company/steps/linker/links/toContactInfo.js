@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { SHOW_CONTACT_INFO_STEP } from './../../../../../../constants/companyOnboarding'
-import { showContactInfoStep } from './../../../../../../actions/companyOnboarding'
+import { showContactInfoStep, gotoContactInfoStep } from './../../../../../../actions/companyOnboarding'
 import { NavigationLink, NavigationUserInfo } from './../../../../../../components/main/navigation'
 import CallStep from './../../../../callStep'
 
@@ -41,7 +41,10 @@ export class To extends Component {
                     name={companyName}
                     email={email}
                     onClick={() => {
-                    if (isEnabled) dispatch(showContactInfoStep())
+                    if (isEnabled) {
+                      dispatch(showContactInfoStep())
+                      dispatch(gotoContactInfoStep())
+                    }
                 }}
                 />
             )
@@ -54,7 +57,10 @@ export class To extends Component {
                 }}
                 active={isActive}
                 onClick={() => {
-                    if (isEnabled) dispatch(showContactInfoStep())
+                    if (isEnabled) {
+                      dispatch(showContactInfoStep())
+                      dispatch(gotoContactInfoStep())
+                    }
                 }}
             >Contact Info</NavigationLink>
         )

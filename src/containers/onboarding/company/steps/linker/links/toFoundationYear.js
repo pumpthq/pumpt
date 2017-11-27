@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { SHOW_FOUNDATION_YEAR_STEP } from './../../../../../../constants/companyOnboarding'
-import { showFoundationYearStep } from './../../../../../../actions/companyOnboarding'
+import { showFoundationYearStep, gotoFoundationYearStep } from './../../../../../../actions/companyOnboarding'
 import { NavigationLink, NavigationLink2 } from './../../../../../../components/main/navigation'
 import CallStep from './../../../../callStep'
 import moment from 'moment';
@@ -42,7 +42,10 @@ export class To extends Component {
                 active={isActive}
                 filled={isFilled}
                 onClick={() => {
-                    if (isEnabled) dispatch(showFoundationYearStep())
+                    if (isEnabled) {
+                      dispatch(showFoundationYearStep())
+                      dispatch(gotoFoundationYearStep())
+                    }
                 }}
                 textLabel='Years in Business'
                 textFilledWith={text}

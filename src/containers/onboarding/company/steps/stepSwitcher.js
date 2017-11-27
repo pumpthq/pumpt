@@ -21,29 +21,14 @@ import SocialMediaStep from './socialMedia'
 import ValuesStep from './values'
 import CompanyFinalStep from './final'
 
-export function mapStateToProps(state, ownProps) {
-    const { step } = state.companyOnboarding
-
-    return {
-        state,
-        step
-    }
-}
-
-export function mapDispatchToProps(dispatch, ownProps) {
-    return {
-        dispatch
-    }
-}
-
-@connect(mapStateToProps, mapDispatchToProps)
+@connect()
 class OnboardingCompanyStepSwitcher extends Component {
     render() {
         const { step, scrollTop } = this.props
         const props = {
             scrollTop
         }
-        
+
         switch (step){
             case SHOW_CONTACT_INFO_STEP :
                 return (<ContactInfoStep/>)

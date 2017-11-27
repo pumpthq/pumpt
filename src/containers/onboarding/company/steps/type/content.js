@@ -11,7 +11,8 @@ import { apiEnumToListData } from './../../../../../utils'
 
 import {
     saveCompanyTypeData,
-    showHeadquartersLocationStep
+    showHeadquartersLocationStep,
+    gotoHeadquartersLocationStep,
 } from './../../../../../actions/companyOnboarding'
 
 @connect(
@@ -30,6 +31,7 @@ import {
                 }
             }))
             dispatch(showHeadquartersLocationStep())
+            dispatch(gotoHeadquartersLocationStep())
         };
 
         return {

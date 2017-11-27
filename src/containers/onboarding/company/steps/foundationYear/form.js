@@ -7,7 +7,8 @@ import { OnboardingInput } from './../../../../../components/onboarding'
 
 import {
     saveFoundationYearData,
-    showWebsiteAndSocialMediaStep
+    showWebsiteAndSocialMediaStep,
+    gotoWebsiteAndSocialMediaStep,
 } from './../../../../../actions/companyOnboarding'
 
 import { SubmissionError } from 'redux-form'
@@ -33,7 +34,7 @@ const renderField = ({
 )
 
 
-const FoundationYearForm = props => {
+let FoundationYearForm = props => {
 
 	const { handleSubmit, submitting, error, invalid, valid, dispatch, onSubmit } = props
 	const submitDisabled = invalid || submitting || error
@@ -41,10 +42,11 @@ const FoundationYearForm = props => {
 	const submit = (values, dispatch) => {
         dispatch(saveFoundationYearData(values))
         dispatch(showWebsiteAndSocialMediaStep())
+        dispatch(gotoWebsiteAndSocialMediaStep())
 	}
 
 	return (
-			<form ref='innerForm' onSubmit={handleSubmit(submit)}>
+			<form onSubmit={handleSubmit(submit)}>
 			<Field
 					type='int'
 					name='foundationYear'
@@ -66,6 +68,15 @@ const FoundationYearForm = props => {
 	)
 }
 
-export default reduxForm({
+FoundationYearForm = reduxForm({
 	form: 'foundationYearForm',
 })(FoundationYearForm)
+
+
+FoundationYearForm = connect(
+  state => ({
+    initialValues: state.companyOnboarding // pull previous values from onboarding state
+  })
+)(FoundationYearForm)
+
+export default FoundationYearForm

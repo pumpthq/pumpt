@@ -8,7 +8,8 @@ import { findById } from 'constants/dropdownData'
 
 import {
     saveCompanyTypeData,
-    showHeadquartersLocationStep
+    showHeadquartersLocationStep,
+    gotoHeadquartersLocationStep,
 } from 'actions/companyOnboarding'
 
 import { AlternativeListItem, StepListLink } from '../../../renderHelpers'
@@ -33,6 +34,7 @@ import { AlternativeListItem, StepListLink } from '../../../renderHelpers'
                 }
             }))
             dispatch(showHeadquartersLocationStep())
+            dispatch(gotoHeadquartersLocationStep())
         }
         return {
             dispatch,

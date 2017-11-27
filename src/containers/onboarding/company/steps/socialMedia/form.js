@@ -12,7 +12,8 @@ import FacebookIcon from './../../../../../components/icons/facebook'
 
 import {
     saveWebsiteAndSocialMediaData,
-    showValuesStep
+    showValuesStep,
+    gotoValuesStep,
 } from './../../../../../actions/companyOnboarding'
 import { SubmissionError } from 'redux-form'
 
@@ -40,7 +41,8 @@ let SocialMediaForm = props => {
     // handleSubmit function
     const submit = (values, dispatch) => {
 			dispatch(saveWebsiteAndSocialMediaData(values))
-			dispatch(showValuesStep())
+      dispatch(showValuesStep())
+			dispatch(gotoValuesStep())
 		}
 	return (
 			<form onSubmit={handleSubmit(submit)}>
@@ -101,7 +103,7 @@ SocialMediaForm = reduxForm({
 
 SocialMediaForm = connect(
   state => ({
-    initialValues: state.candidateOnboarding // pull previous values from onboarding state
+    initialValues: state.companyOnboarding // pull previous values from onboarding state
   })
 )(SocialMediaForm)
 

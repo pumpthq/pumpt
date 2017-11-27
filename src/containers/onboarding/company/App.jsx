@@ -20,7 +20,9 @@ class OnboardingCompany extends Component {
                     </div>
                 </div>
                 <ScrollContainer ref='ScrollContainer'>
-                    <OnboardingCompanyStepSwitcher scrollTop={() => {
+                    <OnboardingCompanyStepSwitcher
+                      step={this.props.params.step}
+                      scrollTop={() => {
                         const { ScrollContainer } = this.refs
 
                         if (ScrollContainer) {

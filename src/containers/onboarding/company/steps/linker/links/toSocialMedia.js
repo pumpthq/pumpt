@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { SHOW_WEBSITE_AND_SOCIAL_MEDIA_STEP } from './../../../../../../constants/companyOnboarding'
-import { showWebsiteAndSocialMediaStep } from './../../../../../../actions/companyOnboarding'
+import { showWebsiteAndSocialMediaStep, gotoWebsiteAndSocialMediaStep } from './../../../../../../actions/companyOnboarding'
 import { NavigationLink, NavigationLink2 } from './../../../../../../components/main/navigation'
 import CallStep from './../../../../callStep'
 
@@ -40,13 +40,16 @@ export class To extends Component {
                 active={isActive}
                 filled={isFilled}
                 onClick={() => {
-                    if (isEnabled) dispatch(showWebsiteAndSocialMediaStep())
+                    if (isEnabled) {
+                      dispatch(showWebsiteAndSocialMediaStep())
+                      dispatch(gotoWebsiteAndSocialMediaStep())
+                    }
                 }}
                 textLabel={label}
                 textFilledWith={websiteUrl}
             />
         )
-    
+
     }
 }
 

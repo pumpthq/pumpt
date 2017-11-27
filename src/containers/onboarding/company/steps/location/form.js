@@ -17,6 +17,7 @@ import PlacesAutocomplete from 'react-places-autocomplete'
 import {
     saveHeadquartersLocationStep,
     showNumberOfEmployeesStep,
+    gotoNumberOfEmployeesStep,
 } from 'actions/companyOnboarding';
 
 import * as V from 'components/main/form/validations'
@@ -44,7 +45,8 @@ let LocationInfoForm = props => {
     // handleSubmit function
     const submit = (values, dispatch) => {
 			dispatch(saveHeadquartersLocationStep(values))
-			dispatch(showNumberOfEmployeesStep())
+      dispatch(showNumberOfEmployeesStep())
+			dispatch(gotoNumberOfEmployeesStep())
 		}
 
         return (
@@ -80,13 +82,13 @@ let LocationInfoForm = props => {
 
 //Form Export
 LocationInfoForm = reduxForm({
-	form: 'locationInfoForm'
+	form: 'locationInfoForm',
 })(LocationInfoForm)
 
 
 LocationInfoForm = connect(
   state => ({
-    initialValues: state.candidateOnboarding // pull previous values from onboarding state
+    initialValues: state.companyOnboarding // pull previous values from onboarding state
   })
 )(LocationInfoForm)
 

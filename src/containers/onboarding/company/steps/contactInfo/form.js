@@ -19,7 +19,8 @@ import {
 } from './../../../../../sagas/companyOnboarding'
 import {
     saveContactInfoData,
-    showCompanyTypeStep
+    showCompanyTypeStep,
+    gotoCompanyTypeStep,
 } from './../../../../../actions/companyOnboarding'
 import { SubmissionError } from 'redux-form'
 import { checkEmailAvailability } from 'actions/authorization'
@@ -103,6 +104,7 @@ let OnboardingCompanyContactInfo = props => {
     const submit = (values, dispatch) => {
         dispatch(saveContactInfoData(values))
         dispatch(showCompanyTypeStep())
+        dispatch(gotoCompanyTypeStep())
 		}
 
 		return (

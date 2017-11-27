@@ -31,6 +31,26 @@ import {
     APPLY_FOR_MEMBERSHIP_FAILED,
 } from './../constants/companyOnboarding';
 
+import {push} from 'react-router-redux'
+
+export const gotoStep = (step) => push('/onboarding/company/'+step)
+
+export const gotoContactInfoStep = () => gotoStep(SHOW_CONTACT_INFO_STEP);
+
+export const gotoCompanyTypeStep = () => gotoStep(SHOW_COMPANY_TYPE_STEP);
+
+export const gotoHeadquartersLocationStep = () => gotoStep(SHOW_HEADQUARTERS_LOCATION_STEP);
+
+export const gotoNumberOfEmployeesStep = () => gotoStep(SHOW_NUMBER_OF_EMPLOYEES_STEP);
+
+export const gotoFoundationYearStep = () => gotoStep(SHOW_FOUNDATION_YEAR_STEP);
+
+export const gotoWebsiteAndSocialMediaStep = () => gotoStep(SHOW_WEBSITE_AND_SOCIAL_MEDIA_STEP);
+
+export const gotoValuesStep = () => gotoStep(SHOW_VALUES_STEP)
+
+export const gotoSetUpPasswordStep = () => gotoStep(SHOW_SET_UP_PASSWORD_STEP);
+
 export const showContactInfoStep = () => ({
     type: SHOW_CONTACT_INFO_STEP,
 });

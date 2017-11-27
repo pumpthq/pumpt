@@ -5,7 +5,8 @@ import List, { ListLink, ListItem } from './../../../../../components/main/list'
 import { COMPANY_EMPLOYEES_DATA } from './../../../../../constants/companyOnboarding'
 import {
     saveNumberOfEmployeesStep,
-    showFoundationYearStep
+    showFoundationYearStep,
+    gotoFoundationYearStep,
 } from './../../../../../actions/companyOnboarding'
 import uuid from 'uuid'
 import { findById } from '../../../../../constants/dropdownData'
@@ -33,8 +34,9 @@ import { StepListLink } from '../../../renderHelpers'
                 }
             }))
             dispatch(showFoundationYearStep())
+            dispatch(gotoFoundationYearStep())
         }
-        
+
         return {
             dispatch,
             nextStep
@@ -44,7 +46,7 @@ import { StepListLink } from '../../../renderHelpers'
 class NumberOfEmployeesForm extends Component {
     render() {
         const { nextStep, listItems, activeItem } = this.props
-        
+
         return (
             <List type='onboarding'>
                 {listItems.map(item => {
