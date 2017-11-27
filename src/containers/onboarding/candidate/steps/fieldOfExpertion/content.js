@@ -64,7 +64,7 @@ class FieldOfExpertiseContent extends Component {
                     stepValid: true,
                     id: prefilledFieldOfExpertise.fieldOfExpertise.id,
                     value: prefilledFieldOfExpertise.fieldOfExpertise.value,
-                    parent: prefilledFieldOfExpertise.fieldOfExpertiseHead.value
+                    parent: prefilledFieldOfExpertise.fieldOfExpertiseHead
                 }
             }
         }
