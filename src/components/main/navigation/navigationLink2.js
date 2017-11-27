@@ -17,7 +17,7 @@ class NavigationLink2 extends Component {
                 <div class={this.makeClassName()}>
                     <span class='text text_size_xs text_color_l-grey'>{textLabel}</span>
                     <a
-                        href=''
+                        // href='javascript:void(0)'
                         class='navigation__link-inner item-with-label'
                         style={style}
                         onClick={(e) => {
@@ -32,7 +32,7 @@ class NavigationLink2 extends Component {
             return (
                 <div class={this.makeClassName()}>
                     <a
-                        href=''
+                        // href='javascript:void(0)'
                         class='navigation__link-inner'
                         style={style}
                         onClick={(e) => {

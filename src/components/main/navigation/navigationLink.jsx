@@ -13,13 +13,13 @@ class NavigationLink extends Component {
 
     render() {
         const { children, onClick, style, filled } = this.props
-        
+
         return (
             <span class={this.makeClasses('navigation__link')}>
                 <a
                     style={style}
                     class='navigation__link-inner'
-                    href=''
+                    // href='javascript:void(0)'
                     onClick={(event) => {
                         event.preventDefault()
 
