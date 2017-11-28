@@ -60,17 +60,10 @@ const buttonStyle = {
     cursor: 'pointer',
 };
 
+//NOTE: this generic job form is used for creating a new job and editing an existing one, which is why submit is handled by its parents (new job form and edit job form)
 let JobForm = props => {
 	const {handleSubmit, submitting, touched, error, invalid, valid, dispatch, names, values, industryValue} = props
 
-	const submit = (values, dispatch) => {
-		return dispatch(createJob(values))
-			.catch(err => {
-					throw new SubmissionError({
-							_error: 'Error Creating Job. Please Correct Any Errors Above and Try Again'
-					})
-			})
-	}
 	const industryParentObj = (parentValue) => {
 		const output = find(FIELD_OF_EXPERTISE_DROPDOWN_DATA, o => o.title === parentValue)
 		return output.items
@@ -149,8 +142,8 @@ let JobForm = props => {
             <div className="recruter__newjob-card__form-bottom">
 
 
-							<FieldArray name="responsibilities" label="Responsibilities" 	validate={hasText}	placeholder="Responsibility" component={renderLists} />
-							<FieldArray name="requirements" 		label="Requirements" 		validate={hasText}	placeholder="Requirement" component={renderLists} />
+							<FieldArray name="responsibilities" label="Responsibilities" 	validateEach={required}	placeholder="Responsibility" component={renderLists} />
+							<FieldArray name="requirements" 		label="Requirements" 		validateEach={required}	placeholder="Requirement" component={renderLists} />
 
 							{error && <span class="textfield__error">{error}</span>}
 								<br/>
@@ -170,7 +163,7 @@ let JobForm = props => {
     )
 }
 
-const renderLists = ({ fields, label, validate, placeholder, meta: { error } }) => (
+const renderLists = ({ fields, label, validateEach, placeholder, meta: { error } }) => (
 					<div>
             <button className="mdl-button new-job-add-button" type="button" onClick={() => {
 							fields.push()
@@ -180,7 +173,7 @@ const renderLists = ({ fields, label, validate, placeholder, meta: { error } }) 
 
             {fields.map((child, index) =>
                 <div key={index}>
-										<Field name={child} component="textarea" validate={validate} class="text-area" placeholder={ `${placeholder}`+" #"+(index+1)+"..." }/>
+										<Field name={child} component={TextAreaField} validate={validateEach} class="text-area" placeholder={ `${placeholder}`+" #"+(index+1)+"..." }/>
                     <button type="button" className="remove-entry" onClick={() => {
 											fields.remove(index)
                     }}><i>Remove</i>
