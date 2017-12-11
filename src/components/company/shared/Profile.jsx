@@ -140,8 +140,8 @@ export default class CompanyProfile extends Component {
                 <span className="text  summary-head__label">Locations</span>
                     { locationOffices && locationOffices.map(location =>
 
-                        <div key={`${location.city}`} className="summary-head__title-column">
-                            <span className="text summary-head__summary">{`${location.city}, ${location.state.substring(0,2)}`}</span>
+                        <div key={`${location.location}`} className="summary-head__title-column">
+                            <span className="text summary-head__summary">{`${location.location}`}</span>
                             {/* <span className="text text_size_s summary-head__summary">{locationHeadquarters}</span> */}
                         </div>
                     )}
