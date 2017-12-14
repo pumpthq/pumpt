@@ -53,6 +53,23 @@ Some useful pm2 commands:
 * `pm2 restart all` restarts all processes managed by pm2
 * `pm2 logs` outputs the logs of managed processes to the console
 
+## Testing
+
+We are rolling out snapshot testing with Jest. Before each commit, please ensure
+that any react components involved in the commit have snapshot test coverage.
+**Make sure to commit the new snapshots**.
+
+Snapshot testing allows us to prevent regressions by triggering a test failure
+if any React component renders differently than in a previous snapshot. If the
+change is unintentional, please fix the regression before comitting! If the
+change is intentional, update the snapshot to reflect this.
+
+1. `npm run test` to perform a regression test (this will also create inital
+snapshots for new tests.)
+2. Observed the output and fix regressions if necessary
+3. Rerun tests until you've determine that all changes are intentional
+4. `npm run test -- -u` to update the snapshots.
+
 ## DevTools
 
 Since this client-side app is running **Redux** on top of **React**, a proper
