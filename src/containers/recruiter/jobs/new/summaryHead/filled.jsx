@@ -21,28 +21,6 @@ const defaultProps = {
     industry: 'AdTech/Platform'
 };
 
-// @connect(
-//     (state) => {
-//         const {
-//             title,
-//             state,
-//             salary,
-//             experience,
-//             employment,
-//             degree,
-//             industry,
-//         } = state.companyJobs.newJob;
-//         return {
-//             title,
-//             state,
-//             salary,
-//             experience,
-//             employment,
-//             degree,
-//             industry,
-//         };
-//     }
-// )
 class SummaryHeadFilled extends Component {
     render() {
         const {

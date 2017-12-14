@@ -3,10 +3,6 @@
 import saveStep from './saveOnboardingStep';
 import _ from 'lodash';
 import {
-    // OPEN_FETCH_SUCCEEDED,
-    // DRAFTS_FETCH_SUCCEEDED,
-    // CLOSED_FETCH_SUCCEEDED,
-
     OPEN_TAB,
     DRAFTS_TAB,
     CLOSED_TAB,
@@ -49,28 +45,7 @@ import {
 
 
     OPEN_APPROVE_AND_EMAIL,
-    //  DESCRIPTION_STEP,
-    //  SHOW_DESCRIPTION_STEP,
-    //  SAVE_DESCRIPTION_DATA,
-    //  CLOSE_DESCRIPTION_STEP,
-     //
-    //  RESPONSIBILITIES_STEP,
-    //  SHOW_RESPONSIBILITIES_STEP,
-    //  SAVE_RESPONSIBILITIES_DATA,
-    //  CLOSE_RESPONSIBILITIES_STEP,
-     //
-    //  SKILLS_AND_REQUIREMENTS_STEP,
-    //  SHOW_SKILLS_AND_REQUIREMENTS_STEP,
-    //  SAVE_SKILLS_AND_REQUIREMENTS_DATA,
-    //  CLOSE_SKILLS_AND_REQUIREMENTS_STEP,
-     //
-    //  SAVE_SUMMARY_DATA,
-    //  SHOW_SUMMARY_HEAD_STANDARD,
-    //  SHOW_SUMMARY_HEAD_EDIT,
-    //  SAVE_SUMMARY_DATA_SUCCEEDED,
-
-     SET_DEFAULT_STATE,
-    //  SET_DEFAULT_NEW_JOB_STATE,
+    SET_DEFAULT_STATE,
 } from './../constants/companyJobs';
 
 import {
@@ -96,66 +71,6 @@ const defaultState = {
     },
     recruiter: {},
 }
-//     open: [{
-//         id: ShortID.generate(),
-//         jobTitle: 'Sales',
-//         location: 'Uzhhorod',
-//         salary: '5000$',
-//         experience: '1 year',
-//         employment: 'Full-time',
-//         degree: 'Bachelors',
-//         matches: '4',
-//     }],
-//     drafts: [{
-//         id: ShortID.generate(),
-//         jobTitle: 'Frontend',
-//         location: 'Uzhhorod',
-//         salary: '10000$',
-//         experience: '2 Years',
-//         employment: 'Any',
-//         degree: 'Any',
-//     }],
-//     closed: [{
-//         id: ShortID.generate(),
-//         jobTitle: 'Sales',
-//         location: 'Uzhhorod',
-//         salary: '5000$',
-//         experience: '1 year',
-//         employment: 'Full-time',
-//         degree: 'Bachelors',
-//         matches: '4',
-//     }],
-//     activeTab: OPEN_TAB,
-//     newJob: {
-//         head: SHOW_SUMMARY_HEAD_EDIT,
-//         step: null,
-//         progress: [],
-//         active: [],
-//         summary: {},
-//     },
-// };
-
-// const getOnlyRequired = ({
-//     title,
-//     location,
-//     salary,
-//     experience,
-//     employment,
-//     degree,
-//     matches,
-//     industry,
-//     industryParent, // TODO
-// }) => ({
-//     jobTitle: title,
-//     location,
-//     salary,
-//     experience,
-//     employment,
-//     degree,
-//     matches,
-//     industry,
-//     industryParent, // TODO
-// });
 
 export default (state = defaultState, action) => {
     const { type, payload } = action;
@@ -205,41 +120,6 @@ export default (state = defaultState, action) => {
             return { ...state, recruiter };
         }
 
-        // case OPEN_FETCH_SUCCEEDED :
-        //     return {
-        //         ...state,
-        //         open: payload.jobs.map((job) => ({
-        //                 id: job._id,
-        //                 ...getOnlyRequired(job),
-        //         })),
-        //         drafts: [],
-        //         closed: [],
-        //         activeTab: OPEN_TAB,
-        //     };
-        // case DRAFTS_FETCH_SUCCEEDED :
-        //     return {
-        //         ...state,
-        //         open: [],
-        //         drafts: payload.jobs
-        //             .map((job) => ({
-        //                 id: job._id,
-        //                 ...getOnlyRequired(job),
-        //             })),
-        //         closed: [],
-        //         activeTab: DRAFTS_TAB,
-        //     };
-        // case CLOSED_FETCH_SUCCEEDED :
-        //     return {
-        //         ...state,
-        //         open: [],
-        //         drafts: [],
-        //         closed: payload.jobs
-        //             .map((job) => ({
-        //                 id: job._id,
-        //                 ...getOnlyRequired(job),
-        //             })),
-        //         activeTab: CLOSED_TAB,
-        //     };
 
         case CREATE_JOB_SUCCEEDED : {
             let jobs = _.clone(state.jobs)
@@ -497,7 +377,3 @@ export default (state = defaultState, action) => {
 
     }
 };
-
-// export const getCompanyJobs = (state) => {
-//     return state.companyJobs;
-// };
