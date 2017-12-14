@@ -11,7 +11,8 @@
     "build:staging": "cross-env NODE_ENV=staging webpack --colors --config webpack.production.config.js",
     "build:production": "cross-env NODE_ENV=production webpack --colors --config webpack.production.config.js",
     "lint": "eslint src --ext .js --ext .jsx",
-    "lint:fix": "eslint src --fix --ext .js --ext .jsx"
+    "lint:fix": "eslint src --fix --ext .js --ext .jsx",
+    "test": "jest"
   },
   "dependencies": {
     "cors": "2.7.1",
@@ -23,8 +24,9 @@
   "devDependencies": {
     "autodll-webpack-plugin": "^0.3.5",
     "axios": "0.12.0",
-    "babel-core": "6.10.4",
+    "babel-core": "^6.10.4",
     "babel-eslint": "6.1.2",
+    "babel-jest": "^21.2.0",
     "babel-loader": "^7.1.2",
     "babel-plugin-react-html-attrs": "2.0.0",
     "babel-plugin-transform-class-properties": "6.10.2",
@@ -51,6 +53,7 @@
     "file-loader": "^0.11.2",
     "hard-source-webpack-plugin": "^0.4.11",
     "html-webpack-plugin": "2.21.0",
+    "jest": "^21.2.1",
     "json-loader": "^0.5.7",
     "less": "2.7.1",
     "less-loader": "^4.0.5",
@@ -82,6 +85,7 @@
     "redux-logger": "2.6.1",
     "redux-saga": "0.10.5",
     "redux-thunk": "^2.1.0",
+    "regenerator-runtime": "^0.11.1",
     "reselect": "^3.0.1",
     "semantic-ui-react": "^0.70.0",
     "shortid": "2.2.6",
