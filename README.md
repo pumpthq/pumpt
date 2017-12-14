@@ -27,12 +27,18 @@ be run locally.
 
 ### Staging mode
 
-Staging uses `screen` instances to manage running servers, but is in the process
-of switching to a `pm2` based system to mirror production.
+We use `pm2` to manage the app on staging. `pm2` is a simple
+project manager with utilities to aid with load balancing and scaling.
+
+While the `pm2` command is available on both staging and productions, it is not
+included in the dev-dependencies for the project. If testing locally or provisioning
+a new server, you must install it globally with `npm i -g pm2@2.7.2`.
 
 1. `npm install`
 2. `npm run build:staging` in order to make a build.
 3. `npm run start:staging`
+
+The last command above runs pm2 under the hood.
 
 ### Production mode
 
