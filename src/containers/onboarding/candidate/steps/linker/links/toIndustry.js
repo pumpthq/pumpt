@@ -30,14 +30,11 @@ export class To extends Component {
             isEnabled,
             dispatch
         } = this.props
-        const stateItem = onboardingState.industry
-        let item = null
-
-        stateItem ? item = findById({
-            id : stateItem.id,
-            data : INDUSTRY_DROPDOWN_DATA
-        }) : null
-
+      const stateItem = onboardingState.industries;
+      let industries = "";
+        if (stateItem) {
+            industries = stateItem.map(({ value }) => value).join(' | ');
+        }
         return(
             <NavigationLink2
                 style={{
@@ -52,7 +49,7 @@ export class To extends Component {
                     }
                 }}
                 textLabel='Industry'
-                textFilledWith={item ? stateItem.value || item.title : ''}
+                textFilledWith={industries}
             />
         )
     }

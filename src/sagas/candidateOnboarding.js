@@ -76,7 +76,7 @@ export default function() {
                 lastName : onboardingState.lastName,
 								location : onboardingState.location,
 								abilityToRelocate : onboardingState.abilityToRelocate,
-                interestWorkingArea : onboardingState.industry.value,
+                interestWorkingArea : onboardingState.industries.map(({value}) => value ),
                 recentWorkingArea : onboardingState.fieldOfExpertise.value,
                 recentWorkingAreaParent : onboardingState.fieldOfExpertiseHead.value,
                 recentJob : onboardingState.jobTitle.value,
