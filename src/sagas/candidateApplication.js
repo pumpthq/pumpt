@@ -325,7 +325,6 @@ export default function() {
                 const {
                     location 
                 } = profile
-                const locationState = state ? state.split(' ').shift() : null
                 const fieldOfExpertisePath = findSequence({
                     path : [profile.recentWorkingAreaParent, profile.recentWorkingArea]
                         .filter((item) => (item)),
@@ -361,13 +360,6 @@ export default function() {
                 const {
                     skills
                 } = profile
-                // const {
-                //     socialMedia : {
-                //         linkedInUrl,
-                //         twitterAcc,
-                //         faceBookUrl
-                //     }
-                // } = profile
 
                 const patch = {
                     progress : progress,
@@ -375,19 +367,7 @@ export default function() {
                     summary : {
                         firstName : profile.firstName,
                         lastName : profile.lastName,
-                        // email : profile.user.email,
-                        industry : {
-                            id : null,
-                            value : profile.interestWorkingArea
-                        },
-                        // fieldOfExpertise : {
-                        //     id : null,
-                        //     value : profile.recentWorkingArea
-                        // },
-                        // jobTitle : {
-                        //     id : null,
-                        //     value : profile.recentJob,
-                        // },
+                        industries : profile.interestWorkingArea,
                         income : {
                             id : null,
                             value : profile.recentAnnualIncome
