@@ -4,7 +4,6 @@ import { H1 } from './../../../../../components/main/heading'
 import { OnboardingInput } from './../../../../../components/onboarding'
 import on2Image from './../../../../../img/sprites-svg/on2.svg'
 
-import TypeForm from './form'
 import TypeContent from './content'
 import OnboardingCompanyLinker from './../linker'
 
@@ -24,7 +23,6 @@ class TypeStep extends Component{
                                         </span>
                                     </span>
                                 </H1>
-                                {/* <TypeForm/> */}
                                 <TypeContent/>
                             </Panel>
                         </section>

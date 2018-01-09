@@ -99,7 +99,7 @@ export default function () {
                 company: {
                     name: onboardingState.companyName,
                     foundDate: `${onboardingState.foundationYear}`,
-                    type: onboardingState.companyType.value,
+                    type: onboardingState.companyType.map(({value}) => value ),
                     employeesAmount: onboardingState.numberOfEmployees.value,
                     headquartersLocation: onboardingState.headquartersLocation,
                     socialMedia: {
