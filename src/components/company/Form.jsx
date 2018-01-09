@@ -99,9 +99,6 @@ let CompanySummaryForm = props =>  {
 					</div>
 			</div>
 
-				{/*<EnumSelector field={recentWorkingAreaParent} label="Working Area" options={
-											onBlur={this.updateIndustries} />*/}
-
 				<div className="candidate-buttons">
 					<button type="submit" disabled={submitDisabled} className="mdl-button button button_type_colored button_size_m">
 							{submitting ? <i/> : <i/>} Save

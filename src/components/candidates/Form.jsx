@@ -133,8 +133,6 @@ let CandidateSummaryForm = props =>  {
 					</div>
 			</div>
 
-				{/*<EnumSelector field={recentWorkingAreaParent} label="Working Area" options={
-											onBlur={this.updateIndustries} />*/}
 
 				<div className="candidate-buttons">
 					<button type="submit" disabled={submitDisabled} className="mdl-button button button_type_colored button_size_m">
@@ -159,7 +157,8 @@ CandidateSummaryForm = reduxForm({
 const selector = formValueSelector('candidateSummaryForm')
 
 CandidateSummaryForm = connect(state => {
-	const industryValue = selector(state, 'recentWorkingAreaParent')
+  const areas = selector(state, 'recentWorkingAreas')
+  const industryValue = areas && areas.length > 0 ? areas[0].parent : ''
 		return {
 			industryValue
 		}

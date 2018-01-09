@@ -85,7 +85,7 @@ export default class CandidateProfile extends Component {
 
     render() {
         const { firstName, lastName, avatar, socialMedia, location,
-          education, interests, workingExperience, skills, recentWorkingArea, recentWorkingAreaParent, recentJob, recentAnnualIncome, recentAreaExperience} = this.props
+          education, interests, workingExperience, skills, recentWorkingAreas, recentJob, recentAnnualIncome, recentAreaExperience} = this.props
 
         return (
 
@@ -95,7 +95,7 @@ export default class CandidateProfile extends Component {
 								<div className="profile-head row">
 									<div className="profile-head-info col-md-9 col-xs-12">
 										<h4>{ `${firstName} ${lastName}` }</h4>
-										<LabeledValue label="Current Working Area" value={ `${recentWorkingAreaParent} | ${recentWorkingArea}` }/>
+                    <LabeledValue label="Current Working Areas" value={ recentWorkingAreas.reduce( (acc, {value, parent}) => `${parent} | ${value}, ${acc}`, '')}/>
 										<LabeledValue label="Current Title" value={recentJob} />
 										<LabeledValue label="Current Total Compensation" value={recentAnnualIncome} />
 										<LabeledValue label="Experience" value={recentAreaExperience} />

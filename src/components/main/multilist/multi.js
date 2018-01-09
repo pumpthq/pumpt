@@ -43,10 +43,14 @@ class MultiselectComponent extends Component {
     const { items, handleGroups, classesToAdd, otherPlaceholder } = this.props,
       { selectedItems } = this.state;
 
+
     return (
             <ul className={this.makeClassName()}>
             {
                 items.map((group) => {
+                  const isActive = selectedItems.length === 0 ||
+                    Array.from(selectedItems.values())
+                    .reduce((acc,item) => acc && item.parent.id  === group.id, true);
                   return (
                         <MultiItemGroup
                           {...group}
@@ -55,6 +59,7 @@ class MultiselectComponent extends Component {
                           selectedItems={selectedItems}
                           handleGroups={handleGroups}
                           isOpened={this.isGroupOpened(group.id)}
+                          isActive={isActive}
                           classesToAdd={classesToAdd}
                           otherPlaceholder={otherPlaceholder}
                         />
@@ -122,6 +127,7 @@ class MultiselectComponent extends Component {
     return wasGroupFind;
   }
 
+  // getParent assumes one level of nesting
   getParent(itemId) {
     const { items } = this.props,
       parent = {

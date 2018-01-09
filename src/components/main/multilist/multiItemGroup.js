@@ -30,9 +30,12 @@ class MultiItemGroup extends Component {
 
     makeGroupClassName() {
         let finalClassName = 'list__item list__item_sub_true'
-        const { isOpened } = this.props
+        const { isOpened, isActive} = this.props
         if(isOpened) {
             finalClassName += ' list__item_active'
+        }
+        if (!isActive) {
+          finalClassName += ' link_color_l-grey';
         }
         return finalClassName
     }
@@ -41,7 +44,6 @@ class MultiItemGroup extends Component {
         const {
             text,
             id,
-            key,
             items,
             onValueChange,
             selectedItems,
@@ -110,7 +112,6 @@ MultiItemGroup.PropTypes = {
     selectedItems: PropTypes.instanceOf(Map),
     text: PropTypes.string,
     id: PropTypes.string,
-    key: PropTypes.string,
     isOpened: PropTypes.bool,
     classesToAdd: PropTypes.string,
     otherPlaceholder: PropTypes.string

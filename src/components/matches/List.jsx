@@ -50,7 +50,7 @@ export default class MatchesList extends Component {
 
 const CandidateItem = (props) => {
     const {match} = props
-    const {candidate: {status, brief:{firstName, lastName, avatar, recentWorkingArea, recentWorkingAreaParent, recentAnnualIncome}},
+    const {candidate: {status, brief:{firstName, lastName, avatar, recentWorkingAreas, recentAnnualIncome}},
       vacancy: {brief:{industry, salary}}} = match
 
     return (
@@ -66,7 +66,7 @@ const CandidateItem = (props) => {
 
 
 						<h4>{ `${firstName} ${lastName}` }</h4>
-						<LabeledValue label="Current Working Area" value={ `${recentWorkingAreaParent} | ${recentWorkingArea}` }/>
+						<LabeledValue label="Current Working Area" value={  recentWorkingAreas.reduce( (acc, {value, parent}) => `${parent} | ${value}, ${acc}`, '') }/>
 						<LabeledValue label="Current Toral Compensation" value={recentAnnualIncome} /> 
 
             <div className="row button-block">

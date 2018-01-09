@@ -90,14 +90,6 @@ export default function() {
                 jobTitle
             } = summary
 
-            const selectedItemFieldOfExpertise = findDropdownItemById({
-                id : fieldOfExpertise.id,
-                data : FIELD_OF_EXPERTISE_DROPDOWN_DATA
-            })
-            const selectedItemJobTitle = findDropdownItemById({
-                id : jobTitle.id,
-                data : JOB_TITLE_DROPDOWN_DATA
-            })
             const patch = {
                 id : entityId,
                 accessToken,
@@ -105,9 +97,7 @@ export default function() {
                     firstName : summary.firstName,
                     lastName : summary.lastName,
                     interestWorkingArea : summary.industry.value,
-                    recentWorkingArea : fieldOfExpertise.value,
-                    recentWorkingAreaParent : selectedItemFieldOfExpertise.parent ?
-                        selectedItemFieldOfExpertise.parent.title : null,
+                    recentWorkingAreas : fieldOfExpertise,
                     recentJob : jobTitle.value,
                     recentAnnualIncome : summary.income.value,
                     recentAreaExperience : summary.experience.value
@@ -325,10 +315,12 @@ export default function() {
                 const {
                     location 
                 } = profile
-                const fieldOfExpertisePath = findSequence({
-                    path : [profile.recentWorkingAreaParent, profile.recentWorkingArea]
-                        .filter((item) => (item)),
+              const fieldOfExpertisePaths = profile.recentWorkingAreas
+                .map(({parent, value}) => { 
+                  findSequence({
+                    path : [parent, value].filter((item) => (item)),
                     nestedListing : FIELD_OF_EXPERTISE_DROPDOWN_DATA
+                  })
                 })
                 const jobTitlePath = findSequence({
                     path : [profile.recentJobParent, profile.recentJob]
@@ -379,19 +371,21 @@ export default function() {
                     }
                 }
 
-                if (fieldOfExpertisePath) {
-                    const selectedItem = fieldOfExpertisePath.pop()
-                    const parentItem = fieldOfExpertisePath.shift()
+              if (fieldOfExpertisePaths.length > 0) {
+                fieldOfExpertisePaths.forEach( path => {
+                  const selectedItem = path.pop()
+                  const parentItem = path.shift()
 
-                    patch.summary.fieldOfExpertise = {
-                        id : selectedItem.id,
-                        value : profile.recentWorkingArea
+                  patch.summary.fieldOfExpertise.push({
+                    id : selectedItem.id,
+                    value:  selectedItem.title,
+                    parent : {
+                      id : parentItem.id,
+                      value : parentItem.title
                     }
-                    patch.summary.fieldOfExpertiseHead = {
-                        id : parentItem.id,
-                        value : parentItem.title
-                    }
-                }
+                  })
+                })
+              }
 
                 if (jobTitlePath) {
                     const selectedItem = jobTitlePath.pop()
