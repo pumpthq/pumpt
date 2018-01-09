@@ -13,8 +13,12 @@ class MultiItemGroup extends Component {
     handleGroupClick(e) {
         e.preventDefault()
 
-        const { onGroupClick, id } = this.props
-        onGroupClick(id)
+        const { onGroupClick, id, isActive } = this.props
+
+        if (!isActive) {
+          return;
+        }
+          onGroupClick(id);
     }
 
     makeUnGrouppedClassName() {
@@ -30,12 +34,9 @@ class MultiItemGroup extends Component {
 
     makeGroupClassName() {
         let finalClassName = 'list__item list__item_sub_true'
-        const { isOpened, isActive} = this.props
+        const { isOpened } = this.props
         if(isOpened) {
             finalClassName += ' list__item_active'
-        }
-        if (!isActive) {
-          finalClassName += ' link_color_l-grey';
         }
         return finalClassName
     }
@@ -48,12 +49,13 @@ class MultiItemGroup extends Component {
             onValueChange,
             selectedItems,
             handleGroups,
-            otherPlaceholder
+          otherPlaceholder,
+          isActive
         } = this.props
         if(handleGroups) {
             return(
                 <li class={this.makeGroupClassName()}>
-                    <a class='link link_size_xl'
+                    <a class={('link link_size_xl' + (isActive ? '' : ' link_color_l-grey link_type_nopointer'))}
                         onClick={this.handleGroupClick}
                     >{text}</a>
                     <ul class='list list_type_sublayer'>
