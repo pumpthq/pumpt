@@ -1,11 +1,11 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import {
-    List,
-    LIST_ITEM_TYPE_TEXT,
-    LIST_ITEM_TYPE_USER_ENTERED,
-    LIST_ITEM_TYPE_GROUP
-} from './../../../../../components/main/list2'
+    Multi,
+    MULTI_ITEM_TYPE_TEXT,
+    MULTI_ITEM_TYPE_USER_ENTERED,
+    MULTI_ITEM_TYPE_GROUP
+} from './../../../../../components/main/multilist'
 import Button from './../../../../../components/main/button'
 import { INDUSTRY_DROPDOWN_DATA } from './../../../../../constants/candidateOnboarding'
 import { apiEnumToListData } from './../../../../../utils'
@@ -18,26 +18,27 @@ import {
 
 @connect(
     function mapStateToProps(state, ownProps) {
-        const { industry } = state.candidateOnboarding
+        const { industries } = state.candidateOnboarding
         return {
-            prefilledIndustry: industry
+            prefilledIndustries: industries
         }
     },
     function mapDispatchToProps(dispatch, ownProps) {
-        const nextStep = ({id, value}) => {
+        const nextStep = (industries) => {
             dispatch(saveIndustryData({
-                industry : {
-                    id,
-                    value
-                }
+                industries
             }))
             dispatch(showFieldOfExpertiseStep())
             dispatch(gotoFieldOfExpertiseStep())
         };
+      const onChange = (industries) => dispatch(saveIndustryData({
+        industries
+      }))
 
         return {
             dispatch,
-            nextStep
+          nextStep,
+          onChange
         }
     }
 )
@@ -45,55 +46,54 @@ class IndustryContent extends Component {
     constructor(props) {
         super(props)
 
-        const { prefilledIndustry } = this.props
-        if(prefilledIndustry) {
-            console.log('Prefill state (Industry)')
-            console.log(this.props.prefilledIndustry)
+        const { prefilledIndustries } = this.props
+        if(prefilledIndustries) {
             this.state = {
                 stepValid: true,
-                id: prefilledIndustry.id,
-                value: prefilledIndustry.value
+                industries: prefilledIndustries,
             }
         } else {
             this.state = {
                 stepValid: false,
-                id: '',
-                value: ''
+                industries: []
             }
         }
         this.handleListChange = this.handleListChange.bind(this)
         this.handleNextButtonCLick = this.handleNextButtonCLick.bind(this)
     }
 
-    handleListChange({ id, value }) {
+    handleListChange(selected) {
         this.setState({
-            stepValid: (value !== '' && value.charAt(0) !== ' '),
-            id: id,
-            value: value
+            stepValid: selected.length !== 0, 
+            industries: selected
         })
+
+      const { onChange } = this.props;
+      onChange(selected);
     }
 
     handleNextButtonCLick(e) {
         let { dispatch, nextStep } = this.props
-        let { id, value } = this.state
-        nextStep({ id, value })
+        let { industries } = this.state
+        nextStep( industries )
     }
 
     render() {
+        const { prefilledIndustries } = this.props
         const convertedItems = apiEnumToListData(INDUSTRY_DROPDOWN_DATA)
         const classesToAdd = [
             'list_type_onboarding'
         ]
-        const { stepValid, id, value } = this.state
+        const { stepValid } = this.state
+
         return (
             <div>
-                <List
+                <Multi
                     items={convertedItems}
                     classesToAdd={classesToAdd}
                     allowNoSelection={true}
-                    listValueSelected={this.handleListChange}
-                    preselectedItem={id}
-                    preselectedValue={value}
+                    listValuesSelected={this.handleListChange}
+                    preselectedItems={prefilledIndustries}
                     handleGroups={false}
                     otherPlaceholder={'Enter Industry Here'}
                 />
@@ -113,7 +113,7 @@ class IndustryContent extends Component {
 IndustryContent.propTypes = {
     dispatch: PropTypes.func,
     nextStep: PropTypes.func,
-    prefilledIndustry: PropTypes.object
+    prefilledIndustries: PropTypes.array
 }
 
 IndustryContent.defaultProps = {

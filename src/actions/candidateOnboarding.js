@@ -97,10 +97,10 @@ export const showIndustryStep = () => ({
     type : SHOW_INDUSTRY_STEP
 })
 
-export const saveIndustryData = ({ industry }) => ({
+export const saveIndustryData = ({ industries }) => ({
     type : SAVE_INDUSTRY_DATA,
     payload : {
-        industry
+        industries
     }
 })
 

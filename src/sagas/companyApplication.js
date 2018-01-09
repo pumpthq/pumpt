@@ -59,9 +59,6 @@ const updateCompany = ({ id, accessToken, body }) =>
          method: 'PUT',
          baseURL: API_URL,
          url: `${API_COMPANY_ROOT}/current`,
-        //  headers: {
-        //      'access-token': accessToken,
-        //  },
          data: body,
          responseType: 'json',
      }).then(response => response.data)
@@ -89,7 +86,7 @@ export default function () {
                     body: {
                         name: summary.companyName,
                         employeesAmount: summary.numberOfEmployees.value,
-                        type: summary.companyType.value,
+                        type: summary.companyType,
                         foundDate: summary.foundationYear,
                     },
                 });
@@ -320,10 +317,7 @@ export default function () {
                         id: null,
                         value: employeesAmount,
                     },
-                    companyType: {
-                        id: null,
-                        value: type,
-                    },
+                    companyType:  type,
                     email: profile.user.email,
                 },
                 location,
