@@ -317,7 +317,7 @@ export default function() {
                 } = profile
               const fieldOfExpertisePaths = profile.recentWorkingAreas
                 .map(({parent, value}) => { 
-                  findSequence({
+                  return findSequence({
                     path : [parent, value].filter((item) => (item)),
                     nestedListing : FIELD_OF_EXPERTISE_DROPDOWN_DATA
                   })
