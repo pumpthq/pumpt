@@ -218,14 +218,6 @@ export default class CompanyForm extends Component {
                             </div>
                         </div>
                         {this.renderCompanyHeader()}
-
-                        {/* <div className="summary-head__title-item summary-head__title-item_type_alignment summary-head__title-item_type_action-bar">
-                            <div className="summary-head__title-column">
-                                <a className="link" onClick={onClickGoToCompanyPage}>
-                                    Go to Company Page
-                                </a>
-                            </div>
-                        </div> */}
                     </div>
                 </div>
 
