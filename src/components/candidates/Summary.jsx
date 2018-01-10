@@ -9,7 +9,7 @@ import {updateCandidate} from 'actions/candidateMatches'
 
 export default class CandidateSummary extends Component {
     render() {
-        const { candidate: { firstName, lastName, avatar, interestWorkingArea, recentWorkingArea, recentWorkingAreaParent, recentJob, recentAnnualIncome, recentAreaExperience } } = this.props
+        const { candidate: { firstName, lastName, avatar, interestWorkingArea, recentWorkingAreas, recentJob, recentAnnualIncome, recentAreaExperience } } = this.props
         const { authorization: {email}, onEdit} = this.props
         return (
             <div class="summary-head">
@@ -52,13 +52,13 @@ export default class CandidateSummary extends Component {
                         </div>
                         <div class="summary-head__title-column">
 														<span class="text summary-head__label">Working Area</span>
-														<span class="text text_size_s summary-head__summary">{recentWorkingAreaParent}</span>
+                            <span class="text text_size_s summary-head__summary">{recentWorkingAreas ? recentWorkingAreas.map(({parent}) => parent).join(', ') : ''}</span>
                             <span class="text summary-head__label">Job Title </span>
                             <span class="text text_size_s summary-head__summary">{recentJob}</span>
                         </div>
                         <div class="summary-head__title-column">
 														<span class="text summary-head__label">Specialty</span>
-														<span class="text text_size_s summary-head__summary">{recentWorkingArea}</span>
+														<span class="text text_size_s summary-head__summary">{recentWorkingAreas ? recentWorkingAreas.map(({value}) => value).join(', ') : ''}</span>
                             <span class="text summary-head__label">Industry Experience </span>
                             <span class="text text_size_s summary-head__summary">{recentAreaExperience}</span>
                         </div>
