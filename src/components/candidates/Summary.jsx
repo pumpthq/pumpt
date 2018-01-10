@@ -51,14 +51,14 @@ export default class CandidateSummary extends Component {
                             <span class="text text_size_s summary-head__summary">{recentAnnualIncome}</span>
                         </div>
                         <div class="summary-head__title-column">
-														<span class="text summary-head__label">Working Areas</span>
-                            <span class="text text_size_s summary-head__summary">{recentWorkingAreas.map(({parent}) => parent).join(', ')}</span>
+														<span class="text summary-head__label">Working Area</span>
+                            <span class="text text_size_s summary-head__summary">{recentWorkingAreas ? recentWorkingAreas.map(({parent}) => parent).join(', ') : ''}</span>
                             <span class="text summary-head__label">Job Title </span>
                             <span class="text text_size_s summary-head__summary">{recentJob}</span>
                         </div>
                         <div class="summary-head__title-column">
 														<span class="text summary-head__label">Specialty</span>
-														<span class="text text_size_s summary-head__summary">{recentWorkingAreas.map(({value}) => value).join(', ')}</span>
+														<span class="text text_size_s summary-head__summary">{recentWorkingAreas ? recentWorkingAreas.map(({value}) => value).join(', ') : ''}</span>
                             <span class="text summary-head__label">Industry Experience </span>
                             <span class="text text_size_s summary-head__summary">{recentAreaExperience}</span>
                         </div>
