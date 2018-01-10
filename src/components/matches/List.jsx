@@ -50,7 +50,7 @@ export default class MatchesList extends Component {
 
 const CandidateItem = (props) => {
     const {match} = props
-    const {candidate: {status, brief:{firstName, lastName, avatar, recentWorkingArea, recentWorkingAreaParent, recentAnnualIncome}},
+    const {candidate: {status, brief:{firstName, lastName, avatar, recentWorkingAreas, recentAnnualIncome}},
       vacancy: {brief:{industry, salary}}} = match
 
     return (
@@ -59,15 +59,15 @@ const CandidateItem = (props) => {
           <div className="match-avatar-block">
 						{avatar && <img src={apiImage(avatar)} className="match-avatar"/>}
             <br/>
-            <h4>status: <span>{status}</span></h4>
+            <h4>Status: <span>{status}</span></h4>
           </div>
 
           <div className="match-avatar-info">
 
 
 						<h4>{ `${firstName} ${lastName}` }</h4>
-						<LabeledValue label="Current Working Area" value={ `${recentWorkingAreaParent} | ${recentWorkingArea}` }/>
-						<LabeledValue label="Current Toral Compensation" value={recentAnnualIncome} /> 
+						<LabeledValue label="Experience" value={  recentWorkingAreas.reduce( (acc, {value, parent}) => `${parent} | ${value}, ${acc}`, '') }/>
+						<LabeledValue label="Current Total Compensation" value={recentAnnualIncome} /> 
 
             <div className="row button-block">
 							<div class="col-md-12">

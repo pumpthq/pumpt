@@ -6,7 +6,6 @@ class MultiselectComponent extends Component {
     super(props);
     this.handleValueChange = this.handleValueChange.bind(this);
     this.handleGroupClick = this.handleGroupClick.bind(this);
-    this.toggleGroup = this.toggleGroup.bind(this);
     this.isGroupOpened = this.isGroupOpened.bind(this);
     this.getParent = this.getParent.bind(this);
 
@@ -16,7 +15,7 @@ class MultiselectComponent extends Component {
 
     this.state = {
       selectedItems,
-      openGroupsId: [],
+      openGroupId: null,
     };
   }
 
@@ -24,7 +23,7 @@ class MultiselectComponent extends Component {
     const { preselectedItems } = this.props;
     if (preselectedItems && preselectedItems.length > 0) {
       const parent = this.getParent(preselectedItems[0].id);
-      this.setState({ openGroupsId: this.toggleGroup(parent.id) });
+      this.setState({ openGroupId: parent.id });
     }
   }
 
@@ -43,10 +42,14 @@ class MultiselectComponent extends Component {
     const { items, handleGroups, classesToAdd, otherPlaceholder } = this.props,
       { selectedItems } = this.state;
 
+
     return (
             <ul className={this.makeClassName()}>
             {
                 items.map((group) => {
+                  const groupClickable = selectedItems.length === 0 ||
+                    Array.from(selectedItems.values())
+                    .reduce((acc,item) => acc && item.parent.id  === group.id, true);
                   return (
                         <MultiItemGroup
                           {...group}
@@ -55,6 +58,7 @@ class MultiselectComponent extends Component {
                           selectedItems={selectedItems}
                           handleGroups={handleGroups}
                           isOpened={this.isGroupOpened(group.id)}
+                          isActive={groupClickable}
                           classesToAdd={classesToAdd}
                           otherPlaceholder={otherPlaceholder}
                         />
@@ -66,7 +70,7 @@ class MultiselectComponent extends Component {
   }
 
   handleGroupClick(groupId) {
-    this.setState({ openGroupsId: this.toggleGroup(groupId) });
+    this.setState({ openGroupId: groupId });
   }
 
   handleValueChange({ id, value }) {
@@ -76,7 +80,7 @@ class MultiselectComponent extends Component {
     // it.
     // But if the item has changed in value, it's probably user-entered text.
     // Don't delete it, update the value.
-    if (selectedItems.has(id) && selectedItems.size > 1 
+    if (selectedItems.has(id)
       && selectedItems.get(id).value === value) {
       selectedItems.delete(id);
       this.setState({ selectedItems });
@@ -94,34 +98,11 @@ class MultiselectComponent extends Component {
     this.props.listValuesSelected(Array.from(this.state.selectedItems.values()));
   }
 
-  toggleGroup(groupIdClicked) {
-    const { openGroupsId } = this.state,
-      newOpenGroupsId = [];
-    let wasItemInLIst = false;
-    openGroupsId.forEach((groupId) => {
-      if (groupId === groupIdClicked) {
-        wasItemInLIst = true;
-      } else {
-        newOpenGroupsId.push(groupId);
-      }
-    });
-    if (!wasItemInLIst) {
-      newOpenGroupsId.push(groupIdClicked);
-    }
-    return newOpenGroupsId;
-  }
-
   isGroupOpened(groupId) {
-    const { openGroupsId } = this.state;
-    let wasGroupFind = false;
-    openGroupsId.forEach((listGroupId) => {
-      if (listGroupId === groupId) {
-        wasGroupFind = true;
-      }
-    });
-    return wasGroupFind;
+    return groupId === this.state.openGroupId;
   }
 
+  // getParent assumes one level of nesting
   getParent(itemId) {
     const { items } = this.props,
       parent = {

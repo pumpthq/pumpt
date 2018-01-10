@@ -108,11 +108,10 @@ export const showFieldOfExpertiseStep = () => ({
     type : SHOW_FIELD_OF_EXPERTISE_STEP
 })
 
-export const saveFieldOfExpertiseStep = ({ fieldOfExpertise, fieldOfExpertiseHead }) => ({
+export const saveFieldOfExpertiseStep = ({ fieldOfExpertise }) => ({
     type : SAVE_FIELD_OF_EXPERTISE_DATA,
     payload : {
-        fieldOfExpertise,
-        fieldOfExpertiseHead
+        fieldOfExpertise
     }
 })
 
