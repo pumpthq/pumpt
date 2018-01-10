@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { MultiItemGroup } from './index';
+import './multi.less'
 
 class MultiselectComponent extends Component {
   constructor(props) {
@@ -29,7 +30,7 @@ class MultiselectComponent extends Component {
 
   makeClassName() {
     const { classesToAdd } = this.props;
-    let finalClassName = 'list';
+    let finalClassName = 'multi';
 
     classesToAdd.forEach((className) => {
       finalClassName += ` ${className}`;

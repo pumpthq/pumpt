@@ -37,15 +37,13 @@ class MultiItemUserEntered extends Component {
     }
 
     makeClassName() {
-        let finalClassName = 'list__item with-child-control'
+        let finalClassName = 'multi__item with-child-control'
         let { isSelected, noOneSelected } = this.props
         if(noOneSelected) {
             finalClassName += ' link'
         } else {
             if(isSelected) {
-                finalClassName += ' link'
-            } else {
-                finalClassName += '  link_color_l-grey'
+                finalClassName += ' link multi__item_selected'
             }
         }
         return finalClassName

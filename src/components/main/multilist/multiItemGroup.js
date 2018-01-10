@@ -58,7 +58,7 @@ class MultiItemGroup extends Component {
                     <a class={('link link_size_xl' + (isActive ? '' : ' link_color_l-grey link_type_nopointer'))}
                         onClick={this.handleGroupClick}
                     >{text}</a>
-                    <ul class='list list_type_sublayer'>
+                    <ul class='multi multi_type_sublayer'>
                         {
                             items.map(item => {
                                 const val = selectedItems.has(item.id) ?
