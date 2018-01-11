@@ -4,6 +4,7 @@ import { reduxForm, FieldArray, Field, SubmissionError, formValueSelector } from
 
 //Places Autocomplete Library
 import { PlaceField } from 'components/main/form/PlaceField'
+import { MultiInput } from 'components/main/form/MultiInput'
 
 //Actions
 import { createJob } from 'actions/companyJobs'
@@ -125,8 +126,9 @@ let JobForm = props => {
 								</Field>
 
 								{industryValue &&
-									<Field name="industry" component={renderSelectField} validate={required} label="Specialty" class="mdl-textfield__input textfield__input textfield__light">
-										{ industryParentObj(industryValue).map((item) => {return <option value={item.title}>{item.title}</option>})  }
+                    <Field name="industry" component={MultiInput} validate={required} label="Specialty" class="mdl-textfield__input textfield__input textfield__light" 
+                      values={ industryParentObj(industryValue).map((item) => item.title)  }
+                      initialValues={ {input: { value: [] }} }>
 									</Field>
 								}
                 <div>
