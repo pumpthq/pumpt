@@ -42,9 +42,6 @@ class EditContainer extends Component {
                     initialValues={candidate}
                     onSubmit={values=> {dispatch(updateCandidate(values)) } }/>
 
-                {/* <CandidateForm initialValues={candidate} onSubmit={values=> dispatch(updateCandidate(id,values))}/> */}
-
-
             </div>
 
         );
