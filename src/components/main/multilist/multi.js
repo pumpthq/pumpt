@@ -2,6 +2,19 @@ import React, { Component, PropTypes } from 'react';
 import { MultiItemGroup } from './index';
 import './multi.less'
 
+const LIST_ITEM_TYPE_TEXT = 'list.item.type.text'
+const makeItem = (value, parentId) => {
+  return {
+     id: value,
+     value: value, 
+     text: value,
+     name: value,
+     key: value,
+     groupId: parentId,
+     type: LIST_ITEM_TYPE_TEXT
+  }
+};
+
 class MultiselectComponent extends Component {
   constructor(props) {
     super(props);
@@ -9,15 +22,33 @@ class MultiselectComponent extends Component {
     this.handleGroupClick = this.handleGroupClick.bind(this);
     this.isGroupOpened = this.isGroupOpened.bind(this);
     this.getParent = this.getParent.bind(this);
+    this.handleEnter = this.handleEnter.bind(this);
+    this.inItems = this.inItems.bind(this);
 
-    const { preselectedItems } = props;
+    const { preselectedItems, items } = props;
     const selectedItems = preselectedItems
       .reduce((acc, item) => acc.set(item.id, item), new Map());
+    const additionalItems = preselectedItems
+      .filter(p => !this.inItems(p.id,p.parent.id)).map(i => makeItem(i.value, i.parent.id));
+    const openId = preselectedItems.length === 0  ? null : preselectedItems[0].parent.id;
 
     this.state = {
       selectedItems,
-      openGroupId: null,
+      openGroupId: openId,
+      additionalItems // created by 'Other' fillins
     };
+  }
+
+  inItems(probeID, parentID) {
+    console.log(probeID);
+    console.log(parentID);
+    const {items} = this.props;
+    let g = items.find( g => g.id===parentID );
+    if (g) {
+      return !!items.find( i => i.id === probeID);
+    }
+
+    return false;
   }
 
   componentDidMount() {
@@ -41,7 +72,7 @@ class MultiselectComponent extends Component {
 
   render() {
     const { items, handleGroups, classesToAdd, otherPlaceholder } = this.props,
-      { selectedItems } = this.state;
+      { selectedItems, additionalItems } = this.state;
 
 
     return (
@@ -51,9 +82,12 @@ class MultiselectComponent extends Component {
                   const groupClickable = selectedItems.length === 0 ||
                     Array.from(selectedItems.values())
                     .reduce((acc,item) => acc && item.parent.id  === group.id, true);
+                  const groupAdditions = additionalItems.filter(i => i.groupId === group.id);
+
                   return (
                         <MultiItemGroup
                           {...group}
+                          additionalItems={groupAdditions}
                           onValueChange={this.handleValueChange}
                           onGroupClick={this.handleGroupClick}
                           selectedItems={selectedItems}
@@ -62,6 +96,7 @@ class MultiselectComponent extends Component {
                           isActive={groupClickable}
                           classesToAdd={classesToAdd}
                           otherPlaceholder={otherPlaceholder}
+                          handleEnter={this.handleEnter}
                         />
                     );
                 })
@@ -70,6 +105,23 @@ class MultiselectComponent extends Component {
         );
   }
 
+  handleEnter(otherId, value, parentId) {
+    const { items, listValuesSelected } = this.props
+    const { selectedItems, additionalItems} = this.state
+    let parent = items.find(g => g.id === parentId);
+    parent = {id: parent.id, value: parent.text}
+
+    const newItem = makeItem(value, parentId);
+
+    selectedItems.delete(otherId); // deselect Other to select created tag
+    this.setState({
+      additionalItems: additionalItems.concat([newItem]),
+      selectedItems: selectedItems.set(value, {id: value, value: value, parent: parent})
+    })
+
+    this.props.listValuesSelected(Array.from(this.state.selectedItems.values()));
+  }
+  
   handleGroupClick(groupId) {
     this.setState({ openGroupId: groupId });
   }

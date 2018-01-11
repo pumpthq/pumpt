@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { MultiItem } from './index'
+const LIST_ITEM_TYPE_TEXT = 'list.item.type.text'
 
 class MultiItemGroup extends Component {
     constructor(props) {
@@ -8,6 +9,12 @@ class MultiItemGroup extends Component {
         this.handleGroupClick = this.handleGroupClick.bind(this)
         this.makeUnGrouppedClassName = this.makeUnGrouppedClassName.bind(this)
         this.makeGroupClassName = this.makeGroupClassName.bind(this)
+        this.handleEnter = this.handleEnter.bind(this)
+    }
+
+    handleEnter(otherId, value) {
+      let { handleEnter, id } = this.props;
+      handleEnter(otherId, value, id);
     }
 
     handleGroupClick(e) {
@@ -50,8 +57,20 @@ class MultiItemGroup extends Component {
             selectedItems,
             handleGroups,
           otherPlaceholder,
-          isActive
+          isActive,
+          additionalItems
         } = this.props
+
+      const compare = (a,b) => {
+        if (a.type === LIST_ITEM_TYPE_TEXT && b.type === LIST_ITEM_TYPE_TEXT) {
+          return 0;
+        } else if (a.type === LIST_ITEM_TYPE_TEXT) {
+          return -1;
+        } else {
+          return 1;
+        }
+      }
+
         if(handleGroups) {
             return(
                 <li class={this.makeGroupClassName()}>
@@ -60,7 +79,9 @@ class MultiItemGroup extends Component {
                     >{text}</a>
                     <ul class='multi multi_type_sublayer'>
                         {
-                            items.map(item => {
+                          items.concat(additionalItems)
+                            .sort(compare)
+                            .map(item => {
                                 const val = selectedItems.has(item.id) ?
                                     selectedItems.get(item.id).value : '';
                                 return(
@@ -71,6 +92,7 @@ class MultiItemGroup extends Component {
                                         preselectedValue={val}
                                         noOneSelected={selectedItems.length === 0}
                                         otherPlaceholder={otherPlaceholder}
+                                        onEnter={this.handleEnter}
                                     />
                                 )
                             })
@@ -82,7 +104,9 @@ class MultiItemGroup extends Component {
             return(
                 <ul className={this.makeUnGrouppedClassName()}>
                 {
-                    items.map(item => {
+                  items.concat(additionalItems)
+                  .sort(compare)
+                  .map(item => {
                         const val = selectedItems.has(item.id) ?
                             selectedItems.get(item.id).value : '';
                         return(
@@ -93,6 +117,7 @@ class MultiItemGroup extends Component {
                                 preselectedValue={val}
                                 noOneSelected={selectedItems.length === 0}
                                 otherPlaceholder={otherPlaceholder}
+                                onEnter={this.handleEnter}
                             />
                         )
                     })
@@ -116,11 +141,12 @@ MultiItemGroup.PropTypes = {
     id: PropTypes.string,
     isOpened: PropTypes.bool,
     classesToAdd: PropTypes.string,
-    otherPlaceholder: PropTypes.string
+    otherPlaceholder: PropTypes.string,
+    handleEnter: PropTypes.func
 }
 
 MultiItemGroup.defaultProps = {
-
+    handleEnter: () => {}
 }
 
 export {

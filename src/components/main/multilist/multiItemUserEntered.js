@@ -13,6 +13,7 @@ class MultiItemUserEntered extends Component {
 
         this.handleClick = this.handleClick.bind(this)
         this.handleValueChange = this.handleValueChange.bind(this)
+        this.handleKeyPress = this.handleKeyPress.bind(this)
     }
 
     handleClick(e) {
@@ -34,6 +35,19 @@ class MultiItemUserEntered extends Component {
             id: id,
             value: value
         })
+    }
+
+    handleKeyPress(event) {
+      let { onEnter, id } = this.props;
+      let { value } = this.state;
+      if (event.key === "Enter") {
+        onEnter(id, value);
+        // Enter means we're done with this tag, so clear its state
+        // leave it to parent to handle the rest
+        this.setState({
+          value: ''
+        });
+      }
     }
 
     makeClassName() {
@@ -64,6 +78,7 @@ class MultiItemUserEntered extends Component {
                         value={value}
                         onValueChange={this.handleValueChange}
                         placeholder={otherPlaceholder}
+                        onKeyPress={this.handleKeyPress}
                     />
                 </div>
             )
@@ -86,7 +101,8 @@ MultiItemUserEntered.PropTypes = {
     onValueChange: PropTypes.func,
     isSelected: PropTypes.bool,
     noOneSelected: PropTypes.bool,
-    otherPlaceholder: PropTypes.string
+    otherPlaceholder: PropTypes.string,
+    onEnter: PropTypes.func
 }
 
 MultiItemUserEntered.defaultProps = {
@@ -96,7 +112,8 @@ MultiItemUserEntered.defaultProps = {
     isSelected: false,
     onValueChange: () => {},
     noOneSelected: true,
-    otherPlaceholder: PropTypes.string
+    otherPlaceholder: PropTypes.string,
+    onEnter: () => {}
 }
 
 export {
