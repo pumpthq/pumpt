@@ -4,7 +4,7 @@ import { reduxForm, FieldArray, Field, SubmissionError, formValueSelector } from
 
 //Places Autocomplete Library
 import { PlaceField } from 'components/main/form/PlaceField'
-import { MultiInput } from 'components/main/form/MultiInput'
+import MultiInput from 'components/main/form/MultiInput'
 
 //Actions
 import { createJob } from 'actions/companyJobs'
@@ -48,15 +48,23 @@ export const TextAreaField = ({input, label, meta: { asyncValidating, touched, e
     </span>
 )
 
-const renderSelectField = ({ input, label, type, meta: { touched, error }, children }) => (
+const renderSelectField = ({ input, label, type, meta: { touched, error }, children }) => {
+  let inputProps = {...input};
+  delete inputProps.value;
+  return (
     <div>
-      <select {...input} class="mdl-textfield__input textfield__input textfield__light">
-				<option value="" class="disabled-text-option" disabled selected>{label}</option>
+      <select 
+        {...inputProps} 
+        class="mdl-textfield__input textfield__input textfield__light"
+        defaultValue={label}
+      >
+        <option value={label} class="disabled_text_option" disabled >{label}</option>
         {children}
       </select>
       {touched && error && <span class="textfield__error textfield__error_small">{error}</span>}
     </div>
-)
+  )
+}
 const buttonStyle = {
     cursor: 'pointer',
 };
@@ -125,12 +133,21 @@ let JobForm = props => {
 									{ FIELD_OF_EXPERTISE_DROPDOWN_DATA.map((item) => {return <option key={item.id} value={item.title}>{item.title}</option>}) }
 								</Field>
 
+<<<<<<< Updated upstream
 								{industryValue &&
                     <Field name="industry" component={MultiInput} validate={required} label="Specialty" class="mdl-textfield__input textfield__input textfield__light" 
                       values={ industryParentObj(industryValue).map((item) => item.title)  }
                       initialValues={ {input: { value: [] }} }>
 									</Field>
 								}
+=======
+                {industryValue &&
+                    <Field name="industry" component={MultiInput} validate={required} label="Specialty" class="mdl-textfield__input textfield__input textfield__light" 
+                      values={ industryParentObj(industryValue).map((item) => item.title)  }
+                      initialValues={ {input: { value: [] }} }>
+                    </Field>
+                }
+>>>>>>> Stashed changes
                 <div>
                   <label>Description</label>
     										<Field
