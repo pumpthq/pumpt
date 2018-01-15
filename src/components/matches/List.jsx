@@ -66,7 +66,7 @@ const CandidateItem = (props) => {
 
 
 						<h4>{ `${firstName} ${lastName}` }</h4>
-						<LabeledValue label="Experience" value={  recentWorkingAreas.reduce( (acc, {value, parent}) => `${parent} | ${value}, ${acc}`, '') }/>
+						<LabeledValue label="Experience" value={recentWorkingAreas.reduce( (acc, {value, parent}) => `${parent} | ${value}, ${acc}`, '')}/>
 						<LabeledValue label="Current Total Compensation" value={recentAnnualIncome} /> 
 
             <div className="row button-block">
@@ -92,7 +92,7 @@ const LabeledValue = (props) => (
 CandidateItem.defaultProps = {
     match: {
         candidate: {}
-    }
+    },
 }
 
 const CardDivider = () => (<div className="summary-head__title-item summary-head__title-item_type_alignment summary-head__title-item_type_middle"></div>)
