@@ -5,19 +5,24 @@ class MultiInput extends Component {
   constructor(props) {
     super(props);
     this.update = this.update.bind(this);
-    this.makeTag= this.makeTag.bind(this);
+    this.makeTag = this.makeTag.bind(this);
     this.state = {
       otherTags: []
     }
   }
 
   update(target) {
-    const { input: { value } } = this.props;
-    if (value.includes(target)) {
-      const d = value.indexOf(target);
-      return value.slice(0, d).concat(value.slice(d + 1));
+    const { input: { value }, values } = this.props;
+    const { otherTags } = this.state;
+    // remove dead tags
+    let newList = value && Array.isArray(value) ?
+      value.filter(v => (values.includes(v) || otherTags.includes(v)))
+      : [];
+    if (newList.includes(target)) {
+      const d = newList.indexOf(target);
+      return newList.slice(0, d).concat(newList.slice(d + 1));
     }
-    return [...value, target];
+    return [...newList, target];
   }
 
   makeTag(newTag) {
@@ -38,7 +43,9 @@ class MultiInput extends Component {
         { displayItems.map(val => (
           <Button
             key={val}
-            onClick={() => onChange(this.update(val))}
+            onClick={() => {
+              onChange(this.update(val));
+            }}
             typeColored
             buttonColor={value.includes(val) ? 'gold' : 'purple'}
             className="button_type_tag"
@@ -61,12 +68,14 @@ class MultiInput extends Component {
 MultiInput.propTypes = {
   input: PropTypes.object,
   values: PropTypes.arrayOf(PropTypes.string),
+  label: PropTypes.string,
 };
 MultiInput.defaultProps = {
   input: {
     value: [],
   },
   values: [],
+  label: '',
 };
 
 export default MultiInput;
