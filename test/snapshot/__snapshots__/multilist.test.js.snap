@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Multilist renders properly 1`] = `
+<ul
+  className="list"
+>
+  <li
+    className="list__item list__item_sub_true"
+  >
+    <a
+      className="link link_size_xl"
+      onClick={[Function]}
+    >
+      choice 1 parent
+    </a>
+    <ul
+      className="list list_type_sublayer"
+    >
+      <li
+        className="link_size_xl list__item link link_color_l-grey"
+        onClick={[Function]}
+      >
+        <span
+          className="link_size_xl"
+        >
+          choice 1 child
+        </span>
+      </li>
+    </ul>
+  </li>
+  <li
+    className="list__item list__item_sub_true"
+  >
+    <a
+      className="link link_size_xl"
+      onClick={[Function]}
+    >
+      choice 2 p
+    </a>
+    <ul
+      className="list list_type_sublayer"
+    />
+  </li>
+</ul>
+`;
