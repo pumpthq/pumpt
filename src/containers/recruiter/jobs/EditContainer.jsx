@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { find } from 'lodash'
 import { updateJob } from 'actions/companyJobs'
 
-import JobForm from 'components/jobs/JobForm'
+import JobForm, { reshapeIndustry, reshapeIndustries } from 'components/jobs/JobForm'
 import VerticalScroller from 'components/VerticalScroller'
 
 const propTypes = {};
@@ -19,7 +19,9 @@ class EditContainer extends Component {
         const { dispatch, job, id } = this.props
         return (
             <VerticalScroller>
-                <JobForm initialValues={job} onSubmit={values=> dispatch(updateJob(id,values))}/>
+              <JobForm
+                initialValues={industryIn(job)} 
+                onSubmit={values=> dispatch(updateJob(id, industryOut(values)))}/>
             </VerticalScroller>
         );
     }

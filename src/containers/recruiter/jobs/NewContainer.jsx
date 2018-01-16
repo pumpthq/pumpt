@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { dispatchProp } from 'components/helpers'
 
-import JobForm from 'components/jobs/JobForm'
+import JobForm, { reshapeIndustry } from 'components/jobs/JobForm'
 import VerticalScroller from 'components/VerticalScroller'
 
 import { createJob } from 'actions/companyJobs'
@@ -14,7 +14,7 @@ class NewContainer extends Component {
         const { dispatch } = this.props
         return (
             <VerticalScroller>
-                <JobForm onSubmit={values=> dispatch(createJob(values))}/>
+                <JobForm onSubmit={values=> dispatch(createJob(industryOut(values)))}/>
             </VerticalScroller>
         );
     }

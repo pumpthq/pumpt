@@ -133,21 +133,12 @@ let JobForm = props => {
 									{ FIELD_OF_EXPERTISE_DROPDOWN_DATA.map((item) => {return <option key={item.id} value={item.title}>{item.title}</option>}) }
 								</Field>
 
-<<<<<<< Updated upstream
 								{industryValue &&
                     <Field name="industry" component={MultiInput} validate={required} label="Specialty" class="mdl-textfield__input textfield__input textfield__light" 
                       values={ industryParentObj(industryValue).map((item) => item.title)  }
                       initialValues={ {input: { value: [] }} }>
 									</Field>
 								}
-=======
-                {industryValue &&
-                    <Field name="industry" component={MultiInput} validate={required} label="Specialty" class="mdl-textfield__input textfield__input textfield__light" 
-                      values={ industryParentObj(industryValue).map((item) => item.title)  }
-                      initialValues={ {input: { value: [] }} }>
-                    </Field>
-                }
->>>>>>> Stashed changes
                 <div>
                   <label>Description</label>
     										<Field
@@ -227,3 +218,14 @@ JobForm = connect(state => {
 
 //Export Form
 export default JobForm
+export const industryOut = (values) => {
+  values.industries = values.industry.map(i => ({parent: values.industryParent, value: i}));
+  delete values.industry;
+  delete values.industryParent;
+  return values;
+}
+export const industryIn = (values) => {
+  values.industry = values.industries.map(i => (i.value));
+  values.industryParent = values.industries.length > 0 ? values.industries[0].parent : undefined;
+  return values;
+}
