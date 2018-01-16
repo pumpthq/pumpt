@@ -37,7 +37,6 @@
     h4 {
       font-size: 18px;
       color: #fff;
-      margin-left: 10px;
 
       span {
         text-transform: capitalize;
@@ -64,16 +63,22 @@
 
     .button-block {
       margin-top: 25px;
+      div[class^="col"] > div {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
     }
 
     button {
       padding: 0 20px;
+      margin-bottom: 5px;
       span:first-of-type {
-        //margin-right: 10px;
       }
     }
     a {
-      margin-right: 20px;
+      margin-right: 36px;
+      margin-bottom: 5px;
       color: #fff;
       cursor: pointer;
 
