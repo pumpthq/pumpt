@@ -134,10 +134,13 @@ let JobForm = props => {
 								</Field>
 
 								{industryValue &&
-                    <Field name="industry" component={MultiInput} validate={required} label="Specialty" class="mdl-textfield__input textfield__input textfield__light" 
+                <div>
+                  <label>Specialty</label>
+                  <Field name="industry" component={MultiInput} validate={required} label="Specialty" class="mdl-textfield__input textfield__input textfield__light" 
                       values={ industryParentObj(industryValue).map((item) => item.title)  }
                       initialValues={ {input: { value: [] }} }>
 									</Field>
+                </div>
 								}
                 <div>
                   <label>Description</label>
