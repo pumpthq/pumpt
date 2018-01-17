@@ -31,12 +31,11 @@ export class To extends Component {
             dispatch
         } = this.props
         const stateItem = onboardingState.companyType
-        let item = null
+        let type = "";
+        if (stateItem) {
+            type = stateItem.map(({ value }) => value).join(' | ');
+        }
 
-        stateItem ? item = findById({
-            id : stateItem.id,
-            data : COMPANY_TYPE_DATA
-        }) : null
         return(
             <NavigationLink2
                 style={{
@@ -44,7 +43,7 @@ export class To extends Component {
                 }}
                 active={isActive}
                 filled={isFilled}
-                textFilledWith={stateItem ? stateItem.value || item.value : ''}
+                textFilledWith={type}
                 textLabel='Company Type'
                 onClick={() => {
                     if (isEnabled) {

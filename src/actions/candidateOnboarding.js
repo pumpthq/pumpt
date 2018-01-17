@@ -97,10 +97,10 @@ export const showIndustryStep = () => ({
     type : SHOW_INDUSTRY_STEP
 })
 
-export const saveIndustryData = ({ industry }) => ({
+export const saveIndustryData = ({ industries }) => ({
     type : SAVE_INDUSTRY_DATA,
     payload : {
-        industry
+        industries
     }
 })
 
@@ -108,11 +108,10 @@ export const showFieldOfExpertiseStep = () => ({
     type : SHOW_FIELD_OF_EXPERTISE_STEP
 })
 
-export const saveFieldOfExpertiseStep = ({ fieldOfExpertise, fieldOfExpertiseHead }) => ({
+export const saveFieldOfExpertiseStep = ({ fieldOfExpertise }) => ({
     type : SAVE_FIELD_OF_EXPERTISE_DATA,
     payload : {
-        fieldOfExpertise,
-        fieldOfExpertiseHead
+        fieldOfExpertise
     }
 })
 

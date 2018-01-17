@@ -1,11 +1,11 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import {
-    List,
-    LIST_ITEM_TYPE_TEXT,
-    LIST_ITEM_TYPE_USER_ENTERED,
-    LIST_ITEM_TYPE_GROUP
-} from './../../../../../components/main/list2'
+    Multi,
+    MULTI_ITEM_TYPE_TEXT,
+    MULTI_ITEM_TYPE_USER_ENTERED,
+    MULTI_ITEM_TYPE_GROUP
+} from './../../../../../components/main/multilist'
 import Button from './../../../../../components/main/button'
 import { FIELD_OF_EXPERTISE_DROPDOWN_DATA } from './../../../../../constants/candidateOnboarding';
 import { apiEnumToListData } from './../../../../../utils'
@@ -19,31 +19,21 @@ import {
 
 @connect(
     function mapStateToProps(state) {
-        const { fieldOfExpertise, fieldOfExpertiseHead } = state.candidateOnboarding
+        const { fieldOfExpertise } = state.candidateOnboarding
         return {
-            prefilledFieldOfExpertise: {
-                fieldOfExpertise,
-                fieldOfExpertiseHead
-            }
+            prefilledFieldOfExpertise: fieldOfExpertise
         }
     },
     function mapDispatchToProps(dispatch) {
-        const nextStep = ({id, value, parent }) => {
+        const nextStep = ( selected ) => {
             dispatch(saveFieldOfExpertiseStep({
-                fieldOfExpertise: {
-                    id: id,
-                    value: value
-                },
-                fieldOfExpertiseHead: parent
+                fieldOfExpertise: selected
             }))
             dispatch(showJobTitleStep())
             dispatch(gotoJobTitleStep())
         };
 
-        return {
-            dispatch,
-            nextStep
-        }
+        return { nextStep }
     }
 )
 class FieldOfExpertiseContent extends Component {
@@ -54,38 +44,30 @@ class FieldOfExpertiseContent extends Component {
 
         this.state = {
             stepValid: false,
-            id: '',
-            vaule: '',
-            parent: ''
+            selected: []
         }
-        if(prefilledFieldOfExpertise) {
-            if(prefilledFieldOfExpertise.fieldOfExpertise && prefilledFieldOfExpertise.fieldOfExpertiseHead) {
+        if(prefilledFieldOfExpertise && prefilledFieldOfExpertise.size > 0) {
                 this.state = {
                     stepValid: true,
-                    id: prefilledFieldOfExpertise.fieldOfExpertise.id,
-                    value: prefilledFieldOfExpertise.fieldOfExpertise.value,
-                    parent: prefilledFieldOfExpertise.fieldOfExpertiseHead
+                    selected: prefilledFieldOfExpertise
                 }
-            }
         }
 
         this.handleListChange = this.handleListChange.bind(this)
         this.handleNextButtonCLick = this.handleNextButtonCLick.bind(this)
     }
 
-    handleListChange({ id, value, parent }) {
+    handleListChange(selected) {
         this.setState({
-            stepValid: (value !== '' && value.charAt(0) !== ' '),
-            id: id,
-            value: value,
-            parent: parent
+            stepValid: selected.length !== 0,
+            selected
         })
     }
 
     handleNextButtonCLick(e) {
-        const { dispatch, nextStep } = this.props
-        const { id, value, parent } = this.state
-        nextStep({ id, value, parent })
+        const { nextStep } = this.props
+        const { selected } = this.state
+        nextStep(selected)
     }
 
     render() {
@@ -94,16 +76,16 @@ class FieldOfExpertiseContent extends Component {
             'list_type_onboarding',
             'list_sublayer_true'
         ]
-        const { stepValid, id, value, parent } = this.state
+        const { stepValid } = this.state
+        const { prefilledFieldOfExpertise } = this.props
         return(
             <div>
-                <List
+                <Multi
                     items={convertedItems}
                     classesToAdd={classesToAdd}
                     allowNoSelection={true}
-                    listValueSelected={this.handleListChange}
-                    preselectedItem={id}
-                    preselectedValue={value}
+                    listValuesSelected={this.handleListChange}
+                    preselectedItems={prefilledFieldOfExpertise}
                     handleGroups={true}
                     otherPlaceholder={'Enter Experience Here'}
                 />
@@ -121,13 +103,11 @@ class FieldOfExpertiseContent extends Component {
 }
 
 FieldOfExpertiseContent.propTypes = {
-    dispatch: PropTypes.func,
     nextStep: PropTypes.func,
     prefilledFieldOfExpertise: PropTypes.object
 }
 
 FieldOfExpertiseContent.defaultProps = {
-    dispatch: () => {},
     nextStep: () => {}
 }
 

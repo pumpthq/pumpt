@@ -2,6 +2,9 @@ import React, {Component, PropTypes} from 'react';
 import { reduxForm, Field, SubmissionError, formValueSelector } from 'redux-form'
 import { connect } from 'react-redux'
 import { Location, EnumSelector, TextArea, TextInput } from 'components/form/inputs'
+import MultiInput from 'components/main/form/MultiInput'
+import { TextField } from 'material-ui'
+import './form.less'
 
 //Actions
 import { updateCandidate } from 'actions/candidateMatches'
@@ -18,17 +21,19 @@ import {
 } from 'constants/candidateOnboarding';
 
 
-//Generalized Redux Field
-export const renderField = ({
+export const renderTextField = ({
   input,
   label,
-  type,
 	className,
   meta: { asyncValidating, touched, error }
 }) => (
   <div class={className}>
 		<div class={asyncValidating ? 'async-validating' : 'class'}>
-      <input class="mdl-textfield__input textfield__input" {...input} placeholder={label} type={type} />
+      <TextField
+        class="mdl-textfield__input textfield__input"
+        {...input}
+        placeholder={label}
+        floatingLabelText={label} />
       {touched && error && <span class="textfield__error">{error}</span>}
     </div>
   </div>
@@ -74,38 +79,19 @@ let CandidateSummaryForm = props =>  {
 					<div class="col-md-4">
 						<Field
 							name="firstName"
-							type="text"
-							component={renderField}
+							component={renderTextField}
 							label="First Name"
 						/>
 					</div>
 					<div class="col-md-4">
 						<Field
 							name="lastName"
-							type="text"
-							component={renderField}
+							component={renderTextField}
 							label="Last Name"
 						/>
 					</div>
 					<div class="col-md-12">
 						<div class="row">
-							<div class="col-md-4">
-								<Field name="interestWorkingArea" component={renderSelectField} label="Industry" class="mdl-textfield__input textfield__input textfield__light">
-									{ INDUSTRY_DROPDOWN_DATA[0].items.map((item) => {return <option value={item.title}>{item.title}</option>}) }
-								</Field>
-							</div>
-							<div class="col-md-4">
-								<Field name="recentWorkingAreaParent" component={renderSelectField} label="Recent Working Area" class="mdl-textfield__input textfield__input textfield__light">
-									{ FIELD_OF_EXPERTISE_DROPDOWN_DATA.map((item) => {return <option key={item.id} value={item.title}>{item.title}</option>}) }
-								</Field>
-							</div>
-							<div class="col-md-4">
-								{industryValue && 
-									<Field name="recentWorkingArea" component={renderSelectField} label="Specialty" class="mdl-textfield__input textfield__input textfield__light">
-										{ industryParentObj(industryValue).map((item) => {return <option value={item.title}>{item.title}</option>})  }
-									</Field>
-								}
-							</div>
 							{industryValue ?
 								<div class="col-md-4">
 									<Field name="recentAnnualIncome" component={renderSelectField} label="Income" class="mdl-textfield__input textfield__input textfield__light">
@@ -129,12 +115,43 @@ let CandidateSummaryForm = props =>  {
 									{ EXPERIENCE_DROPDOWN_DATA.map((item) => {return <option key={item.id}  value={item.title}>{item.title}</option>}) }
 								</Field>
 							</div>
+							<div class="col-md-4">
+                <label>Industry</label>
+                <Field 
+                  name="interestWorkingArea"
+                  component={MultiInput}
+                  label="Industry"
+                  values={INDUSTRY_DROPDOWN_DATA[0].items.map((item) => (item.title))}
+                  class="mdl-textfield__input textfield__input textfield__light">
+								</Field>
+							</div>
+							<div class="col-md-4">
+                <Field 
+                  name="recentWorkingAreaParent"
+                  component={renderSelectField}
+                  label="Recent Working Area"
+                  class="mdl-textfield__input textfield__input textfield__light">
+									{ FIELD_OF_EXPERTISE_DROPDOWN_DATA.map((item) => {return <option key={item.id} value={item.title}>{item.title}</option>}) }
+								</Field>
+							</div>
+							<div class="col-md-4">
+								{industryValue && 
+                  <div>
+                    <label>Specialty</label>
+                    <Field
+                      name="recentWorkingArea"
+                      component={MultiInput}
+                      label="Specialty"
+                      values={industryParentObj(industryValue).map((item) => (item.title)) }
+                      class="mdl-textfield__input textfield__input textfield__light">
+									  </Field>
+                  </div>
+								}
+							</div>
 						</div>
 					</div>
 			</div>
 
-				{/*<EnumSelector field={recentWorkingAreaParent} label="Working Area" options={
-											onBlur={this.updateIndustries} />*/}
 
 				<div className="candidate-buttons">
 					<button type="submit" disabled={submitDisabled} className="mdl-button button button_type_colored button_size_m">
@@ -153,13 +170,12 @@ let CandidateSummaryForm = props =>  {
 CandidateSummaryForm = reduxForm({
 	form: 'candidateSummaryForm',
 	enableReinitialize : true,
-	// onSubmit: submit /* use onSubmit prop passed to component instead */
 })(CandidateSummaryForm)
 
 const selector = formValueSelector('candidateSummaryForm')
 
 CandidateSummaryForm = connect(state => {
-	const industryValue = selector(state, 'recentWorkingAreaParent')
+  const industryValue = selector(state, 'recentWorkingAreaParent')
 		return {
 			industryValue
 		}

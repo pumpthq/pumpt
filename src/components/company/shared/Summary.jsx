@@ -80,7 +80,7 @@ export default class CompanySummary extends Component {
                 </div>
                 <div className="summary-head__title-column"><span
                     className="text summary-head__label">Company Type</span> <span
-                    className="text text_size_s summary-head__summary">{type}</span>
+                    className="text text_size_s summary-head__summary">{type && Array.isArray(type) ? type.join(', ') : type}</span>
                 </div>
                 <div className="summary-head__title-column"><span
                     className="text summary-head__label"># of employees</span> <span
@@ -141,13 +141,10 @@ export default class CompanySummary extends Component {
                         {this.renderCompanyInformation()}
                         <div className="summary-head__title-item summary-head__title-item_type_alignment summary-head__title-item_type_action-bar">
                             <div className="summary-head__title-column">
-                                {/* <a className="link" onClick={()=>dispatch(viewCompany(this.props_id))}>
-                                    Go to Company Page
-                                </a> */}
-                                <Link className="link" to={`/candidate/matches/company/${_id}`}>
+                              {/*<Link className="link" to={`/candidate/matches/company/${_id}`}>
                                     Go to Company Page
                                 </Link>
-
+                                */}
                             </div>
                         </div>
                     </div>

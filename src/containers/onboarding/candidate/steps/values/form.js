@@ -37,6 +37,7 @@ import { VALUE_ASSESSMENTS_DROPDOWN_DATA } from './../../../../../constants/cand
     function mapDispatchToProps(dispatch, ownProps) {
 
         const select = (a) => {
+          // if it's already selected, unselect it
             for(let i in ownProps.activeItems) {
                 if(ownProps.activeItems[i].id == a.id) {
                     ownProps.activeItems.splice(i,1);
@@ -46,9 +47,11 @@ import { VALUE_ASSESSMENTS_DROPDOWN_DATA } from './../../../../../constants/cand
                     return;
                 }
             }
+          // if there are already 3 selected, unselect the first one
             if(ownProps.activeItems.length == 3) {
                 ownProps.activeItems.splice(0,1);
             }
+          // add it
             ownProps.activeItems.push({
                 id: a.id,
                 value: a.value

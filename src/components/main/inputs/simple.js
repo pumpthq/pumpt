@@ -50,7 +50,7 @@ class SimpleInput extends Component {
     }
 
     render() {
-        const { value, placeholder } = this.props
+        const { value, placeholder, onKeyPress } = this.props
         return(
             <div
                 className={this.makeContainerCalssName()}
@@ -62,6 +62,7 @@ class SimpleInput extends Component {
                     onFocus={this.handleFocus}
                     onBlur={this.handleBlur}
                     value={value}
+                    onKeyPress={onKeyPress}
                 />
             </div>
         )

@@ -4,6 +4,7 @@ import { reduxForm, FieldArray, Field, SubmissionError, formValueSelector } from
 
 //Places Autocomplete Library
 import { PlaceField } from 'components/main/form/PlaceField'
+import MultiInput from 'components/main/form/MultiInput'
 
 //Actions
 import { createJob } from 'actions/companyJobs'
@@ -47,15 +48,23 @@ export const TextAreaField = ({input, label, meta: { asyncValidating, touched, e
     </span>
 )
 
-const renderSelectField = ({ input, label, type, meta: { touched, error }, children }) => (
+const renderSelectField = ({ input, label, type, meta: { touched, error }, children }) => {
+  let inputProps = {...input};
+  delete inputProps.value;
+  return (
     <div>
-      <select {...input} class="mdl-textfield__input textfield__input textfield__light">
-				<option value="" class="disabled-text-option" disabled selected>{label}</option>
+      <select 
+        {...inputProps} 
+        class="mdl-textfield__input textfield__input textfield__light"
+        defaultValue={label}
+      >
+        <option value={label} class="disabled_text_option" disabled >{label}</option>
         {children}
       </select>
       {touched && error && <span class="textfield__error textfield__error_small">{error}</span>}
     </div>
-)
+  )
+}
 const buttonStyle = {
     cursor: 'pointer',
 };
@@ -125,9 +134,13 @@ let JobForm = props => {
 								</Field>
 
 								{industryValue &&
-									<Field name="industry" component={renderSelectField} validate={required} label="Specialty" class="mdl-textfield__input textfield__input textfield__light">
-										{ industryParentObj(industryValue).map((item) => {return <option value={item.title}>{item.title}</option>})  }
+                <div>
+                  <label>Specialty</label>
+                  <Field name="industry" component={MultiInput} validate={required} label="Specialty" class="mdl-textfield__input textfield__input textfield__light" 
+                      values={ industryParentObj(industryValue).map((item) => item.title)  }
+                      initialValues={ {input: { value: [] }} }>
 									</Field>
+                </div>
 								}
                 <div>
                   <label>Description</label>
@@ -208,3 +221,14 @@ JobForm = connect(state => {
 
 //Export Form
 export default JobForm
+export const industryOut = (values) => {
+  values.industries = values.industry.map(i => ({parent: values.industryParent, value: i}));
+  delete values.industry;
+  delete values.industryParent;
+  return values;
+}
+export const industryIn = (values) => {
+  values.industry = values.industries.map(i => (i.value));
+  values.industryParent = values.industries.length > 0 ? values.industries[0].parent : undefined;
+  return values;
+}

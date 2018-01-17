@@ -31,22 +31,26 @@ export class To extends Component {
             isEnabled,
             dispatch
         } = this.props
-        const stateItem = onboardingState.fieldOfExpertise
-        const stateParent = onboardingState.fieldOfExpertiseHead
-        // let item = null
-        // stateItem ? item = findById({
-        //     id : stateItem.id,
-        //     data : FIELD_OF_EXPERTISE_DROPDOWN_DATA
-        // }) : null
+      let value = ''
+      if (onboardingState.fieldOfExpertise && Array.isArray(onboardingState.fieldOfExpertise)) {
+        const items = onboardingState.fieldOfExpertise.reduce( (values, field) => {
+          const stateItem = field.value
+          const stateParent = field.parent.value
 
-        let value = ''
-        if(stateParent) {
-            value += stateParent.value + ' | '
-        }
-        if(stateItem) {
-            value += stateItem.value
-        }
+          if (values.has(stateParent)) {
+            values.get(stateParent).push(stateItem);
+          } else {
+            values.set(stateParent, [stateItem])
+          }
+          return values
 
+        }, new Map())
+
+        items.forEach((v, k, map) => {
+          value = `${k} | ${v.join(', ')}; ${value}`
+        })
+        value = value.length > 2 ? value.substr(0,value.length-2) : value;
+      }
         return(
             <NavigationLink2
                 style={{

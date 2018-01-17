@@ -24,7 +24,7 @@ const defaultProps = {
     logo: null,
     profilePhoto: '',
     className: '',
-    name: false,
+    name: '',
 };
 
 @connect(

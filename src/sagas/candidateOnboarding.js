@@ -30,7 +30,6 @@ import {
     login,
     signInCandidate,
 } from './../actions/authorization'
-import { saveSummaryData } from './../actions/applicationCandidate'
 import {
     getCandidateOnboarding
 } from './../reducers/candidateOnboarding'
@@ -76,9 +75,8 @@ export default function() {
                 lastName : onboardingState.lastName,
 								location : onboardingState.location,
 								abilityToRelocate : onboardingState.abilityToRelocate,
-                interestWorkingArea : onboardingState.industry.value,
-                recentWorkingArea : onboardingState.fieldOfExpertise.value,
-                recentWorkingAreaParent : onboardingState.fieldOfExpertiseHead.value,
+                interestWorkingArea : onboardingState.industries.map(({value}) => value ),
+                recentWorkingAreas : onboardingState.fieldOfExpertise.map(({value, parent: {value: parent}}) => ({value, parent})),
                 recentJob : onboardingState.jobTitle.value,
                 recentAnnualIncome : onboardingState.income.value,
                 recentAreaExperience : onboardingState.experience.value,

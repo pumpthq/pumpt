@@ -1,10 +1,10 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import {
-    List,
-    LIST_ITEM_TYPE_TEXT,
-    LIST_ITEM_TYPE_USER_ENTERED
-} from './../../../../../components/main/list2'
+    Multi,
+    MULTI_ITEM_TYPE_TEXT,
+    MULTI_ITEM_TYPE_USER_ENTERED
+} from './../../../../../components/main/multilist'
 import Button from './../../../../../components/main/button'
 import { COMPANY_TYPE_DATA } from './../../../../../constants/companyOnboarding'
 import { apiEnumToListData } from './../../../../../utils'
@@ -23,20 +23,19 @@ import {
         }
     },
     function mapDispatchToProps(dispatch, ownProps) {
-        const nextStep = ({id, value}) => {
-            dispatch(saveCompanyTypeData({
-                companyType : {
-                    id,
-                    value
-                }
-            }))
+        const nextStep = (type) => {
+            dispatch(saveCompanyTypeData({companyType: type}))
             dispatch(showHeadquartersLocationStep())
             dispatch(gotoHeadquartersLocationStep())
         };
+      const onChange = (type) => dispatch(saveCompanyTypeData({
+        companyType: type
+      }))
 
         return {
             dispatch,
-            nextStep
+            nextStep,
+            onChange
         }
     }
 )
@@ -46,53 +45,52 @@ class TypeContent extends Component {
 
         const { prefilledCompany } = this.props
         if(prefilledCompany) {
-            console.log('Prefill state')
-            console.log(this.props.prefilledCompany)
             this.state = {
                 stepValid: true,
-                id: prefilledCompany.id,
-                value: prefilledCompany.value
+                type: prefilledCompany
             }
         } else {
             this.state = {
                 stepValid: false,
-                id: '',
-                value: ''
+                type: []
             }
         }
         this.handleListChange = this.handleListChange.bind(this)
         this.handleNextButtonCLick = this.handleNextButtonCLick.bind(this)
     }
 
-    handleListChange({ id, value }) {
+    handleListChange(selected) {
         this.setState({
-            stepValid: value !== '',
-            id: id,
-            value: value
+            stepValid: selected.length !== 0,
+            type: selected
         })
+
+      const { onChange } = this.props;
+      onChange(selected);
     }
 
     handleNextButtonCLick(e) {
         let { dispatch, nextStep } = this.props
-        let { id, value } = this.state
-        nextStep({ id, value })
+        let { type } = this.state
+        nextStep( type )
     }
 
     render() {
+        const { prefilledCompany } = this.props
         const convertedItems = apiEnumToListData(COMPANY_TYPE_DATA)
         const classesToAdd = [
             'list_type_onboarding'
         ]
-        let { stepValid, id, value } = this.state
+        const { stepValid } = this.state
+
         return (
             <div>
-                <List
+                <Multi
                     items={convertedItems}
                     classesToAdd={classesToAdd}
                     allowNoSelection={true}
-                    listValueSelected={this.handleListChange}
-                    preselectedItem={id}
-                    preselectedValue={value}
+                    listValuesSelected={this.handleListChange}
+                    preselectedItems={prefilledCompany}
                     handleGroups={false}
                 />
                 <div class='form__actions'>
@@ -111,7 +109,7 @@ class TypeContent extends Component {
 TypeContent.propTypes = {
     dispatch: PropTypes.func,
     nextStep: PropTypes.func,
-    prefilledCompany: PropTypes.object
+    prefilledCompany: PropTypes.array
 }
 
 TypeContent.defaultProps = {

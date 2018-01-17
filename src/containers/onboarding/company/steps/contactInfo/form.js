@@ -98,7 +98,7 @@ const asyncValidate = composeAsyncValidators({
 
 let OnboardingCompanyContactInfo = props => {
 		const { handleSubmit, invalid, asyncValidating, submitting, error, valid, dispatch } = props
-		const submitDisabled = invalid || submitting || error || asyncValidating
+    const submitDisabled = invalid || submitting || error || !!asyncValidating // !! ensures result is boolean even though asyncValidating is sometime a string
 
     // handleSubmit function
     const submit = (values, dispatch) => {
