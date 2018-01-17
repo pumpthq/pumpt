@@ -19,9 +19,9 @@ import {
 
 @connect(
     function mapStateToProps(state) {
-        const { selected } = state.candidateOnboarding
+        const { fieldOfExpertise } = state.candidateOnboarding
         return {
-            prefilledFieldOfExpertise: selected
+            prefilledFieldOfExpertise: fieldOfExpertise
         }
     },
     function mapDispatchToProps(dispatch) {

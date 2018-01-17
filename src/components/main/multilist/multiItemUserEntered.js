@@ -13,6 +13,7 @@ class MultiItemUserEntered extends Component {
 
         this.handleClick = this.handleClick.bind(this)
         this.handleValueChange = this.handleValueChange.bind(this)
+        this.handleKeyPress = this.handleKeyPress.bind(this)
     }
 
     handleClick(e) {
@@ -36,16 +37,27 @@ class MultiItemUserEntered extends Component {
         })
     }
 
+    handleKeyPress(event) {
+      let { onEnter, id } = this.props;
+      let { value } = this.state;
+      if (event.key === "Enter" && value.trim() !== '') {
+        onEnter(id, value);
+        // Enter means we're done with this tag, so clear its state
+        // leave it to parent to handle the rest
+        this.setState({
+          value: ''
+        });
+      }
+    }
+
     makeClassName() {
-        let finalClassName = 'list__item with-child-control'
+        let finalClassName = 'multi__item with-child-control'
         let { isSelected, noOneSelected } = this.props
         if(noOneSelected) {
             finalClassName += ' link'
         } else {
             if(isSelected) {
-                finalClassName += ' link'
-            } else {
-                finalClassName += '  link_color_l-grey'
+                finalClassName += ' link multi__item_selected'
             }
         }
         return finalClassName
@@ -66,6 +78,7 @@ class MultiItemUserEntered extends Component {
                         value={value}
                         onValueChange={this.handleValueChange}
                         placeholder={otherPlaceholder}
+                        onKeyPress={this.handleKeyPress}
                     />
                 </div>
             )
@@ -88,7 +101,8 @@ MultiItemUserEntered.PropTypes = {
     onValueChange: PropTypes.func,
     isSelected: PropTypes.bool,
     noOneSelected: PropTypes.bool,
-    otherPlaceholder: PropTypes.string
+    otherPlaceholder: PropTypes.string,
+    onEnter: PropTypes.func
 }
 
 MultiItemUserEntered.defaultProps = {
@@ -98,7 +112,8 @@ MultiItemUserEntered.defaultProps = {
     isSelected: false,
     onValueChange: () => {},
     noOneSelected: true,
-    otherPlaceholder: PropTypes.string
+    otherPlaceholder: PropTypes.string,
+    onEnter: () => {}
 }
 
 export {

@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import { browserHistory } from 'react-router'
 
-import { apiImage } from 'components/helpers'
+import { apiImage, displayIndustries } from 'components/helpers'
 import Case from '../icons-application/case'
 import Education from '../icons-application/education'
 import Pin from '../icons-application/pin'
@@ -95,7 +95,9 @@ export default class CandidateProfile extends Component {
 								<div className="profile-head row">
 									<div className="profile-head-info col-md-9 col-xs-12">
 										<h4>{ `${firstName} ${lastName}` }</h4>
-                    <LabeledValue label="Current Working Areas" value={ recentWorkingAreas.reduce( (acc, {value, parent}) => `${parent} | ${value}, ${acc}`, '')}/>
+                    <LabeledValue
+                      label="Current Working Areas"
+                      value={displayIndustries(recentWorkingAreas)}/>
 										<LabeledValue label="Current Title" value={recentJob} />
 										<LabeledValue label="Current Total Compensation" value={recentAnnualIncome} />
 										<LabeledValue label="Experience" value={recentAreaExperience} />

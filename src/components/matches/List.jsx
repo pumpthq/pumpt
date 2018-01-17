@@ -4,7 +4,7 @@ import { find } from 'lodash'
 
 import MatchRecruiterActions from 'components/matches/RecruiterActions'
 import './matches.less'
-import { apiImage } from 'components/helpers'
+import { apiImage, displayIndustries } from 'components/helpers'
 
 const propTypes = {};
 const defaultProps = {
@@ -51,7 +51,7 @@ export default class MatchesList extends Component {
 const CandidateItem = (props) => {
     const {match} = props
     const {candidate: {status, brief:{firstName, lastName, avatar, recentWorkingAreas, recentAnnualIncome}},
-      vacancy: {brief:{industry, salary}}} = match
+      vacancy: {brief:{salary}}} = match
 
     return (
         <div className={ status === 'rejected' ? "matched-item dimmed" : "matched-item" }>
@@ -66,7 +66,7 @@ const CandidateItem = (props) => {
 
 
 						<h4>{ `${firstName} ${lastName}` }</h4>
-						<LabeledValue label="Experience" value={  recentWorkingAreas.reduce( (acc, {value, parent}) => `${parent} | ${value}, ${acc}`, '') }/>
+						<LabeledValue label="Experience" value={displayIndustries(recentWorkingAreas)}/>
 						<LabeledValue label="Current Total Compensation" value={recentAnnualIncome} /> 
 
             <div className="row button-block">
@@ -75,8 +75,6 @@ const CandidateItem = (props) => {
 							</div>
             </div>
           </div>
-
-            {/*<CardDivider />*/}
         </div>
 
     )
@@ -92,7 +90,7 @@ const LabeledValue = (props) => (
 CandidateItem.defaultProps = {
     match: {
         candidate: {}
-    }
+    },
 }
 
 const CardDivider = () => (<div className="summary-head__title-item summary-head__title-item_type_alignment summary-head__title-item_type_middle"></div>)

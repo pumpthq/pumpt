@@ -6,6 +6,7 @@ import PencilIcon from 'components/icons/pencil'
 import ImageUploader from 'components/ImageUploader'
 import IconPhoto from 'components/icons/photo'
 import {updateCandidate} from 'actions/candidateMatches'
+import { displayIndustries } from 'components/helpers'
 
 export default class CandidateSummary extends Component {
     render() {
@@ -46,21 +47,15 @@ export default class CandidateSummary extends Component {
                     <div class="summary-head__title-item summary-head__title-item_type_alignment">
                         <div class="summary-head__title-column">
 														<span class="text summary-head__label">Industry</span>
-														<span class="text text_size_s summary-head__summary">{interestWorkingArea}</span>
+														<span class="text text_size_s summary-head__summary">{interestWorkingArea && Array.isArray(interestWorkingArea) ? interestWorkingArea.join(', ') : interestWorkingArea}</span>
                             <span class="text summary-head__label">Annual Income</span>
                             <span class="text text_size_s summary-head__summary">{recentAnnualIncome}</span>
                         </div>
                         <div class="summary-head__title-column">
-														<span class="text summary-head__label">Working Area</span>
-                            <span class="text text_size_s summary-head__summary">{recentWorkingAreas ? recentWorkingAreas.map(({parent}) => parent).join(', ') : ''}</span>
+														<span class="text summary-head__label">Working Areas</span>
+                            <span class="text text_size_s summary-head__summary">{displayIndustries(recentWorkingAreas)}</span>
                             <span class="text summary-head__label">Job Title </span>
                             <span class="text text_size_s summary-head__summary">{recentJob}</span>
-                        </div>
-                        <div class="summary-head__title-column">
-														<span class="text summary-head__label">Specialty</span>
-														<span class="text text_size_s summary-head__summary">{recentWorkingAreas ? recentWorkingAreas.map(({value}) => value).join(', ') : ''}</span>
-                            <span class="text summary-head__label">Industry Experience </span>
-                            <span class="text text_size_s summary-head__summary">{recentAreaExperience}</span>
                         </div>
                     </div>
                 </div>
