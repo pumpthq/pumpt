@@ -57,12 +57,6 @@ export default class CandidateSummary extends Component {
                             <span class="text summary-head__label">Job Title </span>
                             <span class="text text_size_s summary-head__summary">{recentJob}</span>
                         </div>
-                        <div class="summary-head__title-column">
-														<span class="text summary-head__label">Specialty</span>
-														<span class="text text_size_s summary-head__summary">{recentWorkingAreas.map(({value}) => value).join(', ')}</span>
-                            <span class="text summary-head__label">Industry Experience </span>
-                            <span class="text text_size_s summary-head__summary">{recentAreaExperience}</span>
-                        </div>
                     </div>
                 </div>
             </div>

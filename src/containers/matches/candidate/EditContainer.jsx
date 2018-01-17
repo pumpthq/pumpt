@@ -9,6 +9,20 @@ import CandidateApplicationForm from 'components/candidates/Application';
 import Panel from 'components/main/panel';
 import ScrollContainer from 'components/main/scrollContainer'
 
+const recentWorkingAreasToParent = (values) => {
+  values.recentWorkingArea = values.recentWorkingAreas.map( a => (a.value));
+  values.recentWorkingAreaParent = values.recentWorkingAreas.length > 0 ? values.recentWorkingAreas[0].parent : undefined;
+
+  return values;
+}
+const recentWorkingAreaFormat = (values) => {
+  values.recentWorkingAreas = values.recentWorkingArea.map(a => ({parent: values.recentWorkingAreaParent, value: a}));
+
+  delete values.recentWorkingArea;
+  delete values.recentWorkingAreaParent;
+  return values;
+}
+
 function mapStateToProps(state, ownProps) {
     return { candidate: state.candidateMatches.candidate, authorization: state.authorization  }
 }
@@ -32,8 +46,8 @@ class EditContainer extends Component {
 
                 {this.state.editSummary ?
                     <CandidateForm
-                        initialValues={candidate}
-                        onSubmit={values=> {dispatch(updateCandidate(values)); this.editSummary(false)}}
+                        initialValues={recentWorkingAreasToParent(candidate)}
+                        onSubmit={values=> {dispatch(updateCandidate(recentWorkingAreaFormat(values))); this.editSummary(false)}}
                         onCancel={()=>this.editSummary(false)} />
                     :
                     <CandidateSummary {...this.props} onEdit={()=>this.editSummary(true)}/>
