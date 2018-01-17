@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { dispatchProp } from 'components/helpers'
 
-import JobForm, { reshapeIndustry } from 'components/jobs/JobForm'
+import JobForm, { industryOut } from 'components/jobs/JobForm'
 import VerticalScroller from 'components/VerticalScroller'
 
 import { createJob } from 'actions/companyJobs'

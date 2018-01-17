@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { find } from 'lodash'
 import { updateJob } from 'actions/companyJobs'
 
-import JobForm, { reshapeIndustry, reshapeIndustries } from 'components/jobs/JobForm'
+import JobForm, { industryIn, industryOut } from 'components/jobs/JobForm'
 import VerticalScroller from 'components/VerticalScroller'
 
 const propTypes = {};

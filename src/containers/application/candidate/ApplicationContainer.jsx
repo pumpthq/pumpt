@@ -28,6 +28,19 @@ function mapStateToProps(state, ownProps) {
 
 import { submit } from 'redux-form'
 
+const recentWorkingAreasToParent = (values) => {
+  values.recentWorkingArea = values.recentWorkingAreas.map( a => (a.value));
+  values.recentWorkingAreaParent = values.recentWorkingAreas.length > 0 ? values.recentWorkingAreas[0].parent : undefined;
+
+  return values;
+}
+const recentWorkingAreaFormat = (values) => {
+  values.recentWorkingAreas = values.recentWorkingArea.map(a => ({parent: values.recentWorkingAreaParent, value: a}));
+
+  delete values.recentWorkingArea;
+  delete values.recentWorkingAreaParent;
+  return values;
+}
 
 @connect(mapStateToProps)
 export default class ApplicationContainer extends Component {
@@ -85,8 +98,8 @@ export default class ApplicationContainer extends Component {
 
 												{this.state.editSummary ?
 													<CandidateSummaryForm
-														initialValues={candidate}
-                                                        onSubmit={values=> {dispatch(updateCandidate(values)); this.editSummary(false)}}
+														initialValues={recentWorkingAreasToParent(candidate)}
+                            onSubmit={values=> {dispatch(updateCandidate(recentWorkingAreaFormat(values))); this.editSummary(false)}}
 														onCancel={()=>this.editSummary(false)}
                                                         />
 
