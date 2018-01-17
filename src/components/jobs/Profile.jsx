@@ -9,7 +9,7 @@ import ButtonLink from 'components/parts/buttonLink'
 
 import { ApproveOpen, Decline } from 'components/icons'
 
-import { tintedBackground, apiImage } from 'components/helpers'
+import { tintedBackground, apiImage, displayIndustries } from 'components/helpers'
 
 import { browserHistory } from 'react-router'
 
@@ -97,7 +97,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 export default class Profile extends Component {
 
     renderMatchInformation() {
-        const { company, title, location, salary, experience, employment, backgroundTint, degree } = this.props
+        const { company, title, location, salary, industries, experience, employment, backgroundTint, degree } = this.props
         const { name, logo, background } = company
         return (
             <div className="summary-head" style={ tintedBackground(apiImage(background),...backgroundTint) }>
@@ -121,6 +121,10 @@ export default class Profile extends Component {
                         <div className="summary-head__title-column">
                             <span className="text text_color_invert summary-head__label">Salary </span>
                             <span className="text text_color_invert text_size_s summary-head__summary">{salary}</span>
+                        </div>
+                        <div className="summary-head__title-column">
+                            <span className="text text_color_invert summary-head__label">Industries</span>
+                            <span className="text text_color_invert text_size_s summary-head__summary">{displayIndustries(industries)}</span>
                         </div>
                         <div className="summary-head__title-column">
                             <span className="text text_color_invert summary-head__label">Industry Experience </span>
