@@ -54,7 +54,7 @@ export default class button extends Component {
     handleKeyPress(event) {
       const { onEnter } = this.props
       const { value } = this.state
-        if (event.key === 'Enter') {
+        if (event.key === 'Enter' && value.trim() !== '') {
           event.preventDefault();
            onEnter(value);
           this.setState({value: ''});

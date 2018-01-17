@@ -1,6 +1,8 @@
 import React, { PropTypes, Component } from 'react';
 import Button, {CustomButton} from '../button';
 
+import './multiInput.less';
+
 class MultiInput extends Component {
   constructor(props) {
     super(props);
@@ -29,7 +31,7 @@ class MultiInput extends Component {
     const { otherTags } = this.state;
     const { input: {value, onChange} } = this.props;
     otherTags.push(newTag);
-    this.setState({otherTags}); // at it to the display
+    this.setState({otherTags}); // add it to the display
     onChange([...value, newTag]) // ensure it's selected
   }
 

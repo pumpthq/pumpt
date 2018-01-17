@@ -40,7 +40,7 @@ class MultiItemUserEntered extends Component {
     handleKeyPress(event) {
       let { onEnter, id } = this.props;
       let { value } = this.state;
-      if (event.key === "Enter") {
+      if (event.key === "Enter" && value.trim() !== '') {
         onEnter(id, value);
         // Enter means we're done with this tag, so clear its state
         // leave it to parent to handle the rest

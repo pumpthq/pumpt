@@ -40,8 +40,6 @@ class MultiselectComponent extends Component {
   }
 
   inItems(probeID, parentID) {
-    console.log(probeID);
-    console.log(parentID);
     const {items} = this.props;
     let g = items.find( g => g.id===parentID );
     if (g) {
