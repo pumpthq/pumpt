@@ -70,7 +70,7 @@ class Card extends Component {
                                 <div className="summary-head__title-column ">
                                     <span className="text text_color_invert summary-head__label">Focus
                                     </span>
-                                    <span className="text text_color_invert text_size_s summary-head__summary">{displayIndustries(industries)}</span>
+                                    <span className="text text_color_invert text_size_s summary-head__summary">{industries && Array.isArray(industries) ? industries[0].parent : ''}</span>
                                 </div>
                                 <div className="summary-head__title-column ">
                                     <span className="text text_color_invert summary-head__label">Salary
