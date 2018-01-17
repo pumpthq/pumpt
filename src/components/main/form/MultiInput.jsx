@@ -10,7 +10,7 @@ class MultiInput extends Component {
     this.makeTag = this.makeTag.bind(this);
 
     const { input: {value}, values } = this.props;
-    const otherTags = value.filter(v => (!values.includes(v)));
+    const otherTags = value ? value.filter(v => (!values.includes(v))) : [];
 
     this.state = {
       otherTags
