@@ -19,15 +19,15 @@ class MultiItemText extends Component {
     }
 
     makeClassName() {
-        let finalClassName = 'link_size_xl list__item'
+        let finalClassName = 'link_size_xl multi__item'
         let { isSelected, noOneSelected } = this.props
         if(noOneSelected) {
             finalClassName += ' link'
         } else {
             if(isSelected) {
-                finalClassName += ' link'
+                finalClassName += ' link multi__item_selected'
             } else {
-                finalClassName += ' link link_color_l-grey'
+                finalClassName += ' link'
             }
         }
         return finalClassName

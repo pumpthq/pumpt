@@ -4,6 +4,7 @@ import { reduxForm, FieldArray, Field, formValueSelector } from 'redux-form';
 
 // Places Autocomplete Library
 import { PlaceField } from 'components/main/form/PlaceField';
+import MultiInput from 'components/main/form/MultiInput';
 
 import { browserHistory } from 'react-router';
 import {
@@ -30,11 +31,23 @@ export const renderField = ({
 }) => (
   <div className={className}>
     <div className={asyncValidating ? 'async-validating' : 'class'}>
-      <input className="mdl-textfield__input textfield__input" {...input} placeholder={label} type={type} />
+      <input
+        className="mdl-textfield__input textfield__input"
+        {...input}
+        placeholder={label}
+        type={type}
+      />
       {touched && error && <span className="textfield__error textfield__error_small">{error}</span>}
     </div>
   </div>
 );
+renderField.propTypes = {
+  input: PropTypes.object,
+  label: PropTypes.string,
+  type: PropTypes.string,
+  className: PropTypes.string,
+  meta: PropTypes.object,
+};
 
 export const TextAreaField = ({ input, label, meta: { touched, error } }) => (
   <span>
@@ -42,18 +55,10 @@ export const TextAreaField = ({ input, label, meta: { touched, error } }) => (
     {touched && error && <span className="textfield__error textfield__error_small">{error}</span>}
   </span>
 );
-
-const renderSelectField = ({ input, label, meta: { touched, error }, children }) => (
-  <div>
-    <select {...input} className="mdl-textfield__input textfield__input textfield__light">
-      <option value="" className="disabled-text-option" disabled selected>{label}</option>
-      {children}
-    </select>
-    {touched && error && <span className="textfield__error textfield__error_small">{error}</span>}
-  </div>
-);
-const buttonStyle = {
-  cursor: 'pointer',
+TextAreaField.propTypes = {
+  input: PropTypes.object,
+  label: PropTypes.string,
+  meta: PropTypes.object,
 };
 
 const renderLists = ({ fields, label, validateEach, placeholder, meta: { error } }) => (
@@ -65,21 +70,27 @@ const renderLists = ({ fields, label, validateEach, placeholder, meta: { error }
         fields.push();
       }}
     ><i />
-      {fields.length === 0 && 'Add'} {label}
+    {fields.length === 0 && 'Add'} {label}
     </button>
 
-    {fields.map((child, index) =>
-      <div key={index}>
-        <Field name={child} component={TextAreaField} validate={validateEach} class="text-area" placeholder={`${placeholder} #${index + 1}...`} />
-        <button
-          type="button"
-          className="remove-entry"
-          onClick={() => {
-            fields.remove(index);
-          }}
-        ><i>Remove</i>
-        </button>
-      </div>
+  {fields.map((child, index) =>
+    <div key={index}>
+      <Field
+        name={child}
+        component={TextAreaField}
+        validate={validateEach}
+        class="text-area"
+        placeholder={`${placeholder} #${index + 1}...`}
+      />
+      <button
+        type="button"
+        className="remove-entry"
+        onClick={() => {
+          fields.remove(index);
+        }}
+      ><i>Remove</i>
+      </button>
+    </div>
     )}
 
     {error && <li className="error">{error}</li>}
@@ -94,14 +105,49 @@ const renderLists = ({ fields, label, validateEach, placeholder, meta: { error }
   </div>
 );
 renderLists.propTypes = {
-  fields: PropTypes.array,
+  fields: PropTypes.object,
   label: PropTypes.string,
   validateEach: PropTypes.func,
   placeholder: PropTypes.string,
-  meta: PropTypes.Object,
+  meta: PropTypes.object,
 };
 
-// NOTE: this generic job form is used for creating a new job and editing an existing one, which is why submit is handled by its parents (new job form and edit job form)
+const renderSelectField = ({ input, label, meta: { touched, error }, children }) => {
+  const inputProps = { ...input };
+  delete inputProps.value;
+  return (
+    <div>
+      <select
+        {...inputProps}
+        className="mdl-textfield__input textfield__input textfield__light"
+        defaultValue={label}
+      >
+        <option value={label} className="disabled_text_option" disabled >
+          {label}
+        </option>
+        {children}
+      </select>
+      {touched && error &&
+        <span
+          className="textfield__error textfield__error_small"
+        >{error}</span>}
+    </div>
+  );
+};
+renderSelectField.propTypes = {
+  input: PropTypes.object,
+  label: PropTypes.string,
+  meta: PropTypes.object,
+  children: PropTypes.array,
+};
+
+const buttonStyle = {
+  cursor: 'pointer',
+};
+
+// NOTE: this generic job form is used for creating a new job and editing an
+// existing one, which is why submit is handled by its parents
+// (new job form and edit job form)
 let JobForm = props => {
   const { handleSubmit, submitting, error, industryValue } = props;
 
@@ -120,10 +166,13 @@ let JobForm = props => {
         >
           ×
         </button>
-        <form onSubmit={handleSubmit} className="mdl-card card card_state_open card_state_scroll">
+        <form
+          onSubmit={handleSubmit}
+          className="mdl-card card card_state_open card_state_scroll"
+        >
           <div className="recruter__newjob-card__form-top">
             <div>
-              <label>Title</label>
+              <label htmlFor="title">Title</label>
               <div>
                 <Field
                   name="title"
@@ -135,7 +184,7 @@ let JobForm = props => {
               </div>
             </div>
             <div>
-              <label>Location</label>
+              <label htmlFor="location">Location</label>
               <div className="dark">
                 <Field
                   name="location"
@@ -147,18 +196,13 @@ let JobForm = props => {
             </div>
 
             <Field
-              name="salary"
-              component={renderSelectField}
-              validate={required}
+              name="salary" component={renderSelectField} validate={required}
               label="Income"
               class="mdl-textfield__input textfield__input textfield__light"
             >
               { ANNUAL_INCOME_DROPDOWN_DATA.map(item => (
-                <option
-                  key={item.id} value={item.title}
-                >
-                  {item.title}
-                </option>)) }
+                <option key={item.id} value={item.title}>
+                  {item.title}</option>)) }
             </Field>
 
             <Field
@@ -167,11 +211,8 @@ let JobForm = props => {
               class="mdl-textfield__input textfield__input textfield__light"
             >
               { EXPERIENCE_DROPDOWN_DATA.map((item) => (
-                <option
-                  key={item.id} value={item.title}
-                >
-                  {item.title}
-                </option>)) }
+                <option key={item.id} value={item.title}>
+                  {item.title}</option>)) }
             </Field>
 
             <Field
@@ -184,21 +225,44 @@ let JobForm = props => {
                   {item.title}</option>)) }
             </Field>
 
-            <Field name="degree" component={renderSelectField} validate={required} label="Lowest Degree Needed" class="mdl-textfield__input textfield__input textfield__light">
-              { DEGREES_DROPDOWN_DATA.map((item) => (<option key={item.id} value={item.title}>{item.title}</option>)) }
+            <Field
+              name="degree" component={renderSelectField} validate={required}
+              label="Lowest Degree Needed"
+              class="mdl-textfield__input textfield__input textfield__light"
+            >
+              { DEGREES_DROPDOWN_DATA.map((item) => (
+                <option key={item.id} value={item.title}>
+                  {item.title}</option>)) }
             </Field>
 
-            <Field name="industryParent" component={renderSelectField} validate={required} label="Field of Expertise" class="mdl-textfield__input textfield__input textfield__light">
-              { FIELD_OF_EXPERTISE_DROPDOWN_DATA.map((item) => (<option key={item.id} value={item.title}>{item.title}</option>)) }
+            <Field
+              name="industryParent"
+              component={renderSelectField}
+              validate={required}
+              label="Field of Expertise"
+              class="mdl-textfield__input textfield__input textfield__light"
+            >
+              { FIELD_OF_EXPERTISE_DROPDOWN_DATA.map((item) => (
+                <option key={item.id} value={item.title}>
+                  {item.title}</option>)) }
             </Field>
 
             {industryValue &&
-                <Field name="industry" component={renderSelectField} validate={required} label="Specialty" class="mdl-textfield__input textfield__input textfield__light">
-                  { industryParentObj(industryValue).map((item) => (<option value={item.title}>{item.title}</option>)) }
-                </Field>
+              <div>
+                <label htmlFor="industry">Specialty</label>
+                <Field
+                  name="industry"
+                  component={MultiInput}
+                  validate={required}
+                  label="Specialty"
+                  class="mdl-textfield__input textfield__input textfield__light"
+                  values={industryParentObj(industryValue).map((item) => item.title)}
+                  initialValues={{ input: { value: [] } }}
+                />
+              </div>
             }
             <div>
-              <label>Description</label>
+              <label htmlFor="description">Description</label>
               <Field
                 name="description"
                 type="text"
@@ -211,8 +275,20 @@ let JobForm = props => {
           <div className="recruter__newjob-card__form-bottom">
 
 
-            <FieldArray name="responsibilities" label="Responsibilities" 	validateEach={required}	placeholder="Responsibility" component={renderLists} />
-            <FieldArray name="requirements" 		label="Requirements" 		validateEach={required}	placeholder="Requirement" component={renderLists} />
+            <FieldArray
+              name="responsibilities"
+              label="Responsibilities"
+              validateEach={required}
+              placeholder="Responsibility"
+              component={renderLists}
+            />
+            <FieldArray
+              name="requirements"
+              label="Requirements"
+              validateEach={required}
+              placeholder="Requirement"
+              component={renderLists}
+            />
 
             {error && <span className="textfield__error">{error}</span>}
             <br />
@@ -233,7 +309,12 @@ let JobForm = props => {
     </div>
   );
 };
-
+JobForm.propTypes = {
+  handleSubmit: PropTypes.func,
+  submitting: PropTypes.bool,
+  error: PropTypes.string,
+  industryValue: PropTypes.string,
+};
 
 // Define Form
 JobForm = reduxForm({
@@ -252,3 +333,16 @@ JobForm = connect(state => {
 
 // Export Form
 export default JobForm;
+export const industryOut = (values) => {
+  const newVals = { ...values };
+  newVals.industries = values.industry.map(i => ({ parent: values.industryParent, value: i }));
+  delete newVals.industry;
+  delete newVals.industryParent;
+  return newVals;
+};
+export const industryIn = (values) => {
+  const newVals = { ...values };
+  newVals.industry = values.industries.map(i => (i.value));
+  newVals.industryParent = values.industries.length > 0 ? values.industries[0].parent : undefined;
+  return newVals;
+};

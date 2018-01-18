@@ -2,6 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import { reduxForm, Field, SubmissionError, formValueSelector } from 'redux-form'
 import { connect } from 'react-redux'
 import { Location, EnumSelector, TextArea, TextInput } from 'components/form/inputs'
+import MultiInput from 'components/main/form/MultiInput'
 
 //Actions
 import { updateCompany } from 'actions/applicationCompany'
@@ -83,8 +84,12 @@ let CompanySummaryForm = props =>  {
 						</Field>
 					</div>
 					<div class="col-md-4">
-						<Field name="type" component={renderSelectField} label="Company Type" class="mdl-textfield__input textfield__input textfield__light">
-							{ COMPANY_TYPE_DATA[0].items.map((item) => {return <option value={item.title}>{item.title}</option>}) }
+            <Field 
+              name="type"
+              component={MultiInput}
+              values={COMPANY_TYPE_DATA[0].items.map((item) => (item.title))}
+              label="Company Type"
+              class="mdl-textfield__input textfield__input textfield__light">
 						</Field>
 					</div>
 					<div class="col-md-4">

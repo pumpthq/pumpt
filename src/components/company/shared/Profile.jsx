@@ -89,7 +89,7 @@ export default class CompanyProfile extends Component {
                 </div>
                 <div className="summary-head__title-column"><span
                     className="text summary-head__label">Company Type</span> <span
-                    className="text text_size_s summary-head__summary">{type}</span>
+                    className="text text_size_s summary-head__summary">{type && Array.isArray(type) ? type.join(', ') : type }</span>
                 </div>
                 <div className="summary-head__title-column"><span
                     className="text summary-head__label"># of employees</span> <span
@@ -207,14 +207,6 @@ export default class CompanyProfile extends Component {
                             </div>
                         </div>
                         {this.renderCompanyHeader()}
-
-                        {/* <div className="summary-head__title-item summary-head__title-item_type_alignment summary-head__title-item_type_action-bar">
-                            <div className="summary-head__title-column">
-                                <a className="link" onClick={onClickGoToCompanyPage}>
-                                    Go to Company Page
-                                </a>
-                            </div>
-                        </div> */}
                     </div>
                 </div>
 

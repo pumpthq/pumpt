@@ -78,7 +78,7 @@ export default class CompanySummary extends Component {
                             </div>
                             <div class="summary-head__title-column">
                                 <span class="text summary-head__label">Company Type</span>
-                                <span class="text text_size_s summary-head__summary">{` ${type}`}</span>
+                                <span class="text text_size_s summary-head__summary">{type && Array.isArray(type) ? ` ${type.join(', ')}` : type}</span>
                             </div>
                             <div class="summary-head__title-column">
                                 <span class="text summary-head__label"># of Employees</span>
