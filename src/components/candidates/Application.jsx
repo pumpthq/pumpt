@@ -17,7 +17,6 @@ import { updateCandidate } from 'actions/candidateMatches';
 import { url, date } from 'components/main/form/validations';
 import { normalizeDate, normalizeYear, normalizeTwitter } from 'components/main/form/normalizations';
 
-import { browserHistory } from 'react-router';
 import { SKILLS } from 'constants/candidateOnboarding';
 import Skills from 'components/icons-application/skills';
 import CaseIcon from 'components/icons-application/case';
@@ -28,7 +27,6 @@ import TwitterIcon from 'components/icons-application/twitter';
 import FacebookIcon from 'components/icons-application/facebook';
 import './style.less';
 
-import BasicDialog from 'components/main/popup/BasicDialog';
 
 // Generalized Redux Field
 export const renderField = ({
@@ -98,9 +96,7 @@ let CandidateApplicationForm = ({ handleSubmit, submitting, invalid, dispatch })
         >
           Save Progress
         </button>
-        <BasicDialog trigger={submitting} onClose={browserHistory.goBack}>
-          Your application has been saved
-        </BasicDialog>
+
       </div>
     </form>
   );
