@@ -51,15 +51,8 @@ export default class ApplySuccessDialog extends Component {
                     open={this.state.open}
                     onRequestClose={this.handleClose}
                 >
-                    {/* <button
-                        style={buttonStyle}
-                        className="button button_type_close"
-                        onClick={this.handleToggle}
-                    >
-                        ×
-                    </button> */}
                     <div>
-											Saving this Job for Later!
+                      This job is now saved and can be found in your Bookmark folder.
                     </div>
                 </Dialog>
         );

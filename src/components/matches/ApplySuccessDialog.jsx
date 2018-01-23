@@ -51,15 +51,8 @@ export default class ApplySuccessDialog extends Component {
                     open={this.state.open}
                     onRequestClose={this.handleClose}
                 >
-                    {/* <button
-                        style={buttonStyle}
-                        className="button button_type_close"
-                        onClick={this.handleToggle}
-                    >
-                        ×
-                    </button> */}
                     <div>
-                        Your Application was successfully sent
+                        Your Application was successfully sent. You will be contacted by the the hiring manager if they’re interested in your Application.
                     </div>
                 </Dialog>
         );
