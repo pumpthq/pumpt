@@ -1,6 +1,5 @@
 import _ from 'lodash';
 import {
-
     UPDATE_CANDIDATE_SUCCEEDED,
     FETCH_CANDIDATE_SUCCEEDED,
     MATCHES_FETCH_SUCCEEDED,
@@ -21,10 +20,6 @@ import {
 } from './../constants/candidateMatches';
 
 const defaultState = {
-    // all: [],
-    // bookmarked: [],
-    // notInterested: [],
-    // approved: [],
     matches: [],
     companies: [],
     vacancies: [],
@@ -49,22 +44,6 @@ export default (state = defaultState, action) => {
             return { ...state, candidate }
         }
         case MATCHES_FETCH_SUCCEEDED : {
-            //   all = []
-            //   , bookmarked = []
-            //   , notInterested = []
-            //   , approved = []
-
-            // payload.matches.forEach(match => {
-            //     var card = match.vacancy
-            //     // ⚠️ TODO: review specs how cards are filtered into matches-tabs
-            //     if(card.status.approved !== null) {
-            //         if (!card.status.approved) notInterested.push(match)
-            //         else approved.push(card)
-            //     }
-            //     else if(card.status.bookmarked !== null && card.status.bookmarked) bookmarked.push(match)
-            //     else all.push(match)
-            // })
-
             const { matches } = payload
 
             return {
