@@ -4,8 +4,6 @@ import Wrapper from './../../../components/main/wrapper';
 import TabBar from './parts/TabBar';
 import CompanyHeader from './parts/HeaderMenu';
 
-// import ApplySuccessDialog from 'components/matches/ApplySuccessDialog'
-
 const propTypes = {
     children : PropTypes.node,
 };
