@@ -109,7 +109,6 @@ export default class ApplicationContainer extends Component {
 												}
 												<CandidateApplicationForm
 														ref="applicationForm"
-														initialValues={candidate}
 													/>
 
 														<div className="text-center">

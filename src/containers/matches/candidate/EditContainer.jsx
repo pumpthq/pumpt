@@ -53,7 +53,6 @@ class EditContainer extends Component {
                     <CandidateSummary {...this.props} onEdit={()=>this.editSummary(true)}/>
                 }
                 <CandidateApplicationForm
-                    initialValues={candidate}
                     onSubmit={values=> {dispatch(updateCandidate(values)) } }/>
 
             </div>

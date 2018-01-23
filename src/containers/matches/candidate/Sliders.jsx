@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import CardSlider from 'components/CardSlider';
-import MatchSummary from 'components/matches/Summary'
-import './style.less'
+import MatchSummary from 'components/matches/Summary';
+import './style.less';
 
 @connect( state => ({
     items: state.candidateMatches.matches.filter(match=>match.vacancy.status=='new'),
