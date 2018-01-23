@@ -5,7 +5,6 @@ import { push } from 'react-router-redux';
 import {
     API_URL,
     API_ALL_JOBS,
-    API_VACANCY_ROOT,
 } from './../constants/api';
 
 import {

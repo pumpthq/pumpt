@@ -53,7 +53,6 @@ import {
 } from './../constants/applicationCompany';
 import {API} from 'constants/actionTypes'
 import {
-    API_VACANCY_ROOT,
     API_RECRUITER_ROOT,
     API_COMPANY_ROOT,
 } from 'constants/api';

@@ -10,8 +10,6 @@
     "start:production": "cross-env NODE_ENV=production pm2 start server.js",
     "build:staging": "cross-env NODE_ENV=staging webpack --colors --config webpack.production.config.js",
     "build:production": "cross-env NODE_ENV=production webpack --colors --config webpack.production.config.js",
-    "lint": "eslint src --ext .js --ext .jsx",
-    "lint:fix": "eslint src --fix --ext .js --ext .jsx",
     "test": "jest"
   },
   "dependencies": {
