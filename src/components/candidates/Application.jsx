@@ -37,6 +37,8 @@ import TwitterIcon from 'components/icons-application/twitter'
 import FacebookIcon from 'components/icons-application/facebook'
 import './style.less'
 
+import BasicDialog from 'components/main/popup/BasicDialog';
+
 //Generalized Redux Field
 export const renderField = ({
   input,
@@ -55,7 +57,6 @@ export const renderField = ({
 
 const CardDivider = () => (<div className="summary-head__title-item summary-head__title-item_type_alignment summary-head__title-item_type_middle"></div>)
 
-
 //Form
 let CandidateApplicationForm = props =>  {
 	const { handleSubmit, submitting, error, invalid, valid, dispatch, names, values} = props
@@ -68,7 +69,6 @@ let CandidateApplicationForm = props =>  {
 					})
 			})
 	}
-
 
 		return (
 			<form onSubmit={handleSubmit(submit)} class="candidate-application-form text-input-underlined">
@@ -92,8 +92,11 @@ let CandidateApplicationForm = props =>  {
 				<div>
 					<button type="submit" disabled={submitDisabled}
 					className="mdl-button button button_type_colored button_size_m candidate-submit">
-						{submitting ? <i/> : <i/>} Save Progress
+						 Save Progress
 					</button>
+          <BasicDialog trigger={submitting} onClose={browserHistory.goBack}>
+            Your application has been saved
+          </BasicDialog>
 				</div>
 			</form>
 		)
@@ -310,70 +313,7 @@ const renderSocial = ({ fields, meta: { error } }) => (
 					</div>
 				</div>
 </div>
-
 )
-
-
-//---------------------------------------------------------------------------------------------------------------------------------
-//ARCHIVE
-
-import ImageUploader from 'components/ImageUploader'
-import {FileImage} from 'components/icons'
-
-export const UploadArray = (props) => {
-    const { field, label } = props
-    const Item = props.component
-    return (
-        <div className="application-item">
-            <ImageUploader
-                label="Add Interest"
-                onSuccessAction={(data) => {
-                    field.addField({image:data.id,description:''}); // ⚠️ this is a hack to work around for building an action for the reducer!
-                    return {type:"FAKE_ACTION_HACK_FOR_ADDING_IMAGE_TO_FIELD_ARRAY"}
-
-                    //🌟 below is correct way, to build and return the action dispatched by `field.addField(data.id)`
-                    // return {
-                    //     type: "redux-form/ADD_ARRAY_VALUE",
-                    //     path: "interests",
-                    //     value: {
-                    //         image: data.id,
-                    //         description: ""
-                    //     },
-                    //     fields: ["","image","description"],
-                    //     form: "candidate-application"
-                    // }
-
-
-                }}
-            />
-            {field.map((child, index) =>
-                <div key={index}>
-                    <Item field={child} />
-                    <button type="button" onClick={() => {
-                      field.removeField(index)  // remove from index
-                    }}><i>Remove</i>
-                    </button>
-                </div>
-            )}
-        </div>
-    )
-}
-
-import {apiImage} from 'components/helpers'
-
-const InterestEntry = props => {
-    const { field: { image, description } } = props
-    return (
-        <div className="application-item interest-application-item">
-					<div class="row">
-
-            <TextInput field={description} placeholder="Description" />
-            <img src={apiImage(image.value)} className="image image_width_full"/>
-					</div>
-        </div>
-    )
-}
-//---------------------------------------------------------------------------------------------------------------------------------
 
 //Define Form
 CandidateApplicationForm = reduxForm({
