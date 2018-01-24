@@ -20,7 +20,6 @@ export default class EditContainer extends Component {
     constructor(props) {
         super(props)
         this.state = { editRecruiterSummary: false, editCompanySummary: false }
-        console.log(props)
     }
 
     editRecruiterSummary = (val) => {

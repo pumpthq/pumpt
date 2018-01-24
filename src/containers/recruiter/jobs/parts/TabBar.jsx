@@ -33,7 +33,7 @@ class TabBar extends Component {
                     route : ROUTE_COMPANY_JOBS_DRAFTS,
                     action : routeToDrafts
                 }, {
-                    title: ` Closed Job `,
+                    title: ` Closed Jobs `,
                     icon: <OkFillIcon className="icon-ok-fill_size_small icon_inline"/>,
                     route: ROUTE_COMPANY_JOBS_CLOSED,
                     action : routeToClosed

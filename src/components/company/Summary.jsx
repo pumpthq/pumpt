@@ -20,34 +20,6 @@ export default class CompanySummary extends Component {
                 <div class="summary-head company-summary-head">
 									<div class="summary-head__title mdl-card__title">
 										<div class="row">
-											<div class="col-md-1 col-lg-1 col-sm-2 col-xs-12">
-												<div class="row">
-													<div class="col-md-12 col-sm-12 col-xs-3">
-															{/* //FIXME: //more testing needed
-                                <ImageUploader
-                                    label="Logo"
-                                    iconPhoto={<BuildingIcon />}
-                                    imageId={logo}
-                                    onSuccessAction={(data) => updateCompany({logo:data.id})}
-                                />
-																*/}
-																<br></br>
-																<br></br>
-																<br></br>
-																<br></br>
-													</div>
-													<div class="col-md-12 col-sm-12 col-xs-3">
-															{/* //FIXME: //more testing needed
-                                <ImageUploader
-                                    label="Background"
-                                    iconPhoto={<BuildingIcon />}
-                                    imageId={background}
-                                    onSuccessAction={(data) => updateCompany({background:data.id})}
-                                />
-																*/}
-													</div>
-												</div>
-											</div>
 											<div class="col-md-11 col-lg-11 col-sm-10 col-xs-12">
 
                         <div class="summary-head__title-item">

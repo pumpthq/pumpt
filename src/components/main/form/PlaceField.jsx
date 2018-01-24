@@ -38,10 +38,6 @@ export const PlaceField = ({ values, name, input, onChange, label, meta: { touch
 		onChange : input.onChange,
 		onBlur: input.onBlur,
 		id : id,
-		typeAhead : false,
-		inputName : input.name,
-		autocompleteItem : AutocompleteItem,
-		classNames : classes,
 		placeholder : label,
 		name : name,
 	}

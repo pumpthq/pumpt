@@ -106,10 +106,6 @@ export default class CompanySummary extends Component {
                                         {name}
                                         <img src={ratingImage}
                                              className="image image_inline image_type_rating invisible-tablet"/>
-                                        <span className="text text_color_grey invisible-tablet">
-																				{/*FIXME: add back in with Glassdoor integration*/}
-																				{/* {ratingCount} reviews */}
-                                        </span>
                                     </h2>
                                     <div className="mdl-card__subtitle-text summary-head__subtitle-text">
                                         <ul className="list list_type_inline">
@@ -124,16 +120,6 @@ export default class CompanySummary extends Component {
                                         <img src={ratingImage}
                                              className="image image_inline image_type_rating"/>
                                         <br/>
-																				{/*FIXME: add back in with Glassdoor integration*/}
-																				{/* <span className="text text_color_grey">{ratingCount} reviews</span> */}
-                                    </span>
-                                    <span className="summary-head__subtitle-head">
-                                        <span className="text text_color_l-grey">
-                                            Powered by<br className="invisible-desktop"/>
-                                            <a href="#">
-                                                <img src={GlassDoorImage} className="image image_type_rating-name"/>
-                                            </a>
-                                        </span>
                                     </span>
                                 </div>
                             </div>

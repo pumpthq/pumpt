@@ -156,8 +156,8 @@ const renderOfficeLocations = ({ fields, label, meta: { error } }) => (
 				 <div class="col-md-12">
 					 <div class="row">
 							{fields.map((officeLocation, index) => (
-							<div class="col-md-6">
-								<div key={index} className="info-block">
+							<div key={index} class="col-md-6">
+								<div className="info-block">
 										<div class="application-detail">
 											<Field
 												name={`${officeLocation}.location`}
@@ -258,15 +258,6 @@ CompanyApplicationForm = reduxForm({
 	form: 'companyApplicationForm',
 	enableReinitialize : true
 })(CompanyApplicationForm)
-
-const selector = formValueSelector('candidateApplicationForm')
-
-CompanyApplicationForm = connect(
-		state => {
-		//	initialValues: state.companyMatches.company
-				//wip????corrent inti values or nahh?
-		}
-)(CompanyApplicationForm)
 
 //Export Form
 export default CompanyApplicationForm
