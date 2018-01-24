@@ -32,6 +32,7 @@ export default class CandidateHeaderMenu extends Component {
                 links={[
                     <Link
                         to={ROUTE_CANDIDATE_MATCHES_ALL}
+                        key="matches"
                         activeClassName="navigation__link navigation__link_active"
                         className="navigation__link"
                     >
@@ -39,6 +40,7 @@ export default class CandidateHeaderMenu extends Component {
                     </Link>,
                     <Link
                         to={"/candidate/matches/edit"}
+                        key="profile"
                         className="navigation__link"
                         activeClassName="navigation__link navigation__link_active"
                     >
@@ -49,12 +51,12 @@ export default class CandidateHeaderMenu extends Component {
                     <HeaderDropDownMenu
                         userName={`${candidate.firstName} ${candidate.lastName}`}
                         userAvatar={apiImage(candidate.avatar)}
-                        progress={candidate.fillProgress}
                         linkTo={"/candidate/matches/edit"}
                     >
-                        <HeaderDropDownItem to={'/candidate/matches/changePass'}>Change Password</HeaderDropDownItem>
-                        {/* <HeaderDropDownItem>Notification Settings</HeaderDropDownItem> */}
-                        <HeaderDropDownItem>
+                      <HeaderDropDownItem to={'/candidate/matches/changePass'}>
+                        Change Password
+                      </HeaderDropDownItem>
+                        <HeaderDropDownItem nolink >
 												<Mailto email="support@pumpthq.com" obfuscate={true}>
 														Help &amp; Support
 													</Mailto>
