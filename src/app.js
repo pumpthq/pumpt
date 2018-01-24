@@ -8,5 +8,7 @@ ReactDOM.render(routes, app);
 /* HMR opt-in setting for this module */
 if(module.hot) {
   console.info('module hot loader enabled on app root')
-  module.hot.accept()
+  module.hot.accept('./routes', () => {
+    ReactDOM.render(routes, app);
+  })
 }
