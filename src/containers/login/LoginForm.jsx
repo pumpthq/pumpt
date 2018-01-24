@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 
 import { login } from 'actions/authorization'
 import { SubmissionError } from 'redux-form'
+import { renderField } from 'components/form/helpers';
 
 //Validations
 const required = value => (value ? undefined : 'Can\'t be Blank')
@@ -14,23 +15,6 @@ const email = value =>
     : undefined
 export const minLength = min => value =>
   value && value.length < min ? `Must be ${min} characters or more` : undefined
-
-//Generalized Redux Field
-const renderField = ({
-  input,
-  label,
-  type,
-  meta: { touched, error }
-}) => (
-  <div>
-    <div>
-      <input class="mdl-textfield__input textfield__input" {...input} placeholder={label} type={type} />
-      {touched && (error && <span class="textfield__error">{error}</span>)}
-    </div>
-  </div>
-)
-
-
 
 const LoginForm = props => {
 	const { handleSubmit, submitting, error, valid, dispatch } = props

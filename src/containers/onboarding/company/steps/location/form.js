@@ -6,6 +6,7 @@ import { reduxForm, Field, SubmissionError } from 'redux-form'
 
 //Places Autocomplete Library
 import { Form, PlaceField} from 'components/main/form/PlaceField';
+import { renderField } from 'components/form/helpers';
 
 //General Components
 import Button from './../../../../../components/main/button';
@@ -21,21 +22,6 @@ import {
 } from 'actions/companyOnboarding';
 
 import * as V from 'components/main/form/validations'
-
-//Generalized Redux Field
-export const renderField = ({
-  input,
-  label,
-  type,
-  meta: { asyncValidating, touched, error }
-}) => (
-  <div>
-		<div class={asyncValidating ? 'async-validating' : 'class'}>
-      <input class="mdl-textfield__input textfield__input" {...input} placeholder={label} type={type} />
-      {touched && error && <span class="textfield__error">{error}</span>}
-    </div>
-  </div>
-)
 
 //Company Onboarding Location Info Form
 let LocationInfoForm = props => {

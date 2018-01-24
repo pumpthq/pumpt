@@ -9,6 +9,7 @@ import ChainIcon from './../../../../../components/icons/chain'
 import LinkedInIcon from './../../../../../components/icons/linkedIn'
 import TwitterIcon from './../../../../../components/icons/twitter'
 import FacebookIcon from './../../../../../components/icons/facebook'
+import { renderField } from 'components/form/helpers';
 
 import {
     saveWebsiteAndSocialMediaData,
@@ -18,21 +19,6 @@ import {
 import { SubmissionError } from 'redux-form'
 
 import * as V from 'components/main/form/validations'
-
-//Generalized Redux Field
-const renderField = ({
-  input,
-  label,
-  type,
-  meta: { asyncValidating, touched, error }
-}) => (
-  <div>
-		<div class={asyncValidating ? 'async-validating' : 'class'}>
-      <input class="mdl-textfield__input textfield__input" {...input} placeholder={label} type={type} />
-      {touched && error && <span class="textfield__error">{error}</span>}
-    </div>
-  </div>
-)
 
 let SocialMediaForm = props => {
 		const { handleSubmit, invalid, asyncValidating, submitting, error, valid, dispatch } = props

@@ -6,6 +6,7 @@ import * as V from 'components/main/form/validations'
 
 //Places Autocomplete Library
 import PlacesAutocomplete from 'react-places-autocomplete'
+import { renderField } from 'components/form/helpers'
 
 import { Checkbox } from 'redux-form-material-ui'
 
@@ -26,21 +27,6 @@ import { checkEmailAvailability } from 'actions/authorization'
 
 //Places Autocomplete Library
 import { PlaceField } from 'components/main/form/PlaceField'
-
-//Generalized Redux Field
-const renderField = ({
-  input,
-  label,
-  type,
-  meta: { asyncValidating, touched, error }
-}) => (
-  <div>
-		<div class={asyncValidating ? 'async-validating' : 'class'}>
-      <input class="mdl-textfield__input textfield__input" {...input} placeholder={label} type={type} />
-      {touched && error && <span class="textfield__error">{error}</span>}
-    </div>
-  </div>
-)
 
 //Async Validation - on if email is already registered
 const asyncValidate = (values, dispatch) => {

@@ -3,7 +3,8 @@ import { reduxForm, Field, SubmissionError, formValueSelector } from 'redux-form
 import { connect } from 'react-redux'
 import { Location, EnumSelector, TextArea, TextInput } from 'components/form/inputs'
 import MultiInput from 'components/main/form/MultiInput'
-import { TextField, SelectField, MenuItem } from 'material-ui'
+import {renderTextField, renderSelectField} from 'components/form/helpers'
+import { MenuItem } from 'material-ui'
 import './form.less'
 
 //Actions
@@ -19,41 +20,6 @@ import {
     ANNUAL_INCOME_DROPDOWN_DATA,
     EXPERIENCE_DROPDOWN_DATA,
 } from 'constants/candidateOnboarding';
-
-
-export const renderTextField = ({
-  input: {
-    value,
-    onChange
-  },
-  label,
-	className,
-  meta: { asyncValidating, touched, error }
-}) => (
-  <div class={className}>
-		<div class={asyncValidating ? 'async-validating' : 'class'}>
-      <TextField
-        value={value}
-        onChange={onChange}
-        placeholder={label}
-        floatingLabelText={label} />
-      {touched && error && <span class="textfield__error">{error}</span>}
-    </div>
-  </div>
-)
-
-const renderSelectField = ({ input: {value, onChange}, label, meta: { touched, error }, children }) => (
-    <div>
-      <SelectField
-        value={value}
-        onChange={(event, id, payload) => (onChange(payload))}
-        floatingLabelText={label}>
-        {children}
-      </SelectField>
-      {touched && error && <span>{error}</span>}
-    </div>
-)
-
 
 //Form
 let CandidateSummaryForm = props =>  {
@@ -155,16 +121,14 @@ let CandidateSummaryForm = props =>  {
 					</div>
 			</div>
 
-
 				<div className="candidate-buttons">
 					<button type="submit" disabled={submitDisabled} className="mdl-button button button_type_colored button_size_m">
-						{submitting ? <i/> : <i/>} Save
+						 Save
 					</button>
 					<button type="button" disabled={submitting} onClick={onCancel} className="mdl-button button button_type_colored button_size_m">
 						Cancel
 					</button>
 				</div>
-
 			</form>
 		)
 	}

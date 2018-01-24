@@ -5,6 +5,7 @@ import Form from 'components/main/form'
 import { OnboardingInput } from 'components/onboarding'
 import Button from 'components/main/button'
 import { SubmissionError } from 'redux-form'
+import { renderField } from 'components/form/helpers'
 
 import { saveSetUpPasswordData as companySaveSetUpPasswordData } from 'actions/companyOnboarding';
 import { applyForMembership as companyApplyForMembership } from 'actions/companyOnboarding';
@@ -32,21 +33,6 @@ const validate = values => {
 
 	return errors
 }
-
-//Generalized Redux Field
-const renderField = ({
-  input,
-  label,
-  type,
-  meta: { touched, error }
-}) => (
-  <div>
-    <div>
-      <input class="mdl-textfield__input textfield__input" {...input} placeholder={label} type={type} />
-      {touched && (error && <span class="textfield__error">{error}</span>)}
-    </div>
-  </div>
-)
 
 //form
 const CompanyFinalForm = props => {

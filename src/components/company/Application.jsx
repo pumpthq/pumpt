@@ -27,22 +27,8 @@ import { updateCompany } from 'actions/applicationCompany'
 //Field-level Validations & Normalizations
 import { url, date, require } from 'components/main/form/validations'
 import { normalizeDate, normalizeTwitter } from 'components/main/form/normalizations'
+import { renderField } from 'components/form/helpers';
 
-//Generalized Redux Field
-export const renderField = ({
-  input,
-  label,
-  type,
-	className,
-  meta: { asyncValidating, touched, error }
-}) => (
-  <div class={className}>
-		<div class={asyncValidating ? 'async-validating' : 'class'}>
-      <input class="mdl-textfield__input textfield__input" {...input} placeholder={label} type={type} />
-      {touched && error && <span class="textfield__error">{error}</span>}
-    </div>
-  </div>
-)
 const CardDivider = () => (<div className="summary-head__title-item summary-head__title-item_type_alignment summary-head__title-item_type_middle"></div>)
 
 //Form

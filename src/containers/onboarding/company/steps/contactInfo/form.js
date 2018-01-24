@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import co from 'co'
 import emailValidator from 'email-validator'
 import PlacesAutocomplete from 'react-places-autocomplete'
+import { renderField } from 'components/form/helpers'
 
 import Form from './../../../../../components/main/form'
 import Button from './../../../../../components/main/button'
@@ -27,20 +28,6 @@ import { checkEmailAvailability } from 'actions/authorization'
 import { checkCompanyNameAvailability } from 'actions/authorization'
 
 import * as V from 'components/main/form/validations'
-//Generalized Redux Field
-const renderField = ({
-  input,
-  label,
-  type,
-  meta: { asyncValidating, touched, error }
-}) => (
-  <div>
-		<div class={asyncValidating ? 'async-validating' : 'class'}>
-      <input class="mdl-textfield__input textfield__input" {...input} placeholder={label} type={type} />
-      {touched && error && <span class="textfield__error">{error}</span>}
-    </div>
-  </div>
-)
 
 //Async Validation - on if email is already registered + on Company Name Uniqueness
 function composeAsyncValidators(validatorFns) {

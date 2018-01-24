@@ -25,24 +25,10 @@ import Social from 'components/icons-application/social';
 import LinkedInIcon from 'components/icons-application/linkedIn';
 import TwitterIcon from 'components/icons-application/twitter';
 import FacebookIcon from 'components/icons-application/facebook';
+
+import { renderField } from 'components/form/helpers';
 import './style.less';
 
-
-// Generalized Redux Field
-export const renderField = ({
-  input,
-  label,
-  type,
-  className,
-  meta: { asyncValidating, touched, error },
-}) => (
-  <div className={className}>
-    <div className={asyncValidating ? 'async-validating' : 'class'}>
-      <input className="mdl-textfield__input textfield__input" {...input} placeholder={label} type={type} />
-      {touched && error && <span className="textfield__error">{error}</span>}
-    </div>
-  </div>
-);
 renderField.propTypes = {
   input: PropTypes.object,
   label: PropTypes.string,

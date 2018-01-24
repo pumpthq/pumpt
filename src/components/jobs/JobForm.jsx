@@ -24,22 +24,7 @@ import { find } from 'lodash'
 //Field-level Validations & Normalizations
 import { url, date, required, hasText } from 'components/main/form/validations'
 import { industryChild } from 'components/main/form/normalizations'
-
-//Generalized Redux Field
-export const renderField = ({
-  input,
-  label,
-  type,
-	className,
-  meta: { asyncValidating, touched, error }
-}) => (
-  <div class={className}>
-		<div class={asyncValidating ? 'async-validating' : 'class'}>
-      <input class="mdl-textfield__input textfield__input" {...input} placeholder={label} type={type} />
-      {touched && error && <span class="textfield__error textfield__error_small">{error}</span>}
-    </div>
-  </div>
-)
+import { renderField } from 'components/form/helpers';
 
 export const TextAreaField = ({input, label, meta: { asyncValidating, touched, error } }) => (
 		<span>

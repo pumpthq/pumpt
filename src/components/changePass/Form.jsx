@@ -11,6 +11,7 @@ import {required, passwordConfirm, minLength } from 'components/main/form/valida
 
 import {changePassword} from 'actions/authorization'
 import { browserHistory } from 'react-router'
+import { renderField } from 'components/form/helpers'
 
 const buttonStyle = {
     cursor: 'pointer',
@@ -41,20 +42,6 @@ const validate = values => {
 
 	return errors
 }
-//Generalized Redux Field
-const renderField = ({
-  input,
-  label,
-  type,
-  meta: { touched, error }
-}) => (
-  <div>
-    <div>
-      <input class="mdl-textfield__input textfield__input" {...input} placeholder={label} type={type} />
-      {touched && (error && <span class="textfield__error">{error}</span>)}
-    </div>
-  </div>
-)
 
 let ChangePassForm = props => {
 
