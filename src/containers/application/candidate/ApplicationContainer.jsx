@@ -109,6 +109,7 @@ export default class ApplicationContainer extends Component {
 												}
 												<CandidateApplicationForm
 														ref="applicationForm"
+                            onSubmit={values=> {dispatch(updateCandidate(values)) } }
 													/>
 
 														<div className="text-center">

@@ -59,19 +59,11 @@ const fieldArrayProps = {
 };
 
 // Form
-let CandidateApplicationForm = ({ handleSubmit, submitting, invalid, dispatch }) => {
+let CandidateApplicationForm = ({ handleSubmit, submitting, invalid, submitSucceeded, pristine }) => {
   const submitDisabled = invalid || submitting;
-  const submit = (values) => (
-    dispatch(updateCandidate(values))
-      .catch(() => {
-        throw new SubmissionError({
-          _error: 'Error Occured While Trying to Save Your Profile',
-        });
-      })
-  );
 
   return (
-    <form onSubmit={handleSubmit(submit)} className="candidate-application-form text-input-underlined">
+    <form onSubmit={handleSubmit} className="candidate-application-form text-input-underlined">
 
       <CaseIcon />
       <FieldArray name="workingExperience" label="Working Experience" component={renderWorkingExperiences} />
@@ -94,8 +86,8 @@ let CandidateApplicationForm = ({ handleSubmit, submitting, invalid, dispatch })
           type="submit" disabled={submitDisabled}
           className="mdl-button button button_type_colored button_size_m candidate-submit"
         >
-          Save Progress
-        </button>
+          Save
+        </button>{(submitSucceeded && pristine) && <span className="message-success">Saved!</span>}
 
       </div>
     </form>
@@ -350,7 +342,6 @@ const renderSocial = () => (
 // Define Form
 CandidateApplicationForm = reduxForm({
   form: 'candidateApplication',
-  enableReinitialize: true,
 })(CandidateApplicationForm);
 
 CandidateApplicationForm = connect(
