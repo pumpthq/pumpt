@@ -1,10 +1,10 @@
-import React, {Component, PropTypes} from 'react'
-import { connect} from 'react-redux'
-import { Link } from 'react-router'
-import { postBookmark, postReject, postApprove, viewVacancy } from '../../actions/candidateMatches'
+import React, {Component} from 'react'
+import {connect} from 'react-redux'
+import {Link} from 'react-router'
+import {postApprove, postBookmark, postReject} from '../../actions/candidateMatches'
 
-import { BookmarkOpen, BookmarkFill, Decline, ApproveOpen, ApproveFill } from 'components/icons'
-import { tintedBackground, apiImage } from 'components/helpers'
+import {ApproveFill, ApproveOpen, BookmarkOpen, Decline} from 'components/icons'
+import {apiImage, tintedBackground} from 'components/helpers'
 
 import './card.less'
 

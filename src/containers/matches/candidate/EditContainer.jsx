@@ -1,14 +1,11 @@
-import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
-import { browserHistory } from 'react-router';
-import { updateCandidate } from 'actions/candidateMatches'
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {browserHistory} from 'react-router';
+import {updateCandidate} from 'actions/candidateMatches'
 
 import CandidateForm from 'components/candidates/Form';
 import CandidateSummary from 'components/candidates/Summary';
 import CandidateApplicationForm from 'components/candidates/Application';
-
-import Panel from 'components/main/panel';
-import ScrollContainer from 'components/main/scrollContainer'
 import Button from 'components/main/button'
 import BasicDialog from 'components/main/popup/BasicDialog';
 

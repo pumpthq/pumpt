@@ -1,11 +1,9 @@
-import React, {Component} from 'react'
-import { Link } from 'react-router'
-import { reduxForm, Field } from 'redux-form'
-import { connect } from 'react-redux';
+import React from 'react'
+import {Link} from 'react-router'
+import {Field, reduxForm, SubmissionError} from 'redux-form'
 
-import { login } from 'actions/authorization'
-import { SubmissionError } from 'redux-form'
-import { renderField } from 'components/form/helpers';
+import {login} from 'actions/authorization'
+import {renderField} from 'components/form/helpers';
 
 //Validations
 const required = value => (value ? undefined : 'Can\'t be Blank')

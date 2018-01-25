@@ -1,14 +1,8 @@
-import React, { Component, PropTypes } from 'react'
-import { TabBar as TabBarView } from '../../../../components/matches'
+import React, {Component, PropTypes} from 'react'
+import {TabBar as TabBarView} from '../../../../components/matches'
 import MatchesIcon from '../../../../components/icons/Matches';
 import BookmarkFill from '../../../../components/icons/BookmarkFill';
 import DeclineIcon from '../../../../components/icons/Decline';
-
-import {
-    routeToAll,
-    routeToBookmarked,
-    routeToNotInterested
-} from './../../../../actions/candidateMatches';
 import {
     ROUTE_CANDIDATE_MATCHES_ALL,
     ROUTE_CANDIDATE_MATCHES_BOOKMARKED,

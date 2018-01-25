@@ -1,30 +1,23 @@
-import React, {Component, PropTypes} from 'react';
-import { connect } from 'react-redux'
-import { reduxForm, FieldArray, Field, SubmissionError, formValueSelector } from 'redux-form'
-
+import React from 'react';
+import {connect} from 'react-redux'
+import {Field, FieldArray, formValueSelector, reduxForm, SubmissionError} from 'redux-form'
 //Places Autocomplete Library
-import { PlaceField } from 'components/main/form/PlaceField'
+import {PlaceField} from 'components/main/form/PlaceField'
 import MultiInput from 'components/main/form/MultiInput'
-
 //Actions
-import { createJob } from 'actions/companyJobs'
 
-import { browserHistory } from 'react-router'
+import {browserHistory} from 'react-router'
 import {
     ANNUAL_INCOME_DROPDOWN_DATA,
     EXPERIENCE_DROPDOWN_DATA,
     FIELD_OF_EXPERTISE_DROPDOWN_DATA,
 } from 'constants/candidateOnboarding';
-import {
-    DEGREES_DROPDOWN_DATA,
-    EMPLOYEMENTS_DROPDOWN_DATA,
-} from 'constants/companyJobs';
-import { find } from 'lodash'
-
+import {DEGREES_DROPDOWN_DATA, EMPLOYEMENTS_DROPDOWN_DATA,} from 'constants/companyJobs';
+import {find} from 'lodash'
 //Field-level Validations & Normalizations
-import { url, date, required, hasText } from 'components/main/form/validations'
-import { industryChild } from 'components/main/form/normalizations'
-import { renderField } from 'components/form/helpers';
+import {hasText, required} from 'components/main/form/validations'
+import {industryChild} from 'components/main/form/normalizations'
+import {renderField} from 'components/form/helpers';
 
 export const TextAreaField = ({input, label, meta: { asyncValidating, touched, error } }) => (
 		<span>

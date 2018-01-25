@@ -1,23 +1,16 @@
-import React, { PropTypes } from 'react';
-import { connect } from 'react-redux';
-import { reduxForm, FieldArray, Field, SubmissionError, propTypes as formTypes } from 'redux-form';
-
+import React, {PropTypes} from 'react';
+import {connect} from 'react-redux';
+import {Field, FieldArray, propTypes as formTypes, reduxForm, SubmissionError} from 'redux-form';
 // Places Autocomplete Library
-import { PlaceField } from 'components/main/form/PlaceField';
-
+import {PlaceField} from 'components/main/form/PlaceField';
 // Material Ui AutoComplete
-import {
-  Checkbox,
-} from 'redux-form-material-ui';
-
+import {Checkbox,} from 'redux-form-material-ui';
 // Actions
-import { updateCandidate } from 'actions/candidateMatches';
-
 // Field-level Validations & Normalizations
-import { url, date } from 'components/main/form/validations';
-import { normalizeDate, normalizeYear, normalizeTwitter } from 'components/main/form/normalizations';
+import {date, url} from 'components/main/form/validations';
+import {normalizeDate, normalizeTwitter, normalizeYear} from 'components/main/form/normalizations';
 
-import { SKILLS } from 'constants/candidateOnboarding';
+import {SKILLS} from 'constants/candidateOnboarding';
 import Skills from 'components/icons-application/skills';
 import CaseIcon from 'components/icons-application/case';
 import Education from 'components/icons-application/education';
@@ -26,7 +19,7 @@ import LinkedInIcon from 'components/icons-application/linkedIn';
 import TwitterIcon from 'components/icons-application/twitter';
 import FacebookIcon from 'components/icons-application/facebook';
 
-import { renderField } from 'components/form/helpers';
+import {renderField} from 'components/form/helpers';
 import './style.less';
 
 renderField.propTypes = {

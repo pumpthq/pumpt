@@ -1,21 +1,11 @@
-import React, { Component, PropTypes } from 'react';
-import { Link } from 'react-router';
-import { connect } from 'react-redux';
+import React, {Component} from 'react';
+import {Link} from 'react-router';
+import {connect} from 'react-redux';
 import Mailto from 'react-mailto';
 
-import {
-    HeaderFull,
-    HeaderDropDownMenu,
-    HeaderDropDownItem,
-} from './../../../components/main/header';
-import {
-    ROUTE_EDIT_COMPANY,
-    ROUTE_COMPANY_MATCHES_ALL,
-    ROUTE_COMPANY_JOBS_OPEN,
-    ROUTE_COMPANY_JOBS_NEW,
-    ROUTE_APPLICATION_COMPANY,
-} from './../../../constants/routes';
-import { logOut } from './../../../actions/authorization';
+import {HeaderDropDownItem, HeaderDropDownMenu, HeaderFull,} from './../../../components/main/header';
+import {ROUTE_COMPANY_JOBS_NEW, ROUTE_COMPANY_JOBS_OPEN,} from './../../../constants/routes';
+import {logOut} from './../../../actions/authorization';
 
 import {apiImage} from 'components/helpers'
 

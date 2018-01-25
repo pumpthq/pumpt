@@ -1,16 +1,10 @@
-import React, {Component, PropTypes} from 'react';
-import { browserHistory } from 'react-router'
+import React, {Component} from 'react';
+import {browserHistory} from 'react-router'
 
-import { apiImage, displayIndustries } from 'components/helpers'
-import Case from '../icons-application/case'
-import Education from '../icons-application/education'
-import Pin from '../icons-application/pin'
-import Social from '../icons-application/social'
-import Skills from '../icons-application/skills'
-import Heart from '../icons-application/heart'
+import {apiImage, displayIndustries} from 'components/helpers'
 import './profile.less'
 
-import { SKILLS } from 'constants/candidateOnboarding';
+import {SKILLS} from 'constants/candidateOnboarding';
 
 const propTypes = {};
 const defaultProps = {

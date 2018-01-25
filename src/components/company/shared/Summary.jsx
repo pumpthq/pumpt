@@ -1,13 +1,7 @@
-import React, {Component, PropTypes} from 'react';
-import { connect } from 'react-redux'
-import GlassDoorImage from 'img/glassdoor.jpg'
-
-import { Link } from 'react-router'
-import { find } from 'lodash'
-import { dispatchProp } from 'components/helpers'
-import { viewCompany } from 'actions/candidateMatches'
-
-import { apiImage } from 'components/helpers'
+import React, {Component} from 'react';
+import {connect} from 'react-redux'
+import {find} from 'lodash'
+import {apiImage, dispatchProp} from 'components/helpers'
 
 const propTypes = {
     // name: PropTypes.string,

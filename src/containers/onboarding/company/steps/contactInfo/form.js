@@ -1,31 +1,19 @@
-import React, { Component } from 'react'
-import { reduxForm, Field} from 'redux-form'
-import { connect } from 'react-redux'
-import co from 'co'
-import emailValidator from 'email-validator'
-import PlacesAutocomplete from 'react-places-autocomplete'
-import { renderField } from 'components/form/helpers'
-
-import Form from './../../../../../components/main/form'
+import React from 'react'
+import {Field, reduxForm, SubmissionError} from 'redux-form'
+import {connect} from 'react-redux'
+import {renderField} from 'components/form/helpers'
 import Button from './../../../../../components/main/button'
-import { OnboardingInput } from './../../../../../components/onboarding'
 
 import {
-    THIS_EMAIL_IS_ALREADY_REGISTERED,
-    THIS_COMPANY_IS_ALREADY_REGISTERED
+    THIS_COMPANY_IS_ALREADY_REGISTERED,
+    THIS_EMAIL_IS_ALREADY_REGISTERED
 } from './../../../../../constants/companyOnboarding'
 import {
-    fetchByEmail as getCompanyByEmail,
-    isAvailable as isAvailableCompanyName
-} from './../../../../../sagas/companyOnboarding'
-import {
+    gotoCompanyTypeStep,
     saveContactInfoData,
     showCompanyTypeStep,
-    gotoCompanyTypeStep,
 } from './../../../../../actions/companyOnboarding'
-import { SubmissionError } from 'redux-form'
-import { checkEmailAvailability } from 'actions/authorization'
-import { checkCompanyNameAvailability } from 'actions/authorization'
+import {checkCompanyNameAvailability, checkEmailAvailability} from 'actions/authorization'
 
 import * as V from 'components/main/form/validations'
 

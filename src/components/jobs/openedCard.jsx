@@ -1,9 +1,9 @@
 import React, {Component, PropTypes} from 'react';
-import { connect } from 'react-redux';
-import { closeJob } from './../../actions/companyJobs';
-import { Link } from 'react-router'
+import {connect} from 'react-redux';
+import {closeJob} from './../../actions/companyJobs';
+import {Link} from 'react-router'
 
-import { apiImage, displayIndustries } from 'components/helpers'
+import {apiImage} from 'components/helpers'
 
 const propTypes = {
     title: PropTypes.string,

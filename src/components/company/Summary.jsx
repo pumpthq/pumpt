@@ -1,11 +1,6 @@
-import React, { Component, PropTypes } from 'react'
-import { connect } from 'react-redux'
+import React, {Component} from 'react'
 
 import PencilIcon from 'components/icons/pencil'
-
-import ImageUploader from 'components/ImageUploader'
-import BuildingIcon from 'components/icons/building'
-import {updateCompany} from 'actions/applicationCompany'
 
 const shortenLocation  = value => {
 	return value.match(/[^,]+,[^,]+/)

@@ -1,5 +1,5 @@
-import React, { Component, PropTypes } from 'react';
-import { MultiItemGroup } from './index';
+import React, {Component, PropTypes} from 'react';
+import {MultiItemGroup} from './index';
 import './multi.less'
 
 const LIST_ITEM_TYPE_TEXT = 'list.item.type.text'

@@ -1,17 +1,13 @@
-import React, { Component, PropTypes } from 'react'
-import { connect } from 'react-redux'
+import React, {Component, PropTypes} from 'react'
+import {connect} from 'react-redux'
 import List from './../../../../../components/main/list'
 import uuid from 'uuid'
-import { findById } from '../../../../../constants/dropdownData'
+import {findById} from '../../../../../constants/dropdownData'
 
-import {
-    saveIncomeData,
-    showExperienceStep,
-    gotoExperienceStep,
-} from './../../../../../actions/candidateOnboarding'
+import {gotoExperienceStep, saveIncomeData, showExperienceStep,} from './../../../../../actions/candidateOnboarding'
 
-import { StepListLink } from '../../../renderHelpers'
-import { ANNUAL_INCOME_DROPDOWN_DATA } from './../../../../../constants/candidateOnboarding'
+import {StepListLink} from '../../../renderHelpers'
+import {ANNUAL_INCOME_DROPDOWN_DATA} from './../../../../../constants/candidateOnboarding'
 
 @connect(
     function mapStateToProps(state, ownProps) {

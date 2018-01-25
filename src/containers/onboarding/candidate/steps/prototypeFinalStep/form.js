@@ -1,13 +1,12 @@
-import React, { Component, PropTypes } from 'react'
-import { reduxForm, Field } from 'redux-form'
+import React from 'react'
+import {Field, reduxForm, SubmissionError} from 'redux-form'
 
 import Button from 'components/main/button'
-import { SubmissionError } from 'redux-form'
 
-import { saveSetUpPasswordData as candidateSaveSetUpPasswordData } from 'actions/candidateOnboarding';
-import { applyForMembership as candidateApplyForMembership } from 'actions/candidateOnboarding';
-
-import {required, passwordConfirm, minLength } from 'components/main/form/validations'
+import {
+    applyForMembership as candidateApplyForMembership,
+    saveSetUpPasswordData as candidateSaveSetUpPasswordData
+} from 'actions/candidateOnboarding';
 import {renderField} from 'components/form/helpers'
 
 //Validations

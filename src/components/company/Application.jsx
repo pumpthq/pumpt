@@ -1,33 +1,25 @@
-import React, {Component, PropTypes} from 'react';
-import { connect } from 'react-redux'
-import { reduxForm, FieldArray, Field, SubmissionError, formValueSelector} from 'redux-form'
-
-import ImageUploader from 'components/ImageUploader'
-import {FileImage} from 'components/icons'
-import { TextArea } from 'components/form/inputs'
-
+import React from 'react';
+import {Field, FieldArray, formValueSelector, reduxForm, SubmissionError} from 'redux-form'
 //Places Autocomplete Library
-import { PlaceField } from 'components/main/form/PlaceField'
+import {PlaceField} from 'components/main/form/PlaceField'
 
 import QuoteIcon from 'components/icons-application/quote'
 import ChainIcon from 'components/icons-application/chain'
 import Pin from 'components/icons-application/pin'
 import Description from 'components/icons-application/description'
 import Social from 'components/icons-application/social'
-import Photos from 'components/icons-application/photos'
 
 import LinkedInIcon from 'components/icons-application/linkedIn'
 import TwitterIcon from 'components/icons-application/twitter'
 import FacebookIcon from 'components/icons-application/facebook'
 import './style.less'
-
 //Actions
-import { updateCompany } from 'actions/applicationCompany'
-
+import {updateCompany} from 'actions/applicationCompany'
 //Field-level Validations & Normalizations
-import { url, date, require } from 'components/main/form/validations'
-import { normalizeDate, normalizeTwitter } from 'components/main/form/normalizations'
-import { renderField } from 'components/form/helpers';
+import {require, url} from 'components/main/form/validations'
+import {normalizeTwitter} from 'components/main/form/normalizations'
+import {renderField} from 'components/form/helpers';
+import {apiImage} from 'components/helpers'
 
 const CardDivider = () => (<div className="summary-head__title-item summary-head__title-item_type_alignment summary-head__title-item_type_middle"></div>)
 
@@ -244,7 +236,6 @@ const renderDropzoneInput = (field) => {
 }
 
 
-import {apiImage} from 'components/helpers'
 const ImageEntry = props => {
     const { field } = props
     return (

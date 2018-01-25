@@ -1,7 +1,5 @@
-import React, {Component, PropTypes} from 'react'
-import { connect } from 'react-redux';
-import { reduxForm, Field, SubmissionError } from 'redux-form'
-
+import React from 'react'
+import {Field, reduxForm, SubmissionError} from 'redux-form'
 //Places Autocomplete Library
 import PlacesAutocomplete from 'react-places-autocomplete'
 

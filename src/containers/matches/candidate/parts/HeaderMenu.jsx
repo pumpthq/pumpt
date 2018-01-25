@@ -1,18 +1,10 @@
-import React, { Component, PropTypes } from 'react';
-import { Link } from 'react-router';
-import { connect } from 'react-redux';
+import React, {Component} from 'react';
+import {Link} from 'react-router';
+import {connect} from 'react-redux';
 import Mailto from 'react-mailto';
-import {
-    HeaderFull,
-    HeaderDropDownMenu,
-    HeaderDropDownItem,
-} from './../../../../components/main/header';
-import {
-    ROUTE_CANDIDATE_MATCHES_ALL,
-    ROUTE_CANDIDATE_MESSAGES,
-    ROUTE_APPLICATION_CANDIDATE,
-} from './../../../../constants/routes';
-import { logOut } from './../../../../actions/authorization';
+import {HeaderDropDownItem, HeaderDropDownMenu, HeaderFull,} from './../../../../components/main/header';
+import {ROUTE_CANDIDATE_MATCHES_ALL,} from './../../../../constants/routes';
+import {logOut} from './../../../../actions/authorization';
 
 import {apiImage} from 'components/helpers'
 

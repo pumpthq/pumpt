@@ -1,14 +1,9 @@
-import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
+import React, {Component, PropTypes} from 'react';
+import {connect} from 'react-redux';
 import IconPerson from './../../icons/photo';
-import { logOut } from './../../../actions/authorization';
+import {logOut} from './../../../actions/authorization';
 
 // import ChangePassLink from '../../../containers/ChangePassword.jsx';
-
-import {
-    API_URL,
-    API_IMAGES,
-} from './../../../constants/api';
 
 const propTypes = {
     logo: PropTypes.oneOfType([

@@ -1,11 +1,11 @@
-import React, { Component } from 'react'
-import  ShowContainer  from './ShowContainer'
-import  EditContainer  from './EditContainer'
-import  ListContainer  from './ListContainer'
-import  MatchesContainer  from './MatchesContainer'
-import  CandidateContainer  from './CandidateContainer'
+import React from 'react'
+import ShowContainer from './ShowContainer'
+import EditContainer from './EditContainer'
+import ListContainer from './ListContainer'
+import MatchesContainer from './MatchesContainer'
+import CandidateContainer from './CandidateContainer'
 
-import { OpenJobsSlider, DraftJobsSlider, ClosedJobsSlider } from './Sliders'
+import {ClosedJobsSlider, DraftJobsSlider, OpenJobsSlider} from './Sliders'
 
 module.exports = {
     path: 'jobs',

@@ -1,13 +1,12 @@
-import React, { Component, PropTypes } from 'react';
-import RaisedButton from 'material-ui/RaisedButton';
+import React, {Component, PropTypes} from 'react';
 import Dialog from 'material-ui/Dialog';
 
 import SubmitButton from './SubmitButton.jsx';
 import CancelLink from './CancelLink.jsx';
 import PassInput from './PassInput.jsx';
 import Title from './Title.jsx';
-import { deprecate } from 'core-decorators'
-import { browserHistory } from 'react-router'
+import {deprecate} from 'core-decorators'
+import {browserHistory} from 'react-router'
 
 const bodyStyle = {
     width: '100%',

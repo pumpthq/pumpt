@@ -1,7 +1,7 @@
-import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import VacancyProfile from '../../../components/jobs/Profile'
-import { find } from 'lodash'
+import {find} from 'lodash'
 import VerticalScroller from 'components/VerticalScroller'
 
 const mapStateToProps = (state, ownProps) => {

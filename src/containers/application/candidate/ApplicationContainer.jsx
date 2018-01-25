@@ -1,26 +1,25 @@
-import React, { Component, PropTypes } from 'react'
-import { connect } from 'react-redux'
+import React, {Component} from 'react'
+import {connect} from 'react-redux'
 import Wrapper from 'components/main/wrapper'
-import { HeaderMini } from 'components/main/header'
+import {HeaderMini} from 'components/main/header'
 import HeadingProgress from 'containers/application/candidate/headingProgress';
 import CandidateSummaryForm from 'components/candidates/Form';
 import CandidateSummary from 'components/candidates/Summary';
 import CandidateApplicationForm from 'components/candidates/Application';
 import logoImage from 'img/sprites-svg/logo.svg'
-import { updateCandidate } from 'actions/candidateMatches'
+import {updateCandidate} from 'actions/candidateMatches'
 import Footer from 'components/main/footer/footer';
 import ApplicationSuccessDialog from 'components/application/ApplicationSuccessDialog'
 import Button from 'components/main/button'
-import { finishApplication } from 'actions/authorization'
+import {finishApplication} from 'actions/authorization'
 
 import {apiImage} from 'components/helpers'
+import {submit} from 'redux-form'
 
 function mapStateToProps(state, ownProps) {
     return { candidate: state.candidateMatches.candidate, authorization: state.authorization,  }
 }
 
-
-import { submit } from 'redux-form'
 
 const recentWorkingAreasToParent = (values) => {
   values.recentWorkingArea = values.recentWorkingAreas.map( a => (a.value));

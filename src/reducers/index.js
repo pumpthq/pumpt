@@ -1,6 +1,5 @@
-import { combineReducers } from 'redux';
+import {combineReducers} from 'redux';
 import routing from './routing';
-import form from './form';
 import candidateOnboarding from './candidateOnboarding';
 import applicationCandidate from './applicationCandidate';
 import companyOnboarding from './companyOnboarding';
@@ -10,7 +9,7 @@ import authorization from './authorization';
 import companyJobs from './companyJobs';
 import candidateMatches from './candidateMatches';
 import apiError from './api';
-import { reducer as forms } from 'redux-form';
+import {reducer as forms} from 'redux-form';
 
 import '../constants/dropdownData';
 

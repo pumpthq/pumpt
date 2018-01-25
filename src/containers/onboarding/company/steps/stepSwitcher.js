@@ -1,15 +1,15 @@
-import React, { Component, PropTypes } from 'react'
-import { connect } from 'react-redux'
+import React, {Component, PropTypes} from 'react'
+import {connect} from 'react-redux'
 
 import {
-    SHOW_CONTACT_INFO_STEP,
     SHOW_COMPANY_TYPE_STEP,
+    SHOW_CONTACT_INFO_STEP,
+    SHOW_FOUNDATION_YEAR_STEP,
     SHOW_HEADQUARTERS_LOCATION_STEP,
     SHOW_NUMBER_OF_EMPLOYEES_STEP,
-    SHOW_FOUNDATION_YEAR_STEP,
-    SHOW_WEBSITE_AND_SOCIAL_MEDIA_STEP,
+    SHOW_SET_UP_PASSWORD_STEP,
     SHOW_VALUES_STEP,
-    SHOW_SET_UP_PASSWORD_STEP
+    SHOW_WEBSITE_AND_SOCIAL_MEDIA_STEP
 } from './../../../../constants/companyOnboarding'
 
 import ContactInfoStep from './contactInfo'

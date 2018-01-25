@@ -1,5 +1,5 @@
-import React, { Component, PropTypes } from 'react'
-import List, { ListLink, ListItem, ListAccordion } from './../../components/main/list'
+import React, {PropTypes} from 'react'
+import List, {ListAccordion, ListItem, ListLink} from './../../components/main/list'
 import AlternativeInput from './alternativeInput'
 import uuid from 'uuid'
 

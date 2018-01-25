@@ -1,17 +1,14 @@
-import React, { Component, PropTypes } from 'react';
-import { reduxForm, Field } from 'redux-form'
+import React from 'react';
+import {Field, reduxForm} from 'redux-form'
 
 import SubmitButton from './SubmitButton.jsx';
 import CancelLink from './CancelLink.jsx';
-import PassInput from './PassInput.jsx';
 import Title from './Title.jsx';
-import ScrollContainer from 'components/main/scrollContainer'
 import './style.less'
-import {required, passwordConfirm, minLength } from 'components/main/form/validations'
 
 import {changePassword} from 'actions/authorization'
-import { browserHistory } from 'react-router'
-import { renderField } from 'components/form/helpers'
+import {browserHistory} from 'react-router'
+import {renderField} from 'components/form/helpers'
 
 const buttonStyle = {
     cursor: 'pointer',

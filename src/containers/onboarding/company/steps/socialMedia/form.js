@@ -1,22 +1,14 @@
-import React, {Component} from 'react'
-import { connect } from 'react-redux'
-import { reduxForm, Field } from 'redux-form'
-import Form from './../../../../../components/main/form'
+import React from 'react'
+import {connect} from 'react-redux'
+import {Field, reduxForm, SubmissionError} from 'redux-form'
 import Button from './../../../../../components/main/button'
-import { ListLink, ListItem } from './../../../../../components/main/list'
-import { OnboardingInput } from './../../../../../components/onboarding'
-import ChainIcon from './../../../../../components/icons/chain'
-import LinkedInIcon from './../../../../../components/icons/linkedIn'
-import TwitterIcon from './../../../../../components/icons/twitter'
-import FacebookIcon from './../../../../../components/icons/facebook'
-import { renderField } from 'components/form/helpers';
+import {renderField} from 'components/form/helpers';
 
 import {
+    gotoValuesStep,
     saveWebsiteAndSocialMediaData,
     showValuesStep,
-    gotoValuesStep,
 } from './../../../../../actions/companyOnboarding'
-import { SubmissionError } from 'redux-form'
 
 import * as V from 'components/main/form/validations'
 

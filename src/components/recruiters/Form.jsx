@@ -1,8 +1,7 @@
-import React, {Component, PropTypes} from 'react';
-import { reduxForm, Field, SubmissionError, formValueSelector } from 'redux-form'
-import { connect } from 'react-redux'
-import { updateRecruiter } from 'actions/applicationCompany'
-import { renderField } from 'components/form/helpers';
+import React from 'react';
+import {Field, formValueSelector, reduxForm, SubmissionError} from 'redux-form'
+import {connect} from 'react-redux'
+import {renderField} from 'components/form/helpers';
 
 let RecruiterForm = props => {
 

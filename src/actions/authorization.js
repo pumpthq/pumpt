@@ -1,39 +1,16 @@
 import {
-    // AUTHENTICATION_CANDIDATE_REQUESTED,
-    AUTHENTICATION_CANDIDATE_SUCCEEDED,
-    // AUTHENTICATION_CANDIDATE_FAILED,
-
-    // AUTHENTICATION_COMPANY_REQUESTED,
-    AUTHENTICATION_COMPANY_SUCCEEDED,
-    // AUTHENTICATION_COMPANY_FAILED,
-
-    // AUTHENTICATION_REQUESTED,
-    AUTHENTICATION_SUCCEEDED,
     AUTHENTICATION_FAILED,
-
-    // CHANGE_PASSWORD_REQUEST,
+    AUTHENTICATION_SUCCEEDED,
     CHANGE_PASSWORD_SUCCEEDED,
-    CHANGE_PASSWORD_FAILED,
-
-    // USER_LOGOUT_REQUESTED,
-    USER_LOGOUT_SUCCEEDED,
-    // USER_LOGOUT_FAILED,
-
-    LOGIN_AT_BEGIN,
-
-    RESOLVE_USER_SUCCEEDED,
-
     FINISH_APPLICATION_SUCCEEDED,
-
     FORGOT_PASSWORD_SUCCEEDED,
+    RESOLVE_USER_SUCCEEDED,
+    USER_LOGOUT_SUCCEEDED,
 } from './../constants/authorization';
-import {
-    API_CHANGE_PASSWORD,
-    API_FORGOT_PASSWORD
-} from './../constants/api'
+import {API_CHANGE_PASSWORD, API_FORGOT_PASSWORD} from './../constants/api'
 
-import { API } from '../constants/actionTypes'
-import { fetchFailed } from '../actions/api';
+import {API} from '../constants/actionTypes'
+import {fetchFailed} from '../actions/api';
 
 export const checkEmailAvailability = email => ({
     type: API,

@@ -1,9 +1,8 @@
-import React, { Component } from 'react';
-import Wrapper from './../../../../components/main/wrapper'
+import React, {Component} from 'react';
 import HeaderFull from './../../../../components/main/header/headerFull';
 import ScrollContainer from './../../../../components/main/scrollContainer';
 import Panel from './../../../../components/main/panel';
-import { H1, H2 } from './../../../../components/main/heading';
+import {H1, H2} from './../../../../components/main/heading';
 import Footer from './../../../../components/main/footer/footer';
 
 class EmptyMatches extends Component {

@@ -1,19 +1,15 @@
-import React, { Component, PropTypes } from 'react'
-import { TabBar as TabBarView } from '../../../../components/matches'
+import React, {Component, PropTypes} from 'react'
+import {TabBar as TabBarView} from '../../../../components/matches'
 import CaseFillIcon from '../../../../components/icons/CaseFill';
 import CaseEmptyIcon from '../../../../components/icons/CaseEmpty';
 import OkFillIcon from '../../../../components/icons/OkFill';
 
-import {
-    routeToOpen,
-    routeToDrafts,
-    routeToClosed
-} from './../../../../actions/companyJobs';
+import {routeToClosed, routeToDrafts, routeToOpen} from './../../../../actions/companyJobs';
 
 import {
-    ROUTE_COMPANY_JOBS_OPEN,
+    ROUTE_COMPANY_JOBS_CLOSED,
     ROUTE_COMPANY_JOBS_DRAFTS,
-    ROUTE_COMPANY_JOBS_CLOSED
+    ROUTE_COMPANY_JOBS_OPEN
 } from './../../../../constants/routes';
 
 class TabBar extends Component {

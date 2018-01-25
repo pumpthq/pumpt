@@ -1,19 +1,14 @@
-import React, { Component, PropTypes } from 'react'
-import { connect } from 'react-redux'
-import {
-    Multi,
-    MULTI_ITEM_TYPE_TEXT,
-    MULTI_ITEM_TYPE_USER_ENTERED,
-    MULTI_ITEM_TYPE_GROUP
-} from './../../../../../components/main/multilist'
+import React, {Component, PropTypes} from 'react'
+import {connect} from 'react-redux'
+import {Multi} from './../../../../../components/main/multilist'
 import Button from './../../../../../components/main/button'
-import { INDUSTRY_DROPDOWN_DATA } from './../../../../../constants/candidateOnboarding'
-import { apiEnumToListData } from './../../../../../utils'
+import {INDUSTRY_DROPDOWN_DATA} from './../../../../../constants/candidateOnboarding'
+import {apiEnumToListData} from './../../../../../utils'
 
 import {
+    gotoFieldOfExpertiseStep,
     saveIndustryData,
     showFieldOfExpertiseStep,
-    gotoFieldOfExpertiseStep,
 } from './../../../../../actions/candidateOnboarding'
 
 @connect(

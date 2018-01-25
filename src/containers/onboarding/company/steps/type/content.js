@@ -1,18 +1,14 @@
-import React, { Component, PropTypes } from 'react'
-import { connect } from 'react-redux'
-import {
-    Multi,
-    MULTI_ITEM_TYPE_TEXT,
-    MULTI_ITEM_TYPE_USER_ENTERED
-} from './../../../../../components/main/multilist'
+import React, {Component, PropTypes} from 'react'
+import {connect} from 'react-redux'
+import {Multi} from './../../../../../components/main/multilist'
 import Button from './../../../../../components/main/button'
-import { COMPANY_TYPE_DATA } from './../../../../../constants/companyOnboarding'
-import { apiEnumToListData } from './../../../../../utils'
+import {COMPANY_TYPE_DATA} from './../../../../../constants/companyOnboarding'
+import {apiEnumToListData} from './../../../../../utils'
 
 import {
+    gotoHeadquartersLocationStep,
     saveCompanyTypeData,
     showHeadquartersLocationStep,
-    gotoHeadquartersLocationStep,
 } from './../../../../../actions/companyOnboarding'
 
 @connect(

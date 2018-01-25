@@ -1,27 +1,21 @@
 //Form Components + Redux
-import React, {Component} from 'react'
-import { connect } from 'react-redux';
-import { reduxForm, Field, SubmissionError } from 'redux-form'
-//import { Form, renderField, PlaceField } from 'components/main/form';
-
+import React from 'react'
+import {connect} from 'react-redux';
+import {Field, reduxForm, SubmissionError} from 'redux-form'
 //Places Autocomplete Library
-import { Form, PlaceField} from 'components/main/form/PlaceField';
-import { renderField } from 'components/form/helpers';
-
+import {Form, PlaceField} from 'components/main/form/PlaceField';
 //General Components
 import Button from './../../../../../components/main/button';
-
 //Places Autocomplete Library
-import PlacesAutocomplete from 'react-places-autocomplete'
-
 //Actions
 import {
+    gotoNumberOfEmployeesStep,
     saveHeadquartersLocationStep,
     showNumberOfEmployeesStep,
-    gotoNumberOfEmployeesStep,
 } from 'actions/companyOnboarding';
 
 import * as V from 'components/main/form/validations'
+//import { Form, renderField, PlaceField } from 'components/main/form';
 
 //Company Onboarding Location Info Form
 let LocationInfoForm = props => {

@@ -1,15 +1,11 @@
-import React, { PropTypes } from 'react';
-import { reduxForm, Field } from 'redux-form';
-import { MenuItem } from 'material-ui'
+import React from 'react';
+import {Field, reduxForm} from 'redux-form';
+import {MenuItem} from 'material-ui'
 
 import MultiInput from 'components/main/form/MultiInput';
-import { renderTextField, renderSelectField } from 'components/form/helpers';
+import {renderSelectField, renderTextField} from 'components/form/helpers';
 
-import {
-    COMPANY_EMPLOYEES_DATA,
-    COMPANY_TYPE_DATA,
-} from 'constants/companyOnboarding';
-
+import {COMPANY_EMPLOYEES_DATA, COMPANY_TYPE_DATA,} from 'constants/companyOnboarding';
 //Validations
 import {year} from 'components/main/form/validations';
 import {normalizeYear} from 'components/main/form/normalizations';

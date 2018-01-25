@@ -1,11 +1,11 @@
-import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
-import { dispatchProp } from 'components/helpers'
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {dispatchProp} from 'components/helpers'
 
-import JobForm, { industryOut } from 'components/jobs/JobForm'
+import JobForm, {industryOut} from 'components/jobs/JobForm'
 import VerticalScroller from 'components/VerticalScroller'
 
-import { createJob } from 'actions/companyJobs'
+import {createJob} from 'actions/companyJobs'
 
 @connect(undefined,dispatchProp)
 class NewContainer extends Component {

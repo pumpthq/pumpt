@@ -1,20 +1,14 @@
-import React, {Component} from 'react'
-import { connect } from 'react-redux'
-import { reduxForm, Field } from 'redux-form'
-import Form from './../../../../../components/main/form'
+import React from 'react'
+import {connect} from 'react-redux'
+import {Field, reduxForm, SubmissionError} from 'redux-form'
 import Button from './../../../../../components/main/button'
-import { OnboardingInput } from './../../../../../components/onboarding'
-import { renderField } from 'components/form/helpers'
+import {renderField} from 'components/form/helpers'
 
 import {
+    gotoWebsiteAndSocialMediaStep,
     saveFoundationYearData,
     showWebsiteAndSocialMediaStep,
-    gotoWebsiteAndSocialMediaStep,
 } from './../../../../../actions/companyOnboarding'
-
-import { SubmissionError } from 'redux-form'
-import { checkEmailAvailability } from 'actions/authorization'
-
 //Validations
 import * as V from 'components/main/form/validations'
 import {normalizeYear} from 'components/main/form/normalizations'

@@ -1,24 +1,20 @@
-import React, {Component, PropTypes} from 'react';
-import { reduxForm, Field, SubmissionError, formValueSelector } from 'redux-form'
-import { connect } from 'react-redux'
-import { Location, EnumSelector, TextArea, TextInput } from 'components/form/inputs'
+import React from 'react';
+import {Field, formValueSelector, reduxForm, SubmissionError} from 'redux-form'
+import {connect} from 'react-redux'
+import {Location} from 'components/form/inputs'
 import MultiInput from 'components/main/form/MultiInput'
-import {renderTextField, renderSelectField} from 'components/form/helpers'
-import { MenuItem } from 'material-ui'
+import {renderSelectField, renderTextField} from 'components/form/helpers'
+import {MenuItem} from 'material-ui'
 import './form.less'
-
 //Actions
-import { updateCandidate } from 'actions/candidateMatches'
-
-import { browserHistory } from 'react-router'
-import { find } from 'lodash'
+import {find} from 'lodash'
 
 import {
-    INDUSTRY_DROPDOWN_DATA,
-    FIELD_OF_EXPERTISE_DROPDOWN_DATA,
-    JOB_TITLE_DROPDOWN_DATA,
     ANNUAL_INCOME_DROPDOWN_DATA,
     EXPERIENCE_DROPDOWN_DATA,
+    FIELD_OF_EXPERTISE_DROPDOWN_DATA,
+    INDUSTRY_DROPDOWN_DATA,
+    JOB_TITLE_DROPDOWN_DATA,
 } from 'constants/candidateOnboarding';
 
 //Form
