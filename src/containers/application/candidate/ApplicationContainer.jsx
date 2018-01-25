@@ -7,7 +7,6 @@ import HeadingProgress from 'containers/application/candidate/headingProgress';
 import CandidateSummaryForm from 'components/candidates/Form';
 import CandidateSummary from 'components/candidates/Summary';
 import CandidateApplicationForm from 'components/candidates/Application';
-import SummaryHead from './summaryHead';
 // import EntryBlock from './EntryBlock'
 import logoImage from 'img/sprites-svg/logo.svg'
 import { updateCandidate } from 'actions/candidateMatches'
