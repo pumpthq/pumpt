@@ -18,7 +18,6 @@ import { updateCompany } from 'actions/applicationCompany';
 import { url } from 'components/main/form/validations';
 import { normalizeTwitter } from 'components/main/form/normalizations';
 import { renderField } from 'components/form/helpers';
-import { apiImage } from 'components/helpers';
 
 import './style.less';
 
@@ -30,7 +29,8 @@ summary-head__title-item_type_middle`}
 
 // Form
 let CompanyApplicationForm = props => {
-  const { handleSubmit, submitting, error, invalid } = props;
+  const { handleSubmit, submitting, error, invalid,
+    submitSucceeded, pristine } = props;
   const submitDisabled = invalid || submitting;
   const submit = (values, dispatch) => {
     return dispatch(updateCompany(values))
@@ -83,11 +83,8 @@ try again, and let us know if the issue persists`,
           type="submit" disabled={submitDisabled}
           className="mdl-button button invisible-mobile button_type_colored button_size_m company-submit"
         >
-          {submitting ? <i /> : <i />} Save
-        </button>
-        {/* <button type="button" disabled={submitting} onClick={resetForm}>
-				 Clear Values
-				 </button> */}
+          Save
+        </button>{(submitSucceeded && pristine) && <span className="message-success">Saved!</span>}
       </div>
     </form>
   );

@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
-import {Field, FieldArray, propTypes as formTypes, reduxForm, SubmissionError} from 'redux-form';
+import {Field, FieldArray, propTypes as formTypes, reduxForm} from 'redux-form';
 // Places Autocomplete Library
 import {PlaceField} from 'components/main/form/PlaceField';
 // Material Ui AutoComplete
@@ -38,7 +38,7 @@ const fieldArrayProps = {
 };
 
 // Form
-let CandidateApplicationForm = ({ handleSubmit, submitting, invalid, submitSucceeded, pristine }) => {
+let CandidateApplicationForm = ({ handleSubmit, submitting, error, invalid, submitSucceeded, pristine }) => {
   const submitDisabled = invalid || submitting;
 
   return (
@@ -61,6 +61,7 @@ let CandidateApplicationForm = ({ handleSubmit, submitting, invalid, submitSucce
       <CardDivider />
 
       <div>
+        {error && <span className="textfield__error">{error}</span>}
         <button
           type="submit" disabled={submitDisabled}
           className="mdl-button button button_type_colored button_size_m candidate-submit"
