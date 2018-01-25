@@ -2,17 +2,12 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import Wrapper from 'components/main/wrapper'
 import { HeaderMini } from 'components/main/header'
-import ScrollContainer from 'components/main/scrollContainer'
 import HeadingProgress from 'containers/application/candidate/headingProgress';
 import CandidateSummaryForm from 'components/candidates/Form';
 import CandidateSummary from 'components/candidates/Summary';
 import CandidateApplicationForm from 'components/candidates/Application';
-// import EntryBlock from './EntryBlock'
 import logoImage from 'img/sprites-svg/logo.svg'
 import { updateCandidate } from 'actions/candidateMatches'
-// import { STARTUP_COMPLETED_STEPS } from './../../../constants/applicationCandidate';
-import Panel from 'components/main/panel';
-import StepProgress from 'components/application/stepProgress';
 import Footer from 'components/main/footer/footer';
 import ApplicationSuccessDialog from 'components/application/ApplicationSuccessDialog'
 import Button from 'components/main/button'
