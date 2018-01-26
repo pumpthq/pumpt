@@ -19,6 +19,8 @@ import { hasText, required } from 'components/main/form/validations';
 import { industryChild } from 'components/main/form/normalizations';
 import { renderField } from 'components/form/helpers';
 
+import './profile.less';
+
 export const TextAreaField = ({ input, label, meta: { asyncValidating, touched, error } }) => (
   <span>
     <textarea className="mdl-textfield__input textfield__input" {...input} placeholder={label} />
@@ -137,15 +139,15 @@ let JobForm = props => {
             </Field>
 
             {industryValue &&
-            <div>
-              <label>Specialty</label>
-              <Field
-                name="industry" component={MultiInput} validate={required}
-                label="Specialty" class="mdl-textfield__input textfield__input textfield__light"
-                values={industryParentObj(industryValue).map((item) => item.title)}
-                initialValues={{ input: { value: [] } }}
-              />
-            </div>
+              <div>
+                <label htmlFor={"industry"}>Specialty</label>
+                <Field
+                  name="industry" component={MultiInput} validate={required}
+                  label="Specialty" class="mdl-textfield__input textfield__input textfield__light"
+                  values={industryParentObj(industryValue).map((item) => item.title)}
+                  initialValues={{ input: { value: [] } }}
+                />
+              </div>
             }
             <div>
               <label htmlFor="description">Description</label>

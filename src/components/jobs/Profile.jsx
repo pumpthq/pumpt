@@ -147,8 +147,9 @@ export default class Profile extends Component {
         return (
             <div className="card__middle-block">
                 <span className="text  summary-head__label">Description</span>
-
-                {description}
+                <span className="show-paragraphs">
+                    {description}
+                </span>
             </div>
         );
     }
