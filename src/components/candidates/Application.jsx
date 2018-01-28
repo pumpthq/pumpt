@@ -1,16 +1,21 @@
-import React, {PropTypes} from 'react';
-import {connect} from 'react-redux';
-import {Field, FieldArray, propTypes as formTypes, reduxForm} from 'redux-form';
-// Places Autocomplete Library
-import {PlaceField} from 'components/main/form/PlaceField';
-// Material Ui AutoComplete
-import {Checkbox,} from 'redux-form-material-ui';
-// Actions
-// Field-level Validations & Normalizations
-import {date, url} from 'components/main/form/validations';
-import {normalizeDate, normalizeTwitter, normalizeYear} from 'components/main/form/normalizations';
+import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { reduxForm, FieldArray, Field, SubmissionError, propTypes as formTypes } from 'redux-form';
 
-import {SKILLS} from 'constants/candidateOnboarding';
+// Places Autocomplete Library
+import { PlaceField } from 'components/main/form/PlaceField';
+
+import { Checkbox } from 'material-ui';
+import MultiInput from 'components/main/form/MultiInput'
+
+// Actions
+import { updateCandidate } from 'actions/candidateMatches';
+
+// Field-level Validations & Normalizations
+import { url, date } from 'components/main/form/validations';
+import { normalizeDate, normalizeYear, normalizeTwitter } from 'components/main/form/normalizations';
+
+import { SKILLS } from 'constants/candidateOnboarding';
 import Skills from 'components/icons-application/skills';
 import CaseIcon from 'components/icons-application/case';
 import Education from 'components/icons-application/education';
@@ -19,7 +24,7 @@ import LinkedInIcon from 'components/icons-application/linkedIn';
 import TwitterIcon from 'components/icons-application/twitter';
 import FacebookIcon from 'components/icons-application/facebook';
 
-import {renderField} from 'components/form/helpers';
+import { renderField } from 'components/form/helpers';
 import './style.less';
 
 renderField.propTypes = {
@@ -38,7 +43,7 @@ const fieldArrayProps = {
 };
 
 // Form
-let CandidateApplicationForm = ({ handleSubmit, submitting, error, invalid, submitSucceeded, pristine }) => {
+let CandidateApplicationForm = ({ handleSubmit, submitting, invalid, submitSucceeded, pristine }) => {
   const submitDisabled = invalid || submitting;
 
   return (
@@ -61,7 +66,6 @@ let CandidateApplicationForm = ({ handleSubmit, submitting, error, invalid, subm
       <CardDivider />
 
       <div>
-        {error && <span className="textfield__error">{error}</span>}
         <button
           type="submit" disabled={submitDisabled}
           className="mdl-button button button_type_colored button_size_m candidate-submit"
@@ -266,11 +270,10 @@ renderEducations.propTypes = fieldArrayProps;
 const renderSkills = () => (
   <div className="application-item">
     <button className="application-item-button" type="button">Skills</button>
-    {SKILLS.map((skill, index) =>
-      <div className="application-detail checkbox-item col-md-12">
-        <Field name={`skills[${index}].value`} id={`skills[${index}].value`} component={Checkbox} label={skill} />
-      </div>
-    )}
+      <Field
+        name='skills' label='skills' component={MultiInput}
+        values={SKILLS}
+      />
   </div>
 );
 
