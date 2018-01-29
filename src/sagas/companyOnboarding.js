@@ -108,7 +108,7 @@ export default function () {
                         twitterAcc: `${onboardingState.twitterUsername}`,
                         facebookUrl: facebookProfileUrl,
                     },
-										values : onboardingState.values ? onboardingState.values.values :  ''
+                  values : onboardingState.values.map(({value}) => value)
                 },
             };
             try { //submitting membership registration request via api
