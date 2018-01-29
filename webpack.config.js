@@ -36,11 +36,6 @@ module.exports = {
                 include: SRC_PATH,
                 loader : 'style-loader!css-loader!less-loader?sourceMap'
             },
-            // {
-            //     test : /\.(png|jpg|gif|svg|ttf|eot|woff|woff2)/,
-            //     include : /\/node_modules\//,
-            //     loader : 'url-loader?name=[1].[ext]?[hash]&regExp=node_modules/(.*)?limit=4096'
-            // },
             {
                 test : /\.(png|jpg|gif|svg|ttf|eot|woff|woff2)/,
                 include : SRC_PATH,

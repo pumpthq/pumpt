@@ -1,18 +1,18 @@
-import React, { Component, PropTypes } from 'react'
+import React, {Component, PropTypes} from 'react'
 import _ from 'lodash'
-import { connect } from 'react-redux'
+import {connect} from 'react-redux'
 import List from './../../../../../components/main/list'
 import uuid from 'uuid'
-import { findById } from '../../../../../constants/dropdownData'
+import {findById} from '../../../../../constants/dropdownData'
 
 import {
+    gotoSetUpPasswordStep,
     saveValuesData,
     showSetUpPasswordStep,
-		gotoSetUpPasswordStep,
 } from './../../../../../actions/candidateOnboarding'
 
-import { StepListCheckLink } from '../../../renderHelpers'
-import { VALUE_ASSESSMENTS_DROPDOWN_DATA } from './../../../../../constants/candidateOnboarding'
+import {StepListCheckLink} from '../../../renderHelpers'
+import {VALUE_ASSESSMENTS_DROPDOWN_DATA} from './../../../../../constants/candidateOnboarding'
 
 @connect(
     function mapStateToProps(state, ownProps) {

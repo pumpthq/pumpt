@@ -1,8 +1,8 @@
 //API Middleware
 import axios from 'axios'
-import { API_URL } from '../constants/api'
-import { API } from '../constants/actionTypes'
-import { fetchRequested, fetchSucceeded, fetchFailed } from '../actions/api'
+import {API_URL} from '../constants/api'
+import {API} from '../constants/actionTypes'
+import {fetchFailed, fetchRequested, fetchSucceeded} from '../actions/api'
 
 export default store => next => action => {
 

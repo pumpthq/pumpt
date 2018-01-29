@@ -1,6 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, {Component, PropTypes} from 'react';
 import uuid from 'uuid';
-import { connect } from 'react-redux';
 
 // import { resetApiError } from '../../actions/api';
 

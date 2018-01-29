@@ -1,58 +1,41 @@
 import axios from 'axios';
-import { takeLatest } from 'redux-saga';
-import { call, fork, put, select } from 'redux-saga/effects';
-import { getValues } from 'redux-form';
+import {takeLatest} from 'redux-saga';
+import {call, fork, put, select} from 'redux-saga/effects';
+import {getValues} from 'redux-form';
+import {API_COMPANY_ROOT, API_RECRUITER_ROOT, API_URL,} from './../constants/api';
 import {
-    API_URL,
-    API_COMPANY_ROOT,
-    API_RECRUITER_ROOT,
-} from './../constants/api';
-import {
-    SAVE_SUMMARY_DATA,
-    SAVE_PROFILE_PHOTO_DATA,
-
-    SET_CITY_AND_STATE_TO_OFFICE,
-
-    FETCH_LINKEDIN_DATA_REQUESTED,
-
-    GET_LATEST_PROFILE,
-    FILL_IN_PROFILE_FAILED,
-
-    SAVE_LOCATION_DATA,
-    SAVE_DESCRIPTION_DATA,
-    SAVE_QUOTE_OR_MOTTO_DATA,
-    SAVE_PHOTO_STEP,
-    SAVE_COMPANY_PHOTO,
-    REMOVE_COMPANY_PHOTO,
-
-    PROFILE_PHOTO_STEP,
-    SOCIAL_MEDIA_STEP,
     DESCRIPTION_STEP,
-    LOCATION_STEP,
+    FETCH_LINKEDIN_DATA_REQUESTED,
+    FILL_IN_PROFILE_FAILED,
+    GET_LATEST_PROFILE,
+    PROFILE_PHOTO_STEP,
     QUOTE_OR_MOTTO_STEP,
-    PHOTO_STEP,
+    REMOVE_COMPANY_PHOTO,
+    SAVE_COMPANY_PHOTO,
+    SAVE_DESCRIPTION_DATA,
+    SAVE_LOCATION_DATA,
+    SAVE_PHOTO_STEP,
+    SAVE_PROFILE_PHOTO_DATA,
+    SAVE_QUOTE_OR_MOTTO_DATA,
+    SAVE_SUMMARY_DATA,
+    SET_CITY_AND_STATE_TO_OFFICE,
+    SOCIAL_MEDIA_STEP,
 } from './../constants/applicationCompany';
 
-import { logOut } from './../actions/authorization';
+import {logOut} from './../actions/authorization';
 import {
-    saveSummaryDataSucceeded,
-    saveSummaryDataFailed,
-    persistTempOffices,
-    fillInProfileSucceeded,
-    fillInProfileFailed,
-    fetchLinkedInDataSucceeded,
     fetchLinkedInDataFailed,
+    fetchLinkedInDataSucceeded,
+    fillInProfileFailed,
+    fillInProfileSucceeded,
     importCompleted,
+    persistTempOffices,
+    saveSummaryDataFailed,
+    saveSummaryDataSucceeded,
 } from './../actions/applicationCompany';
 
-import {
-    getApplicationCompany,
-    getTempOffices,
-    getUploadedPhotos,
-} from './../reducers/applicationCompany';
-import {
-    getAccessToken,
-} from './../reducers/authorization';
+import {getApplicationCompany, getTempOffices, getUploadedPhotos,} from './../reducers/applicationCompany';
+import {getAccessToken,} from './../reducers/authorization';
 
 const updateCompany = ({ id, accessToken, body }) =>
      axios({

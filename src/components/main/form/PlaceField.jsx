@@ -1,7 +1,5 @@
-import React, {Component, PropTypes} from 'react'
-import { connect } from 'react-redux';
-import { reduxForm, Field, SubmissionError } from 'redux-form'
-
+import React from 'react'
+import {Field, reduxForm, SubmissionError} from 'redux-form'
 //Places Autocomplete Library
 import PlacesAutocomplete from 'react-places-autocomplete'
 
@@ -38,10 +36,6 @@ export const PlaceField = ({ values, name, input, onChange, label, meta: { touch
 		onChange : input.onChange,
 		onBlur: input.onBlur,
 		id : id,
-		typeAhead : false,
-		inputName : input.name,
-		autocompleteItem : AutocompleteItem,
-		classNames : classes,
 		placeholder : label,
 		name : name,
 	}

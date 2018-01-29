@@ -1,5 +1,5 @@
 import co from 'co'
-import { fetchPlaces } from '../../sagas/companyOnboarding'
+import {fetchPlaces} from '../../sagas/companyOnboarding'
 
 export default function({ value }) {
     const { dispatch, onFilter, onClickListItem } = this.props

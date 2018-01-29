@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import React, {Component, PropTypes} from 'react'
 import ShortID from 'shortid'
 import Textarea from 'react-textarea-autosize'
 

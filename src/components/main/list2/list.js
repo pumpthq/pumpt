@@ -1,5 +1,5 @@
-import React, { Component, PropTypes } from 'react'
-import { ListItemGroup } from './index'
+import React, {Component, PropTypes} from 'react'
+import {ListItemGroup} from './index'
 
 class List2Component extends Component {
     constructor(props) {

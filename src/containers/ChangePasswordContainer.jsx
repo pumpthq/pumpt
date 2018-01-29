@@ -1,12 +1,13 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
 
-import { changePassword } from '../actions/authorization'
+import {changePassword} from '../actions/authorization'
 import ChangePassForm from 'components/changePass/Form';
 import VerticalScroller from 'components/VerticalScroller'
 
 import ChangePassSuccessDialog from 'components/changePass/SuccessDialog'
-import { browserHistory } from 'react-router'
+import {browserHistory} from 'react-router'
+
 const mapStateToProps = (state) => {
     return {lastChangePass: state.authorization.lastChangePass}
 }

@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react'
-import { Link } from 'react-router'
+import {Link} from 'react-router'
 
 const propTypes = {
     children: PropTypes.oneOfType([
@@ -11,19 +11,28 @@ const propTypes = {
         PropTypes.string,
         PropTypes.bool
     ]),
-    onClick: PropTypes.func
+  onClick: PropTypes.func,
+  nolink: PropTypes.bool,
 };
 
 const defaultProps = {
     children: '',
     to: false,
-    onClick: e=>{}
+  onClick: e=>{},
+  nolink: false,
 };
 
 export default class DropdownItem extends Component {
     render() {
-        const { children, to, onClick } = this.props;
+        const { children, to, onClick, nolink } = this.props;
 
+      if (nolink) {
+        return (
+            <li className="list__item" onClick={onClick}>
+                {children}
+              </li>
+        );
+      }
 
         if(to && to !== true) {
             return (

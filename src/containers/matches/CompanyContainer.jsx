@@ -1,12 +1,12 @@
-import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux'
-import { find } from 'lodash'
+import React, {Component} from 'react';
+import {connect} from 'react-redux'
+import {find} from 'lodash'
 
 import CompanyProfile from 'components/company/shared/Profile'
 import VerticalScroller from 'components/VerticalScroller'
 
-import { dispatchProp } from 'components/helpers'
-import { fetchCompany } from 'actions/candidateMatches'
+import {dispatchProp} from 'components/helpers'
+import {fetchCompany} from 'actions/candidateMatches'
 
 
 const mapStateToProps = (state, ownProps) => (

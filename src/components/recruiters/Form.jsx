@@ -1,23 +1,7 @@
-import React, {Component, PropTypes} from 'react';
-import { reduxForm, Field, SubmissionError, formValueSelector } from 'redux-form'
-import { connect } from 'react-redux'
-import { updateRecruiter } from 'actions/applicationCompany'
-
-//Generalized Redux Field
-export const renderField = ({
-  input,
-  label,
-  type,
-	className,
-  meta: { asyncValidating, touched, error }
-}) => (
-  <div class={className}>
-		<div class={asyncValidating ? 'async-validating' : 'class'}>
-      <input class="mdl-textfield__input textfield__input" {...input} placeholder={label} type={type} />
-      {touched && error && <span class="textfield__error">{error}</span>}
-    </div>
-  </div>
-)
+import React from 'react';
+import {Field, formValueSelector, reduxForm, SubmissionError} from 'redux-form'
+import {connect} from 'react-redux'
+import {renderField} from 'components/form/helpers';
 
 let RecruiterForm = props => {
 

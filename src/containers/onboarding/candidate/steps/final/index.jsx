@@ -1,10 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, {Component, PropTypes} from 'react';
 import OnboardingCandidateLinker from './../linker';
-
-import {
-    saveSetUpPasswordData,
-    applyForMembership,
-} from './../../../../../actions/candidateOnboarding';
 import CandidatePrototypeFinalStep from 'containers/onboarding/candidate/steps/prototypeFinalStep';
 
 class CandidateFinalStep extends Component {

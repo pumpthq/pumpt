@@ -1,6 +1,6 @@
-import React, { Component, PropTypes } from 'react'
+import React, {Component, PropTypes} from 'react'
 import Form from './../../components/main/form'
-import { OnboardingInput } from './../../components/onboarding'
+import {OnboardingInput} from './../../components/onboarding'
 
 class AlternativeInput extends Component {
 

@@ -1,12 +1,12 @@
 import {
+    CANCEL_UPLOADING,
+    REMOVE_IMAGE,
+    RESTART_UPLOADING_IMAGE,
+    SET_DEFAULT_STATE,
+    SET_IMAGE,
     START_UPLOADING,
     STOP_UPLOADING,
-    CANCEL_UPLOADING,
-    SET_IMAGE,
-    REMOVE_IMAGE,
-    UPLOADING_IMAGE_FAILED,
-    RESTART_UPLOADING_IMAGE,
-    SET_DEFAULT_STATE
+    UPLOADING_IMAGE_FAILED
 } from './../constants/applicationPhotoUploading'
 
 export const startUploading = ({ id, file, controller, onDone, async }) => ({

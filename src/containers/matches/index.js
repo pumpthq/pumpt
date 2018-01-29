@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import { AllMatchesSlider, BookmarkedMatchesSlider, NotInterestedMatchesSlider } from './candidate/Sliders'
+import React from 'react'
+import {AllMatchesSlider, BookmarkedMatchesSlider, NotInterestedMatchesSlider} from './candidate/Sliders'
 import MatchesContainer from './candidate/MatchesContainer'
 import VacancyContainer from './candidate/VacancyContainer'
 import CompanyContainer from './CompanyContainer'

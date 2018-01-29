@@ -1,10 +1,8 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { change } from 'redux-form'
+import React, {Component} from 'react'
+import {change, reduxForm} from 'redux-form'
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
-import { reduxForm } from 'redux-form'
 
 export const EnumSelector = (props) => {
     const {field, label, options, onChange, onBlur} = props

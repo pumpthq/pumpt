@@ -1,11 +1,9 @@
-import React, { Component, PropTypes } from 'react'
-import { connect } from 'react-redux'
-import { SHOW_JOB_TITLE_STEP, JOB_TITLE_DROPDOWN_DATA } from './../../../../../../constants/candidateOnboarding'
-import { showJobTitleStep, gotoJobTitleStep } from './../../../../../../actions/candidateOnboarding'
-import { NavigationLink, NavigationLink2 } from './../../../../../../components/main/navigation'
+import React, {Component, PropTypes} from 'react'
+import {connect} from 'react-redux'
+import {SHOW_JOB_TITLE_STEP} from './../../../../../../constants/candidateOnboarding'
+import {gotoJobTitleStep, showJobTitleStep} from './../../../../../../actions/candidateOnboarding'
+import {NavigationLink2} from './../../../../../../components/main/navigation'
 import CallStep from './../../../../callStep'
-import { NavLinkLabel } from '../../../../renderHelpers'
-import { findById } from '../../../../../../constants/dropdownData'
 
 @connect(
     function mapStateToProps(state) {

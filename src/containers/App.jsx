@@ -1,18 +1,13 @@
-import React, { Component, PropTypes } from 'react';
+import React, {Component, PropTypes} from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import { connect } from 'react-redux';
-
-import { resolveUser } from '../actions/authorization'
-import { getAppData } from '../onLoad';
+import {getAppData} from '../onLoad';
+import './../styles/app.less';
+// ⚠️ Tap event required to support material-ui click events
+import injectTapEventPlugin from 'react-tap-event-plugin';
 
 // import { cleanMessage } from '../actions/session';
 
 // import SESSION from '../constants/session';
-
-import './../styles/app.less';
-
-// ⚠️ Tap event required to support material-ui click events
-import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
 
 const propTypes = {

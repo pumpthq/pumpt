@@ -1,5 +1,6 @@
-import React, { Component, PropTypes } from 'react'
-import { MultiItem } from './index'
+import React, {Component, PropTypes} from 'react'
+import {MultiItem} from './index'
+
 const LIST_ITEM_TYPE_TEXT = 'list.item.type.text'
 
 class MultiItemGroup extends Component {

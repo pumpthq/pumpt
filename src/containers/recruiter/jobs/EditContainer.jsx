@@ -1,9 +1,9 @@
-import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
-import { find } from 'lodash'
-import { updateJob } from 'actions/companyJobs'
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {find} from 'lodash'
+import {updateJob} from 'actions/companyJobs'
 
-import JobForm, { industryIn, industryOut } from 'components/jobs/JobForm'
+import JobForm, {industryIn, industryOut} from 'components/jobs/JobForm'
 import VerticalScroller from 'components/VerticalScroller'
 
 const propTypes = {};

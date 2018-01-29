@@ -1,5 +1,5 @@
-import React, { Component, PropTypes } from 'react'
-import { connect } from 'react-redux'
+import React, {Component, PropTypes} from 'react'
+import {connect} from 'react-redux'
 import H3 from './../heading/h3'
 import PopupError from './../../../components/PopupError'
 

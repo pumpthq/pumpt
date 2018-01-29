@@ -1,6 +1,6 @@
-import React, {Component, PropTypes} from 'react';
-import { Link } from 'react-router';
-import { ROUTE_COMPANY_JOBS_NEW } from './../../constants/routes';
+import React, {Component} from 'react';
+import {Link} from 'react-router';
+import {ROUTE_COMPANY_JOBS_NEW} from './../../constants/routes';
 
 export default class CreateJobCard extends Component {
 

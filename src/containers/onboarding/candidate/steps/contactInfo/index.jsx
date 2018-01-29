@@ -1,6 +1,6 @@
 import React from 'react';
 import Panel from './../../../../../components/main/panel';
-import { H1 } from './../../../../../components/main/heading';
+import {H1} from './../../../../../components/main/heading';
 import on1Image from './../../../../../img/sprites-svg/on1.svg';
 import ContactInfoForm from './form';
 import OnboardingCandidateLinker from './../linker';

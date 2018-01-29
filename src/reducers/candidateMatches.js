@@ -1,30 +1,17 @@
 import _ from 'lodash';
 import {
-
-    UPDATE_CANDIDATE_SUCCEEDED,
-    FETCH_CANDIDATE_SUCCEEDED,
-    MATCHES_FETCH_SUCCEEDED,
-    BOOKMARK_POST_SUCCEEDED,
-    REJECT_POST_SUCCEEDED,
     APPROVE_POST_SUCCEEDED,
-
-    ALL_TAB,
-    BOOKMARKED_TAB,
-    NOT_INTERESTED_TAB,
-
-    SHOW_FULL_DESCRIPTION,
-    HIDE_FULL_DESCRIPTION,
-
-    SET_DEFAULT_STATE,
+    BOOKMARK_POST_SUCCEEDED,
+    FETCH_CANDIDATE_SUCCEEDED,
     FETCH_COMPANY_SUCCEEDED,
     FETCH_VACANCY_SUCCEEDED,
+    MATCHES_FETCH_SUCCEEDED,
+    REJECT_POST_SUCCEEDED,
+    SET_DEFAULT_STATE,
+    UPDATE_CANDIDATE_SUCCEEDED,
 } from './../constants/candidateMatches';
 
 const defaultState = {
-    // all: [],
-    // bookmarked: [],
-    // notInterested: [],
-    // approved: [],
     matches: [],
     companies: [],
     vacancies: [],
@@ -49,22 +36,6 @@ export default (state = defaultState, action) => {
             return { ...state, candidate }
         }
         case MATCHES_FETCH_SUCCEEDED : {
-            //   all = []
-            //   , bookmarked = []
-            //   , notInterested = []
-            //   , approved = []
-
-            // payload.matches.forEach(match => {
-            //     var card = match.vacancy
-            //     // ⚠️ TODO: review specs how cards are filtered into matches-tabs
-            //     if(card.status.approved !== null) {
-            //         if (!card.status.approved) notInterested.push(match)
-            //         else approved.push(card)
-            //     }
-            //     else if(card.status.bookmarked !== null && card.status.bookmarked) bookmarked.push(match)
-            //     else all.push(match)
-            // })
-
             const { matches } = payload
 
             return {

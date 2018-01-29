@@ -1,46 +1,21 @@
-import React, { Component } from 'react'
-import { reduxForm, Field} from 'redux-form'
-import { connect } from 'react-redux'
-import co from 'co'
-import emailValidator from 'email-validator'
-import PlacesAutocomplete from 'react-places-autocomplete'
-
-import Form from './../../../../../components/main/form'
+import React from 'react'
+import {Field, reduxForm, SubmissionError} from 'redux-form'
+import {connect} from 'react-redux'
+import {renderField} from 'components/form/helpers'
 import Button from './../../../../../components/main/button'
-import { OnboardingInput } from './../../../../../components/onboarding'
 
 import {
-    THIS_EMAIL_IS_ALREADY_REGISTERED,
-    THIS_COMPANY_IS_ALREADY_REGISTERED
+    THIS_COMPANY_IS_ALREADY_REGISTERED,
+    THIS_EMAIL_IS_ALREADY_REGISTERED
 } from './../../../../../constants/companyOnboarding'
 import {
-    fetchByEmail as getCompanyByEmail,
-    isAvailable as isAvailableCompanyName
-} from './../../../../../sagas/companyOnboarding'
-import {
+    gotoCompanyTypeStep,
     saveContactInfoData,
     showCompanyTypeStep,
-    gotoCompanyTypeStep,
 } from './../../../../../actions/companyOnboarding'
-import { SubmissionError } from 'redux-form'
-import { checkEmailAvailability } from 'actions/authorization'
-import { checkCompanyNameAvailability } from 'actions/authorization'
+import {checkCompanyNameAvailability, checkEmailAvailability} from 'actions/authorization'
 
 import * as V from 'components/main/form/validations'
-//Generalized Redux Field
-const renderField = ({
-  input,
-  label,
-  type,
-  meta: { asyncValidating, touched, error }
-}) => (
-  <div>
-		<div class={asyncValidating ? 'async-validating' : 'class'}>
-      <input class="mdl-textfield__input textfield__input" {...input} placeholder={label} type={type} />
-      {touched && error && <span class="textfield__error">{error}</span>}
-    </div>
-  </div>
-)
 
 //Async Validation - on if email is already registered + on Company Name Uniqueness
 function composeAsyncValidators(validatorFns) {

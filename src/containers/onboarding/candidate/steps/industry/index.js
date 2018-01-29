@@ -1,6 +1,6 @@
-import React, { Component, PropTypes } from 'react'
+import React, {Component, PropTypes} from 'react'
 import Panel from './../../../../../components/main/panel'
-import { H1 } from './../../../../../components/main/heading'
+import {H1} from './../../../../../components/main/heading'
 import on2Image from './../../../../../img/sprites-svg/on2.svg'
 
 import IndustryContent from './content'

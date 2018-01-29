@@ -1,8 +1,8 @@
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
 import GlassDoorImage from 'img/glassdoor.jpg'
 
-import { tintedBackground, apiImage } from 'components/helpers'
-import { browserHistory } from 'react-router'
+import {apiImage, tintedBackground} from 'components/helpers'
+import {browserHistory} from 'react-router'
 
 const buttonStyle = {
     cursor: 'pointer',

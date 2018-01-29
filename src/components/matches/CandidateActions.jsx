@@ -1,11 +1,9 @@
-import React, {Component, PropTypes} from 'react'
-
-import { connect } from 'react-redux'
+import React, {Component} from 'react'
 
 import ButtonApply from 'components/parts/buttonApply'
 import ButtonLink from 'components/parts/buttonLink'
 
-import { BookmarkOpen, BookmarkFill, ApproveOpen, Decline } from 'components/icons'
+import {ApproveOpen, BookmarkFill, BookmarkOpen, Decline} from 'components/icons'
 
 function BookmarkOption(props){
 	var html = null;

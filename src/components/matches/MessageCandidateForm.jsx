@@ -1,8 +1,8 @@
-import React, {Component, PropTypes} from 'react';
-import { connect } from 'react-redux'
-import { reduxForm, Field, formValueSelector } from 'redux-form'
+import React from 'react';
+import {connect} from 'react-redux'
+import {Field, formValueSelector, reduxForm} from 'redux-form'
 import FaEnvelopeO from 'react-icons/lib/fa/envelope-o';
-import { updateCandidate } from 'actions/candidateMatches'
+import {updateCandidate} from 'actions/candidateMatches'
 
 let MessageCandidateForm = props => {
 

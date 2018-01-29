@@ -1,9 +1,9 @@
-import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
+import React, {Component, PropTypes} from 'react';
+import {connect} from 'react-redux';
 
 import SESSION from '../constants/session';
 
-import { resendTokenToEmail } from '../actions/session';
+import {resendTokenToEmail} from '../actions/session';
 
 const LINK_STYLES = { color: '#0998ff', cursor: 'pointer' };
 

@@ -1,18 +1,10 @@
-import React, { Component, PropTypes } from 'react';
-import { Link } from 'react-router';
-import { connect } from 'react-redux';
+import React, {Component} from 'react';
+import {Link} from 'react-router';
+import {connect} from 'react-redux';
 import Mailto from 'react-mailto';
-import {
-    HeaderFull,
-    HeaderDropDownMenu,
-    HeaderDropDownItem,
-} from './../../../../components/main/header';
-import {
-    ROUTE_CANDIDATE_MATCHES_ALL,
-    ROUTE_CANDIDATE_MESSAGES,
-    ROUTE_APPLICATION_CANDIDATE,
-} from './../../../../constants/routes';
-import { logOut } from './../../../../actions/authorization';
+import {HeaderDropDownItem, HeaderDropDownMenu, HeaderFull,} from './../../../../components/main/header';
+import {ROUTE_CANDIDATE_MATCHES_ALL,} from './../../../../constants/routes';
+import {logOut} from './../../../../actions/authorization';
 
 import {apiImage} from 'components/helpers'
 
@@ -32,6 +24,7 @@ export default class CandidateHeaderMenu extends Component {
                 links={[
                     <Link
                         to={ROUTE_CANDIDATE_MATCHES_ALL}
+                        key="matches"
                         activeClassName="navigation__link navigation__link_active"
                         className="navigation__link"
                     >
@@ -39,6 +32,7 @@ export default class CandidateHeaderMenu extends Component {
                     </Link>,
                     <Link
                         to={"/candidate/matches/edit"}
+                        key="profile"
                         className="navigation__link"
                         activeClassName="navigation__link navigation__link_active"
                     >
@@ -49,12 +43,12 @@ export default class CandidateHeaderMenu extends Component {
                     <HeaderDropDownMenu
                         userName={`${candidate.firstName} ${candidate.lastName}`}
                         userAvatar={apiImage(candidate.avatar)}
-                        progress={candidate.fillProgress}
                         linkTo={"/candidate/matches/edit"}
                     >
-                        <HeaderDropDownItem to={'/candidate/matches/changePass'}>Change Password</HeaderDropDownItem>
-                        {/* <HeaderDropDownItem>Notification Settings</HeaderDropDownItem> */}
-                        <HeaderDropDownItem>
+                      <HeaderDropDownItem to={'/candidate/matches/changePass'}>
+                        Change Password
+                      </HeaderDropDownItem>
+                        <HeaderDropDownItem nolink >
 												<Mailto email="support@pumpthq.com" obfuscate={true}>
 														Help &amp; Support
 													</Mailto>
