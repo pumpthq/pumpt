@@ -81,7 +81,7 @@ export default function() {
                 recentAnnualIncome : onboardingState.income.value,
                 recentAreaExperience : onboardingState.experience.value,
 								preferredCompanySize : onboardingState.preferredCompanySize.value,
-                values : onboardingState.values,
+                values : onboardingState.values.map(({value}) => value ),
                 socialMedia: onboardingState.socialMedia
             }
 
