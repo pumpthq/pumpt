@@ -1,7 +1,7 @@
-import React, { Component, PropTypes } from 'react'
+import React, {Component, PropTypes} from 'react'
 
-import { MultiItemText } from './multiItemText'
-import { MultiItemUserEntered } from './multiItemUserEntered'
+import {MultiItemText} from './multiItemText'
+import {MultiItemUserEntered} from './multiItemUserEntered'
 
 const LIST_ITEM_TYPE_TEXT = 'list.item.type.text'
 const LIST_ITEM_TYPE_USER_ENTERED = 'list.item.type.userEntered'

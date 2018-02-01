@@ -1,64 +1,31 @@
-import axios from 'axios';
-import { takeLatest } from 'redux-saga';
-import { push } from 'react-router-redux';
-import { select, call, put, take } from 'redux-saga/effects';
-import { SubmissionError } from 'redux-form'
-
-// import { changePassword } from '../api';
-
+import {takeLatest} from 'redux-saga';
+import {push} from 'react-router-redux';
+import {put} from 'redux-saga/effects';
+import {SubmissionError} from 'redux-form'
 import {
-    API_URL,
-    API_LOGIN,
-    API_LOGOUT,
-    API_CANDIDATE_ROOT,
-    API_COMPANY_ROOT,
-    API_FORGOT_PASSWORD,
-} from './../constants/api';
-import {
-    // AUTHENTICATION_CANDIDATE_REQUESTED,
-    // AUTHENTICATION_COMPANY_REQUESTED,
-    // AUTHENTICATION_REQUESTED,
-    AUTHENTICATION_SUCCEEDED,
     AUTHENTICATION_FAILED,
-    CHANGE_PASSWORD_REQUEST,
-    LOGIN_AT_BEGIN,
-    // USER_LOGOUT_REQUESTED,
-    USER_LOGOUT_SUCCEEDED,
-    // USER_LOGOUT_FAILED,
+    AUTHENTICATION_SUCCEEDED,
     FORGOT_PASSWORD_SUCCEEDED,
-
     RESOLVE_USER_SUCCEEDED,
+    USER_LOGOUT_SUCCEEDED,
 } from './../constants/authorization';
 
-import {
-    changePasswordSucceeded,
-    // changePasswordFailed,
-    // saveCandidateAccessToken,
-    // signInCandidateFailed,
-    // saveCompanyAccessToken,
-    // signInCompanyFailed,
-    // loginAtBegin,
-    // saveAccessToken,
-    // saveProfile,
-    loginFailed,
-    login,
-    logOutFailed,
-    logOutSucceeded,
-} from './../actions/authorization';
+import {login, logOutFailed,} from './../actions/authorization';
 
-import { fetchMatches, fetchCandidate } from './../actions/candidateMatches';
-import { fetchJobs, fetchCompany, fetchRecruiter } from './../actions/companyJobs';
+import {fetchCandidate, fetchMatches} from './../actions/candidateMatches';
+import {fetchCompany, fetchJobs, fetchRecruiter} from './../actions/companyJobs';
 // import {
 //     getAccessToken,
 // } from './../reducers/authorization';
 import {
     ROUTE_APPLICATION_CANDIDATE,
     ROUTE_APPLICATION_COMPANY,
-    ROUTE_DEFAULT,
-    ROUTE_LOGIN,
     ROUTE_CANDIDATE_MATCHES_ALL,
     ROUTE_COMPANY_JOBS_OPEN,
+    ROUTE_LOGIN,
 } from './../constants/routes';
+
+// import { changePassword } from '../api';
 
 // import { getLatestProfile, clearApplicationCandidateState } from './../actions/applicationCandidate';
 // import { clearApplicationCompanyState } from './../actions/applicationCompany';

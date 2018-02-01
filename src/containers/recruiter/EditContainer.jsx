@@ -1,6 +1,5 @@
-import React, { Component, PropTypes } from 'react'
-import { connect } from 'react-redux'
-import ScrollContainer from 'components/main/scrollContainer'
+import React, {Component} from 'react'
+import {connect} from 'react-redux'
 
 import RecruiterForm from 'components/recruiters/Form';
 import RecruiterSummary from 'components/recruiters/Summary';
@@ -8,8 +7,7 @@ import CompanyForm from 'components/company/Form';
 import CompanySummary from 'components/company/Summary';
 import CompanyApplicationForm from 'components/company/Application';
 
-import { updateRecruiter, updateCompany } from 'actions/applicationCompany'
-import Panel from 'components/main/panel';
+import {updateCompany, updateRecruiter} from 'actions/applicationCompany'
 
 function mapStateToProps(state, ownProps) {
     return { recruiter: state.companyJobs.recruiter, company: state.companyJobs.company, authorization: state.authorization }
@@ -20,7 +18,6 @@ export default class EditContainer extends Component {
     constructor(props) {
         super(props)
         this.state = { editRecruiterSummary: false, editCompanySummary: false }
-        console.log(props)
     }
 
     editRecruiterSummary = (val) => {

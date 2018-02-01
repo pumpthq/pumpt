@@ -1,9 +1,6 @@
 require('jasmine-co').install()
 
-import applicationCandidateReducer from './../reducers/applicationCandidate'
 import store from './../store'
-
-import * as constants from './../constants/applicationCandidate'
 import * as actions from './../actions/applicationCandidate'
 
 const expect = chai.expect

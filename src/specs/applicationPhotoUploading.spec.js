@@ -1,19 +1,15 @@
 import 'babel-polyfill'
-
-require('jasmine-co').install()
-import { put, select } from 'redux-saga/effects'
-import * as constants from './../constants/applicationPhotoUploading'
 import * as actions from './../actions/applicationPhotoUploading'
-import {
-    getApplicationMedia
-} from './../reducers/applicationPhotoUploading'
+import {getApplicationMedia} from './../reducers/applicationPhotoUploading'
 import store from './../store'
 import faker from 'faker'
 // import helpers from './../helpers'
 import MockAdapter from 'axios-mock-adapter'
 import axios from 'axios'
 import ObjectID from 'bson-objectid'
-import { API_URL } from './../constants/api'
+import {API_URL} from './../constants/api'
+
+require('jasmine-co').install()
 
 const mockRequest = new MockAdapter(axios)
 

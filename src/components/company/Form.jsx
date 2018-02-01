@@ -1,135 +1,94 @@
-import React, {Component, PropTypes} from 'react';
-import { reduxForm, Field, SubmissionError, formValueSelector } from 'redux-form'
-import { connect } from 'react-redux'
-import { Location, EnumSelector, TextArea, TextInput } from 'components/form/inputs'
-import MultiInput from 'components/main/form/MultiInput'
+import React from 'react';
+import { Field, reduxForm } from 'redux-form';
+import { MenuItem } from 'material-ui';
 
-//Actions
-import { updateCompany } from 'actions/applicationCompany'
+import MultiInput from 'components/main/form/MultiInput';
+import { renderSelectField, renderTextField } from 'components/form/helpers';
 
-import { browserHistory } from 'react-router'
-import { find } from 'lodash'
-
-import {
-    COMPANY_EMPLOYEES_DATA,
-    COMPANY_TYPE_DATA,
-} from 'constants/companyOnboarding';
+import { COMPANY_EMPLOYEES_DATA, COMPANY_TYPE_DATA } from 'constants/companyOnboarding';
+// Validations
+import { year } from 'components/main/form/validations';
+import { normalizeYear } from 'components/main/form/normalizations';
+import './form.less';
 
 
-//Generalized Redux Field
-export const renderField = ({
-  input,
-  label,
-  type,
-	className,
-  meta: { asyncValidating, touched, error }
-}) => (
-  <div class={className}>
-		<div class={asyncValidating ? 'async-validating' : 'class'}>
-      <input class="mdl-textfield__input textfield__input" {...input} placeholder={label} type={type} />
-      {touched && error && <span class="textfield__error">{error}</span>}
-    </div>
-  </div>
-)
+// Form
+let CompanySummaryForm = props => {
+  const {
+    handleSubmit,
+    submitting,
+    invalid,
+    onCancel,
+  } = props;
 
-const renderSelectField = ({ input, label, type, meta: { touched, error }, children }) => (
-    <div>
-      <select {...input} class="margin-top-15 mdl-textfield__input textfield__input textfield__light">
-				<option value="" class="disabled-text-option" disabled selected>{label}</option>
-        {children}
-      </select>
-      {touched && error && <span>{error}</span>}
-    </div>
-)
+  const submitDisabled = invalid || submitting;
+  return (
 
-//Validations
-import {year} from 'components/main/form/validations'
-import {normalizeYear} from 'components/main/form/normalizations'
+    <form onSubmit={handleSubmit} className="company-edit-form">
+      <div className="row">
+        <div className="col-md-6 col-md-offset-3">
+          <Field
+            name="name"
+            component={renderTextField}
+            label="Company Name"
+          />
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-md-4">
+          <Field
+            name="employeesAmount"
+            component={renderSelectField} label="Number of Employees"
+            class="mdl-textfield__input textfield__input textfield__light"
+          >
+            { COMPANY_EMPLOYEES_DATA
+              .map(item => <MenuItem key={item.id} value={item.title} primaryText={item.title} />) }
+          </Field>
+        </div>
+        <div className="col-md-4">
+          <label htmlFor="type">Company Type</label>
+          <Field
+            name="type"
+            component={MultiInput}
+            values={COMPANY_TYPE_DATA[0].items.map((item) => (item.title))}
+            label="Company Type"
+            class="mdl-textfield__input textfield__input textfield__light"
+          />
+        </div>
+        <div className="col-md-4">
+          <Field
+            name="foundDate"
+            component={renderTextField}
+            label="Year Founded"
+            validate={year}
+            normalize={normalizeYear}
+          />
+        </div>
+      </div>
 
+      <div className="candidate-buttons">
+        <button
+          type="submit" disabled={submitDisabled}
+          className="mdl-button button button_type_colored button_size_m"
+        >
+          Save
+        </button>
+        <button
+          type="button" disabled={submitting}
+          onClick={onCancel} className="mdl-button button button_type_colored button_size_m"
+        >
+          Cancel
+        </button>
+      </div>
+    </form>
+  );
+};
 
-//Form
-let CompanySummaryForm = props =>  {
-	const {
-		handleSubmit,
-		submitting,
-		error,
-		invalid,
-		valid,
-		dispatch,
-		names,
-	 	values,
-		industryValue,
-        onCancel,
-	} = props
-
-	const submitDisabled = invalid || submitting
-
-		return (
-
-			<form onSubmit={handleSubmit} class="company-edit-form"> 
-				<div class="row">
-					<div class="col-md-6 col-md-offset-3">
-						<Field
-							name="name"
-							type="text"
-							component={renderField}
-							label="Company Name"
-						/>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-4">
-						<Field name="employeesAmount" component={renderSelectField} label="Number of Employees" class="mdl-textfield__input textfield__input textfield__light">
-							{ COMPANY_EMPLOYEES_DATA.map((item) => {return <option value={item.title}>{item.title}</option>}) }
-						</Field>
-					</div>
-					<div class="col-md-4">
-            <Field 
-              name="type"
-              component={MultiInput}
-              values={COMPANY_TYPE_DATA[0].items.map((item) => (item.title))}
-              label="Company Type"
-              class="mdl-textfield__input textfield__input textfield__light">
-						</Field>
-					</div>
-					<div class="col-md-4">
-						<Field
-							name="foundDate"
-							type="text"
-							component={renderField}
-							label="YearFounded"
-							validate={year}
-							normalize={normalizeYear}
-						/>
-					</div>
-			</div>
-
-				<div className="candidate-buttons">
-					<button type="submit" disabled={submitDisabled} className="mdl-button button button_type_colored button_size_m">
-							{submitting ? <i/> : <i/>} Save
-					</button>
-					<button type="button" disabled={submitting} onClick={onCancel} className="mdl-button button button_type_colored button_size_m">
-							Cancel
-					</button>
-				</div>
-
-
-			</form>
-		)
-	}
-
-//Define Form
+// Define Form
 CompanySummaryForm = reduxForm({
-	form: 'companySummaryForm',
-	enableReinitialize : true,
-	// onSubmit: submit /* use onSubmit prop passed to component instead */
-})(CompanySummaryForm)
+  form: 'companySummaryForm',
+  enableReinitialize: true,
+})(CompanySummaryForm);
 
-const selector = formValueSelector('companySummaryForm')
-
-CompanySummaryForm = connect(state => {
-})(CompanySummaryForm)
-
-
-//Export Form
-export default CompanySummaryForm
+// Export Form
+export default CompanySummaryForm;

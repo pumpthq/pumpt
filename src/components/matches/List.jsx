@@ -1,10 +1,10 @@
-import React, {Component, PropTypes} from 'react';
-import { Link, browserHistory } from 'react-router'
-import { find } from 'lodash'
+import React, {Component} from 'react';
+import {browserHistory} from 'react-router'
+import {find} from 'lodash'
 
 import MatchRecruiterActions from 'components/matches/RecruiterActions'
 import './matches.less'
-import { apiImage, displayIndustries } from 'components/helpers'
+import {apiImage, displayIndustries} from 'components/helpers'
 
 const propTypes = {};
 const defaultProps = {

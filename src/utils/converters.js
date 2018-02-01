@@ -1,8 +1,4 @@
-import {
-    LIST_ITEM_TYPE_TEXT,
-    LIST_ITEM_TYPE_USER_ENTERED,
-    LIST_ITEM_TYPE_GROUP
-} from './../components/main/list2'
+import {LIST_ITEM_TYPE_GROUP, LIST_ITEM_TYPE_TEXT, LIST_ITEM_TYPE_USER_ENTERED} from './../components/main/list2'
 
 const apiEnumToListData = (initialData) => {
     let listData = []

@@ -1,8 +1,8 @@
-import React, { Component, PropTypes } from 'react'
-import { connect } from 'react-redux'
-import { SHOW_CONTACT_INFO_STEP } from './../../../../../../constants/candidateOnboarding'
-import { showContactInfoStep, gotoContactInfoStep } from './../../../../../../actions/candidateOnboarding'
-import { NavigationLink, NavigationUserInfo } from './../../../../../../components/main/navigation'
+import React, {Component, PropTypes} from 'react'
+import {connect} from 'react-redux'
+import {SHOW_CONTACT_INFO_STEP} from './../../../../../../constants/candidateOnboarding'
+import {gotoContactInfoStep, showContactInfoStep} from './../../../../../../actions/candidateOnboarding'
+import {NavigationLink, NavigationUserInfo} from './../../../../../../components/main/navigation'
 import CallStep from './../../../../callStep'
 
 @connect(

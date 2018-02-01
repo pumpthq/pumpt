@@ -1,13 +1,13 @@
-import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
-import { updateCandidate } from 'actions/candidateMatches'
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {browserHistory} from 'react-router';
+import {updateCandidate} from 'actions/candidateMatches'
 
 import CandidateForm from 'components/candidates/Form';
 import CandidateSummary from 'components/candidates/Summary';
 import CandidateApplicationForm from 'components/candidates/Application';
-
-import Panel from 'components/main/panel';
-import ScrollContainer from 'components/main/scrollContainer'
+import Button from 'components/main/button'
+import BasicDialog from 'components/main/popup/BasicDialog';
 
 const recentWorkingAreasToParent = (values) => {
   values.recentWorkingArea = values.recentWorkingAreas.map( a => (a.value));
@@ -30,12 +30,19 @@ function mapStateToProps(state, ownProps) {
 @connect(mapStateToProps)
 class EditContainer extends Component {
     constructor(props) {
-        super(props)
-        this.state = { editSummary: false }
+      super(props)
+      this.state = {
+        editSummary: false,
+        triggerDialog: false
+      }
     }
 
     editSummary = (val) => {
         this.setState({editSummary:val})
+    }
+
+    openDialog = () => {
+      this.setState({ triggerDialog: true });
     }
 
 
@@ -44,18 +51,31 @@ class EditContainer extends Component {
         return (
             <div className="mdl-card col-xs-12">
 
-                {this.state.editSummary ?
-                    <CandidateForm
-                        initialValues={recentWorkingAreasToParent(candidate)}
-                        onSubmit={values=> {dispatch(updateCandidate(recentWorkingAreaFormat(values))); this.editSummary(false)}}
-                        onCancel={()=>this.editSummary(false)} />
-                    :
-                    <CandidateSummary {...this.props} onEdit={()=>this.editSummary(true)}/>
-                }
-                <CandidateApplicationForm
-                    initialValues={candidate}
-                    onSubmit={values=> {dispatch(updateCandidate(values)) } }/>
+              {this.state.editSummary ?
+                  <CandidateForm
+                      initialValues={recentWorkingAreasToParent(candidate)}
+                      onSubmit={values=> {dispatch(updateCandidate(recentWorkingAreaFormat(values))); this.editSummary(false)}}
+                      onCancel={()=>this.editSummary(false)} />
+                  :
+                  <CandidateSummary {...this.props} onEdit={()=>this.editSummary(true)}/>
+              }
 
+              <CandidateApplicationForm
+                  onSubmit={values=> {dispatch(updateCandidate(values)) } }/>
+          
+  						<div className="text-center">
+  							<Button
+  								type='submit'
+  								typeColored
+  								buttonSize='l'
+  								onClick={this.openDialog}
+  							>
+  							 Done
+  							</Button>
+                <BasicDialog trigger={this.state.triggerDialog} onClose={browserHistory.goBack}>
+                  Your application has been saved
+                </BasicDialog>
+  						</div>
             </div>
 
         );

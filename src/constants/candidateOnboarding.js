@@ -47,4 +47,4 @@ export const COMPANY_SIZE_DROPDOWN_DATA = []
 export const EXPERIENCE_DROPDOWN_DATA = []
 export const DEGREE_DROPDOWN_DATA = []
 
-export const SKILLS = ["MS Office (Word,Excel, PPt)","comScore","Google Analytics","IAB Certification","SalesForce","Ad-Serving Platforms"]
+export const SKILLS = ["MS Office (Word,Excel, PPT)","comScore","Google Analytics","IAB Certification","SalesForce","Ad-Serving Platforms"]

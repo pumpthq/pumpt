@@ -1,11 +1,11 @@
-import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux'
+import React, {Component} from 'react';
+import {connect} from 'react-redux'
 import MatchesList from 'components/matches/List'
-import  ApproveAndEmailCandidateDialog  from 'components/matches/ApproveAndEmailCandidateDialog'
+import ApproveAndEmailCandidateDialog from 'components/matches/ApproveAndEmailCandidateDialog'
 import VerticalScroller from 'components/VerticalScroller'
-import { fetchMatches } from 'actions/companyJobs'
+import {fetchMatches} from 'actions/companyJobs'
 
-import { find, filter } from 'lodash'
+import {filter, find} from 'lodash'
 
 function mapStateToProps(state, ownProps) {
     return {

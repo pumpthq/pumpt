@@ -1,20 +1,11 @@
-import React, { Component, PropTypes } from 'react'
-import { connect } from 'react-redux'
-import {
-    List,
-    LIST_ITEM_TYPE_TEXT,
-    LIST_ITEM_TYPE_USER_ENTERED,
-    LIST_ITEM_TYPE_GROUP
-} from './../../../../../components/main/list2'
+import React, {Component, PropTypes} from 'react'
+import {connect} from 'react-redux'
+import {List} from './../../../../../components/main/list2'
 import Button from './../../../../../components/main/button'
-import { JOB_TITLE_DROPDOWN_DATA } from './../../../../../constants/candidateOnboarding'
-import { apiEnumToListData } from './../../../../../utils'
+import {JOB_TITLE_DROPDOWN_DATA} from './../../../../../constants/candidateOnboarding'
+import {apiEnumToListData} from './../../../../../utils'
 
-import {
-    saveJobTitleStep,
-    showIncomeStep,
-    gotoIncomeStep,
-} from './../../../../../actions/candidateOnboarding'
+import {gotoIncomeStep, saveJobTitleStep, showIncomeStep,} from './../../../../../actions/candidateOnboarding'
 
 @connect(
     function mapStateToProps(state) {

@@ -1,10 +1,6 @@
 require('jasmine-co').install()
 
-import {
-    addObjectToArray,
-    addStringToArrayUnique,
-    removeStringFromArray
-} from './../../reducers/stateProcessing'
+import {addObjectToArray, addStringToArrayUnique, removeStringFromArray} from './../../reducers/stateProcessing'
 
 const expect = chai.expect
 

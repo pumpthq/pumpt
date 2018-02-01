@@ -1,6 +1,4 @@
-import {
-    SimpleInput
-} from './simple'
+import {SimpleInput} from './simple'
 
 export {
     SimpleInput

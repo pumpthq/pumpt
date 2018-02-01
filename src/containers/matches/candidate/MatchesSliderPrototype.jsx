@@ -1,7 +1,6 @@
-import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
+import React, {Component, PropTypes} from 'react';
 import './matches.less';
-import { CardCarousel } from './../../../components/matches';
+import {CardCarousel} from './../../../components/matches';
 
 
 const propTypes = {

@@ -1,8 +1,8 @@
-import React, { Component, PropTypes } from 'react'
-import { connect } from 'react-redux'
-import { SHOW_FOUNDATION_YEAR_STEP } from './../../../../../../constants/companyOnboarding'
-import { showFoundationYearStep, gotoFoundationYearStep } from './../../../../../../actions/companyOnboarding'
-import { NavigationLink, NavigationLink2 } from './../../../../../../components/main/navigation'
+import React, {Component, PropTypes} from 'react'
+import {connect} from 'react-redux'
+import {SHOW_FOUNDATION_YEAR_STEP} from './../../../../../../constants/companyOnboarding'
+import {gotoFoundationYearStep, showFoundationYearStep} from './../../../../../../actions/companyOnboarding'
+import {NavigationLink2} from './../../../../../../components/main/navigation'
 import CallStep from './../../../../callStep'
 import moment from 'moment';
 
