@@ -13,7 +13,8 @@ function BookmarkOption(props){
 	}
 	else if(props.vacancy.status=="rejected"){
 		html = <ButtonLink onClick={props.addToBookmark}> Restore</ButtonLink>;
-	}
+  } else if (props.vacancy.status=="approved") {
+  }
 	else{
 		html=<ButtonLink onClick={props.addToBookmark}><BookmarkOpen className=""/> Bookmark</ButtonLink>;
 	}
