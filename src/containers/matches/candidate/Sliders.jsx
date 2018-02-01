@@ -25,6 +25,12 @@ export class BookmarkedMatchesSlider extends CardSlider {}
 }) )
 export class NotInterestedMatchesSlider extends CardSlider {}
 
+@connect( state => ({
+    items: state.candidateMatches.matches.filter(match=>match.vacancy.status=='approved'),
+    component: MatchSummary,
+    placeholder: ApprovedPlaceholder,
+}) )
+export class ApprovedMatchesSlider extends CardSlider {}
 
 const AllPlaceholder = (props) => {
     return (
@@ -55,4 +61,15 @@ const NotInterestedPlaceholder = (props) => {
 						</div>
         </div>
     )
+}
+
+const ApprovedPlaceholder = (props) => {
+  return (
+    <div className="welcome-to-matches-popup">
+      <h3>Accepted Matches Go Here!</h3>
+      <div className="message">
+        When you approve a match, we'll hang onto it so you can check back.
+      </div>
+    </div>
+  )
 }

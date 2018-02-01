@@ -1,5 +1,5 @@
 import React from 'react'
-import {AllMatchesSlider, BookmarkedMatchesSlider, NotInterestedMatchesSlider} from './candidate/Sliders'
+import {AllMatchesSlider, BookmarkedMatchesSlider, NotInterestedMatchesSlider, ApprovedMatchesSlider} from './candidate/Sliders'
 import MatchesContainer from './candidate/MatchesContainer'
 import VacancyContainer from './candidate/VacancyContainer'
 import CompanyContainer from './CompanyContainer'
@@ -19,6 +19,7 @@ module.exports = {
         { path: 'all', component: AllMatchesSlider },
         { path: 'bookmarked', component: BookmarkedMatchesSlider },
         { path: 'not-interested', component: NotInterestedMatchesSlider },
+        { path: 'approved', component: ApprovedMatchesSlider },
         { path: 'changePass', component: ChangePasswordContainer },
     ]
 };
