@@ -2,7 +2,7 @@
 
 exports[`Multilist renders properly 1`] = `
 <ul
-  className="list"
+  className="multi"
 >
   <li
     className="list__item list__item_sub_true"
@@ -14,10 +14,10 @@ exports[`Multilist renders properly 1`] = `
       choice 1 parent
     </a>
     <ul
-      className="list list_type_sublayer"
+      className="multi multi_type_sublayer"
     >
       <li
-        className="link_size_xl list__item link link_color_l-grey"
+        className="link_size_xl multi__item link"
         onClick={[Function]}
       >
         <span
@@ -38,7 +38,7 @@ exports[`Multilist renders properly 1`] = `
       choice 2 p
     </a>
     <ul
-      className="list list_type_sublayer"
+      className="multi multi_type_sublayer"
     />
   </li>
 </ul>
