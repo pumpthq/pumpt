@@ -74,7 +74,7 @@ const buttonStyle = {
 const CandidateProfile = (props) => {
   const { firstName, lastName, avatar, socialMedia, location,
     education, workingExperience, skills, recentWorkingAreas,
-    recentJob, recentAnnualIncome, recentAreaExperience } = props;
+    recentJob, recentAreaExperience } = props;
 
   return (
     <div>
@@ -88,7 +88,6 @@ const CandidateProfile = (props) => {
               value={displayIndustries(recentWorkingAreas)}
             />
             <LabeledValue label="Current Title" value={recentJob} />
-            <LabeledValue label="Current Total Compensation" value={recentAnnualIncome} />
             <LabeledValue label="Experience" value={recentAreaExperience} />
           </div>
 
