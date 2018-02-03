@@ -1,0 +1,90 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Recruiter Summary renders properly 1`] = `
+<div
+  className="summary-head"
+>
+  <div
+    className="summary-head__title mdl-card__title"
+  >
+    <div
+      className="summary-head__title-item summary-head__title-item_type_alignment"
+    >
+      <div
+        className="summary-head__title-column"
+      >
+        <div
+          className="summary-head__title-block"
+        >
+          <h2
+            className="mdl-card__title-text heading heading_type_two"
+          >
+            <span
+              className="ellipsis-text"
+            >
+              John Smith
+            </span>
+            <a
+              className="link"
+              onClick={[Function]}
+              style={
+                Object {
+                  "opacity": 1,
+                  "visibility": "visible",
+                }
+              }
+            >
+              <svg
+                className="icon icon-pencil "
+              >
+                <use
+                  xlinkHref="#pencil"
+                >
+                  <svg
+                    id="pencil"
+                    viewBox="0 0 12 12"
+                  >
+                    <path
+                      className="colored"
+                      d="M0 10.3L7.3 3 9 4.7 1.7 12H0zm9-9L10.3 0 12 1.7 10.7 3z"
+                      fill="#5c86f2"
+                    />
+                  </svg>
+                </use>
+              </svg>
+               Edit
+            </a>
+          </h2>
+          <div
+            className="mdl-card__subtitle-text summary-head__subtitle-text"
+          >
+            <span
+              className="text ellipsis-text"
+            >
+              abc@123.com
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="summary-head__title-item summary-head__title-item_type_alignment"
+    >
+      <div
+        className="summary-head__title-column"
+      >
+        <span
+          className="text summary-head__label"
+        >
+          Position
+        </span>
+        <span
+          className="text text_size_s summary-head__summary"
+        >
+          CEO
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+`;
