@@ -5,6 +5,8 @@ import {gotoIncomeStep, showIncomeStep} from './../../../../../../actions/candid
 import {NavigationLink2} from './../../../../../../components/main/navigation'
 import CallStep from './../../../../callStep'
 
+import { INCOME_NA_ID } from 'constants/candidateOnboarding';
+
 @connect(
     function mapStateToProps(state) {
         const onboardingState = state.candidateOnboarding
@@ -33,7 +35,11 @@ export class To extends Component {
 
         let value = ''
         if(stateItem) {
+          if (stateItem.id === INCOME_NA_ID) {
+            value = "NA"
+          } else {
             value += stateItem.value
+          }
         }
 
         return (
