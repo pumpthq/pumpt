@@ -47,6 +47,15 @@ export const resolveUserFailed = () => ({
     type: RESOLVE_USER_FAILED,
 });
 
+export const getSession = () => ({
+  type: API,
+  payload: {
+    url: '/users/current',
+    method: 'GET',
+    success: loginSucceeded,
+  },
+});
+
 export const changePassword = (data) => ({
     type: API,
     payload: {
