@@ -7,12 +7,16 @@ import {findById} from '../../../../../constants/dropdownData'
 import {gotoExperienceStep, saveIncomeData, showExperienceStep,} from './../../../../../actions/candidateOnboarding'
 
 import {StepListLink} from '../../../renderHelpers'
-import {ANNUAL_INCOME_DROPDOWN_DATA} from './../../../../../constants/candidateOnboarding'
+import {
+  ANNUAL_INCOME_DROPDOWN_DATA,
+  INCOME_NA_ID as NAID,
+  INCOME_NA as NA
+} from './../../../../../constants/candidateOnboarding'
 
 @connect(
     function mapStateToProps(state, ownProps) {
         const { income } = state.candidateOnboarding
-        const activeItem = findById({
+        const activeItem = income && income.id === NAID ? NA : findById({
             id : income ? income.id : null,
             data : ANNUAL_INCOME_DROPDOWN_DATA
         })
@@ -23,10 +27,16 @@ import {ANNUAL_INCOME_DROPDOWN_DATA} from './../../../../../constants/candidateO
     },
     function mapDispatchToProps(dispatch, ownProps) {
         const nextStep = ({ id, value }) => {
+          var val;
+          if (id === NAID) {
+            val = null;
+          } else {
+            val = value;
+          }
             dispatch(saveIncomeData({
                 income : {
                     id,
-                    value
+                    value: val
                 }
             }))
             dispatch(showExperienceStep())
@@ -41,8 +51,8 @@ import {ANNUAL_INCOME_DROPDOWN_DATA} from './../../../../../constants/candidateO
 )
 class IncomeForm extends Component {
     render() {
-        const { listItems, nextStep, activeItem } = this.props
-
+        const { nextStep, activeItem } = this.props
+        const listItems = [NA].concat(ANNUAL_INCOME_DROPDOWN_DATA);
         return (
             <List type='onboarding'>
                 {listItems.map(item => {
@@ -62,11 +72,9 @@ class IncomeForm extends Component {
 
 IncomeForm.propTypes = {
     nextStep : PropTypes.func,
-    listItems : PropTypes.arrayOf(PropTypes.string),
     activeItem : PropTypes.object
 }
 IncomeForm.defaultProps = {
-    listItems : ANNUAL_INCOME_DROPDOWN_DATA
 }
 
 export default IncomeForm

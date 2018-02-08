@@ -19,6 +19,7 @@ class IncomeStep extends Component {
                             <Panel paddingBig>
                                 <H1 noGutter typeFour className="row">
                                     <span className="onboarding-header col-lg-10 col-md-10 col-sm-10 col-xs-10">What is your current total compensation package?</span>
+                                    <span className="onboarding-subheader col-lg-10 col-md-10 col-sm-10 col-xs-10">Don't worry, Companies won't see this!</span>
                                 <span className="col-lg-2 col-md-2 col-sm-2 col-xs-2">
                                     <span className="image__wrapper">
                                         <img className="icon icon-onboarding-2" src={on5Image} />
