@@ -24,6 +24,11 @@ class TabBar extends Component {
                     route : ROUTE_CANDIDATE_MATCHES_ALL,
                     // action : routeToAll
                 }, {
+                    title: ` Approved `,
+                    icon: <Heart className="icon_inline" />,
+                    route: ROUTE_CANDIDATE_MATCHES_APPROVED,
+                    // action : routeToNotInterested
+                }, {
                     title : ` Bookmarked `,
                     icon : <BookmarkFill className="icon-bookmark-fill_size_small icon_inline" />,
                     route : ROUTE_CANDIDATE_MATCHES_BOOKMARKED,
@@ -32,11 +37,6 @@ class TabBar extends Component {
                     title: ` Not Interested `,
                     icon: <DeclineIcon className="icon_inline" />,
                     route: ROUTE_CANDIDATE_MATCHES_NOT_INTERESTED,
-                    // action : routeToNotInterested
-                }, {
-                    title: ` Approved `,
-                    icon: <Heart className="icon_inline" />,
-                    route: ROUTE_CANDIDATE_MATCHES_APPROVED,
                     // action : routeToNotInterested
                 }]}
             </TabBarView>
