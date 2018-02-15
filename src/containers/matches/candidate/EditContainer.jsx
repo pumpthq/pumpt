@@ -27,6 +27,13 @@ function mapStateToProps(state, ownProps) {
     return { candidate: state.candidateMatches.candidate, authorization: state.authorization  }
 }
 
+const processAppFields = (values) => {
+  // filter out null values
+  values.education = values.education.filter(e => e);
+  values.workingExperience = values.workingExperience.filter(e => e);
+  return values;
+}
+
 @connect(mapStateToProps)
 class EditContainer extends Component {
     constructor(props) {
@@ -61,7 +68,7 @@ class EditContainer extends Component {
               }
 
               <CandidateApplicationForm
-                  onSubmit={values=> {dispatch(updateCandidate(values)) } }/>
+                  onSubmit={values=> {dispatch(updateCandidate(processAppFields(values))) } }/>
           
   						<div className="text-center">
   							<Button

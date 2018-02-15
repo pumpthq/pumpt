@@ -35,6 +35,13 @@ const recentWorkingAreaFormat = (values) => {
   return values;
 }
 
+const processAppFields = (values) => {
+  // filter out null values
+  values.education = values.education.filter(e => e);
+  values.workingExperience = values.workingExperience.filter(e => e);
+  return values;
+}
+
 @connect(mapStateToProps)
 export default class ApplicationContainer extends Component {
     constructor(props) {
@@ -102,7 +109,7 @@ export default class ApplicationContainer extends Component {
 												}
 												<CandidateApplicationForm
 														ref="applicationForm"
-                            onSubmit={values=> {dispatch(updateCandidate(values)) } }
+                            onSubmit={values=> {dispatch(updateCandidate(processAppFields(values))) } }
 													/>
 
 														<div className="text-center">
@@ -128,11 +135,3 @@ export default class ApplicationContainer extends Component {
         )
     }
 }
-
-// ApplicationContainer.defaultProps = {
-//     candidate: {
-//         avatar: '{avatar}',
-//         firstName: '{firstName}',
-//         lastName: '{lastName}'
-//     }
-// }

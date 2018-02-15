@@ -212,7 +212,6 @@ const renderEducations = ({ fields, meta: { error } }) => (
               <option value="graduate">Graduate</option>
               <option value="other">Other</option>
             </Field>
-            {/* FIXME: Not pulling data from enums/api - need to make this dynamic*/}
           </div>
           <div className="application-detail col-md-12">
             <div className="row">
