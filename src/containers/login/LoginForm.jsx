@@ -1,6 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router'
 import {Field, reduxForm, SubmissionError} from 'redux-form'
+import {Checkbox} from 'redux-form-material-ui';
 
 import {login} from 'actions/authorization'
 import {renderField} from 'components/form/helpers';
@@ -53,6 +54,15 @@ const LoginForm = props => {
 						/>
 					</div>
 				</fieldset>
+
+        <div>
+          <Field
+            name="remember"
+            type="checkbox"
+            component={Checkbox}
+            label="Stay logged in?"
+          />
+        </div>
 
                     {error && <span class="textfield__error">{error}</span>}
 					<div class="form__actions">

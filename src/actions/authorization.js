@@ -47,6 +47,15 @@ export const resolveUserFailed = () => ({
     type: RESOLVE_USER_FAILED,
 });
 
+export const getSession = () => ({
+  type: API,
+  payload: {
+    url: '/users/current',
+    method: 'GET',
+    success: loginSucceeded,
+  },
+});
+
 export const changePassword = (data) => ({
     type: API,
     payload: {
@@ -61,17 +70,13 @@ export const changePassword = (data) => ({
 export const changePasswordSucceeded = () => ({
     type: CHANGE_PASSWORD_SUCCEEDED,
 });
-//
-// export const changePasswordFailed = () => ({
-//     type: CHANGE_PASSWORD_FAILED,
-// });
 
-export const login = ({ email, password }) => ({
+export const login = ({ email, password, remember }) => ({
     type: API,
     payload : {
         url : '/authentication/login',
         method: 'POST',
-        data: { email, password },
+        data: { email, password, remember},
         success: loginSucceeded,
         error: fetchFailed
     }
