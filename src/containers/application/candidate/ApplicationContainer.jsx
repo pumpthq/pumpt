@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
+import { withRouter } from 'react-router'
 import Wrapper from 'components/main/wrapper'
 import {HeaderMini} from 'components/main/header'
 import HeadingProgress from 'containers/application/candidate/headingProgress';
@@ -35,6 +36,7 @@ const recentWorkingAreaFormat = (values) => {
   return values;
 }
 
+@withRouter
 @connect(mapStateToProps)
 export default class ApplicationContainer extends Component {
     constructor(props) {
@@ -50,9 +52,6 @@ export default class ApplicationContainer extends Component {
     openDialog = () => {
         this.setState({lastApproved:(new Date)})
     }
-
-		componentDidMount() {
-		}
 
     handleFinished = () => {
 
@@ -102,6 +101,7 @@ export default class ApplicationContainer extends Component {
 												}
 												<CandidateApplicationForm
 														ref="applicationForm"
+                            path={this.props.location.pathname}
                             onSubmit={values=> {dispatch(updateCandidate(values)) } }
 													/>
 
@@ -128,11 +128,3 @@ export default class ApplicationContainer extends Component {
         )
     }
 }
-
-// ApplicationContainer.defaultProps = {
-//     candidate: {
-//         avatar: '{avatar}',
-//         firstName: '{firstName}',
-//         lastName: '{lastName}'
-//     }
-// }

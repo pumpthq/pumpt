@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import { withRouter } from 'react-router'
 import {browserHistory} from 'react-router';
 import {updateCandidate} from 'actions/candidateMatches'
 
@@ -27,6 +28,7 @@ function mapStateToProps(state, ownProps) {
     return { candidate: state.candidateMatches.candidate, authorization: state.authorization  }
 }
 
+@withRouter
 @connect(mapStateToProps)
 class EditContainer extends Component {
     constructor(props) {
@@ -61,7 +63,9 @@ class EditContainer extends Component {
               }
 
               <CandidateApplicationForm
-                  onSubmit={values=> {dispatch(updateCandidate(values)) } }/>
+                onSubmit={values=> {dispatch(updateCandidate(values)) } }
+                path={this.props.location.pathname}
+              />
           
   						<div className="text-center">
   							<Button

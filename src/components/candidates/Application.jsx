@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { reduxForm, FieldArray, Field, SubmissionError, propTypes as formTypes } from 'redux-form';
+import {API_URL} from 'constants/api'
 
 // Places Autocomplete Library
 import { PlaceField } from 'components/main/form/PlaceField';
@@ -43,13 +44,19 @@ const fieldArrayProps = {
 };
 
 // Form
-let CandidateApplicationForm = ({ handleSubmit, submitting, invalid, submitSucceeded, pristine }) => {
+let CandidateApplicationForm = ({ handleSubmit, submitting, invalid, submitSucceeded, pristine, path }) => {
   const submitDisabled = invalid || submitting;
 
   return (
     <form onSubmit={handleSubmit} className="candidate-application-form text-input-underlined">
 
       <CaseIcon />
+      <div style={{display: 'flex'}}>
+      <a className="button button_type_colored center" style={{margin: '10px auto', padding: '10px', textDecoration: 'none'}} href={`${API_URL}/linkedin/oauth?redirectTo=${path}`}
+      >
+        Import from LinkedIn
+      </a>
+    </div>
       <FieldArray name="workingExperience" label="Working Experience" component={renderWorkingExperiences} />
       <CardDivider />
 
@@ -325,12 +332,13 @@ const renderSocial = () => (
 // Define Form
 CandidateApplicationForm = reduxForm({
   form: 'candidateApplication',
+  enableReinitialize: true, // allows initialValues to update when the AJAX request returns
 })(CandidateApplicationForm);
 
 CandidateApplicationForm = connect(
   state => ({
     initialValues: state.candidateMatches.candidate,
-  })
+  }),
 )(CandidateApplicationForm);
 
 // Export Form
