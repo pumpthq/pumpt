@@ -21,6 +21,7 @@ import {getCandidateOnboarding} from './../reducers/candidateOnboarding'
 import {getSummary} from './../reducers/applicationCandidate'
 import {push} from 'react-router-redux'
 import {ROUTE_APPLICATION_CANDIDATE} from './../constants/routes'
+import {cityToGeocode} from './../utils/converters'
 
 export const fetchByEmail = (email) => {
     return axios.get(`${API_URL}${EMAIL_AVAILABILITY}/${email}`)
@@ -49,6 +50,16 @@ export default function() {
         takeLatest(APPLY_FOR_MEMBERSHIP_REQUESTED, function * (action) {
             const {resolve, reject} = action.payload
             const onboardingState = yield select(getCandidateOnboarding)
+            let lat, lng;
+            try {
+              let coordinates = yield call(cityToGeocode,onboardingState.location);
+              lat = coordinates.lat;
+              lng = coordinates.lng;
+            } catch (err) {
+              console.log("Error finding lat/lng:");
+              console.log(err);
+            }
+
             const payload = {
                 user : {
                     email : onboardingState.email,
@@ -57,6 +68,7 @@ export default function() {
                 firstName : onboardingState.firstName,
                 lastName : onboardingState.lastName,
 								location : onboardingState.location,
+                locationCoordinates : {lat,lng},
 								abilityToRelocate : onboardingState.abilityToRelocate,
                 interestWorkingArea : onboardingState.industries.map(({value}) => value ),
                 recentWorkingAreas : onboardingState.fieldOfExpertise.map(({value, parent: {value: parent}}) => ({value, parent})),
