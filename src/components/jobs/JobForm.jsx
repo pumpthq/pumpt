@@ -16,8 +16,8 @@ import { DEGREES_DROPDOWN_DATA, EMPLOYEMENTS_DROPDOWN_DATA } from 'constants/com
 import { find } from 'lodash';
 // Field-level Validations & Normalizations
 import { hasText, required } from 'components/main/form/validations';
-import { industryChild } from 'components/main/form/normalizations';
 import { renderField } from 'components/form/helpers';
+import {cityToGeocode} from '../../utils/converters'
 
 import './profile.less';
 
@@ -253,6 +253,18 @@ export const industryOut = (values) => {
   delete newVal.industryParent;
   return newVal;
 };
+export const preSubmit = (values) => {
+  const newVal = industryOut(values);
+  return cityToGeocode(values.location).then(({lat,lng}) => {
+    newVal.locationCoordinates = {lat, lng};
+    return newVal;
+  }).catch(err => {
+    console.log("Error getting lat/lng");
+    console.log(err);
+    return newVal;
+  })
+};
+
 export const industryIn = (values) => {
   const newVal = { ...values };
   newVal.industry = values.industries.map(i => (i.value));

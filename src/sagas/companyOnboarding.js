@@ -22,6 +22,7 @@ import {login} from './../actions/authorization';
 import {ROUTE_APPLICATION_COMPANY} from './../constants/routes';
 
 import {formatUrl} from './../utils'
+import {cityToGeocode} from './../utils/converters'
 
 export const fetchByEmail = (email) =>
      axios.get(`${API_URL}${EMAIL_AVAILABILITY}/${email}`)
@@ -35,11 +36,6 @@ export const isAvailable = ({ companyName }) =>
 
 const registerMembership = (data) =>
      axios.post(`${API_URL}${API_RECRUITER_ROOT}`, data)
-        .then(response => response.data)
-;
-
-export const fetchPlaces = (data) =>
-     axios.get(`${API_URL}${API_CITIES_ENUMS}/${data}`)
         .then(response => response.data)
 ;
 
@@ -63,6 +59,15 @@ export default function () {
             const {resolve, reject} = action.payload
 
             const onboardingState = yield select(getCompanyOnboarding);
+            let lat, lng;
+            try {
+              let coordinates = yield call(cityToGeocode,onboardingState.headquartersLocation);
+              lat = coordinates.lat;
+              lng = coordinates.lng;
+            } catch (err) {
+              console.log("Error finding lat/lng:");
+              console.log(err);
+            }
 
             if (!onboardingState.linkedInProfileUrl) {
                 onboardingState.linkedInProfileUrl = '';
@@ -93,6 +98,7 @@ export default function () {
                     type: onboardingState.companyType.map(({value}) => value ),
                     employeesAmount: onboardingState.numberOfEmployees.value,
                     headquartersLocation: onboardingState.headquartersLocation,
+                    headquartersCoordinates: {lat, lng},
                     socialMedia: {
                         websiteUrl: websiteUrl,
                         linkedInUrl: linkedInProfileUrl,
