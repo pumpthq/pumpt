@@ -33,10 +33,7 @@ const defaultState = {
     candidates: [],
     company: {
         name: '{name}',
-        locationHeadquarters: {
-            city: '{city}',
-            state: '{state}'
-        }
+        locationHeadquarters: '{location}'
     },
     recruiter: {},
 }
