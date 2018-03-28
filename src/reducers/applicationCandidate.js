@@ -57,13 +57,6 @@ const defaultState = {
     experience: {},
     education: {},
 
-    educations: [
-        {
-            schoolName: 'This is from reducer',
-            degree: 'and yes'
-        }
-    ],
-
     location: {},
     socialMedia: {},
     skills: [

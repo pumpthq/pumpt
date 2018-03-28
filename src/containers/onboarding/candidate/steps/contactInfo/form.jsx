@@ -2,7 +2,6 @@ import React from 'react'
 import {Field, reduxForm, SubmissionError} from 'redux-form'
 import {connect} from 'react-redux';
 import * as V from 'components/main/form/validations'
-//Places Autocomplete Library
 import {renderField} from 'components/form/helpers'
 
 import {Checkbox} from 'redux-form-material-ui'

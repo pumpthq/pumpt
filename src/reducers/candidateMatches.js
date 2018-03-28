@@ -16,10 +16,9 @@ const defaultState = {
     companies: [],
     vacancies: [],
     candidate: {
-        location: {
-            city: '{city}',
-            state: '{state}'
-        }
+      location: '{location}',
+      education: [],
+      workingExperience: [],
     },
 };
 
