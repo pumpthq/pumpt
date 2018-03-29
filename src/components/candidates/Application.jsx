@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { reduxForm, FieldArray, Field, SubmissionError, propTypes as formTypes } from 'redux-form';
+import Uploader from 'components/FileUploader';
 
 // Places Autocomplete Library
 import { PlaceField } from 'components/main/form/PlaceField';
@@ -43,12 +44,13 @@ const fieldArrayProps = {
 };
 
 // Form
-let CandidateApplicationForm = ({ handleSubmit, submitting, invalid, submitSucceeded, pristine }) => {
+let CandidateApplicationForm = ({ handleSubmit, submitting, invalid, submitSucceeded, pristine, dispatch }) => {
   const submitDisabled = invalid || submitting;
 
   return (
     <form onSubmit={handleSubmit} className="candidate-application-form text-input-underlined">
 
+      <Uploader label="Resume" onSuccessAction={(data) => (updateCandidate({resumeId: data.id}))}/>
       <CaseIcon />
       <FieldArray name="workingExperience" label="Working Experience" component={renderWorkingExperiences} />
       <CardDivider />
