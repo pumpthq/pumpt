@@ -1,11 +1,6 @@
-import React, { Component, PropTypes } from 'react'
-import { connect } from 'react-redux'
+import React, {Component} from 'react'
 
 import PencilIcon from 'components/icons/pencil'
-
-import ImageUploader from 'components/ImageUploader'
-import IconPhoto from 'components/icons/photo'
-import {updateRecruiter} from 'actions/companyJobs'
 
 export default class RecruiterSummary extends Component {
     render() {

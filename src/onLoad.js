@@ -1,27 +1,19 @@
 import axios from 'axios';
 import co from 'co';
-import {
-    API_URL,
-} from './constants/api';
+import {API_URL,} from './constants/api';
 
 import SESSION from './constants/session';
 import {
-    INDUSTRY_DROPDOWN_DATA,
-    FIELD_OF_EXPERTISE_DROPDOWN_DATA,
-    JOB_TITLE_DROPDOWN_DATA,
     ANNUAL_INCOME_DROPDOWN_DATA,
     COMPANY_SIZE_DROPDOWN_DATA,
     EXPERIENCE_DROPDOWN_DATA,
+    FIELD_OF_EXPERTISE_DROPDOWN_DATA,
+    INDUSTRY_DROPDOWN_DATA,
+    JOB_TITLE_DROPDOWN_DATA,
     VALUE_ASSESSMENTS_DROPDOWN_DATA
 } from './constants/candidateOnboarding';
-import {
-    COMPANY_EMPLOYEES_DATA,
-    COMPANY_TYPE_DATA,
-} from './constants/companyOnboarding';
-import {
-    EMPLOYEMENTS_DROPDOWN_DATA,
-    DEGREES_DROPDOWN_DATA,
-} from './constants/companyJobs';
+import {COMPANY_EMPLOYEES_DATA, COMPANY_TYPE_DATA,} from './constants/companyOnboarding';
+import {DEGREES_DROPDOWN_DATA, EMPLOYEMENTS_DROPDOWN_DATA,} from './constants/companyJobs';
 
 export const getAppData = () =>
      Promise.all([

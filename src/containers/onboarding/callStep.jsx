@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import React, {PropTypes} from 'react'
 
 const CallStep = ({ activeOnStep, onboardingState, To }) => {
     const { progress, step } = onboardingState

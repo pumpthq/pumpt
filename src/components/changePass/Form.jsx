@@ -1,16 +1,14 @@
-import React, { Component, PropTypes } from 'react';
-import { reduxForm, Field } from 'redux-form'
+import React from 'react';
+import {Field, reduxForm} from 'redux-form'
 
 import SubmitButton from './SubmitButton.jsx';
 import CancelLink from './CancelLink.jsx';
-import PassInput from './PassInput.jsx';
 import Title from './Title.jsx';
-import ScrollContainer from 'components/main/scrollContainer'
 import './style.less'
-import {required, passwordConfirm, minLength } from 'components/main/form/validations'
 
 import {changePassword} from 'actions/authorization'
-import { browserHistory } from 'react-router'
+import {browserHistory} from 'react-router'
+import {renderField} from 'components/form/helpers'
 
 const buttonStyle = {
     cursor: 'pointer',
@@ -41,20 +39,6 @@ const validate = values => {
 
 	return errors
 }
-//Generalized Redux Field
-const renderField = ({
-  input,
-  label,
-  type,
-  meta: { touched, error }
-}) => (
-  <div>
-    <div>
-      <input class="mdl-textfield__input textfield__input" {...input} placeholder={label} type={type} />
-      {touched && (error && <span class="textfield__error">{error}</span>)}
-    </div>
-  </div>
-)
 
 let ChangePassForm = props => {
 

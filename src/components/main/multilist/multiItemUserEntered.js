@@ -1,5 +1,5 @@
-import React, { Component, PropTypes } from 'react'
-import { SimpleInput } from './../inputs'
+import React, {Component, PropTypes} from 'react'
+import {SimpleInput} from './../inputs'
 
 class MultiItemUserEntered extends Component {
     constructor(props) {

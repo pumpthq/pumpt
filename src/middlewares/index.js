@@ -1,5 +1,4 @@
-import { applyMiddleware, compose } from 'redux'
-import loggerMiddleware from './logger'
+import {applyMiddleware, compose} from 'redux'
 import thunkMiddleware from 'redux-thunk'
 import sagaMiddleware from './saga'
 import routerMiddleware from './router'

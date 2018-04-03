@@ -1,6 +1,6 @@
-import React, { Component, PropTypes } from 'react';
+import React, {Component, PropTypes} from 'react';
 
-import { OnboardingInput } from '../onboarding';
+import {OnboardingInput} from '../onboarding';
 
 export default class PassInput extends Component {
     static propTypes = {

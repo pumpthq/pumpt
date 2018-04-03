@@ -1,21 +1,11 @@
-import React, { Component, PropTypes } from 'react';
-import { Link } from 'react-router';
-import { connect } from 'react-redux';
+import React, {Component} from 'react';
+import {Link} from 'react-router';
+import {connect} from 'react-redux';
 import Mailto from 'react-mailto';
 
-import {
-    HeaderFull,
-    HeaderDropDownMenu,
-    HeaderDropDownItem,
-} from './../../../components/main/header';
-import {
-    ROUTE_EDIT_COMPANY,
-    ROUTE_COMPANY_MATCHES_ALL,
-    ROUTE_COMPANY_JOBS_OPEN,
-    ROUTE_COMPANY_JOBS_NEW,
-    ROUTE_APPLICATION_COMPANY,
-} from './../../../constants/routes';
-import { logOut } from './../../../actions/authorization';
+import {HeaderDropDownItem, HeaderDropDownMenu, HeaderFull,} from './../../../components/main/header';
+import {ROUTE_COMPANY_JOBS_NEW, ROUTE_COMPANY_JOBS_OPEN,} from './../../../constants/routes';
+import {logOut} from './../../../actions/authorization';
 
 import {apiImage} from 'components/helpers'
 
@@ -36,6 +26,7 @@ export default class RecruiterHeaderMenu extends Component {
                 links={[
                     <Link
                         to={"/recruiter/edit"}
+                        key="profile"
                         activeClassName="navigation__link navigation__link_active"
                         className="navigation__link"
                     >
@@ -43,6 +34,7 @@ export default class RecruiterHeaderMenu extends Component {
                     </Link>,
                     <Link
                         to={ROUTE_COMPANY_JOBS_OPEN}
+                        key="jobs"
                         className="navigation__link"
                         activeClassName="navigation__link navigation__link_active"
                     >
@@ -50,6 +42,7 @@ export default class RecruiterHeaderMenu extends Component {
                     </Link>,
                     <Link
                         to={ROUTE_COMPANY_JOBS_NEW}
+                        key="new"
                         className="navigation__link"
                         activeClassName="navigation__link navigation__link_active"
                     >
@@ -60,13 +53,10 @@ export default class RecruiterHeaderMenu extends Component {
                     <HeaderDropDownMenu
                         userName={`${recruiter.fullName} @ ${company.name}`}
                         userAvatar={apiImage(company.logo)}
-                        progress={company.fillProgress}
                         linkTo={"/recruiter/edit"}
                     >
-                        {/* <HeaderDropDownItem to={ROUTE_EDIT_COMPANY}>Profile</HeaderDropDownItem> */}
                         <HeaderDropDownItem to={'/recruiter/changePass'}>Change Password</HeaderDropDownItem>
-                        {/* <HeaderDropDownItem>Notification Settings</HeaderDropDownItem> */}
-                        <HeaderDropDownItem>
+                        <HeaderDropDownItem nolink >
 													<Mailto email="support@pumpthq.com" obfuscate={true}>
 														Help &amp; Support
 													</Mailto>

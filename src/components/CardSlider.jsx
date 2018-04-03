@@ -27,10 +27,10 @@ CardSlider.propTypes = {
         logo: PropTypes.string,
         background: PropTypes.string
     })),
-    component: PropTypes.element,
+  // we only really want elements in 'component' but react glitches this up
+  // sometimes.
+  component: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
     append: PropTypes.node
-    // component: PropTypes.element,
-    // append: PropTypes.node,
 };
 
 CardSlider.defaultProps = {

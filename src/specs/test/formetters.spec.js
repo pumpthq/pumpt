@@ -1,7 +1,5 @@
 require('jasmine-co').install();
-import {
-    formatUrl
-} from './../../utils';
+import {formatUrl} from './../../utils';
 
 const expect = chai.expect;
 

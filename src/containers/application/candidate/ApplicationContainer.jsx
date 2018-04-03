@@ -1,32 +1,25 @@
-import React, { Component, PropTypes } from 'react'
-import { connect } from 'react-redux'
+import React, {Component} from 'react'
+import {connect} from 'react-redux'
 import Wrapper from 'components/main/wrapper'
-import { HeaderMini } from 'components/main/header'
-import ScrollContainer from 'components/main/scrollContainer'
+import {HeaderMini} from 'components/main/header'
 import HeadingProgress from 'containers/application/candidate/headingProgress';
 import CandidateSummaryForm from 'components/candidates/Form';
 import CandidateSummary from 'components/candidates/Summary';
 import CandidateApplicationForm from 'components/candidates/Application';
-import SummaryHead from './summaryHead';
-// import EntryBlock from './EntryBlock'
 import logoImage from 'img/sprites-svg/logo.svg'
-import { updateCandidate } from 'actions/candidateMatches'
-// import { STARTUP_COMPLETED_STEPS } from './../../../constants/applicationCandidate';
-import Panel from 'components/main/panel';
-import StepProgress from 'components/application/stepProgress';
+import {updateCandidate} from 'actions/candidateMatches'
 import Footer from 'components/main/footer/footer';
 import ApplicationSuccessDialog from 'components/application/ApplicationSuccessDialog'
 import Button from 'components/main/button'
-import { finishApplication } from 'actions/authorization'
+import {finishApplication} from 'actions/authorization'
 
 import {apiImage} from 'components/helpers'
+import {submit} from 'redux-form'
 
 function mapStateToProps(state, ownProps) {
     return { candidate: state.candidateMatches.candidate, authorization: state.authorization,  }
 }
 
-
-import { submit } from 'redux-form'
 
 const recentWorkingAreasToParent = (values) => {
   values.recentWorkingArea = values.recentWorkingAreas.map( a => (a.value));
@@ -39,6 +32,13 @@ const recentWorkingAreaFormat = (values) => {
 
   delete values.recentWorkingArea;
   delete values.recentWorkingAreaParent;
+  return values;
+}
+
+const processAppFields = (values) => {
+  // filter out null values
+  values.education = values.education.filter(e => e);
+  values.workingExperience = values.workingExperience.filter(e => e);
   return values;
 }
 
@@ -109,7 +109,7 @@ export default class ApplicationContainer extends Component {
 												}
 												<CandidateApplicationForm
 														ref="applicationForm"
-														initialValues={candidate}
+                            onSubmit={values=> {dispatch(updateCandidate(processAppFields(values))) } }
 													/>
 
 														<div className="text-center">
@@ -135,11 +135,3 @@ export default class ApplicationContainer extends Component {
         )
     }
 }
-
-// ApplicationContainer.defaultProps = {
-//     candidate: {
-//         avatar: '{avatar}',
-//         firstName: '{firstName}',
-//         lastName: '{lastName}'
-//     }
-// }

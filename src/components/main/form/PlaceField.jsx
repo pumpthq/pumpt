@@ -1,7 +1,5 @@
-import React, {Component, PropTypes} from 'react'
-import { connect } from 'react-redux';
-import { reduxForm, Field, SubmissionError } from 'redux-form'
-
+import React from 'react'
+import {Field, reduxForm, SubmissionError} from 'redux-form'
 //Places Autocomplete Library
 import PlacesAutocomplete from 'react-places-autocomplete'
 
@@ -23,25 +21,17 @@ export const PlaceField = ({ values, name, input, onChange, label, meta: { touch
 		input: `form-control form-control-lg${hasError ? ' form-control-danger' : ''}`
 	}
 
-	//restrict to city results only
+	//restrict to city results only, in US and territories
 	const options = {
-		types: ['(cities)']
-		//componentRestrictions: new google.maps.ComponentRestrictions('country:us|country:pr|country:vi|country:gu|country:mp')
+		types: ['(cities)'],
+    componentRestrictions: {country: ["US","PR","VI","GU","MP"]} 
 	}
-
-	//WIP: restrict results to US only (US already prioritizes, but not exlusive)
-	//Trying to configure using [https://github.com/kenny-hibino/react-places-autocomplete, https://developers.google.com/maps/documentation/javascript/reference#AutocompletionRequest]
-
 
 	const inputProps = {
 		value : input.value,
-		onChange : input.onChange,
+    onChange : input.onChange,
 		onBlur: input.onBlur,
 		id : id,
-		typeAhead : false,
-		inputName : input.name,
-		autocompleteItem : AutocompleteItem,
-		classNames : classes,
 		placeholder : label,
 		name : name,
 	}

@@ -1,10 +1,10 @@
-import React, {Component, PropTypes} from 'react'
-import { connect} from 'react-redux'
-import { Link } from 'react-router'
-import { postBookmark, postReject, postApprove, viewVacancy } from '../../actions/candidateMatches'
+import React, {Component} from 'react'
+import {connect} from 'react-redux'
+import {Link} from 'react-router'
+import {postApprove, postBookmark, postReject} from '../../actions/candidateMatches'
 
-import { BookmarkOpen, BookmarkFill, Decline, ApproveOpen, ApproveFill } from 'components/icons'
-import { tintedBackground, apiImage } from 'components/helpers'
+import {ApproveFill, ApproveOpen, BookmarkOpen, Decline} from 'components/icons'
+import {apiImage, tintedBackground} from 'components/helpers'
 
 import './card.less'
 
@@ -72,19 +72,8 @@ export default class Summary extends Component {
                                 </span>
                             </div>
                         </div>
-                        {/* <div className="summary-head__title-column text-right">
-                            <div
-
-                                className="mdl-card__subtitle-text summary-head__subtitle-text text text_color_invert">
-                                <span  className="summary-head__subtitle-head">{match}%</span>
-                                <span >match</span></div>
-                        </div> */}
                     </div>
                     <div className="summary-head__title-item">
-                        {/* <div className="summary-head__title-column">
-                            <span  className="text text_color_invert summary-head__label">Salary </span>
-                            <span  className="text text_color_invert text_size_s summary-head__summary">{salary}</span>
-                        </div> */}
                         <div className="summary-head__title-column">
                             <span  className="text text_color_invert summary-head__label">Industry Experience </span>
                             <span  className="text text_color_invert text_size_s summary-head__summary">{vacancy.brief.experience}</span>
@@ -95,9 +84,6 @@ export default class Summary extends Component {
                         </div>
                     </div>
                 </div>
-                {/* <div className="mdl-card__media summary-head__media">
-                    <img className="summary-head__media-inner" src={background}/>
-                </div> */}
             </div>
         )
     }
@@ -144,7 +130,6 @@ export default class Summary extends Component {
                     {this.renderShortContent()}
                     <form className="card__actions-wrapper">
                         <div className="mdl-card__actions card__actions">
-                            {/* <div className="mdl-layout-spacer" /> */}
                             <div>
                                 <Link className="link" to={`candidate/matches/match/${_id}/company/${_company}/vacancy/${_vacancy}`}>
                                     View Full Description

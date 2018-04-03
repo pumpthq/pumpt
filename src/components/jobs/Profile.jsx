@@ -1,17 +1,12 @@
-import React, {Component, PropTypes} from 'react'
+import React, {Component} from 'react'
 
-import { connect } from 'react-redux'
+import {connect} from 'react-redux'
 
-import { postBookmark, postReject, postApprove, hideFullDescription } from '../../actions/candidateMatches'
+import {postApprove, postBookmark, postReject} from '../../actions/candidateMatches'
 
-import ButtonApply from 'components/parts/buttonApply'
-import ButtonLink from 'components/parts/buttonLink'
+import {apiImage, displayIndustries, tintedBackground} from 'components/helpers'
 
-import { ApproveOpen, Decline } from 'components/icons'
-
-import { tintedBackground, apiImage, displayIndustries } from 'components/helpers'
-
-import { browserHistory } from 'react-router'
+import {browserHistory} from 'react-router'
 
 const buttonStyle = {
     cursor: 'pointer',
@@ -152,8 +147,9 @@ export default class Profile extends Component {
         return (
             <div className="card__middle-block">
                 <span className="text  summary-head__label">Description</span>
-
-                {description}
+                <span className="show-paragraphs">
+                    {description}
+                </span>
             </div>
         );
     }

@@ -1,7 +1,7 @@
-import React, { Component, PropTypes } from 'react'
+import React, {Component, PropTypes} from 'react'
 
 import Wrapper from './../../../components/main/wrapper'
-import { HeaderMini } from './../../../components/main/header'
+import {HeaderMini} from './../../../components/main/header'
 import ScrollContainer from './../../../components/main/scrollContainer'
 import logoImage from './../../../img/sprites-svg/logo.svg'
 

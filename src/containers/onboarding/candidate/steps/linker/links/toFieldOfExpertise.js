@@ -1,11 +1,9 @@
-import React, { Component, PropTypes } from 'react'
-import { connect } from 'react-redux'
-import { SHOW_FIELD_OF_EXPERTISE_STEP, FIELD_OF_EXPERTISE_DROPDOWN_DATA } from './../../../../../../constants/candidateOnboarding'
-import { showFieldOfExpertiseStep, gotoFieldOfExpertiseStep  } from './../../../../../../actions/candidateOnboarding'
-import { NavigationLink, NavigationLink2 } from './../../../../../../components/main/navigation'
+import React, {Component, PropTypes} from 'react'
+import {connect} from 'react-redux'
+import {SHOW_FIELD_OF_EXPERTISE_STEP} from './../../../../../../constants/candidateOnboarding'
+import {gotoFieldOfExpertiseStep, showFieldOfExpertiseStep} from './../../../../../../actions/candidateOnboarding'
+import {NavigationLink2} from './../../../../../../components/main/navigation'
 import CallStep from './../../../../callStep'
-import { NavLinkLabel } from '../../../../renderHelpers'
-import { findById } from '../../../../../../constants/dropdownData'
 
 @connect(
     function mapStateToProps(state) {

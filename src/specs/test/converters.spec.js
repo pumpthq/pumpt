@@ -1,12 +1,6 @@
 require('jasmine-co').install()
-import {
-    apiEnumToListData
-} from './../../utils/'
-import {
-    LIST_ITEM_TYPE_TEXT,
-    LIST_ITEM_TYPE_USER_ENTERED,
-    LIST_ITEM_TYPE_GROUP
-} from './../../components/main/list2'
+import {apiEnumToListData} from './../../utils/'
+import {LIST_ITEM_TYPE_GROUP, LIST_ITEM_TYPE_USER_ENTERED} from './../../components/main/list2'
 
 const expect = chai.expect
 

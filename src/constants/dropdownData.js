@@ -1,22 +1,16 @@
 import uuid from 'uuid'
 import {
-    INDUSTRY_DROPDOWN_DATA,
-    FIELD_OF_EXPERTISE_DROPDOWN_DATA,
-    JOB_TITLE_DROPDOWN_DATA,
-    EXPERIENCE_DROPDOWN_DATA,
     ANNUAL_INCOME_DROPDOWN_DATA,
     COMPANY_SIZE_DROPDOWN_DATA,
+    EXPERIENCE_DROPDOWN_DATA,
+    FIELD_OF_EXPERTISE_DROPDOWN_DATA,
+    INDUSTRY_DROPDOWN_DATA,
+    JOB_TITLE_DROPDOWN_DATA,
     VALUE_ASSESSMENTS_DROPDOWN_DATA
 } from './candidateOnboarding'
 
-import {
-    COMPANY_EMPLOYEES_DATA,
-    COMPANY_TYPE_DATA
-} from './companyOnboarding'
-import {
-    DEGREES_DROPDOWN_DATA,
-    EMPLOYEMENTS_DROPDOWN_DATA
-} from './companyJobs';
+import {COMPANY_EMPLOYEES_DATA, COMPANY_TYPE_DATA} from './companyOnboarding'
+import {DEGREES_DROPDOWN_DATA, EMPLOYEMENTS_DROPDOWN_DATA} from './companyJobs';
 
 export const assignId = ({ data, parent = null }) => {
     return data.map((element) => {

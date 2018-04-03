@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import React from 'react'
 import prototype from './prototype'
 
 export default class h1 extends prototype {

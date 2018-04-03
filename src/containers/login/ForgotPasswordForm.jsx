@@ -1,13 +1,12 @@
-import React, { Component, PropTypes } from 'react'
-import { connect } from 'react-redux'
+import React, {Component, PropTypes} from 'react'
+import {connect} from 'react-redux'
 import PopUpBig from './../../components/main/popup'
-import { Link } from 'react-router'
+import {Link} from 'react-router'
 import Form from './../../components/main/form'
-import { reduxForm, Field } from 'redux-form'
-import { OnboardingInput } from './../../components/onboarding'
+import {Field, reduxForm} from 'redux-form'
 import emailValidator from 'email-validator'
-import { forgotPassword } from '../../actions/authorization'
-import {required, email_validation } from 'components/main/form/validations'
+import {forgotPassword} from '../../actions/authorization'
+import {email_validation, required} from 'components/main/form/validations'
 
 function mapStateToProps(state) {
     return { apiError: state.apiError.message };

@@ -1,46 +1,16 @@
-import React, {Component} from 'react'
-import { Link } from 'react-router'
-import { reduxForm, Field } from 'redux-form'
-import { connect } from 'react-redux';
+import React from 'react'
+import {Field, reduxForm, SubmissionError} from 'redux-form'
+import {connect} from 'react-redux';
 import * as V from 'components/main/form/validations'
+import {renderField} from 'components/form/helpers'
 
-//Places Autocomplete Library
-import PlacesAutocomplete from 'react-places-autocomplete'
-
-import { Checkbox } from 'redux-form-material-ui'
-
-import co from 'co';
+import {Checkbox} from 'redux-form-material-ui'
 import Button from './../../../../../components/main/button';
-import {
-    THIS_EMAIL_IS_ALREADY_REGISTERED,
-} from './../../../../../constants/candidateOnboarding';
-import {
-    saveContactInfoData,
-    showIndustryStep,
-    gotoIndustryStep,
-
-} from 'actions/candidateOnboarding';
-
-import { SubmissionError } from 'redux-form'
-import { checkEmailAvailability } from 'actions/authorization'
-
+import {THIS_EMAIL_IS_ALREADY_REGISTERED,} from './../../../../../constants/candidateOnboarding';
+import {gotoIndustryStep, saveContactInfoData, showIndustryStep,} from 'actions/candidateOnboarding';
+import {checkEmailAvailability} from 'actions/authorization'
 //Places Autocomplete Library
-import { PlaceField } from 'components/main/form/PlaceField'
-
-//Generalized Redux Field
-const renderField = ({
-  input,
-  label,
-  type,
-  meta: { asyncValidating, touched, error }
-}) => (
-  <div>
-		<div class={asyncValidating ? 'async-validating' : 'class'}>
-      <input class="mdl-textfield__input textfield__input" {...input} placeholder={label} type={type} />
-      {touched && error && <span class="textfield__error">{error}</span>}
-    </div>
-  </div>
-)
+import {PlaceField} from 'components/main/form/PlaceField'
 
 //Async Validation - on if email is already registered
 const asyncValidate = (values, dispatch) => {

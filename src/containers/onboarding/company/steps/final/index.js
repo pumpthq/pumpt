@@ -1,9 +1,5 @@
-import React, { Component, PropTypes } from 'react'
+import React, {Component, PropTypes} from 'react'
 import OnboardingCompanyLinker from './../linker'
-import {
-    saveSetUpPasswordData,
-    applyForMembership
-} from 'actions/companyOnboarding'
 
 import CompanyPrototypeFinalStep from 'containers/onboarding/company/steps/prototypeFinalStep'
 

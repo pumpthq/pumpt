@@ -30,14 +30,13 @@
 
     &-item {
       display: flex;
-      width: 100%;
       justify-content: space-between;
+      flex-wrap: wrap;
 
       &_type {
 
         &_alignment {
-          padding-left: 94px;
-          justify-content: flex-start;
+          justify-content: space-between;
 
           .summary-head__title-column {
             margin-right: 32px;
@@ -164,7 +163,6 @@
   &__label,
   &__summary {
     display: block;
-    white-space: nowrap;
 
     @media @phone {
       font-size: @fz-general;

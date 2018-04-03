@@ -1,4 +1,4 @@
-import { validateForgot } from './validator';
+import {validateForgot} from './validator';
 
 export const forgotForm = ({
     form: 'forgotPassword',

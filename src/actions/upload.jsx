@@ -1,5 +1,5 @@
 import {API} from 'constants/actionTypes'
-import {API_URL,API_IMAGES} from 'constants/api'
+import {API_IMAGES} from 'constants/api'
 
 export const uploadImage = (file,success) => {
 

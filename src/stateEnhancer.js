@@ -1,5 +1,4 @@
-import { compose } from 'redux'
-import persistState from 'redux-localstorage'
+import {compose} from 'redux'
 import middleware from './middlewares'
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

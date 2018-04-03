@@ -1,10 +1,9 @@
-import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux'
+import React, {Component} from 'react';
+import {connect} from 'react-redux'
 import CompanyForm from 'components/company/PreviewForm'
-import {tintedBackground} from 'components/helpers'
 
 import VerticalScroller from 'components/VerticalScroller'
-import { updateCompany } from 'actions/companyJobs'
+import {updateCompany} from 'actions/companyJobs'
 
 
 const mapStateToProps = state => ({ company: state.companyJobs.company })

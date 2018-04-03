@@ -1,6 +1,6 @@
-import React, { Component, PropTypes } from 'react';
+import React, {Component, PropTypes} from 'react';
 import Panel from '../../../../../components/main/panel';
-import { H1 } from '../../../../../components/main/heading';
+import {H1} from '../../../../../components/main/heading';
 import on5Image from '../../../../../img/sprites-svg/on5.svg';
 import CompanySizeForm from './form';
 import OnboardingCandidateLinker from './../linker';

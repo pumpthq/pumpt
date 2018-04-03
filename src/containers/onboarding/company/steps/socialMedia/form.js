@@ -1,38 +1,16 @@
-import React, {Component} from 'react'
-import { connect } from 'react-redux'
-import { reduxForm, Field } from 'redux-form'
-import Form from './../../../../../components/main/form'
+import React from 'react'
+import {connect} from 'react-redux'
+import {Field, reduxForm, SubmissionError} from 'redux-form'
 import Button from './../../../../../components/main/button'
-import { ListLink, ListItem } from './../../../../../components/main/list'
-import { OnboardingInput } from './../../../../../components/onboarding'
-import ChainIcon from './../../../../../components/icons/chain'
-import LinkedInIcon from './../../../../../components/icons/linkedIn'
-import TwitterIcon from './../../../../../components/icons/twitter'
-import FacebookIcon from './../../../../../components/icons/facebook'
+import {renderField} from 'components/form/helpers';
 
 import {
+    gotoValuesStep,
     saveWebsiteAndSocialMediaData,
     showValuesStep,
-    gotoValuesStep,
 } from './../../../../../actions/companyOnboarding'
-import { SubmissionError } from 'redux-form'
 
 import * as V from 'components/main/form/validations'
-
-//Generalized Redux Field
-const renderField = ({
-  input,
-  label,
-  type,
-  meta: { asyncValidating, touched, error }
-}) => (
-  <div>
-		<div class={asyncValidating ? 'async-validating' : 'class'}>
-      <input class="mdl-textfield__input textfield__input" {...input} placeholder={label} type={type} />
-      {touched && error && <span class="textfield__error">{error}</span>}
-    </div>
-  </div>
-)
 
 let SocialMediaForm = props => {
 		const { handleSubmit, invalid, asyncValidating, submitting, error, valid, dispatch } = props

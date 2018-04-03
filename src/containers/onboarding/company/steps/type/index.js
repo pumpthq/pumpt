@@ -1,7 +1,6 @@
-import React, { Component, PropTypes } from 'react'
+import React, {Component} from 'react'
 import Panel from './../../../../../components/main/panel'
-import { H1 } from './../../../../../components/main/heading'
-import { OnboardingInput } from './../../../../../components/onboarding'
+import {H1} from './../../../../../components/main/heading'
 import on2Image from './../../../../../img/sprites-svg/on2.svg'
 
 import TypeContent from './content'

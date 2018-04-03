@@ -1,5 +1,4 @@
-import React, {Component, PropTypes} from 'react';
-import { browserHistory } from 'react-router'
+import React from 'react';
 
 const VerticalScroller = (props) => {
     return (

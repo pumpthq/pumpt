@@ -1,5 +1,6 @@
 import React from 'react'
 import FontAwesome from 'react-fontawesome'
+
 export const fa = name => props => <FontAwesome name={name} {...props} />
 
 export const BookmarkFill = fa('bookmark')

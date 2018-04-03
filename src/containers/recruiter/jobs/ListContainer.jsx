@@ -1,5 +1,4 @@
-import React, { Component, PropTypes } from 'react';
-import Wrapper from './../../../components/main/wrapper';
+import React, {Component, PropTypes} from 'react';
 
 const propTypes = {
     children : PropTypes.node,
