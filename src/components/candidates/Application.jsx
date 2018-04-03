@@ -324,6 +324,7 @@ const renderSocial = () => (
 // Define Form
 CandidateApplicationForm = reduxForm({
   form: 'candidateApplication',
+  enableReinitialize: true,
 })(CandidateApplicationForm);
 
 CandidateApplicationForm = connect(
