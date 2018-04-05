@@ -1,0 +1,50 @@
+.upload-file-component {
+  display: flex;
+  flex-direction: column;
+}
+
+.upload-file-component label {
+  max-width: 160px;
+}
+
+.upload-file-component.used label {
+  display: flex;
+  align-items: center;
+}
+
+.upload-file-component.fresh label span {
+  display: table-cell;
+  height: 42px;
+  padding: 8px 8px;
+  &:hover, &:focus {
+     outline: 2px solid transparent;
+     background-color: #b3b3b3;
+  }
+
+}
+
+.upload-file-component label span {
+  cursor: pointer;
+
+  &.edit {
+    svg {
+      color: #5c86f2;
+      position: static;
+    }
+    display: flex;
+    margin: 1rem;
+  }
+  &.edit:hover, &.edit:focus {
+    color: #2a0b38;
+  }
+}
+
+.upload-file-component {
+  .hide {
+    display: none;
+  }
+  a {
+    color: #5c86f2;
+  }
+}
+

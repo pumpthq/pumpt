@@ -50,7 +50,8 @@ let CandidateApplicationForm = ({ handleSubmit, submitting, invalid, submitSucce
   return (
     <form onSubmit={handleSubmit} className="candidate-application-form text-input-underlined">
 
-      <Uploader label="Resume" onSuccessAction={(data) => (updateCandidate({resumeId: data.id}))}/>
+      <Uploader label="Resume" onSuccessAction={(data) => (updateCandidate({resumeId: data.id, resumeName: data.name}))}/>
+      <br />
       <CaseIcon />
       <FieldArray name="workingExperience" label="Working Experience" component={renderWorkingExperiences} />
       <CardDivider />
