@@ -13,6 +13,7 @@ export const API_LOGIN = '/authentication/login';
 export const API_LOGOUT = '/authentication/logout';
 export const API_FORGOT_PASSWORD = '/password/restore';
 export const API_IMAGES = '/images';
+export const API_FILES = '/files';
 export const API_ALL_JOBS = '/jobs';
 export const API_OPEN_JOBS = '/vacancies?status=opened';
 export const API_DRAFT_JOBS = '/vacancies?status=draft';
