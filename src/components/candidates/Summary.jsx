@@ -1,7 +1,10 @@
 import React, { PropTypes } from 'react';
 
 import PencilIcon from 'components/icons/pencil';
+import Uploader from 'components/FileUploader';
 import { displayIndustries } from 'components/helpers';
+
+import { updateCandidate } from 'actions/candidateMatches';
 
 const CandidateSummary = ({
   candidate: {
@@ -68,6 +71,13 @@ const CandidateSummary = ({
           </span>
         </div>
       </div>
+    </div>
+    <div className="summary-head__title">
+      <Uploader label="Resume"
+        onSuccessAction={(data) => (
+          updateCandidate({resumeId: data.id, resumeName: data.name})
+        )}
+      />
     </div>
   </div>
 );
