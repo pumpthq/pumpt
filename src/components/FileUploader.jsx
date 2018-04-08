@@ -87,7 +87,7 @@ export default class FileUploader extends Component {
 
           return (
             <span class={`upload-file-component used ${additionalClass}`}>
-              Click Edit to remove your resume and upload a new version
+              Click Edit to remove your resume and upload a new version (PDF)
 
               {/* hide the ugly file-upload element and style the label instead */}
               <input
@@ -126,7 +126,7 @@ export default class FileUploader extends Component {
 
       return (
         <span class={`upload-file-component fresh ${additionalClass}`}>
-          Please upload your resume
+          Please upload your resume (PDF)
           <input className="hide"
             ref={input => this.input = input} id={inputId}
             type="file" onChange={this.handleFileChange}
