@@ -1,7 +1,7 @@
 import React from 'react';
 import { browserHistory } from 'react-router';
 
-import { apiImage, displayIndustries } from 'components/helpers';
+import { apiImage, apiFile, displayIndustries } from 'components/helpers';
 import { SKILLS } from 'constants/candidateOnboarding';
 
 import './profile.less';
@@ -74,7 +74,7 @@ const buttonStyle = {
 const CandidateProfile = (props) => {
   const { firstName, lastName, avatar, socialMedia, location,
     education, workingExperience, skills, recentWorkingAreas,
-    recentJob, recentAreaExperience } = props;
+    recentJob, recentAreaExperience, resumeId } = props;
 
   return (
     <div>
@@ -89,6 +89,11 @@ const CandidateProfile = (props) => {
             />
             <LabeledValue label="Current Title" value={recentJob} />
             <LabeledValue label="Experience" value={recentAreaExperience} />
+            {resumeId &&
+                <span className="view">
+                  <a href={apiFile(resumeId)}>View Resume</a>
+                </span>
+            }
           </div>
 
           <div className="profile-avatar col-md-2 col-xs-12">
