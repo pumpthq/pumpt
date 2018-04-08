@@ -1,0 +1,87 @@
+.upload-file-component {
+  display: flex;
+  flex-direction: column;
+
+  .hide {
+    display: none;
+  }
+
+    .failure {
+      color: red;
+    }
+
+    .icon-loading {
+      max-height: 28px;
+    }
+}
+
+.upload-file-component.used {
+  font-size: 14px;
+  color: #808080;
+  width: 50%;
+
+
+
+  a {
+    color: #5c86f2;
+  }
+  label {
+    font-size: 16px;
+    color: black;
+    display: flex;
+    margin: 1rem 0;
+    align-items: flex-end;
+    width: 100%;
+
+    .success {
+      color: green;
+      font-size: 18px;
+      margin-left: 1rem;
+    }
+
+    .failure {
+      margin-left: 1rem;
+      font-size: 18px;
+    }
+
+    span {
+      cursor: pointer;
+      &.edit {
+        color: #5c86f2;
+        svg {
+          color: #5c86f2;
+          position: static;
+        }
+        display: flex;
+        margin-left: 1rem;
+      }
+      &.edit:hover, &.edit:focus {
+        color: #2a0b38;
+      }
+    }
+  }
+}
+
+.upload-file-component.fresh label {
+  max-width: 160px;
+}
+
+.upload-file-component.fresh label span {
+  display: table-cell;
+  height: 42px;
+  padding: 8px 8px;
+  &:hover, &:focus {
+    outline: 2px solid transparent;
+    background-color: #b3b3b3;
+  }
+}
+
+.filename-box {
+  border: 1px solid #979797;
+  border-radius: 3px;
+  padding: 0 1rem;
+  line-height: 2;
+  width: 100%;
+  max-width: 300px;
+}
+

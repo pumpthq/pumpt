@@ -43,12 +43,11 @@ const fieldArrayProps = {
 };
 
 // Form
-let CandidateApplicationForm = ({ handleSubmit, submitting, invalid, submitSucceeded, pristine }) => {
+let CandidateApplicationForm = ({ handleSubmit, submitting, invalid, submitSucceeded, pristine, dispatch }) => {
   const submitDisabled = invalid || submitting;
 
   return (
     <form onSubmit={handleSubmit} className="candidate-application-form text-input-underlined">
-
       <CaseIcon />
       <FieldArray name="workingExperience" label="Working Experience" component={renderWorkingExperiences} />
       <CardDivider />

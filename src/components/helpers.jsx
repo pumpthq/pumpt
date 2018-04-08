@@ -11,9 +11,10 @@ export const tintedBackground = (background,r,g,b,a) => {
 }
 
 
-import {API_IMAGES, API_URL} from 'constants/api'
+import {API_IMAGES, API_FILES, API_URL} from 'constants/api'
 
 export const apiImage = uuid => uuid ? `${API_URL}${API_IMAGES}/${uuid}` : undefined;
+export const apiFile = uuid => uuid ? `${API_URL}${API_FILES}/${uuid}` : undefined;
 
 export const dispatchProp = dispatch => ({dispatch})
 
