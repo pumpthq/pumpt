@@ -100,14 +100,14 @@ export default class FileUploader extends Component {
                     />
                     <label htmlFor={inputId}>
                       <label for="filename" className="hide">uploaded file</label>
-                      <span className={`filename-box`} id="filename">
-                        { this.state.uploading ? <span>uploading... <LoadingIcon /></span> : fileName}
+                      <span className={`filename-box`} id="filename" title={fileName}>
                         {
                           this.state.recentUploadSuccess && <span className="success">&#10004;</span>
                         }
                         {
                           this.state.recentUploadFailure && <span className="failure">&times;</span>
                         }
+                        { this.state.uploading ? <span><LoadingIcon /> uploading...</span> : fileName}
                       </span>
                       <span
                         className="edit"
