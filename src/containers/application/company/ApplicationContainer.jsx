@@ -1,8 +1,7 @@
-import React, { Component, PropTypes } from 'react'
-import { connect } from 'react-redux'
+import React, {Component} from 'react'
+import {connect} from 'react-redux'
 import Wrapper from 'components/main/wrapper'
-import { HeaderMini } from 'components/main/header'
-import ScrollContainer from 'components/main/scrollContainer'
+import {HeaderMini} from 'components/main/header'
 import HeadingProgress from 'containers/application/company/headingProgress';
 
 import RecruiterForm from 'components/recruiters/Form';
@@ -12,12 +11,10 @@ import CompanySummary from 'components/company/Summary';
 import CompanyApplicationForm from 'components/company/Application';
 
 import logoImage from 'img/sprites-svg/logo.svg'
-import { updateRecruiter, updateCompany } from 'actions/applicationCompany'
-import Panel from 'components/main/panel';
-import StepProgress from 'components/application/stepProgress';
+import {updateCompany, updateRecruiter} from 'actions/applicationCompany'
 import Footer from 'components/main/footer/footer';
 import Button from 'components/main/button'
-import { finishApplication } from 'actions/authorization'
+import {finishApplication} from 'actions/authorization'
 
 import ApplicationSuccessDialog from 'components/application/ApplicationSuccessDialog'
 

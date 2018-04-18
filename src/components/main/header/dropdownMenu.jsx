@@ -1,10 +1,6 @@
-import React, { Component, PropTypes } from 'react';
-import { Link } from 'react-router';
+import React, {Component, PropTypes} from 'react';
+import {Link} from 'react-router';
 import IconPerson from './../../icons/photo';
-import {
-    API_URL,
-    API_IMAGES,
-} from './../../../constants/api';
 
 const propTypes = {
     userName: PropTypes.string,

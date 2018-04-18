@@ -5,6 +5,11 @@
 
   &_type {
 
+    &_tag {
+      padding: 10px;
+      margin: 5px;
+    }
+
     &_icon {
       margin-left: 22px;
       width: 18px;
@@ -23,6 +28,7 @@
       font-weight: 600;
       height: auto;
       line-height: 1;
+      margin: 5px;
       margin-right: 30px;
       min-height: 42px;
       padding: 0 @btn-padding;
@@ -367,6 +373,20 @@
         background-color: @background-base;
         color: @blue;
       }
+    }
+    &_purple {
+        background-color: @purple;
+        color: @white;
+        &:active, &:focus:not(:active) {
+            background-color: @purple;
+        }
+    }
+    &_gold {
+        background-color: @gold;
+        color: @black;
+        &:active, &:focus:not(:active) {
+            background-color: @gold;
+        }
     }
   }
 

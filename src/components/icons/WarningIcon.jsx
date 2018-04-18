@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import IconPrototype from './prototype';
 
 export default class WarningIcon extends IconPrototype {

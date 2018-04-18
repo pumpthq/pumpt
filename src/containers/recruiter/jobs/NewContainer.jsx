@@ -1,20 +1,27 @@
-import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
-import { dispatchProp } from 'components/helpers'
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {dispatchProp} from 'components/helpers'
 
-import JobForm from 'components/jobs/JobForm'
+import JobForm, {preSubmit} from 'components/jobs/JobForm'
 import VerticalScroller from 'components/VerticalScroller'
 
-import { createJob } from 'actions/companyJobs'
+import {createJob} from 'actions/companyJobs'
 
 @connect(undefined,dispatchProp)
 class NewContainer extends Component {
 
+    handleSubmit = (values) => {
+      const { dispatch } = this.props
+      return preSubmit(values)
+      .then(result => (
+        dispatch(createJob(result))
+      ))
+    }
     render() {
         const { dispatch } = this.props
         return (
             <VerticalScroller>
-                <JobForm onSubmit={values=> dispatch(createJob(values))}/>
+                <JobForm onSubmit={this.handleSubmit}/>
             </VerticalScroller>
         );
     }

@@ -1,8 +1,8 @@
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
 import GlassDoorImage from 'img/glassdoor.jpg'
 
-import { tintedBackground, apiImage } from 'components/helpers'
-import { browserHistory } from 'react-router'
+import {apiImage, tintedBackground} from 'components/helpers'
+import {browserHistory} from 'react-router'
 
 const buttonStyle = {
     cursor: 'pointer',
@@ -89,7 +89,7 @@ export default class CompanyProfile extends Component {
                 </div>
                 <div className="summary-head__title-column"><span
                     className="text summary-head__label">Company Type</span> <span
-                    className="text text_size_s summary-head__summary">{type}</span>
+                    className="text text_size_s summary-head__summary">{type && Array.isArray(type) ? type.join(', ') : type }</span>
                 </div>
                 <div className="summary-head__title-column"><span
                     className="text summary-head__label"># of employees</span> <span
@@ -140,8 +140,8 @@ export default class CompanyProfile extends Component {
                 <span className="text  summary-head__label">Locations</span>
                     { locationOffices && locationOffices.map(location =>
 
-                        <div key={`${location.city}`} className="summary-head__title-column">
-                            <span className="text summary-head__summary">{`${location.city}, ${location.state.substring(0,2)}`}</span>
+                        <div key={`${location.location}`} className="summary-head__title-column">
+                            <span className="text summary-head__summary">{`${location.location}`}</span>
                             {/* <span className="text text_size_s summary-head__summary">{locationHeadquarters}</span> */}
                         </div>
                     )}
@@ -207,14 +207,6 @@ export default class CompanyProfile extends Component {
                             </div>
                         </div>
                         {this.renderCompanyHeader()}
-
-                        {/* <div className="summary-head__title-item summary-head__title-item_type_alignment summary-head__title-item_type_action-bar">
-                            <div className="summary-head__title-column">
-                                <a className="link" onClick={onClickGoToCompanyPage}>
-                                    Go to Company Page
-                                </a>
-                            </div>
-                        </div> */}
                     </div>
                 </div>
 

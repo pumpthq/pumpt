@@ -1,10 +1,9 @@
-import React, { Component, PropTypes } from 'react'
-import { connect } from 'react-redux';
-import { push } from 'react-router-redux';
+import React, {Component} from 'react'
+import {connect} from 'react-redux';
+import {push} from 'react-router-redux';
 
-import { H1 } from 'components/main/heading'
+import {H1} from 'components/main/heading'
 import Button from 'components/main/button'
-import { finishApplication } from 'actions/authorization'
 
 @connect(
     function mapStateToProps(state, ownProps) {

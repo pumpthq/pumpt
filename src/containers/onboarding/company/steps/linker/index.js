@@ -1,9 +1,9 @@
-import React, { Component, PropTypes } from 'react'
-import { connect } from 'react-redux'
+import React, {Component, PropTypes} from 'react'
+import {connect} from 'react-redux'
 import Panel from './../../../../../components/main/panel'
 import Navigation from './../../../../../components/main/navigation'
 
-import LinkToContactInfoStep from './links/toContactInfo' 
+import LinkToContactInfoStep from './links/toContactInfo'
 import LinkToCompanyTypeStep from './links/toType'
 import LinkToHeadquartersLocationStep from './links/toLocation'
 import LinkToNumberOfEmployeesStep from './links/toNumberOfEmployees'

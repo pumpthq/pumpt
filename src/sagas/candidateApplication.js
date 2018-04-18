@@ -1,58 +1,36 @@
 import axios from 'axios'
-import { takeLatest } from 'redux-saga'
-import { call, take, put, select } from 'redux-saga/effects'
+import {takeLatest} from 'redux-saga'
+import {call, put, select} from 'redux-saga/effects'
 import {
-    SAVE_SUMMARY_DATA,
-    SAVE_EXPERIENCE_DATA,
-    SAVE_EDUCATION_DATA,
-    SAVE_INTERESTS_DATA,
-    SAVE_SKILLS_DATA,
-    SAVE_LOCATION_DATA,
-    SAVE_SOCIAL_MEDIA_DATA,
+    EDUCATION_STEP,
+    EXPERIENCE_STEP,
     FETCH_LINKEDIN_DATA_REQUESTED,
-    SAVE_PROFILE_PHOTO_DATA,
     GET_LATEST_PROFILE,
     PROFILE_PHOTO_STEP,
-    EXPERIENCE_STEP,
-    EDUCATION_STEP,
-    LOCATION_STEP,
-    SOCIAL_MEDIA_STEP,
+    SAVE_EDUCATION_DATA,
+    SAVE_EXPERIENCE_DATA,
+    SAVE_INTERESTS_DATA,
+    SAVE_LOCATION_DATA,
+    SAVE_PROFILE_PHOTO_DATA,
+    SAVE_SKILLS_DATA,
+    SAVE_SOCIAL_MEDIA_DATA,
+    SAVE_SUMMARY_DATA,
     SHOW_ACCORDION
 } from './../constants/applicationCandidate'
+import {API_CANDIDATE_ROOT, API_SCHOOLS_ENUMS, API_UNIVERSITY_ENUMS, API_URL} from './../constants/api'
+import {getApplicationCandidate} from './../reducers/applicationCandidate'
+import {getAccessToken} from './../reducers/authorization'
 import {
-    API_URL,
-    API_CANDIDATE_ROOT,
-    API_SCHOOLS_ENUMS,
-    API_UNIVERSITY_ENUMS
-} from './../constants/api'
-import {
-    getApplicationCandidate
-} from './../reducers/applicationCandidate'
-import {
-    AUTHENTICATION_CANDIDATE_SUCCEEDED
-} from './../constants/authorization'
-import {
-    getAccessToken
-} from './../reducers/authorization'
-import {
-    saveSummaryDataSucceeded,
-    saveSummaryDataFailed,
-
     fetchLinkedInDataFailed,
     fetchLinkedInDataSucceeded,
-
+    fillInProfile,
     importCompleted,
-    fillInProfile
+    saveSummaryDataFailed,
+    saveSummaryDataSucceeded
 } from './../actions/applicationCandidate'
 
-import {
-    findById as findDropdownItemById,
-    findSequence
-} from '../constants/dropdownData'
-import {
-    FIELD_OF_EXPERTISE_DROPDOWN_DATA,
-    JOB_TITLE_DROPDOWN_DATA
-} from './../constants/candidateOnboarding'
+import {findSequence} from '../constants/dropdownData'
+import {FIELD_OF_EXPERTISE_DROPDOWN_DATA, JOB_TITLE_DROPDOWN_DATA} from './../constants/candidateOnboarding'
 import moment from 'moment'
 
 const updateCandidate = ({ id, accessToken, body }) => {
@@ -90,14 +68,6 @@ export default function() {
                 jobTitle
             } = summary
 
-            const selectedItemFieldOfExpertise = findDropdownItemById({
-                id : fieldOfExpertise.id,
-                data : FIELD_OF_EXPERTISE_DROPDOWN_DATA
-            })
-            const selectedItemJobTitle = findDropdownItemById({
-                id : jobTitle.id,
-                data : JOB_TITLE_DROPDOWN_DATA
-            })
             const patch = {
                 id : entityId,
                 accessToken,
@@ -105,9 +75,7 @@ export default function() {
                     firstName : summary.firstName,
                     lastName : summary.lastName,
                     interestWorkingArea : summary.industry.value,
-                    recentWorkingArea : fieldOfExpertise.value,
-                    recentWorkingAreaParent : selectedItemFieldOfExpertise.parent ?
-                        selectedItemFieldOfExpertise.parent.title : null,
+                    recentWorkingAreas : fieldOfExpertise,
                     recentJob : jobTitle.value,
                     recentAnnualIncome : summary.income.value,
                     recentAreaExperience : summary.experience.value
@@ -325,11 +293,12 @@ export default function() {
                 const {
                     location 
                 } = profile
-                const locationState = state ? state.split(' ').shift() : null
-                const fieldOfExpertisePath = findSequence({
-                    path : [profile.recentWorkingAreaParent, profile.recentWorkingArea]
-                        .filter((item) => (item)),
+              const fieldOfExpertisePaths = profile.recentWorkingAreas
+                .map(({parent, value}) => { 
+                  return findSequence({
+                    path : [parent, value].filter((item) => (item)),
                     nestedListing : FIELD_OF_EXPERTISE_DROPDOWN_DATA
+                  })
                 })
                 const jobTitlePath = findSequence({
                     path : [profile.recentJobParent, profile.recentJob]
@@ -361,13 +330,6 @@ export default function() {
                 const {
                     skills
                 } = profile
-                // const {
-                //     socialMedia : {
-                //         linkedInUrl,
-                //         twitterAcc,
-                //         faceBookUrl
-                //     }
-                // } = profile
 
                 const patch = {
                     progress : progress,
@@ -375,19 +337,7 @@ export default function() {
                     summary : {
                         firstName : profile.firstName,
                         lastName : profile.lastName,
-                        // email : profile.user.email,
-                        industry : {
-                            id : null,
-                            value : profile.interestWorkingArea
-                        },
-                        // fieldOfExpertise : {
-                        //     id : null,
-                        //     value : profile.recentWorkingArea
-                        // },
-                        // jobTitle : {
-                        //     id : null,
-                        //     value : profile.recentJob,
-                        // },
+                        industries : profile.interestWorkingArea,
                         income : {
                             id : null,
                             value : profile.recentAnnualIncome
@@ -399,19 +349,21 @@ export default function() {
                     }
                 }
 
-                if (fieldOfExpertisePath) {
-                    const selectedItem = fieldOfExpertisePath.pop()
-                    const parentItem = fieldOfExpertisePath.shift()
+              if (fieldOfExpertisePaths.length > 0) {
+                fieldOfExpertisePaths.forEach( path => {
+                  const selectedItem = path.pop()
+                  const parentItem = path.shift()
 
-                    patch.summary.fieldOfExpertise = {
-                        id : selectedItem.id,
-                        value : profile.recentWorkingArea
+                  patch.summary.fieldOfExpertise.push({
+                    id : selectedItem.id,
+                    value:  selectedItem.title,
+                    parent : {
+                      id : parentItem.id,
+                      value : parentItem.title
                     }
-                    patch.summary.fieldOfExpertiseHead = {
-                        id : parentItem.id,
-                        value : parentItem.title
-                    }
-                }
+                  })
+                })
+              }
 
                 if (jobTitlePath) {
                     const selectedItem = jobTitlePath.pop()

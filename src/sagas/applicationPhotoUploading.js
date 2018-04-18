@@ -1,16 +1,15 @@
 import axios from 'axios'
-import { takeLatest, takeEvery } from 'redux-saga'
-import { fork, call, put, cancel } from 'redux-saga/effects'
-import { START_UPLOADING, RESTART_UPLOADING_IMAGE } from './../constants/applicationPhotoUploading'
-import { API_URL, API_IMAGES } from './../constants/api'
+import {takeEvery} from 'redux-saga'
+import {call, cancel, fork, put} from 'redux-saga/effects'
+import {RESTART_UPLOADING_IMAGE, START_UPLOADING} from './../constants/applicationPhotoUploading'
+import {API_IMAGES, API_URL} from './../constants/api'
 import {
-    startUploading,
-    setImage,
-    removeImage,
     cancelUploading,
-    stopUploading,
     markFailed,
-    retryUploading
+    removeImage,
+    setImage,
+    startUploading,
+    stopUploading
 } from './../actions/applicationPhotoUploading'
 
 export function readAsDataURL(file) {

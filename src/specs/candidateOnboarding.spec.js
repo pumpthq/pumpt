@@ -1,10 +1,7 @@
 require('jasmine-co').install()
-import { put, select } from 'redux-saga/effects'
 import * as constants from './../constants/candidateOnboarding'
 import * as actions from './../actions/candidateOnboarding'
-import {
-    getCandidateOnboarding
-} from './../reducers/candidateOnboarding'
+import {getCandidateOnboarding} from './../reducers/candidateOnboarding'
 import store from './../store'
 import faker from 'faker'
 // import helpers from './../helpers'

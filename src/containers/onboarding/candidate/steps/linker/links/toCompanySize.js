@@ -1,10 +1,9 @@
-import React, { Component, PropTypes } from 'react'
-import { connect } from 'react-redux'
-import { SHOW_COMPANY_SIZE_STEP, COMPANY_SIZE_DROPDOWN_DATA } from './../../../../../../constants/candidateOnboarding'
-import { showCompanySizeStep, gotoCompanySizeStep } from './../../../../../../actions/candidateOnboarding'
-import { NavigationLink, NavigationLink2 } from './../../../../../../components/main/navigation'
+import React, {Component, PropTypes} from 'react'
+import {connect} from 'react-redux'
+import {SHOW_COMPANY_SIZE_STEP} from './../../../../../../constants/candidateOnboarding'
+import {gotoCompanySizeStep, showCompanySizeStep} from './../../../../../../actions/candidateOnboarding'
+import {NavigationLink2} from './../../../../../../components/main/navigation'
 import CallStep from './../../../../callStep'
-import { findById } from '../../../../../../constants/dropdownData'
 
 @connect(
     function mapStateToProps(state) {

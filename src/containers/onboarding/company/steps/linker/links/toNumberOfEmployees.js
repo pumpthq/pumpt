@@ -1,10 +1,10 @@
-import React, { Component, PropTypes } from 'react'
-import { connect } from 'react-redux'
-import { SHOW_NUMBER_OF_EMPLOYEES_STEP, COMPANY_EMPLOYEES_DATA } from './../../../../../../constants/companyOnboarding'
-import { showNumberOfEmployeesStep, gotoNumberOfEmployeesStep } from './../../../../../../actions/companyOnboarding'
-import { NavigationLink, NavigationLink2 } from './../../../../../../components/main/navigation'
+import React, {Component, PropTypes} from 'react'
+import {connect} from 'react-redux'
+import {COMPANY_EMPLOYEES_DATA, SHOW_NUMBER_OF_EMPLOYEES_STEP} from './../../../../../../constants/companyOnboarding'
+import {gotoNumberOfEmployeesStep, showNumberOfEmployeesStep} from './../../../../../../actions/companyOnboarding'
+import {NavigationLink2} from './../../../../../../components/main/navigation'
 import CallStep from './../../../../callStep'
-import { findById } from '../../../../../../constants/dropdownData'
+import {findById} from '../../../../../../constants/dropdownData'
 
 @connect(
     function mapStateToProps(state) {

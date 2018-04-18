@@ -1,8 +1,5 @@
-import {
-    LIST_ITEM_TYPE_TEXT,
-    LIST_ITEM_TYPE_USER_ENTERED,
-    LIST_ITEM_TYPE_GROUP
-} from './../components/main/list2'
+import {LIST_ITEM_TYPE_GROUP, LIST_ITEM_TYPE_TEXT, LIST_ITEM_TYPE_USER_ENTERED} from './../components/main/list2'
+import { geocodeByAddress, getLatLng } from 'react-places-autocomplete'
 
 const apiEnumToListData = (initialData) => {
     let listData = []
@@ -32,6 +29,12 @@ const apiEnumToListData = (initialData) => {
     return listData
 }
 
+const cityToGeocode = (city) => {
+  return geocodeByAddress(city)
+    .then(results => getLatLng(results[0]))
+}
+
 export {
-    apiEnumToListData
+  apiEnumToListData,
+  cityToGeocode
 }

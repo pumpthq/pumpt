@@ -1,10 +1,9 @@
-import React, { Component, PropTypes } from 'react'
-import { connect } from 'react-redux'
-import { SHOW_INDUSTRY_STEP, INDUSTRY_DROPDOWN_DATA } from './../../../../../../constants/candidateOnboarding'
-import { showIndustryStep, gotoIndustryStep } from './../../../../../../actions/candidateOnboarding'
-import { NavigationLink, NavigationLink2 } from './../../../../../../components/main/navigation'
+import React, {Component, PropTypes} from 'react'
+import {connect} from 'react-redux'
+import {SHOW_INDUSTRY_STEP} from './../../../../../../constants/candidateOnboarding'
+import {gotoIndustryStep, showIndustryStep} from './../../../../../../actions/candidateOnboarding'
+import {NavigationLink2} from './../../../../../../components/main/navigation'
 import CallStep from './../../../../callStep'
-import { findById } from '../../../../../../constants/dropdownData'
 
 @connect(
     function mapStateToProps(state) {
@@ -30,14 +29,11 @@ export class To extends Component {
             isEnabled,
             dispatch
         } = this.props
-        const stateItem = onboardingState.industry
-        let item = null
-
-        stateItem ? item = findById({
-            id : stateItem.id,
-            data : INDUSTRY_DROPDOWN_DATA
-        }) : null
-
+      const stateItem = onboardingState.industries;
+      let industries = "";
+        if (stateItem) {
+            industries = stateItem.map(({ value }) => value).join(' | ');
+        }
         return(
             <NavigationLink2
                 style={{
@@ -52,7 +48,7 @@ export class To extends Component {
                     }
                 }}
                 textLabel='Industry'
-                textFilledWith={item ? stateItem.value || item.title : ''}
+                textFilledWith={industries}
             />
         )
     }

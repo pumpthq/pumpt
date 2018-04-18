@@ -1,9 +1,9 @@
-import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
-import { find } from 'lodash'
-import { updateJob } from 'actions/companyJobs'
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {find} from 'lodash'
+import {updateJob} from 'actions/companyJobs'
 
-import JobForm from 'components/jobs/JobForm'
+import JobForm, {preSubmit, industryIn} from 'components/jobs/JobForm'
 import VerticalScroller from 'components/VerticalScroller'
 
 const propTypes = {};
@@ -15,11 +15,22 @@ function mapStateToProps(state, ownProps) {
 
 @connect(mapStateToProps)
 class EditContainer extends Component {
+
+    handleSubmit = (values) => {
+      const { dispatch, id } = this.props
+      return preSubmit(values)
+      .then(result => (
+        dispatch(updateJob(id, result))
+      ))
+    }
+
     render() {
         const { dispatch, job, id } = this.props
         return (
             <VerticalScroller>
-                <JobForm initialValues={job} onSubmit={values=> dispatch(updateJob(id,values))}/>
+              <JobForm
+                initialValues={industryIn(job)} 
+                onSubmit={this.handleSubmit}/>
             </VerticalScroller>
         );
     }

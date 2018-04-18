@@ -1,10 +1,8 @@
-import React, { Component, PropTypes } from 'react'
+import React, {Component} from 'react'
 import Panel from './../../../../../components/main/panel'
-import { H1 } from './../../../../../components/main/heading'
-import { OnboardingInput } from './../../../../../components/onboarding'
+import {H1} from './../../../../../components/main/heading'
 import on2Image from './../../../../../img/sprites-svg/on2.svg'
 
-import TypeForm from './form'
 import TypeContent from './content'
 import OnboardingCompanyLinker from './../linker'
 
@@ -24,7 +22,6 @@ class TypeStep extends Component{
                                         </span>
                                     </span>
                                 </H1>
-                                {/* <TypeForm/> */}
                                 <TypeContent/>
                             </Panel>
                         </section>

@@ -1,6 +1,6 @@
 import React from 'react';
-import { Provider } from 'react-redux';
-import { Router } from 'react-router';
+import {Provider} from 'react-redux';
+import {Router} from 'react-router';
 import store from './store';
 import history from './history'
 import App from './containers/App';

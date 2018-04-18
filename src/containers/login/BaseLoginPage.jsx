@@ -1,26 +1,18 @@
-import React, { Component, PropTypes } from 'react'
+import React, {Component, PropTypes} from 'react'
+import { connect } from 'react-redux'
+import { getSession } from 'actions/authorization'
 import PopUpBig from './../../components/main/popup'
 
 import Wrapper from './../../components/main/wrapper';
 
-import {
-    SHOW_CONTACT_INFO_STEP,
-    SHOW_INDUSTRY_STEP,
-    SHOW_FIELD_OF_EXPERTISE_STEP,
-    SHOW_JOB_TITLE_STEP,
-    SHOW_INCOME_STEP,
-    SHOW_EXPERIENCE_STEP,
-    SHOW_VALUES_STEP,
-    SHOW_COMPANY_SIZE_STEP,
-    SHOW_SET_UP_PASSWORD_STEP
-} from './../../constants/candidateOnboarding'
-
+@connect(null, (dispatch) => {return {dispatch}})
 class BaseLoginPage extends Component {
 
     constructor(props) {
         super(props)
-
         this.state = {}
+      const { dispatch } = this.props;
+      dispatch(getSession());
     }
 
     render() {

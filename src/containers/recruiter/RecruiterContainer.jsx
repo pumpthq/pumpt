@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, {Component} from 'react';
 import Wrapper from 'components/main/wrapper';
 import RecruiterHeader from './parts/HeaderMenu';
 import TabBar from 'containers/recruiter/jobs/parts/TabBar'

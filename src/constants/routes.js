@@ -5,6 +5,7 @@ export const ROUTE_APPLICATION_CANDIDATE = '/application/candidate';
 export const ROUTE_CANDIDATE_MATCHES_ALL = '/candidate/matches/all';
 export const ROUTE_CANDIDATE_MATCHES_BOOKMARKED = '/candidate/matches/bookmarked';
 export const ROUTE_CANDIDATE_MATCHES_NOT_INTERESTED = '/candidate/matches/not-interested';
+export const ROUTE_CANDIDATE_MATCHES_APPROVED = '/candidate/matches/approved';
 export const ROUTE_CANDIDATE_MESSAGES = '/candidate/messages';
 
 export const ROUTE_APPLICATION_COMPANY = '/application/company';

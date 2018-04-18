@@ -47,4 +47,7 @@ export const COMPANY_SIZE_DROPDOWN_DATA = []
 export const EXPERIENCE_DROPDOWN_DATA = []
 export const DEGREE_DROPDOWN_DATA = []
 
-export const SKILLS = ["MS Office (Word,Excel, PPt)","comScore","Google Analytics","IAB Certification","SalesForce","Ad-Serving Platforms"]
+export const INCOME_NA_ID = "f2225cba-da43-4d5e-9507-52689f8f8aba"
+export const INCOME_NA = {id: INCOME_NA_ID, parent: null, title: "NA / Prefer not to say"}
+
+export const SKILLS = ["MS Office (Word,Excel, PPT)","comScore","Google Analytics","IAB Certification","SalesForce","Ad-Serving Platforms"]

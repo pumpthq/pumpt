@@ -1,9 +1,7 @@
-import React, { Component, PropTypes } from 'react'
-import { connect } from 'react-redux'
+import React, {Component} from 'react'
+import {connect} from 'react-redux'
 // import '../styles/ImageUploader.less'
 import uuid from 'uuid'
-
-import {API_URL,API_IMAGES} from 'constants/api'
 import {uploadImage} from 'actions/upload'
 import {apiImage} from 'components/helpers'
 

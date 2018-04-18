@@ -1,14 +1,10 @@
-import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
+import React, {Component, PropTypes} from 'react';
+import {connect} from 'react-redux';
 import uuid from 'uuid';
 import List from './../../../../../components/main/list';
-import { findById } from '../../../../../constants/dropdownData';
-import {
-    saveApplicationData,
-    showSetUpPasswordStep,
-} from './../../../../../actions/candidateOnboarding';
-import { StepListLink } from '../../../renderHelpers';
-import { EXPERIENCE_DROPDOWN_DATA } from './../../../../../constants/candidateOnboarding';
+import {findById} from '../../../../../constants/dropdownData';
+import {saveApplicationData, showSetUpPasswordStep,} from './../../../../../actions/candidateOnboarding';
+import {StepListLink} from '../../../renderHelpers';
 
 @connect(
     (state) => {

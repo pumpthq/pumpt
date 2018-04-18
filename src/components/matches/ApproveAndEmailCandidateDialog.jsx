@@ -1,8 +1,8 @@
-import React, { Component, PropTypes } from 'react'
-import { connect } from 'react-redux'
-import  Dialog from 'material-ui/Dialog'
-import { postApprove } from 'actions/companyJobs'
-import  MessageCandidateForm from 'components/matches/MessageCandidateForm'
+import React, {Component} from 'react'
+import {connect} from 'react-redux'
+import Dialog from 'material-ui/Dialog'
+import {postApprove} from 'actions/companyJobs'
+import MessageCandidateForm from 'components/matches/MessageCandidateForm'
 
 const propTypes = {};
 

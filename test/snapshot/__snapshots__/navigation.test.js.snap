@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`navigation renders properly 1`] = `
+<nav
+  className="navigation  navigation_type_onboarding"
+>
+  Nav Links
+</nav>
+`;

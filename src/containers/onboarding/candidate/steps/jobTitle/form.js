@@ -1,16 +1,11 @@
-import React, { Component, PropTypes } from 'react'
-import { connect } from 'react-redux'
-import { findById } from '../../../../../constants/dropdownData'
+import React, {Component, PropTypes} from 'react'
+import {connect} from 'react-redux'
+import {findById} from '../../../../../constants/dropdownData'
 
-import {
-    saveJobTitleStep,
-    showIncomeStep,
-    gotoIncomeStep,
-} from './../../../../../actions/candidateOnboarding'
-
+import {gotoIncomeStep, saveJobTitleStep, showIncomeStep,} from './../../../../../actions/candidateOnboarding'
 //import { StepTopAccordion } from '../../../renderHelpers'
-import { AlternativeListItem, StepListLink } from '../../../renderHelpers'
-import { JOB_TITLE_DROPDOWN_DATA } from './../../../../../constants/candidateOnboarding'
+import {AlternativeListItem, StepListLink} from '../../../renderHelpers'
+import {JOB_TITLE_DROPDOWN_DATA} from './../../../../../constants/candidateOnboarding'
 
 @connect(
     function mapStateToProps(state, ownProps) {

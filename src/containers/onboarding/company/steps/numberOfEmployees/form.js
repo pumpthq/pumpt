@@ -1,17 +1,16 @@
-import React, { Component, PropTypes } from 'react'
-import { connect } from 'react-redux'
-import { OnboardingInput } from './../../../../../components/onboarding'
-import List, { ListLink, ListItem } from './../../../../../components/main/list'
-import { COMPANY_EMPLOYEES_DATA } from './../../../../../constants/companyOnboarding'
+import React, {Component, PropTypes} from 'react'
+import {connect} from 'react-redux'
+import List from './../../../../../components/main/list'
+import {COMPANY_EMPLOYEES_DATA} from './../../../../../constants/companyOnboarding'
 import {
+    gotoFoundationYearStep,
     saveNumberOfEmployeesStep,
     showFoundationYearStep,
-    gotoFoundationYearStep,
 } from './../../../../../actions/companyOnboarding'
 import uuid from 'uuid'
-import { findById } from '../../../../../constants/dropdownData'
+import {findById} from '../../../../../constants/dropdownData'
 
-import { StepListLink } from '../../../renderHelpers'
+import {StepListLink} from '../../../renderHelpers'
 
 @connect(
     function mapStateToProps(state, ownProps) {

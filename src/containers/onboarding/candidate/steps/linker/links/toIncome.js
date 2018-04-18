@@ -1,10 +1,11 @@
-import React, { Component, PropTypes } from 'react'
-import { connect } from 'react-redux'
-import { SHOW_INCOME_STEP, ANNUAL_INCOME_DROPDOWN_DATA } from './../../../../../../constants/candidateOnboarding'
-import { showIncomeStep, gotoIncomeStep } from './../../../../../../actions/candidateOnboarding'
-import { NavigationLink, NavigationLink2 } from './../../../../../../components/main/navigation'
+import React, {Component, PropTypes} from 'react'
+import {connect} from 'react-redux'
+import {SHOW_INCOME_STEP} from './../../../../../../constants/candidateOnboarding'
+import {gotoIncomeStep, showIncomeStep} from './../../../../../../actions/candidateOnboarding'
+import {NavigationLink2} from './../../../../../../components/main/navigation'
 import CallStep from './../../../../callStep'
-import { findById } from '../../../../../../constants/dropdownData'
+
+import { INCOME_NA_ID } from 'constants/candidateOnboarding';
 
 @connect(
     function mapStateToProps(state) {
@@ -34,7 +35,11 @@ export class To extends Component {
 
         let value = ''
         if(stateItem) {
+          if (stateItem.id === INCOME_NA_ID) {
+            value = "NA"
+          } else {
             value += stateItem.value
+          }
         }
 
         return (

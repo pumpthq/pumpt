@@ -1,9 +1,9 @@
 import React, {Component, PropTypes} from 'react';
-import { connect } from 'react-redux';
-import { closeJob } from './../../actions/companyJobs';
-import { Link } from 'react-router'
+import {connect} from 'react-redux';
+import {closeJob} from './../../actions/companyJobs';
+import {Link} from 'react-router'
 
-import { apiImage } from 'components/helpers'
+import {apiImage} from 'components/helpers'
 
 const propTypes = {
     title: PropTypes.string,
@@ -12,7 +12,7 @@ const propTypes = {
     experience: PropTypes.string,
     employment: PropTypes.string,
     degree: PropTypes.string,
-    industry: PropTypes.string,
+    industries: PropTypes.array,
     _id: PropTypes.string,
 };
 
@@ -24,7 +24,7 @@ const defaultProps = {
     experience: '{experience}',
     employment: '{employment}',
     degree: '{degree}',
-    industry: '{industry}',
+    industries: '{industries}',
     candidates: {
         briefs: []
     },
@@ -43,7 +43,7 @@ class Card extends Component {
             experience,
             employment,
             degree,
-            industry,
+            industries,
             candidates,
             dispatch,
 						matches,
@@ -70,7 +70,7 @@ class Card extends Component {
                                 <div className="summary-head__title-column ">
                                     <span className="text text_color_invert summary-head__label">Focus
                                     </span>
-                                    <span className="text text_color_invert text_size_s summary-head__summary">{industry}</span>
+                                    <span className="text text_color_invert text_size_s summary-head__summary">{industries && Array.isArray(industries) ? industries[0].parent : ''}</span>
                                 </div>
                                 <div className="summary-head__title-column ">
                                     <span className="text text_color_invert summary-head__label">Salary
@@ -99,10 +99,8 @@ class Card extends Component {
                         <div className="row">
                             <div className="col-xs-6 no-right-gutter">
                                 <Link className="link" to={`recruiter/jobs/${_id}/candidates`}>
-																{/* {matches.length} Matching<br/> */}
                                     View Matches
                                 </Link>
-                                {/* <p className="text text_color_l-grey">67–98% match</p> */}
                             </div>
                             <div className="col-xs-6">
                                 <div className="text-right">

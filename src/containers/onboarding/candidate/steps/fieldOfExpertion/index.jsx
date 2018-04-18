@@ -1,8 +1,7 @@
-import React, { Component, PropTypes } from 'react'
+import React, {Component, PropTypes} from 'react'
 import Panel from '../../../../../components/main/panel'
-import { H1 } from '../../../../../components/main/heading'
+import {H1} from '../../../../../components/main/heading'
 import on3Image from '../../../../../img/sprites-svg/on3.svg'
-import FieldOfExpertiseForm from './form'
 import FieldOfExpertiseContent from './content'
 
 import OnboardingCandidateLinker from './../linker'
@@ -27,7 +26,6 @@ class FieldOfExpertiseStep extends Component {
                                 </span>
                                 </H1>
                                 <FieldOfExpertiseContent />
-                                { /*<FieldOfExpertiseForm /> */}
                             </Panel>
                         </section>
                         <aside class="column column_size_s">

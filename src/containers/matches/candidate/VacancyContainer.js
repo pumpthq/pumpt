@@ -1,14 +1,10 @@
-import { connect } from 'react-redux'
-import React, { Component } from 'react'
+import {connect} from 'react-redux'
+import React, {Component} from 'react'
 import VacancyProfile from '../../../components/jobs/Profile'
-import { find } from 'lodash'
-import { dispatchProp } from 'components/helpers'
-import { fetchVacancy, fetchCompany } from 'actions/candidateMatches'
-import { postBookmark, postReject, postApprove } from 'actions/candidateMatches'
-import { browserHistory } from 'react-router'
-import ApplySuccessDialog from 'components/matches/ApplySuccessDialog'
-import RejectSuccessDialog from 'components/matches/RejectSuccessDialog'
-import BookmarkSuccessDialog from 'components/matches/BookmarkSuccessDialog'
+import {find} from 'lodash'
+import {fetchCompany, fetchVacancy, postApprove, postBookmark, postReject} from 'actions/candidateMatches'
+import {browserHistory} from 'react-router'
+import BasicDialog from 'components/main/popup/BasicDialog'
 
 import VerticalScroller from 'components/VerticalScroller'
 import MatchCandidateActions from 'components/matches/CandidateActions'
@@ -66,9 +62,15 @@ export default class VacancyContainer extends Component {
                     </VacancyProfile>
                     <CompanySummary {...this.props.company} />
 
-                    <RejectSuccessDialog trigger={this.props.lastRejected} onClose={browserHistory.goBack}/>
-                    <ApplySuccessDialog trigger={this.props.lastApproved} onClose={browserHistory.goBack}/>
-                    <BookmarkSuccessDialog trigger={this.props.lastBookmarked} onClose={browserHistory.goBack}/>
+                    <BasicDialog trigger={this.props.lastRejected} onClose={browserHistory.goBack}>
+                      This Job Posting has Been Rejected
+                    </BasicDialog>
+                    <BasicDialog trigger={this.props.lastApproved} onClose={browserHistory.goBack}>
+                      Your Application was successfully sent. You will be contacted by the the hiring manager if they’re interested in your Application.
+                    </BasicDialog>
+                    <BasicDialog trigger={this.props.lastBookmarked} onClose={browserHistory.goBack}>
+                      This job is now saved and can be found in your Bookmark folder.
+                    </BasicDialog>
 
             </VerticalScroller>
 

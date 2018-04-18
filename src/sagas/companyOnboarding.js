@@ -1,36 +1,28 @@
 import axios from 'axios';
-import { takeLatest } from 'redux-saga';
-import { call, fork, put, take, select } from 'redux-saga/effects';
+import {takeLatest} from 'redux-saga';
+import {call, fork, put, select, take} from 'redux-saga/effects';
 import {
-    EMAIL_VALIDATE_REQUESTED,
     APPLY_FOR_MEMBERSHIP_REQUESTED,
+    EMAIL_VALIDATE_REQUESTED,
     THIS_EMAIL_IS_ALREADY_REGISTERED,
 } from './../constants/companyOnboarding';
+import {API_CITIES_ENUMS, API_COMPANY_ROOT, API_RECRUITER_ROOT, API_URL, EMAIL_AVAILABILITY,} from './../constants/api';
+import {AUTHENTICATION_SUCCEEDED,} from './../constants/authorization';
+import {push} from 'react-router-redux';
 import {
-    API_URL,
-    API_RECRUITER_ROOT,
-    EMAIL_AVAILABILITY,
-    API_CITIES_ENUMS,
-    API_COMPANY_ROOT,
-} from './../constants/api';
-import {
-    AUTHENTICATION_SUCCEEDED,
-} from './../constants/authorization';
-import { push } from 'react-router-redux';
-import {
-    emailValidateSucceeded,
-    emailAlreadyRegistered,
-    applyForMembershipSucceeded,
     applyForMembershipFailed,
-    showContactInfoStep,
+    applyForMembershipSucceeded,
+    emailAlreadyRegistered,
+    emailValidateSucceeded,
 } from 'actions/companyOnboarding';
-import { getCompanyOnboarding } from './../reducers/companyOnboarding';
-import { migrateOnboardingToApplication } from './../actions/applicationCompany';
-import { getSummary } from './../reducers/applicationCompany';
-import { login } from './../actions/authorization';
-import { ROUTE_APPLICATION_COMPANY } from './../constants/routes';
+import {getCompanyOnboarding} from './../reducers/companyOnboarding';
+import {migrateOnboardingToApplication} from './../actions/applicationCompany';
+import {getSummary} from './../reducers/applicationCompany';
+import {login} from './../actions/authorization';
+import {ROUTE_APPLICATION_COMPANY} from './../constants/routes';
 
-import { formatUrl } from './../utils'
+import {formatUrl} from './../utils'
+import {cityToGeocode} from './../utils/converters'
 
 export const fetchByEmail = (email) =>
      axios.get(`${API_URL}${EMAIL_AVAILABILITY}/${email}`)
@@ -44,11 +36,6 @@ export const isAvailable = ({ companyName }) =>
 
 const registerMembership = (data) =>
      axios.post(`${API_URL}${API_RECRUITER_ROOT}`, data)
-        .then(response => response.data)
-;
-
-export const fetchPlaces = (data) =>
-     axios.get(`${API_URL}${API_CITIES_ENUMS}/${data}`)
         .then(response => response.data)
 ;
 
@@ -72,6 +59,15 @@ export default function () {
             const {resolve, reject} = action.payload
 
             const onboardingState = yield select(getCompanyOnboarding);
+            let lat, lng;
+            try {
+              let coordinates = yield call(cityToGeocode,onboardingState.headquartersLocation);
+              lat = coordinates.lat;
+              lng = coordinates.lng;
+            } catch (err) {
+              console.log("Error finding lat/lng:");
+              console.log(err);
+            }
 
             if (!onboardingState.linkedInProfileUrl) {
                 onboardingState.linkedInProfileUrl = '';
@@ -99,16 +95,17 @@ export default function () {
                 company: {
                     name: onboardingState.companyName,
                     foundDate: `${onboardingState.foundationYear}`,
-                    type: onboardingState.companyType.value,
+                    type: onboardingState.companyType.map(({value}) => value ),
                     employeesAmount: onboardingState.numberOfEmployees.value,
                     headquartersLocation: onboardingState.headquartersLocation,
+                    headquartersCoordinates: {lat, lng},
                     socialMedia: {
                         websiteUrl: websiteUrl,
                         linkedInUrl: linkedInProfileUrl,
                         twitterAcc: `${onboardingState.twitterUsername}`,
                         facebookUrl: facebookProfileUrl,
                     },
-										values : onboardingState.values ? onboardingState.values.values :  ''
+                  values : onboardingState.values.map(({value}) => value)
                 },
             };
             try { //submitting membership registration request via api

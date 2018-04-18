@@ -1,10 +1,10 @@
-import React, {Component, PropTypes} from 'react';
-import { Link, browserHistory } from 'react-router'
-import { find } from 'lodash'
+import React, {Component} from 'react';
+import {browserHistory} from 'react-router'
+import {find} from 'lodash'
 
 import MatchRecruiterActions from 'components/matches/RecruiterActions'
 import './matches.less'
-import { apiImage } from 'components/helpers'
+import {apiImage, displayIndustries} from 'components/helpers'
 
 const propTypes = {};
 const defaultProps = {
@@ -50,8 +50,8 @@ export default class MatchesList extends Component {
 
 const CandidateItem = (props) => {
     const {match} = props
-    const {candidate: {status, brief:{firstName, lastName, avatar, recentWorkingArea, recentWorkingAreaParent, recentAnnualIncome}},
-      vacancy: {brief:{industry, salary}}} = match
+    const {candidate: {status, brief:{firstName, lastName, avatar, recentWorkingAreas}},
+      vacancy: {brief:{salary}}} = match
 
     return (
         <div className={ status === 'rejected' ? "matched-item dimmed" : "matched-item" }>
@@ -59,15 +59,14 @@ const CandidateItem = (props) => {
           <div className="match-avatar-block">
 						{avatar && <img src={apiImage(avatar)} className="match-avatar"/>}
             <br/>
-            <h4>status: <span>{status}</span></h4>
+            <h4>Status: <span>{status}</span></h4>
           </div>
 
           <div className="match-avatar-info">
 
 
 						<h4>{ `${firstName} ${lastName}` }</h4>
-						<LabeledValue label="Current Working Area" value={ `${recentWorkingAreaParent} | ${recentWorkingArea}` }/>
-						<LabeledValue label="Current Toral Compensation" value={recentAnnualIncome} /> 
+						<LabeledValue label="Experience" value={displayIndustries(recentWorkingAreas)}/>
 
             <div className="row button-block">
 							<div class="col-md-12">
@@ -75,8 +74,6 @@ const CandidateItem = (props) => {
 							</div>
             </div>
           </div>
-
-            {/*<CardDivider />*/}
         </div>
 
     )
@@ -92,7 +89,7 @@ const LabeledValue = (props) => (
 CandidateItem.defaultProps = {
     match: {
         candidate: {}
-    }
+    },
 }
 
 const CardDivider = () => (<div className="summary-head__title-item summary-head__title-item_type_alignment summary-head__title-item_type_middle"></div>)

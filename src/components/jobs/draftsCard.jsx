@@ -1,9 +1,9 @@
-import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router'
-import { H2 } from './../main/heading';
+import React, {Component, PropTypes} from 'react';
+import {connect} from 'react-redux';
+import {Link} from 'react-router'
+import {H2} from './../main/heading';
 import Button from './../main/button';
-import { deleteJob, openJob } from './../../actions/companyJobs';
+import {deleteJob, openJob} from './../../actions/companyJobs';
 
 const propTypes = {
     title: PropTypes.string,

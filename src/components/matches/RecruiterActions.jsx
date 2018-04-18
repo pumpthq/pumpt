@@ -1,14 +1,12 @@
-import React, {Component, PropTypes} from 'react'
+import React, {Component} from 'react'
 
-import { connect } from 'react-redux'
-import { Link, browserHistory } from 'react-router'
+import {connect} from 'react-redux'
+import {Link} from 'react-router'
 
 import ButtonApply from 'components/parts/buttonApply'
 import ButtonLink from 'components/parts/buttonLink'
 
-import { BookmarkOpen, BookmarkFill, ApproveOpen, Decline } from 'components/icons'
-
-import { postBookmark, postReject, postRestore, postApprove, openApprove } from 'actions/companyJobs'
+import {openApprove, postApprove, postBookmark, postReject, postRestore} from 'actions/companyJobs'
 
 
 const mapDispatchToProps = (dispatch, ownProps) => {

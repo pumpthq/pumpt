@@ -1,13 +1,7 @@
-import React, {Component, PropTypes} from 'react';
-import { connect } from 'react-redux'
-import GlassDoorImage from 'img/glassdoor.jpg'
-
-import { Link } from 'react-router'
-import { find } from 'lodash'
-import { dispatchProp } from 'components/helpers'
-import { viewCompany } from 'actions/candidateMatches'
-
-import { apiImage } from 'components/helpers'
+import React, {Component} from 'react';
+import {connect} from 'react-redux'
+import {find} from 'lodash'
+import {apiImage, dispatchProp} from 'components/helpers'
 
 const propTypes = {
     // name: PropTypes.string,
@@ -80,7 +74,7 @@ export default class CompanySummary extends Component {
                 </div>
                 <div className="summary-head__title-column"><span
                     className="text summary-head__label">Company Type</span> <span
-                    className="text text_size_s summary-head__summary">{type}</span>
+                    className="text text_size_s summary-head__summary">{type && Array.isArray(type) ? type.join(', ') : type}</span>
                 </div>
                 <div className="summary-head__title-column"><span
                     className="text summary-head__label"># of employees</span> <span
@@ -106,10 +100,6 @@ export default class CompanySummary extends Component {
                                         {name}
                                         <img src={ratingImage}
                                              className="image image_inline image_type_rating invisible-tablet"/>
-                                        <span className="text text_color_grey invisible-tablet">
-																				{/*FIXME: add back in with Glassdoor integration*/}
-																				{/* {ratingCount} reviews */}
-                                        </span>
                                     </h2>
                                     <div className="mdl-card__subtitle-text summary-head__subtitle-text">
                                         <ul className="list list_type_inline">
@@ -124,16 +114,6 @@ export default class CompanySummary extends Component {
                                         <img src={ratingImage}
                                              className="image image_inline image_type_rating"/>
                                         <br/>
-																				{/*FIXME: add back in with Glassdoor integration*/}
-																				{/* <span className="text text_color_grey">{ratingCount} reviews</span> */}
-                                    </span>
-                                    <span className="summary-head__subtitle-head">
-                                        <span className="text text_color_l-grey">
-                                            Powered by<br className="invisible-desktop"/>
-                                            <a href="#">
-                                                <img src={GlassDoorImage} className="image image_type_rating-name"/>
-                                            </a>
-                                        </span>
                                     </span>
                                 </div>
                             </div>
@@ -141,13 +121,10 @@ export default class CompanySummary extends Component {
                         {this.renderCompanyInformation()}
                         <div className="summary-head__title-item summary-head__title-item_type_alignment summary-head__title-item_type_action-bar">
                             <div className="summary-head__title-column">
-                                {/* <a className="link" onClick={()=>dispatch(viewCompany(this.props_id))}>
-                                    Go to Company Page
-                                </a> */}
-                                <Link className="link" to={`/candidate/matches/company/${_id}`}>
+                              {/*<Link className="link" to={`/candidate/matches/company/${_id}`}>
                                     Go to Company Page
                                 </Link>
-
+                                */}
                             </div>
                         </div>
                     </div>

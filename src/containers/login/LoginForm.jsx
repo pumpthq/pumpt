@@ -1,10 +1,10 @@
-import React, {Component} from 'react'
-import { Link } from 'react-router'
-import { reduxForm, Field } from 'redux-form'
-import { connect } from 'react-redux';
+import React from 'react'
+import {Link} from 'react-router'
+import {Field, reduxForm, SubmissionError} from 'redux-form'
+import {Checkbox} from 'redux-form-material-ui';
 
-import { login } from 'actions/authorization'
-import { SubmissionError } from 'redux-form'
+import {login} from 'actions/authorization'
+import {renderField} from 'components/form/helpers';
 
 //Validations
 const required = value => (value ? undefined : 'Can\'t be Blank')
@@ -14,23 +14,6 @@ const email = value =>
     : undefined
 export const minLength = min => value =>
   value && value.length < min ? `Must be ${min} characters or more` : undefined
-
-//Generalized Redux Field
-const renderField = ({
-  input,
-  label,
-  type,
-  meta: { touched, error }
-}) => (
-  <div>
-    <div>
-      <input class="mdl-textfield__input textfield__input" {...input} placeholder={label} type={type} />
-      {touched && (error && <span class="textfield__error">{error}</span>)}
-    </div>
-  </div>
-)
-
-
 
 const LoginForm = props => {
 	const { handleSubmit, submitting, error, valid, dispatch } = props
@@ -71,6 +54,15 @@ const LoginForm = props => {
 						/>
 					</div>
 				</fieldset>
+
+        <div>
+          <Field
+            name="remember"
+            type="checkbox"
+            component={Checkbox}
+            label="Stay logged in?"
+          />
+        </div>
 
                     {error && <span class="textfield__error">{error}</span>}
 					<div class="form__actions">

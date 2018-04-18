@@ -1,11 +1,12 @@
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
 import GlassDoorImage from 'img/glassdoor.jpg'
-import { reduxForm } from 'redux-form'
-import { tintedBackground } from 'components/helpers'
-import { browserHistory } from 'react-router'
+import {reduxForm} from 'redux-form'
+import {tintedBackground} from 'components/helpers'
+import {browserHistory} from 'react-router'
 
-import { Location, EnumSelector, TextArea } from 'components/form/inputs'
+import {EnumSelector, Location, TextArea} from 'components/form/inputs'
 import {COMPANY_EMPLOYEES_DATA} from 'constants/companyOnboarding'
+
 const propTypes = {
     // name: PropTypes.string,
     // logo: PropTypes.string,
@@ -218,14 +219,6 @@ export default class CompanyForm extends Component {
                             </div>
                         </div>
                         {this.renderCompanyHeader()}
-
-                        {/* <div className="summary-head__title-item summary-head__title-item_type_alignment summary-head__title-item_type_action-bar">
-                            <div className="summary-head__title-column">
-                                <a className="link" onClick={onClickGoToCompanyPage}>
-                                    Go to Company Page
-                                </a>
-                            </div>
-                        </div> */}
                     </div>
                 </div>
 

@@ -1,9 +1,8 @@
-import React, { Component, PropTypes } from 'react'
+import React, {Component, PropTypes} from 'react'
 import Panel from './../../../../../components/main/panel'
-import { H1 } from './../../../../../components/main/heading'
+import {H1} from './../../../../../components/main/heading'
 import on2Image from './../../../../../img/sprites-svg/on2.svg'
 
-import IndustryForm from './form'
 import IndustryContent from './content'
 import OnboardingCandidateLinker from './../linker'
 
@@ -27,7 +26,6 @@ class IndustryStep extends Component {
                                     </span>
                                 </span>
                                 </H1>
-                                {/* <IndustryForm/> */}
                                 <IndustryContent/>
                             </Panel>
                         </section>
