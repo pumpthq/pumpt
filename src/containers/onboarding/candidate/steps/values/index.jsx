@@ -19,13 +19,13 @@ class ValuesStep extends Component {
                             <Panel paddingBig>
                                 <H1 noGutter typeFour className="row">
                                     <span className="onboarding-header col-lg-10 col-md-10 col-sm-10 col-xs-10">What factors are most important to you in assessing a company?</span>
+                                    <span className="onboarding-subheader col-lg-10 col-md-10 col-sm-10 col-xs-10">Select your top 3 choices.</span>
                                 <span className="col-lg-2 col-md-2 col-sm-2 col-xs-2">
                                     <span className="image__wrapper">
                                         <img className="icon icon-onboarding-2" src={on3Image} />
                                     </span>
                                 </span>
                                 </H1>
-                                <p class="onboarding__tip">Select your top 3 choices.</p>
                                 <ValuesForm />
                             </Panel>
                         </section>

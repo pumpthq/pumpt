@@ -28,7 +28,7 @@ const asyncValidate = (values, dispatch) => {
 //Form
 let OnboardingCandidateContactInfo = props => {
 		const { handleSubmit, invalid, asyncValidating, submitting, error, valid, dispatch } = props
-		const submitDisabled = invalid || submitting || asyncValidating || error
+		const submitDisabled = invalid || submitting || error
 
 		//Props for AutoComplete Item (Special)
 		const cssClasses = {
