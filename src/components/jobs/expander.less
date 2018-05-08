@@ -1,0 +1,38 @@
+.expander {
+  padding: 1rem 0;
+  border-bottom: 1px solid black;
+
+  & > header {
+    position: relative;
+
+    & > h4::after {
+      content: "";
+      display: block;
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 0;
+      height: 0;
+
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+
+      border-bottom: 10px solid black;
+    }
+  }
+}
+
+.expander.expanded {
+  & > header {
+    margin-bottom: 1.25rem;
+
+    & >  h4::after {
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+
+      border-top: 10px solid black;
+      border-bottom: none;
+    }
+  }
+}

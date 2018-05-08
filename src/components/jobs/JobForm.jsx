@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, FieldArray, formValueSelector, reduxForm } from 'redux-form';
+import { RadioButton } from 'material-ui/RadioButton';
+import { RadioButtonGroup } from 'redux-form-material-ui';
 // Places Autocomplete Library
 import { PlaceField } from 'components/main/form/PlaceField';
 import MultiInput from 'components/main/form/MultiInput';
@@ -20,10 +22,11 @@ import { renderField } from 'components/form/helpers';
 import {cityToGeocode} from '../../utils/converters'
 
 import './profile.less';
+import './expander.less';
 
 export const TextAreaField = ({ input, label, meta: { asyncValidating, touched, error } }) => (
   <span>
-    <textarea className="mdl-textfield__input textfield__input" {...input} placeholder={label} />
+    <textarea {...input} placeholder={label} />
     {touched && error && <span className="textfield__error textfield__error_small">{error}</span>}
   </span>
 );
@@ -49,6 +52,34 @@ const buttonStyle = {
   cursor: 'pointer',
 };
 
+class Expander extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {expanded: false};
+  }
+
+  toggleExpand = () => {
+    this.setState(({expanded}) =>({expanded: !expanded}))
+  }
+
+  render() {
+    const {title, children} = this.props;
+    const { expanded } = this.state;
+    return (
+      <div className={`expander ${expanded ? 'expanded' : ''}`}>
+        <header role="button" onClick={this.toggleExpand}>
+          <h4>{title}</h4>
+        </header>
+        { expanded &&
+          <div className="expander_content">
+            {children}
+          </div>
+        }
+      </div>
+    );
+  }
+}
+
 // NOTE: this generic job form is used for creating a new job and editing an existing one,
 // which is why submit is handled by its parents (new job form and edit job form)
 let JobForm = props => {
@@ -71,106 +102,100 @@ let JobForm = props => {
         </button>
         <form onSubmit={handleSubmit} className="mdl-card card card_state_open card_state_scroll">
           <div className="recruter__newjob-card__form-top">
+            <header>
+              <h2>New Job Posting</h2>
+            </header>
             <div>
-              <label htmlFor="title">Title</label>
-              <div>
+              <label htmlFor="title">Title:</label>
+              <div className="labeledField">
                 <Field
                   name="title"
                   type="text"
                   component={renderField}
-                  label="Enter Job Title"
+                  label="Ex: Account Manager"
                   validate={required}
                 />
               </div>
             </div>
             <div>
-              <label htmlFor="location">Location</label>
-              <div className="dark">
+              <label htmlFor="location">Location:</label>
+              <div className="labeledField">
                 <Field
                   name="location"
-                  label="Location"
+                  label="Ex: New York, NY"
                   component={PlaceField}
                   validate={required}
                 />
               </div>
             </div>
 
-            <Field
-              name="salary" component={renderSelectField} validate={required}
-              label="Income" class="mdl-textfield__input textfield__input textfield__light"
-            >
-              { ANNUAL_INCOME_DROPDOWN_DATA
-                .map(item => <option key={item.id} value={item.title}>{item.title}</option>) }
-            </Field>
+            <Expander title="Employment Type">
+              <Field
+                name="employment" component={RadioButtonGroup} validate={required}
+              >
+                { EMPLOYEMENTS_DROPDOWN_DATA
+                    .map(item => <RadioButton key={item.id} value={item.title} label={item.title} style={{marginBottom: 12}} />) }
+                  </Field>
+              </Expander>
 
+              <Expander title="Total Compensation">
+                <Field
+                  name="salary" component={renderSelectField} validate={required}
+                >
+                  { ANNUAL_INCOME_DROPDOWN_DATA
+                      .map(item => <option key={item.id} value={item.title}>{item.title}</option>) }
+                </Field>
+              </Expander>
+
+              <Expander title="Industry Experience">
             <Field
-              name="experience" component={renderSelectField} validate={required}
+              name="experience" component={RadioButtonGroup} validate={required}
               label="Industry Experience"
-              class="mdl-textfield__input textfield__input textfield__light"
             >
               { EXPERIENCE_DROPDOWN_DATA
-                .map(item => <option key={item.id} value={item.title}>{item.title}</option>) }
+                .map(item => <RadioButton key={item.id} value={item.title} label={item.title}  style={{marginBottom: 12}} />) }
             </Field>
+              </Expander>
 
+              <Expander title="Required Degree">
             <Field
-              name="employment" component={renderSelectField} validate={required}
-              label="Employment Type" class="mdl-textfield__input textfield__input textfield__light"
-            >
-              { EMPLOYEMENTS_DROPDOWN_DATA
-                .map(item => <option key={item.id} value={item.title}>{item.title}</option>) }
-            </Field>
-
-            <Field
-              name="degree" component={renderSelectField} validate={required}
-              label="Lowest Degree Needed"
-              class="mdl-textfield__input textfield__input textfield__light"
+              name="degree" component={RadioButtonGroup} validate={required}
             >
               { DEGREES_DROPDOWN_DATA
-                .map(item => <option key={item.id} value={item.title}>{item.title}</option>) }
+                  .map(item => <RadioButton key={item.id} value={item.title} label={item.title}  style={{marginBottom: 12}} />) }
             </Field>
+              </Expander>
 
+              <Expander title="Field of Expertise">
             <Field
-              name="industryParent" component={renderSelectField} validate={required}
-              label="Field of Expertise"
-              class="mdl-textfield__input textfield__input textfield__light"
+              name="industryParent" component={RadioButtonGroup} validate={required}
             >
               { FIELD_OF_EXPERTISE_DROPDOWN_DATA
-                .map(item => <option key={item.id} value={item.title}>{item.title}</option>) }
+                .map(item => <RadioButton key={item.id} value={item.title} label={item.title} style={{marginBottom: 12}}  />) }
             </Field>
+              </Expander>
 
-            {industryValue &&
-              <div>
-                <label htmlFor={"industry"}>Specialty</label>
-                <Field
-                  name="industry" component={MultiInput} validate={required}
-                  label="Specialty" class="mdl-textfield__input textfield__input textfield__light"
-                  values={industryParentObj(industryValue).map((item) => item.title)}
-                  initialValues={{ input: { value: [] } }}
-                />
-              </div>
-            }
-            <div>
-              <label htmlFor="description">Description</label>
+              <Expander title="Specialty" className={industryValue ? "" : 'disabled'}>
+              <Field
+                name="industry" component={MultiInput} validate={required}
+                label="Specialty"
+                values={industryValue && industryParentObj(industryValue).map((item) => item.title)}
+                initialValues={{ input: { value: [] } }}
+              />
+              </Expander>
+
+              <Expander title="Description" className={industryValue ? "" : 'disabled'}>
+              <label htmlFor="description">Please enter the Requirements and Responsibilities for the role.</label>
               <Field
                 name="description"
                 type="text"
                 component={TextAreaField}
                 validate={required}
               />
-            </div>
+              </Expander>
           </div>
 
           <div className="recruter__newjob-card__form-bottom">
-
-
-            <FieldArray
-              name="responsibilities" label="Responsibilities"
-              validateEach={required} placeholder="Responsibility" component={renderLists}
-            />
-            <FieldArray
-              name="requirements" label="Requirements"
-              validateEach={required} placeholder="Requirement" component={renderLists}
-            />
 
             {error && <span className="textfield__error">{error}</span>}
             <br />
@@ -208,7 +233,7 @@ const renderLists = ({ fields, label, validateEach, placeholder, meta: { error }
       <div key={index}>
         <Field
           name={child} component={TextAreaField} validate={validateEach}
-          class="text-area" placeholder={`${placeholder}` + ' #' + (index + 1) + '...'} />
+          className="text-area" placeholder={`${placeholder}` + ' #' + (index + 1) + '...'} />
         <button
           type="button" className="remove-entry" onClick={() => {
             fields.remove(index);

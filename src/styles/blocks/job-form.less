@@ -3,19 +3,15 @@
 
   &__form-top {
     padding: 35px;
-    background-color: rgb(79, 104, 172);
-    color: #fff;
+    color: #000;
 
     input.job-title {
       font-size: 18px;
-			background-color: #4f68ac;
     }
 
 		div div div input[type='text']{
       border: 0;
       border-bottom: 1px solid #7888b3;
-			background-color: #4f68ac;
-			color:white !important;
 			font-size:16px !important;
 			height: 30px;
 			width:100%;
@@ -23,13 +19,16 @@
 		}
 
 		textarea {
-			color:white !important;
 		}
 
 		::-webkit-input-placeholder { /* WebKit browsers */
-			color:    white;
 			opacity: 1 !important;
+      color: #555;
 		 }
+
+    & > header {
+      margin-bottom: 2.5rem;
+    }
 
     & > div {
       width: 500px;
@@ -37,10 +36,10 @@
 
       & > label {
         float: left;
-        color: #c5cbe0;
+        color: #000;
       }
 
-      & > div {
+      & > div.labeledField {
         margin-left: 110px;
 
         & select {
@@ -57,11 +56,9 @@
       border-bottom: 1px solid #8496c5;
       font-family: 'Proxima Nova', Helvetica, Arial, sans-serif;
       font-weight: 400;
-		background-color: #4f68ac;
     }
 
 		.textfield__light{
-			color: white;
 		}
   }
 
@@ -72,8 +69,6 @@
 
 		.add-entry{
 			text-transform: capitalize !important;
-			background-color: #5a83f5 !important;
-			color: white !important;
 			margin-left: 0px !important;
 			margin-bottom: 30px !important;
 		}
