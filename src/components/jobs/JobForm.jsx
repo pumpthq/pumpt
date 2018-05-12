@@ -20,6 +20,7 @@ import { find } from 'lodash';
 import { hasText, required } from 'components/main/form/validations';
 import { renderField } from 'components/form/helpers';
 import {cityToGeocode} from '../../utils/converters'
+import CKEditor from "react-ckeditor-component";
 
 import './profile.less';
 import './expander.less';
@@ -79,6 +80,16 @@ class Expander extends Component {
     );
   }
 }
+
+const Editor = ({value, onChange}) => (
+  <CKEditor 
+    content={value}
+    scriptUrl="/static/ckeditor/ckeditor.js"
+    events= {{
+      change: onChange
+    }}
+  />
+)
 
 // NOTE: this generic job form is used for creating a new job and editing an existing one,
 // which is why submit is handled by its parents (new job form and edit job form)
@@ -185,11 +196,11 @@ let JobForm = props => {
               </Expander>
 
               <Expander title="Description" className={industryValue ? "" : 'disabled'}>
-              <label htmlFor="description">Please enter the Requirements and Responsibilities for the role.</label>
+              <label htmlFor="description" className="desc">Please enter the Requirements and Responsibilities for the role.</label>
               <Field
                 name="description"
                 type="text"
-                component={TextAreaField}
+                component={Editor}
                 validate={required}
               />
               </Expander>
