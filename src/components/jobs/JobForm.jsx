@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Field, FieldArray, formValueSelector, reduxForm } from 'redux-form';
+import { Field, FieldArray, getFormValues, reduxForm } from 'redux-form';
 import { RadioButton } from 'material-ui/RadioButton';
 import { RadioButtonGroup } from 'redux-form-material-ui';
 // Places Autocomplete Library
 import { PlaceField } from 'components/main/form/PlaceField';
 import MultiInput from 'components/main/form/MultiInput';
+import './jobform.less';
 // Actions
 
 import { browserHistory } from 'react-router';
@@ -25,34 +26,35 @@ import CKEditor from "react-ckeditor-component";
 import './profile.less';
 import './expander.less';
 
-export const TextAreaField = ({ input, label, meta: { asyncValidating, touched, error } }) => (
-  <span>
-    <textarea {...input} placeholder={label} />
-    {touched && error && <span className="textfield__error textfield__error_small">{error}</span>}
-  </span>
-);
-
-const renderSelectField = ({ input, label, type, meta: { touched, error }, children }) => {
-  const inputProps = { ...input };
-  delete inputProps.value;
-  return (
-    <div>
-      <select
-        {...inputProps}
-        className="mdl-textfield__input textfield__input textfield__light"
-        defaultValue={label}
-      >
-        <option value={label} className="disabled_text_option" disabled >{label}</option>
-        {children}
-      </select>
-      {touched && error && <span className="textfield__error textfield__error_small">{error}</span>}
-    </div>
-  );
-};
 const buttonStyle = {
   cursor: 'pointer',
 };
 
+export const TextAreaField = ({ children, input, label} ) => (
+  <div>
+    {children}
+    <textarea className="textfield__input" {...input} placeholder={label} />
+  </div>
+);
+
+// Expander needs to be wrapped inside Field so that it can display errors even
+// when it isn't expanded.
+// Expander can't manage its own state because every time Field re-renders its
+// open/close state will reset.
+// TODO: lift the state of Expanders up into JobForm
+const ExpandableField = (FieldComponent) => {
+  const expandableField = ({ children, expander, componentProps, input, label, meta: { touched, error } }) => (
+    <div>
+    <Expander {...expander}>
+      <FieldComponent {...componentProps} input={input} label={label}>
+        {children}
+      </FieldComponent>
+    </Expander>
+        {touched && error && <span className="textfield__error textfield__error_small">{error}</span>}
+      </div>
+  )
+  return expandableField;
+}
 class Expander extends Component {
   constructor(props) {
     super(props);
@@ -64,38 +66,61 @@ class Expander extends Component {
   }
 
   render() {
-    const {title, children} = this.props;
+    const {title, preview, children} = this.props;
     const { expanded } = this.state;
     return (
       <div className={`expander ${expanded ? 'expanded' : ''}`}>
-        <header role="button" onClick={this.toggleExpand}>
-          <h4>{title}</h4>
+        <header role="button" style={buttonStyle} tabIndex="0" onClick={this.toggleExpand}>
+          <h5>{title}</h5>
         </header>
-        { expanded &&
+
           <div className="expander_content">
             {children}
           </div>
+          {
+            !expanded &&
+          <div className="expander_preview">
+            {preview}
+          </div>
+
         }
       </div>
     );
   }
 }
 
-const Editor = ({value, onChange}) => (
-  <CKEditor 
-    content={value}
-    scriptUrl="/static/ckeditor/ckeditor.js"
-    events= {{
-      change: onChange
-    }}
-  />
-)
+
+class Editor extends Component {
+  constructor(props){
+    super(props);
+  }
+
+  onChange = (evt) => {
+    this.props.input.onChange(evt.editor.getData());
+    console.log(evt);
+  }
+
+  render() {
+    return (
+      <div>
+      <CKEditor
+        scriptUrl="/static/ckeditor/ckeditor.js"
+        content={this.props.input.value}
+        events={{
+          change: this.onChange
+        }}
+      />
+    </div>
+    );
+  }
+}
 
 // NOTE: this generic job form is used for creating a new job and editing an existing one,
 // which is why submit is handled by its parents (new job form and edit job form)
 let JobForm = props => {
-  const { handleSubmit, submitting, error, industryValue } = props;
+  const { handleSubmit, submitting, error, formValues } = props;
 
+  const { industryParent } = formValues;
   const industryParentObj = (parentValue) => {
     const output = find(FIELD_OF_EXPERTISE_DROPDOWN_DATA, o => o.title === parentValue);
     return output.items;
@@ -140,7 +165,9 @@ let JobForm = props => {
               </div>
             </div>
 
-            <Expander title="Employment Type">
+            <Expander title="Employment Type"
+              preview={(formValues.employment)}
+            >
               <Field
                 name="employment" component={RadioButtonGroup} validate={required}
               >
@@ -149,16 +176,20 @@ let JobForm = props => {
                   </Field>
               </Expander>
 
-              <Expander title="Total Compensation">
+              <Expander title="Total Compensation"
+                preview={(formValues.salary)}
+              >
                 <Field
-                  name="salary" component={renderSelectField} validate={required}
+                  name="salary" component={RadioButtonGroup} validate={required}
                 >
                   { ANNUAL_INCOME_DROPDOWN_DATA
-                      .map(item => <option key={item.id} value={item.title}>{item.title}</option>) }
+                      .map(item => <RadioButton key={item.id} value={item.title} label={item.title} style={{marginBottom: 12}} />) }
                 </Field>
               </Expander>
 
-              <Expander title="Industry Experience">
+              <Expander title="Industry Experience"
+                preview={(formValues.experience)}
+              >
             <Field
               name="experience" component={RadioButtonGroup} validate={required}
               label="Industry Experience"
@@ -168,7 +199,9 @@ let JobForm = props => {
             </Field>
               </Expander>
 
-              <Expander title="Required Degree">
+              <Expander title="Required Degree"
+                preview={(formValues.degree)}
+              >
             <Field
               name="degree" component={RadioButtonGroup} validate={required}
             >
@@ -177,7 +210,9 @@ let JobForm = props => {
             </Field>
               </Expander>
 
-              <Expander title="Field of Expertise">
+              <Expander title="Field of Expertise"
+                preview={(formValues.industryParent)}
+              >
             <Field
               name="industryParent" component={RadioButtonGroup} validate={required}
             >
@@ -186,24 +221,36 @@ let JobForm = props => {
             </Field>
               </Expander>
 
-              <Expander title="Specialty" className={industryValue ? "" : 'disabled'}>
               <Field
-                name="industry" component={MultiInput} validate={required}
-                label="Specialty"
-                values={industryValue && industryParentObj(industryValue).map((item) => item.title)}
-                initialValues={{ input: { value: [] } }}
+                name="industry" validate={required}
+                component={ExpandableField(MultiInput)}
+                expander={{
+                title: "Specialty",
+                className: industryParent ? "" : 'disabled',
+                preview: formValues.industry && formValues.industry.join(', ')
+                }}
+                componentProps={{
+                  label: "Specialty",
+                  values: industryParent && industryParentObj(industryParent).map((item) => item.title),
+                  initialValues: { input: { value: [] } }
+                }}
               />
-              </Expander>
 
-              <Expander title="Description" className={industryValue ? "" : 'disabled'}>
-              <label htmlFor="description" className="desc">Please enter the Requirements and Responsibilities for the role.</label>
               <Field
                 name="description"
-                type="text"
-                component={Editor}
+                component={ExpandableField(TextAreaField)}
+                expander={{
+                  title: "Description",
+                  preview: formValues.description 
+                }}
                 validate={required}
-              />
-              </Expander>
+              >
+                <label 
+                  htmlFor="description"
+                  className="desc">
+                  Please enter the Requirements and Responsibilities for the role.
+                </label>
+            </Field>
           </div>
 
           <div className="recruter__newjob-card__form-bottom">
@@ -228,57 +275,13 @@ let JobForm = props => {
   );
 };
 
-const renderLists = ({ fields, label, validateEach, placeholder, meta: { error } }) => (
-  <div>
-    <button
-      className="mdl-button new-job-add-button" type="button"
-      onClick={() => {
-        fields.push();
-      }}
-    >
-      <i />
-      {fields.length === 0 && 'Add'} {label}
-    </button>
-
-    {fields.map((child, index) =>
-      <div key={index}>
-        <Field
-          name={child} component={TextAreaField} validate={validateEach}
-          className="text-area" placeholder={`${placeholder}` + ' #' + (index + 1) + '...'} />
-        <button
-          type="button" className="remove-entry" onClick={() => {
-            fields.remove(index);
-          }}
-        >
-          <i>Remove</i>
-        </button>
-      </div>
-    )}
-
-    {error && <li className="error">{error}</li>}
-    {fields.length > 0 && <button className="add-entry mdl-button" type="button" onClick={() => {
-      fields.push();
-    }}>Add
-    </button>}
-  </div>
-
-);
-
-
 // Define Form
 JobForm = reduxForm({
   form: 'jobForm',
   enableReinitialize: true,
 })(JobForm);
 
-const selector = formValueSelector('jobForm');
-
-JobForm = connect(state => {
-  const industryValue = selector(state, 'industryParent');
-  return {
-    industryValue,
-  };
-})(JobForm);
+JobForm = connect(state => ({formValues: getFormValues('jobForm')(state) || {}}))(JobForm);
 
 // Export Form
 export default JobForm;

@@ -1,11 +1,15 @@
-.expander {
-  padding: 1rem 0;
-  border-bottom: 1px solid black;
+div.expander {
+  padding: 1.75rem 0;
+  border-bottom: 1px solid #979797;
+  .expander_content {
+    display: none;
+  }
 
   & > header {
     position: relative;
+    padding: 2px 0;
 
-    & > h4::after {
+    & > h5::after {
       content: "";
       display: block;
       position: absolute;
@@ -21,13 +25,22 @@
       border-bottom: 10px solid black;
     }
   }
+  .expander_preview {
+    padding: .75rem 0;
+  }
+  .textfield_error {
+    display: block !important;
+  }
 }
 
 .expander.expanded {
+  .expander_content {
+    display: block;
+  }
   & > header {
     margin-bottom: 1.25rem;
 
-    & >  h4::after {
+    & >  h5::after {
       border-left: 10px solid transparent;
       border-right: 10px solid transparent;
 
