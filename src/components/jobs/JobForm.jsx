@@ -30,12 +30,12 @@ const buttonStyle = {
   cursor: 'pointer',
 };
 
-export const TextAreaField = ({ children, input, label} ) => (
-  <div>
-    {children}
-    <textarea className="textfield__input" {...input} placeholder={label} />
-  </div>
-);
+//export const TextAreaField = ({ children, input, label} ) => (
+//  <div>
+//    {children}
+//    <textarea className="textfield__input" {...input} placeholder={label} />
+//  </div>
+//);
 
 // Expander needs to be wrapped inside Field so that it can display errors even
 // when it isn't expanded.
@@ -56,21 +56,11 @@ const ExpandableField = (FieldComponent) => {
   return expandableField;
 }
 class Expander extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {expanded: false};
-  }
-
-  toggleExpand = () => {
-    this.setState(({expanded}) =>({expanded: !expanded}))
-  }
-
   render() {
-    const {title, preview, children} = this.props;
-    const { expanded } = this.state;
+    const {title, preview, children, onToggleExpand, expanded} = this.props;
     return (
       <div className={`expander ${expanded ? 'expanded' : ''}`}>
-        <header role="button" style={buttonStyle} tabIndex="0" onClick={this.toggleExpand}>
+        <header role="button" style={buttonStyle} tabIndex="0" onClick={onToggleExpand(title)}>
           <h5>{title}</h5>
         </header>
 
@@ -96,8 +86,9 @@ class Editor extends Component {
   }
 
   onChange = (evt) => {
-    this.props.input.onChange(evt.editor.getData());
-    console.log(evt);
+    const data = evt.editor.getData();
+    console.log(data);
+    this.props.input.onChange(data);
   }
 
   render() {
@@ -107,9 +98,12 @@ class Editor extends Component {
         scriptUrl="/static/ckeditor/ckeditor.js"
         content={this.props.input.value}
         events={{
-          change: this.onChange
+          change: this.onChange,
+          blur: () => this.props.input.onBlur()
         }}
       />
+      {this.props.meta.touched && this.props.meta.error &&
+          <span className="textfield__error textfield__error_small">{this.props.meta.error}</span>}
     </div>
     );
   }
@@ -117,8 +111,27 @@ class Editor extends Component {
 
 // NOTE: this generic job form is used for creating a new job and editing an existing one,
 // which is why submit is handled by its parents (new job form and edit job form)
-let JobForm = props => {
-  const { handleSubmit, submitting, error, formValues } = props;
+class JobForm extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {expandedFields: []};
+  }
+
+  onToggleExpand = (id) => () => {
+    this.setState(({expandedFields}) => (
+      expandedFields.includes(id) ? 
+      {expandedFields: expandedFields.filter(f => f !== id)}
+      :
+      {expandedFields: expandedFields.concat([id])}
+    ))
+  }
+
+  expanded = (id) => {
+    return this.state.expandedFields.includes(id);
+  }
+
+  render() {
+  const { handleSubmit, submitting, error, formValues } = this.props;
 
   const { industryParent } = formValues;
   const industryParentObj = (parentValue) => {
@@ -165,61 +178,78 @@ let JobForm = props => {
               </div>
             </div>
 
-            <Expander title="Employment Type"
-              preview={(formValues.employment)}
-            >
               <Field
-                name="employment" component={RadioButtonGroup} validate={required}
+                name="employment"
+                component={ExpandableField(RadioButtonGroup)}
+                validate={required}
+                expander = {{
+                  title: "Employment Type",
+                  preview: formValues.employment,
+                  onToggleExpand: this.onToggleExpand,
+                  expanded: this.expanded("Employment Type")
+                }}
               >
                 { EMPLOYEMENTS_DROPDOWN_DATA
                     .map(item => <RadioButton key={item.id} value={item.title} label={item.title} style={{marginBottom: 12}} />) }
                   </Field>
-              </Expander>
 
-              <Expander title="Total Compensation"
-                preview={(formValues.salary)}
-              >
                 <Field
-                  name="salary" component={RadioButtonGroup} validate={required}
+                  name="salary" component={ExpandableField(RadioButtonGroup)}
+                  validate={required}
+                  expander= {{
+                    title: "Total Compensation",
+                    preview: formValues.salary,
+                    onToggleExpand: this.onToggleExpand,
+                    expanded: this.expanded("Total Compensation")
+                  }}
                 >
                   { ANNUAL_INCOME_DROPDOWN_DATA
                       .map(item => <RadioButton key={item.id} value={item.title} label={item.title} style={{marginBottom: 12}} />) }
                 </Field>
-              </Expander>
 
-              <Expander title="Industry Experience"
-                preview={(formValues.experience)}
-              >
             <Field
-              name="experience" component={RadioButtonGroup} validate={required}
-              label="Industry Experience"
+              name="experience" component={ExpandableField(RadioButtonGroup)}
+              validate={required}
+              expander= {{
+                title: "Industry Experience",
+                preview: formValues.experience,
+                onToggleExpand: this.onToggleExpand,
+                expanded: this.expanded("Industry Experience")
+              }}
+              componentProps = {{label: "Industry Experience"}}
             >
               { EXPERIENCE_DROPDOWN_DATA
                 .map(item => <RadioButton key={item.id} value={item.title} label={item.title}  style={{marginBottom: 12}} />) }
             </Field>
-              </Expander>
 
-              <Expander title="Required Degree"
-                preview={(formValues.degree)}
-              >
             <Field
-              name="degree" component={RadioButtonGroup} validate={required}
+              name="degree" component={ExpandableField(RadioButtonGroup)}
+              validate={required}
+              expander= {{
+                title: "Required Degree",
+                preview: formValues.degree,
+                onToggleExpand: this.onToggleExpand,
+                expanded: this.expanded("Required Degree")
+              }}
             >
               { DEGREES_DROPDOWN_DATA
                   .map(item => <RadioButton key={item.id} value={item.title} label={item.title}  style={{marginBottom: 12}} />) }
             </Field>
-              </Expander>
 
-              <Expander title="Field of Expertise"
-                preview={(formValues.industryParent)}
-              >
             <Field
-              name="industryParent" component={RadioButtonGroup} validate={required}
+              name="industryParent"
+              component={ExpandableField(RadioButtonGroup)}
+              validate={required}
+              expander={{
+                title: "Field of Expertise",
+                preview: formValues.industryParent,
+                onToggleExpand: this.onToggleExpand,
+                expanded: this.expanded("Field of Expertise")
+              }}
             >
               { FIELD_OF_EXPERTISE_DROPDOWN_DATA
                 .map(item => <RadioButton key={item.id} value={item.title} label={item.title} style={{marginBottom: 12}}  />) }
             </Field>
-              </Expander>
 
               <Field
                 name="industry" validate={required}
@@ -227,7 +257,9 @@ let JobForm = props => {
                 expander={{
                 title: "Specialty",
                 className: industryParent ? "" : 'disabled',
-                preview: formValues.industry && formValues.industry.join(', ')
+                preview: formValues.industry && formValues.industry.join(', '),
+                  onToggleExpand: this.onToggleExpand,
+                  expanded: this.expanded('Specialty')
                 }}
                 componentProps={{
                   label: "Specialty",
@@ -236,13 +268,11 @@ let JobForm = props => {
                 }}
               />
 
+            <div>
+              <h5>Description</h5>
               <Field
                 name="description"
-                component={ExpandableField(TextAreaField)}
-                expander={{
-                  title: "Description",
-                  preview: formValues.description 
-                }}
+                component={Editor}
                 validate={required}
               >
                 <label 
@@ -251,6 +281,7 @@ let JobForm = props => {
                   Please enter the Requirements and Responsibilities for the role.
                 </label>
             </Field>
+            </div>
           </div>
 
           <div className="recruter__newjob-card__form-bottom">
@@ -273,7 +304,7 @@ let JobForm = props => {
       </div>
     </div>
   );
-};
+}}
 
 // Define Form
 JobForm = reduxForm({
