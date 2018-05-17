@@ -30,18 +30,10 @@ const buttonStyle = {
   cursor: 'pointer',
 };
 
-//export const TextAreaField = ({ children, input, label} ) => (
-//  <div>
-//    {children}
-//    <textarea className="textfield__input" {...input} placeholder={label} />
-//  </div>
-//);
-
 // Expander needs to be wrapped inside Field so that it can display errors even
 // when it isn't expanded.
 // Expander can't manage its own state because every time Field re-renders its
 // open/close state will reset.
-// TODO: lift the state of Expanders up into JobForm
 const ExpandableField = (FieldComponent) => {
   const expandableField = ({ children, expander, componentProps, input, label, meta: { touched, error } }) => (
     <div>
@@ -87,7 +79,6 @@ class Editor extends Component {
 
   onChange = (evt) => {
     const data = evt.editor.getData();
-    console.log(data);
     this.props.input.onChange(data);
   }
 
@@ -329,8 +320,6 @@ export const preSubmit = (values) => {
     newVal.locationCoordinates = {lat, lng};
     return newVal;
   }).catch(err => {
-    console.log("Error getting lat/lng");
-    console.log(err);
     return newVal;
   })
 };
