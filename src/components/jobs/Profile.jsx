@@ -12,39 +12,6 @@ const buttonStyle = {
     cursor: 'pointer',
 };
 
-const propTypes = {
-//     name: PropTypes.string,
-//     logo: PropTypes.string,
-//     title: PropTypes.string,
-//     location: PropTypes.string,
-//     match: PropTypes.number,
-//     salary: PropTypes.string,
-//     experience: PropTypes.string,
-//     employment: PropTypes.string,
-//     degree: PropTypes.string,
-//     background: PropTypes.string,
-//     text: PropTypes.oneOfType([
-//         PropTypes.string,
-//         PropTypes.array
-//     ]),
-//     children: PropTypes.oneOfType([
-//         PropTypes.string,
-//         PropTypes.element,
-//         PropTypes.array
-//     ]),
-//     additionElements: PropTypes.oneOfType([
-//         PropTypes.element,
-//         PropTypes.string,
-//         PropTypes.array
-//     ]),
-//     onClick: PropTypes.func,
-//     onClickForLink: PropTypes.func,
-//     onClickClose: PropTypes.func,
-//     bookmark: PropTypes.bool,
-//     addToBookmark: PropTypes.func,
-//     removeOfBookmark: PropTypes.func
-};
-
 const defaultProps = {
     // name: 'Name',
     company: {
@@ -135,9 +102,6 @@ export default class Profile extends Component {
                         </div>
                     </div>
                 </div>
-                {/* <div className="mdl-card__media summary-head__media">
-                    <img className="summary-head__media-inner" src={background}/>
-                </div> */}
             </div>
         )
     }
@@ -147,16 +111,16 @@ export default class Profile extends Component {
         return (
             <div className="card__middle-block">
                 <span className="text  summary-head__label">Description</span>
-                <span className="show-paragraphs">
-                    {description}
-                </span>
+                <span className="show-paragraphs"
+                  dangerouslySetInnerHTML={{ __html: description }}
+                />
             </div>
         );
     }
 
     renderResponsibilities() {
         const { responsibilities } = this.props
-        return (
+      return responsibilities && responsibilities.length > 0 ? (
             <div className="card__middle-block">
                 <span className="text  summary-head__label">Responsibilities</span>
 
@@ -169,12 +133,12 @@ export default class Profile extends Component {
                     })
                 }
             </div>
-        );
+        ) : '';
     }
 
     renderRequirements() {
         const { requirements } = this.props
-        return (
+        return requirements && requirements.length > 0 ? (
             <div className="card__middle-block">
                 <span className="text  summary-head__label">Requirements</span>
 
@@ -187,7 +151,7 @@ export default class Profile extends Component {
                     })
                 }
             </div>
-        );
+        ) : '';
     }
 
     render() {
@@ -210,5 +174,4 @@ export default class Profile extends Component {
     }
 }
 
-Profile.propTypes = propTypes;
 Profile.defaultProps = defaultProps;
