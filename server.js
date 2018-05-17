@@ -14,6 +14,7 @@ const app = express();
 // app.use(cors());
 app.use(morgan('dev'))
 app.use('/static', express.static(path.join(__dirname, 'static')));
+app.use('/', express.static(path.join(__dirname, 'letsencrypt')));
 
 
 switch (NODE_ENV) {
