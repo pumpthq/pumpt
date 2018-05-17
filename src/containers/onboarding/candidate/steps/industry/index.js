@@ -3,7 +3,7 @@ import Panel from './../../../../../components/main/panel'
 import {H1} from './../../../../../components/main/heading'
 import on2Image from './../../../../../img/sprites-svg/on2.svg'
 
-import IndustryContent from './content'
+import IndustryForm from './content'
 import OnboardingCandidateLinker from './../linker'
 
 class IndustryStep extends Component {
@@ -26,7 +26,7 @@ class IndustryStep extends Component {
                                     </span>
                                 </span>
                                 </H1>
-                                <IndustryContent/>
+                                <IndustryForm/>
                             </Panel>
                         </section>
                         <aside class='column column_size_s'>

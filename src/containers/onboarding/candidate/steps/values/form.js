@@ -78,6 +78,8 @@ class ValuesForm extends Component {
 
     render() {
         const { listItems, nextStep, activeItems, select } = this.props
+				console.log(JSON.stringify(listItems))
+
         return (
             <div>
                 <List type='onboarding' visualType='plainCheckboxes'>
