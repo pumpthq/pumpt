@@ -79,15 +79,11 @@ class IndustryForm extends Component {
 
     render() {
         const { listItems, nextStep, activeItems, select } = this.props
-        const convertedItems = apiEnumToListData(listItems)
-
-				console.log(JSON.stringify(listItems))
 
         return (
             <div>
                 <List type='onboarding' visualType='plainCheckboxes'>
-                    {listItems.map(group => {
-											group.items.map(item => {
+                    {listItems[0].items.map(item => {
 												//something weird happening here
 
                         return (
@@ -100,7 +96,6 @@ class IndustryForm extends Component {
                             }} />
                         )
 											})
-										})
 										}
                 </List>
                 <button class="onboarding__next mdl-button button button_type_colored button_size_l" disabled={!activeItems || activeItems.length < 3} onClick={nextStep}>Next</button>
