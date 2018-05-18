@@ -10,7 +10,8 @@ import {
     FIELD_OF_EXPERTISE_DROPDOWN_DATA,
     INDUSTRY_DROPDOWN_DATA,
     JOB_TITLE_DROPDOWN_DATA,
-    VALUE_ASSESSMENTS_DROPDOWN_DATA
+  VALUE_ASSESSMENTS_DROPDOWN_DATA,
+  DEGREE_DROPDOWN_DATA
 } from './constants/candidateOnboarding';
 import {COMPANY_EMPLOYEES_DATA, COMPANY_TYPE_DATA,} from './constants/companyOnboarding';
 import {DEGREES_DROPDOWN_DATA, EMPLOYEMENTS_DROPDOWN_DATA,} from './constants/companyJobs';
@@ -28,6 +29,8 @@ export const getAppData = () =>
              data.COMPANY_SIZE_DROPDOWN_DATA.forEach((element) => COMPANY_SIZE_DROPDOWN_DATA.push(element));
              data.VALUE_ASSESSMENTS_DROPDOWN_DATA.forEach((element) => VALUE_ASSESSMENTS_DROPDOWN_DATA.push(element));
              data.EXPERIENCE_DROPDOWN_DATA.forEach((element) => EXPERIENCE_DROPDOWN_DATA.push(element));
+             data.DEGREES_DROPDOWN_DATA.forEach((element) => DEGREE_DROPDOWN_DATA.push(element));
+           console.log(DEGREE_DROPDOWN_DATA);
 
              data.EMPLOYEES_AMOUNTS_DROPDOWN_DATA.forEach((element) => COMPANY_EMPLOYEES_DATA.push(element));
              data.CURRENT_INDUSTRIES_DROPDOWN_DATA.forEach((element) => COMPANY_TYPE_DATA.push(element));
