@@ -8,6 +8,7 @@ import {
     SAVE_FIELD_OF_EXPERTISE_DATA,
     SAVE_INCOME_DATA,
     SAVE_INDUSTRY_DATA,
+    SAVE_DEGREE_DATA,
     SAVE_JOB_TITLE_DATA,
     SAVE_SET_UP_PASSWORD_DATA,
     SAVE_VALUES_DATA,
@@ -18,6 +19,7 @@ import {
     SHOW_FIELD_OF_EXPERTISE_STEP,
     SHOW_INCOME_STEP,
     SHOW_INDUSTRY_STEP,
+    SHOW_DEGREE_STEP,
     SHOW_JOB_TITLE_STEP,
     SHOW_SET_UP_PASSWORD_STEP,
     SHOW_VALUES_STEP,
@@ -44,6 +46,19 @@ export default (state = defaultState, action) => {
             return saveStep({
                 state,
                 step: SHOW_CONTACT_INFO_STEP,
+                payload,
+            });
+
+        case SHOW_DEGREE_STEP :
+            return {
+                ...state,
+                step,
+            };
+
+        case SAVE_DEGREE_DATA :
+            return saveStep({
+                state,
+                step: SHOW_DEGREE_STEP,
                 payload,
             });
 

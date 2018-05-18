@@ -4,6 +4,7 @@ import {getAppData} from '../onLoad';
 import './../styles/app.less';
 // ⚠️ Tap event required to support material-ui click events
 import injectTapEventPlugin from 'react-tap-event-plugin';
+import { DEGREE_DROPDOWN_DATA } from '../constants/candidateOnboarding';
 
 // import { cleanMessage } from '../actions/session';
 
@@ -29,6 +30,7 @@ class App extends Component {
   componentWillMount() {
     getAppData()
     .then(()=>{
+      console.log(DEGREE_DROPDOWN_DATA)
       console.info('app data finished loading')
       this.setState({isLoading:true})
     })
