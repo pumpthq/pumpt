@@ -77,7 +77,8 @@ export default function() {
                 recentAreaExperience : onboardingState.experience.value,
 								preferredCompanySize : onboardingState.preferredCompanySize.value,
                 values : onboardingState.values.map(({value}) => value ),
-                socialMedia: onboardingState.socialMedia
+                socialMedia: onboardingState.socialMedia,
+                highestDegree: onboardingState.degree.value,
             }
 
             try {
