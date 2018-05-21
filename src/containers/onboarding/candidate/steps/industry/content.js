@@ -51,7 +51,7 @@ import {INDUSTRY_DROPDOWN_DATA} from './../../../../../constants/candidateOnboar
           // add it
             ownProps.activeItems.push({
                 id: a.id,
-                industry: a.industry
+                value: a.value
             });
             dispatch(saveIndustryData({
                 industries : ownProps.activeItems
