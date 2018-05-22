@@ -4,6 +4,7 @@ import {List} from './../../../../../components/main/list2'
 import Button from './../../../../../components/main/button'
 import {JOB_TITLE_DROPDOWN_DATA} from './../../../../../constants/candidateOnboarding'
 import {apiEnumToListData} from './../../../../../utils'
+import Autocomplete from 'react-autocomplete'
 
 import {gotoIncomeStep, saveJobTitleStep, showIncomeStep,} from './../../../../../actions/candidateOnboarding'
 
@@ -75,16 +76,32 @@ class JobTitleContent extends Component {
         const classesToAdd = [
             'list_type_onboarding'
         ]
-        const { stepValid, id, value } = this.state
+        //const { stepValid, id, value } = this.state
         return(
             <div>
-                <List
+                <Autocomplete
+									items={convertedItems}
+									shouldItemRender={(item, value) => item.text.toLowerCase().indexOf(value.toLowerCase()) > -1}
+									getItemValue={item => item.text}
+									renderItem={(item, highlighted) =>
+										<div
+											key={item.id}
+											style={{ backgroundColor: highlighted ? '#eee' : 'transparent'}}
+										>
+											{item.text}
+										</div>
+									}
+									value={this.state.value}
+									onChange={e => this.setState({ value: e.target.value })}
+									onSelect={value => this.setState({ value })}
+								/>
+								<List
                     items={convertedItems}
                     classesToAdd={classesToAdd}
                     allowNoSelection={true}
                     listValueSelected={this.handleListChange}
-                    preselectedItem={id}
-                    preselectedValue={value}
+                    preselectedItem={this.state.id}
+                    preselectedValue={this.state.value}
                     handleGroups={false}
                     otherPlaceholder={'Enter Title Here'}
                 />
@@ -92,7 +109,7 @@ class JobTitleContent extends Component {
                     <Button
                         typeColored={true}
                         buttonSize={'l'}
-                        disabled={!stepValid}
+                        disabled={!this.state.stepValid}
                         onClick={this.handleNextButtonCLick}
                     >Next</Button>
                 </div>

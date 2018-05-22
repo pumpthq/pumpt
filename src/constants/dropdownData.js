@@ -6,7 +6,8 @@ import {
     FIELD_OF_EXPERTISE_DROPDOWN_DATA,
     INDUSTRY_DROPDOWN_DATA,
     JOB_TITLE_DROPDOWN_DATA,
-    VALUE_ASSESSMENTS_DROPDOWN_DATA
+  VALUE_ASSESSMENTS_DROPDOWN_DATA,
+  DEGREE_DROPDOWN_DATA
 } from './candidateOnboarding'
 
 import {COMPANY_EMPLOYEES_DATA, COMPANY_TYPE_DATA} from './companyOnboarding'
@@ -90,7 +91,8 @@ export const findSequence = ({ path = [], nestedListing = [] }) => {
     COMPANY_TYPE_DATA,
     EMPLOYEMENTS_DROPDOWN_DATA,
     DEGREES_DROPDOWN_DATA,
-    VALUE_ASSESSMENTS_DROPDOWN_DATA
+  VALUE_ASSESSMENTS_DROPDOWN_DATA,
+  DEGREE_DROPDOWN_DATA
 ].forEach((data) => {
     assignId({ data })
 })

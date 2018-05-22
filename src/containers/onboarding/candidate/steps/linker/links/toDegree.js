@@ -1,11 +1,9 @@
 import React, {Component, PropTypes} from 'react'
 import {connect} from 'react-redux'
-import {SHOW_INDUSTRY_STEP} from './../../../../../../constants/candidateOnboarding'
-import {gotoIndustryStep, showIndustryStep} from './../../../../../../actions/candidateOnboarding'
+import {SHOW_DEGREE_STEP} from './../../../../../../constants/candidateOnboarding'
+import {gotoDegreeStep, showDegreeStep} from './../../../../../../actions/candidateOnboarding'
 import {NavigationLink2} from './../../../../../../components/main/navigation'
 import CallStep from './../../../../callStep'
-import {findById} from '../../../../../../constants/dropdownData'
-import {INDUSTRY_DROPDOWN_DATA} from '../../../../../../constants/candidateOnboarding'
 
 @connect(
     function mapStateToProps(state) {
@@ -31,16 +29,14 @@ export class To extends Component {
             isEnabled,
             dispatch
         } = this.props
-      const stateItem = onboardingState.industries;
-      let industries = "";
-        if (stateItem) {
-          industries = stateItem.map(({ id }) => findById({
-            id,
-            data : INDUSTRY_DROPDOWN_DATA
-          }).title
-          ).join(' | ');
+        const stateItem = onboardingState.degree
+
+        let value = ''
+        if(stateItem) {
+          value += stateItem.value
         }
-        return(
+
+        return (
             <NavigationLink2
                 style={{
                     cursor : isFilled || isActive ? 'pointer' : 'default'
@@ -49,12 +45,12 @@ export class To extends Component {
                 filled={isFilled}
                 onClick={() => {
                     if (isEnabled) {
-                      dispatch(showIndustryStep())
-                      dispatch(gotoIndustryStep())
+                      dispatch(showDegreeStep())
+                      dispatch(gotoDegreeStep())
                     }
                 }}
-                textLabel='Industry'
-                textFilledWith={industries}
+                textLabel='Degree'
+                textFilledWith={value}
             />
         )
     }
@@ -68,18 +64,18 @@ To.propTypes = {
     dispatch : PropTypes.func
 }
 
-const LinkToIndustryStep = ({ onboardingState }) => {
+const LinkToDegreeStep = ({ onboardingState }) => {
     return (
         <CallStep {...{
-            activeOnStep : SHOW_INDUSTRY_STEP,
+            activeOnStep : SHOW_DEGREE_STEP,
             onboardingState,
             To
         }} />
     )
 }
 
-LinkToIndustryStep.propTypes = {
+LinkToDegreeStep.propTypes = {
     onboardingState : PropTypes.object
 }
 
-export default LinkToIndustryStep
+export default LinkToDegreeStep

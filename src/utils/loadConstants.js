@@ -9,7 +9,8 @@ import {
     FIELD_OF_EXPERTISE_DROPDOWN_DATA,
     INDUSTRY_DROPDOWN_DATA,
     JOB_TITLE_DROPDOWN_DATA,
-    VALUE_ASSESSMENTS_DROPDOWN_DATA
+    VALUE_ASSESSMENTS_DROPDOWN_DATA,
+  DEGREE_DROPDOWN_DATA
 } from '../constants/candidateOnboarding';
 
 export default () =>
@@ -49,6 +50,9 @@ export default () =>
             });
             data.DEGREES_DROPDOWN_DATA.forEach(el => {
                 DEGREES_DROPDOWN_DATA.push(el);
+            });
+            data.DEGREES_DROPDOWN_DATA.forEach(el => {
+                DEGREE_DROPDOWN_DATA.push(el);
             });
         })
         .catch(error => {
