@@ -49,7 +49,7 @@ export default class CandidateHeaderMenu extends Component {
                         Change Password
                       </HeaderDropDownItem>
                         <HeaderDropDownItem nolink >
-												<Mailto email="support@pumpthq.com" obfuscate={true}>
+												<Mailto email="support@pumpthq.com" obfuscate={true} target="_blank">
 														Help &amp; Support
 													</Mailto>
 												</HeaderDropDownItem>
