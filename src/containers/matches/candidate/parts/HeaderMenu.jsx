@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router';
+import {Link, withRouter} from 'react-router';
 import {connect} from 'react-redux';
 import Mailto from 'react-mailto';
 import {HeaderDropDownItem, HeaderDropDownMenu, HeaderFull,} from './../../../../components/main/header';
@@ -11,16 +11,20 @@ import {apiImage} from 'components/helpers'
 const mapStateToProps = state => {
     return {candidate: state.candidateMatches.candidate}
 }
+
+@withRouter
 @connect(mapStateToProps)
 export default class CandidateHeaderMenu extends Component {
 
     render() {
+      console.log('All: ', this.props.router.isActive('/candidate/matches/all'));
         const {
             candidate,
             dispatch,
         } = this.props;
         return (
             <HeaderFull
+                router={this.props.router}
                 links={[
                     <Link
                         to={ROUTE_CANDIDATE_MATCHES_ALL}
