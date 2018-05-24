@@ -76,16 +76,6 @@ class ClosedCard extends Component {
                     <div className="card__middle-block">
                         <div className="row">
                             <div className="col-lg-5 no-right-gutter">
-                                <p className="link link_size_s">{matches} Matches</p>
-                            </div>
-                            <div className="col-lg-7">
-                                <div className="image__hor-list text-right">
-                                    <img className="image image_size_m image_round" src="" />
-                                    <img className="image image_size_m image_round" src="" />
-                                    <img className="image image_size_m image_round" src="" />
-                                    <img className="image image_size_m image_round" src="" />
-                                    <img className="image image_size_m image_round" src="" />
-                                </div>
                             </div>
                         </div>
                     </div>

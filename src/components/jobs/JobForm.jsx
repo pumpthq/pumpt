@@ -146,7 +146,7 @@ class JobForm extends Component {
               <h2>New Job Posting</h2>
             </header>
             <div>
-              <label htmlFor="title">Title:</label>
+              <label htmlFor="title">Job Title:</label>
               <div className="labeledField">
                 <Field
                   name="title"

@@ -31,13 +31,15 @@ export default class BasicDialog extends Component {
   };
 
   render() {
-    const actions = [
+    let actions = [
       <FlatButton
-        label="Close"
-        primary
+        label={this.props.closeText ? this.props.closeText : "Close"}
+        primary={!this.props.mainAction}
         onTouchTap={this.handleClose}
       />,
     ];
+    actions = this.props.mainAction ?
+      actions.concat([this.props.mainAction]) : actions;
 
     return (
       <Dialog
@@ -57,6 +59,8 @@ export default class BasicDialog extends Component {
 }
 
 BasicDialog.propTypes = {
+  closeText: PropTypes.string,
+  mainAction: PropTypes.node,
   trigger: PropTypes.any,
   onClose: PropTypes.func,
   children: PropTypes.node,
