@@ -4,6 +4,8 @@ import {Link} from 'react-router'
 import {H2} from './../main/heading';
 import Button from './../main/button';
 import {deleteJob, openJob} from './../../actions/companyJobs';
+import BasicDialog from 'components/main/popup/BasicDialog'
+import FlatButton from 'material-ui/FlatButton';
 
 const propTypes = {
     title: PropTypes.string,
@@ -30,6 +32,16 @@ const defaultProps = {
     (dispatch) => ({dispatch})
 )
 class DraftsCard extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {triggerDialog: false};
+  }
+
+  handleDelete = (event) => {
+    event.preventDefault();
+    this.setState(({triggerDialog}) => ({triggerDialog: !triggerDialog}));
+  }
     render() {
         const {
             title,
@@ -110,15 +122,29 @@ class DraftsCard extends Component {
                             </Link>
 
                             <div className="mdl-layout-spacer" />
+
                             <button
                                 className="link link_type_additional"
-                                onClick={(event) => {
-                                    event.preventDefault();
-                                    dispatch(deleteJob(_id));
-                                }}
+                                onClick={this.handleDelete}
                             >
                                 Delete Draft
                             </button>
+                            <BasicDialog
+                              trigger={this.state.triggerDialog}
+                              closeText={"Nevermind"}
+                              onClose={() => {}}
+                              mainAction={
+                                <FlatButton
+                                  primary
+                                  onTouchTap={() => {
+                                    dispatch(deleteJob(_id));
+                                  }}
+                                  label="Delete Draft"
+                                />
+                              }
+                            >
+                              Are you sure you want to delete the draft?
+                            </BasicDialog>
                         </div>
                     </form>
                 </div>

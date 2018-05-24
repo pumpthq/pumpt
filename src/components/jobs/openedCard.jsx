@@ -3,9 +3,8 @@ import {connect} from 'react-redux';
 import {closeJob} from './../../actions/companyJobs';
 import {Link} from 'react-router'
 import BasicDialog from 'components/main/popup/BasicDialog'
-import Dotdotdot from 'react-dotdotdot'
 import Truncate from 'react-truncate';
-
+import FlatButton from 'material-ui/FlatButton';
 
 
 import {apiImage} from 'components/helpers'
@@ -48,6 +47,16 @@ const SummaryEntry = ({children}) => (
     (dispatch) => ({ dispatch })
 )
 class Card extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {triggerDialog: false};
+  }
+
+  handleClose = (event) => {
+    event.preventDefault();
+    this.setState(({triggerDialog}) => ({triggerDialog: !triggerDialog}));
+  }
+
     render() {
         const {
             title,
@@ -64,6 +73,7 @@ class Card extends Component {
         } = this.props;
         return (
             <div className="slider__item slider__item_content_middle">
+
                 <div className="mdl-card card card_size_s">
                     <div className="summary-head summary-head_rad-top" style={{ backgroundColor: '#4f68ac' }}>
                         <div className="summary-head__title mdl-card__title">
@@ -140,13 +150,26 @@ class Card extends Component {
                             <div className="mdl-layout-spacer" />
                             <button
                                 className="link link_type_additional"
-                                onClick={(event) => {
-                                    event.preventDefault();
-                                    dispatch(closeJob(_id));
-                                }}
+                                onClick={this.handleClose}
                             >
                             Close Job
                             </button>
+                            <BasicDialog
+                              trigger={this.state.triggerDialog}
+                              closeText={"Nevermind"}
+                              onClose={() => {}}
+                              mainAction={
+                                <FlatButton
+                                  primary
+                                  onTouchTap={() => {
+                                    dispatch(closeJob(_id))
+                                  }}
+                                  label="Close Job"
+                                />
+                              }
+                            >
+                              Are you sure you want to close the job?
+                            </BasicDialog>
                         </div>
                     </form>
                 </div>
