@@ -2,6 +2,11 @@ import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {closeJob} from './../../actions/companyJobs';
 import {Link} from 'react-router'
+import BasicDialog from 'components/main/popup/BasicDialog'
+import Dotdotdot from 'react-dotdotdot'
+import Truncate from 'react-truncate';
+
+
 
 import {apiImage} from 'components/helpers'
 
@@ -30,6 +35,14 @@ const defaultProps = {
     },
 		matches: []
 };
+
+const SummaryEntry = ({children}) => (
+  <span className="text text_color_invert text_size_s summary-head__summary">
+    <Truncate lines={1}>
+      {children}
+    </Truncate>
+  </span>
+)
 
 @connect(
     (dispatch) => ({ dispatch })
@@ -70,44 +83,47 @@ class Card extends Component {
                                 <div className="summary-head__title-column ">
                                     <span className="text text_color_invert summary-head__label">Focus
                                     </span>
-                                    <span className="text text_color_invert text_size_s summary-head__summary">{industries && Array.isArray(industries) ? industries[0].parent : ''}</span>
-                                </div>
+                                    <SummaryEntry>
+                                      {industries && Array.isArray(industries) ? industries[0].parent : ''}
+                                    </SummaryEntry>
+                                  </div>
                                 <div className="summary-head__title-column ">
                                     <span className="text text_color_invert summary-head__label">Salary
                                     </span>
-                                    <span className="text text_color_invert text_size_s summary-head__summary">{salary}</span>
+                                    <SummaryEntry>
+                                      {salary}
+                                    </SummaryEntry>
                                 </div>
                                 <div className="summary-head__title-column ">
                                     <span className="text text_color_invert summary-head__label">Experience
                                     </span>
-                                    <span className="text text_color_invert text_size_s summary-head__summary">{experience}</span>
+                                    <SummaryEntry>
+                                      {experience}
+                                    </SummaryEntry>
                                 </div>
                                 <div className="summary-head__title-column ">
                                     <span className="text text_color_invert summary-head__label">Employment
                                     </span>
-                                    <span className="text text_color_invert text_size_s summary-head__summary">{employment}</span>
+                                    <SummaryEntry>
+                                      {employment}
+                                    </SummaryEntry>
                                 </div>
                                 <div className="summary-head__title-column ">
                                     <span className="text text_color_invert summary-head__label">Degree
                                     </span>
-                                    <span className="text text_color_invert text_size_s summary-head__summary">{degree}</span>
+                                    <SummaryEntry>
+                                      {degree}
+                                    </SummaryEntry>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div className="card__middle-block">
                         <div className="row">
-                            <div className="col-xs-6 no-right-gutter">
+                            <div className="col-xs-6 col-xs-offset-3 no-right-gutter">
                                 <Link className="link" to={`recruiter/jobs/${_id}/candidates`}>
                                     View Matches
                                 </Link>
-                            </div>
-                            <div className="col-xs-6">
-                                <div className="text-right">
-                                    {candidates.briefs.map(candidate =>
-                                        <img className="image image_size_m image_round" src={apiImage(candidate.avatar)} />
-                                    )}
-                                </div>
                             </div>
                         </div>
                     </div>
