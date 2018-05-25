@@ -75,16 +75,16 @@ class JobTitleContent extends Component {
         const classesToAdd = [
             'list_type_onboarding'
         ]
-        const { stepValid, id, value } = this.state
+        //const { stepValid, id, value } = this.state
         return(
             <div>
-                <List
+								<List
                     items={convertedItems}
                     classesToAdd={classesToAdd}
                     allowNoSelection={true}
                     listValueSelected={this.handleListChange}
-                    preselectedItem={id}
-                    preselectedValue={value}
+                    preselectedItem={this.state.id}
+                    preselectedValue={this.state.value}
                     handleGroups={false}
                     otherPlaceholder={'Enter Title Here'}
                 />
@@ -92,7 +92,7 @@ class JobTitleContent extends Component {
                     <Button
                         typeColored={true}
                         buttonSize={'l'}
-                        disabled={!stepValid}
+                        disabled={!this.state.stepValid}
                         onClick={this.handleNextButtonCLick}
                     >Next</Button>
                 </div>

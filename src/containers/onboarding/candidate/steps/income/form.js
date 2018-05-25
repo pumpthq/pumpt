@@ -52,7 +52,8 @@ import {
 class IncomeForm extends Component {
     render() {
         const { nextStep, activeItem } = this.props
-        const listItems = [NA].concat(ANNUAL_INCOME_DROPDOWN_DATA);
+			{/*const listItems = [NA].concat(ANNUAL_INCOME_DROPDOWN_DATA);*/}
+        const listItems = ANNUAL_INCOME_DROPDOWN_DATA;
         return (
             <List type='onboarding'>
                 {listItems.map(item => {

@@ -4,6 +4,8 @@ import {SHOW_INDUSTRY_STEP} from './../../../../../../constants/candidateOnboard
 import {gotoIndustryStep, showIndustryStep} from './../../../../../../actions/candidateOnboarding'
 import {NavigationLink2} from './../../../../../../components/main/navigation'
 import CallStep from './../../../../callStep'
+import {findById} from '../../../../../../constants/dropdownData'
+import {INDUSTRY_DROPDOWN_DATA} from '../../../../../../constants/candidateOnboarding'
 
 @connect(
     function mapStateToProps(state) {
@@ -32,7 +34,11 @@ export class To extends Component {
       const stateItem = onboardingState.industries;
       let industries = "";
         if (stateItem) {
-            industries = stateItem.map(({ value }) => value).join(' | ');
+          industries = stateItem.map(({ id }) => findById({
+            id,
+            data : INDUSTRY_DROPDOWN_DATA
+          }).title
+          ).join(' | ');
         }
         return(
             <NavigationLink2

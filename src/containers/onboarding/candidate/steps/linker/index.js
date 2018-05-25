@@ -4,6 +4,7 @@ import Panel from './../../../../../components/main/panel'
 import Navigation from './../../../../../components/main/navigation'
 
 import LinkToContactInfoStep from './links/toContactInfo'
+import LinkToDegreeStep from './links/toDegree'
 import LinkToIndustryStep from './links/toIndustry'
 import LinkToFieldOfExpertiseStep from './links/toFieldOfExpertise'
 import LinkToJobTitleStep from './links/toJobTitle'
@@ -34,6 +35,7 @@ class OnboardingCandidateLinker extends Component {
             <Panel paddingFalse typeOfNav>
                 <Navigation type='onboarding'>
                     <LinkToContactInfoStep {...props}/>
+                    <LinkToDegreeStep {...props}/>
                     <LinkToIndustryStep {...props}/>
                     <LinkToFieldOfExpertiseStep {...props}/>
                     <LinkToJobTitleStep {...props}/>

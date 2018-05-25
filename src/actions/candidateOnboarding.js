@@ -5,6 +5,7 @@ import {
     EMAIL_ALREADY_REGISTERED,
     EMAIL_VALIDATE_REQUESTED,
     EMAIL_VALIDATE_SUCCEEDED,
+    SAVE_DEGREE_DATA,
     SAVE_COMPANY_SIZE_DATA,
     SAVE_CONTACT_INFO_DATA,
     SAVE_EXPERIENCE_DATA,
@@ -22,7 +23,8 @@ import {
     SHOW_INDUSTRY_STEP,
     SHOW_JOB_TITLE_STEP,
     SHOW_SET_UP_PASSWORD_STEP,
-    SHOW_VALUES_STEP
+    SHOW_VALUES_STEP,
+    SHOW_DEGREE_STEP
 } from './../constants/candidateOnboarding'
 
 import {push} from 'react-router-redux'
@@ -30,6 +32,8 @@ import {push} from 'react-router-redux'
 export const gotoStep = (step) => push('/onboarding/candidate/'+step)
 
 export const gotoContactInfoStep = () => gotoStep(SHOW_CONTACT_INFO_STEP)
+
+export const gotoDegreeStep = () => gotoStep(SHOW_DEGREE_STEP)
 
 export const gotoIndustryStep = () => gotoStep(SHOW_INDUSTRY_STEP)
 
@@ -82,6 +86,15 @@ export const saveContactInfoData = ({ firstName, lastName, email, location, abil
 				abilityToRelocate,
         socialMedia,
     }
+})
+
+export const showDegreeStep = () => ({
+  type: SHOW_DEGREE_STEP
+})
+
+export const saveDegreeData = ({ degree }) => ({
+  type : SAVE_DEGREE_DATA,
+  payload : { degree }
 })
 
 export const showIndustryStep = () => ({

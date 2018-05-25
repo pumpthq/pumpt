@@ -18,13 +18,14 @@ class JobTitleStep extends Component {
                         <section class='column column_size_l'>
                             <Panel paddingBig>
                                 <H1 noGutter typeFour class='row'>
-                                    <span class='onboarding-header col-lg-10 col-md-10 col-sm-10 col-xs-10'>What is your current job title?</span>
+                                    <span class='onboarding-header col-lg-10 col-md-10 col-sm-10 col-xs-10'>What is your job title?</span>
                                 <span class='col-lg-2 col-md-2 col-sm-2 col-xs-2'>
                                     <span class='image__wrapper'>
                                         <img class='icon icon-onboarding-2' src={on4Image}/>
                                     </span>
                                 </span>
                                 </H1>
+
                                 <JobTitleContent />
                                 {/*<JobTitleForm/>*/}
                             </Panel>

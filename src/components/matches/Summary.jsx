@@ -92,7 +92,10 @@ export default class Summary extends Component {
         const { vacancy } = this.props
         return (
             <div className="card__middle-block">
-                <p className="mdl-card__supporting-text card__supporting-text">{vacancy.brief.description}</p>
+              <span
+                className="mdl-card__supporting-text card__supporting-text"
+                dangerouslySetInnerHTML={{ __html: vacancy.brief.description }}
+              />
             </div>
         );
     }

@@ -2,6 +2,10 @@ import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {closeJob} from './../../actions/companyJobs';
 import {Link} from 'react-router'
+import BasicDialog from 'components/main/popup/BasicDialog'
+import Truncate from 'react-truncate';
+import FlatButton from 'material-ui/FlatButton';
+
 
 import {apiImage} from 'components/helpers'
 
@@ -31,10 +35,28 @@ const defaultProps = {
 		matches: []
 };
 
+const SummaryEntry = ({children}) => (
+  <span className="text text_color_invert text_size_s summary-head__summary">
+    <Truncate lines={1}>
+      {children}
+    </Truncate>
+  </span>
+)
+
 @connect(
     (dispatch) => ({ dispatch })
 )
 class Card extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {triggerDialog: false};
+  }
+
+  handleClose = (event) => {
+    event.preventDefault();
+    this.setState(({triggerDialog}) => ({triggerDialog: !triggerDialog}));
+  }
+
     render() {
         const {
             title,
@@ -51,6 +73,7 @@ class Card extends Component {
         } = this.props;
         return (
             <div className="slider__item slider__item_content_middle">
+
                 <div className="mdl-card card card_size_s">
                     <div className="summary-head summary-head_rad-top" style={{ backgroundColor: '#4f68ac' }}>
                         <div className="summary-head__title mdl-card__title">
@@ -70,44 +93,47 @@ class Card extends Component {
                                 <div className="summary-head__title-column ">
                                     <span className="text text_color_invert summary-head__label">Focus
                                     </span>
-                                    <span className="text text_color_invert text_size_s summary-head__summary">{industries && Array.isArray(industries) ? industries[0].parent : ''}</span>
-                                </div>
+                                    <SummaryEntry>
+                                      {industries && Array.isArray(industries) ? industries[0].parent : ''}
+                                    </SummaryEntry>
+                                  </div>
                                 <div className="summary-head__title-column ">
                                     <span className="text text_color_invert summary-head__label">Salary
                                     </span>
-                                    <span className="text text_color_invert text_size_s summary-head__summary">{salary}</span>
+                                    <SummaryEntry>
+                                      {salary}
+                                    </SummaryEntry>
                                 </div>
                                 <div className="summary-head__title-column ">
                                     <span className="text text_color_invert summary-head__label">Experience
                                     </span>
-                                    <span className="text text_color_invert text_size_s summary-head__summary">{experience}</span>
+                                    <SummaryEntry>
+                                      {experience}
+                                    </SummaryEntry>
                                 </div>
                                 <div className="summary-head__title-column ">
                                     <span className="text text_color_invert summary-head__label">Employment
                                     </span>
-                                    <span className="text text_color_invert text_size_s summary-head__summary">{employment}</span>
+                                    <SummaryEntry>
+                                      {employment}
+                                    </SummaryEntry>
                                 </div>
                                 <div className="summary-head__title-column ">
                                     <span className="text text_color_invert summary-head__label">Degree
                                     </span>
-                                    <span className="text text_color_invert text_size_s summary-head__summary">{degree}</span>
+                                    <SummaryEntry>
+                                      {degree}
+                                    </SummaryEntry>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div className="card__middle-block">
                         <div className="row">
-                            <div className="col-xs-6 no-right-gutter">
+                            <div className="col-xs-6 col-xs-offset-3 no-right-gutter">
                                 <Link className="link" to={`recruiter/jobs/${_id}/candidates`}>
                                     View Matches
                                 </Link>
-                            </div>
-                            <div className="col-xs-6">
-                                <div className="text-right">
-                                    {candidates.briefs.map(candidate =>
-                                        <img className="image image_size_m image_round" src={apiImage(candidate.avatar)} />
-                                    )}
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -124,13 +150,26 @@ class Card extends Component {
                             <div className="mdl-layout-spacer" />
                             <button
                                 className="link link_type_additional"
-                                onClick={(event) => {
-                                    event.preventDefault();
-                                    dispatch(closeJob(_id));
-                                }}
+                                onClick={this.handleClose}
                             >
                             Close Job
                             </button>
+                            <BasicDialog
+                              trigger={this.state.triggerDialog}
+                              closeText={"Nevermind"}
+                              onClose={() => {}}
+                              mainAction={
+                                <FlatButton
+                                  primary
+                                  onTouchTap={() => {
+                                    dispatch(closeJob(_id))
+                                  }}
+                                  label="Close Job"
+                                />
+                              }
+                            >
+                              Are you sure you want to close the job?
+                            </BasicDialog>
                         </div>
                     </form>
                 </div>

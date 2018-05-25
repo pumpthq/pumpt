@@ -7,7 +7,7 @@ import {renderField} from 'components/form/helpers'
 import {Checkbox} from 'redux-form-material-ui'
 import Button from './../../../../../components/main/button';
 import {THIS_EMAIL_IS_ALREADY_REGISTERED,} from './../../../../../constants/candidateOnboarding';
-import {gotoIndustryStep, saveContactInfoData, showIndustryStep,} from 'actions/candidateOnboarding';
+import {gotoDegreeStep, saveContactInfoData, showDegreeStep,} from 'actions/candidateOnboarding';
 import {checkEmailAvailability} from 'actions/authorization'
 //Places Autocomplete Library
 import {PlaceField} from 'components/main/form/PlaceField'
@@ -28,7 +28,7 @@ const asyncValidate = (values, dispatch) => {
 //Form
 let OnboardingCandidateContactInfo = props => {
 		const { handleSubmit, invalid, asyncValidating, submitting, error, valid, dispatch } = props
-		const submitDisabled = invalid || submitting || asyncValidating || error
+		const submitDisabled = invalid || submitting || error
 
 		//Props for AutoComplete Item (Special)
 		const cssClasses = {
@@ -38,8 +38,8 @@ let OnboardingCandidateContactInfo = props => {
     // handleSubmit function
     const submit = (values, dispatch) => {
 			dispatch(saveContactInfoData(values))
-			dispatch(showIndustryStep()) //this can also be called in a saga
-      dispatch(gotoIndustryStep()) 
+			dispatch(showDegreeStep()) //this can also be called in a saga
+      dispatch(gotoDegreeStep()) 
 
 		}
 

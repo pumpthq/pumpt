@@ -7,6 +7,7 @@ import {
     SHOW_EXPERIENCE_STEP,
     SHOW_FIELD_OF_EXPERTISE_STEP,
     SHOW_INCOME_STEP,
+    SHOW_DEGREE_STEP,
     SHOW_INDUSTRY_STEP,
     SHOW_JOB_TITLE_STEP,
     SHOW_SET_UP_PASSWORD_STEP,
@@ -14,6 +15,7 @@ import {
 } from './../../../../constants/candidateOnboarding'
 
 import ContactInfoStep from './contactInfo'
+import DegreeStep from './degree'
 import IndustryStep from './industry'
 import FieldOfExpertiseStep from './fieldOfExpertion'
 import JobTitleStep from './jobTitle'
@@ -22,21 +24,6 @@ import ExperienceStep from './experience'
 import ValuesStep from './values'
 import CompanySizeStep from './companySize'
 import CandidateFinalStep from './final'
-
-// export function mapStateToProps(state, ownProps) {
-//     // const { step } = state.candidateOnboarding
-//
-//     return {
-//         state,
-//         // step
-//     }
-// }
-
-// export function mapDispatchToProps(dispatch, ownProps) {
-//     return {
-//         dispatch
-//     }
-// }
 
 @connect()
 class OnboardingCandidateStepSwitcher extends Component {
@@ -49,6 +36,8 @@ class OnboardingCandidateStepSwitcher extends Component {
         switch (step) {
             case SHOW_CONTACT_INFO_STEP :
                 return (<ContactInfoStep/>)
+            case SHOW_DEGREE_STEP :
+                return (<DegreeStep {...props}/>)
             case SHOW_INDUSTRY_STEP :
                 return (<IndustryStep {...props}/>)
             case SHOW_FIELD_OF_EXPERTISE_STEP :
