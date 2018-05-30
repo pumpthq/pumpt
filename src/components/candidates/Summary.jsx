@@ -5,6 +5,7 @@ import Uploader from 'components/FileUploader';
 import { displayIndustries } from 'components/helpers';
 
 import { updateCandidate } from 'actions/candidateMatches';
+import './summary.less';
 
 const CandidateSummary = ({
   candidate: {
@@ -18,7 +19,7 @@ const CandidateSummary = ({
   authorization: { email },
   onEdit,
 }) => (
-  <div className="summary-head">
+  <div className="summary-head summary">
     <div className="summary-head__title mdl-card__title">
       <div className="summary-head__title-item summary-head__title-item_type_alignment">
         <div className="summary-head__title-column">

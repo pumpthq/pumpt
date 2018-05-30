@@ -12,14 +12,6 @@ export default class RecruiterSummary extends Component {
                 <div class="summary-head__title mdl-card__title">
                     <div class="summary-head__title-item summary-head__title-item_type_alignment">
                         <div class="summary-head__title-column">
-															{/* //FIXME: //more testing needed
-                            <ImageUploader
-                                label="Photo"
-                                iconPhoto={<IconPhoto />}
-                                imageId={avatar}
-                                onSuccessAction={(data) => updateRecruiter({avatar:data.id})}
-                            />
-														*/}
                             <div class="summary-head__title-block">
                                 <h2 class="mdl-card__title-text heading heading_type_two">
                                     <span class="ellipsis-text">
@@ -42,7 +34,7 @@ export default class RecruiterSummary extends Component {
                     </div>
                     <div class="summary-head__title-item summary-head__title-item_type_alignment">
                         <div class="summary-head__title-column">
-                            <span class="text summary-head__label">Position</span>
+                            <span class="text summary-head__label">Your Position</span>
                             <span class="text text_size_s summary-head__summary">{position}</span>
                         </div>
                     </div>
