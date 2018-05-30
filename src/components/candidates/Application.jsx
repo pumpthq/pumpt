@@ -48,19 +48,15 @@ let CandidateApplicationForm = ({ handleSubmit, submitting, invalid, submitSucce
 
   return (
     <form onSubmit={handleSubmit} className="candidate-application-form text-input-underlined">
-      <CaseIcon />
       <FieldArray name="workingExperience" label="Working Experience" component={renderWorkingExperiences} />
       <CardDivider />
 
-      <Education />
       <FieldArray name="education" component={renderEducations} />
       <CardDivider />
 
-      <Skills />
       <FieldArray name="skills" component={renderSkills} />
       <CardDivider />
 
-      <Social />
       <FieldArray name="social" component={renderSocial} />
       <CardDivider />
 

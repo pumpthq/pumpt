@@ -51,14 +51,7 @@ let ChangePassForm = props => {
 
 	return (
 					<div className='change-password-popup'>
-							<button
-									style={buttonStyle}
-									className="button button_type_close"
-									onClick={browserHistory.goBack}
-							>
-									×
-							</button>
-							<div>
+						<div>
 									<Title />
 									<form className="form form_padding-size_xs" onSubmit={handleSubmit(submit)}>
 											<Field
@@ -84,7 +77,6 @@ let ChangePassForm = props => {
 
 											<div className="form__actions">
 													<SubmitButton isDisabled={submitDisabled} />
-													<CancelLink handleClose={browserHistory.goBack} />
 											</div>
 									</form>
 							</div>
