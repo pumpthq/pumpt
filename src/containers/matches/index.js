@@ -4,6 +4,7 @@ import MatchesContainer from './candidate/MatchesContainer'
 import VacancyContainer from './candidate/VacancyContainer'
 import CompanyContainer from './CompanyContainer'
 import EditContainer from './candidate/EditContainer'
+import SettingsContainer from './SettingsContainer.jsx'
 
 import ChangePasswordContainer from 'containers/ChangePasswordContainer'
 
@@ -21,5 +22,6 @@ module.exports = {
         { path: 'not-interested', component: NotInterestedMatchesSlider },
         { path: 'approved', component: ApprovedMatchesSlider },
         { path: 'changePass', component: ChangePasswordContainer },
+      { path: 'settings', component: SettingsContainer },
     ]
 };

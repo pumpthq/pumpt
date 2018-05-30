@@ -27,7 +27,7 @@ export default class BasicDialog extends Component {
 
   handleClose = () => {
     this.setState({ open: false });
-    this.props.onClose();
+    this.props.onClose && this.props.onClose();
   };
 
   render() {
