@@ -21,7 +21,7 @@ class LocationInfoStep extends Component {
                         <section class="column column_size_l">
                             <Panel paddingBig>
                                 <H1 noGutter typeFour class="row">
-                                    <span class="onboarding-header col-lg-10 col-md-10 col-sm-10 col-xs-10">Where are your company’s headquarters located?</span>
+                                    <span class="onboarding-header col-lg-10 col-md-10 col-sm-10 col-xs-10">Where is your company headquartered?</span>
                                     <span class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
                                         <span class="image__wrapper">
                                             <img class="icon icon-onboarding-3" src={on3Image} />
