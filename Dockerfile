@@ -1,21 +1,15 @@
-FROM node:argon
+FROM node:carbon
+# Ensure secrets directory is in the working directory
+# docker build -t jkobyp/pumpt .
+# docker run --name pumpt -p 4000:4000 -d jkobyp/pumpt
+# docker exec -it pumpt /bin/bash
 
-RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
-
-# Install app dependencies
-COPY package.json /usr/src/app/
+COPY package*.json ./
 RUN npm install
 
-# Install pm2
-RUN npm install -g pm2
+COPY . .
+EXPOSE 4000
+ENV NODE_ENV docker
 
-# Copy app code
-COPY . /usr/src/app
-
-# Build project
-RUN npm run build
-
-# Run
-EXPOSE 3011
-CMD ["pm2", "start", "process.json", "--env", "staging", "--no-daemon"]
+CMD ["node", "server.js"]
