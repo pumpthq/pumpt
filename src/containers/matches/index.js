@@ -14,7 +14,7 @@ import RequireAuth from 'wrappers/RequireAuth'
 
 
 const displayIfActive = (activeComponent) => (
- () => <InactiveMatchesPlaceholder activeComponent={activeComponent} />  
+ (props) => <InactiveMatchesPlaceholder childProps={props} activeComponent={activeComponent} />  
 );
 
 module.exports = {

@@ -5,8 +5,9 @@ import { connect } from 'react-redux'
 class InactiveMatchesPlaceholder extends Component {
     render() {
         const ActiveComponent = this.props.activeComponent;
+      const { childProps } = this.props;
         if(this.props.active) {
-         return ( <ActiveComponent/> )
+         return ( <ActiveComponent {...childProps} /> )
 	} else {
          return (
          <div className="welcome-to-matches-popup">
