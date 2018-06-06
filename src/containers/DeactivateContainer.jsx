@@ -31,10 +31,10 @@ export default class Deactivate extends Component {
           return (
 <div>
           <h3 className="heading heading_type_three">
-            Activate Account
+            Reactivate Account
             </h3>
             <p>
-             Do you want to activate your account and resume receiving matches?
+             Want to reactivate your account? Click the button below in order to receive job matches.
            </p>
            <form
              className="form_padding-size_xs"
@@ -44,7 +44,7 @@ export default class Deactivate extends Component {
                 type="submit"
                 className="mdl-button button button_margin-right_m button_type_colored button_size_50p"
               >
-                Activate
+                Reactivate Your Account
               </button>
            </form>
           </div>
@@ -56,7 +56,7 @@ export default class Deactivate extends Component {
             Deactivate Account
             </h3>
             <p>
-             Do you want to deactivate your account? Know that by deactivating your account, you will no longer receive job matches, etc.
+             Do you want to deactivate your account? By deactivating your account, you will no longer receive job matches.
            </p>
            <form className="form_padding-size_xs">
               <input
@@ -89,7 +89,7 @@ export default class Deactivate extends Component {
 Are you sure you want to deactivate your account? 
                 </h4>
                 <p>
-You will need to visit this page to reactivate your account.
+You will need to visit the settings page to reactivate your account.
                 </p>
             </BasicDialog>
            </form>
