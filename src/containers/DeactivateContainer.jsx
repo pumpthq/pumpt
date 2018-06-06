@@ -33,7 +33,7 @@ export default class Deactivate extends Component {
           <h3 className="heading heading_type_three">
             Reactivate Account
             </h3>
-            <p>
+            <p className="text">
              Want to reactivate your account? Click the button below in order to receive job matches.
            </p>
            <form
@@ -52,17 +52,17 @@ export default class Deactivate extends Component {
           )} else {
         return (
           <div>
-          <h3 className="heading heading_type_three">
+          <h3>
             Deactivate Account
             </h3>
-            <p>
+            <p className="text">
              Do you want to deactivate your account? By deactivating your account, you will no longer receive job matches.
            </p>
            <form className="form_padding-size_xs">
               <input
                 className="mdl-textfield__input textfield__input"
                 name="email"
-                placeholder="email address"
+                placeholder="Email Address"
                 type="email"
                 onChange={this.handleChange}
               />
