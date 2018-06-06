@@ -2,11 +2,13 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import BasicDialog from 'components/main/popup/BasicDialog';
 import FlatButton from 'material-ui/FlatButton';
-
-const deactivate = () => ({type: "DEACTIVATE"})
+import {deactivateCandidate, activateCandidate} from 'actions/candidateMatches';
 
 const mapStateToProps = (state) => {
-  return {active: state.candidateMatches.candidate.active}
+  return {
+    active: state.candidateMatches.candidate.active,
+    email: state.authorization.email,
+  }
 }
 
 @connect(mapStateToProps)
@@ -19,12 +21,35 @@ export default class Deactivate extends Component {
     e.preventDefault();
     this.setState(({modalTrigger}) => ({modalTrigger: !modalTrigger}))
   }
-  handleChange = (v) => {
-    this.setState({email: v});
+  handleChange = (e) => {
+    this.setState({email: e.target.value});
   }
     render() {
-        const {dispatch} = this.props
+        const {dispatch, active} = this.props
 
+        if (!active) {
+          return (
+<div>
+          <h3 className="heading heading_type_three">
+            Activate Account
+            </h3>
+            <p>
+             Do you want to activate your account and resume receiving matches?
+           </p>
+           <form
+             className="form_padding-size_xs"
+             onSubmit={(e) => {e.preventDefault(); dispatch(activateCandidate())}}
+           >
+              <button
+                type="submit"
+                className="mdl-button button button_margin-right_m button_type_colored button_size_50p"
+              >
+                Activate
+              </button>
+           </form>
+          </div>
+
+          )} else {
         return (
           <div>
           <h3 className="heading heading_type_three">
@@ -43,6 +68,7 @@ export default class Deactivate extends Component {
               />
               <br />
               <button
+              disabled={this.props.email !== this.state.email}
               className="mdl-button button button_margin-right_m button_type_colored button_size_50p"
               onClick={this.triggerModal}
               >
@@ -52,8 +78,9 @@ export default class Deactivate extends Component {
                 trigger={this.state.modalTrigger}
                 mainAction={
                   <FlatButton 
+                    type="submit"
                     label="OK"
-                    onTouchTap={() => {dispatch(deactivate())}}
+                    onTouchTap={() => {dispatch(deactivateCandidate())}}
                     primary
                   />
                 }
@@ -68,5 +95,6 @@ You will need to visit this page to reactivate your account.
            </form>
           </div>
         )
+        }
     }
 }
