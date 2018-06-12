@@ -54,10 +54,6 @@ export default class ApplicationContainer extends Component {
         this.setState({editSummary:val})
     }
 
-    openDialog = () => {
-        this.setState({lastApproved:(new Date)})
-    }
-
 		componentDidMount() {
 		}
 
@@ -67,7 +63,6 @@ export default class ApplicationContainer extends Component {
         //🔧 use 'ref' prop to find and submit the application form (handled by redux-form) and dispatch finishApplication action
         //this.refs.applicationForm.submit();
         this.props.dispatch(finishApplication());
-				this.openDialog();
     }
 
 
@@ -109,18 +104,11 @@ export default class ApplicationContainer extends Component {
 												}
 												<CandidateApplicationForm
 														ref="applicationForm"
-                            onSubmit={values=> {dispatch(updateCandidate(processAppFields(values))) } }
+                            onSubmit={values=>
+{dispatch(updateCandidate(processAppFields(values))); this.handleFinished(); } }
 													/>
 
 														<div className="text-center">
-    													<Button
-    														type='submit'
-    														typeColored
-    														buttonSize='l'
-    														onClick={this.handleFinished}
-    													>
-    													 Done
-    													</Button>
 															<ApplicationSuccessDialog trigger={authorization.lastFinished} />
     												</div>
 														<span>
