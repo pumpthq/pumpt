@@ -51,7 +51,7 @@ const CandidateSummary = ({
           <span className="text text_size_s summary-head__summary">{recentAnnualIncome}</span>
         </div>
         <div className="summary-head__title-column">
-          <span class="text summary-head__label">Industry Experience </span>
+          <span class="text summary-head__label">Years of Experience </span>
           <span class="text text_size_s summary-head__summary">{recentAreaExperience}</span>
         </div>
         <div className="summary-head__title-column">
@@ -65,7 +65,7 @@ const CandidateSummary = ({
           </span>
         </div>
         <div className="summary-head__title-column">
-          <span className="text summary-head__label">Industry</span>
+          <span className="text summary-head__label">Industry Experience</span>
           <span className="text text_size_s summary-head__summary">
             {interestWorkingArea && Array.isArray(interestWorkingArea) ?
                 interestWorkingArea.join(', ') : interestWorkingArea}
