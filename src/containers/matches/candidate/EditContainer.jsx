@@ -68,17 +68,11 @@ class EditContainer extends Component {
               }
 
               <CandidateApplicationForm
-                  onSubmit={values=> {dispatch(updateCandidate(processAppFields(values))) } }/>
+                onSubmit={values=> {dispatch(updateCandidate(processAppFields(values)));
+                  this.openDialog();
+                } }/>
           
   						<div className="text-center">
-  							<Button
-  								type='submit'
-  								typeColored
-  								buttonSize='l'
-  								onClick={this.openDialog}
-  							>
-  							 Done
-  							</Button>
                 <BasicDialog trigger={this.state.triggerDialog} onClose={browserHistory.goBack}>
                   Your application has been saved
                 </BasicDialog>

@@ -49,7 +49,7 @@ export class To extends Component {
                       dispatch(gotoExperienceStep())
                     }
                 }}
-                textLabel='Experience'
+                textLabel='Years of Experience'
                 textFilledWith={value}
             />
         )

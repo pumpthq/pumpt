@@ -60,10 +60,10 @@ let CandidateApplicationForm = ({ handleSubmit, submitting, invalid, submitSucce
       <FieldArray name="social" component={renderSocial} />
       <CardDivider />
 
-      <div>
+      <div className="text-center">
         <button
           type="submit" disabled={submitDisabled}
-          className="mdl-button button button_type_colored button_size_m candidate-submit"
+          className="mdl-button button button_type_colored button_size_l candidate-submit"
         >
           Save
         </button>{(submitSucceeded && pristine) && <span className="message-success">Saved!</span>}
@@ -264,10 +264,11 @@ renderEducations.propTypes = fieldArrayProps;
 const renderSkills = () => (
   <div className="application-item">
     <button className="application-item-button" type="button">Skills</button>
-      <Field
-        name='skills' label='skills' component={MultiInput}
-        values={SKILLS}
-      />
+    {SKILLS.map((skill, index) =>
+      <div className="application-detail checkbox-item col-md-12">
+        <Field name={`skills[${index}].value`} id={`skills[${index}].value`} component={Checkbox} label={skill} />
+      </div>
+    )}
   </div>
 );
 
