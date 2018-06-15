@@ -82,7 +82,7 @@ let CandidateSummaryForm = props => {
           </div>
           <div className="row">
             <div className="col-md-4">
-              <label>Industry</label>
+              <label>Industry Experience</label>
               <Field
                 name="interestWorkingArea"
                 component={MultiInput}

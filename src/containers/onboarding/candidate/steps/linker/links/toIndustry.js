@@ -53,7 +53,7 @@ export class To extends Component {
                       dispatch(gotoIndustryStep())
                     }
                 }}
-                textLabel='Industry'
+                textLabel='Industry Experience'
                 textFilledWith={industries}
             />
         )
