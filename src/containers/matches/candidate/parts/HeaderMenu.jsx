@@ -12,8 +12,8 @@ const mapStateToProps = state => {
     return {candidate: state.candidateMatches.candidate}
 }
 
-@withRouter
 @connect(mapStateToProps)
+@withRouter
 export default class CandidateHeaderMenu extends Component {
 
     render() {
