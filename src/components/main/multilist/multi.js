@@ -6,7 +6,7 @@ const LIST_ITEM_TYPE_TEXT = 'list.item.type.text'
 const makeItem = (value, parentId) => {
   return {
      id: value,
-     value: value, 
+     value: value,
      text: value,
      name: value,
      key: value,
@@ -119,9 +119,14 @@ class MultiselectComponent extends Component {
 
     this.props.listValuesSelected(Array.from(this.state.selectedItems.values()));
   }
-  
+
   handleGroupClick(groupId) {
-    this.setState({ openGroupId: groupId });
+    if(groupId === this.state.openGroupId) {
+      this.setState({ openGroupId: "" });
+    }
+    else {
+      this.setState({ openGroupId: groupId });
+    }
   }
 
   handleValueChange({ id, value }) {
