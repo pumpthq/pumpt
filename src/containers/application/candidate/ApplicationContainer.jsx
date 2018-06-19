@@ -20,6 +20,19 @@ function mapStateToProps(state, ownProps) {
     return { candidate: state.candidateMatches.candidate, authorization: state.authorization,  }
 }
 
+const formatSkills = (values) => {
+  let newValues = values;
+  newValues.skills = values.skills && Array.isArray(values.skills)
+    ? values.skills.reduce((obj, s) => {obj[s] = true; return obj} , {}) 
+    : values.skills || {};
+  return newValues;
+}
+
+const submitSkills = (values) => {
+  let newValues = {...values};
+  newValues.skills = Object.keys(values.skills).filter(k => values.skills[k]);
+  return newValues;
+}
 
 const recentWorkingAreasToParent = (values) => {
   values.recentWorkingArea = values.recentWorkingAreas.map( a => (a.value));
@@ -104,8 +117,9 @@ export default class ApplicationContainer extends Component {
 												}
 												<CandidateApplicationForm
 														ref="applicationForm"
+                            initialValues={formatSkills(candidate)}
                             onSubmit={values=>
-{dispatch(updateCandidate(processAppFields(values))); this.handleFinished(); } }
+{dispatch(updateCandidate(submitSkills(processAppFields(values)))); this.handleFinished(); } }
 													/>
 
 														<div className="text-center">

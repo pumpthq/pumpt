@@ -5,7 +5,7 @@ import { reduxForm, FieldArray, Field, SubmissionError, propTypes as formTypes }
 // Places Autocomplete Library
 import { PlaceField } from 'components/main/form/PlaceField';
 
-import { Checkbox } from 'material-ui';
+import { Checkbox } from 'redux-form-material-ui';
 import MultiInput from 'components/main/form/MultiInput'
 
 // Actions
@@ -266,7 +266,7 @@ const renderSkills = () => (
     <button className="application-item-button" type="button">Skills</button>
     {SKILLS.map((skill, index) =>
       <div className="application-detail checkbox-item col-md-12">
-        <Field name={`skills[${index}].value`} id={`skills[${index}].value`} component={Checkbox} label={skill} />
+        <Field name={`skills[${skill}]`} id={`skills[${skill}]`} component={Checkbox} label={skill} />
       </div>
     )}
   </div>
