@@ -11,7 +11,7 @@ import BasicDialog from 'components/main/popup/BasicDialog';
 
 
 const formatSkills = (values) => {
-  let newValues = {...values};
+  let newValues = values;
   newValues.skills = values.skills && Array.isArray(values.skills)
     ? values.skills.reduce((obj, s) => {console.log(s,obj); obj[s] = true; return obj} , {}) 
     : values.skills || {};
