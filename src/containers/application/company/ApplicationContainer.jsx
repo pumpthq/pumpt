@@ -95,7 +95,11 @@ export default class ApplicationContainer extends Component {
                                                 initialValues={company}
                                                 onSubmit={values=> {dispatch(updateCompany(values)); this.handleFinished() } }/>
 
-                                                
+                                            <ApplicationSuccessDialog trigger={authorization.lastFinished} />
+
+
+																              	<span>
+ 																									<br></br>
 																									<br></br>
 																								</span>
                                             </div>
