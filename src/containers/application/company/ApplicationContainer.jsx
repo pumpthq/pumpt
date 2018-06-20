@@ -29,7 +29,6 @@ export default class ApplicationContainer extends Component {
     constructor(props) {
         super(props)
         this.state = { editRecruiterSummary: false, editCompanySummary: false }
-        console.log(props)
     }
 
     editRecruiterSummary = (val) => {
@@ -45,9 +44,6 @@ export default class ApplicationContainer extends Component {
     }
 
     handleFinished = () => {
-
-        //🔧 use 'ref' prop to find and submit the application form (handled by redux-form) and dispatch finishApplication action
-        //this.refs.companyApplicationForm.submit();
         this.props.dispatch(finishApplication());
 				this.openDialog();
     }
@@ -97,21 +93,9 @@ export default class ApplicationContainer extends Component {
                                             <CompanyApplicationForm
                                                 ref="companyApplicationForm"
                                                 initialValues={company}
-                                                onSubmit={values=> {dispatch(updateCompany(values)) } }/>
+                                                onSubmit={values=> {dispatch(updateCompany(values)); this.handleFinished() } }/>
 
-                                                <div className="text-center">
-                                                    <Button
-                                                        type='submit'
-                                                        typeColored
-                                                        buttonSize='l'
-                                                        onClick={this.handleFinished}
-                                                    >
-                                                       Done 
-                                                    </Button>
-																										<ApplicationSuccessDialog trigger={authorization.lastFinished} />
-                                                </div>
-																								<span>
-																									<br></br>
+                                                
 																									<br></br>
 																								</span>
                                             </div>
