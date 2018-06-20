@@ -14,7 +14,7 @@ export default store => next => action => {
 
       store.dispatch(request({payload}))
 
-      return axios({ baseURL: `http://localhost:4000/${API_URL}`, method, url, data })
+      return axios({ baseURL: API_URL, method, url, data })
       .then(res => {
           store.dispatch(success(res.data))
           return Promise.resolve(res.data) //keep the response data in the promise chain accessible from the return value
