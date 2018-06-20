@@ -11,14 +11,15 @@ const defaultProps = {};
 class MatchesContainer extends Component {
 
     render() {
-        const { children } = this.props;
+      const { children } = this.props;
+      const activeLocation = this.props.location;
 
         return (
             <Wrapper>
                 <div className="container">
                     <div className="row row-padding-bigger">
                         <div className="col-xs-12">
-                            <CompanyHeader />
+                            <CompanyHeader location={activeLocation} />
                         </div>
                     </div>
                 </div>
