@@ -18,6 +18,24 @@ import {
 } from './../constants/candidateMatches';
 import {API} from '../constants/actionTypes'
 
+export const deactivateCandidate = () => ({
+  type : API,
+  payload : {
+    url : `/candidates/deactivate`,
+    method : 'POST',
+    success : fetchCandidate
+  }
+})
+
+export const activateCandidate = () => ({
+  type : API,
+  payload : {
+    url : `/candidates/activate`,
+    method : 'POST',
+    success : fetchCandidate
+  }
+})
+
 export const fetchCandidate = () => ({
     type : API,
     payload : {

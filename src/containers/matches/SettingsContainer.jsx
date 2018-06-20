@@ -16,10 +16,10 @@ export default () => (
   </section>
 
       <section>
-    <h3 className="heading heading_type_three">
+    <h3>
       Help &amp; Support
     </h3>
-    <p>
+    <p className="text">
       Have a question? Please send us an email at &nbsp;
       <Mailto email="support@pumpthq.com" obfuscate={true} target="_blank">
         support@pumpthq.com
