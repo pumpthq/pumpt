@@ -9,6 +9,21 @@ import CandidateApplicationForm from 'components/candidates/Application';
 import Button from 'components/main/button'
 import BasicDialog from 'components/main/popup/BasicDialog';
 
+
+const formatSkills = (values) => {
+  let newValues = values;
+  newValues.skills = values.skills && Array.isArray(values.skills)
+    ? values.skills.reduce((obj, s) => {console.log(s,obj); obj[s] = true; return obj} , {}) 
+    : values.skills || {};
+  return newValues;
+}
+
+const submitSkills = (values) => {
+  let newValues = {...values};
+  newValues.skills = Object.keys(values.skills).filter(k => values.skills[k] === true);
+  return newValues;
+}
+
 const recentWorkingAreasToParent = (values) => {
   values.recentWorkingArea = values.recentWorkingAreas.map( a => (a.value));
   values.recentWorkingAreaParent = values.recentWorkingAreas.length > 0 ? values.recentWorkingAreas[0].parent : undefined;
@@ -68,17 +83,12 @@ class EditContainer extends Component {
               }
 
               <CandidateApplicationForm
-                  onSubmit={values=> {dispatch(updateCandidate(processAppFields(values))) } }/>
+                initialValues={formatSkills(candidate)}
+                onSubmit={values=> {dispatch(updateCandidate(submitSkills(processAppFields(values))));
+                  this.openDialog();
+                } }/>
           
   						<div className="text-center">
-  							<Button
-  								type='submit'
-  								typeColored
-  								buttonSize='l'
-  								onClick={this.openDialog}
-  							>
-  							 Done
-  							</Button>
                 <BasicDialog trigger={this.state.triggerDialog} onClose={browserHistory.goBack}>
                   Your application has been saved
                 </BasicDialog>

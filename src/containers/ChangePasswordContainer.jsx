@@ -17,13 +17,13 @@ export default class ChangePassword extends Component {
         const {dispatch} = this.props
 
         return (
-            <VerticalScroller>
+          <div>
                 <ChangePassForm {...this.props}
-                    onSubmit={values=> {dispatch(changePassword(values)) } } />;
+                    onSubmit={values=> {dispatch(changePassword(values)) } } />
 
 
                 <ChangePassSuccessDialog trigger={this.props.lastChangePass} onClose={browserHistory.goBack}/>
-            </VerticalScroller>
+              </div>
         )
     }
 }

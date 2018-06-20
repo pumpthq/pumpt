@@ -30,8 +30,6 @@ class App extends Component {
   componentWillMount() {
     getAppData()
     .then(()=>{
-      console.log(DEGREE_DROPDOWN_DATA)
-      console.info('app data finished loading')
       this.setState({isLoading:true})
     })
   }

@@ -35,18 +35,11 @@ export default class ApplicationSuccessDialog extends Component {
     render() {
         const actions = [
 					<div>
-						<FlatButton
-            label="Add More Info"
-            primary={true}
-            onTouchTap={this.handleClose}
-						/>
-						<a href="http://blog.pumpthq.com">
-							<FlatButton
-							label="All Set!"
-							primary={true}
-							onTouchTap={this.handleClose}
-							/>
-							</a>
+					<FlatButton
+						label="Continue"
+						primary={true}
+						onTouchTap={this.handleClose}
+					/>
 					</div>
         ];
 

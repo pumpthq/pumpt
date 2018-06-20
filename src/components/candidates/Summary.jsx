@@ -5,6 +5,7 @@ import Uploader from 'components/FileUploader';
 import { displayIndustries } from 'components/helpers';
 
 import { updateCandidate } from 'actions/candidateMatches';
+import './summary.less';
 
 const CandidateSummary = ({
   candidate: {
@@ -18,7 +19,7 @@ const CandidateSummary = ({
   authorization: { email },
   onEdit,
 }) => (
-  <div className="summary-head">
+  <div className="summary-head summary">
     <div className="summary-head__title mdl-card__title">
       <div className="summary-head__title-item summary-head__title-item_type_alignment">
         <div className="summary-head__title-column">
@@ -50,7 +51,7 @@ const CandidateSummary = ({
           <span className="text text_size_s summary-head__summary">{recentAnnualIncome}</span>
         </div>
         <div className="summary-head__title-column">
-          <span class="text summary-head__label">Industry Experience </span>
+          <span class="text summary-head__label">Years of Experience </span>
           <span class="text text_size_s summary-head__summary">{recentAreaExperience}</span>
         </div>
         <div className="summary-head__title-column">
@@ -64,7 +65,7 @@ const CandidateSummary = ({
           </span>
         </div>
         <div className="summary-head__title-column">
-          <span className="text summary-head__label">Industry</span>
+          <span className="text summary-head__label">Industry Experience</span>
           <span className="text text_size_s summary-head__summary">
             {interestWorkingArea && Array.isArray(interestWorkingArea) ?
                 interestWorkingArea.join(', ') : interestWorkingArea}

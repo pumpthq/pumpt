@@ -48,14 +48,9 @@ export default class CandidateHeaderMenu extends Component {
                         userAvatar={apiImage(candidate.avatar)}
                         linkTo={"/candidate/matches/edit"}
                     >
-                      <HeaderDropDownItem to={'/candidate/matches/changePass'}>
-                        Change Password
+                      <HeaderDropDownItem to={'/candidate/matches/settings'}>
+                        Settings
                       </HeaderDropDownItem>
-                        <HeaderDropDownItem nolink >
-												<Mailto email="support@pumpthq.com" obfuscate={true} target="_blank">
-														Help &amp; Support
-													</Mailto>
-												</HeaderDropDownItem>
                         <HeaderDropDownItem
                             onClick={() => {
                                 dispatch(logOut());

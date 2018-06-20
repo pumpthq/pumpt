@@ -5,7 +5,7 @@ import { reduxForm, FieldArray, Field, SubmissionError, propTypes as formTypes }
 // Places Autocomplete Library
 import { PlaceField } from 'components/main/form/PlaceField';
 
-import { Checkbox } from 'material-ui';
+import { Checkbox } from 'redux-form-material-ui';
 import MultiInput from 'components/main/form/MultiInput'
 
 // Actions
@@ -48,26 +48,22 @@ let CandidateApplicationForm = ({ handleSubmit, submitting, invalid, submitSucce
 
   return (
     <form onSubmit={handleSubmit} className="candidate-application-form text-input-underlined">
-      <CaseIcon />
       <FieldArray name="workingExperience" label="Working Experience" component={renderWorkingExperiences} />
       <CardDivider />
 
-      <Education />
       <FieldArray name="education" component={renderEducations} />
       <CardDivider />
 
-      <Skills />
       <FieldArray name="skills" component={renderSkills} />
       <CardDivider />
 
-      <Social />
       <FieldArray name="social" component={renderSocial} />
       <CardDivider />
 
-      <div>
+      <div className="text-center">
         <button
           type="submit" disabled={submitDisabled}
-          className="mdl-button button button_type_colored button_size_m candidate-submit"
+          className="mdl-button button button_type_colored button_size_l candidate-submit"
         >
           Save
         </button>{(submitSucceeded && pristine) && <span className="message-success">Saved!</span>}
@@ -268,10 +264,11 @@ renderEducations.propTypes = fieldArrayProps;
 const renderSkills = () => (
   <div className="application-item">
     <button className="application-item-button" type="button">Skills</button>
-      <Field
-        name='skills' label='skills' component={MultiInput}
-        values={SKILLS}
-      />
+    {SKILLS.map((skill, index) =>
+      <div className="application-detail checkbox-item col-md-12">
+        <Field name={`skills[${skill}]`} id={`skills[${skill}]`} component={Checkbox} label={skill} />
+      </div>
+    )}
   </div>
 );
 
