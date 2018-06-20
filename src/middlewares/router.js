@@ -1,4 +1,4 @@
 import {routerMiddleware} from 'react-router-redux'
-import {browserHistory} from 'react-router'
+import {hashHistory} from 'react-router'
 
-export default routerMiddleware(browserHistory)
+export default routerMiddleware(hashHistory)

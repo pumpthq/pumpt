@@ -1,4 +1,4 @@
-export const API_URL = '/api';
+export const API_URL = 'api';
 export const EMAIL_AVAILABILITY = '/users';
 export const API_CANDIDATE_ROOT = '/candidates';
 export const API_VACANCY_ROOT = '/vacancies';
