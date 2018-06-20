@@ -388,6 +388,13 @@
               transform: rotate(135deg);
               width: 12px;
             }
+
+            &.link_color_l-grey, &.link_type_nopointer {
+              &::before {
+                border-color: @light-grey;
+              }
+            }
+
           }
 
           &.list__item_active {
@@ -400,6 +407,7 @@
                 transform: rotate(-45deg);
                 top: 17px;
               }
+
             }
 
             .list_type_sublayer {
