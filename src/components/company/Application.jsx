@@ -32,19 +32,10 @@ let CompanyApplicationForm = props => {
   const { handleSubmit, submitting, error, invalid,
     submitSucceeded, pristine } = props;
   const submitDisabled = invalid || submitting;
-  const submit = (values, dispatch) => {
-    return dispatch(updateCompany(values))
-      .catch(() => {
-        throw new SubmissionError({
-          _error: `Error Saving Profile. Please correct any errors, 
-try again, and let us know if the issue persists`,
-        });
-      });
-  };
 
   return (
     <form
-      onSubmit={handleSubmit(submit)}
+      onSubmit={handleSubmit}
       className="company-application-form text-input-underlined"
     >
       <CardDivider />
@@ -73,18 +64,16 @@ try again, and let us know if the issue persists`,
       />
       <CardDivider />
 
-      {/*	<FieldArray fields="images" label="Photos" component={renderImages} />*/}
-      <CardDivider />
 
       <div>
         {error && <span className="textfield__error">{error}</span>}
         <br />
-        <button
+        <div class="text-center"><button
           type="submit" disabled={submitDisabled}
-          className="mdl-button button invisible-mobile button_type_colored button_size_m company-submit"
+          className="mdl-button button invisible-mobile button_type_colored button_size_l company-submit"
         >
           Save
-        </button>{(submitSucceeded && pristine) && <span className="message-success">Saved!</span>}
+      </button></div>
       </div>
     </form>
   );
