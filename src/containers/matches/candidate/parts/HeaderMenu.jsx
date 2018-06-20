@@ -17,7 +17,6 @@ const mapStateToProps = state => {
 export default class CandidateHeaderMenu extends Component {
 
     render() {
-      console.log('All: ', this.props.router.isActive('/candidate/matches/all'));
         const {
             candidate,
             dispatch,
