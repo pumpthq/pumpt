@@ -78,7 +78,20 @@ class HeadingProgress extends Component {
                 </div>
             )
         }
-        // Default view. if profile is NOT approved & NOT filled. There is no button "Get Matches".
+
+        else if (isFinished && isNotApproved) {
+	        return (
+	            <div className="text-center">
+	                <H1 noGutter typeFour class='row'>Your Application is Under Review</H1>
+	                <p class="text text_after_big-head text_size_xs">
+			You can continue to update your company information below.
+        	    	</p>
+           	    </div>
+       		)
+
+      	}
+
+       // Default view. if profile is NOT approved & NOT filled. There is no button "Get Matches".
 				else {
             return (
                 <div className="text-center">

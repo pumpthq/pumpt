@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
+import {browserHistory} from 'react-router';
 
 import RecruiterForm from 'components/recruiters/Form';
 import RecruiterSummary from 'components/recruiters/Summary';
@@ -9,6 +10,7 @@ import CompanyApplicationForm from 'components/company/Application';
 
 import {updateCompany, updateRecruiter} from 'actions/applicationCompany'
 
+import BasicDialog from 'components/main/popup/BasicDialog';
 function mapStateToProps(state, ownProps) {
     return { recruiter: state.companyJobs.recruiter, company: state.companyJobs.company, authorization: state.authorization }
 }
@@ -17,7 +19,7 @@ function mapStateToProps(state, ownProps) {
 export default class EditContainer extends Component {
     constructor(props) {
         super(props)
-        this.state = { editRecruiterSummary: false, editCompanySummary: false }
+        this.state = { editRecruiterSummary: false, editCompanySummary: false, triggerDialog: false }
     }
 
     editRecruiterSummary = (val) => {
@@ -27,6 +29,11 @@ export default class EditContainer extends Component {
     editCompanySummary = (val) => {
         this.setState({editCompanySummary:val})
     }
+
+    openDialog = () => {
+      this.setState({ triggerDialog: true });
+    }
+
 
     render() {
         const { recruiter, company, dispatch } = this.props
@@ -52,7 +59,13 @@ export default class EditContainer extends Component {
 
                                             <CompanyApplicationForm
                                                 initialValues={company}
-                                                onSubmit={values=> {dispatch(updateCompany(values)) } }/>
+                                                onSubmit={values=> {dispatch(updateCompany(values)); this.openDialog(); } }/>
+
+  						<div className="text-center">
+                <BasicDialog trigger={this.state.triggerDialog} onClose={browserHistory.goBack}>
+                  Your application has been saved
+                </BasicDialog>
+  						</div>
 
                     </div>
         )
