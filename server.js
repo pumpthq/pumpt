@@ -6,6 +6,7 @@ const proxy = require('http-proxy-middleware');
 const cors = require('cors');
 const express = require('express');
 const morgan = require('morgan')
+const fallback = require('express-history-api-fallback');
 
 const { NODE_ENV, HOST, PORT, REMOTE_API_HOST, REMOTE_API_PORT } = process.env
 
@@ -60,6 +61,7 @@ switch (NODE_ENV) {
         const buildAppPath = path.join(__dirname, './build').normalize();
 
         app.use('/', express.static(buildAppPath));
+        app.use(fallback('index.html', {root: buildAppPath}))
         break;
 }
 
