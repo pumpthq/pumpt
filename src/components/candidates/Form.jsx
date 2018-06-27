@@ -14,7 +14,6 @@ import {
   JOB_TITLE_DROPDOWN_DATA,
 } from 'constants/candidateOnboarding';
 
-import './form.less';
 
 // Form
 let CandidateSummaryForm = props => {

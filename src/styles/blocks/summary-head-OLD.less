@@ -1,14 +1,14 @@
+.company-summary-head{
+	min-height: 100px;
+}
 .summary-head {
   flex-shrink: 0;
   position: relative;
+
+  // TODO: refactor to overlay with tint
   background-size: cover;
   background-repeat: no-repeat;
-  padding: 20px 10px 20px;
-
-  .candidate-profile & {
-      background-image: linear-gradient(84deg, #ffffff, #5882f5);
-      text-align: center;
-  }
+  padding: 0 10px 20px;
 
   &:after {
     position: absolute;
@@ -24,9 +24,11 @@
 
   &__title {
     display: block;
-    padding: 32px 35px 34px;
+    padding: 52px 18px 40px;
     position: relative;
     z-index: 1;
+    background-image: linear-gradient(84deg, #ffffff, #5882f5);
+    text-align: center;
 
     &-item {
       display: flex;
@@ -129,8 +131,12 @@
     vertical-align: top;
     //margin-left: 10px;
 
-    .link {
-      padding-left: 20px;
+    .link__edit {
+      position: absolute;
+      top: 0;
+      right: 0;
+      color: #FFF;
+      padding: 18px;
     }
   }
 

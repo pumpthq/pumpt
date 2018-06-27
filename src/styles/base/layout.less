@@ -1,0 +1,38 @@
+.page {
+
+  @media @phone {
+    height: auto;
+    min-height: 100%;
+
+    &_full-block {
+      overflow: hidden;
+    }
+  }
+}
+
+.row-padding-bigger {
+  padding-left: 20px;
+  padding-right: 20px;
+
+  @media @phone {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+.content {
+  padding-bottom: 69px;
+
+  &__wrapper {
+    min-height: 100%;
+    position: relative;
+  }
+
+  @media @phone {
+    padding-bottom: 116px;
+  }
+}
+
+.mdl-card {
+  width: 100%;
+}
