@@ -12,17 +12,17 @@
 .card {
   background: transparent;
   background: @background-base;
-  border-radius: (@br-standard + 2px) (@br-standard + 2px) @br-standard @br-standard;
+  border-radius: @br-standard;
   box-shadow: @bsh-1;
   max-height: 600px;
-  overflow: visible;
+  overflow: hidden;
   position: relative;
   width: 465px;
+  border: none;
 
   @media @phone-portrait {
     max-width: 84vw;
   }
-
 
   &__middle-block {
     //max-height: calc(~'100% - 210px - 54px - 32px');

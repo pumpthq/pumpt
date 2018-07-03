@@ -20,63 +20,50 @@ const CandidateSummary = ({
   onEdit,
 }) => (
   <div>
-    <div className="summary-head">
-      <div className="summary-head__title">
-        <h2 className="mdl-card__title-text heading">
-          <span className="ellipsis-text">
-            {firstName} {lastName}
-          </span>
+
+    <div className="summary-head row">
+      <div className="col-12 py-5">
+        <h2>
+          {firstName} {lastName}
         </h2>
+        <span>{email}</span>
         <br />
-        <span className="text ellipsis-text">{email}</span>
+        <span>{location}</span>
         <br />
-        <span className="text ellipsis-text">{location}</span>
-        <a
-          className="link link__edit" onClick={onEdit}
-          style={{
-            visibility: 'visible',
-            opacity: 1,
-          }}
-        >
+        <a className="link link__edit" onClick={onEdit}>
           Edit
         </a>
       </div>
     </div>
-    <div className="row">
-      <div className="summary-head__title-column">
-        <span className="text summary-head__label">Annual Income</span>
-        <span className="text text_size_s summary-head__summary">{recentAnnualIncome}</span>
+
+    <div className="row summary-body">
+      <div className="col-12 pt-5">
+        <dl>
+          <dt>Annual Income</dt>
+          <dd>{recentAnnualIncome}</dd>
+          <dt>Industry Experience </dt>
+          <dd>{recentAreaExperience}</dd>
+          <dt>Job Title </dt>
+          <dd>{recentJob}</dd>
+          <dt>Working Areas</dt>
+          <dd>{displayIndustries(recentWorkingAreas)}</dd>
+          <dt>Industry</dt>
+          <dd>{interestWorkingArea && Array.isArray(interestWorkingArea) ?
+                interestWorkingArea.join(', ') : interestWorkingArea}
+              </dd>
+          <hr className="my-5" />
+          <dt>Experience + Education</dt>
+          <dd>Please upload your resume (PDF) or enter your Experience and Education.
+            <Uploader label="Resume"
+              onSuccessAction={(data) => (
+                updateCandidate({resumeId: data.id, resumeName: data.name})
+              )}
+            />
+          </dd>
+        </dl>
       </div>
-      <div className="summary-head__title-column">
-        <span class="text summary-head__label">Industry Experience </span>
-        <span class="text text_size_s summary-head__summary">{recentAreaExperience}</span>
-      </div>
-      <div className="summary-head__title-column">
-        <span className="text summary-head__label">Job Title </span>
-        <span className="text text_size_s summary-head__summary">{recentJob}</span>
-      </div>
-      <div className="summary-head__title-column">
-        <span className="text summary-head__label">Working Areas</span>
-        <span className="text text_size_s summary-head__summary">
-          {displayIndustries(recentWorkingAreas)}
-        </span>
-      </div>
-      <div className="summary-head__title-column">
-        <span className="text summary-head__label">Industry</span>
-        <span className="text text_size_s summary-head__summary">
-          {interestWorkingArea && Array.isArray(interestWorkingArea) ?
-              interestWorkingArea.join(', ') : interestWorkingArea}
-            </span>
-          </div>
-        </div>
-        <div className="summary-head__title">
-          <Uploader label="Resume"
-            onSuccessAction={(data) => (
-              updateCandidate({resumeId: data.id, resumeName: data.name})
-            )}
-          />
-        </div>
-      </div>
+    </div>
+  </div>
 );
 
 CandidateSummary.propTypes = {

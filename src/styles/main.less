@@ -1,22 +1,23 @@
 // imported
-@import "base/material.min.css";
-@import "base/grid.css";
+// @import "base/material.min.css"; // Material theme
+// @import "base/grid.css"; // replicates Bootstrap grid classes
+@import "base/bootstrap.min.css"; // Bootstrap 4.1.1
 
 // base
-@import "base/vars";
+@import "base/vars"; // colors, fonts, shadows
 @import "base/mixins";
 @import "base/helpers";
-@import "base/fonts";
-@import "base/common";
-@import "base/layout";
+@import "base/fonts"; // @font-face imports
+@import "base/common"; // css and html standards and resets
+@import "base/layout"; // site containers
 
 // blocks
 @import "blocks/text";
 @import "blocks/icon";
-@import "blocks/heading";
+@import "blocks/heading"; // h1 - h5 styles; old .heading classes
 @import "blocks/image";
 @import "blocks/card";
-@import "blocks/link";
+@import "blocks/link"; // inline link styles
 @import "blocks/button";
 @import "blocks/logo";
 @import "blocks/list";
@@ -27,7 +28,7 @@
 @import "blocks/profile-progress";
 @import "blocks/select";
 @import "blocks/slider";
-@import "blocks/summary-head";
+@import "blocks/summary-head"; // card summary head section
 @import "blocks/dropdown";
 @import "blocks/form";
 @import "blocks/footer";

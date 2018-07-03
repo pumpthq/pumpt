@@ -15,14 +15,14 @@ class MatchesContainer extends Component {
 
         return (
             <Wrapper>
-                <div className="container">
-                    <div className="row row-padding-bigger">
-                        <div className="col-xs-12">
+                <div className="container topnav">
+                    <div className="row">
+                        <div className="col-12">
                             <CompanyHeader />
                         </div>
                     </div>
                 </div>
-                <div className="container">
+                <div className="container main">
                     {children}
                 </div>
                 <TabBar />

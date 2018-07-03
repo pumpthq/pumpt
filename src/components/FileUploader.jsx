@@ -87,10 +87,8 @@ export default class FileUploader extends Component {
 
           return (
               <div className="row">
-                <div className="col-12 col-md-6">
+                <div className="col-12">
                   <span className={`upload-file-component used ${additionalClass}`}>
-                    Click Edit to remove your resume and upload a new version (PDF)
-
                     {/* hide the ugly file-upload element and style the label instead */}
                     <input
                       className="hide"
