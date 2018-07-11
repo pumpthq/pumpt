@@ -27,13 +27,13 @@ export default class Deactivate extends Component {
 
         return (
           <div>
-          <h3 className="heading heading_type_three">
-            Deactivate Account
+            <h3>
+              Deactivate Account
             </h3>
             <p>
              Do you want to deactivate your account? Know that by deactivating your account, you will no longer receive job matches, etc.
            </p>
-           <form className="form_padding-size_xs">
+           <form className="application-form">
               <input
                 className="mdl-textfield__input textfield__input"
                 name="email"
@@ -43,7 +43,7 @@ export default class Deactivate extends Component {
               />
               <br />
               <button
-              className="mdl-button button button_margin-right_m button_type_colored button_size_50p"
+              className="button_type_colored"
               onClick={this.triggerModal}
               >
                 Deactivate
@@ -51,7 +51,7 @@ export default class Deactivate extends Component {
               <BasicDialog
                 trigger={this.state.modalTrigger}
                 mainAction={
-                  <FlatButton 
+                  <FlatButton
                     label="OK"
                     onTouchTap={() => {dispatch(deactivate())}}
                     primary
@@ -59,7 +59,7 @@ export default class Deactivate extends Component {
                 }
               >
                 <h4>
-Are you sure you want to deactivate your account? 
+Are you sure you want to deactivate your account?
                 </h4>
                 <p>
 You will need to visit this page to reactivate your account.

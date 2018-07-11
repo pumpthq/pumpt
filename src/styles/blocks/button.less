@@ -43,6 +43,14 @@
       }
     }
 
+    &_text {
+      color: @color-additional;
+      font-weight: 600;
+      &:hover {
+        color: @color-base;
+      }
+    }
+
     &_slider {
       .size(36px);
       background: transparent;
@@ -267,6 +275,7 @@
     &_s {
       padding-left: @btn-padding - 16px;
       padding-right: @btn-padding - 11px;
+      min-height: 2em;
     }
 
     &_m {
@@ -287,20 +296,12 @@
     &_xl {
       padding: 12px (@btn-padding * 2 + 8px);
     }
-
-    &_50p {
-      width: 50%;
-    }
   }
 
   &_height {
     &_small {
       height: 36px;
     }
-  }
-
-  &_margin-right_m {
-    margin-right: 35px;
   }
 
   &_state {
