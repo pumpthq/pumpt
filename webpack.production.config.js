@@ -17,7 +17,7 @@ module.exports = {
 
     output : {
         path : BUILD_PATH,
-        publicPath : '',
+      publicPath : '/',
         filename: '[name].js',
         chunkFilename: '[id].chunk.js',
     },
@@ -47,7 +47,7 @@ module.exports = {
             {
                 test : /\.(png|jpg|gif|svg|ttf|eot|woff|woff2)/,
                 include : /\/node_modules\//,
-                loader : 'file-loader?name=[1]?[hash]&regExp=node_modules/(.*)'
+              loader : 'file-loader?name=[1]?[hash]&regExp=node_modules/(.*)'
             },
             {
                 test : /\.(png|jpg|gif|svg|ttf|eot|woff|woff2)/,
