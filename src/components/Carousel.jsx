@@ -1,6 +1,4 @@
 import React, {Component, PropTypes} from 'react';
-import 'components/matches/carousel.less'
-
 import ArrowIcon from 'components/icons/arrow'
 
 const propTypes = {

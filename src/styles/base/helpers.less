@@ -5,6 +5,16 @@
   margin: 0;
 }
 
+.divided {
+  &_pipe {
+    &:nth-of-type(n+2) {
+      &:before {
+        content: '\00A0|\00A0';
+      }
+    }
+  }
+}
+
 .clearfix {
   &:before,
   &:after {

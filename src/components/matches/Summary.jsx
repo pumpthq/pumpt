@@ -6,8 +6,6 @@ import {postApprove, postBookmark, postReject} from '../../actions/candidateMatc
 import {ApproveFill, ApproveOpen, BookmarkOpen, Decline} from 'components/icons'
 import {apiImage, tintedBackground} from 'components/helpers'
 
-import './card.less'
-
 
 const propTypes = {};
 
@@ -27,6 +25,7 @@ const defaultProps = {
             experience: '{experience}',
             employment: '{employment}',
             description: '{description}',
+            education: '{education}',
         }
     },
     score: '{score}',
@@ -52,53 +51,50 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 @connect(undefined, mapDispatchToProps)
 export default class Summary extends Component {
 
-    componentWillMount() {}
+  componentWillMount() {}
 
-    renderMatchInformation() {
-        const { score, company, vacancy, backgroundTint } = this.props
-        return (
-            <div className="summary-head" style={ tintedBackground(apiImage(company.brief.background),...backgroundTint) } >
-                <div className="summary-head__title mdl-card__title">
-                    <div className="summary-head__title-item">
-                        <div className="summary-head__title-column">
-                            <img className="image image_round image_size_xxl image_type_company-logo" src={apiImage(company.brief.logo)}/>
-                            <div className="summary-head__title-block">
-                                <h2 className="mdl-card__title-text heading heading_color_invert heading_type_two">
-                                    {company.brief.name}
-                                </h2>
-                                <span className="mdl-card__subtitle-text summary-head__subtitle-text text text_color_invert">
-                                    {vacancy.brief.title}<br/>
-                                    {vacancy.brief.state}
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="summary-head__title-item">
-                        <div className="summary-head__title-column">
-                            <span  className="text text_color_invert summary-head__label">Industry Experience </span>
-                            <span  className="text text_color_invert text_size_s summary-head__summary">{vacancy.brief.experience}</span>
-                        </div>
-                        <div className="summary-head__title-column">
-                            <span  className="text text_color_invert summary-head__label">Employment </span>
-                            <span  className="text text_color_invert text_size_s summary-head__summary">{vacancy.brief.employment}</span>
-                        </div>
-                    </div>
-                </div>
+  renderMatchInformation() {
+    const { score, company, vacancy, backgroundTint } = this.props
+    return (
+      <div className="summary-head row py-3">
+        <div className="col-12 pb-2"><h2>{company.brief.name}</h2></div>
+        <div className="col-3">
+          <img className="image image_round image_size_xl image_type_company-logo" src={apiImage(company.brief.logo)}/>
+        </div>
+        <div className="col-9 text-left">
+          <h2 className="job_title font-weight-normal mb-1">{vacancy.brief.title}</h2>
+          {vacancy.brief.employment}
+        </div>
+        {/*
+              {vacancy.brief.state}
+              {vacancy.brief.experience}
+              {vacancy.brief.employment}
+              */}
             </div>
-        )
-    }
+    )
+  }
 
-    renderShortContent() {
-        const { vacancy } = this.props
-        return (
-            <div className="card__middle-block">
-              <span
-                className="mdl-card__supporting-text card__supporting-text"
-                dangerouslySetInnerHTML={{ __html: vacancy.brief.description }}
-              />
-            </div>
-        );
-    }
+  renderShortContent() {
+    const { vacancy } = this.props
+    return (
+      <div className="card__middle-block py-4">
+        <dl>
+          <dt>Industries</dt>
+          <dd>
+            {vacancy.brief.industries.map(function(industry,i) {
+              return <span key="{i}" className="divided_pipe">{industry.value}</span>
+            })}
+          </dd>
+          <dt>Industry Experience</dt>
+          <dd>{vacancy.brief.experience}</dd>
+          <dt>Employment Type</dt>
+          <dd>{vacancy.brief.employment}</dd>
+          <dt>Educational Degree</dt>
+          <dd>{vacancy.brief.degree}</dd>
+        </dl>
+      </div>
+    );
+  }
     renderBookmarks() {
         const { candidate: { status }, addToBookmark } = this.props;
 
@@ -129,19 +125,15 @@ export default class Summary extends Component {
         return (
             <div className="slider__item">
                 <div className="mdl-card card">
-                    {this.renderMatchInformation()}
-                    {this.renderShortContent()}
-                    <form className="card__actions-wrapper">
-                        <div className="mdl-card__actions card__actions">
-                            <div>
-                                <Link className="link" to={`candidate/matches/match/${_id}/company/${_company}/vacancy/${_vacancy}`}>
-                                    View Full Description
-                                </Link>
-                            </div>
-                        </div>
-                    </form>
+                  {this.renderMatchInformation()}
+                  {this.renderShortContent()}
+                    <Link className="link m-auto" to={`candidate/matches/match/${_id}/company/${_company}/vacancy/${_vacancy}`}>
+                      <button className="button_type_colored button_size_l m-auto">
+                        View Full Description
+                      </button>
+                    </Link>
                 </div>
-            </div>
+              </div>
         );
     }
 }
