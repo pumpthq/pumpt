@@ -4,7 +4,7 @@ import { browserHistory } from 'react-router';
 import { apiImage, apiFile, displayIndustries } from 'components/helpers';
 import { SKILLS } from 'constants/candidateOnboarding';
 
-import './profile.less';
+// import './profile.less';
 
 const propTypes = {};
 const defaultProps = {

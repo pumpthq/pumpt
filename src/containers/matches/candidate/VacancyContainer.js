@@ -10,7 +10,7 @@ import VerticalScroller from 'components/VerticalScroller'
 import MatchCandidateActions from 'components/matches/CandidateActions'
 
 
-import CompanySummary from 'components/company/shared/Summary'
+// import CompanySummary from 'components/company/shared/Summary'
 
 const mapStateToProps = (state, ownProps) => {
     const match = find(state.candidateMatches.matches, o => o._id === ownProps.mid)
@@ -56,11 +56,10 @@ export default class VacancyContainer extends Component {
     }
     render() {
         return (
-            <VerticalScroller>
+            <div>
                     <VacancyProfile {...this.props.vacancy} >
-                        <MatchCandidateActions {...this.props.match} {...this.props.actions}/>
+                        <MatchCandidateActions {...this.props.match} {...this.props.actions} {...this.props.company} />
                     </VacancyProfile>
-                    <CompanySummary {...this.props.company} />
 
                     <BasicDialog trigger={this.props.lastRejected} onClose={browserHistory.goBack}>
                       This Job Posting has Been Rejected
@@ -72,7 +71,7 @@ export default class VacancyContainer extends Component {
                       This job is now saved and can be found in your Bookmark folder.
                     </BasicDialog>
 
-            </VerticalScroller>
+                </div>
 
         )
     }

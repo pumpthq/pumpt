@@ -50,7 +50,6 @@ const CandidateSummary = ({
           <dd>{interestWorkingArea && Array.isArray(interestWorkingArea) ?
                 interestWorkingArea.join(', ') : interestWorkingArea}
               </dd>
-
         </dl>
       </div>
     </div>

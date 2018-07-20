@@ -17,11 +17,9 @@
   max-height: 600px;
   overflow: hidden;
   position: relative;
-  width: 465px;
   border: none;
 
   @media @phone-portrait {
-    max-width: 84vw;
   }
 
   &__middle-block {
@@ -41,7 +39,6 @@
 
   &__actions-wrapper {
     border-radius: (@br-standard + 2px) (@br-standard + 2px) 0 0;
-    width: 100%;
   }
 
 
@@ -100,7 +97,6 @@
   &_state {
 
     &_open {
-      .size(900px, auto);
       box-shadow: none;
       margin-bottom: 24px;
       max-height: none;
@@ -171,7 +167,6 @@
       margin-bottom: 0;
       margin-left: 16px;
       padding-bottom: 70px;
-      width: 800px;
 
       .card__actions {
         padding-top: 14px;
@@ -396,7 +391,6 @@
 
   @media @phone {
     //min-height: 396px;
-    width: 313px;
 
     &_onb-info {
 
@@ -460,14 +454,10 @@
         position: fixed;
         top: 0;
         left: 0;
-        width: 100vw;
         height: 100vh;
       }
 
       &_open {
-        border-radius: 0;
-        margin-bottom: 23px;
-        width: 100vw;
 
         .card__actions {
           padding-top: 12px;
