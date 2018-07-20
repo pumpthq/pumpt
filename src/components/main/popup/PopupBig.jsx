@@ -46,7 +46,7 @@ class PopUpBig extends Component {
                 <div class="popup popup_big">
                     {/*<a href="" class="button button_type_close">×</a>*/}
                     <div className="popup__top">
-                        <H3 class="heading heading_type_four">{ heading }</H3>
+                        <h1 class="text-center py-4 font-weight-normal">{ heading }</h1>
                     </div>
                     <div className="popup__middle">
                         { children }
