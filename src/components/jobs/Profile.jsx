@@ -132,17 +132,17 @@ export default class Profile extends Component {
                 <dt>Who we are</dt>
                 <dd>{company.description}</dd>
                 <dt>Headquarters</dt>
-                <dd>{company.headquartersLocation.slice(0,company.headquartersLocation.lastIndexOf(','))}</dd>
+                <dd>{company.headquartersLocation && company.headquartersLocation.slice(0,company.headquartersLocation.lastIndexOf(','))}</dd>
                 <dt>Company Type</dt>
                 <dd>
-                  {company.type.map(function(atype,i) {
+                  {company.type && company.type.map(function(atype,i) {
                     return <span key="{i}" className="divided_pipe">{atype}</span>
                   })}
                 </dd>
                 <dt>Company Size</dt>
                 <dd>{company.employeesAmount}</dd>
                 <dt>Website</dt>
-                <dd><a href={company.socialMedia.websiteUrl} target="_blank">{company.socialMedia.websiteUrl}</a></dd>
+                <dd><a href={company.socialMedia && company.socialMedia.websiteUrl} target="_blank">{company.socialMedia && company.socialMedia.websiteUrl}</a></dd>
                 <dt>Founded</dt>
                 <dd>{company.foundDate}</dd>
               </div>
