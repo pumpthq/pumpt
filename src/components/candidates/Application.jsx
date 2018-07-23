@@ -78,7 +78,7 @@ CandidateApplicationForm.propTypes = formTypes;
 // FieldArray Definitions
 const renderWorkingExperiences = ({ fields, meta: { error } }) => (
   <div className="application-item">
-    <h6>{fields.length === 0 && 'Add'} Working Experience</h6>
+    <h6>Working Experience</h6>
     {fields.map((workingExperience, index) => (
       <div key={index} className="info-block">
         <div className="row">
