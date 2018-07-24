@@ -26,6 +26,7 @@ export default () => (
         </p>
       </section>
       <hr className="my-5" />
+
       <section>
         <DeactivateContainer />
       </section>

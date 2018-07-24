@@ -14,7 +14,7 @@ import {
 } from '../constants/candidateOnboarding';
 
 export default () =>
-     axios.get(`http://localhost:4000/${API_URL}/enums/all`)
+     axios.get(`${API_URL}/enums/all`)
         .then(response => {
             const data = response.data;
 

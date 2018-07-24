@@ -329,11 +329,5 @@ CandidateApplicationForm = reduxForm({
   enableReinitialize: true,
 })(CandidateApplicationForm);
 
-CandidateApplicationForm = connect(
-  state => ({
-    initialValues: state.candidateMatches.candidate,
-  })
-)(CandidateApplicationForm);
-
 // Export Form
 export default CandidateApplicationForm;
