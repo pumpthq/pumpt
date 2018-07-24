@@ -52,13 +52,8 @@ export default class Deactivate extends Component {
           )} else {
         return (
           <div>
-<<<<<<< HEAD
             <h3>
               Deactivate Account
-=======
-          <h3>
-            Deactivate Account
->>>>>>> staging
             </h3>
             <p className="text">
              Do you want to deactivate your account? By deactivating your account, you will no longer receive job matches.

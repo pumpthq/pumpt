@@ -33,7 +33,6 @@ const CandidateSummary = ({
           Edit
         </a>
       </div>
-<<<<<<< HEAD
     </div>
 
     <div className="row summary-body card-inner">
