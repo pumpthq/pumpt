@@ -5,13 +5,15 @@ class CardSlider extends Component {
     render() {
         const Item = this.props.component;
         const Placeholder = this.props.placeholder;
+      const items = this.props.sort ? this.props.items.sort(this.props.sort) : this.props.items;
+
         return (
             <Carousel>
-                {this.props.items.map((item) =>
+                {items.map((item) =>
                     <Item key={item._id} {...item} />
                 )}
 
-                {this.props.placeholder && this.props.items.length === 0 &&
+                {this.props.placeholder && items.length === 0 &&
                     <Placeholder />
                 }
                 
