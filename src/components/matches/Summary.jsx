@@ -10,26 +10,26 @@ import {apiImage, tintedBackground} from 'components/helpers'
 const propTypes = {};
 
 const defaultProps = {
-    company: {
-        brief: {
-            name: '{name}',
-            logo: 'https://placeholdit.imgix.net/~text?txtsize=9&txt=50x50&w=50&h=50',
-            background: 'https://placeholdit.imgix.net/~text?txtsize=33&txt=350%C3%97150&w=350&h=150',
-        }
-    },
-    vacancy: {
-        brief: {
-            title: '{title}',
-            state: '{state}',
-            salary: '{salary}',
-            experience: '{experience}',
-            employment: '{employment}',
-            description: '{description}',
-            education: '{education}',
-        }
-    },
-    score: '{score}',
-    backgroundTint: [50,50,50,.75],
+  company: {
+    brief: {
+      name: '{name}',
+      logo: 'https://placeholdit.imgix.net/~text?txtsize=9&txt=50x50&w=50&h=50',
+      background: 'https://placeholdit.imgix.net/~text?txtsize=33&txt=350%C3%97150&w=350&h=150',
+    }
+  },
+  vacancy: {
+    brief: {
+      title: '{title}',
+      state: '{state}',
+      salary: '{salary}',
+      experience: '{experience}',
+      employment: '{employment}',
+      description: '{description}',
+      education: '{education}',
+    }
+  },
+  score: '{score}',
+  backgroundTint: [50,50,50,.75],
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
@@ -39,10 +39,10 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     },
     postReject: () => {
       dispatch(postReject(ownProps._id))
-  },
+    },
     postApprove: () => {
       dispatch(postApprove(ownProps._id))
-  },
+    },
 
 
   }
@@ -95,47 +95,47 @@ export default class Summary extends Component {
       </div>
     );
   }
-    renderBookmarks() {
-        const { candidate: { status }, addToBookmark } = this.props;
+  renderBookmarks() {
+    const { candidate: { status }, addToBookmark } = this.props;
 
-        if (status === "new") {
-            return (
-                <a onClick={addToBookmark} className="button button_type_icons col-xs-12">
-                    <BookmarkOpen /> BOOKMARK
-                </a>
-            )
-        }
+    if (status === "new") {
+      return (
+        <a onClick={addToBookmark} className="button button_type_icons col-xs-12">
+          <BookmarkOpen /> BOOKMARK
+        </a>
+      )
     }
-    renderApproveReject() {
-        const { candidate: { status }, postReject, postApprove } = this.props;
+  }
+  renderApproveReject() {
+    const { candidate: { status }, postReject, postApprove } = this.props;
 
-        if (status === "new" || status === "bookmarked") {
-            return (
-                <div>
-                    <a onClick={postApprove} className="mdl_button button col-xs-12">
-                        <ApproveOpen /> APPROVE</a>
-                    <a onClick={postReject} className="mdl_button button col-xs-12">
-                        <Decline /> REJECT</a>
-                </div>
-            );
-        }
+    if (status === "new" || status === "bookmarked") {
+      return (
+        <div>
+          <a onClick={postApprove} className="mdl_button button col-xs-12">
+            <ApproveOpen /> APPROVE</a>
+          <a onClick={postReject} className="mdl_button button col-xs-12">
+            <Decline /> REJECT</a>
+        </div>
+      );
     }
-    render() {
-        const { _vacancy, _company, _id } = this.props;
-        return (
-            <div className="slider__item">
-                <div className="mdl-card card">
-                  {this.renderMatchInformation()}
-                  {this.renderShortContent()}
-                    <Link className="link m-auto" to={`candidate/matches/match/${_id}/company/${_company}/vacancy/${_vacancy}`}>
-                      <button className="button_type_colored button_size_l m-auto">
-                        View Full Description
-                      </button>
-                    </Link>
-                </div>
-              </div>
-        );
-    }
+  }
+  render() {
+    const { _vacancy, _company, _id } = this.props;
+    return (
+      <div className="slider__item">
+        <div className="mdl-card card">
+          {this.renderMatchInformation()}
+          {this.renderShortContent()}
+          <Link className="link m-auto" to={`candidate/matches/match/${_id}/company/${_company}/vacancy/${_vacancy}`}>
+            <button className="button_type_colored button_size_l m-auto">
+              View Full Description
+            </button>
+          </Link>
+        </div>
+      </div>
+    );
+  }
 }
 
 Summary.propTypes = propTypes;

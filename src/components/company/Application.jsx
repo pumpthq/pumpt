@@ -60,7 +60,7 @@ let CompanyApplicationForm = props => {
     <div class="text-center pt-5">
       <button
         type="submit" disabled={submitDisabled}
-        className="button_type_colored button_size_l mb-5"
+        className="button_type_colored button_size_l"
       >
         Save
       </button>
