@@ -41,7 +41,7 @@ function EducationDisplay(props) {
         <div key={index} className="item-title-text">
           School Name: {exp.schoolName}
           <br />Specialty: {exp.specialty}
-          <br />Degree: {exp.degree}
+          <br />Educational Degree: {exp.degree}
           <br />Started At: {exp.startStudyAt}
           <br />{exp.isCurrentSchool ?
             <span>Current School: Yes</span>

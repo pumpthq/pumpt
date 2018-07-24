@@ -38,7 +38,7 @@ const CandidateSummary = ({
     <div className="row summary-body card-inner">
       <div className="col-12 pt-5">
         <dl>
-          <dt>Annual Income</dt>
+          <dt>Total Compensation</dt>
           <dd>{recentAnnualIncome}</dd>
           <dt>Industry Experience </dt>
           <dd>{recentAreaExperience}</dd>

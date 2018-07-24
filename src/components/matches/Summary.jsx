@@ -63,7 +63,7 @@ export default class Summary extends Component {
         </div>
         <div className="col-9 text-left">
           <h2 className="job_title font-weight-normal mb-1">{vacancy.brief.title}</h2>
-          {vacancy.brief.employment}
+          {vacancy.brief.location ? vacancy.brief.location.slice(0,vacancy.brief.location.lastIndexOf(',')) : ""}
         </div>
         {/*
               {vacancy.brief.state}

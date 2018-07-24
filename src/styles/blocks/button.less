@@ -85,22 +85,22 @@
     }
 
     &_close {
-      .size(24px);
-      background-color: @color-invert;
-      border: 1px solid fade(@background-invert, 20);
+      background: transparent;
+      border:none;
+      font-size: 40px;
       border-radius: @br-circle;
-      color: @close-btn-color;
       font-family: @ff-base;
-      font-size: extract(@fzs-main, 5);
       font-weight: 600;
-      line-height: 0.88;
-      padding: 1px 0 0 1px;
-      right: 12px;
+      position: absolute;
+      right: 16px;
+      top: 16px;
+      line-height: .5em;
       text-align: center;
       text-decoration: none;
       z-index: 2;
       cursor: pointer;
-			margin-left:97%;
+      margin: 0;
+      padding: 4px;
 
       &.button_close_simple {
         background: transparent;

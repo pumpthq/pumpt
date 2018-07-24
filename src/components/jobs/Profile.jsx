@@ -1,11 +1,7 @@
 import React, {Component} from 'react'
-
 import {connect} from 'react-redux'
-
 import {postApprove, postBookmark, postReject} from '../../actions/candidateMatches'
-
 import {apiImage, displayIndustries, tintedBackground} from 'components/helpers'
-
 import {browserHistory} from 'react-router'
 
 const buttonStyle = {
@@ -115,7 +111,7 @@ export default class Profile extends Component {
           <dd>{employment}</dd>
           <dt>Educational Degree</dt>
           <dd>{degree}</dd>
-          <dt>Salary</dt>
+          <dt>Total Compensation</dt>
           <dd>{salary}</dd>
           <hr className="my-5" />
           <dt>Description</dt>
@@ -157,8 +153,8 @@ export default class Profile extends Component {
     const { children } = this.props
     return (
       <div>
-        <button style={buttonStyle} className="button button_type_close" onClick={browserHistory.goBack}>×</button>
         <div className="mdl-card card card_state_open card_state_scroll">
+          <button style={buttonStyle} className="button button_type_close" onClick={browserHistory.goBack}>×</button>
           {this.renderMatchInformation()}
           {this.renderLongContent()}
           {children}

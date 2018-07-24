@@ -57,7 +57,7 @@ export default class VacancyContainer extends Component {
     render() {
         return (
             <div>
-                    <VacancyProfile {...this.props.vacancy} >
+                    <VacancyProfile {...this.props.vacancy}>
                         <MatchCandidateActions {...this.props.match} {...this.props.actions} {...this.props.company} />
                     </VacancyProfile>
 

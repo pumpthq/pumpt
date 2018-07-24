@@ -188,12 +188,12 @@ const renderEducations = ({ fields, meta: { error } }) => (
           </div>
           <div className="col-12 col-md-6">
             <Field
-              label="Degree"
+              label="Educational Degree"
               className="mdl-textfield__input textfield__input pad-top-30"
               name={`${education}.degree`}
               component="select"
             >
-              <option value="" className="disabled-text-option" disabled selected>Degree</option>
+              <option value="" className="disabled-text-option" disabled selected>Educational Degree</option>
               <option value="high-school">High School</option>
               <option value="undergraduate">Undergraduate</option>
               <option value="graduate">Graduate</option>
