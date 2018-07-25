@@ -43,7 +43,7 @@ class MultiselectComponent extends Component {
     const {items} = this.props;
     let g = items.find( g => g.id===parentID );
     if (g) {
-      return !!items.find( i => i.id === probeID);
+      return !!g.items.find( i => i.id === probeID);
     }
 
     return false;
