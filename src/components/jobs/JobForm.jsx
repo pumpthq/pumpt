@@ -110,7 +110,7 @@ class JobForm extends Component {
 
   onToggleExpand = (id) => () => {
     this.setState(({expandedFields}) => (
-      expandedFields.includes(id) ? 
+      expandedFields.includes(id) ?
       {expandedFields: expandedFields.filter(f => f !== id)}
       :
       {expandedFields: expandedFields.concat([id])}
@@ -202,12 +202,12 @@ class JobForm extends Component {
               name="experience" component={ExpandableField(RadioButtonGroup)}
               validate={required}
               expander= {{
-                title: "Industry Experience",
+                title: "Years of Experience",
                 preview: formValues.experience,
                 onToggleExpand: this.onToggleExpand,
-                expanded: this.expanded("Industry Experience")
+                expanded: this.expanded("Years of Experience")
               }}
-              componentProps = {{label: "Industry Experience"}}
+              componentProps = {{label: "Years of Experience"}}
             >
               { EXPERIENCE_DROPDOWN_DATA
                 .map(item => <RadioButton key={item.id} value={item.title} label={item.title}  style={{marginBottom: 12}} />) }
@@ -232,10 +232,10 @@ class JobForm extends Component {
               component={ExpandableField(RadioButtonGroup)}
               validate={required}
               expander={{
-                title: "Field of Expertise",
+                title: "Working Areas",
                 preview: formValues.industryParent,
                 onToggleExpand: this.onToggleExpand,
-                expanded: this.expanded("Field of Expertise")
+                expanded: this.expanded("Working Areas")
               }}
             >
               { FIELD_OF_EXPERTISE_DROPDOWN_DATA
@@ -266,7 +266,7 @@ class JobForm extends Component {
                 component={Editor}
                 validate={required}
               >
-                <label 
+                <label
                   htmlFor="description"
                   className="desc">
                   Please enter the Requirements and Responsibilities for the role.

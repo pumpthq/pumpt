@@ -105,7 +105,7 @@ export default class Profile extends Component {
         <dl>
           <dt>Working Areas</dt>
           <dd>{displayIndustries(industries)}</dd>
-          <dt>Industry Experience</dt>
+          <dt>Years of Experience</dt>
           <dd>{experience}</dd>
           <dt>Employment Type</dt>
           <dd>{employment}</dd>

@@ -55,7 +55,7 @@ export class To extends Component {
                       dispatch(gotoIncomeStep())
                     }
                 }}
-                textLabel='Income'
+                textLabel='Total Compensation'
                 textFilledWith={value}
             />
         )
@@ -70,7 +70,7 @@ export class To extends Component {
                 onClick={() => {
                     if (isEnabled) dispatch(showIncomeStep())
                 }}
-            >{item ? stateItem.value || item.title : 'Income'}</NavigationLink>
+            >{item ? stateItem.value || item.title : 'Total Compensation'}</NavigationLink>
         )*/
     }
 }

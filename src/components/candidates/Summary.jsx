@@ -40,13 +40,13 @@ const CandidateSummary = ({
         <dl>
           <dt>Total Compensation</dt>
           <dd>{recentAnnualIncome}</dd>
-          <dt>Industry Experience </dt>
+          <dt>Years of Experience </dt>
           <dd>{recentAreaExperience}</dd>
           <dt>Job Title </dt>
           <dd>{recentJob}</dd>
           <dt>Working Areas</dt>
           <dd>{displayIndustries(recentWorkingAreas)}</dd>
-          <dt>Industry</dt>
+          <dt>Working Areas</dt>
           <dd>{interestWorkingArea && Array.isArray(interestWorkingArea) ?
                 interestWorkingArea.join(', ') : interestWorkingArea}
               </dd>

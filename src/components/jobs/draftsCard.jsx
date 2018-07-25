@@ -74,7 +74,7 @@ class DraftsCard extends Component {
               </div>
               <div className="card__middle-block pt-2">
                 <dl className="row small">
-                  <dt className="col-6">Focus</dt>
+                  <dt className="col-6">Working Areas</dt>
                   <dd className="col-6 pb-3">
                     {industries && Array.isArray(industries) ? industries[0].parent : ''}
                   </dd>
