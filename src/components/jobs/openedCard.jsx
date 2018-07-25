@@ -75,12 +75,12 @@ handleClose = (event) => {
       <div className="slider__item slider__item_content_middle">
         <div className="mdl-card card card_size_s">
           <div className="summary-head row py-3">
-            {company && company.brief ?
+            {company && company.brief && company.brief.logo ?
                 <div className="col-3">
                   <img className="image image_round image_size_xl image_type_company-logo" src={apiImage(company.brief.logo)}/>
                 </div>
                 : ''}
-                <div className={`col-${company && company.brief.logo ? 9 : 12} text-left`}>
+                <div className={`col-${company && company.brief && company.brief.logo ? 9 : 12} text-left`}>
                   <h2>{title || 'Untitled'}</h2>
                   <small>{location ? location.slice(0,location.lastIndexOf(',')) : 'Location not specified'}</small>
                 </div>
@@ -93,7 +93,7 @@ handleClose = (event) => {
               </dd>
               <dt className="col-6">Total Compensation</dt>
               <dd className="col-6 pb-3">{salary}</dd>
-              <dt className="col-6">Experience</dt>
+              <dt className="col-6">Years Experience</dt>
               <dd className="col-6 pb-3">{experience}</dd>
               <dt className="col-6">Employment Type</dt>
               <dd className="col-6 pb-3">{employment}</dd>
