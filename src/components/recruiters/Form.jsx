@@ -32,7 +32,7 @@ let RecruiterForm = props => {
 					name="position"
 					type="text"
 					component={renderField}
-					label="Your Position"
+					label="Your Title"
 				/>
 
 				<div>

@@ -103,9 +103,9 @@ export default class Profile extends Component {
       <div className="row card-inner">
         <div className="col-12 py-5">
         <dl>
-          <dt>Industries</dt>
+          <dt>Working Areas</dt>
           <dd>{displayIndustries(industries)}</dd>
-          <dt>Industry Experience</dt>
+          <dt>Years of Experience</dt>
           <dd>{experience}</dd>
           <dt>Employment Type</dt>
           <dd>{employment}</dd>

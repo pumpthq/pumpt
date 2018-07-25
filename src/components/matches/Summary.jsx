@@ -79,13 +79,13 @@ export default class Summary extends Component {
     return (
       <div className="card__middle-block py-4">
         <dl>
-          <dt>Industries</dt>
+          <dt>Working Areas</dt>
           <dd>
             {vacancy.brief.industries.map(function(industry,i) {
               return <span key="{i}" className="divided_pipe">{industry.value}</span>
             })}
           </dd>
-          <dt>Industry Experience</dt>
+          <dt>Years of Experience</dt>
           <dd>{vacancy.brief.experience}</dd>
           <dt>Employment Type</dt>
           <dd>{vacancy.brief.employment}</dd>
