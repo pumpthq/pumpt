@@ -92,7 +92,7 @@ class EditContainer extends Component {
               </div>
 
   						<div className="text-center">
-                <BasicDialog trigger={this.state.triggerDialog} onClose={browserHistory.goBack}>
+                <BasicDialog trigger={this.state.triggerDialog} >
                   Your application has been saved
                 </BasicDialog>
   						</div>

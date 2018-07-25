@@ -67,7 +67,7 @@ let CandidateApplicationForm = ({ handleSubmit, submitting, invalid, submitSucce
           className="mdl-button button button_type_colored button_size_l candidate-submit"
         >
           Save
-        </button>{(submitSucceeded && pristine) && <span className="message-success">Saved!</span>}
+        </button>
 
       </div>
     </form>
