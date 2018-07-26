@@ -46,7 +46,7 @@ const CandidateSummary = ({
           <dd>{recentJob}</dd>
           <dt>Working Areas</dt>
           <dd>{displayIndustries(recentWorkingAreas)}</dd>
-          <dt>Working Areas</dt>
+          <dt>Industry</dt>
           <dd>{interestWorkingArea && Array.isArray(interestWorkingArea) ?
                 interestWorkingArea.join(', ') : interestWorkingArea}
               </dd>

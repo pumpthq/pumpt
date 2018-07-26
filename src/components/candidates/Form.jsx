@@ -12,6 +12,7 @@ import {
   FIELD_OF_EXPERTISE_DROPDOWN_DATA,
   INDUSTRY_DROPDOWN_DATA,
   JOB_TITLE_DROPDOWN_DATA,
+  DEGREE_DROPDOWN_DATA
 } from 'constants/candidateOnboarding';
 
 
@@ -34,27 +35,23 @@ let CandidateSummaryForm = props => {
 
   return (
 
-    <form onSubmit={handleSubmit} className="candidate-edit-form">
+    <form onSubmit={handleSubmit} className="candidate-edit-form card-inner pt-5">
       <div className="row">
-        <div className="col-md-3 col-md-offset-3">
+        <div className="col-12 col-md-6">
           <Field
             name="firstName"
             component={renderTextField}
             label="First Name"
           />
         </div>
-        <div className="col-md-3">
+        <div className="col-12 col-md-6">
           <Field
             name="lastName"
             component={renderTextField}
             label="Last Name"
           />
         </div>
-      </div>
-      <div className="row">
-        <div className="col-md-12">
-          <div className="row">
-            <div className="col-md-4">
+            <div className="col-12 col-md-6">
               <Field
                 name="recentAnnualIncome"
                 component={renderSelectField} label="Total Compensation"
@@ -62,7 +59,7 @@ let CandidateSummaryForm = props => {
                 { ANNUAL_INCOME_DROPDOWN_DATA.map(item => <MenuItem key={item.id} value={item.title} primaryText={item.title} />) }
               </Field>
             </div>
-            <div className="col-md-4">
+            <div className="col-12 col-md-6">
               <Field
                 name="recentAreaExperience"
                 component={renderSelectField} label="Years of Experience"
@@ -70,7 +67,7 @@ let CandidateSummaryForm = props => {
                 { EXPERIENCE_DROPDOWN_DATA.map((item) => (<MenuItem key={item.id} value={item.title} primaryText={item.title} />)) }
               </Field>
             </div>
-            <div className="col-md-4">
+            <div className="col-12 col-md-6">
               <Field
                 name="recentJob"
                 component={renderSelectField} label="Job Title"
@@ -78,9 +75,19 @@ let CandidateSummaryForm = props => {
                 { JOB_TITLE_DROPDOWN_DATA[0].items.map(item => <MenuItem key={item.id} value={item.title} primaryText={item.title} />) }
               </Field>
             </div>
-          </div>
-          <div className="row">
-            <div className="col-md-4">
+            <div className="col-12 col-md-6">
+              {/* TODO: THIS SHOULD BE THE HIGHEST DEGREE EARNED FIELD */}
+              <Field
+                name="degree"
+                component={renderSelectField} label="Highest Degree Earned"
+              >
+                { DEGREE_DROPDOWN_DATA.map(item => <MenuItem key={item.id} value={item.title} primaryText={item.title} />) }
+              </Field>
+            </div>
+
+
+
+            <div className="col-12 col-md-6">
               <label>Working Areas</label>
               <Field
                 name="interestWorkingArea"
@@ -89,8 +96,7 @@ let CandidateSummaryForm = props => {
                 values={INDUSTRY_DROPDOWN_DATA[0].items.map((item) => (item.title))}
               />
             </div>
-            <div className="col-md-4">
-              <label>Expertise</label>
+            <div className="col-12 col-md-6">
               <Field
                 name="recentWorkingAreaParent"
                 component={renderSelectField}
@@ -112,19 +118,17 @@ let CandidateSummaryForm = props => {
               }
             </div>
           </div>
-        </div>
-      </div>
 
       <div className="candidate-buttons">
         <button
           type="submit" disabled={submitDisabled}
-          className="mdl-button button button_type_colored button_size_m"
+          className="button_type_colored button_size_m"
         >
           Save
         </button>
         <button
           type="button" disabled={submitting} onClick={onCancel}
-          className="mdl-button button button_type_colored button_size_m"
+          className="button_type_colored button_size_m"
         >
           Cancel
         </button>

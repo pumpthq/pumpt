@@ -261,7 +261,7 @@ const renderSkills = () => (
     <p>Select all that apply</p>
     <div className="info-block">
       {SKILLS.map((skill, index) =>
-        <div className="checkbox-item">
+        <div className="checkbox-item" key={index}>
           <Field name={`skills[${skill}]`} id={`skills[${skill}]`} component={Checkbox} label={skill} />
         </div>
       )}
