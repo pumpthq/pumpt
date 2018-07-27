@@ -9,18 +9,18 @@ class RecruiterContainer extends Component {
         const { children } = this.props;
 
         return (
-            <Wrapper>
+            <Wrapper id="dashboard">
                 <div className="container">
                     <div className="row row-padding-bigger">
-                        <div className="col-lg-12">
+                        <div className="col-12">
                             <RecruiterHeader />
                         </div>
                     </div>
                 </div>
+                {this.props.location.pathname.indexOf('list')>=0  ? <TabBar /> : ''}
                 <div className="container">
                     {children}
                 </div>
-                <TabBar />
             </Wrapper>
         );
     }

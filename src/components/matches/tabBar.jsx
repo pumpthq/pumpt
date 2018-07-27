@@ -24,7 +24,7 @@ class TabBar extends Component {
         const { visible } = this.props
 
         const classes = [
-            'navigation', 'navigation_type_bottom',
+            'navigation', 'navigation_type_tabbar',,
             'navigation_color_invert', 'navigation_inline',
             'text-center', 'navigation_state_open'
         ];
@@ -56,12 +56,11 @@ class TabBar extends Component {
                             key={index}
                             to={route}
                             className="navigation__link"
-                            activeClassName="navigation__link navigation__link_active"
+                            activeClassName="navigation__link_active"
                             onClick={() => {
                                 // dispatch(action())
                             }}
                         >
-                            {icon}
                             {title}
                         </Link>
                     )

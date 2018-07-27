@@ -15,18 +15,22 @@ class MatchesContainer extends Component {
       const activeLocation = this.props.location;
 
         return (
-            <Wrapper>
-                <div className="container topnav">
-                    <div className="row">
-                        <div className="col-12">
-                            <CompanyHeader location={activeLocation} />
-                        </div>
-                    </div>
+            <Wrapper id="dashboard">
+              <div className="container">
+                <div className="row">
+                  <div className="col-12">
+                    <CompanyHeader location={activeLocation} />
+                  </div>
                 </div>
-                <div className="container main">
-                    {children}
-                </div>
-                <TabBar />
+              </div>
+              {this.props.location.pathname.indexOf('edit')<=0
+                  && this.props.location.pathname.indexOf('settings')<=0
+                  ? <TabBar />
+                  : ''
+              }
+              <div className="container main">
+                {children}
+              </div>
             </Wrapper>
         );
     }

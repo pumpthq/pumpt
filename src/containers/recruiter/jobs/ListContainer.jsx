@@ -19,8 +19,8 @@ class ShowContainer extends Component {
         return (
               <div>
                 <div className="container slider-container">
-                    <div className="row row-padding-bigger">
-                        <div className="col-lg-12">
+                    <div className="row">
+                        <div className="col-12">
                             {children}
                         </div>
                     </div>

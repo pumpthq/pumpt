@@ -1,11 +1,18 @@
+.slider-container {
+  padding-left: 0;
+  padding-right: 0;
+  > .row {
+    padding: 0 40px;
+    position: relative;
+  }
+}
+
 .slider {
-  position: relative;
   overflow: hidden;
-  height: calc(~'100vh - 120px');
 
   &__items {
-    // height: 100%;
     display: flex;
+    transition-duration: .5s;
   }
 
   &__item {
@@ -15,11 +22,6 @@
     max-width: 33.33333%;
     padding: 0 1.5%;
     min-width: 265px;
-
-    //&:nth-of-type(1) { outline: 4px solid red; }
-    //&:nth-of-type(3) { outline: 4px solid green; }
-    //&:nth-of-type(5) { outline: 4px solid blue; }
-    //&:nth-of-type(7) { outline: 4px solid white; }
 
     .card {
       width: 100%;
@@ -42,37 +44,27 @@
 }
 
 .slider__bottom-bar {
-  bottom: 54px;
-  left: 0;
+  top: 46%;
+  left: -40px;
+  right: -40px;;
   position: absolute;
-  right: 0;
+}
 
-  &-wrap {
-    position: relative;
-  }
 
-  &_pos {
-    &_center {
-      position: relative;
-      bottom: 0;
-      text-align: center;
-      margin: 24px 0;
 
-      .button {
-        position: relative;
-        margin: 0 13px;
-        display: inline-block;
-      }
+@media @phone {
+  .slider-container {
+    max-width: 100%;
+    > .row {
+      padding: 0 20px;
     }
   }
-
-  @media @phone {
-    bottom: 0;
-    display: flex;
-    justify-content: space-between;
-    left: auto;
-    margin-left: -10px;
-    margin-right: -10px;
-    right: auto;
+  .slider__bottom-bar {
+    left: -20px;
+    right: -20px;
   }
+  .button_type_slider {
+    transform: scale(.75);
+  }
+
 }
