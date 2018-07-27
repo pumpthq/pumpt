@@ -9,12 +9,17 @@
   }
 
   &__item {
-    flex: 1;
+    flex: 0 0 33.33333%;
     flex-shrink: 0;
     vertical-align: top;
-    max-width: 30%;
-    margin: 0 1.5%;
+    max-width: 33.33333%;
+    padding: 0 1.5%;
     min-width: 265px;
+
+    //&:nth-of-type(1) { outline: 4px solid red; }
+    //&:nth-of-type(3) { outline: 4px solid green; }
+    //&:nth-of-type(5) { outline: 4px solid blue; }
+    //&:nth-of-type(7) { outline: 4px solid white; }
 
     .card {
       width: 100%;
@@ -22,9 +27,16 @@
       padding-bottom: 16px;
 
       .job_title {
-        height: 2em;
+        height: 1.95em;
         overflow: hidden;
       }
+
+      .card__middle-block {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
     }
   }
 }

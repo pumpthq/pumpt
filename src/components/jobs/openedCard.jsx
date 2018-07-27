@@ -81,7 +81,7 @@ handleClose = (event) => {
                 </div>
                 : ''}
                 <div className={`col-${company && company.brief && company.brief.logo ? 9 : 12} text-left`}>
-                  <h2>{title || 'Untitled'}</h2>
+                  <h2 className="job_title">{title || 'Untitled'}</h2>
                   <small>{location ? location.slice(0,location.lastIndexOf(',')) : 'Location not specified'}</small>
                 </div>
               </div>
