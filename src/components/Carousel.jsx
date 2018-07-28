@@ -46,7 +46,7 @@ export default class Carousel extends Component {
         let totalWidthItems = 0;
         let itemsWidth = [];
         let centerMode = false;
-
+        {/* TODO: Recalculate card sizes on browser resize */}
         for(let i = 0; i < children.length; i++) {
             totalWidthItems += children[i].offsetWidth;
             itemsWidth.push(children[i].offsetWidth);
@@ -168,7 +168,9 @@ export default class Carousel extends Component {
             this.onCenterMode();
         }
 
-        return (
+      return (
+        <div className="container slider-container">
+          <div className="row">
             <div className={this.makeClasses()}>
                 <div className="slider__items" ref="sliderBody" style={this.createTranslateX(sliderPosition)}>
                     {children}
@@ -181,7 +183,9 @@ export default class Carousel extends Component {
                         <ArrowIcon className="icon-arrow_right"/>
                     </button>
                 </div>
+              </div>
             </div>
+          </div>
         )
     }
 }

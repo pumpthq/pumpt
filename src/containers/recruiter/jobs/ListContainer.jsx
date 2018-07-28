@@ -14,18 +14,12 @@ class ShowContainer extends Component {
     }
 
     render() {
-        const { children } = this.props;
+      const { children } = this.props;
 
-        return (
-              <div>
-                <div className="container slider-container">
-                    <div className="row">
-                        <div className="col-12">
-                            {children}
-                        </div>
-                    </div>
-                </div>
-              </div>
+      return (
+        <div>
+          {children}
+        </div>
         );
     }
 

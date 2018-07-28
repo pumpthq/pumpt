@@ -16,7 +16,7 @@ class CardSlider extends Component {
                 {this.props.placeholder && items.length === 0 &&
                     <Placeholder />
                 }
-                
+
                 {this.props.append}
             </Carousel>
         )
