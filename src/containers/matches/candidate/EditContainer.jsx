@@ -5,6 +5,7 @@ import {updateCandidate} from 'actions/candidateMatches'
 
 import CandidateForm from 'components/candidates/Form';
 import CandidateSummary from 'components/candidates/Summary';
+import CandidateResume from 'components/candidates/Resume';
 import CandidateApplicationForm from 'components/candidates/Application';
 import Button from 'components/main/button'
 import BasicDialog from 'components/main/popup/BasicDialog';
@@ -13,7 +14,7 @@ import BasicDialog from 'components/main/popup/BasicDialog';
 const formatSkills = (values) => {
   let newValues = {...values};
   newValues.skills = values.skills && Array.isArray(values.skills)
-    ? values.skills.reduce((obj, s) => {obj[s] = true; return obj} , {}) 
+    ? values.skills.reduce((obj, s) => {obj[s] = true; return obj} , {})
     : values.skills || {};
   return newValues;
 }
@@ -71,7 +72,7 @@ class EditContainer extends Component {
     render() {
         const { dispatch, candidate } = this.props
         return (
-            <div className="mdl-card col-xs-12">
+            <div className="mdl-card candidate-profile">
 
               {this.state.editSummary ?
                   <CandidateForm
@@ -81,15 +82,17 @@ class EditContainer extends Component {
                   :
                   <CandidateSummary {...this.props} onEdit={()=>this.editSummary(true)}/>
               }
+              <div className="card-inner">
+                <CandidateResume {...this.props} onEdit={()=>this.editSummary(true)} />
+                <CandidateApplicationForm
+                  initialValues={formatSkills(candidate)}
+                  onSubmit={values=> {dispatch(updateCandidate(submitSkills(processAppFields(values))));
+                    this.openDialog();
+                  } }/>
+              </div>
 
-              <CandidateApplicationForm
-                initialValues={formatSkills(candidate)}
-                onSubmit={values=> {dispatch(updateCandidate(submitSkills(processAppFields(values))));
-                  this.openDialog();
-                } }/>
-          
   						<div className="text-center">
-                <BasicDialog trigger={this.state.triggerDialog} onClose={browserHistory.goBack}>
+                <BasicDialog trigger={this.state.triggerDialog} >
                   Your application has been saved
                 </BasicDialog>
   						</div>

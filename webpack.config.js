@@ -21,32 +21,32 @@ module.exports = {
     devtool : 'source-map',
 
     module : {
-        loaders : [
-						{
-                test : /\.jsx?$/,
-                include: SRC_PATH,
-                loader : 'babel-loader'
-            },
-            {
-                test : /\.css$/,
-                loader : 'style-loader!css-loader?sourceMap'
-            },
-            {
-                test : /\.less$/,
-                include: SRC_PATH,
-                loader : 'style-loader!css-loader!less-loader?sourceMap'
-            },
-            {
-                test : /\.(png|jpg|gif|svg|ttf|eot|woff|woff2)/,
-                include : SRC_PATH,
-                loader : 'url-loader?name=[path][name].[ext]?[hash]?limit=4096'
-            },
-            {
-                test : /\.json$/,
-                include: SRC_PATH,
-                loader : 'json-loader'
-            }
-        ]
+      loaders : [
+        {
+          test : /\.jsx?$/,
+          include: SRC_PATH,
+          loader : 'babel-loader'
+        },
+        {
+          test : /\.css$/,
+          loader : 'style-loader?sourceMap!css-loader?sourceMap'
+        },
+        {
+          test : /\.less$/,
+          include: SRC_PATH,
+          loader : 'style-loader?sourceMap!css-loader?sourceMap!less-loader?sourceMap'
+        },
+        {
+          test : /\.(png|jpg|gif|svg|ttf|eot|woff|woff2)/,
+          include : SRC_PATH,
+          loader : 'url-loader?name=[path][name].[ext]?[hash]?limit=4096'
+        },
+        {
+          test : /\.json$/,
+          include: SRC_PATH,
+          loader : 'json-loader'
+        }
+      ]
     },
 
     resolve : {

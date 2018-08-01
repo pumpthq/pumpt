@@ -12,23 +12,20 @@
 .card {
   background: transparent;
   background: @background-base;
-  border-radius: (@br-standard + 2px) (@br-standard + 2px) @br-standard @br-standard;
+  border-radius: @br-standard;
   box-shadow: @bsh-1;
   max-height: 600px;
-  overflow: visible;
+  overflow: hidden;
   position: relative;
-  width: 465px;
+  border: none;
 
   @media @phone-portrait {
-    max-width: 84vw;
   }
-
 
   &__middle-block {
     //max-height: calc(~'100% - 210px - 54px - 32px');
     flex-grow: 1;
     overflow: hidden;
-    padding: 18px 35px 0;
     white-space: normal;
 		min-height: 60px;
   }
@@ -41,14 +38,13 @@
 
 
   &__actions-wrapper {
-    border-radius: (@br-standard + 2px) (@br-standard + 2px) 0 0;
-    width: 100%;
+    border-radius: (@br-standard) (@br-standard) 0 0;
   }
 
 
   &__actions {
     background-color: @background-base;
-    border-radius: 0 0 (@br-standard + 2px) (@br-standard + 2px);
+    border-radius: 0 0 (@br-standard) (@br-standard);
     display: flex;
     padding: 32px 35px 32px;
     align-items: center;
@@ -101,7 +97,6 @@
   &_state {
 
     &_open {
-      .size(900px, auto);
       box-shadow: none;
       margin-bottom: 24px;
       max-height: none;
@@ -172,7 +167,6 @@
       margin-bottom: 0;
       margin-left: 16px;
       padding-bottom: 70px;
-      width: 800px;
 
       .card__actions {
         padding-top: 14px;
@@ -280,6 +274,12 @@
       text-align: center;
       text-decoration: none;
       justify-content: center;
+      &:hover {
+        text-decoration: none;
+        > * {
+          color: blue;
+        }
+      }
     }
   }
 
@@ -397,7 +397,6 @@
 
   @media @phone {
     //min-height: 396px;
-    width: 313px;
 
     &_onb-info {
 
@@ -426,7 +425,6 @@
     }
 
     &__middle-block {
-      padding: 7px 30px 0;
     }
 
     &__actions {
@@ -462,14 +460,10 @@
         position: fixed;
         top: 0;
         left: 0;
-        width: 100vw;
         height: 100vh;
       }
 
       &_open {
-        border-radius: 0;
-        margin-bottom: 23px;
-        width: 100vw;
 
         .card__actions {
           padding-top: 12px;

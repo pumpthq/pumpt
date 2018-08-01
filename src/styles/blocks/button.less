@@ -21,18 +21,19 @@
 
     &_colored {
       background-color: @color-additional;
-      border-radius: @br-standard - 2px;
+      border-radius: @br-standard;
       color: @color-invert;
       font-family: @ff-base;
       font-size: @fz-general;
       font-weight: 600;
       height: auto;
       line-height: 1;
-      margin: 5px;
       margin-right: 30px;
       // min-height: 42px;
       padding: 12px @btn-padding;
       text-transform: none;
+      border: none;
+      text-decoration: none !important;
 
       &:hover {
         background-color: @color-additional;
@@ -41,6 +42,14 @@
       &[disabled][disabled] {
         background-color: @light-grey;
         color: @color-invert;
+      }
+    }
+
+    &_text {
+      color: @color-additional;
+      font-weight: 600;
+      &:hover {
+        color: @color-base;
       }
     }
 
@@ -76,22 +85,22 @@
     }
 
     &_close {
-      .size(24px);
-      background-color: @color-invert;
-      border: 1px solid fade(@background-invert, 20);
+      background: transparent;
+      border:none;
+      font-size: 40px;
       border-radius: @br-circle;
-      color: @close-btn-color;
       font-family: @ff-base;
-      font-size: extract(@fzs-main, 5);
       font-weight: 600;
-      line-height: 0.88;
-      padding: 1px 0 0 1px;
-      right: 12px;
+      position: absolute;
+      right: 16px;
+      top: 16px;
+      line-height: .5em;
       text-align: center;
       text-decoration: none;
       z-index: 2;
       cursor: pointer;
-			margin-left:97%;
+      margin: 0;
+      padding: 4px;
 
       &.button_close_simple {
         background: transparent;
@@ -125,7 +134,7 @@
       .size(30px);
       background: fade(@palette-black, 30);
       border: none;
-      border-radius: @br-standard / 2;
+      border-radius: @br-standard;
       cursor: pointer;
       line-height: 0;
       margin: 0;
@@ -188,7 +197,7 @@
         .size(100%, 126px);
         display: block;
         border: 1px dashed fade(@grey, 50);
-        border-radius: @br-standard / 2;
+        border-radius: @br-standard;
         margin-bottom: 3px;
       }
 
@@ -268,6 +277,7 @@
     &_s {
       padding-left: @btn-padding - 16px;
       padding-right: @btn-padding - 11px;
+      min-height: 2em;
     }
 
     &_m {
@@ -288,20 +298,12 @@
     &_xl {
       padding: 12px (@btn-padding * 2 + 8px);
     }
-
-    &_50p {
-      width: 50%;
-    }
   }
 
   &_height {
     &_small {
       height: 36px;
     }
-  }
-
-  &_margin-right_m {
-    margin-right: 35px;
   }
 
   &_state {
@@ -330,7 +332,7 @@
       }
 
       .image {
-        border-radius: @br-standard / 2;
+        border-radius: @br-standard;
       }
     }
 
@@ -482,11 +484,6 @@
           left: 13px;
           top: 13px;
         }
-      }
-
-      &_slider {
-        .size(30px);
-        padding: 5px;
       }
 
       &_close {

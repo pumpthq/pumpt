@@ -1,13 +1,20 @@
 .application-form {
+  padding-bottom: 20px;
+
+  .application-item {
+    .info-block {
+      padding-top: 1rem;
+      padding-bottom: 2rem;
+      &:last-of-type {
+        padding-bottom: 1rem;
+      }
+    }
+  }
 
   .edit-link {
     margin-left: 400px;
     position: absolute;
     cursor: pointer;
-  }
-
-  .application-item {
-    margin: 14px 0;
   }
 
   .application-item-button {
@@ -19,19 +26,44 @@
     cursor: pointer;
   }
 
-  .info-block {
-    margin-left: 17px;
-		.remove-entry{
-			margin-top:-25px;
-		}
+  input[type='text'],
+  input[type='email'],
+  input[type='password'],
+  input[type='int'],
+  select,
+  textarea,
+  div#PlacesAutocomplete__root input {
+    border: 0;
+    margin: 5px 0;
+    padding: 4px 0;
+    width: 100%;
+    border-bottom: 1px solid @light-grey;
+    outline: transparent;
+    resize: none;
   }
 
-  input[type='text'] {
-    border: 0;
-    font-size: 16px;
+   &.medium {
+    input[type='text'],
+    input[type='email'],
+    input[type='password'],
+    input[type='int'],
+    select,
+    textarea,
+    div#PlacesAutocomplete__root input {
+      font-size: 1.5em;
+    }
+  }
 
-    margin: 5px 0;
-    width: 100%;
+  &.large {
+    input[type='text'],
+    input[type='email'],
+    input[type='password'],
+    input[type='int'],
+    select,
+    textarea,
+    div#PlacesAutocomplete__root input {
+      font-size: 2em;
+    }
   }
 
   input[type="checkbox"] {
@@ -52,10 +84,8 @@
     color: #5a83f5;
     background-color: #fff;
 		z-index: 1000;
-
-    i {
-      font-style: inherit;
-    }
+    min-height: 0;
+    margin-right: 0;
   }
 
   .label-item {
@@ -77,27 +107,11 @@
   font-size: 16px;
 }
 
-.text-area{
-	border:0;
-	border-bottom: 1px solid lightgrey;
-	font-family: 'Proxima Nova', Helvetica, Arial, sans-serif;
-	font-size:16px;
-	font-weight: 400;
-		padding-top: 12px;
-	resize: none;
-	width: 100%;
-	overflow: visible;
-	height: 60px;
-}
-
 .text-area-large{
 	height: 200px !important;
 	color: #333;
 	font-family: 'Proxima Nova', Helvetica, Arial, sans-serif;
 	font-weight:800;
-}
-
-.text-area-label{
 }
 
 .recruiter-text-area{
@@ -124,3 +138,30 @@
     color: @green;
     font-size: 14px;
 }
+
+
+.social-media-block {
+  .icon {
+    height: 30px;
+    width: 30px;
+    margin: 6px 0 0;
+  }
+}
+
+
+
+div#PlacesAutocomplete__root{
+	z-index:10;
+	input{
+		padding-left: 0px !important;
+		color: rgb(51, 51, 51);
+	}
+}
+div#PlacesAutocomplete__autocomplete-container{
+	z-index:15;
+	max-height:10px !important;
+	height:40px;
+}
+
+
+

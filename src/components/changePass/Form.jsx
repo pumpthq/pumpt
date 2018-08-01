@@ -4,7 +4,6 @@ import {Field, reduxForm} from 'redux-form'
 import SubmitButton from './SubmitButton.jsx';
 import CancelLink from './CancelLink.jsx';
 import Title from './Title.jsx';
-import './style.less'
 
 import {changePassword} from 'actions/authorization'
 import {browserHistory} from 'react-router'
@@ -53,29 +52,29 @@ let ChangePassForm = props => {
 					<div className='change-password-popup'>
 						<div>
 									<Title />
-									<form className="form form_padding-size_xs" onSubmit={handleSubmit(submit)}>
+									<form className="form application-form" onSubmit={handleSubmit(submit)}>
 											<Field
 												name='oldPassword'
 												type="password"
 												component={renderField}
-												label="Current"
+												label="Current Password"
 											/>
 											<Field
 												name='newPassword'
 												type="password"
 												component={renderField}
-												label="New"
+												label="New Password"
 												//validate={[required, minLength(8)]}
 											/>
 											<Field
 												name='confirmPass'
 												type="password"
 												component={renderField}
-												label="Confirm"
+												label="Confirm New Password"
 												//validate={[required, minLength(8), passwordConfirm]}
 											/>
 
-											<div className="form__actions">
+											<div className="pt-2">
 													<SubmitButton isDisabled={submitDisabled} />
 											</div>
 									</form>

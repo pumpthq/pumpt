@@ -35,7 +35,7 @@ renderField.propTypes = {
   meta: PropTypes.object,
 };
 
-const CardDivider = () => (<div className="summary-head__title-item summary-head__title-item_type_alignment summary-head__title-item_type_middle" />);
+const CardDivider = () => (<hr className="my-5"/>);
 
 const fieldArrayProps = {
   fields: PropTypes.object,
@@ -47,7 +47,9 @@ let CandidateApplicationForm = ({ handleSubmit, submitting, invalid, submitSucce
   const submitDisabled = invalid || submitting;
 
   return (
-    <form onSubmit={handleSubmit} className="candidate-application-form text-input-underlined">
+    <form onSubmit={handleSubmit} className="candidate-application-form">
+      <CardDivider />
+
       <FieldArray name="workingExperience" label="Working Experience" component={renderWorkingExperiences} />
       <CardDivider />
 
@@ -58,15 +60,14 @@ let CandidateApplicationForm = ({ handleSubmit, submitting, invalid, submitSucce
       <CardDivider />
 
       <FieldArray name="social" component={renderSocial} />
-      <CardDivider />
 
-      <div className="text-center">
+      <div className="text-center pt-5">
         <button
           type="submit" disabled={submitDisabled}
           className="mdl-button button button_type_colored button_size_l candidate-submit"
         >
           Save
-        </button>{(submitSucceeded && pristine) && <span className="message-success">Saved!</span>}
+        </button>
 
       </div>
     </form>
@@ -77,17 +78,11 @@ CandidateApplicationForm.propTypes = formTypes;
 // FieldArray Definitions
 const renderWorkingExperiences = ({ fields, meta: { error } }) => (
   <div className="application-item">
-    <button
-      className="application-item-button" type="button" onClick={() => {
-        fields.push();
-      }}
-    ><i />
-      {fields.length === 0 && 'Add'} Working Experience
-    </button>
+    <h6>Working Experience</h6>
     {fields.map((workingExperience, index) => (
       <div key={index} className="info-block">
         <div className="row">
-          <div className="application-detail col-md-12">
+          <div className="col-12">
             <Field
               name={`${workingExperience}.companyName`}
               type="text"
@@ -95,7 +90,7 @@ const renderWorkingExperiences = ({ fields, meta: { error } }) => (
               label="Company Name"
             />
           </div>
-          <div className="application-detail col-md-6">
+          <div className="col-12">
             <Field
               name={`${workingExperience}.position`}
               type="text"
@@ -103,22 +98,22 @@ const renderWorkingExperiences = ({ fields, meta: { error } }) => (
               label="Title"
             />
           </div>
-          <div className="application-detail col-md-6">
+          <div className="col-12">
             <Field
               name={`${workingExperience}.location`}
               component={PlaceField}
               label="Company Location"
             />
           </div>
-          <div className="application-detail col-md-12">
+          <div className="col-12">
             <Field
               name={`${workingExperience}.duty`}
               component="textarea"
-              class="text-area"
+              className="text-area"
               placeholder="Description of your work"
             />
           </div>
-          <div className="application-detail col-md-4 col-sm-6">
+          <div className="col-12 col-sm-6">
             <Field
               name={`${workingExperience}.startWorkingAt`}
               type="text"
@@ -128,7 +123,7 @@ const renderWorkingExperiences = ({ fields, meta: { error } }) => (
               validate={date}
             />
           </div>
-          <div className="application-detail col-md-4 col-sm-6">
+          <div className="col-12 col-sm-6">
             <Field
               name={`${workingExperience}.endWorkingAt`}
               type="text"
@@ -137,48 +132,45 @@ const renderWorkingExperiences = ({ fields, meta: { error } }) => (
               normalize={normalizeDate}
               validate={date}
             />
-            <Field
-              name={`${workingExperience}.isCurrentJob`}
-              id={`${workingExperience}.currentEducation`}
-              component={Checkbox} label="Currently Work Here"
-            />
+            <div className="row">
+              <div className="col-12 col-md"><Field
+                  name={`${workingExperience}.isCurrentJob`}
+                  id={`${workingExperience}.currentEducation`}
+                  component={Checkbox} label="Currently Work Here"
+                /></div>
+              <div className="col-12 col-md-auto pt-sm-2 pt-md-0 text-right">
+                <button
+                  className="remove-entry button_type_colored button_size_s" type="button" onClick={() => {
+                    fields.remove(index);
+                  }}
+                >Remove
+                </button>
+              </div>
+            </div>
           </div>
         </div>
-
-        <button
-          className="remove-entry" type="button" onClick={() => {
-            fields.remove(index);
-          }}
-        ><i>Remove</i>
-        </button>
       </div>
 
     ))}
     {error && <li className="error">{error}</li>}
 
-    {fields.length > 0 && <button
-      className="add-entry mdl-button" type="button" onClick={() => {
+    <button
+      className="button_type_colored button_size_l mt-3" type="button" onClick={() => {
         fields.push();
       }}
     >Add
-    </button>}
+    </button>
   </div>
 );
 renderWorkingExperiences.propTypes = fieldArrayProps;
 
 const renderEducations = ({ fields, meta: { error } }) => (
   <div className="application-item">
-    <button
-      className="application-item-button" type="button" onClick={() => {
-        fields.push();
-      }}
-    ><i />
-      {fields.length === 0 && 'Add'} Education
-    </button>
+    <h6>Education</h6>
     {fields.map((education, index) => (
       <div key={index} className="info-block">
         <div className="row">
-          <div className="application-detail col-md-12">
+          <div className="col-md-12">
             <Field
               name={`${education}.schoolName`}
               type="text"
@@ -186,7 +178,7 @@ const renderEducations = ({ fields, meta: { error } }) => (
               label="School Name"
             />
           </div>
-          <div className="application-detail col-md-6">
+          <div className="col-12 col-md-6">
             <Field
               name={`${education}.specialty`}
               type="text"
@@ -194,40 +186,39 @@ const renderEducations = ({ fields, meta: { error } }) => (
               label="Field of Study"
             />
           </div>
-          <div className="application-detail col-md-6">
+          <div className="col-12 col-md-6">
             <Field
-              label="Degree"
-              class="mdl-textfield__input textfield__input pad-top-30"
+              label="Educational Degree"
+              className="mdl-textfield__input textfield__input pad-top-30"
               name={`${education}.degree`}
               component="select"
             >
-              <option value="" className="disabled-text-option" disabled selected>Degree</option>
+              <option value="" className="disabled-text-option" disabled selected>Educational Degree</option>
               <option value="high-school">High School</option>
               <option value="undergraduate">Undergraduate</option>
               <option value="graduate">Graduate</option>
               <option value="other">Other</option>
             </Field>
           </div>
-          <div className="application-detail col-md-12">
+          <div className="col-12 col-sm-6">
+            <Field
+              name={`${education}.startStudyAt`}
+              component={renderField}
+              type="text"
+              label="Start Date (YYYY)"
+              normalize={normalizeYear}
+            />
+          </div>
+          <div className="col-12 col-sm-6">
+            <Field
+              name={`${education}.endStudyAt`}
+              type="text"
+              component={renderField}
+              label="End Date (YYYY)"
+              normalize={normalizeYear}
+            />
             <div className="row">
-
-              <div className="application-detail col-md-4 col-sm-6">
-                <Field
-                  name={`${education}.startStudyAt`}
-                  component={renderField}
-                  type="text"
-                  label="Start Date (YYYY)"
-                  normalize={normalizeYear}
-                />
-              </div>
-              <div className="application-detail col-md-4 col-sm-6">
-                <Field
-                  name={`${education}.endStudyAt`}
-                  type="text"
-                  component={renderField}
-                  label="End Date (YYYY)"
-                  normalize={normalizeYear}
-                />
+              <div className="col-12 col-md">
                 <Field
                   name={`${education}.isCurrentSchool`}
                   id={`${education}.currentEducation`}
@@ -235,56 +226,58 @@ const renderEducations = ({ fields, meta: { error } }) => (
                   label="Currently Attending"
                 />
               </div>
+              <div className="col-12 col-md-auto pt-sm-2 pt-md-0 text-right">
+                <button
+                  className="remove-entry button_type_colored button_size_s" type="button" onClick={() => {
+                    fields.remove(index);
+                  }}
+                >Remove
+                </button>
+              </div>
+
             </div>
           </div>
         </div>
 
-        <button
-          className="remove-entry" type="button" onClick={() => {
-            fields.remove(index);
-          }}
-        ><i>Remove</i>
-        </button>
       </div>
 
     ))}
     {error && <li className="error">{error}</li>}
 
-    {fields.length > 0 &&
-      <button
-        className="add-entry mdl-button" type="button" onClick={() => {
-          fields.push();
-        }}
-      >Add
-      </button>}
+    <button
+      className="button_type_colored button_size_l mt-3" type="button" onClick={() => {
+        fields.push();
+      }}
+    >Add
+    </button>
   </div>
 );
 renderEducations.propTypes = fieldArrayProps;
 
 const renderSkills = () => (
   <div className="application-item">
-    <button className="application-item-button" type="button">Skills</button>
-    {SKILLS.map((skill, index) =>
-      <div className="application-detail checkbox-item col-md-12">
-        <Field name={`skills[${skill}]`} id={`skills[${skill}]`} component={Checkbox} label={skill} />
-      </div>
-    )}
+    <h6>Skills</h6>
+    <p>Select all that apply</p>
+    <div className="info-block">
+      {SKILLS.map((skill, index) =>
+        <div className="checkbox-item" key={index}>
+          <Field name={`skills[${skill}]`} id={`skills[${skill}]`} component={Checkbox} label={skill} />
+        </div>
+      )}
+    </div>
   </div>
 );
 
 
 const renderSocial = () => (
   <div className="application-item">
-    <button
-      className="application-item-button" type="button" onClick={() => {
-      }}
-    ><i />
-      Social Media
-    </button>
-    <div className="info-block">
+    <h6>Social Media</h6>
+    <div className="info-block social-media-block">
       <div className="row">
-        <div className="social-media-block">
+        <div className="col-auto pr-0">
           <LinkedInIcon />
+        </div>
+        <div className="col">
           <Field
             name="socialMedia.linkedInUrl"
             type="text"
@@ -293,7 +286,13 @@ const renderSocial = () => (
             className="social-application-item"
             validate={url}
           />
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-auto pr-0">
           <TwitterIcon />
+        </div>
+        <div className="col">
           <Field
             name="socialMedia.twitterAcc"
             type="text"
@@ -302,7 +301,13 @@ const renderSocial = () => (
             normalize={normalizeTwitter}
             label="Twitter"
           />
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-auto pr-0">
           <FacebookIcon />
+        </div>
+        <div className="col">
           <Field
             name="socialMedia.faceBookUrl"
             type="text"

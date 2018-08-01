@@ -2,7 +2,7 @@ import React, {PropTypes} from 'react';
 
 const SubmitButton = props => (
     <button
-        className="mdl-button button button_type_colored button_size_s"
+        className="button_type_colored button_size_"
         disabled={props.isDisabled}
         type="submit"
     >

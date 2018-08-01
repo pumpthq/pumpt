@@ -25,7 +25,7 @@ let FoundationYearForm = props => {
 	}
 
 	return (
-			<form onSubmit={handleSubmit(submit)}>
+			<form onSubmit={handleSubmit(submit)} className="application-form medium">
 			<Field
 					type='int'
 					name='foundationYear'
@@ -34,7 +34,7 @@ let FoundationYearForm = props => {
 					normalize={normalizeYear}
 					component={renderField}
 			/>
-					<div class='form__actions'>
+					<div class='form__actions mt-3'>
 							<Button type='submit'
 											typeColored
 											buttonSize='l'
