@@ -90,12 +90,13 @@ class TypeContent extends Component {
                     handleGroups={false}
                 />
                 <div class='form__actions'>
-                    <Button
-                        typeColored={true}
-                        buttonSize={'l'}
-                        disabled={!stepValid}
-                        onClick={this.handleNextButtonCLick}
-                    >Next</Button>
+                    <button
+                      className="button_type_colored button_size_l"
+                      disabled={!stepValid}
+                      onClick={this.handleNextButtonCLick}
+                    >
+                      Next
+                    </button>
                 </div>
             </div>
         )

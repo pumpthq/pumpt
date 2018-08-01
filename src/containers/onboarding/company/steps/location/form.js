@@ -30,7 +30,7 @@ let LocationInfoForm = props => {
 		}
 
         return (
-					<form onSubmit={handleSubmit(submit)}>
+					<form onSubmit={handleSubmit(submit)} className="application-form medium">
 							<div class="row">
 									<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
 											<fieldset class="form__row">

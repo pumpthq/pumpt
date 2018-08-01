@@ -51,7 +51,7 @@ const CompanyFinalForm = props => {
 	}
 
 	return (
-		<form onSubmit={handleSubmit(submit)}>
+		<form onSubmit={handleSubmit(submit)} className="application-form medium">
 				<fieldset class="form__row">
 					<div class="mdl-textfield mdl-js-textfield textfield is-upgraded textfield_size_l">
 						<Field
@@ -83,7 +83,7 @@ const CompanyFinalForm = props => {
 						>
 								Next
 						</Button>
-						<p class='text'>
+						<p class='text pt-3'>
 								By clicking ‘Apply for Membership’,
 								you agree to the
 								<a class='link' target="_blank" href='http://pumpthq.com/terms'> Terms &amp; Conditions</a>.

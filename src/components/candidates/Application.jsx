@@ -155,7 +155,7 @@ const renderWorkingExperiences = ({ fields, meta: { error } }) => (
     {error && <li className="error">{error}</li>}
 
     <button
-      className="button_type_colored button_size_l" type="button" onClick={() => {
+      className="button_type_colored button_size_l mt-3" type="button" onClick={() => {
         fields.push();
       }}
     >Add
@@ -166,7 +166,7 @@ renderWorkingExperiences.propTypes = fieldArrayProps;
 
 const renderEducations = ({ fields, meta: { error } }) => (
   <div className="application-item">
-    <h6>{fields.length === 0 && 'Add'} Education</h6>
+    <h6>Education</h6>
     {fields.map((education, index) => (
       <div key={index} className="info-block">
         <div className="row">
@@ -244,14 +244,13 @@ const renderEducations = ({ fields, meta: { error } }) => (
     ))}
     {error && <li className="error">{error}</li>}
 
-    {fields.length > 0 &&
-        <button
-          className="button_type_colored button_size_l" type="button" onClick={() => {
-            fields.push();
-          }}
-        >Add
-        </button>}
-      </div>
+    <button
+      className="button_type_colored button_size_l mt-3" type="button" onClick={() => {
+        fields.push();
+      }}
+    >Add
+    </button>
+  </div>
 );
 renderEducations.propTypes = fieldArrayProps;
 

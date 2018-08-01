@@ -23,7 +23,7 @@ let SocialMediaForm = props => {
 			dispatch(gotoValuesStep())
 		}
 	return (
-			<form onSubmit={handleSubmit(submit)}>
+			<form onSubmit={handleSubmit(submit)} className="application-form medium">
 					<fieldset class="form__row">
 						<Field
 								label="Website URL"
