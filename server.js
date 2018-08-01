@@ -15,7 +15,7 @@ const app = express();
 // app.use(cors());
 app.use(morgan('dev'))
 app.use('/static', express.static(path.join(__dirname, 'static')));
-app.use('/', express.static(path.join(__dirname, 'letsencrypt')));
+app.use('/.well-known', express.static(path.join(__dirname, 'letsencrypt/.well-known')))
 app.use('/api', proxy({
     target : `${REMOTE_API_HOST}:${REMOTE_API_PORT}`,
     changeOrigin : true,
