@@ -21,7 +21,7 @@ let RecruiterForm = props => {
 	const submitDisabled = invalid || submitting
 
 	return (
-			<form onSubmit={handleSubmit} className="recruiter-form">
+			<form onSubmit={handleSubmit} className="recruiter-form application-form card-inner pt-5">
 				<Field
 					name="fullName"
 					type="text"
