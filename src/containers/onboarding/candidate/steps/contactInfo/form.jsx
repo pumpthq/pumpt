@@ -39,12 +39,12 @@ let OnboardingCandidateContactInfo = props => {
     const submit = (values, dispatch) => {
 			dispatch(saveContactInfoData(values))
 			dispatch(showDegreeStep()) //this can also be called in a saga
-      dispatch(gotoDegreeStep()) 
+      dispatch(gotoDegreeStep())
 
 		}
 
 		return (
-				<form onSubmit={handleSubmit(submit)}>
+				<form onSubmit={handleSubmit(submit)} class="application-form medium">
 
 						<fieldset className="form__row">
 								<Field

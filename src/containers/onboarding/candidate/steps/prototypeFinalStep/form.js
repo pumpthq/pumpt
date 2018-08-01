@@ -51,7 +51,7 @@ const CandidateFinalForm = props => {
 	}
 
 	return (
-		<form onSubmit={handleSubmit(submit)}>
+		<form onSubmit={handleSubmit(submit)} className="application-form">
 				<fieldset class="form__row">
 					<div class="mdl-textfield mdl-js-textfield textfield is-upgraded textfield_size_l">
 						<Field

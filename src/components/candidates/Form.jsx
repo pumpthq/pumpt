@@ -78,7 +78,7 @@ let CandidateSummaryForm = props => {
             <div className="col-12 col-md-6">
               {/* TODO: THIS SHOULD BE THE HIGHEST DEGREE EARNED FIELD */}
               <Field
-                name="degree"
+                name="highestDegree"
                 component={renderSelectField} label="Highest Degree Earned"
               >
                 { DEGREE_DROPDOWN_DATA.map(item => <MenuItem key={item.id} value={item.title} primaryText={item.title} />) }

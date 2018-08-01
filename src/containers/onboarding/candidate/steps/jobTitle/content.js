@@ -89,12 +89,13 @@ class JobTitleContent extends Component {
                     otherPlaceholder={'Enter Title Here'}
                 />
                 <div class='form__actions'>
-                    <Button
-                        typeColored={true}
-                        buttonSize={'l'}
-                        disabled={!this.state.stepValid}
-                        onClick={this.handleNextButtonCLick}
-                    >Next</Button>
+                    <button
+                      class="onboarding__next button_type_colored button_size_l"
+                      disabled={!this.state.stepValid}
+                      onClick={this.handleNextButtonCLick}
+                    >
+                      Next
+                    </button>
                 </div>
             </div>
         )
