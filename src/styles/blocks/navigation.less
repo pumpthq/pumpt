@@ -36,12 +36,12 @@
   &__link > a,
   &__link-inner {
     text-decoration: none;
+    font-size: @fz-general + 2;
   }
 
   &_color_invert &__link,
   &_color_invert &__link > a {
     color: @grey;
-    font-size: @fz-general;
     line-height: @lh-base;
 
     use {
@@ -75,7 +75,7 @@
   }
 
   &_inline {
-    margin: 0;
+    margin: 1rem  0;
   }
 
   &_inline &__link {
@@ -86,9 +86,27 @@
   &_type {
 
     &_bottom {
-
+      margin: -3rem 0 1rem;
       .navigation__link {
         position: relative;
+      }
+    }
+
+    &_tabbar {
+      margin-bottom : 2em;
+      .navigation__link {
+        padding: .225em 1em;
+        min-width: 140px;
+        &:hover {
+          text-decoration: none;
+          border-bottom: 2px solid white;
+          margin-bottom: -2px;
+        }
+        &_active, &_active:hover {
+          border-bottom: 2px solid @blue;
+          margin-bottom: -2px;
+          font-weight: bold;
+        }
       }
     }
 
@@ -284,7 +302,6 @@
       &_open {
         .navigation__link {
           display: block;
-          margin-bottom: 19px;
 
           &::after {
             margin-bottom: -2px;

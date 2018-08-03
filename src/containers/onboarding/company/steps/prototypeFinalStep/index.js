@@ -7,7 +7,7 @@ import CompanyFinalForm from './form'
 class CompanyPrototypeFinalStep extends Component {
     render() {
         const { onSubmit, OnboardingLinker } = this.props
-        
+
         return (
             <div class='container'>
                 <div class='row row-padding-bigger'>
@@ -20,7 +20,7 @@ class CompanyPrototypeFinalStep extends Component {
                                         <span class="image__wrapper"></span>
                                     </span>
                                 </H1>
-                                <p class='onboarding-header text text_after_big-head text_size_xs'>
+                                <p class='onboarding-header text text_size_xs pb-3'>
                                     Password must be at least 8 characters long.
                                     To make password more secure, use upper and lowercase letters, digits, and symbols.
                                 </p>

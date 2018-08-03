@@ -7,6 +7,8 @@ import {deleteJob, openJob} from './../../actions/companyJobs';
 import BasicDialog from 'components/main/popup/BasicDialog'
 import FlatButton from 'material-ui/FlatButton';
 
+import {apiImage} from 'components/helpers'
+
 const propTypes = {
     title: PropTypes.string,
     state: PropTypes.string,
@@ -43,112 +45,95 @@ class DraftsCard extends Component {
     this.setState(({triggerDialog}) => ({triggerDialog: !triggerDialog}));
   }
     render() {
-        const {
+      const {
+            company,
             title,
             state,
             salary,
             experience,
             employment,
             degree,
+            industries,
             _id,
             dispatch,
 						location,
         } = this.props;
         return (
-            <div className="slider__item slider__item_content_middle">
-                <div className="mdl-card card card_size_s">
-                    <div className="summary-head summary-head_rad-top" style={{ backgroundColor: '#4f68ac' }}>
-                        <div className={`summary-head__title mdl-card__title ${title ? null : 'summary-head__title_transparency'}`}>
-                            <div className="summary-head__title-item">
-                                <div className="summary-head__title-column">
-                                    <div className="summary-head__title-block">
-                                        <H2 className="mdl-card__title-text heading heading_color_invert heading_type_two">
-                                          {title || 'Untitled'} : [DRAFT] 
-                                        </H2>
-                                        <span className="mdl-card__subtitle-text summary-head__subtitle-text text text_color_invert text_size_xs">
-                                            {location ? location : 'Location is not specified'}
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="summary-head__title-item summary-head__title-item_type_vertical ">
-                                <div className="summary-head__title-column ">
-                                    <span className="text text_color_invert summary-head__label">Salary
-                                    </span>
-                                    <span className="text text_color_invert text_size_s summary-head__summary">
-                                        {salary || 'Not specified'}
-                                    </span>
-                                </div>
-                                <div className="summary-head__title-column ">
-                                    <span className="text text_color_invert summary-head__label">Experience
-                                    </span>
-                                    <span className="text text_color_invert text_size_s summary-head__summary">
-                                        {experience || 'Any'}
-                                    </span>
-                                </div>
-                                <div className="summary-head__title-column ">
-                                    <span className="text text_color_invert summary-head__label">Employment
-                                    </span>
-                                    <span className="text text_color_invert text_size_s summary-head__summary">
-                                        {employment || 'Any'}
-                                    </span>
-                                </div>
-                                <div className="summary-head__title-column ">
-                                    <span className="text text_color_invert summary-head__label">Degree
-                                    </span>
-                                    <span className="text text_color_invert text_size_s summary-head__summary">
-                                        {degree || 'Any'}
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="card__middle-block text-center">
-                        <Button
-                            disabled={ title === undefined }
-                            className="button_type_colored button_pos_center"
-                            onClick={(event) => {
-                                event.preventDefault();
-                                dispatch(openJob(_id));
-                            }}
-                        >
-                            Publish Job
-                        </Button>
-                    </div>
-                    <form className="card__actions-wrapper">
-                        <div className="mdl-card__actions mdl-card--border card__actions">
-                            <Link to={`/recruiter/jobs/${_id}/edit`} className="link">
-                                Edit Description
-                            </Link>
-
-                            <div className="mdl-layout-spacer" />
-
-                            <button
-                                className="link link_type_additional"
-                                onClick={this.handleDelete}
-                            >
-                                Delete Draft
-                            </button>
-                            <BasicDialog
-                              trigger={this.state.triggerDialog}
-                              closeText={"Nevermind"}
-                              onClose={() => {}}
-                              mainAction={
-                                <FlatButton
-                                  primary
-                                  onTouchTap={() => {
-                                    dispatch(deleteJob(_id));
-                                  }}
-                                  label="Delete Draft"
-                                />
-                              }
-                            >
-                              Are you sure you want to delete the draft?
-                            </BasicDialog>
-                        </div>
-                    </form>
+          <div className="slider__item slider__item_content_middle">
+            <div className="mdl-card card card_size_s">
+              <div className="summary-head row py-3">
+                {company && company.brief && company.brief.logo ?
+                  <div className="col-3">
+                    <img className="image image_round image_size_xl image_type_company-logo" src={apiImage(company.brief.logo)}/>
+                  </div>
+                : ''}
+                <div className={`col-${company && company.brief && company.brief.logo ? 9 : 12} text-left`}>
+                  <h2 className="job_title">{title || 'Untitled'} [Draft]</h2>
+                  <small>{location ? location.slice(0,location.lastIndexOf(',')) : 'Location not specified'}</small>
                 </div>
+              </div>
+              <div className="card__middle-block pt-2">
+                <dl className="row small">
+                  <dt className="col-6">Working Areas</dt>
+                  <dd className="col-6 pb-3">
+                    {industries && Array.isArray(industries) ? industries[0].parent : ''}
+                  </dd>
+                  <dt className="col-6">Total Compensation</dt>
+                  <dd className="col-6 pb-3">{salary || 'Not specified'}</dd>
+                  <dt className="col-6">Experience</dt>
+                  <dd className="col-6 pb-3">{experience || 'Any'}</dd>
+                  <dt className="col-6">Employment Type</dt>
+                  <dd className="col-6 pb-3">{employment || 'Any'}</dd>
+                  <dt className="col-6">Educational Degree</dt>
+                  <dd className="col-6 pb-3">{degree || 'Any'}</dd>
+                </dl>
+                <Link className="link row" to={`recruiter/jobs/${_id}/candidates`}>
+                  <button
+                    className="button_type_colored button_size_l m-auto"
+                    disabled={title === undefined}
+                    onClick={(event) => {
+                      event.preventDefault();
+                      dispatch(openJob(_id));
+                    }}
+                  >
+                    Publish Job
+                  </button>
+                </Link>
+                <div className="row pt-4 small">
+                  <div className="col-12">
+                    <Link
+                      to={`/recruiter/jobs/${_id}/edit`}
+                      className="link divided_pipe"
+                    >
+                      Edit Description
+                    </Link>
+                    <button
+                      className="link divided_pipe"
+                      onClick={this.handleDelete}
+                    >
+                      Delete Draft
+                    </button>
+                    <BasicDialog
+                      trigger={this.state.triggerDialog}
+                      closeText={"Nevermind"}
+                      onClose={() => {}}
+                      mainAction={
+                        <FlatButton
+                          primary
+                          onTouchTap={() => {
+                            dispatch(deleteJob(_id));
+                          }}
+                          label="Delete Draft"
+                        />
+                      }
+                    >
+                      Are you sure you want to delete the draft?
+                    </BasicDialog>
+                  </div>
+                </div>
+              </div>
             </div>
+          </div>
         );
     }
 }

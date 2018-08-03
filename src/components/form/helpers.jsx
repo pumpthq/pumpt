@@ -16,7 +16,9 @@ export const renderTextField = ({
         value={value}
         onChange={onChange}
         placeholder={label}
-        floatingLabelText={label} />
+        floatingLabelText={label}
+        style={{width: "100%"}}
+      />
       {touched && error && <span class="textfield__error">{error}</span>}
     </div>
   </div>
@@ -31,7 +33,13 @@ export const renderField = ({
 }) => (
   <div class={className}>
 		<div class={asyncValidating ? 'async-validating' : 'class'}>
-      <input class="mdl-textfield__input textfield__input" {...input} placeholder={label} type={type} />
+      <input
+        class="mdl-textfield__input textfield__input"
+        {...input}
+        placeholder={label}
+        type={type}
+        style={{width: "100%"}}
+      />
       {touched && error && <span class="textfield__error">{error}</span>}
     </div>
   </div>
@@ -42,7 +50,9 @@ export const renderSelectField = ({ input: {value, onChange}, label, meta: { tou
       <SelectField
         value={value}
         onChange={(event, id, payload) => (onChange(payload))}
-        floatingLabelText={label}>
+        floatingLabelText={label}
+        style={{width: "100%"}}
+      >
         {children}
       </SelectField>
       {touched && error && <span>{error}</span>}

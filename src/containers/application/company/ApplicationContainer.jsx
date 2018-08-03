@@ -68,7 +68,7 @@ export default class ApplicationContainer extends Component {
                     </div>
                 </div>
                 <div className="container">
-                    <div className="mdl-card col-xs-12">
+                    <div className="mdl-card col-12 mb-3 py-3">
                         <HeadingProgress/>
                     </div>
 

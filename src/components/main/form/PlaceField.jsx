@@ -18,13 +18,13 @@ export const PlaceField = ({ values, name, input, onChange, label, meta: { touch
 	const id = input.name;
 
 	const classes={
-		input: `form-control form-control-lg${hasError ? ' form-control-danger' : ''}`
+		input: `placesAutocomplete${hasError ? ' form-control-danger' : ''}`
 	}
 
 	//restrict to city results only, in US and territories
 	const options = {
 		types: ['(cities)'],
-    componentRestrictions: {country: ["US","PR","VI","GU","MP"]} 
+    componentRestrictions: {country: ["US","PR","VI","GU","MP"]}
 	}
 
 	const inputProps = {
@@ -37,11 +37,12 @@ export const PlaceField = ({ values, name, input, onChange, label, meta: { touch
 	}
 
 	return (
-		<div className={`form-group${hasError ? ' has-danger' : ''}`}>
+		<div className={`${hasError ? ' has-danger' : ''}`}>
 
 			<PlacesAutocomplete
 				inputProps={inputProps}
-				options={options}
+        options={options}
+        classNames={classes}
 			/>
 
 			{hasError && <div className="textfield__error textfield__error_small">{error}</div>}

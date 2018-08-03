@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {getAppData} from '../onLoad';
-import './../styles/app.less';
+import '../styles/app.less';
 // ⚠️ Tap event required to support material-ui click events
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import { DEGREE_DROPDOWN_DATA } from '../constants/candidateOnboarding';

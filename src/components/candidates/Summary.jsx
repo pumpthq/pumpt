@@ -1,16 +1,15 @@
 import React, { PropTypes } from 'react';
 
 import PencilIcon from 'components/icons/pencil';
-import Uploader from 'components/FileUploader';
 import { displayIndustries } from 'components/helpers';
 
 import { updateCandidate } from 'actions/candidateMatches';
-import './summary.less';
 
 const CandidateSummary = ({
   candidate: {
     firstName,
     lastName,
+    location,
     interestWorkingArea,
     recentWorkingAreas,
     recentJob,
@@ -19,66 +18,40 @@ const CandidateSummary = ({
   authorization: { email },
   onEdit,
 }) => (
-  <div className="summary-head summary">
-    <div className="summary-head__title mdl-card__title">
-      <div className="summary-head__title-item summary-head__title-item_type_alignment">
-        <div className="summary-head__title-column">
-          <div className="summary-head__title-block">
-            <h2 className="mdl-card__title-text heading heading_type_two">
-              <span className="ellipsis-text">
-                {firstName} {lastName}
-              </span>
-              <a
-                className="link" onClick={onEdit}
-                style={{
-                  visibility: 'visible',
-                  opacity: 1,
-                }}
-              >
-                <PencilIcon />
-                &nbsp;Edit
-              </a>
-            </h2>
-            <br />
-            <span className="text ellipsis-text">{email}</span>
+  <div>
 
-          </div>
-        </div>
-      </div>
-      <div className="summary-head__title-item summary-head__title-item_type_alignment">
-        <div className="summary-head__title-column">
-          <span className="text summary-head__label">Annual Income</span>
-          <span className="text text_size_s summary-head__summary">{recentAnnualIncome}</span>
-        </div>
-        <div className="summary-head__title-column">
-          <span class="text summary-head__label">Years of Experience </span>
-          <span class="text text_size_s summary-head__summary">{recentAreaExperience}</span>
-        </div>
-        <div className="summary-head__title-column">
-          <span className="text summary-head__label">Job Title </span>
-          <span className="text text_size_s summary-head__summary">{recentJob}</span>
-        </div>
-        <div className="summary-head__title-column">
-          <span className="text summary-head__label">Working Areas</span>
-          <span className="text text_size_s summary-head__summary">
-            {displayIndustries(recentWorkingAreas)}
-          </span>
-        </div>
-        <div className="summary-head__title-column">
-          <span className="text summary-head__label">Industry Experience</span>
-          <span className="text text_size_s summary-head__summary">
-            {interestWorkingArea && Array.isArray(interestWorkingArea) ?
-                interestWorkingArea.join(', ') : interestWorkingArea}
-          </span>
-        </div>
+    <div className="summary-head row">
+      <div className="col-12 py-5">
+        <h2>
+          {firstName} {lastName}
+        </h2>
+        <span>{email}</span>
+        <br />
+        <span>{location.slice(0,location.lastIndexOf(','))}</span>
+        <br />
+        <a className="link link__edit" onClick={onEdit}>
+          Edit
+        </a>
       </div>
     </div>
-    <div className="summary-head__title">
-      <Uploader label="Resume"
-        onSuccessAction={(data) => (
-          updateCandidate({resumeId: data.id, resumeName: data.name})
-        )}
-      />
+
+    <div className="row summary-body card-inner">
+      <div className="col-12 pt-5">
+        <dl>
+          <dt>Total Compensation</dt>
+          <dd>{recentAnnualIncome}</dd>
+          <dt>Years of Experience </dt>
+          <dd>{recentAreaExperience}</dd>
+          <dt>Job Title </dt>
+          <dd>{recentJob}</dd>
+          <dt>Working Areas</dt>
+          <dd>{displayIndustries(recentWorkingAreas)}</dd>
+          <dt>Industry</dt>
+          <dd>{interestWorkingArea && Array.isArray(interestWorkingArea) ?
+                interestWorkingArea.join(', ') : interestWorkingArea}
+              </dd>
+        </dl>
+      </div>
     </div>
   </div>
 );

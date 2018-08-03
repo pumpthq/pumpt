@@ -1,6 +1,8 @@
 import React, {Component, PropTypes} from 'react';
 import {Link} from 'react-router'
 
+import {apiImage} from 'components/helpers'
+
 const propTypes = {
     title: PropTypes.string,
     state: PropTypes.string,
@@ -21,7 +23,8 @@ const defaultProps = {
 
 class ClosedCard extends Component {
     render() {
-        const {
+      const {
+            company,
             _id,
             title,
             state,
@@ -30,66 +33,48 @@ class ClosedCard extends Component {
             experience,
             employment,
             degree,
+            industries,
             matches,
         } = this.props;
         return (
-            <div className="slider__item slider__item_content_middle">
-                <div className="mdl-card card card_size_s">
-                    <div className="summary-head summary-head_rad-top" style={{ backgroundColor: '#4f68ac' }}>
-                        <div className="summary-head__title mdl-card__title">
-                            <div className="summary-head__title-item">
-                                <div className="summary-head__title-column">
-                                    <div className="summary-head__title-block">
-                                        <h2 className="mdl-card__title-text heading heading_color_invert heading_type_two">
-                                            {title}
-                                        </h2>
-                                        <span className="mdl-card__subtitle-text summary-head__subtitle-text text text_color_invert text_size_xs">
-                                            {location ? location : ""}
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="summary-head__title-item summary-head__title-item_type_vertical ">
-                                <div className="summary-head__title-column ">
-                                    <span className="text text_color_invert summary-head__label">Salary
-                                    </span>
-                                    <span className="text text_color_invert text_size_s summary-head__summary">{salary}</span>
-                                </div>
-                                <div className="summary-head__title-column ">
-                                    <span className="text text_color_invert summary-head__label">Experience
-                                    </span>
-                                    <span className="text text_color_invert text_size_s summary-head__summary">{experience}</span>
-                                </div>
-                                <div className="summary-head__title-column ">
-                                    <span className="text text_color_invert summary-head__label">Employment
-                                    </span>
-                                    <span className="text text_color_invert text_size_s summary-head__summary">{employment}</span>
-                                </div>
-                                <div className="summary-head__title-column ">
-                                    <span className="text text_color_invert summary-head__label">Degree
-                                    </span>
-                                    <span className="text text_color_invert text_size_s summary-head__summary">{degree}</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="card__middle-block">
-                        <div className="row">
-                            <div className="col-lg-5 no-right-gutter">
-                            </div>
-                        </div>
-                    </div>
-                    <form className="card__actions-wrapper">
-                        <div className="mdl-card__actions mdl-card--border card__actions">
-                            <Link className="link" to={`recruiter/jobs/${_id}/show`}>
-                                View Job Description
-                            </Link>
-
-                            <div className="mdl-layout-spacer" />
-                        </div>
-                    </form>
+         <div className="slider__item slider__item_content_middle">
+            <div className="mdl-card card card_size_s">
+              <div className="summary-head row py-3">
+                {company && company.brief && company.brief.logo ?
+                  <div className="col-3">
+                    <img className="image image_round image_size_xl image_type_company-logo" src={apiImage(company.brief.logo)}/>
+                  </div>
+                : ''}
+                <div className={`col-${company && company.brief && company.brief.logo ? 9 : 12} text-left`}>
+                  <h2 className="job_title">{title || 'Untitled'} [Draft]</h2>
+                  <small>{location ? location.slice(0,location.lastIndexOf(',')) : 'Location not specified'}</small>
                 </div>
+              </div>
+              <div className="card__middle-block pt-2">
+                <dl className="row small">
+                  <dt className="col-6">Working Areas</dt>
+                  <dd className="col-6 pb-3">
+                    {industries && Array.isArray(industries) ? industries[0].parent : ''}
+                  </dd>
+                  <dt className="col-6">Total Compensation</dt>
+                  <dd className="col-6 pb-3">{salary || 'Not specified'}</dd>
+                  <dt className="col-6">Experience</dt>
+                  <dd className="col-6 pb-3">{experience || 'Any'}</dd>
+                  <dt className="col-6">Employment Type</dt>
+                  <dd className="col-6 pb-3">{employment || 'Any'}</dd>
+                  <dt className="col-6">Educational Degree</dt>
+                  <dd className="col-6 pb-3">{degree || 'Any'}</dd>
+                </dl>
+                <Link className="link row" to={`recruiter/jobs/${_id}/show`}>
+                  <button
+                    className="button_type_colored button_size_l m-auto"
+                  >
+                  View Job Description
+                  </button>
+                </Link>
+              </div>
             </div>
+          </div>
         );
     }
 }

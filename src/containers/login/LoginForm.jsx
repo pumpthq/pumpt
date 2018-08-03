@@ -23,15 +23,13 @@ const LoginForm = props => {
       return dispatch(login(values))
         .catch(err => {
             throw new SubmissionError({
-                _error: 'Incorrect Username or Password' 
+                _error: 'Incorrect Username or Password'
             })
         })
     }
 
 	return (
-			<form class="form form_padding-size_xs" onSubmit={handleSubmit(submit)}>
-				<fieldset class="form__row form__row_indent-size_m">
-					<div class="mdl-textfield mdl-js-textfield textfield is-upgraded textfield_size_l">
+			<form class="application-form large" onSubmit={handleSubmit(submit)}>
 						<Field
 							name="email"
 							type="email"
@@ -39,12 +37,7 @@ const LoginForm = props => {
 							label="Email"
 							validate={[required, email]}
 						/>
-					</div>
-				</fieldset>
 
-
-				<fieldset class="form__row form__row_indent-size_m">
-					<div class="mdl-textfield mdl-js-textfield textfield is-upgraded textfield_size_l">
 						<Field
 							name="password"
 							type="password"
@@ -52,10 +45,8 @@ const LoginForm = props => {
 							label="Password"
 							validate={[required]}
 						/>
-					</div>
-				</fieldset>
 
-        <div>
+        <div className="py-4">
           <Field
             name="remember"
             type="checkbox"
@@ -68,7 +59,7 @@ const LoginForm = props => {
 					<div class="form__actions">
 						<button
 							type="submit"
-							class="mdl-button button button_margin-right_m button_type_colored button_size_50p"
+							class="button_type_colored button_size_l"
 							disabled={!valid || submitting}
 							>Log In</button>
 						<Link class="link" to='/story/forgot'>Forgot Password?</Link>

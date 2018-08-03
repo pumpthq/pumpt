@@ -1,11 +1,57 @@
-.heading {
+h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
   color: @color-base;
   font-family: @ff-base;
-	text-align:center;
+  line-height: 1em;
+  padding-bottom: .5em;
+}
 
+h1 {
+  font-size: @fz-xxl;
+}
+
+h2 {
+  font-size: @fz-xl;
+  @media @phone {
+    font-size: extract(@fzs-main, 3);
+  }
+}
+
+h3 {
+  font-size: @fz-l;
+  font-size: extract(@fzs-main, 3);
+  line-height: 1.2;
+  margin: 12px 0;
+  letter-spacing: -0.1px;
+}
+
+h4 {
+  font-size: @fz-m;
+  font-family: @ff-additional;
+  font-weight: 400;
+  line-height: 1.25;
+  margin: 22px 0;
+  letter-spacing: -1.2px;
+  word-spacing: 2px;
+
+  @media @phone {
+    font-size: extract(@fzs-main, 4);
+    letter-spacing: -1px;
+    margin: 16px 0;
+  }
+}
+
+h5 {
+  font-size: @fz-m;
+}
+
+h6 {
+  font-size: @fz-general;
+}
+
+
+.heading {
   &__wrapper {
-
     .heading {
       width: 80%;
       display: inline-block;
@@ -15,44 +61,23 @@
 
   &_type {
     &_one {
-      font-size: @fz-xxl;
+      @extend h1;
     }
 
     &_two {
-      font-size: @fz-l;
-      font-weight: 600;
-
-      @media @phone {
-        font-size: extract(@fzs-main, 3);
-      }
+      @extend h2;
     }
 
     &_three {
-      font-size: extract(@fzs-main, 3);
-      line-height: 1.2;
-      margin: 12px 0;
-      letter-spacing: -0.1px;
+      @extend h3;
     }
 
     &_four {
-      font-size: @fz-xl;
-      font-family: @ff-additional;
-      font-weight: 400;
-      line-height: 1.25;
-      margin: 22px 0;
-      letter-spacing: -1.2px;
-      word-spacing: 2px;
-
-      @media @phone {
-        font-size: extract(@fzs-main, 4);
-        letter-spacing: -1px;
-        margin: 16px 0;
-      }
+      @extend h4;
     }
 
     &_five {
-      font-size: @fz-xxl;
-      font-weight: 600;
+      @extend h5;
     }
   }
 
@@ -63,21 +88,11 @@
   }
 
   &_button {
-
     &_true {
-      //display: flex;
-      //justify-content: space-between;
-
       .button {
         margin: 0;
       }
     }
   }
-
-  .summary-head & {
-    display: inline-block;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    width:100%;
-  }
 }
+

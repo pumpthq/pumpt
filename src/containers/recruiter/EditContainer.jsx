@@ -39,7 +39,7 @@ export default class EditContainer extends Component {
         const { recruiter, company, dispatch } = this.props
 
         return (
-                <div className="mdl-card col-xs-12">
+                <div className="mdl-card recruiter-profile">
                                             {this.state.editRecruiterSummary ?
                                                 <RecruiterForm
                                                     initialValues={recruiter}
@@ -57,9 +57,11 @@ export default class EditContainer extends Component {
                                                 <CompanySummary {...this.props} onEdit={()=>this.editCompanySummary(true)}/>
                                             }
 
+                                            <div className="card-inner">
                                             <CompanyApplicationForm
                                                 initialValues={company}
                                                 onSubmit={values=> {dispatch(updateCompany(values)); this.openDialog(); } }/>
+                                            </div>
 
   						<div className="text-center">
                 <BasicDialog trigger={this.state.triggerDialog} onClose={browserHistory.goBack}>

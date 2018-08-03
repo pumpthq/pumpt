@@ -86,7 +86,7 @@ class HeadingProgress extends Component {
         else if (isFinished && isNotApproved) {
 	        return (
 	            <div className="text-center">
-	                <H1 noGutter typeFour class='row'>Your Application is Under Review</H1>
+	                <H1 noGutter typeFour>Your Application is Under Review</H1>
 	                <p class="text text_after_big-head text_size_xs">
 			You can continue to update your background information below.
         	    	</p>
@@ -97,7 +97,7 @@ class HeadingProgress extends Component {
 
         return (
             <div className="text-center">
-                    <H1 noGutter typeFour class='row'>Just a Few More Steps</H1>
+                    <H1 noGutter typeFour>Just a Few More Steps</H1>
                     <p class="text text_after_big-head text_size_xs">
 			Please take this opportunity to tell us more about your background.
                     </p>

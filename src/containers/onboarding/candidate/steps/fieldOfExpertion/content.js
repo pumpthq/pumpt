@@ -84,13 +84,14 @@ class FieldOfExpertiseContent extends Component {
                     handleGroups={true}
                     otherPlaceholder={'Enter Experience Here'}
                 />
-                <div class='form__actions'>
-                    <Button
-                        typeColored={true}
-                        buttonSize={'l'}
-                        disabled={!stepValid}
-                        onClick={this.handleNextButtonCLick}
-                    >Next</Button>
+                <div class='form__actions pt-5'>
+                  <button
+                    class="onboarding__next button_type_colored button_size_l"
+                    disabled={!stepValid}
+                    onClick={this.handleNextButtonCLick}
+                  >
+                    Next
+                  </button>
                 </div>
             </div>
         )
