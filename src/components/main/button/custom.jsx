@@ -5,13 +5,11 @@ const propTypes = {
     typeColored : PropTypes.bool,
     buttonColor: PropTypes.string,
     text: PropTypes.string,
-  //key: PropTypes.string
 }
 
 const defaultProps = {
     onEnter : () => {
     },
-    typeColored : false,
     text : 'Other'
 }
 
@@ -26,22 +24,13 @@ export default class button extends Component {
         }
     }
 
-    makeClasses(initial) {
-        const { className, typeColored, buttonColor } = this.props
-        let classes = [initial, className]
-
-        if (typeColored) classes.push('button_type_colored');
-        if (buttonColor) classes.push('button_color_' + buttonColor.toLowerCase());
-        return classes.join(' ');
-    }
-
     render() {
         const { value, focused } = this.state;
         const { placeHolder } = this.props;
         return (
             <input
-                class={this.makeClasses('mdl-button button')}
-                type={focused ? 'text' : 'button'}
+                class={'custom-input'}
+                type="text"
                 onChange={this.handleValueChange}
                 onKeyPress={this.handleKeyPress}
                 onFocus={() => this.setState({focused: true})}

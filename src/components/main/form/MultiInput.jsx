@@ -47,16 +47,21 @@ class MultiInput extends Component {
     return (
       <div className="multi-input">
         { displayItems.map(val => (
-          <Button
-            key={val}
-            onClick={() => {
-              onChange(this.update(val));
-            }}
-            typeColored
-            buttonColor={value.includes(val) ? 'gold' : 'purple'}
-            className="button_type_tag"
-          >
-            {val}</Button>
+          <div>
+            <input
+              type="checkbox"
+              key={val}
+              checked={value.includes(val)}
+              onClick={() => {
+                onChange(this.update(val));
+              }}
+              value={val}
+              name={`fields[${val}]`}
+            />
+            <label for={`fields[${val}]`}>
+              {val}
+            </label>
+          </div>
         ))}
         <CustomButton 
           placeHolder="Other"
