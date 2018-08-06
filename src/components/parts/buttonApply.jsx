@@ -22,7 +22,7 @@ export default class ButtonApply extends Component {
     render() {
         const { icon, children, onClick } = this.props
         return (
-            <button onClick={e=> {e.preventDefault(); onClick()}} className="mdl-button button button_type_colored button_include_icon">
+            <button onClick={e=> {e.preventDefault(); onClick()}} className="button_type_colored">
                 {icon}
                 <span className="icon__text">{children}</span>
             </button>

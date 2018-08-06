@@ -53,8 +53,9 @@ export default class VacancyContainer extends Component {
         if(!company) {
             dispatch(fetchCompany(cid))
         }
+
     }
-    render() {
+  render() {
         return (
             <div>
                     <VacancyProfile {...this.props.vacancy}>

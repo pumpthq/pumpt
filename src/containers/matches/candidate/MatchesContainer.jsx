@@ -25,6 +25,7 @@ class MatchesContainer extends Component {
               </div>
               {this.props.location.pathname.indexOf('edit')<=0
                   && this.props.location.pathname.indexOf('settings')<=0
+                  && this.props.location.pathname.indexOf('matches/match')<=0
                   ? <TabBar />
                   : ''
               }

@@ -28,20 +28,37 @@
       font-weight: 600;
       height: auto;
       line-height: 1;
-      margin-right: 30px;
       // min-height: 42px;
+      margin-right: 30px;
       padding: 12px @btn-padding;
       text-transform: none;
       border: none;
       text-decoration: none !important;
-
+      cursor: pointer;
+      .text-center & {
+        margin: 0 15px 8px;
+      }
       &:hover {
-        background-color: @color-additional;
+        background-color: @color-invert;
+        color: @color-additional;
+        box-shadow: inset 0 0 0 2px @color-additional;
+      }
+
+      &_invert {
+        box-shadow: inset 0 0 0 2px @color-additional;
+        background: @color-invert;
+        color: @color-additional;
+        &:hover {
+          background-color: @color-additional;
+          color: @color-invert !important;
+        }
       }
 
       &[disabled][disabled] {
         background-color: @light-grey;
         color: @color-invert;
+        cursor: not-allowed;
+        box-shadow: none !important;
       }
     }
 
