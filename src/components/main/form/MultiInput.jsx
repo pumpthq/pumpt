@@ -79,14 +79,12 @@ class MultiInput extends Component {
 MultiInput.propTypes = {
   input: PropTypes.object,
   values: PropTypes.arrayOf(PropTypes.string),
-  label: PropTypes.string,
 };
 MultiInput.defaultProps = {
   input: {
     value: [],
   },
   values: [],
-  label: '',
 };
 
 export default MultiInput;

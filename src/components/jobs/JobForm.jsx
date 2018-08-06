@@ -171,7 +171,7 @@ class JobForm extends Component {
 
               <Field
                 name="employment"
-                component={ExpandableField(RadioButtonGroup)}
+                component={ExpandableField(MultiInput)}
                 validate={required}
                 expander = {{
                   title: "Employment Type",
@@ -179,10 +179,10 @@ class JobForm extends Component {
                   onToggleExpand: this.onToggleExpand,
                   expanded: this.expanded("Employment Type")
                 }}
-              >
-                { EMPLOYEMENTS_DROPDOWN_DATA
-                    .map(item => <RadioButton key={item.id} value={item.title} label={item.title} style={{marginBottom: 12}} />) }
-                  </Field>
+                componentProps={{
+                  values: EMPLOYEMENTS_DROPDOWN_DATA.map(i => i.title)
+                }}
+              />
 
                 <Field
                   name="salary" component={ExpandableField(RadioButtonGroup)}
