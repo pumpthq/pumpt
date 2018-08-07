@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import Button, {CustomButton} from '../button';
+import {Checkbox} from 'material-ui'
 
 import './multiInput.less';
 
@@ -39,6 +40,7 @@ class MultiInput extends Component {
     onChange([...value, newTag]) // ensure it's selected
   }
 
+
   render() {
     const { values, input: {value, onChange} } = this.props;
     const { otherTags } = this.state;
@@ -47,29 +49,22 @@ class MultiInput extends Component {
     return (
       <div className="multi-input">
         { displayItems.map(val => (
-          <div>
-            <input
-              type="checkbox"
+            <Checkbox
               key={val}
               checked={value.includes(val)}
-              onClick={() => {
+              onCheck={() => {
                 onChange(this.update(val));
               }}
               value={val}
               name={`fields[${val}]`}
+              id={`fields[${val}]`}
+              label={val}
             />
-            <label for={`fields[${val}]`}>
-              {val}
-            </label>
-          </div>
         ))}
-        <CustomButton 
+        <CustomButton
           placeHolder="Other"
           key="Other"
           onEnter={this.makeTag}
-          typeColored
-          buttonColor="purple"
-          className="button_type_tag"
         />
       </div>
     );
