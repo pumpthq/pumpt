@@ -141,13 +141,13 @@ class JobForm extends Component {
           ×
         </button>
         <form onSubmit={handleSubmit} className="mdl-card card card_state_open card_state_scroll">
-          <div className="recruter__newjob-card__form-top">
+          <div className="recruter__newjob-card__form-top card-inner">
             <header>
               <h2>New Job Posting</h2>
             </header>
-            <div>
-              <label htmlFor="title">Job Title:</label>
-              <div className="labeledField">
+            <div className="row">
+              <label className="col-auto" htmlFor="title">Job Title:</label>
+              <div className="col labeledField">
                 <Field
                   name="title"
                   type="text"
@@ -157,9 +157,9 @@ class JobForm extends Component {
                 />
               </div>
             </div>
-            <div>
-              <label htmlFor="location">Location:</label>
-              <div className="labeledField">
+            <div className="row">
+              <label className="col-auto" htmlFor="location">Location:</label>
+              <div className="col labeledField">
                 <Field
                   name="location"
                   label="Ex: New York, NY"
