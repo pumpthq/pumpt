@@ -13,10 +13,9 @@ export default (props) => {
   return (
     <div className="summary-body row card-inner">
       <div className="col-12 pt-5">
-        <h2>
-          {` ${name}`}
-        </h2>
         <dl>
+          <dt>Company</dt>
+          <dd><h2>{name}</h2></dd>
           <dt>Headquarters</dt>
           <dd>{headquartersLocation && shortenLocation(headquartersLocation)}</dd>
           <dt>Company Type</dt>
@@ -26,10 +25,10 @@ export default (props) => {
           <dt>Founded</dt>
           <dd>{` ${foundDate}`}</dd>
         </dl>
-        <a className="link link__edit" onClick={onEdit}>
-          Edit
-        </a>
       </div>
+      <a className="link link__edit" onClick={onEdit}>
+        Edit
+      </a>
     </div>
   );
 };

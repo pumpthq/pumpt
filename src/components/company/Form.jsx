@@ -26,7 +26,7 @@ let CompanySummaryForm = props => {
 
     <form onSubmit={handleSubmit} className="company-edit-form">
       <div className="row">
-        <div className="col-md-6 col-md-offset-3">
+        <div className="col-12 col-md-6 col-md-offset-3">
           <Field
             name="name"
             component={renderTextField}
@@ -46,6 +46,15 @@ let CompanySummaryForm = props => {
           </Field>
         </div>
         <div className="col-md-4">
+          <Field
+            name="foundDate"
+            component={renderTextField}
+            label="Year Founded"
+            validate={year}
+            normalize={normalizeYear}
+          />
+        </div>
+        <div className="col-md-4">
           <label htmlFor="type">Company Type</label>
           <Field
             name="type"
@@ -55,18 +64,9 @@ let CompanySummaryForm = props => {
             class="mdl-textfield__input textfield__input textfield__light"
           />
         </div>
-        <div className="col-md-4">
-          <Field
-            name="foundDate"
-            component={renderTextField}
-            label="Year Founded"
-            validate={year}
-            normalize={normalizeYear}
-          />
-        </div>
       </div>
 
-      <div className="candidate-buttons">
+      <div className="candidate-buttons pt-2">
         <button
           type="submit" disabled={submitDisabled}
           className="mdl-button button button_type_colored button_size_m"

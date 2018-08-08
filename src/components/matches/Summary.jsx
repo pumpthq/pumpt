@@ -13,8 +13,6 @@ const defaultProps = {
   company: {
     brief: {
       name: '{name}',
-      logo: 'https://placeholdit.imgix.net/~text?txtsize=9&txt=50x50&w=50&h=50',
-      background: 'https://placeholdit.imgix.net/~text?txtsize=33&txt=350%C3%97150&w=350&h=150',
     }
   },
   vacancy: {
@@ -127,7 +125,7 @@ export default class Summary extends Component {
         <div className="mdl-card card">
           {this.renderMatchInformation()}
           {this.renderShortContent()}
-          <Link className="link m-auto" to={`candidate/matches/match/${_id}/company/${_company}/vacancy/${_vacancy}`}>
+          <Link className="link m-auto" to={`/candidate/matches/match/${_id}/company/${_company}/vacancy/${_vacancy}`}>
             <button className="button_type_colored button_size_l m-auto">
               View Full Description
             </button>

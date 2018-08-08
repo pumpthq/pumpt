@@ -20,9 +20,13 @@ const defaultProps = {
 
 export default class ButtonLink extends Component {
     render() {
-        const { icon, disabled, children, onClick } = this.props
-        return (
-            <button onClick={e=> {e.preventDefault(); onClick()}} disabled={disabled} className="link mdl-button button button_type_colored button_include_icon">
+      const { icon, disabled, children, onClick, secondary } = this.props
+      const buttonClass = 'button_type_colored' + (
+      secondary  ? ' button_type_colored_invert': ''
+    )
+
+      return (
+            <button onClick={e=> {e.preventDefault(); onClick()}} disabled={disabled} className={buttonClass}>
                 {icon}
                 <span className="icon__text">{children}</span>
             </button>
