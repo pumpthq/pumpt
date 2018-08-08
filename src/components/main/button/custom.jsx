@@ -49,7 +49,7 @@ export default class button extends Component {
               onKeyPress={this.handleKeyPress}
               onFocus={() => this.setState({focused: true})}
               onBlur={() => this.setState({focused: false})}
-              value={focused ? value : placeHolder}
+              value={value || focused ? value : placeHolder}
             />
           </div>
         </div>
