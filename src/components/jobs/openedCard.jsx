@@ -96,7 +96,7 @@ handleClose = (event) => {
               <dt className="col-6">Years Experience</dt>
               <dd className="col-6 pb-3">{experience}</dd>
               <dt className="col-6">Employment Type</dt>
-              <dd className="col-6 pb-3">{employment}</dd>
+              <dd className="col-6 pb-3">{ Array.isArray(employment) ? employment.join(', ') : 'Any' }</dd>
               <dt className="col-6">Educational Degree</dt>
               <dd className="col-6 pb-3">{degree}</dd>
             </dl>
