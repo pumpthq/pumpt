@@ -12,8 +12,6 @@ const defaultProps = {
     // name: 'Name',
     company: {
         name: '{companyName}',
-        // logo: 'https://placeholdit.imgix.net/~text?txtsize=9&txt=50x50&w=50&h=50',
-        // background: 'https://placeholdit.imgix.net/~text?txtsize=33&txt=350%C3%97150&w=350&h=150',
     },
     title: '{title}',
     state: '{location}',

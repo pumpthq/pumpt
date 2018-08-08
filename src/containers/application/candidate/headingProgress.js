@@ -44,7 +44,7 @@ class HeadingProgress extends Component {
                         </Button>
                     </h2>
                     <p class="text text_after_big-head text_size_xs">
-                        We'll let you know when we find a match for you.
+                      {` We'll let you know when we find a match for you. `}
                     </p>
                     <Button
                         class="invisible-mobile"
