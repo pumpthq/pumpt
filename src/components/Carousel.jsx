@@ -37,22 +37,16 @@ export default class Carousel extends Component {
         this.onClickNextButton = this.onClickNextButton.bind(this);
         this.onClickPrevButton = this.onClickPrevButton.bind(this);
     }
-    componentDidMount() {
-        const { openCard } = this.props;
+
+  updateSize = () => {
         let sliderBody = this.refs.sliderBody;
         const children = sliderBody.children;
-
         let sliderWidth = sliderBody.offsetWidth;
         let totalWidthItems = 0;
         let itemsWidth = [];
-        let centerMode = false;
-        {/* TODO: Recalculate card sizes on browser resize */}
         for(let i = 0; i < children.length; i++) {
             totalWidthItems += children[i].offsetWidth;
             itemsWidth.push(children[i].offsetWidth);
-        }
-        if(openCard && openCard !== true) {
-            centerMode = true;
         }
 
         this.setState({
@@ -60,10 +54,30 @@ export default class Carousel extends Component {
             totalWidthItems: totalWidthItems,
             itemsWidth: itemsWidth,
             items: children,
-            itemPosition: 0,
-            centerMode: centerMode
         })
+  }
+
+    componentDidMount() {
+      const { openCard } = this.props;
+
+      let centerMode = false;
+      if(openCard && openCard !== true) {
+        centerMode = true;
+      }
+
+      this.setState({
+        itemPosition: 0,
+        centerMode: centerMode
+      })
+      this.updateSize();
+
+      window.addEventListener("resize", this.updateSize);
     }
+
+   componentWillUnmount() {
+    window.removeEventListener("resize", this.updateSize);
+   }
+
     makeClasses() {
         const { className } = this.props
         let classes = ['slider', 'matches-carousel', className]
