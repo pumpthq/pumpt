@@ -175,7 +175,9 @@ class JobForm extends Component {
                 validate={required}
                 expander = {{
                   title: "Employment Type",
-                  preview: formValues.employment,
+                  preview: Array.isArray(formValues.employment) ? formValues.employment.map(type => (
+                    <span className="divided_pipe">{type} </span>
+                  ) ) : 'Any',
                   onToggleExpand: this.onToggleExpand,
                   expanded: this.expanded("Employment Type")
                 }}
