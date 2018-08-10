@@ -10,21 +10,6 @@ import CandidateApplicationForm from 'components/candidates/Application';
 import Button from 'components/main/button'
 import BasicDialog from 'components/main/popup/BasicDialog';
 
-
-const formatSkills = (values) => {
-  let newValues = {...values};
-  newValues.skills = values.skills && Array.isArray(values.skills)
-    ? values.skills.reduce((obj, s) => {obj[s] = true; return obj} , {})
-    : values.skills || {};
-  return newValues;
-}
-
-const submitSkills = (values) => {
-  let newValues = {...values};
-  newValues.skills = Object.keys(values.skills).filter(k => values.skills[k] === true);
-  return newValues;
-}
-
 const recentWorkingAreasToParent = (values) => {
   values.recentWorkingArea = values.recentWorkingAreas.map( a => (a.value));
   values.recentWorkingAreaParent = values.recentWorkingAreas.length > 0 ? values.recentWorkingAreas[0].parent : undefined;
@@ -85,8 +70,8 @@ class EditContainer extends Component {
               <div className="card-inner">
                 <CandidateResume {...this.props} onEdit={()=>this.editSummary(true)} />
                 <CandidateApplicationForm
-                  initialValues={formatSkills(candidate)}
-                  onSubmit={values=> {dispatch(updateCandidate(submitSkills(processAppFields(values))));
+                  initialValues={candidate}
+                  onSubmit={values=> {dispatch(updateCandidate(processAppFields(values)));
                     this.openDialog();
                   } }/>
               </div>

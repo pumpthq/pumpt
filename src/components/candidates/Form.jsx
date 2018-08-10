@@ -76,7 +76,6 @@ let CandidateSummaryForm = props => {
               </Field>
             </div>
             <div className="col-12 col-md-6">
-              {/* TODO: THIS SHOULD BE THE HIGHEST DEGREE EARNED FIELD */}
               <Field
                 name="highestDegree"
                 component={renderSelectField} label="Highest Degree Earned"
