@@ -61,7 +61,7 @@ class ClosedCard extends Component {
                   <dt className="col-6">Experience</dt>
                   <dd className="col-6 pb-3">{experience || 'Any'}</dd>
                   <dt className="col-6">Employment Type</dt>
-                  <dd className="col-6 pb-3">{employment || 'Any'}</dd>
+                  <dd className="col-6 pb-3">{ Array.isArray(employment) ? employment.join(', ') : 'Any' }</dd>
                   <dt className="col-6">Educational Degree</dt>
                   <dd className="col-6 pb-3">{degree || 'Any'}</dd>
                 </dl>

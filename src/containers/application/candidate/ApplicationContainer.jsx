@@ -2,9 +2,9 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import Wrapper from 'components/main/wrapper'
 import {HeaderMini} from 'components/main/header'
-import HeadingProgress from 'containers/application/candidate/headingProgress';
 import CandidateSummaryForm from 'components/candidates/Form';
 import CandidateSummary from 'components/candidates/Summary';
+import CandidateResume from 'components/candidates/Resume';
 import CandidateApplicationForm from 'components/candidates/Application';
 import logoImage from 'img/sprites-svg/logo.svg'
 import {updateCandidate} from 'actions/candidateMatches'
@@ -83,55 +83,51 @@ export default class ApplicationContainer extends Component {
         const { candidate, dispatch, jobTitleData, authorization } = this.props
 
         return (
-            <Wrapper id='onboarding-candidate'>
-                <div class='container'>
-                    <div class='row row-padding-bigger'>
-                        <div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
-                            <HeaderMini
-                                class="header_small"
-                                profilePhoto={apiImage(candidate.avatar)}
-                                logo={logoImage}
-                                name={`${candidate.firstName} ${candidate.lastName}`}
-                                progress={candidate.fillProgress}
-                            />
-                        </div>
-                    </div>
+          <Wrapper id='onboarding-candidate'>
+            <div class='container'>
+              <div class='row row-padding-bigger'>
+                <div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
+                  <HeaderMini
+                    class="header_small"
+                    profilePhoto={apiImage(candidate.avatar)}
+                    logo={logoImage}
+                    name={`${candidate.firstName} ${candidate.lastName}`}
+                    progress={candidate.fillProgress}
+                  />
                 </div>
-                <div className="container">
-                    <div className="mdl-card col-12 mb-3 py-3">
-                        <HeadingProgress/>
-                    </div>
+              </div>
+            </div>
+            <div className="container">
+              <div className="mdl-card col-xs-12">
 
-                    <div className="mdl-card col-xs-12">
-
-												{this.state.editSummary ?
-													<CandidateSummaryForm
-														initialValues={recentWorkingAreasToParent(candidate)}
-                            onSubmit={values=> {dispatch(updateCandidate(recentWorkingAreaFormat(values))); this.editSummary(false)}}
-														onCancel={()=>this.editSummary(false)}
-                                                        />
-
-														:
-
-														<CandidateSummary {...this.props} onEdit={()=>this.editSummary(true)}/>
-												}
-												<CandidateApplicationForm
-														ref="applicationForm"
-                            initialValues={formatSkills(candidate)}
-                            onSubmit={values=>
-{dispatch(updateCandidate(submitSkills(processAppFields(values)))); this.handleFinished(); } }
-													/>
-
-														<div className="text-center">
-															<ApplicationSuccessDialog trigger={authorization.lastFinished} />
-    												</div>
-														<span>
-															<br></br>
-															<br></br>
-														</span>
-												</div>
+                {this.state.editSummary ?
+                    <CandidateSummaryForm
+                      initialValues={recentWorkingAreasToParent(candidate)}
+                      onSubmit={values=> {dispatch(updateCandidate(recentWorkingAreaFormat(values))); this.editSummary(false)}}
+                      onCancel={()=>this.editSummary(false)}
+                    />
+                    :
+                    <CandidateSummary {...this.props} onEdit={()=>this.editSummary(true)} headingProgress={true} />
+                }
+                <div className="card-inner">
+                  <CandidateResume {...this.props} onEdit={()=>this.editSummary(true)} />
+                  <CandidateApplicationForm
+                    ref="applicationForm"
+                    initialValues={formatSkills(candidate)}
+                    onSubmit={values=>
+                      {dispatch(updateCandidate(submitSkills(processAppFields(values)))); this.handleFinished(); } }
+                    />
+                  </div>
+                  <div className="text-center">
+                    <ApplicationSuccessDialog trigger={authorization.lastFinished} />
+                  </div>
+                  <span>
+                    <br></br>
+                    <br></br>
+                  </span>
                 </div>
-                <Footer />
+              </div>
+              <Footer />
 
             </Wrapper>
         )

@@ -68,10 +68,6 @@ export default class ApplicationContainer extends Component {
                     </div>
                 </div>
                 <div className="container">
-                    <div className="mdl-card col-12 mb-3 py-3">
-                        <HeadingProgress/>
-                    </div>
-
                     <div className="mdl-card col-xs-12">
                                             {this.state.editRecruiterSummary ?
                                                 <RecruiterForm
@@ -81,6 +77,9 @@ export default class ApplicationContainer extends Component {
                                                 :
                                                 <RecruiterSummary {...this.props} onEdit={()=>this.editRecruiterSummary(true)}/>
                                             }
+
+                                            <div className="pt-5"><HeadingProgress/></div>
+
                                             {this.state.editCompanySummary ?
                                                 <CompanyForm
                                                     initialValues={company}

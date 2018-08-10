@@ -3,6 +3,7 @@ import React, { PropTypes } from 'react';
 import PencilIcon from 'components/icons/pencil';
 import { displayIndustries } from 'components/helpers';
 
+import HeadingProgress from 'containers/application/candidate/headingProgress';
 import { updateCandidate } from 'actions/candidateMatches';
 
 const CandidateSummary = ({
@@ -17,6 +18,7 @@ const CandidateSummary = ({
     recentAreaExperience },
   authorization: { email },
   onEdit,
+  headingProgress
 }) => (
   <div>
 
@@ -34,6 +36,11 @@ const CandidateSummary = ({
         </a>
       </div>
     </div>
+
+    {headingProgress
+        ? <div className="pt-5"><HeadingProgress/></div>
+        : ''
+    }
 
     <div className="row summary-body card-inner">
       <div className="col-12 pt-5">

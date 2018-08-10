@@ -2,7 +2,6 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux';
 import {push} from 'react-router-redux';
 
-import {H1} from 'components/main/heading'
 import Button from 'components/main/button'
 
 @connect(
@@ -30,7 +29,7 @@ class HeadingProgress extends Component {
         if (!isNotApproved && isFilled) {
             return (
                 <div>
-                    <H1 class="heading heading_type_four  heading_button_true ">
+                    <h2>
                         Welcome to Pumpt!
                         <Button
                             class="invisible-mobile"
@@ -41,7 +40,7 @@ class HeadingProgress extends Component {
                         >
                             Get Matches
                         </Button>
-                    </H1>
+                    </h2>
                     <p class="text text_after_big-head text_size_xs">
                         We'll let you know when we find a match for you.
                     </p>
@@ -61,9 +60,9 @@ class HeadingProgress extends Component {
         else if (!isNotApproved && !isFilled) {
             return (
                 <div class="text-center">
-                    <H1 class="heading heading_type_four  heading_button_true ">
+                    <h2>
                         Your application is approved!
-                    </H1>
+                    </h2>
                     <p class="text text_after_big-head text_size_xs">
                         Improve your match results by completing your profile.
                     </p>
@@ -82,7 +81,7 @@ class HeadingProgress extends Component {
         else if (isFinished && isNotApproved) {
 	        return (
 	            <div className="text-center">
-	                <H1 noGutter typeFour>Your Application is Under Review</H1>
+	                <h2>Your application is under review</h2>
 	                <p class="text text_after_big-head text_size_xs">
 			You can continue to update your company information below.
         	    	</p>
@@ -95,7 +94,7 @@ class HeadingProgress extends Component {
 				else {
             return (
                 <div className="text-center">
-                    <H1 noGutter typeFour>Just a Few More Steps</H1>
+                    <h2>Just a few more steps</h2>
                     <p class="text text_after_big-head text_size_xs">
 										Please take this opportunity to tell us more about your company and what makes your culture unique.
                     </p>

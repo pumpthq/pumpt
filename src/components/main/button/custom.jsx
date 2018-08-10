@@ -1,17 +1,16 @@
 import React, {Component, PropTypes} from 'react'
+import {Checkbox} from 'material-ui'
 
 const propTypes = {
     onEnter : PropTypes.func,
     typeColored : PropTypes.bool,
     buttonColor: PropTypes.string,
     text: PropTypes.string,
-  //key: PropTypes.string
 }
 
 const defaultProps = {
     onEnter : () => {
     },
-    typeColored : false,
     text : 'Other'
 }
 
@@ -26,29 +25,35 @@ export default class button extends Component {
         }
     }
 
-    makeClasses(initial) {
-        const { className, typeColored, buttonColor } = this.props
-        let classes = [initial, className]
-
-        if (typeColored) classes.push('button_type_colored');
-        if (buttonColor) classes.push('button_color_' + buttonColor.toLowerCase());
-        return classes.join(' ');
-    }
-
     render() {
-        const { value, focused } = this.state;
-        const { placeHolder } = this.props;
-        return (
+      const { value, focused } = this.state;
+      const { placeHolder } = this.props;
+      return (
+        <div className="custom-input-set row">
+          <div className="col-auto checkbox-submit">
+            <Checkbox
+              checked={false}
+              value="Other"
+              label=""
+              onCheck={() => {
+                this.props.onEnter(value);
+                this.setState({value: ''})
+              }}
+            />
+          </div>
+          <div className="col px-0 application-form">
             <input
-                class={this.makeClasses('mdl-button button')}
-                type={focused ? 'text' : 'button'}
-                onChange={this.handleValueChange}
-                onKeyPress={this.handleKeyPress}
-                onFocus={() => this.setState({focused: true})}
-                onBlur={() => this.setState({focused: false})}
-                value={focused ? value : placeHolder}
-              />
-        )
+              className={'custom-input my-0 py-0'}
+              type="text"
+              onChange={this.handleValueChange}
+              onKeyPress={this.handleKeyPress}
+              onFocus={() => this.setState({focused: true})}
+              onBlur={() => this.setState({focused: false})}
+              value={value || focused ? value : placeHolder}
+            />
+          </div>
+        </div>
+      )
     }
 
     handleKeyPress(event) {

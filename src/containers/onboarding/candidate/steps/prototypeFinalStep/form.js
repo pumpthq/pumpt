@@ -85,7 +85,7 @@ const CandidateFinalForm = props => {
 						>
 								Next
 						</Button>
-						<p class='text'>
+						<p class='text mt-5'>
 								By clicking ‘Next’,
 								you agree to the
 								<a class='link' target="_blank" href='http://pumpthq.com/terms'> Terms &amp; Conditions</a>.
