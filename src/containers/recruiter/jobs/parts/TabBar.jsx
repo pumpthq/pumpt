@@ -16,7 +16,7 @@ class TabBar extends Component {
         return (
             <TabBarView>
                 {[{
-                    title : ` Open Jobs `,
+                    title : ` Published Jobs `,
                     route : ROUTE_COMPANY_JOBS_OPEN,
                     action : routeToOpen
                 }, {

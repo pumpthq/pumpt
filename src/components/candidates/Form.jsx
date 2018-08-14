@@ -87,11 +87,11 @@ let CandidateSummaryForm = props => {
 
 
             <div className="col-12 col-md-6">
-              <label>Working Areas</label>
+              <label>Industry</label>
               <Field
                 name="interestWorkingArea"
                 component={MultiInput}
-                label="Working Areas"
+                label="Industry"
                 values={INDUSTRY_DROPDOWN_DATA[0].items.map((item) => (item.title))}
               />
             </div>
@@ -99,7 +99,7 @@ let CandidateSummaryForm = props => {
               <Field
                 name="recentWorkingAreaParent"
                 component={renderSelectField}
-                label="Field Of Expertise"
+                label="Working Areas"
               >
                 { FIELD_OF_EXPERTISE_DROPDOWN_DATA
                   .map((item) => <MenuItem key={item.id} value={item.title} primaryText={item.title} />)}
