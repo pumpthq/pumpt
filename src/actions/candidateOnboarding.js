@@ -24,7 +24,9 @@ import {
     SHOW_JOB_TITLE_STEP,
     SHOW_SET_UP_PASSWORD_STEP,
     SHOW_VALUES_STEP,
-    SHOW_DEGREE_STEP
+    SHOW_DEGREE_STEP,
+    SAVE_EMPLOYMENT_DATA,
+    SHOW_EMPLOYMENT_DATA,
 } from './../constants/candidateOnboarding'
 
 import {push} from 'react-router-redux'
@@ -34,6 +36,8 @@ export const gotoStep = (step) => push('/onboarding/candidate/'+step)
 export const gotoContactInfoStep = () => gotoStep(SHOW_CONTACT_INFO_STEP)
 
 export const gotoDegreeStep = () => gotoStep(SHOW_DEGREE_STEP)
+
+export const gotoEmploymentStep = () => gotoStep(SHOW_EMPLOYMENT_STEP)
 
 export const gotoIndustryStep = () => gotoStep(SHOW_INDUSTRY_STEP)
 
@@ -86,6 +90,15 @@ export const saveContactInfoData = ({ firstName, lastName, email, location, abil
 				abilityToRelocate,
         socialMedia,
     }
+})
+
+export const showEmploymentStep = () => ({
+  type: SHOW_EMPLOYMENT_STEP
+})
+
+export const saveEmploymentData = ({ employmentTypes }) => ({
+  type : SAVE_EMPLOYMENT_DATA,
+  payload : { employmentTypes }
 })
 
 export const showDegreeStep = () => ({

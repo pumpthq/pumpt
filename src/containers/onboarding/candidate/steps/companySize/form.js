@@ -4,7 +4,7 @@ import List from './../../../../../components/main/list'
 import uuid from 'uuid'
 import {findById} from '../../../../../constants/dropdownData'
 
-import {gotoValuesStep, saveCompanySizeData, showValuesStep,} from './../../../../../actions/candidateOnboarding'
+import {gotoEmploymentStep, saveCompanySizeData, showEmploymentStep,} from './../../../../../actions/candidateOnboarding'
 
 import {StepListLink} from '../../../renderHelpers'
 import {COMPANY_SIZE_DROPDOWN_DATA} from './../../../../../constants/candidateOnboarding'
@@ -29,8 +29,8 @@ import {COMPANY_SIZE_DROPDOWN_DATA} from './../../../../../constants/candidateOn
                     value
                 }
             }))
-            dispatch(showValuesStep())
-            dispatch(gotoValuesStep())
+            dispatch(showEmploymentStep())
+            dispatch(gotoEmploymentStep())
         }
 
         return {
