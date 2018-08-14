@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react'
 import {SimpleInput} from './../inputs'
+import CustomBox from 'components/main/button/custom';
 
 class MultiItemUserEntered extends Component {
     constructor(props) {
@@ -66,9 +67,17 @@ class MultiItemUserEntered extends Component {
     render() {
         let { text, id, isSelected, otherPlaceholder } = this.props
         let {value} = this.state
+      return (
+        <CustomBox
+                placeHolder="Other"
+                key="Other"
+                onEnter={(val) => this.props.onEnter("other", val)}
+              />
+      )
         if(isSelected) {
             return (
-                <div>
+            
+               <div>
                     <li
                         className={this.makeClassName()}
                         key={id}

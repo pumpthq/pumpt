@@ -1,4 +1,5 @@
 import React, {Component, PropTypes} from 'react'
+import {Checkbox} from 'material-ui'
 
 class MultiItemText extends Component {
     constructor(props) {
@@ -18,29 +19,17 @@ class MultiItemText extends Component {
         })
     }
 
-    makeClassName() {
-        let finalClassName = 'link_size_xl multi__item'
-        let { isSelected, noOneSelected } = this.props
-        if(noOneSelected) {
-            finalClassName += ' link'
-        } else {
-            if(isSelected) {
-                finalClassName += ' link multi__item_selected'
-            } else {
-                finalClassName += ' link'
-            }
-        }
-        return finalClassName
-    }
-
     render() {
         let { text, id } = this.props
-        return (
-            <li
-                className={this.makeClassName()}
-                key={id}
-                onClick={this.handleClick}
-            ><span class='link_size_xl'>{text}</span></li>
+      return (
+        <Checkbox
+          value={text}
+          key={id}
+          label={text}
+          onCheck={this.handleClick}
+          checked={this.props.isSelected}
+          className="my-2"
+        />
         )
     }
 }
