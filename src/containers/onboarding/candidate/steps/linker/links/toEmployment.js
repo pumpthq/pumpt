@@ -5,7 +5,7 @@ import {gotoEmploymentStep, showEmploymentStep} from './../../../../../../action
 import {NavigationLink2} from './../../../../../../components/main/navigation'
 import CallStep from './../../../../callStep'
 import {findById} from '../../../../../../constants/dropdownData'
-import {EMPLOYMENT_DROPDOWN_DATA} from '../../../../../../constants/candidateOnboarding'
+import {EMPLOYMENTS_DROPDOWN_DATA} from '../../../../../../constants/companyJobs'
 
 @connect(
     function mapStateToProps(state) {
@@ -31,12 +31,12 @@ export class To extends Component {
             isEnabled,
             dispatch
         } = this.props
-      const stateItem = onboardingState.industries;
-      let industries = "";
+      const stateItem = onboardingState.employments;
+      let employments = "";
         if (stateItem) {
-          industries = stateItem.map(({ id }) => findById({
+          employments = stateItem.map(({ id }) => findById({
             id,
-            data : EMPLOYMENT_DROPDOWN_DATA
+            data : EMPLOYMENTS_DROPDOWN_DATA
           }).title
           ).join(' | ');
         }
@@ -54,7 +54,7 @@ export class To extends Component {
                     }
                 }}
                 textLabel='Preferred Employment Type'
-                textFilledWith={industries}
+                textFilledWith={employments}
             />
         )
     }

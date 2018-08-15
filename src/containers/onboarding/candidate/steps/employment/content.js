@@ -13,19 +13,20 @@ import {
 } from './../../../../../actions/candidateOnboarding'
 
 import {StepListCheckLink} from '../../../renderHelpers'
-import {EMPLOYMENT_DROPDOWN_DATA} from './../../../../../constants/candidateOnboarding'
+import {EMPLOYMENTS_DROPDOWN_DATA} from './../../../../../constants/companyJobs'
 
 @connect(
     function mapStateToProps(state, ownProps) {
-        const { industries } = state.candidateOnboarding
+        const { employments } = state.candidateOnboarding
+      let items = employments;
 
         let activeItems = [];
 
         if(items) {
             for(var item of items) {
                 let v = findById({
-                    id: industry.id,
-                    data: EMPLOYMENT_DROPDOWN_DATA
+                    id: item.id,
+                    data: EMPLOYMENTS_DROPDOWN_DATA
                 });
                 v ? activeItems.push(v) : null;
             }
@@ -43,7 +44,7 @@ import {EMPLOYMENT_DROPDOWN_DATA} from './../../../../../constants/candidateOnbo
                 if(ownProps.activeItems[i].id == a.id) {
                     ownProps.activeItems.splice(i,1);
                     dispatch(saveEmploymentData({
-                        industries : ownProps.activeItems
+                        employments: ownProps.activeItems
                     }))
                     return;
                 }
@@ -54,12 +55,12 @@ import {EMPLOYMENT_DROPDOWN_DATA} from './../../../../../constants/candidateOnbo
                 value: a.value
             });
             dispatch(saveEmploymentData({
-                industries : ownProps.activeItems
+                employments: ownProps.activeItems
             }))
 
         }
 
-        const nextStep = ({ id, industry }) => {
+        const nextStep = ({ id, employments}) => {
 					dispatch(showValuesStep())
 					dispatch(gotoValuesStep())
         }
@@ -79,7 +80,7 @@ class EmploymentForm extends Component {
         return (
             <div>
                 <List type='onboarding' visualType='plainCheckboxes'>
-                    {listItems[0].items.map(item => {
+                    {listItems.map(item => {
 												//something weird happening here
 
                         return (
@@ -108,7 +109,7 @@ EmploymentForm.propTypes = {
 }
 EmploymentForm.defaultProps = {
     activeItems: [],
-    listItems : EMPLOYMENT_DROPDOWN_DATA
+    listItems : EMPLOYMENTS_DROPDOWN_DATA
 }
 
 export default EmploymentForm

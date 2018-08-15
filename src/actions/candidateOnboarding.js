@@ -26,7 +26,7 @@ import {
     SHOW_VALUES_STEP,
     SHOW_DEGREE_STEP,
     SAVE_EMPLOYMENT_DATA,
-    SHOW_EMPLOYMENT_DATA,
+    SHOW_EMPLOYMENT_STEP,
 } from './../constants/candidateOnboarding'
 
 import {push} from 'react-router-redux'
@@ -96,9 +96,9 @@ export const showEmploymentStep = () => ({
   type: SHOW_EMPLOYMENT_STEP
 })
 
-export const saveEmploymentData = ({ employmentTypes }) => ({
+export const saveEmploymentData = ({ employments }) => ({
   type : SAVE_EMPLOYMENT_DATA,
-  payload : { employmentTypes }
+  payload : { employments }
 })
 
 export const showDegreeStep = () => ({
