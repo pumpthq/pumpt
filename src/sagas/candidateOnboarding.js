@@ -79,6 +79,7 @@ export default function() {
                 values : onboardingState.values.map(({value}) => value ),
                 socialMedia: onboardingState.socialMedia,
                 highestDegree: onboardingState.degree.value,
+                employments: onboardingState.employments.map(({value})=> value),
             }
 
             try {

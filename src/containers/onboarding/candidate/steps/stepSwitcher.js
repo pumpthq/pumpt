@@ -12,6 +12,7 @@ import {
     SHOW_JOB_TITLE_STEP,
     SHOW_SET_UP_PASSWORD_STEP,
     SHOW_VALUES_STEP,
+    SHOW_EMPLOYMENT_STEP,
 } from './../../../../constants/candidateOnboarding'
 
 import ContactInfoStep from './contactInfo'
@@ -24,6 +25,7 @@ import ExperienceStep from './experience'
 import ValuesStep from './values'
 import CompanySizeStep from './companySize'
 import CandidateFinalStep from './final'
+import EmploymentStep from './employment'
 
 @connect()
 class OnboardingCandidateStepSwitcher extends Component {
@@ -50,6 +52,8 @@ class OnboardingCandidateStepSwitcher extends Component {
                 return (<ExperienceStep {...props}/>)
             case SHOW_VALUES_STEP :
                 return (<ValuesStep {...props}/>)
+          case SHOW_EMPLOYMENT_STEP :
+              return (<EmploymentStep {...props} />)
             case SHOW_COMPANY_SIZE_STEP :
                 return (<CompanySizeStep {...props}/>)
             case SHOW_SET_UP_PASSWORD_STEP :

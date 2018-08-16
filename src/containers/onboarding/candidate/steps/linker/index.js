@@ -12,6 +12,7 @@ import LinkToIncomeStep from './links/toIncome'
 import LinkToExperienceStep from './links/toExperience'
 import LinkToCompanySizeStep from './links/toCompanySize'
 import LinkToValuesStep from './links/toValues'
+import LinkToEmploymentStep from './links/toEmployment'
 
 //import LinkToApplicationStep from './links/toApplication'
 
@@ -42,6 +43,7 @@ class OnboardingCandidateLinker extends Component {
                     <LinkToIncomeStep {...props}/>
                     <LinkToExperienceStep {...props}/>
                     <LinkToCompanySizeStep {...props}/>
+                    <LinkToEmploymentStep {...props} />
                     <LinkToValuesStep {...props}/>
                 </Navigation>
             </Panel>

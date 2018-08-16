@@ -9,6 +9,7 @@ import {
     SAVE_INCOME_DATA,
     SAVE_INDUSTRY_DATA,
     SAVE_DEGREE_DATA,
+    SAVE_EMPLOYMENT_DATA,
     SAVE_JOB_TITLE_DATA,
     SAVE_SET_UP_PASSWORD_DATA,
     SAVE_VALUES_DATA,
@@ -23,6 +24,7 @@ import {
     SHOW_JOB_TITLE_STEP,
     SHOW_SET_UP_PASSWORD_STEP,
     SHOW_VALUES_STEP,
+    SHOW_EMPLOYMENT_STEP,
 } from './../constants/candidateOnboarding';
 import saveStep from './saveOnboardingStep';
 
@@ -144,6 +146,17 @@ export default (state = defaultState, action) => {
                 step: SHOW_COMPANY_SIZE_STEP,
                 payload,
             });
+      case SHOW_EMPLOYMENT_STEP :
+        return {
+          ...state,
+          step,
+        };
+      case SAVE_EMPLOYMENT_DATA :
+        return saveStep({
+          state,
+          step: SHOW_EMPLOYMENT_STEP,
+          payload,
+        });
 
         case SHOW_APPLICATION_STEP :
             return {
