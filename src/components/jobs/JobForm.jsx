@@ -15,7 +15,7 @@ import {
   EXPERIENCE_DROPDOWN_DATA,
   FIELD_OF_EXPERTISE_DROPDOWN_DATA,
 } from 'constants/candidateOnboarding';
-import { DEGREES_DROPDOWN_DATA, EMPLOYEMENTS_DROPDOWN_DATA } from 'constants/companyJobs';
+import { DEGREES_DROPDOWN_DATA, EMPLOYMENTS_DROPDOWN_DATA } from 'constants/companyJobs';
 import { find } from 'lodash';
 // Field-level Validations & Normalizations
 import { hasText, required } from 'components/main/form/validations';
@@ -182,7 +182,7 @@ class JobForm extends Component {
                   expanded: this.expanded("Employment Type")
                 }}
                 componentProps={{
-                  values: EMPLOYEMENTS_DROPDOWN_DATA.map(i => i.title)
+                  values: EMPLOYMENTS_DROPDOWN_DATA.map(i => i.title)
                 }}
               />
 

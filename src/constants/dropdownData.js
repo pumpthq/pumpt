@@ -7,11 +7,11 @@ import {
     INDUSTRY_DROPDOWN_DATA,
     JOB_TITLE_DROPDOWN_DATA,
   VALUE_ASSESSMENTS_DROPDOWN_DATA,
-  DEGREE_DROPDOWN_DATA
+  DEGREE_DROPDOWN_DATA,
 } from './candidateOnboarding'
 
 import {COMPANY_EMPLOYEES_DATA, COMPANY_TYPE_DATA} from './companyOnboarding'
-import {DEGREES_DROPDOWN_DATA, EMPLOYEMENTS_DROPDOWN_DATA} from './companyJobs';
+import {DEGREES_DROPDOWN_DATA, EMPLOYMENTS_DROPDOWN_DATA} from './companyJobs';
 
 export const assignId = ({ data, parent = null }) => {
     return data.map((element) => {
@@ -89,7 +89,7 @@ export const findSequence = ({ path = [], nestedListing = [] }) => {
     COMPANY_SIZE_DROPDOWN_DATA,
     COMPANY_EMPLOYEES_DATA,
     COMPANY_TYPE_DATA,
-    EMPLOYEMENTS_DROPDOWN_DATA,
+    EMPLOYMENTS_DROPDOWN_DATA,
     DEGREES_DROPDOWN_DATA,
   VALUE_ASSESSMENTS_DROPDOWN_DATA,
   DEGREE_DROPDOWN_DATA

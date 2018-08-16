@@ -30,7 +30,7 @@ export default class button extends Component {
       const { placeHolder } = this.props;
       return (
         <div className="custom-input-set row">
-          <div className="col-auto checkbox-submit">
+          <div className="col-auto checkbox-submit pr-0">
             <Checkbox
               checked={false}
               value="Other"

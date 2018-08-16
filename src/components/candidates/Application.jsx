@@ -259,11 +259,11 @@ const renderSkills = () => (
     <h6>Skills</h6>
     <p>Select all that apply</p>
     <div className="info-block">
-      {SKILLS.map((skill, index) =>
-        <div className="checkbox-item" key={index}>
-          <Field name={`skills[${skill}]`} id={`skills[${skill}]`} component={Checkbox} label={skill} />
-        </div>
-      )}
+      <Field
+        name="skills"
+        component={MultiInput}
+        values={SKILLS}
+      />
     </div>
   </div>
 );

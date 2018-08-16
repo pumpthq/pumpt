@@ -2,7 +2,7 @@ import axios from 'axios';
 
 import {API_URL} from '../constants/api';
 import {COMPANY_EMPLOYEES_DATA, COMPANY_TYPE_DATA} from '../constants/companyOnboarding';
-import {DEGREES_DROPDOWN_DATA, EMPLOYEMENTS_DROPDOWN_DATA} from '../constants/companyJobs';
+import {DEGREES_DROPDOWN_DATA, EMPLOYMENTS_DROPDOWN_DATA} from '../constants/companyJobs';
 import {
     ANNUAL_INCOME_DROPDOWN_DATA,
     EXPERIENCE_DROPDOWN_DATA,
@@ -37,7 +37,7 @@ export default () =>
                 COMPANY_SIZE_DROPDOWN_DATA.push(el);
             });
             data.EMPLOYEMENTS_DROPDOWN_DATA.forEach(el => {
-                EMPLOYEMENTS_DROPDOWN_DATA.push(el);
+                EMPLOYMENTS_DROPDOWN_DATA.push(el);
             });
             data.CURRENT_INDUSTRIES_DROPDOWN_DATA.forEach(el => {
                 COMPANY_TYPE_DATA.push(el);

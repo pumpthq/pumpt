@@ -20,20 +20,6 @@ function mapStateToProps(state, ownProps) {
     return { candidate: state.candidateMatches.candidate, authorization: state.authorization,  }
 }
 
-const formatSkills = (values) => {
-  let newValues = Array.isArray(values) ? values.slice() : {...values};
-  newValues.skills = values.skills && Array.isArray(values.skills)
-    ? values.skills.reduce((obj, s) => {obj[s] = true; return obj} , {})
-    : values.skills || {};
-  return newValues;
-}
-
-const submitSkills = (values) => {
-  let newValues = {...values};
-  newValues.skills = Object.keys(values.skills).filter(k => values.skills[k]);
-  return newValues;
-}
-
 const recentWorkingAreasToParent = (values) => {
   values.recentWorkingArea = values.recentWorkingAreas.map( a => (a.value));
   values.recentWorkingAreaParent = values.recentWorkingAreas.length > 0 ? values.recentWorkingAreas[0].parent : undefined;
@@ -113,9 +99,9 @@ export default class ApplicationContainer extends Component {
                   <CandidateResume {...this.props} onEdit={()=>this.editSummary(true)} />
                   <CandidateApplicationForm
                     ref="applicationForm"
-                    initialValues={formatSkills(candidate)}
+                    initialValues={candidate}
                     onSubmit={values=>
-                      {dispatch(updateCandidate(submitSkills(processAppFields(values)))); this.handleFinished(); } }
+                      {dispatch(updateCandidate(processAppFields(values))); this.handleFinished(); } }
                     />
                   </div>
                   <div className="text-center">

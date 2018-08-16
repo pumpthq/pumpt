@@ -5,7 +5,7 @@ import '../styles/app.less';
 // ⚠️ Tap event required to support material-ui click events
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import { DEGREE_DROPDOWN_DATA } from '../constants/candidateOnboarding';
-
+import getMuiTheme from 'material-ui/styles/getMuiTheme'
 // import { cleanMessage } from '../actions/session';
 
 // import SESSION from '../constants/session';
@@ -21,6 +21,13 @@ const propTypes = {
 const defaultProps = {
     children: '',
 };
+
+const muiTheme = getMuiTheme({
+  checkbox: {
+    checkedColor: "purple"
+  }
+});
+
 
 class App extends Component {
   constructor(props) {
@@ -41,7 +48,7 @@ class App extends Component {
         return (<div>Loading app data...</div>)
       }else{
         return (
-            <MuiThemeProvider>
+            <MuiThemeProvider muiTheme={muiTheme}>
                 <div className="app page wall wall_type_revert wall_image_second">
                     {this.props.children}
                 </div>
