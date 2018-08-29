@@ -105,7 +105,7 @@ class Editor extends Component {
 class JobForm extends Component {
   constructor(props) {
     super(props);
-    this.state = {expandedFields: []};
+    this.state = {expandedFields: [], location: [props.formValues.location]};
   }
 
   onToggleExpand = (id) => () => {
@@ -123,6 +123,7 @@ class JobForm extends Component {
 
   render() {
   const { handleSubmit, submitting, error, formValues } = this.props;
+    const { location } = this.state;
 
   const { industryParent } = formValues;
   const industryParentObj = (parentValue) => {
@@ -158,15 +159,28 @@ class JobForm extends Component {
               </div>
             </div>
             <div className="row">
-              <label className="col-auto" htmlFor="location">Location:</label>
+              <label className="col-4" htmlFor="location">Location:</label>
               <div className="col labeledField">
                 <Field
-                  name="location"
+                  name="location[0]"
                   label="Ex: New York, NY"
                   component={PlaceField}
                   validate={required}
                 />
               </div>
+              {
+                location.slice(1).map((l,i) => (
+                  <div className="col-4 labeledField">
+                    <Field
+                      name={`location[${i+1}]`}
+                      label="Ex: New York, NY"
+                      component={PlaceField}
+                      validate={required}
+                    />
+                  </div>
+                ))
+              }
+                <button onClick={(e) => {e.preventDefault();this.setState({location: location.concat([''])})}} >+</button>
             </div>
 
               <Field
@@ -287,6 +301,7 @@ class JobForm extends Component {
                 type="submit"
                 className="mdl-button button button_type_colored button_size_m candidate-submit"
                 disabled={submitting}
+                onClick={handleSubmit}
               >
                 {submitting ? <i /> : <i />} Save Job
               </button>
@@ -318,12 +333,14 @@ export const industryOut = (values) => {
 };
 export const preSubmit = (values) => {
   const newVal = industryOut(values);
-  return cityToGeocode(values.location).then(({lat,lng}) => {
-    newVal.locationCoordinates = {lat, lng};
-    return newVal;
-  }).catch(err => {
-    return newVal;
-  })
+  return Promise.all(Object.values(values.location).map((loc,i) =>{
+    return cityToGeocode(loc).then(({lat,lng}) => {
+      newVal.locationCoordinates[i] = {lat, lng};
+      return newVal;
+    }).catch(err => {
+      return newVal;
+    })
+  }))
 };
 
 export const industryIn = (values) => {
