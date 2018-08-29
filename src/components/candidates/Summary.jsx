@@ -15,7 +15,9 @@ const CandidateSummary = ({
     recentWorkingAreas,
     recentJob,
     recentAnnualIncome,
-    recentAreaExperience },
+    recentAreaExperience,
+    employments,
+  },
   authorization: { email },
   onEdit,
   headingProgress
@@ -57,6 +59,8 @@ const CandidateSummary = ({
           <dd>{interestWorkingArea && Array.isArray(interestWorkingArea) ?
                 interestWorkingArea.join(', ') : interestWorkingArea}
               </dd>
+          <dt>Preferred Employment Type</dt>
+          <dd>{employments && employments.join(', ')}</dd>
         </dl>
       </div>
     </div>

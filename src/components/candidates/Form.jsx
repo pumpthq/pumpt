@@ -12,8 +12,12 @@ import {
   FIELD_OF_EXPERTISE_DROPDOWN_DATA,
   INDUSTRY_DROPDOWN_DATA,
   JOB_TITLE_DROPDOWN_DATA,
-  DEGREE_DROPDOWN_DATA
+  DEGREE_DROPDOWN_DATA,
 } from 'constants/candidateOnboarding';
+import {
+  EMPLOYMENTS_DROPDOWN_DATA,
+} from 'constants/companyJobs';
+
 
 
 // Form
@@ -116,6 +120,15 @@ let CandidateSummaryForm = props => {
                   />
                 </div>
               }
+            </div>
+            <div className="col-12 col-md-6">
+              <label>Preferred Employment Type</label>
+              <Field
+                name="employments"
+                component={MultiInput}
+                label="Preferred Employment Type"
+                values={EMPLOYMENTS_DROPDOWN_DATA.map((item) => (item.title))}
+              />
             </div>
           </div>
 
