@@ -35,9 +35,10 @@ export default class FileUploader extends Component {
   }
 
   handleFailure = (err) => {
+    console.log(err);
     this.setState({
       uploading: false,
-      recentUploadFailure: true,
+      recentUploadFailure: err,
     });
   }
 
@@ -119,7 +120,11 @@ export default class FileUploader extends Component {
                           Edit
                         </span>
                       </div>
-                   { this.state.recentUploadFailure && <div className="col-12"><span className="failure">Failed to update resume: we only accept PDFs under 4MB</span></div>}
+                      { this.state.recentUploadFailure && (this.state.recentUploadFailure.status==413 ? 
+                        <div className="col-12"><span className="failure">Failed to update resume: we only accept PDFs under 4MB</span></div>
+                        :
+                        <div className="col-12"><span className="failure">{this.state.recentUploadFailure.data.message  || this.state.recentUploadFailure.statusText }</span></div>
+                      )}
                     </div>
                   </label>
                  <span className="view row"><div className="col-12">
@@ -149,7 +154,11 @@ export default class FileUploader extends Component {
                     { this.state.uploading ? <span>Uploading...<LoadingIcon /></span> : `Add ${label}`}
                   </span>
                 </label>
-                { this.state.recentUploadFailure && <span className="failure">Failed to update resume: we only accept PDFs under 4MB</span>}
+        { this.state.recentUploadFailure && (this.state.recentUploadFailure.status==413 ? 
+          <div className="col-12"><span className="failure">Failed to update resume: we only accept PDFs under 4MB</span></div>
+          :
+          <div className="col-12"><span className="failure">{this.state.recentUploadFailure.data.message || this.state.recentUploadFailure.statusText }</span></div>
+        )}
               </span>
             </div>
           </div>
