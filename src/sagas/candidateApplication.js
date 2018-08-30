@@ -17,7 +17,7 @@ import {
     SAVE_SUMMARY_DATA,
     SHOW_ACCORDION
 } from './../constants/applicationCandidate'
-import {API_CANDIDATE_ROOT, API_SCHOOLS_ENUMS, API_UNIVERSITY_ENUMS, API_URL} from './../constants/api'
+import {API_CANDIDATE_ROOT, API_URL} from './../constants/api'
 import {getApplicationCandidate} from './../reducers/applicationCandidate'
 import {getAccessToken} from './../reducers/authorization'
 import {
@@ -45,15 +45,5 @@ const updateCandidate = ({ id, accessToken, body }) => {
 
 const fetchProfile = ({ id }) => {
     return axios.get(`${API_URL}${API_CANDIDATE_ROOT}/current`)
-        .then(response => response.data)
-}
-
-export const fetchSchools = (data) => {
-    return axios.get(`${API_URL}${API_SCHOOLS_ENUMS}/${data}`)
-        .then(response => response.data)
-}
-
-export const fetchUniversity = (data) => {
-    return axios.get(`${API_URL}${API_UNIVERSITY_ENUMS}/${data}`)
         .then(response => response.data)
 }
