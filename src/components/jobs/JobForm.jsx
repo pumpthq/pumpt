@@ -105,7 +105,7 @@ class Editor extends Component {
 class JobForm extends Component {
   constructor(props) {
     super(props);
-    this.state = {expandedFields: []};
+    this.state = {expandedFields: [], location: props.formValues.location};
   }
 
   onToggleExpand = (id) => () => {
@@ -121,8 +121,38 @@ class JobForm extends Component {
     return this.state.expandedFields.includes(id);
   }
 
+  renderLocations = ({fields}) => {
+    fields.length == 0 && fields.push()
+    return (
+            <div className="row pb-0">
+              <label className="col-auto" htmlFor="location">Location:</label>
+        {
+          fields.map((l,i) => (
+            <div className="col-4 labeledField">
+              <Field
+                name={`${l}`}
+                label="Ex: New York, NY"
+                component={PlaceField}
+                validate={required}
+              />
+            </div>
+          ))
+        }
+      <div className="pt-0">
+        {fields.length > 1 &&
+            <div>
+              <button className="loc-button" onClick={(e) => { e.preventDefault(); fields.remove(fields.length - 1)}} >- remove location</button>
+            </div>
+        }
+        <button className="loc-button" onClick={(e) => { e.preventDefault();fields.push()}} >+ add new location</button>
+      </div>
+            </div>
+    )
+  }
+
   render() {
   const { handleSubmit, submitting, error, formValues } = this.props;
+    const location = ((this.state.location && this.state.location.length > 0) ? this.state.location : this.props.formValues.location) || [];
 
   const { industryParent } = formValues;
   const industryParentObj = (parentValue) => {
@@ -157,17 +187,11 @@ class JobForm extends Component {
                 />
               </div>
             </div>
-            <div className="row">
-              <label className="col-auto" htmlFor="location">Location:</label>
-              <div className="col labeledField">
-                <Field
-                  name="location"
-                  label="Ex: New York, NY"
-                  component={PlaceField}
-                  validate={required}
-                />
-              </div>
-            </div>
+              <FieldArray
+                component={this.renderLocations}
+                name="location"
+              />
+
 
               <Field
                 name="employment"
@@ -287,6 +311,7 @@ class JobForm extends Component {
                 type="submit"
                 className="mdl-button button button_type_colored button_size_m candidate-submit"
                 disabled={submitting}
+                onClick={handleSubmit}
               >
                 {submitting ? <i /> : <i />} Save Job
               </button>
@@ -318,18 +343,22 @@ export const industryOut = (values) => {
 };
 export const preSubmit = (values) => {
   const newVal = industryOut(values);
-  return cityToGeocode(values.location).then(({lat,lng}) => {
-    newVal.locationCoordinates = {lat, lng};
-    return newVal;
-  }).catch(err => {
+  return Promise.all(Object.values(newVal.location).map((loc,i) =>{
+    return cityToGeocode(loc).then(({lat,lng}) => {
+      return {lat, lng};
+    }).catch(err => {
+      return;
+    })
+  })).then((coords) => {
+    newVal.locationCoordinates = coords;
     return newVal;
   })
 };
 
 export const industryIn = (values) => {
   const newVal = { ...values };
-  newVal.industry = values.industries.map(i => (i.value));
-  newVal.industryParent = values.industries.length > 0 ? values.industries[0].parent : undefined;
+  newVal.industry = values ? values.industries.map(i => (i.value)) : '';
+  newVal.industryParent = values && values.industries.length > 0 ? values.industries[0].parent : undefined;
   delete newVal.industries;
   return newVal;
 };
