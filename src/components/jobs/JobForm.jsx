@@ -345,12 +345,12 @@ export const preSubmit = (values) => {
   const newVal = industryOut(values);
   return Promise.all(Object.values(newVal.location).map((loc,i) =>{
     return cityToGeocode(loc).then(({lat,lng}) => {
-      newVal.locationCoordinates[i] = {lat, lng};
-      return;
+      return {lat, lng};
     }).catch(err => {
       return;
     })
-  })).then(() => {
+  })).then((coords) => {
+    newVal.locationCoordinates = coords;
     return newVal;
   })
 };
