@@ -6,7 +6,7 @@ import {
     EMAIL_VALIDATE_REQUESTED,
     THIS_EMAIL_IS_ALREADY_REGISTERED,
 } from './../constants/companyOnboarding';
-import {API_CITIES_ENUMS, API_COMPANY_ROOT, API_RECRUITER_ROOT, API_URL, EMAIL_AVAILABILITY,} from './../constants/api';
+import {API_COMPANY_ROOT, API_RECRUITER_ROOT, API_URL, EMAIL_AVAILABILITY,} from './../constants/api';
 import {AUTHENTICATION_SUCCEEDED,} from './../constants/authorization';
 import {push} from 'react-router-redux';
 import {

@@ -1,4 +1,3 @@
-export { default as loadContants } from './loadConstants';
 export { buildClasses } from './builder';
 export {
     validateForgot,
