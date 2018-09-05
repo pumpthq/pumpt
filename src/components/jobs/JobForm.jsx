@@ -49,14 +49,18 @@ const ExpandableField = (FieldComponent) => {
 }
 class Expander extends Component {
   render() {
-    const {title, preview, children, onToggleExpand, expanded} = this.props;
+    const {title, preview, children, onToggleExpand, expanded, before} = this.props;
     return (
       <div className={`expander ${expanded ? 'expanded' : ''}`}>
         <header role="button" style={buttonStyle} tabIndex="0" onClick={onToggleExpand(title)}>
           <h5>{title}</h5>
         </header>
-
           <div className="expander_content">
+            {before && 
+                <div className="expander_before">
+                  {before}
+                </div>
+            }
             {children}
           </div>
           {
@@ -217,7 +221,8 @@ class JobForm extends Component {
                     title: "Total Compensation",
                     preview: formValues.salary,
                     onToggleExpand: this.onToggleExpand,
-                    expanded: this.expanded("Total Compensation")
+                    expanded: this.expanded("Total Compensation"),
+                    before: <div className="note pb-3">{"Don't worry, candidates won't see this"}</div>,
                   }}
                 >
                   { ANNUAL_INCOME_DROPDOWN_DATA

@@ -70,7 +70,7 @@ let CandidateSummaryForm = props => {
             <div className="col-12 col-md-6">
               <Field
                 name="recentJob"
-                component={renderSelectField} label="Job Title"
+                component={renderSelectField} label="Current Job Title"
               >
                 { JOB_TITLE_DROPDOWN_DATA[0].items.map(item => <MenuItem key={item.id} value={item.title} primaryText={item.title} />) }
               </Field>
