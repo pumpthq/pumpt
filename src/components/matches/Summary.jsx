@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
+import {find} from 'lodash'
 import {connect} from 'react-redux'
 import {Link} from 'react-router'
-import {postApprove, postBookmark, postReject} from '../../actions/candidateMatches'
+import {fetchVacancy, postApprove, postBookmark, postReject} from '../../actions/candidateMatches'
 
 import {ApproveFill, ApproveOpen, BookmarkOpen, Decline} from 'components/icons'
 import {apiImage, tintedBackground} from 'components/helpers'
@@ -41,21 +42,31 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     postApprove: () => {
       dispatch(postApprove(ownProps._id))
     },
-
-
+    dispatch,
   }
 }
 
-@connect(undefined, mapDispatchToProps)
+@connect((state, ownProps) => ({
+  vacancy_full: state.candidateMatches.vacancies.find(v => v._id === ownProps._vacancy)
+  }),
+  mapDispatchToProps)
 export default class Summary extends Component {
 
-  componentWillMount() {}
+  componentWillMount() {
+        const { dispatch, _vacancy, vacancy_full } = this.props;
+        if(!vacancy_full) {
+            dispatch(fetchVacancy(_vacancy))
+        }
+  }
 
   renderMatchInformation() {
-    const { score, company, vacancy, backgroundTint } = this.props
+    const { score, company, vacancy, vacancy_full, backgroundTint } = this.props
     return (
       <div className="summary-head row py-3">
-        <div className="col-12 pb-2"><h2>{company.brief.name}</h2></div>
+        <div className="col-12 pb-2">
+          <h2>{company.brief.name}</h2>
+          <h3 className="job_status"> {vacancy_full && vacancy_full.status == "opened" ? "Active" : "Closed"}</h3>
+      </div>
         <div className="col-3">
           <img className="image image_round image_size_xl image_type_company-logo" src={apiImage(company.brief.logo)}/>
         </div>

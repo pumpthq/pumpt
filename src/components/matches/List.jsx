@@ -50,8 +50,7 @@ export default class MatchesList extends Component {
 
 const CandidateItem = (props) => {
     const {match} = props
-    const {candidate: {status, brief:{firstName, lastName, avatar, recentWorkingAreas}},
-      vacancy: {brief:{salary}}} = match
+    const {candidate: {status, brief:{firstName, lastName, avatar, recentWorkingAreas}}} = match
 
     return (
         <div className={ status === 'rejected' ? "matched-item dimmed" : "matched-item" }>
