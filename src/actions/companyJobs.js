@@ -401,6 +401,7 @@ export const postApprove = (matchingId, email) => ({
     payload : {
         url : `/matches/approve/${matchingId}`,
         data: {email},
+        method: 'POST',
         success: postApproveSucceeded(matchingId),
     }
 })

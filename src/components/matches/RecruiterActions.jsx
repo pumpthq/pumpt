@@ -6,7 +6,7 @@ import {Link} from 'react-router'
 import ButtonApply from 'components/parts/buttonApply'
 import ButtonLink from 'components/parts/buttonLink'
 
-import {openApprove, postApprove, postBookmark, postReject, postRestore} from 'actions/companyJobs'
+import {openApprove, postBookmark, postReject, postRestore} from 'actions/companyJobs'
 
 
 const mapDispatchToProps = (dispatch, ownProps) => {
@@ -17,9 +17,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
             },
             postReject: () => {
                 dispatch(postReject(ownProps.match._id))
-            },
-            postApprove: () => {
-                dispatch(postApprove(ownProps.match._id))
             },
             postRestore: () => {
                 dispatch(postRestore(ownProps.match._id))
@@ -35,7 +32,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 export default class RecruiterActions extends Component {
 
     render() {
-        const { actions: { postApprove, postReject, postRestore, addToBookmark, openApprove }, match: { candidate }, match } = this.props
+        const { actions: { postReject, postRestore, addToBookmark, openApprove }, match: { candidate }, match } = this.props
 
         if(candidate.status==='new') {
             return (
