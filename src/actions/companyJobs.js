@@ -396,10 +396,11 @@ export const openApprove = (id) => ({
     payload: { id }
 })
 
-export const postApprove = (matchingId) => ({
+export const postApprove = (matchingId, email) => ({
     type : API,
     payload : {
         url : `/matches/approve/${matchingId}`,
+        data: {email},
         success: postApproveSucceeded(matchingId),
     }
 })
