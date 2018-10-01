@@ -19,7 +19,7 @@ class TabBar extends Component {
         return (
             <TabBarView>
                 {[{
-                    title : ` All Matches `,
+                    title : ` New Matches `,
                     icon : <MatchesIcon className="icon_inline" />,
                     route : ROUTE_CANDIDATE_MATCHES_ALL,
                     // action : routeToAll
