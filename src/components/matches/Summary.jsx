@@ -65,7 +65,7 @@ export default class Summary extends Component {
       <div className="summary-head row py-3">
         <div className="col-12 pb-2">
           <h2>{company.brief.name}</h2>
-          <h3 className="job_status"> {vacancy_full && vacancy_full.status == "opened" ? "Active" : "Closed"}</h3>
+          <h3 className="job_status"> &nbsp; {vacancy_full && vacancy_full.status == "opened" ? " \t " : "Closed"}</h3>
       </div>
         <div className="col-3">
           <img className="image image_round image_size_xl image_type_company-logo" src={apiImage(company.brief.logo)}/>
@@ -104,40 +104,18 @@ export default class Summary extends Component {
       </div>
     );
   }
-  renderBookmarks() {
-    const { candidate: { status }, addToBookmark } = this.props;
 
-    if (status === "new") {
-      return (
-        <a onClick={addToBookmark} className="button button_type_icons col-xs-12">
-          <BookmarkOpen /> BOOKMARK
-        </a>
-      )
-    }
-  }
-  renderApproveReject() {
-    const { candidate: { status }, postReject, postApprove } = this.props;
-
-    if (status === "new" || status === "bookmarked") {
-      return (
-        <div>
-          <a onClick={postApprove} className="mdl_button button col-xs-12">
-            <ApproveOpen /> APPROVE</a>
-          <a onClick={postReject} className="mdl_button button col-xs-12">
-            <Decline /> REJECT</a>
-        </div>
-      );
-    }
-  }
   render() {
-    const { _vacancy, _company, _id } = this.props;
+    const { _vacancy, _company, _id, vacancy_full } = this.props;
+    const disabled = !(vacancy_full && vacancy_full.status == "opened")
+    const classes =  disabled ? "slider__item disabled" :  "slider__item" ;
     return (
-      <div className="slider__item">
+      <div className={classes}>
         <div className="mdl-card card">
           {this.renderMatchInformation()}
           {this.renderShortContent()}
           <Link className="link m-auto" to={`/candidate/matches/match/${_id}/company/${_company}/vacancy/${_vacancy}`}>
-            <button className="button_type_colored button_size_l m-auto">
+            <button className={`${!disabled ? "button_type_colored" : "button_color_grey"} button_size_l m-auto`}>
               View Full Description
             </button>
           </Link>

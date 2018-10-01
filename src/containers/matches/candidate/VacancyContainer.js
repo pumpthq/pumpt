@@ -59,7 +59,7 @@ export default class VacancyContainer extends Component {
         return (
             <div>
                     <VacancyProfile {...this.props.vacancy}>
-                        <MatchCandidateActions {...this.props.match} {...this.props.actions} {...this.props.company} />
+                        <MatchCandidateActions full_vacancy={this.props.vacancy} {...this.props.match} {...this.props.actions} {...this.props.company} />
                     </VacancyProfile>
 
                     <BasicDialog trigger={this.props.lastRejected} onClose={browserHistory.goBack}>

@@ -378,7 +378,24 @@
       color: @light-grey;
     }
     &_grey {
-      color: @grey;
+      color: white;
+      background-color: grey;
+      border-radius: @br-standard;
+      font-family: @ff-base;
+      font-size: @fz-general;
+      font-weight: 600;
+      height: auto;
+      line-height: 1;
+      // min-height: 42px;
+      margin-right: 30px;
+      padding: 12px @btn-padding;
+      text-transform: none;
+      border: none;
+      text-decoration: none !important;
+      cursor: pointer;
+      .text-center & {
+        margin: 0 15px 8px;
+      }
     }
     &_white {
       background-color: @background-base;
