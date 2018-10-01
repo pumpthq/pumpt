@@ -35,16 +35,7 @@ export default class ApproveAndEmailCandidateDialog extends Component {
 
     handleSubmit = (values) => {
         const {dispatch, trigger, recruiter} = this.props
-				const mailToLink = `mailto:${trigger ? trigger.candidate.brief.user.email : 'no@email.com'}?subject=${values.subject}&body=${encodeURIComponent('Hi,\n\nYou were highly matched to a job we posted on Pumpt. I’d like to connect with you soon to discuss this position.\n\nPlease let me know when you’re available to speak.\n\nThank you.')}&bcc=info@pumpthq.com`
-
-				window.open(mailToLink)
-
-        dispatch(postApprove(trigger._id))
-
-        // ⚠️ window.open and window.location.href do not work as expected with react-router
-        //const mailToLink = "mailto:"+email+'&subject='+values.subject+'&body='+values.body
-        //window.open(mailToLink, '_blank');
-        //window.location.href = mailToLink
+      dispatch(postApprove(trigger._id, values))
 
         this.handleClose();
     }
@@ -57,7 +48,7 @@ export default class ApproveAndEmailCandidateDialog extends Component {
                     onRequestClose={this.handleClose}
 										autoScrollBodyContent={true}
                 >
-                    <div>
+                    <div className="formwrap">
 											<MessageCandidateForm
 												{...this.props}
 												onSubmit={this.handleSubmit}
