@@ -25,6 +25,8 @@ function ApplyOption(props){
 	}
 	else if(props.vacancy.status=="approved"){
 	}
+  else if (props.full_vacancy.status=="closed"){
+  }
 	else{
 		html=<ButtonApply onClick={props.postApprove}>Apply</ButtonApply>;
 	}
@@ -46,7 +48,7 @@ function RejectOption(props){
 export default class CandidateActions extends Component {
 
   render() {
-    const { postApprove, postReject, addToBookmark, vacancy } = this.props
+    const { postApprove, postReject, addToBookmark, vacancy, full_vacancy } = this.props
     return (
       <div className="card__actions-wrapper text-center">
         {vacancy &&
@@ -54,7 +56,7 @@ export default class CandidateActions extends Component {
 
               <BookmarkOption vacancy={vacancy} addToBookmark={addToBookmark} />
               <RejectOption vacancy={vacancy} postReject={postReject} />
-              <ApplyOption vacancy={vacancy} postApprove={postApprove} />
+              <ApplyOption full_vacancy={full_vacancy} vacancy={vacancy} postApprove={postApprove} />
             </span>
         }
       </div>

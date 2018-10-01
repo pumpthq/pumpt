@@ -49,7 +49,7 @@ const CandidateSummary = ({
           <dd>{recentAnnualIncome}</dd>
           <dt>Years of Experience </dt>
           <dd>{recentAreaExperience}</dd>
-          <dt>Job Title </dt>
+          <dt>Current Job Title </dt>
           <dd>{recentJob}</dd>
           <dt>Working Areas</dt>
           <dd>{displayIndustries(recentWorkingAreas)}</dd>

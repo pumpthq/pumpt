@@ -9,28 +9,12 @@ const buttonStyle = {
 };
 
 const defaultProps = {
-    // name: 'Name',
     company: {
         name: '{companyName}',
     },
     title: '{title}',
     state: '{location}',
-    // match: 20,
-    // salary: 'Salary',
-    // experience: 'Experience',
-    // employment: 'Employment',
-    // degree: '',
-    // background: '//wallpaper.sc/en/ipad/wp-content/uploads/2014/10/ipad-2048x2048-thumbnail_01022-256x256.jpg',
     backgroundTint: [50,50,50,.75],
-    // text: '',
-    // children: '',
-    // additionElements: '',
-    // onClick: e=>{},
-    // onClickForLink: e=>{},
-    // onClickClose: e=>{},
-    // bookmark: false,
-    // addToBookmark: PropTypes.func,
-    // removeOfBookmark: PropTypes.func,
     status: {}
 };
 

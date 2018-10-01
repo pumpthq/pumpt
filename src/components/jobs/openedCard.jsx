@@ -100,7 +100,7 @@ handleClose = (event) => {
               <dt className="col-6">Educational Degree</dt>
               <dd className="col-6 pb-3">{degree}</dd>
             </dl>
-            <Link className="link row" to={`recruiter/jobs/${_id}/candidates`}>
+            <Link className="link row" to={`/recruiter/jobs/${_id}/candidates`}>
               <button className="button_type_colored button_size_l m-auto">
                 View Matches
               </button>
@@ -109,7 +109,7 @@ handleClose = (event) => {
               <div className="col-12">
                 <Link
                   className="link divided_pipe"
-                  to={`recruiter/jobs/${_id}/show`}
+                  to={`/recruiter/jobs/${_id}/show`}
                 >
                   View Job
                 </Link>

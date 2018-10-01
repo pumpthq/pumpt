@@ -1,71 +1,71 @@
 import React from 'react';
 import {connect} from 'react-redux'
 import {Field, formValueSelector, reduxForm} from 'redux-form'
-import FaEnvelopeO from 'react-icons/lib/fa/envelope-o';
+import BasicDialog from 'components/main/popup/BasicDialog'
+import FlatButton from 'material-ui/FlatButton';
 import {updateCandidate} from 'actions/candidateMatches'
 
-let MessageCandidateForm = props => {
+  class MessageCandidateForm extends React.Component {
+    constructor(props) {
+      super(props);
+      this.state = {triggerDialog: false}
+    }
+    render() {
 
-	const { bodyValue, subjectValue, trigger, recruiter, handleSubmit, invalid, asyncValidating, submitting, error, valid, dispatch } = props
-	const submitDisabled = invalid || submitting
+      const { bodyValue, subjectValue, trigger, recruiter, handleSubmit, invalid, asyncValidating, submitting, error, valid, dispatch } = this.props
+      const submitDisabled = invalid || submitting
 
-	const submit = (values) => {
-		
-		return dispatch(updateCandidate(values))
-			.catch(err => {
-					throw new SubmissionError({
-							_error: 'Error!' 
-					})
-			})
-	}
+      return (
+        <div className="message-candidate container">
+          <h4 className="text-center">Connect with Your Candidate</h4>
+          <form onSubmit={handleSubmit}>
+            <div>
+              <div className="row email-header">
+                <span class="email-label">To: &nbsp;</span>
+                <span class="email-field">{ `${trigger.candidate.brief.firstName} ${trigger.candidate.brief.lastName}` }</span>
+              </div>
+              <div className="row email-header">
+                <span class="email-label">From: &nbsp;</span>
+                <span class="email-field no-margin">{ `${recruiter.fullName} at ${trigger.company.brief.name}` }</span>
+              </div>
+              <div className="row email-header">
+                <label htmlFor="subject" class="email-label subject">Subject: &nbsp;</label>
+                <Field name='subject' component="input" class="email-field subject" />
+              </div>
+              <br />
+              <div className="row email-body">
+                <Field name='body' component="textarea"  />
+              </div>
+            </div>
+            <div className="d-flex justify-content-center">
+              <button
+                onClick={e => {e.preventDefault(); this.setState({triggerDialog: !this.state.triggerDialog})}}
+                disabled={submitDisabled}
+                className="center mdl-button buttone button_type_colored button_size_m candidate-submit"
+              >
+                {submitting ? <i/> : <i/>} Approve and Send
+              </button>
 
-	return (
-		<div>
-		<form action="mailto:no@email.com" onSubmit={handleSubmit}>
-
-			<div class="fa-icon"><FaEnvelopeO />
-			<br />
-			<h4>Connect with Your Candidate</h4>
-			<br />
-			<br />
-			</div>
-			<div>
-				<span class="email-label">To:</span>
-				<span class="email-field">{ `${trigger.candidate.brief.firstName} ${trigger.candidate.brief.lastName}` }</span><br />
-				<br />
-
-				<span class="email-label">From:</span>
-				<span class="email-field no-margin">{ `${recruiter.fullName}` }</span> at <span class="email-field">{ `${trigger.company.brief.name}` }</span><br />
-				<br />
-
-				<div class="row">
-					<div class="col-md-2 margin-top-15">
-						<span class="email-label">Subject:</span>
-					</div>
-					<div class="col-md-10">
-						<Field name='subject' component="input" class="mdl-textfield__input textfield__input email-field" />
-					</div>
-				</div>
-				<br />
-				<br />
-
-				<span class="email-label">Message:</span>
-				<Field name='body' component="textarea" class="text-area text-area-large"  />
-			</div>
-
-
-				<button
-					type="submit"
-					disabled={submitDisabled}
-					className="center mdl-button buttone button_type_colored button_size_m candidate-submit"
-						>
-					{submitting ? <i/> : <i/>} Approve and Email
-				</button>
-
-
-		</form>
-		</div>
-	)
+              <BasicDialog
+                trigger={this.state.triggerDialog}
+                closeText={"Not yet"}
+                onClose={() => {}}
+                mainAction={
+                  <FlatButton
+                    type="submit"
+                    onTouchTap={handleSubmit}
+                    primary
+                    label="Send"
+                  />
+                }
+              >
+                Are you sure you want to send the candidate this email?
+              </BasicDialog>
+            </div>
+          </form>
+        </div>
+      )
+    }
 }
 
 //Define Form
