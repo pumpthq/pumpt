@@ -73,6 +73,7 @@ export default class Summary extends Component {
         <div className="col-9 text-left">
           <h2 className="job_title font-weight-normal mb-1">{vacancy.brief.title}</h2>
           {vacancy.brief.location ? vacancy.brief.location.slice(0,vacancy.brief.location.lastIndexOf(',')) : ""}
+					{/* FIXME: New Vacacy UI (being used in /src/components/jobs/opendedCard.jsx - doesn't work here, causes issues with brief/fetchingVacancy in broken look*/}
         </div>
         {/*
               {vacancy.brief.state}

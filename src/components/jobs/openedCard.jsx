@@ -82,7 +82,19 @@ handleClose = (event) => {
                 : ''}
                 <div className={`col-${company && company.brief && company.brief.logo ? 9 : 12} text-left`}>
                   <h2 className="job_title">{title || 'Untitled'}</h2>
-                  <small>{location ? location.slice(0,location.lastIndexOf(',')) : 'Location not specified'}</small>
+									<div className="row">
+										{location ?
+											location.map(loc =>
+												<div className="col-12 job_location">
+													<small>{loc.match(/[^,]+,[^,]+/g)}</small>
+												</div>
+											)
+											:
+											<div className="col-12">
+												<small>'Location not specified'</small>
+											</div>
+										}
+									</div>
                 </div>
               </div>
               <div className="card__middle-block pt-2">
