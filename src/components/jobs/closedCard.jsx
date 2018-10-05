@@ -64,7 +64,7 @@ class ClosedCard extends Component {
               </div>
               <div className="card__middle-block pt-2">
                 <dl className="row small">
-                  <dt className="col-6">Working Areas</dt>
+                  <dt className="col-6">Working Area</dt>
                   <dd className="col-6 pb-3">
                     {industries && Array.isArray(industries) ? industries[0].parent : ''}
                   </dd>
@@ -72,8 +72,18 @@ class ClosedCard extends Component {
                   <dd className="col-6 pb-3">{salary || 'Not specified'}</dd>
                   <dt className="col-6">Experience</dt>
                   <dd className="col-6 pb-3">{experience || 'Any'}</dd>
-                  <dt className="col-6">Employment Type</dt>
-                  <dd className="col-6 pb-3">{ Array.isArray(employment) ? employment.join(', ') : 'Any' }</dd>
+									<dt className="col-6">Employment Type</dt>
+											<dd className="col-6 pb-3">
+												{ Array.isArray(employment) ?
+													employment.map(emp =>
+														<div className="col-12 job_employment">
+															<small>{emp.match(/[^,]+/g)}</small>
+														</div>
+													)
+													:
+													'Any'
+												}
+											</dd>
                   <dt className="col-6">Educational Degree</dt>
                   <dd className="col-6 pb-3">{degree || 'Any'}</dd>
                 </dl>
