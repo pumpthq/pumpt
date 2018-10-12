@@ -2,7 +2,7 @@ import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { MenuItem } from 'material-ui';
 
-import MultiInput from 'components/main/form/MultiInput';
+import { RestrictedMultiInput } from 'components/main/form/RestrictedMultiInput';
 import { renderSelectField, renderTextField } from 'components/form/helpers';
 
 import { COMPANY_EMPLOYEES_DATA, COMPANY_TYPE_DATA } from 'constants/companyOnboarding';
@@ -58,7 +58,7 @@ let CompanySummaryForm = props => {
           <label htmlFor="type">Company Type</label>
           <Field
             name="type"
-            component={MultiInput}
+            component={RestrictedMultiInput}
             values={COMPANY_TYPE_DATA[0].items.map((item) => (item.title))}
             label="Company Type"
             class="mdl-textfield__input textfield__input textfield__light"

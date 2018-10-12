@@ -1,10 +1,6 @@
 import React, { PropTypes } from 'react';
-
-import PencilIcon from 'components/icons/pencil';
 import { displayIndustries } from 'components/helpers';
-
 import HeadingProgress from 'containers/application/candidate/headingProgress';
-import { updateCandidate } from 'actions/candidateMatches';
 
 const CandidateSummary = ({
   candidate: {

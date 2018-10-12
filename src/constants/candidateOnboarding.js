@@ -56,4 +56,36 @@ export const DEGREE_DROPDOWN_DATA = []
 export const INCOME_NA_ID = "f2225cba-da43-4d5e-9507-52689f8f8aba"
 export const INCOME_NA = {id: INCOME_NA_ID, parent: null, title: "NA / Prefer not to say"}
 
-export const SKILLS = ["MS Office (Word,Excel, PPT)","comScore","Google Analytics","IAB Certification","SalesForce","Ad-Serving Platforms"]
+export const SKILLS = {"Industry Knowledge": [
+													"Advertising",
+													"Digital Media",
+													"Native/Branded Content",
+													"Mobile/Videos",
+													"Social Media",
+													"Start-ups"
+												],
+												"Vertical Knowledge":[
+													"Automotive",
+													"Financial",
+													"Health",
+													"Lifestyle",
+													"Luxury Brands"
+												],
+												"Leadership Knowledge":[
+													"Team Management",
+													"Hiring",
+													"Strategic Partnerships",
+													"Entrepreneurship",
+													"Presentations/PanelSpeaker"
+												],
+												"Technical Knowledge":[
+													"MS Office",
+													"CRM (fill in which ones)",
+													"Enterprise/ SaaS Software",
+													"Ad-Serving Platform (fill in which ones)"
+												],
+												"Certification": [
+													"Google Analytics",
+													"IAB"
+												]
+											}

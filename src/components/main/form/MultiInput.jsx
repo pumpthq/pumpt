@@ -11,7 +11,7 @@ class MultiInput extends Component {
     this.makeTag = this.makeTag.bind(this);
 
     const { input: {value}, values } = this.props;
-    const otherTags = value ? value.filter(v => (!values.includes(v))) : [];
+    const otherTags = (value && Array.isArray(values)) ? value.filter(v => (!values.includes(v))) : [];
 
     this.state = {
       otherTags
@@ -44,30 +44,77 @@ class MultiInput extends Component {
   render() {
     const { values, input: {value, onChange} } = this.props;
     const { otherTags } = this.state;
-    let displayItems = values.filter(v => v !== "Other").concat(otherTags);
+   // let displayItems = values.filter(v => v !== "Other").concat(otherTags);
 
-    return (
-      <div className="multi-input">
-        { displayItems.map(val => (
-            <Checkbox
-              key={val}
-              checked={value.includes(val)}
-              onCheck={() => {
-                onChange(this.update(val));
-              }}
-              value={val}
-              name={`fields[${val}]`}
-              id={`fields[${val}]`}
-              label={val}
-            />
-        ))}
-        <CustomButton
-          placeHolder="Other"
-          key="Other"
-          onEnter={this.makeTag}
-        />
-      </div>
-    );
+		let ops =[];
+
+			if(values === Object(values) && !Array.isArray(values)){
+				Object.keys(values).forEach((opt, i) => {
+					if(values[opt].length >= 1){
+							let opts3 = {
+									label: opt,
+									options: []
+							};
+							values[opt].forEach((a, i) => {
+									opts3.options.push({
+											label: values[opt][i],
+											value: values[opt][i]
+									});
+							});
+							ops.push(opts3);
+						} else {
+								let opts4 = {
+										label: opt,
+										value: opt
+								};
+								ops.push(opts4);
+						}
+				});
+			} else {
+				values && values.forEach((opt) => {
+						ops.push({
+								label: opt,
+								value: opt
+						});
+				});
+		}
+		console.log(ops);
+
+		let columns = [];
+
+		for (var i = 0; i < ops.length; i++){
+			columns.push(
+				<React.Fragment>
+					<div>
+						<h2>{ops[i].label}</h2>
+						<div className="multi-input">
+							{ ops[i].options.map(val => (
+									<Checkbox
+										key={val}
+										checked={value.includes(val)}
+										onCheck={() => {
+											onChange(this.update(val));
+										}}
+										value={val}
+										name={`fields[${val}]`}
+										id={`fields[${val}]`}
+										label={val}
+									/>
+							))}
+							<CustomButton
+								placeHolder="Other"
+								key="Other"
+								onEnter={this.makeTag}
+							/>
+						</div>
+					</div>
+				</React.Fragment>
+			);
+	}
+
+	return (
+		<React.Fragment>{columns}</React.Fragment>
+	);
   }
 }
 

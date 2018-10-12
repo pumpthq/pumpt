@@ -5,7 +5,7 @@ import { RadioButton } from 'material-ui/RadioButton';
 import { RadioButtonGroup } from 'redux-form-material-ui';
 // Places Autocomplete Library
 import { PlaceField } from 'components/main/form/PlaceField';
-import MultiInput from 'components/main/form/MultiInput';
+import { RestrictedMultiInput } from 'components/main/form/RestrictedMultiInput';
 import './jobform.less';
 // Actions
 
@@ -199,7 +199,7 @@ class JobForm extends Component {
 
               <Field
                 name="employment"
-                component={ExpandableField(MultiInput)}
+                component={ExpandableField(RestrictedMultiInput)}
                 validate={required}
                 expander = {{
                   title: "Employment Type",
@@ -275,7 +275,7 @@ class JobForm extends Component {
 
               <Field
                 name="industry" validate={required}
-                component={ExpandableField(MultiInput)}
+                component={ExpandableField(RestrictedMultiInput)}
                 expander={{
                 title: "Specialty",
                 className: industryParent ? "" : 'disabled',

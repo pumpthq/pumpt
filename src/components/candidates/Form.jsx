@@ -1,7 +1,7 @@
 import React from 'react';
 import { Field, formValueSelector, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
-import MultiInput from 'components/main/form/MultiInput';
+import { RestrictedMultiInput } from 'components/main/form/RestrictedMultiInput';
 import { renderSelectField, renderTextField } from 'components/form/helpers';
 import { MenuItem } from 'material-ui';
 // Actions
@@ -90,7 +90,7 @@ let CandidateSummaryForm = props => {
               <label>Industry</label>
               <Field
                 name="interestWorkingArea"
-                component={MultiInput}
+                component={RestrictedMultiInput}
                 label="Industry"
                 values={INDUSTRY_DROPDOWN_DATA[0].items.map((item) => (item.title))}
               />
@@ -108,7 +108,7 @@ let CandidateSummaryForm = props => {
                 <div>
                   <Field
                     name="recentWorkingArea"
-                    component={MultiInput}
+                    component={RestrictedMultiInput}
                     label="Specialty"
                     values={industryParentObj(industryValue).map((item) => (item.title))}
                     class="mdl-textfield__input textfield__input textfield__light"

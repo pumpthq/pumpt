@@ -6,7 +6,8 @@ import { reduxForm, FieldArray, Field, SubmissionError, propTypes as formTypes }
 import { PlaceField } from 'components/main/form/PlaceField';
 
 import { Checkbox } from 'redux-form-material-ui';
-import MultiInput from 'components/main/form/MultiInput'
+import { RestrictedMultiInput } from 'components/main/form/RestrictedMultiInput';
+import { MultiInput } from 'components/main/form/MultiInput';
 
 // Actions
 import { updateCandidate } from 'actions/candidateMatches';
@@ -16,10 +17,6 @@ import { url, date } from 'components/main/form/validations';
 import { normalizeDate, normalizeYear, normalizeTwitter } from 'components/main/form/normalizations';
 
 import { SKILLS } from 'constants/candidateOnboarding';
-import Skills from 'components/icons-application/skills';
-import CaseIcon from 'components/icons-application/case';
-import Education from 'components/icons-application/education';
-import Social from 'components/icons-application/social';
 import LinkedInIcon from 'components/icons-application/linkedIn';
 import TwitterIcon from 'components/icons-application/twitter';
 import FacebookIcon from 'components/icons-application/facebook';
