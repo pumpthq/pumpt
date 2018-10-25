@@ -26,6 +26,7 @@ module.exports = {
 
       { path: ':id/candidates', component: (props) => <MatchesContainer id={props.params.id}/> },
       { path: ':id/candidates/:cid', component: (props) => <CandidateContainer {...props.params} /> },
+      { path: ':id', component: (props) => <MatchesContainer id={props.params.id}/> },
 
     ]
 };
