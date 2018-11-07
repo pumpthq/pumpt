@@ -44,3 +44,8 @@ export const normalizeChildIndustry = otherField => (value, previousValue, allVa
 export const disableEndDate = otherField => (value, previousValue, allValues) => {
   return (allValues[otherField] ? '12/2006' : value)
 }
+
+export const lowercase = value => {
+	if (!value) { return value }
+	return value.toLowerCase()
+}

@@ -3,6 +3,7 @@ import {Field, reduxForm, SubmissionError} from 'redux-form'
 import {connect} from 'react-redux'
 import {renderField} from 'components/form/helpers'
 import Button from './../../../../../components/main/button'
+import * as N from 'components/main/form/normalizations'
 
 import {
     THIS_COMPANY_IS_ALREADY_REGISTERED,
@@ -118,6 +119,7 @@ let OnboardingCompanyContactInfo = props => {
 									type="email"
 									component={renderField}
 									validate={[V.required, V.email_validation]}
+									normalize={N.lowercase}
 								/>
 						</fieldset>
 						<div class='form__actions'>
