@@ -2,6 +2,7 @@ import React from 'react'
 import {Field, reduxForm, SubmissionError} from 'redux-form'
 import {connect} from 'react-redux';
 import * as V from 'components/main/form/validations'
+import * as N from 'components/main/form/normalizations'
 import {renderField} from 'components/form/helpers'
 
 import {Checkbox} from 'redux-form-material-ui'
@@ -71,6 +72,7 @@ let OnboardingCandidateContactInfo = props => {
 										type="email"
 										component={renderField}
 										validate={[V.email_validation,V.required]}
+										normalize={N.lowercase}
 									/>
 						</fieldset>
             <fieldset className="form__row">
