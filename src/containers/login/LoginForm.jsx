@@ -2,6 +2,7 @@ import React from 'react'
 import {Link} from 'react-router'
 import {Field, reduxForm, SubmissionError} from 'redux-form'
 import {Checkbox} from 'redux-form-material-ui';
+import * as N from 'components/main/form/normalizations'
 
 import {login} from 'actions/authorization'
 import {renderField} from 'components/form/helpers';
@@ -36,6 +37,7 @@ const LoginForm = props => {
 							component={renderField}
 							label="Email"
 							validate={[required, email]}
+							normalize={N.lowercase}
 						/>
 
 						<Field
