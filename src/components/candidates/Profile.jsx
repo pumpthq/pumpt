@@ -77,7 +77,7 @@ const CandidateProfile = (props) => {
     recentJob, recentAreaExperience, resumeId } = props;
 
   return (
-    <div>
+    <div style={{position:"relative"}}>
       <button style={buttonStyle} className="button button_type_close" onClick={browserHistory.goBack}>×</button>
       <div className="candidate-profile mdl-card card card_type_mini card_state_open">
         <div className="profile-head row">
