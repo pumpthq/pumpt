@@ -1,20 +1,25 @@
 module.exports = {
-  "extends": "airbnb",
-  "parser": "babel-eslint",
-  "plugins": [
-    "react",
-    "jsx-a11y",
-    "import"
-  ],
-  "settings": {
+  extends: ["airbnb", "plugin:prettier/recommended"],
+  parser: "babel-eslint",
+  plugins: ["react", "jsx-a11y", "import", "prettier"],
+  settings: {
     "import/resolver": {
-      "node": {
-        "paths": ["src"],
-        "moduleDirectory": ["node_modules","src"]
+      node: {
+        paths: ["src"],
+        moduleDirectory: ["node_modules", "src"]
       }
     }
   },
-  "rules": {
-    "import/no-extraneous-dependencies": ["error", {"devDependencies": true, "optionalDependencies": true, "peerDependencies": false}] 
+  rules: {
+    "prettier/prettier": "warn",
+    "react/require-extension": "off",
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        devDependencies: true,
+        optionalDependencies: true,
+        peerDependencies: false
+      }
+    ]
   }
 };
