@@ -21,6 +21,7 @@ module.exports = {
     'react/require-extension': 'off',
     'react/jsx-indent': 'off',
     'react/jsx-indent-props': 'off',
+    'react/jsx-one-expression-per-line': 'off',
     'import/no-extraneous-dependencies': [
       'error',
       {
