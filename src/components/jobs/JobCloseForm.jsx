@@ -34,7 +34,7 @@ import { required } from 'components/main/form/validations';
             </div>
             <div className="d-flex justify-content-center">
               <button
-                onClick={e => {e.preventDefault(); handleSubmit}}
+                onClick={handleSubmit}
                 disabled={submitDisabled}
                 className="center mdl-button buttone button_type_colored button_size_m candidate-submit"
               >
@@ -44,7 +44,7 @@ import { required } from 'components/main/form/validations';
               <br />
             <div className="d-flex justify-content-center">
               <button
-                onClick={close}
+                onClick={e => {e.preventDefault(); close}}
                 disabled={submitDisabled}
                 className="link"
               >
