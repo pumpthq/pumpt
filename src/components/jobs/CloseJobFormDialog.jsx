@@ -36,7 +36,7 @@ export default class CloseJobFormDialog extends Component {
 
     handleSubmit = (values) => {
     	const {dispatch, trigger, jobId, jobTitle} = this.props
-    	dispatch(closeJob(jobId))
+    	dispatch(closeJob(jobId,values.reason))
 			this.handleClose();
     }
 
