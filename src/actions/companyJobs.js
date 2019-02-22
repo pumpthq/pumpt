@@ -334,7 +334,7 @@ export const closeJob = id => ({
     payload: {
         url: `${API_VACANCY_ROOT}/${id}`,
         method: 'PUT',
-        data: { status: 'closed' },
+        data: { status: 'closed', closedAt: new Date(), publishedAt: null },
         success: closeJobSucceeded(id)
     }
 });
@@ -366,7 +366,7 @@ export const openJob = id => ({
     payload: {
         url: `${API_VACANCY_ROOT}/${id}`,
         method: 'PUT',
-        data: { status: 'opened' },
+        data: { status: 'opened', publishedAt: new Date(), closedAt: null },
         success: openJobSucceeded(id)
     }
 });
