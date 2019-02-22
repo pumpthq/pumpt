@@ -44,7 +44,7 @@ import { required } from 'components/main/form/validations';
               <br />
             <div className="d-flex justify-content-center">
               <button
-                onClick={e => {e.preventDefault(); close}}
+                onClick={e => {e.preventDefault(); close();}}
                 disabled={submitDisabled}
                 className="link"
               >
