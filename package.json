@@ -4,7 +4,7 @@
   "description": "",
   "author": "Collectively LLC",
   "scripts": {
-    "start": "cross-env NODE_ENV=development node server",
+    "start": "cross-env NODE_ENV=development node server | ./node_modules/.bin/bunyan",
     "start/api:staging": "cross-env NODE_ENV=development API_ENV=staging node server",
     "start:staging": "cross-env NODE_ENV=staging pm2 start server.js",
     "start:production": "cross-env NODE_ENV=production pm2 start server.js",
@@ -14,6 +14,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "bunyan": "1.8.12",
     "cross-env": "1.0.8",
     "domain-browser": "^1.2.0",
     "express": "4.14.0",
@@ -27,7 +28,7 @@
     "autodll-webpack-plugin": "^0.3.9",
     "axios": "0.12.0",
     "babel-core": "^6.26.3",
-    "babel-eslint": "6.1.2",
+    "babel-eslint": "10.0.1",
     "babel-jest": "^21.2.0",
     "babel-loader": "^7.1.4",
     "babel-plugin-react-html-attrs": "2.0.0",
@@ -47,11 +48,14 @@
     "email-validator": "1.0.4",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-15": "^1.0.5",
-    "eslint": "3.4.0",
-    "eslint-config-airbnb": "10.0.1",
-    "eslint-plugin-import": "1.14.0",
-    "eslint-plugin-jsx-a11y": "2.2.1",
-    "eslint-plugin-react": "6.2.0",
+    "eslint": "5.12.1",
+    "eslint-config-airbnb": "17.1.0",
+    "eslint-config-prettier": "3.6.0",
+    "eslint-plugin-import": "2.14.0",
+    "eslint-plugin-jsx-a11y": "6.1.2",
+    "eslint-plugin-prettier": "3.0.1",
+    "eslint-plugin-react": "7.12.4",
+    "eslint-plugin-react-redux": "3.0.0",
     "extract-text-webpack-plugin": "^3.0.2",
     "file-loader": "^0.11.2",
     "hard-source-webpack-plugin": "^0.4.11",
@@ -63,6 +67,7 @@
     "lodash": "^4.17.10",
     "material-ui": "^0.19.4",
     "moment": "2.14.1",
+    "prettier": "1.15.3",
     "prop-types": "^15.6.2",
     "react": "^15.4.0",
     "react-bootstrap": "^0.31.5",
@@ -100,7 +105,7 @@
     "year-range-regex": "0.1.0"
   },
   "engines": {
-    "node": "^8.9.0",
-    "npm": "^5.5.0"
+    "node": "8.9.4",
+    "npm": "5.6.0"
   }
 }
