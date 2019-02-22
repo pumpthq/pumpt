@@ -1,8 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import {closeJob} from './../../actions/companyJobs';
 import {Link} from 'react-router'
-import BasicDialog from 'components/main/popup/BasicDialog'
+import CloseJobFormDialog from 'components/jobs/CloseJobFormDialog'
 import Truncate from 'react-truncate';
 import FlatButton from 'material-ui/FlatButton';
 
@@ -48,7 +47,9 @@ const SummaryEntry = ({children}) => (
 class Card extends Component {
 constructor(props) {
   super(props);
-  this.state = {triggerDialog: false};
+  this.state = {
+		triggerDialog: false
+	};
 }
 
 handleClose = (event) => {
@@ -151,22 +152,7 @@ handleClose = (event) => {
                     Close Job
                   </button>
                 </span>
-                <BasicDialog
-                  trigger={this.state.triggerDialog}
-                  closeText={"Nevermind"}
-                  onClose={() => {}}
-                  mainAction={
-                    <FlatButton
-                      primary
-                      onTouchTap={() => {
-                        dispatch(closeJob(_id))
-                      }}
-                      label="Close Job"
-                    />
-                  }
-                >
-                  Are you sure you want to close the job?
-                </BasicDialog>
+                <CloseJobFormDialog jobId={_id} jobTitle={title} trigger={this.state.triggerDialog} />
               </div>
             </div>
           </div>

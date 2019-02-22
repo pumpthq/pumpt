@@ -329,12 +329,16 @@ export const saveSummaryDataFailed = ({}) => deprecated({
     payload : {}
 })
 
-export const closeJob = id => ({
+export const closeJob = (id,reason) => ({
     type: API,
     payload: {
         url: `${API_VACANCY_ROOT}/${id}`,
         method: 'PUT',
-        data: { status: 'closed', closedAt: new Date(), publishedAt: null },
+        data: {
+					status: 'closed',
+					closedAt: new Date(), publishedAt: null,
+					closeFormResponse: reason
+				},
         success: closeJobSucceeded(id)
     }
 });
