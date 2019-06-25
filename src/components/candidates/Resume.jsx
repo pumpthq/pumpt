@@ -8,8 +8,7 @@ const CandidateResume = () => (
     <hr className="my-5" />
     <dt>Experience + Education</dt>
     <dd>
-      Please upload your resume in a PDF format and/or enter your experience
-      &amp; education below.
+      Please upload your resume or a LinkedIn resume. All files must be in PDF format.
       <br />
       <em>
         Please note, you’ll be matched to more jobs by both uploading your
