@@ -18,7 +18,7 @@ import {DEGREES_DROPDOWN_DATA, EMPLOYMENTS_DROPDOWN_DATA,} from './constants/com
 
 export const getAppData = () =>
      Promise.all([
-         co.wrap(function* () {
+         co(function* () {
            const response = yield axios.get(`/enums/all`, {baseURL: API_URL});
              const data = response.data;
              console.log(data)
